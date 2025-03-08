@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hippius-docs
+  namespace: hippius-documentation
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hippius-docs
+  template:
+    metadata:
+      labels:
+        app: hippius-docs
+    spec:
+      containers:
+      - name: hippius-docs
+        image: ${IMAGE}
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: "512Mi"
+          requests:
+            cpu: "0.2"
+            memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hippius-docs
+  namespace: hippius-documentation
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 3000
+  selector:
+    app: hippius-docs 

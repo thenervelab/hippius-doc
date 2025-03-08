@@ -1,0 +1,97 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    
+    steps:
+    # Checkout code
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Get short SHA for tagging
+    - name: Get short SHA
+      id: sha
+      run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+    # Set up Docker Buildx
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+      with:
+        version: latest
+        buildkitd-flags: --debug
+
+    # Login to Custom Registry
+    - name: Login to Custom Registry
+      uses: docker/login-action@v2
+      with:
+        registry: registry.starkleytech.com
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+        logout: true
+
+    # Build and push Docker image
+    - name: Build and push
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        push: true
+        tags: |
+          registry.starkleytech.com/hippius/docs:${{ steps.sha.outputs.SHORT_SHA }}
+          registry.starkleytech.com/hippius/docs:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        platforms: linux/amd64
+        provenance: false
+        sbom: false
+        outputs: type=registry,compression=gzip,compression-level=3,force-compression=true
+
+    # Set up kubectl
+    - name: Setup kubectl
+      uses: azure/setup-kubectl@v3
+      
+    # Deploy to Kubernetes
+    - name: Deploy to Rancher K8s
+      run: |
+        mkdir -p $HOME/.kube
+        echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
+        
+        # Create a kubectl config with insecure-skip-tls-verify
+        kubectl config set-cluster rancher --insecure-skip-tls-verify=true
+        
+        # Create namespace if it doesn't exist
+        kubectl create namespace hippius-documentation --insecure-skip-tls-verify=true || true
+        
+        # Create or update the registry secret in the namespace
+        kubectl create secret docker-registry registry \
+          --namespace=hippius-documentation \
+          --docker-server=registry.starkleytech.com \
+          --docker-username=${{ secrets.REGISTRY_USERNAME }} \
+          --docker-password=${{ secrets.REGISTRY_PASSWORD }} \
+          --insecure-skip-tls-verify=true \
+          --dry-run=client -o yaml | kubectl apply -f - --insecure-skip-tls-verify=true
+        
+        # Update deployment file with the current image tag
+        sed -i "s|\${IMAGE}|registry.starkleytech.com/hippius/docs:${{ steps.sha.outputs.SHORT_SHA }}|g" k8s/deployment.yaml
+        
+        # Apply the deployment with validation disabled
+        kubectl apply -f k8s/deployment.yaml --validate=false --insecure-skip-tls-verify=true
+        
+        # Wait for rollout with increased timeout and insecure flag
+        kubectl rollout status deployment/hippius-docs -n hippius-documentation --timeout=180s --insecure-skip-tls-verify=true
+        
+        # Print deployment status for debugging
+        echo "Deployment status:"
+        kubectl get deployments -n hippius-documentation --insecure-skip-tls-verify=true
+        
+        # Print pod status
+        echo "Pod status:"
+        kubectl get pods -n hippius-documentation --insecure-skip-tls-verify=true 
