@@ -1,0 +1,19 @@
+:root {
+  --ifm-color-primary: #1e90ff; /* Hippius blue */
+  --ifm-background-color: #1a1a2e; /* Dark blue background */
+  --ifm-font-color-base: #e0e0e0; /* Light gray text */
+  --ifm-heading-color: #ffffff; /* White headers */
+  --ifm-menu-color: #e0e0e0; /* Sidebar text */
+  --ifm-menu-color-background-active: #2a2a4e; /* Active sidebar item */
+}
+
+/* Code blocks */
+code {
+  background-color: #2a2a4e;
+}
+
+/* Buttons */
+.button--primary {
+  background-color: #1e90ff;
+  color: #ffffff;
+}

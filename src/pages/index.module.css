@@ -1,0 +1,94 @@
+.heroBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background-color: #1e90ff; /* Hippius blue */
+}
+
+.heroBanner h1 {
+  color: #ffffff; /* White text */
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.heroBanner p {
+  color: #e0e0e0; /* Light gray text */
+  font-size: 1.5rem;
+}
+
+.buttons {
+  margin-top: 2rem;
+}
+
+.features {
+  padding: 4rem 0;
+  background-color: #1a1a2e; /* Dark blue background */
+  color: #e0e0e0; /* Light gray text */
+}
+
+.features h2 {
+  color: #ffffff; /* White headers */
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.features ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  text-align: left; /* Align to the left */
+  max-width: 600px; /* Constrain width for readability */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features ul li {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.features ul li::before {
+  content: '•'; /* Bullet point */
+  color: #1e90ff; /* Hippius blue */
+  position: absolute;
+  left: 0;
+  font-size: 1.5rem;
+  line-height: 1.2rem;
+}
+
+.features ul li a {
+  color: #1e90ff; /* Hippius blue links */
+  text-decoration: none;
+}
+
+.features ul li a:hover {
+  text-decoration: underline;
+}
+
+.features p {
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.featureCard {
+  background-color: #2a2a4e; /* Slightly lighter dark blue for cards */
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 1rem 0;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+}
+
+.featureCard h3 {
+  color: #ffffff; /* White headers */
+  margin-bottom: 1rem;
+}
