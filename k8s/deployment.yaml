@@ -13,6 +13,8 @@ spec:
       labels:
         app: hippius-docs
     spec:
+      imagePullSecrets:
+      - name: registry
       containers:
       - name: hippius-docs
         image: ${IMAGE}
