@@ -214,7 +214,7 @@ const initialNodes = [
   {
     id: 'client',
     type: 'default',
-    position: { x: 600, y: 50 }, // Top center
+    position: { x: 605, y: 50 }, // Top center, adjusted for perfect alignment
     data: { 
       label: (
         <div style={nodeStyles.clientContent}>
@@ -275,7 +275,7 @@ const initialNodes = [
   {
     id: 'dashboard',
     type: 'default',
-    position: { x: 600, y: 320 }, // Center, below client
+    position: { x: 605, y: 320 }, // Center, below client, adjusted for perfect alignment
     data: { label: <div><strong>Web Dashboard</strong></div> },
     style: nodeStyles.dashboard,
   },
@@ -299,7 +299,7 @@ const initialNodes = [
   {
     id: 'marketplace',
     type: 'default',
-    position: { x: 600, y: 450 }, // Below Web Dashboard
+    position: { x: 605, y: 450 }, // Below Web Dashboard, adjusted for perfect alignment
     data: { label: <div><strong>Marketplace Pallet</strong></div> },
     style: nodeStyles.marketplace,
   },
@@ -307,7 +307,7 @@ const initialNodes = [
   {
     id: 'hippius-blockchain',
     type: 'default',
-    position: { x: 600, y: 580 }, // Below Marketplace
+    position: { x: 605, y: 580 }, // Below Marketplace, adjusted for perfect alignment
     data: { label: <div><strong>Hippius Blockchain</strong></div> },
     style: nodeStyles.bittensor, // Reusing the blockchain style
   },
