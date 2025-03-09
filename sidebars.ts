@@ -11,6 +11,8 @@ const sidebars: SidebarsConfig = {
         'learn/intro', // What is Hippius?
         'learn/web3-basics', // Intro to web3
         'learn/substrate-staking', // Substrate, BABE, staking concepts
+        'learn/mnemonic-auth', // Mnemonic Authentication
+        'learn/encryption', // Encryption System
       ],
     },
     {
