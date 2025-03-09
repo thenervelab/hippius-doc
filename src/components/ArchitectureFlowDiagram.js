@@ -323,7 +323,7 @@ const initialNodes = [
   {
     id: 'miner',
     type: 'default',
-    position: { x: 1000, y: 580 }, // Right of Hippius blockchain, aligned horizontally
+    position: { x: 850, y: 700 }, // Right of Hippius blockchain
     data: { label: <div><strong>Miner Node</strong></div> },
     style: nodeStyles.miner,
   },
@@ -355,7 +355,7 @@ const initialNodes = [
   {
     id: 's3-miner',
     type: 'default',
-    position: { x: 900, y: 700 }, // Right side, below Miner Node
+    position: { x: 800, y: 1100 }, // Below Offchain Worker, right side
     data: { 
       label: (
         <div>
@@ -371,7 +371,7 @@ const initialNodes = [
   {
     id: 'ipfs-miner',
     type: 'default',
-    position: { x: 1100, y: 700 }, // Further right, below Miner Node
+    position: { x: 1050, y: 1100 }, // Below Offchain Worker, further right
     data: { 
       label: (
         <div>
@@ -387,7 +387,7 @@ const initialNodes = [
   {
     id: 'compute-miner',
     type: 'default',
-    position: { x: 1000, y: 850 }, // Right side, below storage miners
+    position: { x: 925, y: 1250 }, // Below storage miners, right side
     data: { 
       label: (
         <div>
@@ -403,7 +403,7 @@ const initialNodes = [
   {
     id: 'rewards',
     type: 'default',
-    position: { x: 600, y: 1250 }, // More space below miners
+    position: { x: 600, y: 1400 }, // Below miners
     data: { 
       label: (
         <div>
@@ -725,7 +725,7 @@ export default function ArchitectureFlowDiagram() {
     <div style={{ width: '100%', height: '100%' }}>
       <ReactFlow
         className="architecture-flow-diagram"
-        style={{ width: '100%', height: '1500px' }}
+        style={{ width: '100%', height: '1600px' }}
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
@@ -733,7 +733,7 @@ export default function ArchitectureFlowDiagram() {
         onConnect={onConnect}
         onInit={onInit}
         fitView={false}
-        defaultViewport={{ x: 150, y: 0, zoom: 0.5 }}
+        defaultViewport={{ x: 150, y: 0, zoom: 0.45 }}
         attributionPosition="bottom-right"
         minZoom={0.1}
         maxZoom={4}
