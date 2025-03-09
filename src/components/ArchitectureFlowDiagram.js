@@ -315,7 +315,7 @@ const initialNodes = [
   {
     id: 'validator',
     type: 'default',
-    position: { x: 350, y: 700 }, // More space below Hippius blockchain and further left
+    position: { x: 400, y: 700 }, // Left of Hippius blockchain
     data: { label: <div><strong>Validator Node</strong></div> },
     style: nodeStyles.validator,
   },
@@ -323,7 +323,7 @@ const initialNodes = [
   {
     id: 'miner',
     type: 'default',
-    position: { x: 850, y: 700 }, // More space below Hippius blockchain and further right
+    position: { x: 1000, y: 580 }, // Right of Hippius blockchain, aligned horizontally
     data: { label: <div><strong>Miner Node</strong></div> },
     style: nodeStyles.miner,
   },
@@ -331,7 +331,7 @@ const initialNodes = [
   {
     id: 'hippius-node',
     type: 'default',
-    position: { x: 300, y: 820 }, // More space below validator and further left
+    position: { x: 350, y: 820 }, // Below validator
     data: { label: <div><strong>Hippius Full Node</strong></div> },
     style: nodeStyles.ipfs,
   },
@@ -339,7 +339,7 @@ const initialNodes = [
   {
     id: 'subtensor-node',
     type: 'default',
-    position: { x: 600, y: 820 }, // More space below validator
+    position: { x: 600, y: 820 }, // Below Hippius blockchain
     data: { label: <div><strong>Subtensor Full Node</strong></div> },
     style: nodeStyles.ipfs,
   },
@@ -347,7 +347,7 @@ const initialNodes = [
   {
     id: 'worker',
     type: 'default',
-    position: { x: 550, y: 940 }, // More space below nodes
+    position: { x: 550, y: 940 }, // Below nodes
     data: { label: <div><strong>Offchain Worker</strong></div> },
     style: nodeStyles.worker,
   },
@@ -355,7 +355,7 @@ const initialNodes = [
   {
     id: 's3-miner',
     type: 'default',
-    position: { x: 200, y: 1080 }, // More horizontal and vertical spacing, further left
+    position: { x: 900, y: 700 }, // Right side, below Miner Node
     data: { 
       label: (
         <div>
@@ -371,7 +371,7 @@ const initialNodes = [
   {
     id: 'ipfs-miner',
     type: 'default',
-    position: { x: 600, y: 1080 }, // More vertical spacing
+    position: { x: 1100, y: 700 }, // Further right, below Miner Node
     data: { 
       label: (
         <div>
@@ -387,7 +387,7 @@ const initialNodes = [
   {
     id: 'compute-miner',
     type: 'default',
-    position: { x: 1000, y: 1080 }, // More horizontal and vertical spacing, further right
+    position: { x: 1000, y: 850 }, // Right side, below storage miners
     data: { 
       label: (
         <div>
@@ -733,7 +733,7 @@ export default function ArchitectureFlowDiagram() {
         onConnect={onConnect}
         onInit={onInit}
         fitView={false}
-        defaultViewport={{ x: 200, y: 0, zoom: 0.55 }}
+        defaultViewport={{ x: 150, y: 0, zoom: 0.5 }}
         attributionPosition="bottom-right"
         minZoom={0.1}
         maxZoom={4}
