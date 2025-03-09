@@ -156,14 +156,16 @@ const nodeStyles = {
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
   },
   note: {
-    background: 'transparent',
+    background: 'rgba(30, 30, 30, 0.7)',
     color: '#ffffff',
-    border: 'none',
-    padding: '5px',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
+    borderRadius: '4px',
+    padding: '8px',
     fontSize: '12px',
     fontFamily: 'monospace',
     width: 'auto',
     textAlign: 'left',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
   },
   dashboard: {
     background: '#9C27B0', // Purple
@@ -231,7 +233,7 @@ const initialNodes = [
   {
     id: 'bittensor',
     type: 'default',
-    position: { x: 200, y: 350 }, // Left side
+    position: { x: 150, y: 350 }, // Moved further left
     data: { label: <div><strong>Bittensor Blockchain</strong></div> },
     style: nodeStyles.bittensor,
   },
@@ -239,7 +241,7 @@ const initialNodes = [
   {
     id: 'bridge',
     type: 'default',
-    position: { x: 200, y: 600 }, // Left side, below Bittensor
+    position: { x: 150, y: 650 }, // Moved further down for more vertical space
     data: { 
       label: (
         <div>
@@ -255,7 +257,7 @@ const initialNodes = [
   {
     id: 'bridge-note',
     type: 'default',
-    position: { x: 400, y: 600 }, // Right of bridge
+    position: { x: 150, y: 850 }, // Positioned further below bridge to avoid overlap
     data: { 
       label: (
         <div>
@@ -281,7 +283,7 @@ const initialNodes = [
   {
     id: 'dashboard-note',
     type: 'default',
-    position: { x: 450, y: 450 }, // Between dashboard and bridge
+    position: { x: 400, y: 500 }, // Adjusted position between dashboard and bridge
     data: { 
       label: (
         <div>
@@ -305,7 +307,7 @@ const initialNodes = [
   {
     id: 'hippius-blockchain',
     type: 'default',
-    position: { x: 700, y: 600 }, // Center, below dashboard
+    position: { x: 700, y: 650 }, // Adjusted to align with bridge vertically
     data: { label: <div><strong>Hippius Blockchain</strong></div> },
     style: nodeStyles.bittensor, // Reusing the blockchain style
   },
@@ -313,7 +315,7 @@ const initialNodes = [
   {
     id: 'validator',
     type: 'default',
-    position: { x: 550, y: 750 }, // Center-left, below Hippius blockchain
+    position: { x: 550, y: 800 }, // Adjusted vertical position
     data: { label: <div><strong>Validator Node</strong></div> },
     style: nodeStyles.validator,
   },
@@ -321,7 +323,7 @@ const initialNodes = [
   {
     id: 'miner',
     type: 'default',
-    position: { x: 850, y: 750 }, // Center-right, below Hippius blockchain
+    position: { x: 850, y: 800 }, // Adjusted vertical position
     data: { label: <div><strong>Miner Node</strong></div> },
     style: nodeStyles.miner,
   },
@@ -329,7 +331,7 @@ const initialNodes = [
   {
     id: 'hippius-node',
     type: 'default',
-    position: { x: 450, y: 900 }, // Below validator, increased spacing
+    position: { x: 450, y: 950 }, // Adjusted vertical position
     data: { label: <div><strong>Hippius Full Node</strong></div> },
     style: nodeStyles.ipfs,
   },
@@ -337,7 +339,7 @@ const initialNodes = [
   {
     id: 'subtensor-node',
     type: 'default',
-    position: { x: 650, y: 900 }, // Below validator, increased spacing
+    position: { x: 650, y: 950 }, // Adjusted vertical position
     data: { label: <div><strong>Subtensor Full Node</strong></div> },
     style: nodeStyles.ipfs,
   },
@@ -345,7 +347,7 @@ const initialNodes = [
   {
     id: 'worker',
     type: 'default',
-    position: { x: 600, y: 1050 }, // Below nodes, increased vertical spacing
+    position: { x: 600, y: 1100 }, // Adjusted vertical position
     data: { label: <div><strong>Offchain Worker</strong></div> },
     style: nodeStyles.worker,
   },
@@ -353,7 +355,7 @@ const initialNodes = [
   {
     id: 's3-miner',
     type: 'default',
-    position: { x: 400, y: 1200 }, // Bottom left, increased spacing
+    position: { x: 400, y: 1250 }, // Adjusted vertical position
     data: { 
       label: (
         <div>
@@ -369,7 +371,7 @@ const initialNodes = [
   {
     id: 'ipfs-miner',
     type: 'default',
-    position: { x: 700, y: 1200 }, // Bottom center, increased spacing
+    position: { x: 700, y: 1250 }, // Adjusted vertical position
     data: { 
       label: (
         <div>
@@ -385,7 +387,7 @@ const initialNodes = [
   {
     id: 'compute-miner',
     type: 'default',
-    position: { x: 1000, y: 1200 }, // Bottom right, increased spacing
+    position: { x: 1000, y: 1250 }, // Adjusted vertical position
     data: { 
       label: (
         <div>
@@ -401,7 +403,7 @@ const initialNodes = [
   {
     id: 'rewards',
     type: 'default',
-    position: { x: 700, y: 1400 }, // Bottom, increased vertical spacing
+    position: { x: 700, y: 1450 }, // Adjusted vertical position
     data: { 
       label: (
         <div>
@@ -428,6 +430,8 @@ const initialEdges = [
     type: 'default',
     style: edgeStyles.funds,
     label: 'FIAT/TAO',
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Bittensor to Bridge
   {
@@ -450,6 +454,8 @@ const initialEdges = [
     type: 'default',
     style: edgeStyles.funds,
     label: 'Alpha (locked)',
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Dashboard to Bridge (UI interaction)
   {
@@ -460,6 +466,8 @@ const initialEdges = [
     type: 'default',
     style: edgeStyles.dashed,
     label: 'UI for bridging',
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Dashboard to Marketplace
   {
@@ -470,6 +478,8 @@ const initialEdges = [
     type: 'default',
     style: edgeStyles.dashed,
     label: 'mints credit',
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Marketplace to Hippius Blockchain
   {
@@ -479,6 +489,8 @@ const initialEdges = [
     animated: false,
     type: 'default',
     style: edgeStyles.dashed,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Hippius Blockchain to Validator
   {
@@ -488,6 +500,8 @@ const initialEdges = [
     animated: false,
     type: 'default',
     style: edgeStyles.dashed,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Hippius Blockchain to Miner
   {
@@ -497,6 +511,8 @@ const initialEdges = [
     animated: false,
     type: 'default',
     style: edgeStyles.dashed,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Validator to Bittensor (weights)
   {
@@ -507,6 +523,8 @@ const initialEdges = [
     type: 'default',
     style: edgeStyles.orange,
     label: 'weights',
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Validator to Hippius Node
   {
@@ -516,6 +534,8 @@ const initialEdges = [
     animated: false,
     type: 'default',
     style: edgeStyles.dashed,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Validator to Subtensor Node
   {
@@ -525,6 +545,8 @@ const initialEdges = [
     animated: false,
     type: 'default',
     style: edgeStyles.dashed,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Miner to S3 Storage Miner
   {
@@ -534,6 +556,8 @@ const initialEdges = [
     animated: false,
     type: 'default',
     style: edgeStyles.dashed,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Miner to IPFS Storage Miner
   {
@@ -543,6 +567,8 @@ const initialEdges = [
     animated: false,
     type: 'default',
     style: edgeStyles.dashed,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Miner to Compute Miner
   {
@@ -552,6 +578,8 @@ const initialEdges = [
     animated: false,
     type: 'default',
     style: edgeStyles.dashed,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Hippius Node to Worker
   {
@@ -561,6 +589,8 @@ const initialEdges = [
     animated: false,
     type: 'default',
     style: edgeStyles.dashed,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Worker to S3 Miner
   {
@@ -570,6 +600,8 @@ const initialEdges = [
     animated: false,
     type: 'default',
     style: edgeStyles.dashed,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Worker to IPFS Miner
   {
@@ -579,6 +611,8 @@ const initialEdges = [
     animated: false,
     type: 'default',
     style: edgeStyles.dashed,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Worker to Compute Miner
   {
@@ -588,6 +622,8 @@ const initialEdges = [
     animated: false,
     type: 'default',
     style: edgeStyles.dashed,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // S3 Miner to Rewards
   {
@@ -597,6 +633,8 @@ const initialEdges = [
     animated: false,
     type: 'default',
     style: edgeStyles.dashed,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // IPFS Miner to Rewards
   {
@@ -606,6 +644,8 @@ const initialEdges = [
     animated: false,
     type: 'default',
     style: edgeStyles.dashed,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Compute Miner to Rewards
   {
@@ -615,6 +655,8 @@ const initialEdges = [
     animated: false,
     type: 'default',
     style: edgeStyles.dashed,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
   // Rewards to Bridge (bidirectional Alpha flow)
   {
@@ -625,6 +667,8 @@ const initialEdges = [
     type: 'default',
     style: edgeStyles.funds,
     label: 'Alpha (bidirectional)',
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
 ];
 
@@ -681,7 +725,7 @@ export default function ArchitectureFlowDiagram() {
     <div style={{ width: '100%', height: '100%' }}>
       <ReactFlow
         className="architecture-flow-diagram"
-        style={{ width: '100%', height: '2000px' }}
+        style={{ width: '100%', height: '2200px' }}
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
@@ -689,7 +733,7 @@ export default function ArchitectureFlowDiagram() {
         onConnect={onConnect}
         onInit={onInit}
         fitView={false}
-        defaultViewport={{ x: 0, y: 0, zoom: 0.7 }}
+        defaultViewport={{ x: 0, y: 0, zoom: 0.65 }}
         attributionPosition="bottom-right"
         minZoom={0.1}
         maxZoom={4}
@@ -697,6 +741,8 @@ export default function ArchitectureFlowDiagram() {
           style: edgeStyles.dashed,
           animated: false,
           type: 'default',
+          labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+          labelStyle: { fill: '#ffffff' },
         }}
         proOptions={{ hideAttribution: true }}
         connectionLineStyle={{ stroke: 'rgba(255, 255, 255, 0.5)', strokeWidth: 1.5, strokeDasharray: '5,5' }}
