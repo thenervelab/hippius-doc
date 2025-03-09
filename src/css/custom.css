@@ -28,9 +28,7 @@ code {
   position: relative; /* For positioning zoom controls */
   overflow: hidden; /* Prevent content from spilling out when panning */
   user-select: none; /* Prevent text selection during panning */
-  touch-action: none; /* Prevent browser handling of touch events */
   min-height: 600px; /* Ensure container has height */
-  transition: all 0.3s ease; /* Smooth transition for fullscreen */
 }
 
 /* Fullscreen mode */
@@ -62,9 +60,8 @@ code {
   margin: 0 auto;
   display: block;
   min-height: 600px; /* Ensure the object has height */
-  transition: transform 0.1s ease; /* Smooth zoom/pan transition */
-  transform-origin: center center;
-  will-change: transform; /* Optimize for animations */
+  border: none; /* Remove iframe border */
+  background-color: transparent; /* Ensure transparent background */
 }
 
 /* Fullscreen button */
@@ -84,7 +81,6 @@ code {
   align-items: center;
   justify-content: center;
   z-index: 100;
-  opacity: 1 !important;
 }
 
 .fullscreen-btn:hover {
@@ -104,7 +100,6 @@ code {
   font-size: 14px;
   cursor: pointer;
   z-index: 100;
-  opacity: 1 !important;
   display: none;
 }
 
@@ -122,9 +117,7 @@ code {
   padding: 5px;
   display: flex;
   gap: 5px;
-  z-index: 100; /* Increased z-index to ensure visibility */
-  pointer-events: auto; /* Ensure clicks are registered */
-  opacity: 1 !important; /* Force visibility */
+  z-index: 100;
 }
 
 .zoom-btn {
@@ -139,7 +132,6 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 1 !important; /* Force visibility */
 }
 
 .zoom-btn:hover {
@@ -152,7 +144,6 @@ code {
   align-items: center;
   padding: 0 8px;
   font-size: 14px;
-  opacity: 1 !important; /* Force visibility */
 }
 
 /* Tooltip */
@@ -167,8 +158,6 @@ code {
   border-radius: 4px;
   font-size: 14px;
   z-index: 10;
-  transition: opacity 1s ease;
-  opacity: 1;
 }
 
 /* Pan indicator */
@@ -184,8 +173,13 @@ code {
   font-size: 14px;
   z-index: 10;
   pointer-events: none;
-  animation: fadeOut 2s forwards;
-  animation-delay: 1s;
+  opacity: 1;
+  transition: opacity 2s ease;
+}
+
+/* Add a class for fading out instead of using animation */
+.pan-indicator.fade-out {
+  opacity: 0;
 }
 
 .pan-text {
@@ -198,11 +192,6 @@ code {
   content: "↔";
   margin-right: 5px;
   font-size: 16px;
-}
-
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
 }
 
 /* Mermaid Diagrams */
