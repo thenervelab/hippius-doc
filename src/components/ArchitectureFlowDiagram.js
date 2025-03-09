@@ -214,7 +214,7 @@ const initialNodes = [
   {
     id: 'client',
     type: 'default',
-    position: { x: 700, y: 50 }, // Top center
+    position: { x: 600, y: 50 }, // Top center
     data: { 
       label: (
         <div style={nodeStyles.clientContent}>
@@ -233,7 +233,7 @@ const initialNodes = [
   {
     id: 'bittensor',
     type: 'default',
-    position: { x: 150, y: 350 }, // Moved further left
+    position: { x: 150, y: 320 }, // Moved even further left
     data: { label: <div><strong>Bittensor Blockchain</strong></div> },
     style: nodeStyles.bittensor,
   },
@@ -241,7 +241,7 @@ const initialNodes = [
   {
     id: 'bridge',
     type: 'default',
-    position: { x: 150, y: 650 }, // Moved further down for more vertical space
+    position: { x: 150, y: 550 }, // More vertical space between Bittensor and Bridge
     data: { 
       label: (
         <div>
@@ -257,7 +257,7 @@ const initialNodes = [
   {
     id: 'bridge-note',
     type: 'default',
-    position: { x: 150, y: 850 }, // Positioned further below bridge to avoid overlap
+    position: { x: 150, y: 700 }, // More space below bridge
     data: { 
       label: (
         <div>
@@ -275,7 +275,7 @@ const initialNodes = [
   {
     id: 'dashboard',
     type: 'default',
-    position: { x: 700, y: 350 }, // Center, below client
+    position: { x: 600, y: 320 }, // Center, below client
     data: { label: <div><strong>Web Dashboard</strong></div> },
     style: nodeStyles.dashboard,
   },
@@ -283,7 +283,7 @@ const initialNodes = [
   {
     id: 'dashboard-note',
     type: 'default',
-    position: { x: 400, y: 500 }, // Adjusted position between dashboard and bridge
+    position: { x: 380, y: 420 }, // Between dashboard and bridge
     data: { 
       label: (
         <div>
@@ -299,7 +299,7 @@ const initialNodes = [
   {
     id: 'marketplace',
     type: 'default',
-    position: { x: 1050, y: 450 }, // Right of dashboard
+    position: { x: 600, y: 450 }, // Moved below Web Dashboard
     data: { label: <div><strong>Marketplace Pallet</strong></div> },
     style: nodeStyles.marketplace,
   },
@@ -307,7 +307,7 @@ const initialNodes = [
   {
     id: 'hippius-blockchain',
     type: 'default',
-    position: { x: 700, y: 650 }, // Adjusted to align with bridge vertically
+    position: { x: 600, y: 580 }, // Adjusted to be below Marketplace
     data: { label: <div><strong>Hippius Blockchain</strong></div> },
     style: nodeStyles.bittensor, // Reusing the blockchain style
   },
@@ -315,7 +315,7 @@ const initialNodes = [
   {
     id: 'validator',
     type: 'default',
-    position: { x: 550, y: 800 }, // Adjusted vertical position
+    position: { x: 400, y: 700 }, // More space below Hippius blockchain
     data: { label: <div><strong>Validator Node</strong></div> },
     style: nodeStyles.validator,
   },
@@ -323,7 +323,7 @@ const initialNodes = [
   {
     id: 'miner',
     type: 'default',
-    position: { x: 850, y: 800 }, // Adjusted vertical position
+    position: { x: 800, y: 700 }, // More space below Hippius blockchain and further right
     data: { label: <div><strong>Miner Node</strong></div> },
     style: nodeStyles.miner,
   },
@@ -331,7 +331,7 @@ const initialNodes = [
   {
     id: 'hippius-node',
     type: 'default',
-    position: { x: 450, y: 950 }, // Adjusted vertical position
+    position: { x: 350, y: 820 }, // More space below validator
     data: { label: <div><strong>Hippius Full Node</strong></div> },
     style: nodeStyles.ipfs,
   },
@@ -339,7 +339,7 @@ const initialNodes = [
   {
     id: 'subtensor-node',
     type: 'default',
-    position: { x: 650, y: 950 }, // Adjusted vertical position
+    position: { x: 600, y: 820 }, // More space below validator
     data: { label: <div><strong>Subtensor Full Node</strong></div> },
     style: nodeStyles.ipfs,
   },
@@ -347,7 +347,7 @@ const initialNodes = [
   {
     id: 'worker',
     type: 'default',
-    position: { x: 600, y: 1100 }, // Adjusted vertical position
+    position: { x: 550, y: 940 }, // More space below nodes
     data: { label: <div><strong>Offchain Worker</strong></div> },
     style: nodeStyles.worker,
   },
@@ -355,7 +355,7 @@ const initialNodes = [
   {
     id: 's3-miner',
     type: 'default',
-    position: { x: 400, y: 1250 }, // Adjusted vertical position
+    position: { x: 250, y: 1080 }, // More horizontal and vertical spacing
     data: { 
       label: (
         <div>
@@ -371,7 +371,7 @@ const initialNodes = [
   {
     id: 'ipfs-miner',
     type: 'default',
-    position: { x: 700, y: 1250 }, // Adjusted vertical position
+    position: { x: 600, y: 1080 }, // More vertical spacing
     data: { 
       label: (
         <div>
@@ -387,7 +387,7 @@ const initialNodes = [
   {
     id: 'compute-miner',
     type: 'default',
-    position: { x: 1000, y: 1250 }, // Adjusted vertical position
+    position: { x: 950, y: 1080 }, // More horizontal and vertical spacing
     data: { 
       label: (
         <div>
@@ -403,7 +403,7 @@ const initialNodes = [
   {
     id: 'rewards',
     type: 'default',
-    position: { x: 700, y: 1450 }, // Adjusted vertical position
+    position: { x: 600, y: 1250 }, // More space below miners
     data: { 
       label: (
         <div>
@@ -430,6 +430,18 @@ const initialEdges = [
     type: 'default',
     style: edgeStyles.funds,
     label: 'FIAT/TAO',
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
+  },
+  // Dashboard to Marketplace
+  {
+    id: 'dashboard-to-marketplace',
+    source: 'dashboard',
+    target: 'marketplace',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
+    label: 'mints credit',
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
   },
@@ -466,18 +478,6 @@ const initialEdges = [
     type: 'default',
     style: edgeStyles.dashed,
     label: 'UI for bridging',
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-  },
-  // Dashboard to Marketplace
-  {
-    id: 'dashboard-to-marketplace',
-    source: 'dashboard',
-    target: 'marketplace',
-    animated: false,
-    type: 'default',
-    style: edgeStyles.dashed,
-    label: 'mints credit',
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
   },
@@ -725,7 +725,7 @@ export default function ArchitectureFlowDiagram() {
     <div style={{ width: '100%', height: '100%' }}>
       <ReactFlow
         className="architecture-flow-diagram"
-        style={{ width: '100%', height: '2200px' }}
+        style={{ width: '100%', height: '1500px' }}
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
@@ -733,7 +733,7 @@ export default function ArchitectureFlowDiagram() {
         onConnect={onConnect}
         onInit={onInit}
         fitView={false}
-        defaultViewport={{ x: 0, y: 0, zoom: 0.65 }}
+        defaultViewport={{ x: 0, y: 0, zoom: 0.6 }}
         attributionPosition="bottom-right"
         minZoom={0.1}
         maxZoom={4}
@@ -745,42 +745,21 @@ export default function ArchitectureFlowDiagram() {
           labelStyle: { fill: '#ffffff' },
         }}
         proOptions={{ hideAttribution: true }}
-        connectionLineStyle={{ stroke: 'rgba(255, 255, 255, 0.5)', strokeWidth: 1.5, strokeDasharray: '5,5' }}
-        connectionLineType="straight"
-        nodesDraggable={true}
-        elementsSelectable={true}
-        zoomOnScroll={true}
-        panOnScroll={false}
-        panOnDrag={true}
       >
-        <Controls 
-          className="flow-controls" 
-          showInteractive={false}
-          position="bottom-right"
-        />
-        <MiniMap 
-          nodeStrokeColor={(n) => '#ffffff'}
-          nodeColor={(n) => {
-            const nodeId = n.id;
-            if (nodeId.includes('client')) return '#333333';
-            if (nodeId.includes('bridge') || nodeId.includes('dashboard') || nodeId.includes('hippius-blockchain')) return '#9C27B0';
-            if (nodeId.includes('marketplace')) return '#FBBC05';
-            if (nodeId.includes('validator') || nodeId.includes('bittensor') || nodeId.includes('ipfs') || nodeId.includes('worker')) return '#4285F4';
-            if (nodeId.includes('miner')) return '#34A853';
-            if (nodeId.includes('rewards')) return '#333333';
-            return '#666666';
+        <MiniMap
+          nodeStrokeColor={(n) => {
+            if (n.style?.background) return n.style.background;
+            return '#fff';
           }}
-          maskColor="rgba(30, 30, 30, 0.8)"
+          nodeColor={(n) => {
+            if (n.style?.background) return n.style.background;
+            return '#fff';
+          }}
+          nodeBorderRadius={2}
           className="flow-minimap"
-          position="bottom-left"
         />
-        <Background 
-          color="#333333" 
-          gap={20} 
-          size={1}
-          className="flow-background" 
-          variant="dots"
-        />
+        <Controls className="flow-controls" />
+        <Background color="#000000" gap={16} className="flow-background" />
       </ReactFlow>
     </div>
   );
