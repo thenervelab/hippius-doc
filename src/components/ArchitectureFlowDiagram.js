@@ -233,7 +233,7 @@ const initialNodes = [
   {
     id: 'bittensor',
     type: 'default',
-    position: { x: 150, y: 320 }, // Moved even further left
+    position: { x: 100, y: 320 }, // Moved even further left
     data: { label: <div><strong>Bittensor Blockchain</strong></div> },
     style: nodeStyles.bittensor,
   },
@@ -241,7 +241,7 @@ const initialNodes = [
   {
     id: 'bridge',
     type: 'default',
-    position: { x: 150, y: 550 }, // More vertical space between Bittensor and Bridge
+    position: { x: 100, y: 550 }, // Aligned with Bittensor horizontally
     data: { 
       label: (
         <div>
@@ -257,7 +257,7 @@ const initialNodes = [
   {
     id: 'bridge-note',
     type: 'default',
-    position: { x: 150, y: 700 }, // More space below bridge
+    position: { x: 100, y: 700 }, // Below bridge
     data: { 
       label: (
         <div>
@@ -283,7 +283,7 @@ const initialNodes = [
   {
     id: 'dashboard-note',
     type: 'default',
-    position: { x: 380, y: 420 }, // Between dashboard and bridge
+    position: { x: 350, y: 420 }, // Between dashboard and bridge
     data: { 
       label: (
         <div>
@@ -299,7 +299,7 @@ const initialNodes = [
   {
     id: 'marketplace',
     type: 'default',
-    position: { x: 600, y: 450 }, // Moved below Web Dashboard
+    position: { x: 600, y: 450 }, // Below Web Dashboard
     data: { label: <div><strong>Marketplace Pallet</strong></div> },
     style: nodeStyles.marketplace,
   },
@@ -307,7 +307,7 @@ const initialNodes = [
   {
     id: 'hippius-blockchain',
     type: 'default',
-    position: { x: 600, y: 580 }, // Adjusted to be below Marketplace
+    position: { x: 600, y: 580 }, // Below Marketplace
     data: { label: <div><strong>Hippius Blockchain</strong></div> },
     style: nodeStyles.bittensor, // Reusing the blockchain style
   },
@@ -315,7 +315,7 @@ const initialNodes = [
   {
     id: 'validator',
     type: 'default',
-    position: { x: 400, y: 700 }, // More space below Hippius blockchain
+    position: { x: 350, y: 700 }, // More space below Hippius blockchain and further left
     data: { label: <div><strong>Validator Node</strong></div> },
     style: nodeStyles.validator,
   },
@@ -323,7 +323,7 @@ const initialNodes = [
   {
     id: 'miner',
     type: 'default',
-    position: { x: 800, y: 700 }, // More space below Hippius blockchain and further right
+    position: { x: 850, y: 700 }, // More space below Hippius blockchain and further right
     data: { label: <div><strong>Miner Node</strong></div> },
     style: nodeStyles.miner,
   },
@@ -331,7 +331,7 @@ const initialNodes = [
   {
     id: 'hippius-node',
     type: 'default',
-    position: { x: 350, y: 820 }, // More space below validator
+    position: { x: 300, y: 820 }, // More space below validator and further left
     data: { label: <div><strong>Hippius Full Node</strong></div> },
     style: nodeStyles.ipfs,
   },
@@ -355,7 +355,7 @@ const initialNodes = [
   {
     id: 's3-miner',
     type: 'default',
-    position: { x: 250, y: 1080 }, // More horizontal and vertical spacing
+    position: { x: 200, y: 1080 }, // More horizontal and vertical spacing, further left
     data: { 
       label: (
         <div>
@@ -387,7 +387,7 @@ const initialNodes = [
   {
     id: 'compute-miner',
     type: 'default',
-    position: { x: 950, y: 1080 }, // More horizontal and vertical spacing
+    position: { x: 1000, y: 1080 }, // More horizontal and vertical spacing, further right
     data: { 
       label: (
         <div>
@@ -733,7 +733,7 @@ export default function ArchitectureFlowDiagram() {
         onConnect={onConnect}
         onInit={onInit}
         fitView={false}
-        defaultViewport={{ x: 0, y: 0, zoom: 0.6 }}
+        defaultViewport={{ x: 50, y: 0, zoom: 0.55 }}
         attributionPosition="bottom-right"
         minZoom={0.1}
         maxZoom={4}
