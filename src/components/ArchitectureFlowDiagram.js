@@ -6,482 +6,625 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   addEdge,
-  MarkerType,
-  Panel,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import '../css/architecture-flow-diagram.css';
 
 // Define custom edge styles
 const edgeStyles = {
-  default: {
-    stroke: '#555',
-    strokeWidth: 2,
+  solid: {
+    stroke: 'rgba(255, 255, 255, 0.7)',
+    strokeWidth: 1.5,
+    strokeDasharray: 'none',
   },
-  highlight: {
-    stroke: '#FF5722',
-    strokeWidth: 3,
+  dashed: {
+    stroke: 'rgba(255, 255, 255, 0.7)',
+    strokeWidth: 1.5,
+    strokeDasharray: '5,5',
+  },
+  highlighted: {
+    stroke: '#FBBC05', // Yellow
+    strokeWidth: 2,
+    strokeDasharray: 'none',
+  },
+  orange: {
+    stroke: '#EA4335', // Red/Orange
+    strokeWidth: 1.5,
+    strokeDasharray: '5,5',
+  },
+  funds: {
+    stroke: '#4CAF50', // Green
+    strokeWidth: 2,
+    strokeDasharray: 'none',
   },
 };
 
 // Define custom node styles
 const nodeStyles = {
   validator: {
-    background: '#4285F4',
-    color: 'white',
-    border: '1px solid #2A56C6',
-    borderRadius: '5px',
+    background: '#4285F4', // Blue
+    color: '#ffffff',
+    border: 'none',
+    borderRadius: '4px',
     padding: '10px',
     width: 180,
+    height: 60,
+    textAlign: 'center',
+    fontSize: '16px',
+    fontFamily: 'monospace',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
   },
   miner: {
-    background: '#34A853',
-    color: 'white',
-    border: '1px solid #137333',
-    borderRadius: '5px',
+    background: '#34A853', // Green
+    color: '#ffffff',
+    border: 'none',
+    borderRadius: '4px',
     padding: '10px',
     width: 180,
+    height: 60,
+    textAlign: 'center',
+    fontSize: '16px',
+    fontFamily: 'monospace',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
   },
-  relay: {
-    background: '#C026D3',
-    color: 'white',
-    border: '1px solid #9C1AB1',
-    borderRadius: '5px',
-    padding: '10px',
+  minerDetails: {
+    background: '#34A853', // Green
+    color: '#ffffff',
+    border: 'none',
+    borderRadius: '4px',
+    padding: '15px',
     width: 220,
-  },
-  dashboard: {
-    background: '#9333EA',
-    color: 'white',
-    border: '1px solid #7928CA',
-    borderRadius: '5px',
-    padding: '10px',
-    width: 180,
-  },
-  ipfs: {
-    background: '#4285F4',
-    color: 'white',
-    border: '1px solid #2A56C6',
-    borderRadius: '5px',
-    padding: '10px',
-    width: 180,
-  },
-  storage: {
-    background: '#34A853',
-    color: 'white',
-    border: '1px solid #137333',
-    borderRadius: '5px',
-    padding: '10px',
-    width: 180,
-  },
-  offchain: {
-    background: '#4285F4',
-    color: 'white',
-    border: '1px solid #2A56C6',
-    borderRadius: '5px',
-    padding: '10px',
-    width: 180,
+    height: 120,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    fontSize: '14px',
+    fontFamily: 'monospace',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
   },
   marketplace: {
-    background: '#1E1E1E',
-    color: 'white',
-    border: '1px solid #000000',
-    borderRadius: '5px',
+    background: '#FBBC05', // Yellow
+    color: '#ffffff',
+    border: 'none',
+    borderRadius: '4px',
     padding: '10px',
-    width: 220,
+    width: 180,
+    height: 60,
+    textAlign: 'center',
+    fontSize: '16px',
+    fontFamily: 'monospace',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
   },
   client: {
-    background: '#1E1E1E',
-    color: 'white',
-    border: '1px solid #000000',
-    borderRadius: '5px',
-    padding: '10px',
-    width: 220,
-    height: 150,
+    background: '#333333',
+    color: '#ffffff',
+    border: 'none',
+    borderRadius: '4px',
+    padding: '15px',
+    width: 240,
+    height: 160,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
+  },
+  clientContent: {
+    width: '100%',
+    textAlign: 'center',
+    fontSize: '15px',
+    fontFamily: 'monospace',
+    lineHeight: '1.5',
   },
   bittensor: {
-    background: '#1E1E1E',
-    color: 'white',
-    border: '1px solid #000000',
-    borderRadius: '5px',
+    background: '#4285F4', // Blue
+    color: '#ffffff',
+    border: 'none',
+    borderRadius: '4px',
     padding: '10px',
-    width: 300,
+    width: 220,
+    height: 60,
+    textAlign: 'center',
+    fontSize: '16px',
+    fontFamily: 'monospace',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
+  },
+  bridge: {
+    background: '#9C27B0', // Purple
+    color: '#ffffff',
+    border: 'none',
+    borderRadius: '4px',
+    padding: '10px',
+    width: 220,
+    height: 80,
+    textAlign: 'center',
+    fontSize: '14px',
+    fontFamily: 'monospace',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
+  },
+  rewards: {
+    background: '#333333',
+    color: '#ffffff',
+    border: 'none',
+    borderRadius: '4px',
+    padding: '15px',
+    width: 400,
+    height: 180,
+    textAlign: 'left',
+    fontSize: '14px',
+    fontFamily: 'monospace',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
+  },
+  note: {
+    background: 'transparent',
+    color: '#ffffff',
+    border: 'none',
+    padding: '5px',
+    fontSize: '12px',
+    fontFamily: 'monospace',
+    width: 'auto',
+    textAlign: 'left',
+  },
+  dashboard: {
+    background: '#9C27B0', // Purple
+    color: '#ffffff',
+    border: 'none',
+    borderRadius: '4px',
+    padding: '10px',
+    width: 180,
+    height: 60,
+    textAlign: 'center',
+    fontSize: '16px',
+    fontFamily: 'monospace',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
+  },
+  ipfs: {
+    background: '#4285F4', // Blue
+    color: '#ffffff',
+    border: 'none',
+    borderRadius: '4px',
+    padding: '10px',
+    width: 180,
+    height: 60,
+    textAlign: 'center',
+    fontSize: '16px',
+    fontFamily: 'monospace',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
+  },
+  worker: {
+    background: '#4285F4', // Blue
+    color: '#ffffff',
+    border: 'none',
+    borderRadius: '4px',
+    padding: '10px',
+    width: 180,
+    height: 60,
+    textAlign: 'center',
+    fontSize: '16px',
+    fontFamily: 'monospace',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
   },
 };
 
 // Initial nodes configuration
 const initialNodes = [
+  // Client Buying
   {
     id: 'client',
     type: 'default',
-    position: { x: 400, y: -350 },
+    position: { x: 700, y: 50 }, // Top center
     data: { 
       label: (
-        <div>
-          <strong>CLIENT BUYING:</strong>
-          <div>- Storage</div>
-          <div>- Compute</div>
-          <div style={{ marginTop: '10px' }}>Paying in FIAT / Alpha / TAO</div>
-          <div>from the Dashboard</div>
+        <div style={nodeStyles.clientContent}>
+          <strong>CLIENT</strong><br/>
+          Purchases resources:<br/>
+          • Storage<br/>
+          • Compute<br/><br/>
+          Payment methods:<br/>
+          FIAT / Alpha / TAO
         </div>
       ) 
     },
     style: nodeStyles.client,
   },
-  {
-    id: 'web-dashboard',
-    type: 'default',
-    position: { x: 400, y: -150 },
-    data: { label: 'Web Dashboard' },
-    style: nodeStyles.dashboard,
-  },
-  {
-    id: 'marketplace',
-    type: 'default',
-    position: { x: 400, y: -250 },
-    data: { label: 'Marketplace Pallet' },
-    style: nodeStyles.marketplace,
-  },
-  {
-    id: 'relay-node',
-    type: 'default',
-    position: { x: 400, y: -50 },
-    data: { label: 'Relay Node (RPC + IPFS Gateway)' },
-    style: nodeStyles.relay,
-  },
-  {
-    id: 'validator-node',
-    type: 'default',
-    position: { x: 200, y: 100 },
-    data: { label: 'Validator Node' },
-    style: nodeStyles.validator,
-  },
-  {
-    id: 'miner-node',
-    type: 'default',
-    position: { x: 600, y: 100 },
-    data: { label: 'Miner Node' },
-    style: nodeStyles.miner,
-  },
-  {
-    id: 'hippius-full-node',
-    type: 'default',
-    position: { x: 100, y: 250 },
-    data: { label: 'Hippius Full Node' },
-    style: nodeStyles.validator,
-  },
-  {
-    id: 'subtensor-full-node',
-    type: 'default',
-    position: { x: 300, y: 250 },
-    data: { label: 'Subtensor Full Node' },
-    style: nodeStyles.validator,
-  },
-  {
-    id: 'ipfs-node',
-    type: 'default',
-    position: { x: 500, y: 250 },
-    data: { label: 'IPFS Node' },
-    style: nodeStyles.ipfs,
-  },
-  {
-    id: 'ipfs-storage',
-    type: 'default',
-    position: { x: 700, y: 250 },
-    data: { label: 'IPFS Storage' },
-    style: nodeStyles.storage,
-  },
-  {
-    id: 'offchain-worker',
-    type: 'default',
-    position: { x: 200, y: 400 },
-    data: { 
-      label: (
-        <div>
-          <div>Offchain Worker</div>
-        </div>
-      ) 
-    },
-    style: nodeStyles.offchain,
-  },
-  {
-    id: 's3-miner',
-    type: 'default',
-    position: { x: 100, y: 550 },
-    data: { 
-      label: (
-        <div>
-          <div>S3 STORAGE MINER</div>
-          <div style={{ fontSize: '10px', marginTop: '5px' }}>
-            - Blockchain + OFFCHAIN WORKER
-            <br />- Volume service and auth
-          </div>
-        </div>
-      ) 
-    },
-    style: { ...nodeStyles.validator, width: 220 },
-  },
-  {
-    id: 'ipfs-miner',
-    type: 'default',
-    position: { x: 400, y: 550 },
-    data: { 
-      label: (
-        <div>
-          <div>IPFS STORAGE MINER</div>
-          <div style={{ fontSize: '10px', marginTop: '5px' }}>
-            - Blockchain + OFFCHAIN WORKER
-            <br />- IPFS service
-          </div>
-        </div>
-      ) 
-    },
-    style: { ...nodeStyles.ipfs, width: 220 },
-  },
-  {
-    id: 'compute-miner',
-    type: 'default',
-    position: { x: 700, y: 550 },
-    data: { 
-      label: (
-        <div>
-          <div>COMPUTE MINER</div>
-          <div style={{ fontSize: '10px', marginTop: '5px' }}>
-            - Blockchain + OFFCHAIN WORKER
-            <br />- VM Agent
-            <br />- k8s
-            <br />- libvirt
-          </div>
-        </div>
-      ) 
-    },
-    style: { ...nodeStyles.miner, width: 220 },
-  },
+  // Bittensor Blockchain
   {
     id: 'bittensor',
     type: 'default',
-    position: { x: -100, y: 50 },
+    position: { x: 200, y: 350 }, // Left side
+    data: { label: <div><strong>Bittensor Blockchain</strong></div> },
+    style: nodeStyles.bittensor,
+  },
+  // Bridge
+  {
+    id: 'bridge',
+    type: 'default',
+    position: { x: 200, y: 600 }, // Left side, below Bittensor
     data: { 
       label: (
         <div>
-          <div style={{ textAlign: 'center', fontWeight: 'bold' }}>Bittensor Blockchain</div>
+          <strong>BRIDGE</strong><br/>
+          Bidirectional transfer of Alpha<br/>
+          between Bittensor and Hippius
         </div>
       ) 
     },
-    style: nodeStyles.bittensor,
+    style: nodeStyles.bridge,
   },
+  // Bridge Note
+  {
+    id: 'bridge-note',
+    type: 'default',
+    position: { x: 400, y: 600 }, // Right of bridge
+    data: { 
+      label: (
+        <div>
+          <strong>Process:</strong><br/>
+          1. Client purchases with FIAT/TAO<br/>
+          2. System acquires Alpha on Bittensor<br/>
+          3. Alpha is bridged to Hippius chain<br/>
+          4. Alpha is locked as credit is minted
+        </div>
+      ) 
+    },
+    style: nodeStyles.note,
+  },
+  // Web Dashboard
+  {
+    id: 'dashboard',
+    type: 'default',
+    position: { x: 700, y: 350 }, // Center, below client
+    data: { label: <div><strong>Web Dashboard</strong></div> },
+    style: nodeStyles.dashboard,
+  },
+  // Dashboard Note
+  {
+    id: 'dashboard-note',
+    type: 'default',
+    position: { x: 450, y: 450 }, // Between dashboard and bridge
+    data: { 
+      label: (
+        <div>
+          <strong>UI Interaction:</strong><br/>
+          Dashboard provides interface<br/>
+          for bridging Alpha between chains
+        </div>
+      ) 
+    },
+    style: nodeStyles.note,
+  },
+  // Marketplace Pallet
+  {
+    id: 'marketplace',
+    type: 'default',
+    position: { x: 1050, y: 450 }, // Right of dashboard
+    data: { label: <div><strong>Marketplace Pallet</strong></div> },
+    style: nodeStyles.marketplace,
+  },
+  // Hippius Blockchain
+  {
+    id: 'hippius-blockchain',
+    type: 'default',
+    position: { x: 700, y: 600 }, // Center, below dashboard
+    data: { label: <div><strong>Hippius Blockchain</strong></div> },
+    style: nodeStyles.bittensor, // Reusing the blockchain style
+  },
+  // Validator Node
+  {
+    id: 'validator',
+    type: 'default',
+    position: { x: 550, y: 750 }, // Center-left, below Hippius blockchain
+    data: { label: <div><strong>Validator Node</strong></div> },
+    style: nodeStyles.validator,
+  },
+  // Miner Node
+  {
+    id: 'miner',
+    type: 'default',
+    position: { x: 850, y: 750 }, // Center-right, below Hippius blockchain
+    data: { label: <div><strong>Miner Node</strong></div> },
+    style: nodeStyles.miner,
+  },
+  // Hippius Full Node
+  {
+    id: 'hippius-node',
+    type: 'default',
+    position: { x: 450, y: 900 }, // Below validator, increased spacing
+    data: { label: <div><strong>Hippius Full Node</strong></div> },
+    style: nodeStyles.ipfs,
+  },
+  // Subtensor Full Node
+  {
+    id: 'subtensor-node',
+    type: 'default',
+    position: { x: 650, y: 900 }, // Below validator, increased spacing
+    data: { label: <div><strong>Subtensor Full Node</strong></div> },
+    style: nodeStyles.ipfs,
+  },
+  // Offchain Worker
+  {
+    id: 'worker',
+    type: 'default',
+    position: { x: 600, y: 1050 }, // Below nodes, increased vertical spacing
+    data: { label: <div><strong>Offchain Worker</strong></div> },
+    style: nodeStyles.worker,
+  },
+  // S3 Storage Miner
+  {
+    id: 's3-miner',
+    type: 'default',
+    position: { x: 400, y: 1200 }, // Bottom left, increased spacing
+    data: { 
+      label: (
+        <div>
+          <strong>S3 STORAGE MINER</strong><br/>
+          • Blockchain + Offchain Worker<br/>
+          • Volume service and auth
+        </div>
+      ) 
+    },
+    style: nodeStyles.minerDetails,
+  },
+  // IPFS Storage Miner
+  {
+    id: 'ipfs-miner',
+    type: 'default',
+    position: { x: 700, y: 1200 }, // Bottom center, increased spacing
+    data: { 
+      label: (
+        <div>
+          <strong>IPFS STORAGE MINER</strong><br/>
+          • Blockchain + Offchain Worker<br/>
+          • IPFS service
+        </div>
+      ) 
+    },
+    style: nodeStyles.minerDetails,
+  },
+  // Compute Miner
+  {
+    id: 'compute-miner',
+    type: 'default',
+    position: { x: 1000, y: 1200 }, // Bottom right, increased spacing
+    data: { 
+      label: (
+        <div>
+          <strong>COMPUTE MINER</strong><br/>
+          • Blockchain + Offchain Worker<br/>
+          • VM Agent, k8s, libvirt
+        </div>
+      ) 
+    },
+    style: nodeStyles.minerDetails,
+  },
+  // Rewards
   {
     id: 'rewards',
     type: 'default',
-    position: { x: 400, y: 700 },
+    position: { x: 700, y: 1400 }, // Bottom, increased vertical spacing
     data: { 
       label: (
-        <div style={{ fontSize: '12px' }}>
-          <strong>REWARD DISTRIBUTION:</strong>
-          <div>- 10% for treasury</div>
-          <div>- 30% for validators + stakers</div>
-          <div>- 60% for miners</div>
-          <div style={{ marginTop: '5px' }}>All rewards in Alpha, can be bridged to Bittensor</div>
+        <div>
+          <strong>REWARD DISTRIBUTION</strong><br/>
+          • 10% Treasury<br/>
+          • 30% Validators & Stakers<br/>
+          • 60% Miners<br/><br/>
+          All rewards in Alpha can be bridged back to Bittensor
         </div>
       ) 
     },
-    style: { ...nodeStyles.marketplace, width: 300, height: 120 },
+    style: nodeStyles.rewards,
   },
 ];
 
 // Initial edges configuration
 const initialEdges = [
-  { 
-    id: 'client-to-web', 
-    source: 'client', 
-    target: 'web-dashboard', 
-    label: 'Purchase', 
-    animated: true, 
-    type: 'smoothstep',
-    style: edgeStyles.default,
-    labelStyle: { fontSize: '12px', fontWeight: 'bold' },
-    labelBgStyle: { fill: 'rgba(255, 255, 255, 0.75)' },
+  // Client to Dashboard
+  {
+    id: 'client-to-dashboard',
+    source: 'client',
+    target: 'dashboard',
+    animated: true,
+    type: 'default',
+    style: edgeStyles.funds,
+    label: 'FIAT/TAO',
   },
-  { 
-    id: 'web-to-marketplace', 
-    source: 'web-dashboard', 
-    target: 'marketplace', 
-    label: 'Request', 
-    animated: true, 
-    type: 'smoothstep',
-    style: edgeStyles.default,
-    labelStyle: { fontSize: '12px', fontWeight: 'bold' },
-    labelBgStyle: { fill: 'rgba(255, 255, 255, 0.75)' },
+  // Bittensor to Bridge
+  {
+    id: 'bittensor-to-bridge',
+    source: 'bittensor',
+    target: 'bridge',
+    animated: true,
+    type: 'default',
+    style: edgeStyles.funds,
+    label: 'Alpha',
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
   },
-  { 
-    id: 'marketplace-to-relay', 
-    source: 'marketplace', 
-    target: 'relay-node', 
-    label: 'Submit', 
-    animated: true, 
-    type: 'smoothstep',
-    style: edgeStyles.default,
-    labelStyle: { fontSize: '12px', fontWeight: 'bold' },
-    labelBgStyle: { fill: 'rgba(255, 255, 255, 0.75)' },
+  // Bridge to Hippius Blockchain
+  {
+    id: 'bridge-to-hippius',
+    source: 'bridge',
+    target: 'hippius-blockchain',
+    animated: true,
+    type: 'default',
+    style: edgeStyles.funds,
+    label: 'Alpha (locked)',
   },
-  { 
-    id: 'relay-to-validator', 
-    source: 'relay-node', 
-    target: 'validator-node', 
-    label: 'RPC', 
-    animated: true, 
-    type: 'smoothstep',
-    style: edgeStyles.default,
-    labelStyle: { fontSize: '12px', fontWeight: 'bold' },
-    labelBgStyle: { fill: 'rgba(255, 255, 255, 0.75)' },
+  // Dashboard to Bridge (UI interaction)
+  {
+    id: 'dashboard-to-bridge',
+    source: 'dashboard',
+    target: 'bridge',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
+    label: 'UI for bridging',
   },
-  { 
-    id: 'relay-to-miner', 
-    source: 'relay-node', 
-    target: 'miner-node', 
-    label: 'RPC', 
-    animated: true, 
-    type: 'smoothstep',
-    style: edgeStyles.default,
-    labelStyle: { fontSize: '12px', fontWeight: 'bold' },
-    labelBgStyle: { fill: 'rgba(255, 255, 255, 0.75)' },
+  // Dashboard to Marketplace
+  {
+    id: 'dashboard-to-marketplace',
+    source: 'dashboard',
+    target: 'marketplace',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
+    label: 'mints credit',
   },
-  { 
-    id: 'validator-to-hippius', 
-    source: 'validator-node', 
-    target: 'hippius-full-node', 
-    label: 'Structural', 
-    animated: true, 
-    type: 'smoothstep',
-    style: edgeStyles.default,
-    labelStyle: { fontSize: '12px', fontWeight: 'bold' },
-    labelBgStyle: { fill: 'rgba(255, 255, 255, 0.75)' },
+  // Marketplace to Hippius Blockchain
+  {
+    id: 'marketplace-to-hippius',
+    source: 'marketplace',
+    target: 'hippius-blockchain',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
   },
-  { 
-    id: 'validator-to-subtensor', 
-    source: 'validator-node', 
-    target: 'subtensor-full-node', 
-    label: 'Structural', 
-    animated: true, 
-    type: 'smoothstep',
-    style: edgeStyles.default,
-    labelStyle: { fontSize: '12px', fontWeight: 'bold' },
-    labelBgStyle: { fill: 'rgba(255, 255, 255, 0.75)' },
+  // Hippius Blockchain to Validator
+  {
+    id: 'hippius-to-validator',
+    source: 'hippius-blockchain',
+    target: 'validator',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
   },
-  { 
-    id: 'miner-to-ipfs-node', 
-    source: 'miner-node', 
-    target: 'ipfs-node', 
-    label: 'Structural', 
-    animated: true, 
-    type: 'smoothstep',
-    style: edgeStyles.default,
-    labelStyle: { fontSize: '12px', fontWeight: 'bold' },
-    labelBgStyle: { fill: 'rgba(255, 255, 255, 0.75)' },
+  // Hippius Blockchain to Miner
+  {
+    id: 'hippius-to-miner',
+    source: 'hippius-blockchain',
+    target: 'miner',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
   },
-  { 
-    id: 'miner-to-ipfs-storage', 
-    source: 'miner-node', 
-    target: 'ipfs-storage', 
-    label: 'Storage', 
-    animated: true, 
-    type: 'smoothstep',
-    style: edgeStyles.default,
-    labelStyle: { fontSize: '12px', fontWeight: 'bold' },
-    labelBgStyle: { fill: 'rgba(255, 255, 255, 0.75)' },
+  // Validator to Bittensor (weights)
+  {
+    id: 'validator-to-bittensor',
+    source: 'validator',
+    target: 'bittensor',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.orange,
+    label: 'weights',
   },
-  { 
-    id: 'hippius-to-offchain', 
-    source: 'hippius-full-node', 
-    target: 'offchain-worker', 
-    label: 'Spawn', 
-    animated: true, 
-    type: 'smoothstep',
-    style: edgeStyles.default,
-    labelStyle: { fontSize: '12px', fontWeight: 'bold' },
-    labelBgStyle: { fill: 'rgba(255, 255, 255, 0.75)' },
+  // Validator to Hippius Node
+  {
+    id: 'validator-to-hippius',
+    source: 'validator',
+    target: 'hippius-node',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
   },
-  { 
-    id: 'relay-to-ipfs-node', 
-    source: 'relay-node', 
-    target: 'ipfs-node', 
-    label: 'Monitor', 
-    animated: true, 
-    type: 'smoothstep',
-    style: edgeStyles.default,
-    labelStyle: { fontSize: '12px', fontWeight: 'bold' },
-    labelBgStyle: { fill: 'rgba(255, 255, 255, 0.75)' },
+  // Validator to Subtensor Node
+  {
+    id: 'validator-to-subtensor',
+    source: 'validator',
+    target: 'subtensor-node',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
   },
-  { 
-    id: 'validator-to-bittensor', 
-    source: 'validator-node', 
-    target: 'bittensor', 
-    label: 'Submit weights', 
-    animated: true, 
-    type: 'smoothstep', 
-    markerEnd: { type: MarkerType.ArrowClosed },
-    style: edgeStyles.default,
-    labelStyle: { fontSize: '12px', fontWeight: 'bold' },
-    labelBgStyle: { fill: 'rgba(255, 255, 255, 0.75)' },
+  // Miner to S3 Storage Miner
+  {
+    id: 'miner-to-s3',
+    source: 'miner',
+    target: 's3-miner',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
   },
-  { 
-    id: 'offchain-to-s3', 
-    source: 'offchain-worker', 
-    target: 's3-miner', 
-    animated: true, 
-    type: 'smoothstep',
-    style: edgeStyles.default,
+  // Miner to IPFS Storage Miner
+  {
+    id: 'miner-to-ipfs',
+    source: 'miner',
+    target: 'ipfs-miner',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
   },
-  { 
-    id: 'offchain-to-ipfs', 
-    source: 'offchain-worker', 
-    target: 'ipfs-miner', 
-    animated: true, 
-    type: 'smoothstep',
-    style: edgeStyles.default,
+  // Miner to Compute Miner
+  {
+    id: 'miner-to-compute',
+    source: 'miner',
+    target: 'compute-miner',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
   },
-  { 
-    id: 'offchain-to-compute', 
-    source: 'offchain-worker', 
-    target: 'compute-miner', 
-    animated: true, 
-    type: 'smoothstep',
-    style: edgeStyles.default,
+  // Hippius Node to Worker
+  {
+    id: 'hippius-to-worker',
+    source: 'hippius-node',
+    target: 'worker',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
   },
-  { 
-    id: 's3-to-rewards', 
-    source: 's3-miner', 
-    target: 'rewards', 
-    animated: true, 
-    type: 'smoothstep',
-    style: edgeStyles.default,
+  // Worker to S3 Miner
+  {
+    id: 'worker-to-s3',
+    source: 'worker',
+    target: 's3-miner',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
   },
-  { 
-    id: 'ipfs-to-rewards', 
-    source: 'ipfs-miner', 
-    target: 'rewards', 
-    animated: true, 
-    type: 'smoothstep',
-    style: edgeStyles.default,
+  // Worker to IPFS Miner
+  {
+    id: 'worker-to-ipfs',
+    source: 'worker',
+    target: 'ipfs-miner',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
   },
-  { 
-    id: 'compute-to-rewards', 
-    source: 'compute-miner', 
-    target: 'rewards', 
-    animated: true, 
-    type: 'smoothstep',
-    style: edgeStyles.default,
+  // Worker to Compute Miner
+  {
+    id: 'worker-to-compute',
+    source: 'worker',
+    target: 'compute-miner',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
   },
-  { 
-    id: 'rewards-to-bittensor', 
-    source: 'rewards', 
-    target: 'bittensor', 
-    label: 'Bridge', 
-    animated: true, 
-    type: 'smoothstep', 
-    style: edgeStyles.highlight,
-    labelStyle: { fontSize: '12px', fontWeight: 'bold' },
-    labelBgStyle: { fill: 'rgba(255, 255, 255, 0.75)' },
+  // S3 Miner to Rewards
+  {
+    id: 's3-to-rewards',
+    source: 's3-miner',
+    target: 'rewards',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
+  },
+  // IPFS Miner to Rewards
+  {
+    id: 'ipfs-to-rewards',
+    source: 'ipfs-miner',
+    target: 'rewards',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
+  },
+  // Compute Miner to Rewards
+  {
+    id: 'compute-to-rewards',
+    source: 'compute-miner',
+    target: 'rewards',
+    animated: false,
+    type: 'default',
+    style: edgeStyles.dashed,
+  },
+  // Rewards to Bridge (bidirectional Alpha flow)
+  {
+    id: 'rewards-to-bridge',
+    source: 'rewards',
+    target: 'bridge',
+    animated: true,
+    type: 'default',
+    style: edgeStyles.funds,
+    label: 'Alpha (bidirectional)',
   },
 ];
 
@@ -491,14 +634,42 @@ export default function ArchitectureFlowDiagram() {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
 
   const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge({ 
-      ...params, 
-      animated: true, 
-      type: 'smoothstep',
-      style: edgeStyles.default,
-      labelStyle: { fontSize: '12px', fontWeight: 'bold' },
-      labelBgStyle: { fill: 'rgba(255, 255, 255, 0.75)' },
-    }, eds)),
+    (params) => {
+      // Determine if this is a funds-related connection
+      const isFundsConnection = 
+        (params.source === 'client' && params.target === 'dashboard') ||
+        (params.source === 'bittensor' && params.target === 'bridge') ||
+        (params.source === 'bridge' && params.target === 'hippius-blockchain') ||
+        (params.source === 'rewards' && params.target === 'bridge');
+      
+      // Determine if this is a blockchain-related connection
+      const isBlockchainConnection =
+        (params.source === 'marketplace' && params.target === 'hippius-blockchain') ||
+        (params.source === 'hippius-blockchain' && params.target === 'validator') ||
+        (params.source === 'hippius-blockchain' && params.target === 'miner');
+      
+      // Determine if this is a miner-related connection
+      const isMinerConnection =
+        (params.source === 'miner' && params.target === 's3-miner') ||
+        (params.source === 'miner' && params.target === 'ipfs-miner') ||
+        (params.source === 'miner' && params.target === 'compute-miner');
+      
+      // Determine if this is a UI-related connection
+      const isUIConnection =
+        (params.source === 'dashboard' && params.target === 'bridge');
+      
+      setEdges((eds) => addEdge({ 
+        ...params, 
+        animated: isFundsConnection, 
+        type: 'default',
+        style: isFundsConnection ? edgeStyles.funds : 
+              isBlockchainConnection ? edgeStyles.highlighted : 
+              isMinerConnection ? edgeStyles.highlighted :
+              isUIConnection ? edgeStyles.dashed :
+              edgeStyles.dashed,
+        label: isUIConnection ? 'UI for bridging' : undefined
+      }, eds));
+    },
     [setEdges]
   );
 
@@ -507,44 +678,64 @@ export default function ArchitectureFlowDiagram() {
   }, []);
 
   return (
-    <div className="architecture-flow-diagram">
+    <div style={{ width: '100%', height: '100%' }}>
       <ReactFlow
+        className="architecture-flow-diagram"
+        style={{ width: '100%', height: '2000px' }}
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         onInit={onInit}
-        fitView
-        fitViewOptions={{ padding: 0.2 }}
+        fitView={false}
+        defaultViewport={{ x: 0, y: 0, zoom: 0.7 }}
         attributionPosition="bottom-right"
-        minZoom={0.2}
+        minZoom={0.1}
         maxZoom={4}
         defaultEdgeOptions={{
-          style: { strokeWidth: 2 },
-          markerEnd: { type: MarkerType.ArrowClosed },
+          style: edgeStyles.dashed,
+          animated: false,
+          type: 'default',
         }}
+        proOptions={{ hideAttribution: true }}
+        connectionLineStyle={{ stroke: 'rgba(255, 255, 255, 0.5)', strokeWidth: 1.5, strokeDasharray: '5,5' }}
+        connectionLineType="straight"
+        nodesDraggable={true}
+        elementsSelectable={true}
+        zoomOnScroll={true}
+        panOnScroll={false}
+        panOnDrag={true}
       >
-        <Controls />
-        <MiniMap 
-          nodeStrokeColor={(n) => {
-            return '#fff';
-          }}
-          nodeColor={(n) => {
-            if (n.style?.background) return n.style.background;
-            return '#eee';
-          }}
+        <Controls 
+          className="flow-controls" 
+          showInteractive={false}
+          position="bottom-right"
         />
-        <Background color="#aaa" gap={16} />
-        <Panel position="top-left" className="architecture-legend">
-          <div style={{ background: 'rgba(255, 255, 255, 0.8)', padding: '10px', borderRadius: '5px' }}>
-            <h3 style={{ margin: '0 0 10px 0' }}>Hippius Architecture</h3>
-            <div style={{ fontSize: '12px', color: '#666' }}>
-              Interactive diagram - drag to pan, scroll to zoom
-            </div>
-          </div>
-        </Panel>
+        <MiniMap 
+          nodeStrokeColor={(n) => '#ffffff'}
+          nodeColor={(n) => {
+            const nodeId = n.id;
+            if (nodeId.includes('client')) return '#333333';
+            if (nodeId.includes('bridge') || nodeId.includes('dashboard') || nodeId.includes('hippius-blockchain')) return '#9C27B0';
+            if (nodeId.includes('marketplace')) return '#FBBC05';
+            if (nodeId.includes('validator') || nodeId.includes('bittensor') || nodeId.includes('ipfs') || nodeId.includes('worker')) return '#4285F4';
+            if (nodeId.includes('miner')) return '#34A853';
+            if (nodeId.includes('rewards')) return '#333333';
+            return '#666666';
+          }}
+          maskColor="rgba(30, 30, 30, 0.8)"
+          className="flow-minimap"
+          position="bottom-left"
+        />
+        <Background 
+          color="#333333" 
+          gap={20} 
+          size={1}
+          className="flow-background" 
+          variant="dots"
+        />
       </ReactFlow>
     </div>
   );
-} 
+}

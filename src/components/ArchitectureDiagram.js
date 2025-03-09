@@ -36,8 +36,9 @@ export default function ArchitectureDiagram() {
     <div 
       className={`architecture-diagram-container ${isFullscreen ? 'fullscreen' : ''}`}
       ref={containerRef}
+      style={{ width: '100%', height: '2500px' }}
     >
-      <div className="architecture-diagram">
+      <div className="architecture-diagram" style={{ width: '100%', height: '100%' }}>
         <ArchitectureFlowDiagram />
       </div>
       
