@@ -233,7 +233,7 @@ const initialNodes = [
   {
     id: 'bittensor',
     type: 'default',
-    position: { x: 20, y: 320 }, // Moved even further left
+    position: { x: -50, y: 320 }, // Moved much further left
     data: { label: <div><strong>Bittensor Blockchain</strong></div> },
     style: nodeStyles.bittensor,
   },
@@ -241,7 +241,7 @@ const initialNodes = [
   {
     id: 'bridge',
     type: 'default',
-    position: { x: 20, y: 550 }, // Aligned with Bittensor horizontally
+    position: { x: -50, y: 550 }, // Aligned with Bittensor horizontally
     data: { 
       label: (
         <div>
@@ -257,7 +257,7 @@ const initialNodes = [
   {
     id: 'bridge-note',
     type: 'default',
-    position: { x: 20, y: 730 }, // Aligned with Bridge horizontally
+    position: { x: -50, y: 800 }, // Moved further down to avoid overlap with Hippius Full Node
     data: { 
       label: (
         <div>
@@ -733,7 +733,7 @@ export default function ArchitectureFlowDiagram() {
         onConnect={onConnect}
         onInit={onInit}
         fitView={false}
-        defaultViewport={{ x: 120, y: 0, zoom: 0.55 }}
+        defaultViewport={{ x: 200, y: 0, zoom: 0.55 }}
         attributionPosition="bottom-right"
         minZoom={0.1}
         maxZoom={4}
