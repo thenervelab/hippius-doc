@@ -23,6 +23,19 @@ const config: Config = {
     locales: ['en'],
   },
 
+  markdown: {
+    mermaid: true,
+  },
+
+  // Add custom scripts
+  scripts: [
+    {
+      src: '/js/diagramZoom.js',
+      async: true,
+      defer: true,
+    },
+  ],
+
   presets: [
     [
       'classic',

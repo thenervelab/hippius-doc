@@ -17,3 +17,135 @@ code {
   background-color: #1e90ff;
   color: #ffffff;
 }
+
+/* Architecture Diagram */
+.architecture-diagram-container {
+  background-color: #000;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #333;
+  position: relative; /* For positioning zoom controls */
+  overflow: hidden; /* Prevent content from spilling out when panning */
+  user-select: none; /* Prevent text selection during panning */
+  touch-action: none; /* Prevent browser handling of touch events */
+  min-height: 600px; /* Ensure container has height */
+}
+
+.architecture-diagram {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: block;
+  min-height: 600px; /* Ensure the object has height */
+  transition: transform 0.1s ease; /* Smooth zoom/pan transition */
+  transform-origin: center center;
+  will-change: transform; /* Optimize for animations */
+}
+
+/* Zoom Controls */
+.zoom-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+  padding: 5px;
+  display: flex;
+  gap: 5px;
+  z-index: 100; /* Increased z-index to ensure visibility */
+  pointer-events: auto; /* Ensure clicks are registered */
+  opacity: 1 !important; /* Force visibility */
+}
+
+.zoom-btn {
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1 !important; /* Force visibility */
+}
+
+.zoom-btn:hover {
+  background-color: #0078d7;
+}
+
+.zoom-level {
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 14px;
+  opacity: 1 !important; /* Force visibility */
+}
+
+/* Tooltip */
+.zoom-tooltip {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  z-index: 10;
+  transition: opacity 1s ease;
+  opacity: 1;
+}
+
+/* Pan indicator */
+.pan-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  z-index: 10;
+  pointer-events: none;
+  animation: fadeOut 2s forwards;
+  animation-delay: 1s;
+}
+
+.pan-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pan-text::before {
+  content: "↔";
+  margin-right: 5px;
+  font-size: 16px;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Mermaid Diagrams */
+.mermaid {
+  overflow: auto !important;
+  cursor: grab;
+}
+.mermaid:active {
+  cursor: grabbing;
+}
+.mermaid svg {
+  max-width: none !important;
+  transform-origin: 0 0;
+  transition: transform 0.3s ease;
+}

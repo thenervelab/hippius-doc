@@ -13,6 +13,7 @@ const sidebars: SidebarsConfig = {
         'learn/mnemonic-auth', // Mnemonic Authentication
         'learn/encryption', // Encryption System
         'learn/storage-systems', // Decentralized Storage Systems
+        'learn/architecture', // System Architecture
       ],
     },
     {
