@@ -30,6 +30,30 @@ code {
   user-select: none; /* Prevent text selection during panning */
   touch-action: none; /* Prevent browser handling of touch events */
   min-height: 600px; /* Ensure container has height */
+  transition: all 0.3s ease; /* Smooth transition for fullscreen */
+}
+
+/* Fullscreen mode */
+.architecture-diagram-container.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  margin: 0;
+  padding: 30px;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.architecture-diagram-container.fullscreen .architecture-diagram {
+  max-height: 90vh;
+  object-fit: contain;
 }
 
 .architecture-diagram {
@@ -41,6 +65,51 @@ code {
   transition: transform 0.1s ease; /* Smooth zoom/pan transition */
   transform-origin: center center;
   will-change: transform; /* Optimize for animations */
+}
+
+/* Fullscreen button */
+.fullscreen-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  opacity: 1 !important;
+}
+
+.fullscreen-btn:hover {
+  background-color: #0078d7;
+}
+
+/* Exit fullscreen button */
+.exit-fullscreen-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  z-index: 100;
+  opacity: 1 !important;
+  display: none;
+}
+
+.architecture-diagram-container.fullscreen .exit-fullscreen-btn {
+  display: block;
 }
 
 /* Zoom Controls */

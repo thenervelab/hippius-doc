@@ -8,6 +8,7 @@ export default function ArchitectureDiagram() {
   const [isPanning, setIsPanning] = useState(false);
   const [startPan, setStartPan] = useState({ x: 0, y: 0 });
   const [showTooltip, setShowTooltip] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   // Constants
   const zoomStep = 0.1;
@@ -30,6 +31,28 @@ export default function ArchitectureDiagram() {
       return () => clearTimeout(timer);
     }
   }, [showTooltip]);
+
+  // Toggle fullscreen
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen);
+    // Reset zoom and pan when toggling fullscreen
+    setCurrentZoom(1);
+    setPanPosition({ x: 0, y: 0 });
+  };
+
+  // Handle escape key to exit fullscreen
+  useEffect(() => {
+    const handleEscKey = (e) => {
+      if (e.key === 'Escape' && isFullscreen) {
+        setIsFullscreen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscKey);
+    return () => {
+      document.removeEventListener('keydown', handleEscKey);
+    };
+  }, [isFullscreen]);
 
   // Zoom in function
   const zoomIn = () => {
@@ -130,6 +153,12 @@ export default function ArchitectureDiagram() {
         resetZoom();
       }
       
+      // F key for fullscreen
+      if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        toggleFullscreen();
+      }
+      
       // Arrow keys for panning when zoomed in
       if (currentZoom > 1) {
         const panStep = 10;
@@ -160,7 +189,7 @@ export default function ArchitectureDiagram() {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [currentZoom]);
+  }, [currentZoom, isFullscreen]);
 
   // Set up mouse move and mouse up listeners
   useEffect(() => {
@@ -230,7 +259,7 @@ export default function ArchitectureDiagram() {
 
   return (
     <div 
-      className="architecture-diagram-container" 
+      className={`architecture-diagram-container ${isFullscreen ? 'fullscreen' : ''}`}
       ref={containerRef}
       onMouseDown={handleMouseDown}
       onWheel={handleWheel}
@@ -249,6 +278,24 @@ export default function ArchitectureDiagram() {
       >
         Your browser does not support SVG
       </object>
+      
+      {/* Fullscreen button */}
+      <button 
+        className="fullscreen-btn" 
+        onClick={toggleFullscreen}
+        title={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+        aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+      >
+        {isFullscreen ? '⤓' : '⤢'}
+      </button>
+      
+      {/* Exit fullscreen button (visible only in fullscreen mode) */}
+      <button 
+        className="exit-fullscreen-btn" 
+        onClick={toggleFullscreen}
+      >
+        Exit Fullscreen (Esc)
+      </button>
       
       <div className="zoom-controls">
         <button 
@@ -274,7 +321,7 @@ export default function ArchitectureDiagram() {
       
       {showTooltip && (
         <div className="zoom-tooltip">
-          Use mouse wheel or buttons to zoom. When zoomed in, click and drag to pan.
+          Use mouse wheel or buttons to zoom. When zoomed in, click and drag to pan. Press F for fullscreen.
         </div>
       )}
       
