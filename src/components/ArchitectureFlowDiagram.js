@@ -134,9 +134,9 @@ const nodeStyles = {
     color: '#ffffff',
     border: 'none',
     borderRadius: '4px',
-    padding: '10px',
+    padding: '15px',
     width: 220,
-    height: 80,
+    height: 120,
     textAlign: 'center',
     fontSize: '14px',
     fontFamily: 'monospace',
@@ -233,7 +233,7 @@ const initialNodes = [
   {
     id: 'bittensor',
     type: 'default',
-    position: { x: 100, y: 320 }, // Moved even further left
+    position: { x: 20, y: 320 }, // Moved even further left
     data: { label: <div><strong>Bittensor Blockchain</strong></div> },
     style: nodeStyles.bittensor,
   },
@@ -241,7 +241,7 @@ const initialNodes = [
   {
     id: 'bridge',
     type: 'default',
-    position: { x: 100, y: 550 }, // Aligned with Bittensor horizontally
+    position: { x: 20, y: 550 }, // Aligned with Bittensor horizontally
     data: { 
       label: (
         <div>
@@ -257,7 +257,7 @@ const initialNodes = [
   {
     id: 'bridge-note',
     type: 'default',
-    position: { x: 100, y: 700 }, // Below bridge
+    position: { x: 20, y: 730 }, // Aligned with Bridge horizontally
     data: { 
       label: (
         <div>
@@ -733,7 +733,7 @@ export default function ArchitectureFlowDiagram() {
         onConnect={onConnect}
         onInit={onInit}
         fitView={false}
-        defaultViewport={{ x: 50, y: 0, zoom: 0.55 }}
+        defaultViewport={{ x: 120, y: 0, zoom: 0.55 }}
         attributionPosition="bottom-right"
         minZoom={0.1}
         maxZoom={4}
