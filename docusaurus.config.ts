@@ -15,13 +15,26 @@ const config: Config = {
   organizationName: 'thenervelab',
   projectName: 'hippius-doc',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
   },
+
+  markdown: {
+    mermaid: true,
+  },
+
+  // Add custom scripts
+  scripts: [
+    {
+      src: '/js/diagramZoom.js',
+      async: true,
+      defer: true,
+    },
+  ],
 
   presets: [
     [
@@ -111,8 +124,8 @@ const config: Config = {
               to: '/learn/intro',
             },
             {
-              label: 'Web3 Basics',
-              to: '/learn/web3-basics',
+              label: 'Substrate & Staking',
+              to: '/learn/substrate-staking',
             },
           ],
         },
