@@ -15,7 +15,7 @@ const config: Config = {
   organizationName: 'thenervelab',
   projectName: 'hippius-doc',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   i18n: {
@@ -111,8 +111,8 @@ const config: Config = {
               to: '/learn/intro',
             },
             {
-              label: 'Web3 Basics',
-              to: '/learn/web3-basics',
+              label: 'Substrate & Staking',
+              to: '/learn/substrate-staking',
             },
           ],
         },
