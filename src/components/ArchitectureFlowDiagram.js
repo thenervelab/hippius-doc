@@ -20,18 +20,76 @@ const StepEdge = ({ id, source, target, sourceX, sourceY, targetX, targetY, sour
     sourceX,
     sourceY,
     sourcePosition,
+    targetPosition,
     targetX,
     targetY,
-    targetPosition,
   });
 
   // For a step edge, we need to create a path with right angles
   const xDiff = targetX - sourceX;
   const yDiff = targetY - sourceY;
-  const midX = sourceX + xDiff / 2;
   
-  // Create a path with right angles
-  const path = `M${sourceX},${sourceY} H${midX} V${targetY} H${targetX}`;
+  // Determine if we should route horizontally first or vertically first
+  // For vertical connections (nodes in a column), go straight down/up
+  if (Math.abs(xDiff) < 50) {
+    // Almost vertical alignment - go straight
+    return (
+      <path
+        id={id}
+        style={style}
+        className="react-flow__edge-path"
+        d={`M${sourceX},${sourceY} L${targetX},${targetY}`}
+        markerEnd={markerEnd}
+      />
+    );
+  }
+  
+  // For horizontal connections with small vertical difference, go straight across
+  if (Math.abs(yDiff) < 50) {
+    return (
+      <path
+        id={id}
+        style={style}
+        className="react-flow__edge-path"
+        d={`M${sourceX},${sourceY} L${targetX},${targetY}`}
+        markerEnd={markerEnd}
+      />
+    );
+  }
+  
+  // For connections between nodes at different levels, use step routing
+  // Calculate midpoints to avoid crossing through nodes
+  const midX = sourceX + xDiff / 2;
+  const midY = sourceY + yDiff / 2;
+  
+  // Create a path with right angles based on the positions
+  let path;
+  
+  // If source is above target, go down then across
+  if (sourceY < targetY) {
+    if (sourcePosition === 'bottom' && targetPosition === 'top') {
+      // Vertical alignment - go straight down
+      path = `M${sourceX},${sourceY} V${midY} H${targetX} V${targetY}`;
+    } else if (sourcePosition === 'right' && targetPosition === 'left') {
+      // Horizontal alignment - go right then down then left
+      path = `M${sourceX},${sourceY} H${midX} V${targetY} H${targetX}`;
+    } else if (sourcePosition === 'left' && targetPosition === 'right') {
+      // Horizontal alignment - go left then down then right
+      path = `M${sourceX},${sourceY} H${midX} V${targetY} H${targetX}`;
+    } else {
+      // Default - go down then across
+      path = `M${sourceX},${sourceY} V${midY} H${targetX} V${targetY}`;
+    }
+  } else {
+    // If source is below target, go across then up
+    if (sourcePosition === 'top' && targetPosition === 'bottom') {
+      // Vertical alignment - go straight up
+      path = `M${sourceX},${sourceY} V${midY} H${targetX} V${targetY}`;
+    } else {
+      // Default - go across then up
+      path = `M${sourceX},${sourceY} H${midX} V${targetY} H${targetX}`;
+    }
+  }
 
   return (
     <path
@@ -577,6 +635,8 @@ const initialEdges = [
     label: 'Alpha',
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
+    sourcePosition: 'bottom',
+    targetPosition: 'top',
   },
   // Bridge to Hippius Blockchain
   {
@@ -589,6 +649,8 @@ const initialEdges = [
     label: 'Alpha (locked)',
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
+    sourcePosition: 'right',
+    targetPosition: 'left',
   },
   // Dashboard to Bridge (UI interaction)
   {
@@ -601,6 +663,8 @@ const initialEdges = [
     label: 'UI for bridging',
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
+    sourcePosition: 'left',
+    targetPosition: 'right',
   },
   // Marketplace to Hippius Blockchain
   {
@@ -625,6 +689,8 @@ const initialEdges = [
     style: edgeStyles.solid,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
+    sourcePosition: 'left',
+    targetPosition: 'right',
   },
   // Hippius Blockchain to Miner
   {
@@ -636,6 +702,8 @@ const initialEdges = [
     style: edgeStyles.solid,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
+    sourcePosition: 'right',
+    targetPosition: 'left',
   },
   // Hippius Blockchain to Hippius Full Node
   {
