@@ -214,7 +214,7 @@ const initialNodes = [
   {
     id: 'client',
     type: 'default',
-    position: { x: 605, y: 50 }, // Top center, adjusted for perfect alignment
+    position: { x: 605, y: 50 }, // Top center, perfect vertical alignment
     data: { 
       label: (
         <div style={nodeStyles.clientContent}>
@@ -227,7 +227,11 @@ const initialNodes = [
         </div>
       ) 
     },
-    style: nodeStyles.client,
+    style: {
+      ...nodeStyles.client,
+      width: 250, // Ensure consistent width
+      textAlign: 'center',
+    },
   },
   // Bittensor Blockchain
   {
@@ -275,9 +279,13 @@ const initialNodes = [
   {
     id: 'dashboard',
     type: 'default',
-    position: { x: 605, y: 320 }, // Center, below client, adjusted for perfect alignment
+    position: { x: 605, y: 320 }, // Perfect vertical alignment with client
     data: { label: <div><strong>Web Dashboard</strong></div> },
-    style: nodeStyles.dashboard,
+    style: {
+      ...nodeStyles.dashboard,
+      width: 180, // Ensure consistent width
+      textAlign: 'center',
+    },
   },
   // Dashboard Note
   {
@@ -299,17 +307,25 @@ const initialNodes = [
   {
     id: 'marketplace',
     type: 'default',
-    position: { x: 605, y: 450 }, // Below Web Dashboard, adjusted for perfect alignment
+    position: { x: 605, y: 450 }, // Perfect vertical alignment with dashboard
     data: { label: <div><strong>Marketplace Pallet</strong></div> },
-    style: nodeStyles.marketplace,
+    style: {
+      ...nodeStyles.marketplace,
+      width: 180, // Ensure consistent width
+      textAlign: 'center',
+    },
   },
   // Hippius Blockchain
   {
     id: 'hippius-blockchain',
     type: 'default',
-    position: { x: 605, y: 580 }, // Below Marketplace, adjusted for perfect alignment
+    position: { x: 605, y: 580 }, // Perfect vertical alignment with marketplace
     data: { label: <div><strong>Hippius Blockchain</strong></div> },
-    style: nodeStyles.bittensor, // Reusing the blockchain style
+    style: {
+      ...nodeStyles.bittensor, // Reusing the blockchain style
+      width: 180, // Ensure consistent width
+      textAlign: 'center',
+    },
   },
   // Validator Node
   {
@@ -331,9 +347,13 @@ const initialNodes = [
   {
     id: 'hippius-node',
     type: 'default',
-    position: { x: 600, y: 820 }, // Below validator
+    position: { x: 605, y: 820 }, // Aligned with the main vertical chain
     data: { label: <div><strong>Hippius Full Node</strong></div> },
-    style: nodeStyles.ipfs,
+    style: {
+      ...nodeStyles.ipfs,
+      width: 180, // Ensure consistent width
+      textAlign: 'center',
+    },
   },
   // Subtensor Full Node
   {
@@ -347,9 +367,13 @@ const initialNodes = [
   {
     id: 'worker',
     type: 'default',
-    position: { x: 600, y: 940 }, // Below Hippius Full Node, aligned vertically
+    position: { x: 605, y: 940 }, // Aligned with the main vertical chain
     data: { label: <div><strong>Offchain Worker</strong></div> },
-    style: nodeStyles.worker,
+    style: {
+      ...nodeStyles.worker,
+      width: 180, // Ensure consistent width
+      textAlign: 'center',
+    },
   },
   // S3 Storage Miner
   {
@@ -432,6 +456,8 @@ const initialEdges = [
     label: 'FIAT/TAO',
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
+    sourcePosition: 'bottom',
+    targetPosition: 'top',
   },
   // Dashboard to Marketplace
   {
@@ -444,6 +470,8 @@ const initialEdges = [
     label: 'mints credit',
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
+    sourcePosition: 'bottom',
+    targetPosition: 'top',
   },
   // Bittensor to Bridge
   {
@@ -491,6 +519,8 @@ const initialEdges = [
     style: edgeStyles.solid,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
+    sourcePosition: 'bottom',
+    targetPosition: 'top',
   },
   // Hippius Blockchain to Validator
   {
@@ -513,6 +543,19 @@ const initialEdges = [
     style: edgeStyles.solid,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
+  },
+  // Hippius Blockchain to Hippius Full Node
+  {
+    id: 'hippius-blockchain-to-hippius-node',
+    source: 'hippius-blockchain',
+    target: 'hippius-node',
+    animated: false,
+    type: 'straight',
+    style: edgeStyles.solid,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
+    sourcePosition: 'bottom',
+    targetPosition: 'top',
   },
   // Validator to Bittensor (weights)
   {
@@ -591,6 +634,8 @@ const initialEdges = [
     style: edgeStyles.solid,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
+    sourcePosition: 'bottom',
+    targetPosition: 'top',
   },
   // Worker to S3 Miner
   {
