@@ -6,9 +6,43 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   addEdge,
+  getBezierPath,
+  getStraightPath,
+  getEdgeCenter,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import '../css/architecture-flow-diagram.css';
+
+// Custom edge with step routing (90° angles)
+const StepEdge = ({ id, source, target, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, style = {}, data, markerEnd }) => {
+  // Calculate the path
+  const [edgePath] = getStraightPath({
+    sourceX,
+    sourceY,
+    sourcePosition,
+    targetX,
+    targetY,
+    targetPosition,
+  });
+
+  // For a step edge, we need to create a path with right angles
+  const xDiff = targetX - sourceX;
+  const yDiff = targetY - sourceY;
+  const midX = sourceX + xDiff / 2;
+  
+  // Create a path with right angles
+  const path = `M${sourceX},${sourceY} H${midX} V${targetY} H${targetX}`;
+
+  return (
+    <path
+      id={id}
+      style={style}
+      className="react-flow__edge-path"
+      d={path}
+      markerEnd={markerEnd}
+    />
+  );
+};
 
 // Define custom edge styles
 const edgeStyles = {
@@ -34,6 +68,31 @@ const edgeStyles = {
   },
   funds: {
     stroke: '#4CAF50', // Green
+    strokeWidth: 2,
+    strokeDasharray: 'none',
+  },
+  validator: {
+    stroke: '#4285F4', // Blue
+    strokeWidth: 2,
+    strokeDasharray: 'none',
+  },
+  miner: {
+    stroke: '#34A853', // Green
+    strokeWidth: 2,
+    strokeDasharray: 'none',
+  },
+  ranking: {
+    stroke: '#FBBC05', // Yellow
+    strokeWidth: 2.5,
+    strokeDasharray: 'none',
+  },
+  worker: {
+    stroke: '#4285F4', // Blue
+    strokeWidth: 1.5,
+    strokeDasharray: '5,5',
+  },
+  client: {
+    stroke: '#EA4335', // Red/Orange
     strokeWidth: 2,
     strokeDasharray: 'none',
   },
@@ -279,7 +338,7 @@ const initialNodes = [
   {
     id: 'dashboard',
     type: 'default',
-    position: { x: 605, y: 320 }, // Perfect vertical alignment with client
+    position: { x: 605, y: 250 }, // Increased vertical spacing
     data: { label: <div><strong>Web Dashboard</strong></div> },
     style: {
       ...nodeStyles.dashboard,
@@ -291,7 +350,7 @@ const initialNodes = [
   {
     id: 'dashboard-note',
     type: 'default',
-    position: { x: 350, y: 420 }, // Between dashboard and bridge
+    position: { x: 350, y: 350 }, // Adjusted position
     data: { 
       label: (
         <div>
@@ -307,7 +366,7 @@ const initialNodes = [
   {
     id: 'marketplace',
     type: 'default',
-    position: { x: 605, y: 450 }, // Perfect vertical alignment with dashboard
+    position: { x: 605, y: 400 }, // Increased vertical spacing
     data: { label: <div><strong>Marketplace Pallet</strong></div> },
     style: {
       ...nodeStyles.marketplace,
@@ -319,7 +378,7 @@ const initialNodes = [
   {
     id: 'hippius-blockchain',
     type: 'default',
-    position: { x: 605, y: 580 }, // Perfect vertical alignment with marketplace
+    position: { x: 605, y: 550 }, // Increased vertical spacing
     data: { label: <div><strong>Hippius Blockchain</strong></div> },
     style: {
       ...nodeStyles.bittensor, // Reusing the blockchain style
@@ -339,15 +398,19 @@ const initialNodes = [
   {
     id: 'miner',
     type: 'default',
-    position: { x: 850, y: 700 }, // Right of Hippius blockchain
+    position: { x: 1100, y: 700 }, // Adjusted to align with new layout
     data: { label: <div><strong>Miner Node</strong></div> },
-    style: nodeStyles.miner,
+    style: {
+      ...nodeStyles.miner,
+      width: 180, // Ensure consistent width
+      textAlign: 'center',
+    },
   },
   // Hippius Full Node
   {
     id: 'hippius-node',
     type: 'default',
-    position: { x: 605, y: 820 }, // Aligned with the main vertical chain
+    position: { x: 605, y: 850 }, // Increased vertical spacing
     data: { label: <div><strong>Hippius Full Node</strong></div> },
     style: {
       ...nodeStyles.ipfs,
@@ -359,7 +422,7 @@ const initialNodes = [
   {
     id: 'subtensor-node',
     type: 'default',
-    position: { x: 350, y: 820 }, // Below Hippius blockchain
+    position: { x: 350, y: 850 }, // Aligned with Hippius Full Node
     data: { label: <div><strong>Subtensor Full Node</strong></div> },
     style: nodeStyles.ipfs,
   },
@@ -367,7 +430,7 @@ const initialNodes = [
   {
     id: 'worker',
     type: 'default',
-    position: { x: 605, y: 940 }, // Aligned with the main vertical chain
+    position: { x: 605, y: 1000 }, // Increased vertical spacing
     data: { label: <div><strong>Offchain Worker</strong></div> },
     style: {
       ...nodeStyles.worker,
@@ -379,7 +442,7 @@ const initialNodes = [
   {
     id: 's3-miner',
     type: 'default',
-    position: { x: 800, y: 1100 }, // Below Offchain Worker, right side
+    position: { x: 600, y: 1300 }, // Increased vertical spacing
     data: { 
       label: (
         <div>
@@ -395,7 +458,7 @@ const initialNodes = [
   {
     id: 'ipfs-miner',
     type: 'default',
-    position: { x: 1050, y: 1100 }, // Below Offchain Worker, further right
+    position: { x: 1600, y: 1300 }, // Increased vertical spacing
     data: { 
       label: (
         <div>
@@ -411,7 +474,7 @@ const initialNodes = [
   {
     id: 'compute-miner',
     type: 'default',
-    position: { x: 925, y: 1250 }, // Below storage miners, right side
+    position: { x: 1100, y: 1300 }, // Increased vertical spacing
     data: { 
       label: (
         <div>
@@ -423,23 +486,53 @@ const initialNodes = [
     },
     style: nodeStyles.minerDetails,
   },
+  // Ranking Pallet
+  {
+    id: 'ranking-pallet',
+    type: 'default',
+    position: { x: 1500, y: 1000 }, // Aligned horizontally with Offchain Worker
+    data: { 
+      label: (
+        <div style={{ textAlign: 'center', padding: '10px 0', lineHeight: '1.4' }}>
+          <strong>RANKING PALLET</strong><br/>
+          • Validators weight miners<br/>
+          • Points based on work & criteria<br/>
+          • Distributes rewards by rank
+        </div>
+      ) 
+    },
+    style: {
+      ...nodeStyles.marketplace, // Using marketplace style as base
+      background: '#FBBC05', // Yellow like marketplace
+      width: 320, // Further increased width to fit text
+      height: 180, // Adjusted height for balanced spacing
+      fontSize: '16px', // Ensure text is readable
+      padding: '20px', // Increased padding
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  },
   // Rewards
   {
     id: 'rewards',
     type: 'default',
-    position: { x: 600, y: 1400 }, // Below miners
+    position: { x: 1100, y: 1700 }, // Increased vertical spacing
     data: { 
       label: (
         <div>
           <strong>REWARD DISTRIBUTION</strong><br/>
           • 10% Treasury<br/>
           • 30% Validators & Stakers<br/>
-          • 60% Miners<br/><br/>
+          • 60% Miners (via Ranking Pallet)<br/><br/>
           All rewards in Alpha can be bridged back to Bittensor
         </div>
       ) 
     },
-    style: nodeStyles.rewards,
+    style: {
+      ...nodeStyles.rewards,
+      width: 300, // Make it wider to fit the text
+    },
   },
 ];
 
@@ -450,10 +543,10 @@ const initialEdges = [
     id: 'client-to-dashboard',
     source: 'client',
     target: 'dashboard',
-    animated: false,
-    type: 'straight',
-    style: edgeStyles.solid,
-    label: 'FIAT/TAO',
+    animated: true,
+    type: 'step',
+    style: edgeStyles.client,
+    label: 'FIAT/Alpha/TAO',
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
     sourcePosition: 'bottom',
@@ -465,7 +558,7 @@ const initialEdges = [
     source: 'dashboard',
     target: 'marketplace',
     animated: false,
-    type: 'straight',
+    type: 'step',
     style: edgeStyles.solid,
     label: 'mints credit',
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
@@ -478,9 +571,9 @@ const initialEdges = [
     id: 'bittensor-to-bridge',
     source: 'bittensor',
     target: 'bridge',
-    animated: false,
-    type: 'straight',
-    style: edgeStyles.solid,
+    animated: true,
+    type: 'step',
+    style: edgeStyles.funds,
     label: 'Alpha',
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
@@ -490,9 +583,9 @@ const initialEdges = [
     id: 'bridge-to-hippius',
     source: 'bridge',
     target: 'hippius-blockchain',
-    animated: false,
-    type: 'straight',
-    style: edgeStyles.solid,
+    animated: true,
+    type: 'step',
+    style: edgeStyles.funds,
     label: 'Alpha (locked)',
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
@@ -503,7 +596,7 @@ const initialEdges = [
     source: 'dashboard',
     target: 'bridge',
     animated: false,
-    type: 'straight',
+    type: 'step',
     style: edgeStyles.solid,
     label: 'UI for bridging',
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
@@ -515,7 +608,7 @@ const initialEdges = [
     source: 'marketplace',
     target: 'hippius-blockchain',
     animated: false,
-    type: 'straight',
+    type: 'step',
     style: edgeStyles.solid,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
@@ -528,7 +621,7 @@ const initialEdges = [
     source: 'hippius-blockchain',
     target: 'validator',
     animated: false,
-    type: 'straight',
+    type: 'step',
     style: edgeStyles.solid,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
@@ -539,7 +632,7 @@ const initialEdges = [
     source: 'hippius-blockchain',
     target: 'miner',
     animated: false,
-    type: 'straight',
+    type: 'step',
     style: edgeStyles.solid,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
@@ -550,7 +643,7 @@ const initialEdges = [
     source: 'hippius-blockchain',
     target: 'hippius-node',
     animated: false,
-    type: 'straight',
+    type: 'step',
     style: edgeStyles.solid,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
@@ -562,9 +655,9 @@ const initialEdges = [
     id: 'validator-to-bittensor',
     source: 'validator',
     target: 'bittensor',
-    animated: false,
-    type: 'straight',
-    style: edgeStyles.solid,
+    animated: true,
+    type: 'step',
+    style: edgeStyles.validator,
     label: 'weights',
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
@@ -574,20 +667,34 @@ const initialEdges = [
     id: 'validator-to-hippius',
     source: 'validator',
     target: 'hippius-node',
-    animated: false,
-    type: 'straight',
-    style: edgeStyles.solid,
+    animated: true,
+    type: 'step',
+    style: edgeStyles.validator,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
+    sourcePosition: 'bottom',
+    targetPosition: 'top',
   },
   // Validator to Subtensor Node
   {
     id: 'validator-to-subtensor',
     source: 'validator',
     target: 'subtensor-node',
-    animated: false,
-    type: 'straight',
-    style: edgeStyles.dashed,
+    animated: true,
+    type: 'step',
+    style: edgeStyles.validator,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
+  },
+  // Validator to Ranking Pallet
+  {
+    id: 'validator-to-ranking',
+    source: 'validator',
+    target: 'ranking-pallet',
+    animated: true,
+    type: 'step',
+    style: edgeStyles.validator,
+    label: 'weights',
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
   },
@@ -596,9 +703,9 @@ const initialEdges = [
     id: 'miner-to-s3',
     source: 'miner',
     target: 's3-miner',
-    animated: false,
-    type: 'straight',
-    style: edgeStyles.solid,
+    animated: true,
+    type: 'step',
+    style: edgeStyles.miner,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
   },
@@ -607,9 +714,9 @@ const initialEdges = [
     id: 'miner-to-ipfs',
     source: 'miner',
     target: 'ipfs-miner',
-    animated: false,
-    type: 'straight',
-    style: edgeStyles.solid,
+    animated: true,
+    type: 'step',
+    style: edgeStyles.miner,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
   },
@@ -618,9 +725,88 @@ const initialEdges = [
     id: 'miner-to-compute',
     source: 'miner',
     target: 'compute-miner',
+    animated: true,
+    type: 'step',
+    style: edgeStyles.miner,
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
+  },
+  // Miner to Ranking Pallet
+  {
+    id: 'miner-to-ranking',
+    source: 'miner',
+    target: 'ranking-pallet',
+    animated: true,
+    type: 'step',
+    style: edgeStyles.miner,
+    label: 'registers',
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
+  },
+  // Marketplace to Ranking Pallet
+  {
+    id: 'marketplace-to-ranking',
+    source: 'marketplace',
+    target: 'ranking-pallet',
     animated: false,
-    type: 'straight',
-    style: edgeStyles.solid,
+    type: 'step',
+    style: edgeStyles.funds,
+    label: '60% of revenue',
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
+    animated: true,
+  },
+  // Ranking Pallet to S3 Miner
+  {
+    id: 'ranking-to-s3',
+    source: 'ranking-pallet',
+    target: 's3-miner',
+    animated: true,
+    type: 'step',
+    style: edgeStyles.ranking,
+    label: '60% of S3 revenue',
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
+    labelShowBg: true,
+    labelBgPadding: [8, 4],
+  },
+  // Ranking Pallet to IPFS Miner
+  {
+    id: 'ranking-to-ipfs',
+    source: 'ranking-pallet',
+    target: 'ipfs-miner',
+    animated: true,
+    type: 'step',
+    style: edgeStyles.ranking,
+    label: '60% of IPFS revenue',
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
+    labelShowBg: true,
+    labelBgPadding: [8, 4],
+  },
+  // Ranking Pallet to Compute Miner
+  {
+    id: 'ranking-to-compute',
+    source: 'ranking-pallet',
+    target: 'compute-miner',
+    animated: true,
+    type: 'step',
+    style: edgeStyles.ranking,
+    label: '60% of Compute revenue',
+    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
+    labelStyle: { fill: '#ffffff' },
+    labelShowBg: true,
+    labelBgPadding: [8, 4],
+  },
+  // Ranking Pallet to Rewards
+  {
+    id: 'ranking-to-rewards',
+    source: 'ranking-pallet',
+    target: 'rewards',
+    animated: true,
+    type: 'step',
+    style: edgeStyles.ranking,
+    label: 'distributes 60%',
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
   },
@@ -629,9 +815,9 @@ const initialEdges = [
     id: 'hippius-to-worker',
     source: 'hippius-node',
     target: 'worker',
-    animated: false,
-    type: 'straight',
-    style: edgeStyles.solid,
+    animated: true,
+    type: 'step',
+    style: edgeStyles.validator,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
     sourcePosition: 'bottom',
@@ -642,9 +828,9 @@ const initialEdges = [
     id: 'worker-to-s3',
     source: 'worker',
     target: 's3-miner',
-    animated: false,
-    type: 'straight',
-    style: edgeStyles.solid,
+    animated: true,
+    type: 'step',
+    style: edgeStyles.worker,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
   },
@@ -653,9 +839,9 @@ const initialEdges = [
     id: 'worker-to-ipfs',
     source: 'worker',
     target: 'ipfs-miner',
-    animated: false,
-    type: 'straight',
-    style: edgeStyles.solid,
+    animated: true,
+    type: 'step',
+    style: edgeStyles.worker,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
   },
@@ -664,9 +850,9 @@ const initialEdges = [
     id: 'worker-to-compute',
     source: 'worker',
     target: 'compute-miner',
-    animated: false,
-    type: 'straight',
-    style: edgeStyles.solid,
+    animated: true,
+    type: 'step',
+    style: edgeStyles.worker,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
   },
@@ -676,7 +862,7 @@ const initialEdges = [
     source: 's3-miner',
     target: 'rewards',
     animated: false,
-    type: 'straight',
+    type: 'step',
     style: edgeStyles.solid,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
@@ -687,7 +873,7 @@ const initialEdges = [
     source: 'ipfs-miner',
     target: 'rewards',
     animated: false,
-    type: 'straight',
+    type: 'step',
     style: edgeStyles.solid,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
@@ -698,7 +884,7 @@ const initialEdges = [
     source: 'compute-miner',
     target: 'rewards',
     animated: false,
-    type: 'straight',
+    type: 'step',
     style: edgeStyles.solid,
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
@@ -708,9 +894,9 @@ const initialEdges = [
     id: 'rewards-to-bridge',
     source: 'rewards',
     target: 'bridge',
-    animated: false,
-    type: 'straight',
-    style: edgeStyles.solid,
+    animated: true,
+    type: 'step',
+    style: edgeStyles.funds,
     label: 'Alpha (bidirectional)',
     labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
     labelStyle: { fill: '#ffffff' },
@@ -721,6 +907,11 @@ export default function ArchitectureFlowDiagram() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
+
+  // Define the edge types
+  const edgeTypes = {
+    step: StepEdge,
+  };
 
   const onConnect = useCallback(
     (params) => {
@@ -750,7 +941,7 @@ export default function ArchitectureFlowDiagram() {
       setEdges((eds) => addEdge({ 
         ...params, 
         animated: isFundsConnection, 
-        type: 'straight',
+        type: 'step',
         style: isFundsConnection ? edgeStyles.funds : 
               isBlockchainConnection ? edgeStyles.highlighted : 
               isMinerConnection ? edgeStyles.highlighted :
@@ -767,25 +958,27 @@ export default function ArchitectureFlowDiagram() {
   }, []);
 
   return (
-    <div style={{ width: '100%', height: '100%' }}>
+    <div style={{ width: '100%', height: '750px' }}>
       <ReactFlow
         className="architecture-flow-diagram"
-        style={{ width: '100%', height: '1600px' }}
+        style={{ width: '100%', height: '750px' }}
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         onInit={onInit}
-        fitView={false}
-        defaultViewport={{ x: 150, y: 0, zoom: 0.45 }}
+        edgeTypes={edgeTypes}
+        fitView={true}
+        fitViewOptions={{ padding: 0.1 }}
+        defaultViewport={{ x: 0, y: 0, zoom: 0.4 }}
         attributionPosition="bottom-right"
         minZoom={0.1}
         maxZoom={4}
         defaultEdgeOptions={{
           style: edgeStyles.dashed,
           animated: false,
-          type: 'straight',
+          type: 'step',
           labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
           labelStyle: { fill: '#ffffff' },
         }}
@@ -801,7 +994,13 @@ export default function ArchitectureFlowDiagram() {
             return '#fff';
           }}
           nodeBorderRadius={2}
-          className="flow-minimap"
+          style={{ 
+            width: 120, 
+            height: 80,
+            bottom: 10,
+            right: 10,
+            background: 'rgba(20, 20, 20, 0.8)'
+          }}
         />
         <Controls className="flow-controls" />
         <Background color="#000000" gap={16} className="flow-background" />
