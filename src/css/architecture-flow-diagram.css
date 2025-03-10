@@ -9,6 +9,20 @@
   color: #ffffff;
 }
 
+/* Animated dashed line for Alpha flows */
+.alpha-flow-path {
+  stroke-dasharray: 10, 5;
+  animation: dashdraw 15s linear infinite;
+  stroke-width: 3;
+  stroke: #4CAF50 !important; /* Green color for Alpha flows */
+}
+
+@keyframes dashdraw {
+  to {
+    stroke-dashoffset: 300;
+  }
+}
+
 .architecture-diagram-container {
   position: relative;
   width: 100%;

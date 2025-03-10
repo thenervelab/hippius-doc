@@ -102,6 +102,69 @@ const StepEdge = ({ id, source, target, sourceX, sourceY, targetX, targetY, sour
   );
 };
 
+// Custom edge for Alpha flows with animated dashed lines
+const AlphaFlowEdge = ({ id, source, target, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, style = {}, data, markerEnd }) => {
+  // For a step edge, we need to create a path with right angles
+  const xDiff = targetX - sourceX;
+  const yDiff = targetY - sourceY;
+  
+  // Calculate midpoints to avoid crossing through nodes
+  const midX = sourceX + xDiff / 2;
+  const midY = sourceY + yDiff / 2;
+  
+  // Create a path with right angles based on the positions
+  let path;
+  
+  // If source is above target, go down then across
+  if (sourceY < targetY) {
+    if (sourcePosition === 'bottom' && targetPosition === 'top') {
+      // Vertical alignment - go straight down
+      path = `M${sourceX},${sourceY} V${midY} H${targetX} V${targetY}`;
+    } else if (sourcePosition === 'right' && targetPosition === 'left') {
+      // Horizontal alignment - go right then down then left
+      path = `M${sourceX},${sourceY} H${midX} V${targetY} H${targetX}`;
+    } else if (sourcePosition === 'left' && targetPosition === 'right') {
+      // Horizontal alignment - go left then down then right
+      path = `M${sourceX},${sourceY} H${midX} V${targetY} H${targetX}`;
+    } else {
+      // Default - go down then across
+      path = `M${sourceX},${sourceY} V${midY} H${targetX} V${targetY}`;
+    }
+  } else {
+    // If source is below target, go across then up
+    if (sourcePosition === 'top' && targetPosition === 'bottom') {
+      // Vertical alignment - go straight up
+      path = `M${sourceX},${sourceY} V${midY} H${targetX} V${targetY}`;
+    } else {
+      // Default - go across then up
+      path = `M${sourceX},${sourceY} H${midX} V${targetY} H${targetX}`;
+    }
+  }
+
+  return (
+    <>
+      <path
+        id={id}
+        className="alpha-flow-path"
+        d={path}
+        markerEnd={markerEnd}
+      />
+      {/* Add a label if needed */}
+      {data?.label && (
+        <text
+          x={midX}
+          y={midY - 10}
+          textAnchor="middle"
+          style={{ fill: '#fff', fontSize: '12px' }}
+          className="react-flow__edge-text"
+        >
+          {data.label}
+        </text>
+      )}
+    </>
+  );
+};
+
 // Define custom edge styles
 const edgeStyles = {
   solid: {
@@ -602,11 +665,9 @@ const initialEdges = [
     source: 'client',
     target: 'dashboard',
     animated: true,
-    type: 'step',
-    style: edgeStyles.client,
-    label: 'FIAT/Alpha/TAO',
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
+    type: 'alphaFlow',
+    style: edgeStyles.funds,
+    data: { label: 'FIAT/Alpha/TAO' },
     sourcePosition: 'bottom',
     targetPosition: 'top',
   },
@@ -630,11 +691,9 @@ const initialEdges = [
     source: 'bittensor',
     target: 'bridge',
     animated: true,
-    type: 'step',
+    type: 'alphaFlow',
     style: edgeStyles.funds,
-    label: 'Alpha',
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
+    data: { label: 'Alpha' },
     sourcePosition: 'bottom',
     targetPosition: 'top',
   },
@@ -644,11 +703,9 @@ const initialEdges = [
     source: 'bridge',
     target: 'hippius-blockchain',
     animated: true,
-    type: 'step',
+    type: 'alphaFlow',
     style: edgeStyles.funds,
-    label: 'Alpha (locked)',
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
+    data: { label: 'Alpha (locked)' },
     sourcePosition: 'right',
     targetPosition: 'left',
   },
@@ -963,11 +1020,9 @@ const initialEdges = [
     source: 'rewards',
     target: 'bridge',
     animated: true,
-    type: 'step',
+    type: 'alphaFlow',
     style: edgeStyles.funds,
-    label: 'Alpha (bidirectional)',
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
+    data: { label: 'Alpha (bidirectional)' },
   },
 ];
 
@@ -979,6 +1034,7 @@ export default function ArchitectureFlowDiagram() {
   // Define the edge types
   const edgeTypes = {
     step: StepEdge,
+    alphaFlow: AlphaFlowEdge,
   };
 
   const onConnect = useCallback(
@@ -1009,13 +1065,13 @@ export default function ArchitectureFlowDiagram() {
       setEdges((eds) => addEdge({ 
         ...params, 
         animated: isFundsConnection, 
-        type: 'step',
+        type: isFundsConnection ? 'alphaFlow' : 'step',
         style: isFundsConnection ? edgeStyles.funds : 
               isBlockchainConnection ? edgeStyles.highlighted : 
               isMinerConnection ? edgeStyles.highlighted :
               isUIConnection ? edgeStyles.dashed :
               edgeStyles.dashed,
-        label: isUIConnection ? 'UI for bridging' : undefined
+        data: isUIConnection ? { label: 'UI for bridging' } : undefined
       }, eds));
     },
     [setEdges]
