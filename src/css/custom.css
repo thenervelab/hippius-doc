@@ -21,7 +21,7 @@ code {
 /* Architecture Diagram */
 .architecture-diagram-container {
   background-color: #000;
-  padding: 20px;
+  padding: 0;
   border-radius: 8px;
   margin-bottom: 20px;
   border: 1px solid #333;
@@ -150,14 +150,15 @@ code {
 .zoom-tooltip {
   position: absolute;
   bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 10px;
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
-  padding: 8px 12px;
+  padding: 5px 10px;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 12px;
   z-index: 10;
+  pointer-events: none;
+  white-space: nowrap;
 }
 
 /* Pan indicator */

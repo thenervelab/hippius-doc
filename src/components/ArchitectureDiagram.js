@@ -35,12 +35,10 @@ export default function ArchitectureDiagram() {
   return (
     <div 
       className={`architecture-diagram-container ${isFullscreen ? 'fullscreen' : ''}`}
-      ref={containerRef}
-      style={{ width: '100%', height: '750px' }}
+      // ref={containerRef}
+      // style={{ padding: 0, margin: 0 }}
     >
-      <div className="architecture-diagram" style={{ width: '100%', height: '100%' }}>
-        <ArchitectureFlowDiagram />
-      </div>
+      <ArchitectureFlowDiagram />
       
       {/* Fullscreen button */}
       <button 

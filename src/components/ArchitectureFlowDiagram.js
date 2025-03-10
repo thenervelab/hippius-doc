@@ -6,33 +6,16 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   addEdge,
-  getBezierPath,
-  getStraightPath,
-  getEdgeCenter,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import '../css/architecture-flow-diagram.css';
 
 // Custom edge with step routing (90° angles)
 const StepEdge = ({ id, source, target, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, style = {}, data, markerEnd }) => {
-  // Calculate the path
-  const [edgePath] = getStraightPath({
-    sourceX,
-    sourceY,
-    sourcePosition,
-    targetPosition,
-    targetX,
-    targetY,
-  });
-
-  // For a step edge, we need to create a path with right angles
   const xDiff = targetX - sourceX;
   const yDiff = targetY - sourceY;
   
-  // Determine if we should route horizontally first or vertically first
-  // For vertical connections (nodes in a column), go straight down/up
   if (Math.abs(xDiff) < 50) {
-    // Almost vertical alignment - go straight
     return (
       <path
         id={id}
@@ -44,7 +27,6 @@ const StepEdge = ({ id, source, target, sourceX, sourceY, targetX, targetY, sour
     );
   }
   
-  // For horizontal connections with small vertical difference, go straight across
   if (Math.abs(yDiff) < 50) {
     return (
       <path
@@ -57,36 +39,24 @@ const StepEdge = ({ id, source, target, sourceX, sourceY, targetX, targetY, sour
     );
   }
   
-  // For connections between nodes at different levels, use step routing
-  // Calculate midpoints to avoid crossing through nodes
   const midX = sourceX + xDiff / 2;
   const midY = sourceY + yDiff / 2;
   
-  // Create a path with right angles based on the positions
   let path;
-  
-  // If source is above target, go down then across
   if (sourceY < targetY) {
     if (sourcePosition === 'bottom' && targetPosition === 'top') {
-      // Vertical alignment - go straight down
       path = `M${sourceX},${sourceY} V${midY} H${targetX} V${targetY}`;
     } else if (sourcePosition === 'right' && targetPosition === 'left') {
-      // Horizontal alignment - go right then down then left
       path = `M${sourceX},${sourceY} H${midX} V${targetY} H${targetX}`;
     } else if (sourcePosition === 'left' && targetPosition === 'right') {
-      // Horizontal alignment - go left then down then right
       path = `M${sourceX},${sourceY} H${midX} V${targetY} H${targetX}`;
     } else {
-      // Default - go down then across
       path = `M${sourceX},${sourceY} V${midY} H${targetX} V${targetY}`;
     }
   } else {
-    // If source is below target, go across then up
     if (sourcePosition === 'top' && targetPosition === 'bottom') {
-      // Vertical alignment - go straight up
       path = `M${sourceX},${sourceY} V${midY} H${targetX} V${targetY}`;
     } else {
-      // Default - go across then up
       path = `M${sourceX},${sourceY} H${midX} V${targetY} H${targetX}`;
     }
   }
@@ -104,39 +74,27 @@ const StepEdge = ({ id, source, target, sourceX, sourceY, targetX, targetY, sour
 
 // Custom edge for Alpha flows with animated dashed lines
 const AlphaFlowEdge = ({ id, source, target, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, style = {}, data, markerEnd }) => {
-  // For a step edge, we need to create a path with right angles
   const xDiff = targetX - sourceX;
   const yDiff = targetY - sourceY;
   
-  // Calculate midpoints to avoid crossing through nodes
   const midX = sourceX + xDiff / 2;
   const midY = sourceY + yDiff / 2;
   
-  // Create a path with right angles based on the positions
   let path;
-  
-  // If source is above target, go down then across
   if (sourceY < targetY) {
     if (sourcePosition === 'bottom' && targetPosition === 'top') {
-      // Vertical alignment - go straight down
       path = `M${sourceX},${sourceY} V${midY} H${targetX} V${targetY}`;
     } else if (sourcePosition === 'right' && targetPosition === 'left') {
-      // Horizontal alignment - go right then down then left
       path = `M${sourceX},${sourceY} H${midX} V${targetY} H${targetX}`;
     } else if (sourcePosition === 'left' && targetPosition === 'right') {
-      // Horizontal alignment - go left then down then right
       path = `M${sourceX},${sourceY} H${midX} V${targetY} H${targetX}`;
     } else {
-      // Default - go down then across
       path = `M${sourceX},${sourceY} V${midY} H${targetX} V${targetY}`;
     }
   } else {
-    // If source is below target, go across then up
     if (sourcePosition === 'top' && targetPosition === 'bottom') {
-      // Vertical alignment - go straight up
       path = `M${sourceX},${sourceY} V${midY} H${targetX} V${targetY}`;
     } else {
-      // Default - go across then up
       path = `M${sourceX},${sourceY} H${midX} V${targetY} H${targetX}`;
     }
   }
@@ -144,260 +102,107 @@ const AlphaFlowEdge = ({ id, source, target, sourceX, sourceY, targetX, targetY,
   return (
     <>
       <path
+        id={`${id}-glow`}
+        d={path}
+        stroke="rgba(76, 175, 80, 0.3)"
+        strokeWidth="6"
+        fill="none"
+        filter="url(#glow)"
+      />
+      <path
         id={id}
         className="alpha-flow-path"
         d={path}
         markerEnd={markerEnd}
+        style={style}
       />
-      {/* Add a label if needed */}
       {data?.label && (
         <text
           x={midX}
           y={midY - 10}
           textAnchor="middle"
-          style={{ fill: '#fff', fontSize: '12px' }}
+          style={{ 
+            fill: '#fff', 
+            fontSize: '14px',
+            fontWeight: 'bold',
+            textShadow: '0 0 4px rgba(0,0,0,0.8)',
+            fontFamily: 'monospace'
+          }}
           className="react-flow__edge-text"
         >
           {data.label}
         </text>
       )}
+      <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
     </>
   );
 };
 
-// Define custom edge styles
+// Define custom edge styles with enhanced visibility
 const edgeStyles = {
-  solid: {
-    stroke: 'rgba(255, 255, 255, 0.7)',
-    strokeWidth: 1.5,
-    strokeDasharray: 'none',
-  },
-  dashed: {
-    stroke: 'rgba(255, 255, 255, 0.7)',
-    strokeWidth: 1.5,
-    strokeDasharray: '5,5',
-  },
-  highlighted: {
-    stroke: '#FBBC05', // Yellow
-    strokeWidth: 2,
-    strokeDasharray: 'none',
-  },
-  orange: {
-    stroke: '#EA4335', // Red/Orange
-    strokeWidth: 1.5,
-    strokeDasharray: '5,5',
-  },
-  funds: {
-    stroke: '#4CAF50', // Green
-    strokeWidth: 2,
-    strokeDasharray: 'none',
-  },
-  validator: {
-    stroke: '#4285F4', // Blue
-    strokeWidth: 2,
-    strokeDasharray: 'none',
-  },
-  miner: {
-    stroke: '#34A853', // Green
-    strokeWidth: 2,
-    strokeDasharray: 'none',
-  },
-  ranking: {
-    stroke: '#FBBC05', // Yellow
-    strokeWidth: 2.5,
-    strokeDasharray: 'none',
-  },
-  worker: {
-    stroke: '#4285F4', // Blue
-    strokeWidth: 1.5,
-    strokeDasharray: '5,5',
-  },
-  client: {
-    stroke: '#EA4335', // Red/Orange
-    strokeWidth: 2,
-    strokeDasharray: 'none',
-  },
+  solid: { stroke: '#ffffff', strokeWidth: 2, strokeDasharray: 'none', filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.5))' },
+  dashed: { stroke: '#ffffff', strokeWidth: 2, strokeDasharray: '5,5', filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.5))' },
+  highlighted: { stroke: '#FBBC05', strokeWidth: 3, strokeDasharray: 'none', filter: 'drop-shadow(0 0 5px rgba(251, 188, 5, 0.7))' },
+  orange: { stroke: '#EA4335', strokeWidth: 3, strokeDasharray: '5,5', filter: 'drop-shadow(0 0 4px rgba(234, 67, 53, 0.6))' },
+  funds: { stroke: '#4CAF50', strokeWidth: 3, strokeDasharray: 'none', filter: 'drop-shadow(0 0 5px rgba(76, 175, 80, 0.7))' },
+  validator: { stroke: '#4285F4', strokeWidth: 3, strokeDasharray: 'none', filter: 'drop-shadow(0 0 5px rgba(66, 133, 244, 0.7))' },
+  miner: { stroke: '#34A853', strokeWidth: 3, strokeDasharray: 'none', filter: 'drop-shadow(0 0 4px rgba(52, 168, 83, 0.7))' },
+  ranking: { stroke: '#FBBC05', strokeWidth: 3, strokeDasharray: 'none', filter: 'drop-shadow(0 0 4px rgba(251, 188, 5, 0.7))' },
+  worker: { stroke: '#4285F4', strokeWidth: 2, strokeDasharray: '5,5', filter: 'drop-shadow(0 0 4px rgba(66, 133, 244, 0.7))' },
+  client: { stroke: '#EA4335', strokeWidth: 3, strokeDasharray: 'none', filter: 'drop-shadow(0 0 4px rgba(234, 67, 53, 0.7))' },
 };
 
-// Define custom node styles
-const nodeStyles = {
-  validator: {
-    background: '#4285F4', // Blue
-    color: '#ffffff',
-    border: 'none',
-    borderRadius: '4px',
-    padding: '10px',
-    width: 180,
-    height: 60,
-    textAlign: 'center',
+// Node style helper function with improved readability
+const getNodeStyle = (type) => {
+  const baseStyle = {
+    padding: '16px',
+    borderRadius: '8px',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+    fontWeight: 600,
+    textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
     fontSize: '16px',
     fontFamily: 'monospace',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-  },
-  miner: {
-    background: '#34A853', // Green
     color: '#ffffff',
-    border: 'none',
-    borderRadius: '4px',
-    padding: '10px',
-    width: 180,
-    height: 60,
-    textAlign: 'center',
-    fontSize: '16px',
-    fontFamily: 'monospace',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-  },
-  minerDetails: {
-    background: '#34A853', // Green
-    color: '#ffffff',
-    border: 'none',
-    borderRadius: '4px',
-    padding: '15px',
-    width: 220,
-    height: 120,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
-    fontSize: '14px',
-    fontFamily: 'monospace',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-  },
-  marketplace: {
-    background: '#FBBC05', // Yellow
-    color: '#ffffff',
-    border: 'none',
-    borderRadius: '4px',
-    padding: '10px',
-    width: 180,
-    height: 60,
-    textAlign: 'center',
-    fontSize: '16px',
-    fontFamily: 'monospace',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-  },
-  client: {
-    background: '#333333',
-    color: '#ffffff',
-    border: 'none',
-    borderRadius: '4px',
-    padding: '15px',
-    width: 240,
-    height: 160,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-  },
-  clientContent: {
-    width: '100%',
-    textAlign: 'center',
-    fontSize: '15px',
-    fontFamily: 'monospace',
-    lineHeight: '1.5',
-  },
-  bittensor: {
-    background: '#4285F4', // Blue
-    color: '#ffffff',
-    border: 'none',
-    borderRadius: '4px',
-    padding: '10px',
-    width: 220,
-    height: 60,
-    textAlign: 'center',
-    fontSize: '16px',
-    fontFamily: 'monospace',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-  },
-  bridge: {
-    background: '#9C27B0', // Purple
-    color: '#ffffff',
-    border: 'none',
-    borderRadius: '4px',
-    padding: '15px',
-    width: 220,
-    height: 120,
-    textAlign: 'center',
-    fontSize: '14px',
-    fontFamily: 'monospace',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-  },
-  rewards: {
-    background: '#333333',
-    color: '#ffffff',
-    border: 'none',
-    borderRadius: '4px',
-    padding: '15px',
-    width: 400,
-    height: 180,
-    textAlign: 'left',
-    fontSize: '14px',
-    fontFamily: 'monospace',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-  },
-  note: {
-    background: 'rgba(30, 30, 30, 0.7)',
-    color: '#ffffff',
-    border: '1px solid rgba(255, 255, 255, 0.2)',
-    borderRadius: '4px',
-    padding: '8px',
-    fontSize: '12px',
-    fontFamily: 'monospace',
-    width: 'auto',
-    textAlign: 'left',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-  },
-  dashboard: {
-    background: '#9C27B0', // Purple
-    color: '#ffffff',
-    border: 'none',
-    borderRadius: '4px',
-    padding: '10px',
-    width: 180,
-    height: 60,
-    textAlign: 'center',
-    fontSize: '16px',
-    fontFamily: 'monospace',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-  },
-  ipfs: {
-    background: '#4285F4', // Blue
-    color: '#ffffff',
-    border: 'none',
-    borderRadius: '4px',
-    padding: '10px',
-    width: 180,
-    height: 60,
-    textAlign: 'center',
-    fontSize: '16px',
-    fontFamily: 'monospace',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-  },
-  worker: {
-    background: '#4285F4', // Blue
-    color: '#ffffff',
-    border: 'none',
-    borderRadius: '4px',
-    padding: '10px',
-    width: 180,
-    height: 60,
-    textAlign: 'center',
-    fontSize: '16px',
-    fontFamily: 'monospace',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-  },
+    transition: 'transform 0.3s ease-in-out, opacity 0.3s ease-in-out',
+  };
+
+  switch(type) {
+    case 'client':
+      return { ...baseStyle, background: 'linear-gradient(135deg, #424242 0%, #303030 100%)', borderColor: 'rgba(255, 255, 255, 0.2)', width: 250, height: 180 };
+    case 'dashboard':
+      return { ...baseStyle, background: 'linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)', borderColor: '#42A5F5', width: 200, height: 60 };
+    case 'marketplace':
+      return { ...baseStyle, background: 'linear-gradient(135deg, #7E57C2 0%, #5E35B1 100%)', borderColor: '#9575CD', width: 200, height: 60 };
+    case 'blockchain':
+      return { ...baseStyle, background: 'linear-gradient(135deg, #FFA000 0%, #FF6F00 100%)', borderColor: '#FFB74D', width: 220, height: 60 };
+    case 'validator':
+      return { ...baseStyle, background: 'linear-gradient(135deg, #43A047 0%, #2E7D32 100%)', borderColor: '#66BB6A', width: 200, height: 60 };
+    case 'miner':
+      return { ...baseStyle, background: 'linear-gradient(135deg, #E53935 0%, #C62828 100%)', borderColor: '#EF5350', width: 200, height: 60 };
+    case 'worker':
+      return { ...baseStyle, background: 'linear-gradient(135deg, #4285F4 0%, #1565C0 100%)', borderColor: '#42A5F5', width: 200, height: 60 };
+    case 'note':
+      return { ...baseStyle, background: 'rgba(30, 30, 30, 0.8)', border: '1px solid rgba(255, 255, 255, 0.2)', width: 300, fontSize: '14px', padding: '15px' };
+    case 'minerDetails':
+      return { ...baseStyle, background: 'linear-gradient(135deg, #E53935 0%, #C62828 100%)', borderColor: '#EF5350', width: 250, height: 120 };
+    case 'rewards':
+      return { ...baseStyle, background: 'linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%)', borderColor: '#66BB6A', width: 350, height: 200 };
+    default:
+      return { ...baseStyle, background: 'linear-gradient(135deg, #424242 0%, #303030 100%)', borderColor: 'rgba(255, 255, 255, 0.2)', width: 200, height: 60 };
+  }
 };
 
-// Initial nodes configuration
+// Initial nodes configuration with increased spacing and centered layout
 const initialNodes = [
   // Client Buying
-  {
-    id: 'client',
-    type: 'default',
-    position: { x: 605, y: 50 }, // Top center, perfect vertical alignment
-    data: { 
+  { id: 'client', type: 'default', position: { x: 300, y: 50 }, data: { 
       label: (
-        <div style={nodeStyles.clientContent}>
+        <div style={{ textAlign: 'center', lineHeight: '1.5' }}>
           <strong>CLIENT</strong><br/>
           Purchases resources:<br/>
           • Storage<br/>
@@ -406,45 +211,23 @@ const initialNodes = [
           FIAT / Alpha / TAO
         </div>
       ) 
-    },
-    style: {
-      ...nodeStyles.client,
-      width: 250, // Ensure consistent width
-      textAlign: 'center',
-    },
-  },
+    }, style: getNodeStyle('client') },
   // Bittensor Blockchain
-  {
-    id: 'bittensor',
-    type: 'default',
-    position: { x: -50, y: 320 }, // Moved much further left
-    data: { label: <div><strong>Bittensor Blockchain</strong></div> },
-    style: nodeStyles.bittensor,
-  },
+  { id: 'bittensor', type: 'default', position: { x: 500, y: 350 }, data: { label: <div><strong>Bittensor Blockchain</strong></div> }, style: getNodeStyle('blockchain') },
   // Bridge
-  {
-    id: 'bridge',
-    type: 'default',
-    position: { x: -50, y: 550 }, // Aligned with Bittensor horizontally
-    data: { 
+  { id: 'bridge', type: 'default', position: { x: 500, y: 500 }, data: { 
       label: (
-        <div>
+        <div style={{ textAlign: 'center', lineHeight: '1.5' }}>
           <strong>BRIDGE</strong><br/>
           Bidirectional transfer of Alpha<br/>
           between Bittensor and Hippius
         </div>
       ) 
-    },
-    style: nodeStyles.bridge,
-  },
+    }, style: getNodeStyle('blockchain') },
   // Bridge Note
-  {
-    id: 'bridge-note',
-    type: 'default',
-    position: { x: -50, y: 800 }, // Moved further down to avoid overlap with Hippius Full Node
-    data: { 
+  { id: 'bridge-note', type: 'default', position: { x: 500, y: 650 }, data: { 
       label: (
-        <div>
+        <div style={{ lineHeight: '1.5' }}>
           <strong>Process:</strong><br/>
           1. Client purchases with FIAT/TAO<br/>
           2. System acquires Alpha on Bittensor<br/>
@@ -452,578 +235,132 @@ const initialNodes = [
           4. Alpha is locked as credit is minted
         </div>
       ) 
-    },
-    style: nodeStyles.note,
-  },
+    }, style: getNodeStyle('note') },
   // Web Dashboard
-  {
-    id: 'dashboard',
-    type: 'default',
-    position: { x: 605, y: 250 }, // Increased vertical spacing
-    data: { label: <div><strong>Web Dashboard</strong></div> },
-    style: {
-      ...nodeStyles.dashboard,
-      width: 180, // Ensure consistent width
-      textAlign: 'center',
-    },
-  },
+  { id: 'dashboard', type: 'default', position: { x: 850, y: 150 }, data: { label: <div><strong>Web Dashboard</strong></div> }, style: getNodeStyle('dashboard') },
   // Dashboard Note
-  {
-    id: 'dashboard-note',
-    type: 'default',
-    position: { x: 350, y: 350 }, // Adjusted position
-    data: { 
+  { id: 'dashboard-note', type: 'default', position: { x: 850, y: 250 }, data: { 
       label: (
-        <div>
+        <div style={{ lineHeight: '1.5' }}>
           <strong>UI Interaction:</strong><br/>
           Dashboard provides interface<br/>
           for bridging Alpha between chains
         </div>
       ) 
-    },
-    style: nodeStyles.note,
-  },
+    }, style: getNodeStyle('note') },
   // Marketplace Pallet
-  {
-    id: 'marketplace',
-    type: 'default',
-    position: { x: 605, y: 400 }, // Increased vertical spacing
-    data: { label: <div><strong>Marketplace Pallet</strong></div> },
-    style: {
-      ...nodeStyles.marketplace,
-      width: 180, // Ensure consistent width
-      textAlign: 'center',
-    },
-  },
+  { id: 'marketplace', type: 'default', position: { x: 1150, y: 900 }, data: { label: <div><strong>Marketplace Pallet</strong></div> }, style: getNodeStyle('marketplace') },
   // Hippius Blockchain
-  {
-    id: 'hippius-blockchain',
-    type: 'default',
-    position: { x: 605, y: 550 }, // Increased vertical spacing
-    data: { label: <div><strong>Hippius Blockchain</strong></div> },
-    style: {
-      ...nodeStyles.bittensor, // Reusing the blockchain style
-      width: 180, // Ensure consistent width
-      textAlign: 'center',
-    },
-  },
+  { id: 'hippius-blockchain', type: 'default', position: { x: 1150, y: 500 }, data: { label: <div><strong>Hippius Blockchain</strong></div> }, style: getNodeStyle('blockchain') },
   // Validator Node
-  {
-    id: 'validator',
-    type: 'default',
-    position: { x: 400, y: 700 }, // Left of Hippius blockchain
-    data: { label: <div><strong>Validator Node</strong></div> },
-    style: nodeStyles.validator,
-  },
+  { id: 'validator', type: 'default', position: { x: 950, y: 650 }, data: { label: <div><strong>Validator Node</strong></div> }, style: getNodeStyle('validator') },
   // Miner Node
-  {
-    id: 'miner',
-    type: 'default',
-    position: { x: 1100, y: 700 }, // Adjusted to align with new layout
-    data: { label: <div><strong>Miner Node</strong></div> },
-    style: {
-      ...nodeStyles.miner,
-      width: 180, // Ensure consistent width
-      textAlign: 'center',
-    },
-  },
+  { id: 'miner', type: 'default', position: { x: 1350, y: 650 }, data: { label: <div><strong>Miner Node</strong></div> }, style: getNodeStyle('miner') },
   // Hippius Full Node
-  {
-    id: 'hippius-node',
-    type: 'default',
-    position: { x: 605, y: 850 }, // Increased vertical spacing
-    data: { label: <div><strong>Hippius Full Node</strong></div> },
-    style: {
-      ...nodeStyles.ipfs,
-      width: 180, // Ensure consistent width
-      textAlign: 'center',
-    },
-  },
+  { id: 'hippius-node', type: 'default', position: { x: 1150, y: 750 }, data: { label: <div><strong>Hippius Full Node</strong></div> }, style: getNodeStyle('blockchain') },
   // Subtensor Full Node
-  {
-    id: 'subtensor-node',
-    type: 'default',
-    position: { x: 350, y: 850 }, // Aligned with Hippius Full Node
-    data: { label: <div><strong>Subtensor Full Node</strong></div> },
-    style: nodeStyles.ipfs,
-  },
+  { id: 'subtensor-node', type: 'default', position: { x: 750, y: 750 }, data: { label: <div><strong>Subtensor Full Node</strong></div> }, style: getNodeStyle('blockchain') },
   // Offchain Worker
-  {
-    id: 'worker',
-    type: 'default',
-    position: { x: 605, y: 1000 }, // Increased vertical spacing
-    data: { label: <div><strong>Offchain Worker</strong></div> },
-    style: {
-      ...nodeStyles.worker,
-      width: 180, // Ensure consistent width
-      textAlign: 'center',
-    },
-  },
+  { id: 'worker', type: 'default', position: { x: 1150, y: 1000 }, data: { label: <div><strong>Offchain Worker</strong></div> }, style: getNodeStyle('worker') },
   // S3 Storage Miner
-  {
-    id: 's3-miner',
-    type: 'default',
-    position: { x: 600, y: 1300 }, // Increased vertical spacing
-    data: { 
+  { id: 's3-miner', type: 'default', position: { x: 850, y: 1200 }, data: { 
       label: (
-        <div>
-          <strong>S3 STORAGE MINER</strong><br/>
-          • Blockchain + Offchain Worker<br/>
-          • Volume service and auth
+        <div style={{ textAlign: 'center', lineHeight: '1.8', fontSize: '16px', padding: '10px 5px' }}>
+          <strong style={{ fontSize: '20px', display: 'block', marginBottom: '10px' }}>S3 STORAGE MINER</strong>
+          • Blockchain +<br/>
+            Offchain Worker<br/>
+          • Volume service and<br/>
+            auth
         </div>
       ) 
-    },
-    style: nodeStyles.minerDetails,
-  },
+    }, style: { ...getNodeStyle('minerDetails'), width: 250, height: 170 } },
   // IPFS Storage Miner
-  {
-    id: 'ipfs-miner',
-    type: 'default',
-    position: { x: 1600, y: 1300 }, // Increased vertical spacing
-    data: { 
+  { id: 'ipfs-miner', type: 'default', position: { x: 1450, y: 1200 }, data: { 
       label: (
-        <div>
-          <strong>IPFS STORAGE MINER</strong><br/>
-          • Blockchain + Offchain Worker<br/>
+        <div style={{ textAlign: 'center', lineHeight: '1.8', fontSize: '16px', padding: '10px 5px' }}>
+          <strong style={{ fontSize: '20px', display: 'block', marginBottom: '10px' }}>IPFS STORAGE MINER</strong>
+          • Blockchain +<br/>
+            Offchain Worker<br/>
           • IPFS service
         </div>
       ) 
-    },
-    style: nodeStyles.minerDetails,
-  },
+    }, style: { ...getNodeStyle('minerDetails'), width: 250, height: 170 } },
   // Compute Miner
-  {
-    id: 'compute-miner',
-    type: 'default',
-    position: { x: 1100, y: 1300 }, // Increased vertical spacing
-    data: { 
+  { id: 'compute-miner', type: 'default', position: { x: 1150, y: 1200 }, data: { 
       label: (
-        <div>
-          <strong>COMPUTE MINER</strong><br/>
-          • Blockchain + Offchain Worker<br/>
-          • VM Agent, k8s, libvirt
+        <div style={{ textAlign: 'center', lineHeight: '1.8', fontSize: '16px', padding: '10px 5px' }}>
+          <strong style={{ fontSize: '20px', display: 'block', marginBottom: '10px' }}>COMPUTE MINER</strong>
+          • Blockchain +<br/>
+            Offchain Worker<br/>
+          • VM Agent, k8s,<br/>
+            libvirt
         </div>
       ) 
-    },
-    style: nodeStyles.minerDetails,
-  },
+    }, style: { ...getNodeStyle('minerDetails'), width: 250, height: 170 } },
   // Ranking Pallet
-  {
-    id: 'ranking-pallet',
-    type: 'default',
-    position: { x: 1500, y: 1000 }, // Aligned horizontally with Offchain Worker
-    data: { 
+  { id: 'ranking-pallet', type: 'default', position: { x: 1600, y: 900 }, data: { 
       label: (
-        <div style={{ textAlign: 'center', padding: '10px 0', lineHeight: '1.4' }}>
-          <strong>RANKING PALLET</strong><br/>
+        <div style={{ textAlign: 'center', lineHeight: '2.0', fontSize: '18px', padding: '15px 10px' }}>
+          <strong style={{ fontSize: '24px', display: 'block', marginBottom: '10px' }}>RANKING PALLET</strong>
           • Validators weight miners<br/>
-          • Points based on work & criteria<br/>
-          • Distributes rewards by rank
+          • Points based on work &<br/>
+            criteria<br/>
+          • Distributes rewards by<br/>
+            rank
         </div>
       ) 
-    },
-    style: {
-      ...nodeStyles.marketplace, // Using marketplace style as base
-      background: '#FBBC05', // Yellow like marketplace
-      width: 320, // Further increased width to fit text
-      height: 180, // Adjusted height for balanced spacing
-      fontSize: '16px', // Ensure text is readable
-      padding: '20px', // Increased padding
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-  },
+    }, style: { ...getNodeStyle('validator'), width: 450, height: 250, padding: '0' } },
   // Rewards
-  {
-    id: 'rewards',
-    type: 'default',
-    position: { x: 1100, y: 1700 }, // Increased vertical spacing
-    data: { 
+  { id: 'rewards', type: 'default', position: { x: 1150, y: 1400 }, data: { 
       label: (
-        <div>
-          <strong>REWARD DISTRIBUTION</strong><br/>
+        <div style={{ textAlign: 'center', lineHeight: '1.8', fontSize: '18px', padding: '15px 10px' }}>
+          <strong style={{ fontSize: '24px', display: 'block', marginBottom: '15px' }}>REWARD DISTRIBUTION</strong>
           • 10% Treasury<br/>
           • 30% Validators & Stakers<br/>
-          • 60% Miners (via Ranking Pallet)<br/><br/>
-          All rewards in Alpha can be bridged back to Bittensor
+          • 60% Miners (via Ranking<br/>
+            &nbsp;&nbsp;Pallet)<br/>
+          <br/>
+          <div style={{ marginTop: '10px', marginBottom: '30px', paddingBottom: '15px' }}>
+            All rewards in Alpha can be<br/>
+            bridged back to Bittensor
+          </div>
         </div>
       ) 
-    },
-    style: {
-      ...nodeStyles.rewards,
-      width: 300, // Make it wider to fit the text
-    },
-  },
+    }, style: { ...getNodeStyle('rewards'), width: 400, height: 340 } },
 ];
 
 // Initial edges configuration
 const initialEdges = [
-  // Client to Dashboard
-  {
-    id: 'client-to-dashboard',
-    source: 'client',
-    target: 'dashboard',
-    animated: true,
-    type: 'alphaFlow',
-    style: edgeStyles.funds,
-    data: { label: 'FIAT/Alpha/TAO' },
-    sourcePosition: 'bottom',
-    targetPosition: 'top',
-  },
-  // Dashboard to Marketplace
-  {
-    id: 'dashboard-to-marketplace',
-    source: 'dashboard',
-    target: 'marketplace',
-    animated: false,
-    type: 'step',
-    style: edgeStyles.solid,
-    label: 'mints credit',
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-    sourcePosition: 'bottom',
-    targetPosition: 'top',
-  },
-  // Bittensor to Bridge
-  {
-    id: 'bittensor-to-bridge',
-    source: 'bittensor',
-    target: 'bridge',
-    animated: true,
-    type: 'alphaFlow',
-    style: edgeStyles.funds,
-    data: { label: 'Alpha' },
-    sourcePosition: 'bottom',
-    targetPosition: 'top',
-  },
-  // Bridge to Hippius Blockchain
-  {
-    id: 'bridge-to-hippius',
-    source: 'bridge',
-    target: 'hippius-blockchain',
-    animated: true,
-    type: 'alphaFlow',
-    style: edgeStyles.funds,
-    data: { label: 'Alpha (locked)' },
-    sourcePosition: 'right',
-    targetPosition: 'left',
-  },
-  // Dashboard to Bridge (UI interaction)
-  {
-    id: 'dashboard-to-bridge',
-    source: 'dashboard',
-    target: 'bridge',
-    animated: false,
-    type: 'step',
-    style: edgeStyles.solid,
-    label: 'UI for bridging',
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-    sourcePosition: 'left',
-    targetPosition: 'right',
-  },
-  // Marketplace to Hippius Blockchain
-  {
-    id: 'marketplace-to-hippius',
-    source: 'marketplace',
-    target: 'hippius-blockchain',
-    animated: false,
-    type: 'step',
-    style: edgeStyles.solid,
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-    sourcePosition: 'bottom',
-    targetPosition: 'top',
-  },
-  // Hippius Blockchain to Validator
-  {
-    id: 'hippius-to-validator',
-    source: 'hippius-blockchain',
-    target: 'validator',
-    animated: false,
-    type: 'step',
-    style: edgeStyles.solid,
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-    sourcePosition: 'left',
-    targetPosition: 'right',
-  },
-  // Hippius Blockchain to Miner
-  {
-    id: 'hippius-to-miner',
-    source: 'hippius-blockchain',
-    target: 'miner',
-    animated: false,
-    type: 'step',
-    style: edgeStyles.solid,
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-    sourcePosition: 'right',
-    targetPosition: 'left',
-  },
-  // Hippius Blockchain to Hippius Full Node
-  {
-    id: 'hippius-blockchain-to-hippius-node',
-    source: 'hippius-blockchain',
-    target: 'hippius-node',
-    animated: false,
-    type: 'step',
-    style: edgeStyles.solid,
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-    sourcePosition: 'bottom',
-    targetPosition: 'top',
-  },
-  // Validator to Bittensor (weights)
-  {
-    id: 'validator-to-bittensor',
-    source: 'validator',
-    target: 'bittensor',
-    animated: true,
-    type: 'step',
-    style: edgeStyles.validator,
-    label: 'weights',
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-  },
-  // Validator to Hippius Node
-  {
-    id: 'validator-to-hippius',
-    source: 'validator',
-    target: 'hippius-node',
-    animated: true,
-    type: 'step',
-    style: edgeStyles.validator,
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-    sourcePosition: 'bottom',
-    targetPosition: 'top',
-  },
-  // Validator to Subtensor Node
-  {
-    id: 'validator-to-subtensor',
-    source: 'validator',
-    target: 'subtensor-node',
-    animated: true,
-    type: 'step',
-    style: edgeStyles.validator,
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-  },
-  // Validator to Ranking Pallet
-  {
-    id: 'validator-to-ranking',
-    source: 'validator',
-    target: 'ranking-pallet',
-    animated: true,
-    type: 'step',
-    style: edgeStyles.validator,
-    label: 'weights',
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-  },
-  // Miner to S3 Storage Miner
-  {
-    id: 'miner-to-s3',
-    source: 'miner',
-    target: 's3-miner',
-    animated: true,
-    type: 'step',
-    style: edgeStyles.miner,
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-  },
-  // Miner to IPFS Storage Miner
-  {
-    id: 'miner-to-ipfs',
-    source: 'miner',
-    target: 'ipfs-miner',
-    animated: true,
-    type: 'step',
-    style: edgeStyles.miner,
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-  },
-  // Miner to Compute Miner
-  {
-    id: 'miner-to-compute',
-    source: 'miner',
-    target: 'compute-miner',
-    animated: true,
-    type: 'step',
-    style: edgeStyles.miner,
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-  },
-  // Miner to Ranking Pallet
-  {
-    id: 'miner-to-ranking',
-    source: 'miner',
-    target: 'ranking-pallet',
-    animated: true,
-    type: 'step',
-    style: edgeStyles.miner,
-    label: 'registers',
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-  },
-  // Marketplace to Ranking Pallet
-  {
-    id: 'marketplace-to-ranking',
-    source: 'marketplace',
-    target: 'ranking-pallet',
-    animated: false,
-    type: 'step',
-    style: edgeStyles.funds,
-    label: '60% of revenue',
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-    animated: true,
-  },
-  // Ranking Pallet to S3 Miner
-  {
-    id: 'ranking-to-s3',
-    source: 'ranking-pallet',
-    target: 's3-miner',
-    animated: true,
-    type: 'step',
-    style: edgeStyles.ranking,
-    label: '60% of S3 revenue',
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-    labelShowBg: true,
-    labelBgPadding: [8, 4],
-  },
-  // Ranking Pallet to IPFS Miner
-  {
-    id: 'ranking-to-ipfs',
-    source: 'ranking-pallet',
-    target: 'ipfs-miner',
-    animated: true,
-    type: 'step',
-    style: edgeStyles.ranking,
-    label: '60% of IPFS revenue',
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-    labelShowBg: true,
-    labelBgPadding: [8, 4],
-  },
-  // Ranking Pallet to Compute Miner
-  {
-    id: 'ranking-to-compute',
-    source: 'ranking-pallet',
-    target: 'compute-miner',
-    animated: true,
-    type: 'step',
-    style: edgeStyles.ranking,
-    label: '60% of Compute revenue',
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-    labelShowBg: true,
-    labelBgPadding: [8, 4],
-  },
-  // Ranking Pallet to Rewards
-  {
-    id: 'ranking-to-rewards',
-    source: 'ranking-pallet',
-    target: 'rewards',
-    animated: true,
-    type: 'step',
-    style: edgeStyles.ranking,
-    label: 'distributes 60%',
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-  },
-  // Hippius Node to Worker
-  {
-    id: 'hippius-to-worker',
-    source: 'hippius-node',
-    target: 'worker',
-    animated: true,
-    type: 'step',
-    style: edgeStyles.validator,
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-    sourcePosition: 'bottom',
-    targetPosition: 'top',
-  },
-  // Worker to S3 Miner
-  {
-    id: 'worker-to-s3',
-    source: 'worker',
-    target: 's3-miner',
-    animated: true,
-    type: 'step',
-    style: edgeStyles.worker,
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-  },
-  // Worker to IPFS Miner
-  {
-    id: 'worker-to-ipfs',
-    source: 'worker',
-    target: 'ipfs-miner',
-    animated: true,
-    type: 'step',
-    style: edgeStyles.worker,
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-  },
-  // Worker to Compute Miner
-  {
-    id: 'worker-to-compute',
-    source: 'worker',
-    target: 'compute-miner',
-    animated: true,
-    type: 'step',
-    style: edgeStyles.worker,
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-  },
-  // S3 Miner to Rewards
-  {
-    id: 's3-to-rewards',
-    source: 's3-miner',
-    target: 'rewards',
-    animated: false,
-    type: 'step',
-    style: edgeStyles.solid,
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-  },
-  // IPFS Miner to Rewards
-  {
-    id: 'ipfs-to-rewards',
-    source: 'ipfs-miner',
-    target: 'rewards',
-    animated: false,
-    type: 'step',
-    style: edgeStyles.solid,
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-  },
-  // Compute Miner to Rewards
-  {
-    id: 'compute-to-rewards',
-    source: 'compute-miner',
-    target: 'rewards',
-    animated: false,
-    type: 'step',
-    style: edgeStyles.solid,
-    labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-    labelStyle: { fill: '#ffffff' },
-  },
-  // Rewards to Bridge (bidirectional Alpha flow)
-  {
-    id: 'rewards-to-bridge',
-    source: 'rewards',
-    target: 'bridge',
-    animated: true,
-    type: 'alphaFlow',
-    style: edgeStyles.funds,
-    data: { label: 'Alpha (bidirectional)' },
-  },
+  { id: 'client-to-dashboard', source: 'client', target: 'dashboard', animated: true, type: 'alphaFlow', style: edgeStyles.funds, data: { label: 'FIAT/Alpha/TAO' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'dashboard-to-marketplace', source: 'dashboard', target: 'marketplace', animated: false, type: 'step', style: edgeStyles.solid, label: 'mints credit', labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'bittensor-to-bridge', source: 'bittensor', target: 'bridge', animated: true, type: 'alphaFlow', style: edgeStyles.funds, data: { label: 'Alpha' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'bridge-to-hippius', source: 'bridge', target: 'hippius-blockchain', animated: true, type: 'alphaFlow', style: edgeStyles.funds, data: { label: 'Alpha (locked)' }, sourcePosition: 'right', targetPosition: 'left' },
+  { id: 'dashboard-to-bridge', source: 'dashboard', target: 'bridge', animated: false, type: 'step', style: edgeStyles.solid, label: 'UI for bridging', labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'left', targetPosition: 'right' },
+  { id: 'marketplace-to-hippius', source: 'marketplace', target: 'hippius-blockchain', animated: false, type: 'step', style: edgeStyles.solid, labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'hippius-to-validator', source: 'hippius-blockchain', target: 'validator', animated: false, type: 'step', style: edgeStyles.solid, labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'left', targetPosition: 'right' },
+  { id: 'hippius-to-miner', source: 'hippius-blockchain', target: 'miner', animated: false, type: 'step', style: edgeStyles.solid, labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'right', targetPosition: 'left' },
+  { id: 'hippius-blockchain-to-hippius-node', source: 'hippius-blockchain', target: 'hippius-node', animated: false, type: 'step', style: edgeStyles.solid, labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'validator-to-bittensor', source: 'validator', target: 'bittensor', animated: true, type: 'step', style: edgeStyles.validator, label: 'weights', labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'left', targetPosition: 'right' },
+  { id: 'validator-to-hippius', source: 'validator', target: 'hippius-node', animated: true, type: 'step', style: edgeStyles.validator, labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'right', targetPosition: 'left' },
+  { id: 'validator-to-subtensor', source: 'validator', target: 'subtensor-node', animated: true, type: 'step', style: edgeStyles.validator, labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'right', targetPosition: 'left' },
+  { id: 'validator-to-ranking', source: 'validator', target: 'ranking-pallet', animated: true, type: 'step', style: edgeStyles.validator, label: 'weights', labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'miner-to-s3', source: 'miner', target: 's3-miner', animated: true, type: 'step', style: edgeStyles.miner, labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'miner-to-ipfs', source: 'miner', target: 'ipfs-miner', animated: true, type: 'step', style: edgeStyles.miner, labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'miner-to-compute', source: 'miner', target: 'compute-miner', animated: true, type: 'step', style: edgeStyles.miner, labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'miner-to-ranking', source: 'miner', target: 'ranking-pallet', animated: true, type: 'step', style: edgeStyles.miner, label: 'registers', labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'marketplace-to-ranking', source: 'marketplace', target: 'ranking-pallet', animated: true, type: 'step', style: edgeStyles.funds, label: '60% of revenue', labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'ranking-to-s3', source: 'ranking-pallet', target: 's3-miner', animated: true, type: 'step', style: edgeStyles.ranking, label: '60% of S3 revenue', labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'ranking-to-ipfs', source: 'ranking-pallet', target: 'ipfs-miner', animated: true, type: 'step', style: edgeStyles.ranking, label: '60% of IPFS revenue', labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'ranking-to-compute', source: 'ranking-pallet', target: 'compute-miner', animated: true, type: 'step', style: edgeStyles.ranking, label: '60% of Compute revenue', labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'ranking-to-rewards', source: 'ranking-pallet', target: 'rewards', animated: true, type: 'step', style: edgeStyles.ranking, label: 'distributes 60%', labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'hippius-to-worker', source: 'hippius-node', target: 'worker', animated: true, type: 'step', style: edgeStyles.validator, labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'worker-to-s3', source: 'worker', target: 's3-miner', animated: true, type: 'step', style: edgeStyles.worker, labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'worker-to-ipfs', source: 'worker', target: 'ipfs-miner', animated: true, type: 'step', style: edgeStyles.worker, labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'worker-to-compute', source: 'worker', target: 'compute-miner', animated: true, type: 'step', style: edgeStyles.worker, labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 's3-to-rewards', source: 's3-miner', target: 'rewards', animated: false, type: 'step', style: edgeStyles.solid, labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'ipfs-to-rewards', source: 'ipfs-miner', target: 'rewards', animated: false, type: 'step', style: edgeStyles.solid, labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'compute-to-rewards', source: 'compute-miner', target: 'rewards', animated: false, type: 'step', style: edgeStyles.solid, labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' }, labelStyle: { fill: '#ffffff', fontFamily: 'monospace' }, sourcePosition: 'bottom', targetPosition: 'top' },
+  { id: 'rewards-to-bridge', source: 'rewards', target: 'bridge', animated: true, type: 'step', style: edgeStyles.funds, data: { label: 'Alpha (bidirectional)' }, sourcePosition: 'top', targetPosition: 'bottom', label: 'Alpha can be bridged back', labelBgStyle: { fill: 'rgba(30, 30, 30, 0.8)' }, labelStyle: { fill: '#ffffff', fontWeight: 'bold', fontFamily: 'monospace' } },
 ];
 
 export default function ArchitectureFlowDiagram() {
@@ -1031,34 +368,43 @@ export default function ArchitectureFlowDiagram() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
 
-  // Define the edge types
   const edgeTypes = {
     step: StepEdge,
     alphaFlow: AlphaFlowEdge,
   };
 
+  const svgDefinitions = (
+    <svg>
+      <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#fff" />
+        </marker>
+      </defs>
+    </svg>
+  );
+
   const onConnect = useCallback(
     (params) => {
-      // Determine if this is a funds-related connection
       const isFundsConnection = 
         (params.source === 'client' && params.target === 'dashboard') ||
         (params.source === 'bittensor' && params.target === 'bridge') ||
         (params.source === 'bridge' && params.target === 'hippius-blockchain') ||
         (params.source === 'rewards' && params.target === 'bridge');
       
-      // Determine if this is a blockchain-related connection
       const isBlockchainConnection =
         (params.source === 'marketplace' && params.target === 'hippius-blockchain') ||
         (params.source === 'hippius-blockchain' && params.target === 'validator') ||
         (params.source === 'hippius-blockchain' && params.target === 'miner');
       
-      // Determine if this is a miner-related connection
       const isMinerConnection =
         (params.source === 'miner' && params.target === 's3-miner') ||
         (params.source === 'miner' && params.target === 'ipfs-miner') ||
         (params.source === 'miner' && params.target === 'compute-miner');
       
-      // Determine if this is a UI-related connection
       const isUIConnection =
         (params.source === 'dashboard' && params.target === 'bridge');
       
@@ -1071,7 +417,13 @@ export default function ArchitectureFlowDiagram() {
               isMinerConnection ? edgeStyles.highlighted :
               isUIConnection ? edgeStyles.dashed :
               edgeStyles.dashed,
-        data: isUIConnection ? { label: 'UI for bridging' } : undefined
+        data: isUIConnection ? { label: 'UI for bridging' } : undefined,
+        markerEnd: {
+          type: 'arrowhead',
+          color: isFundsConnection ? '#4CAF50' : 
+                 isBlockchainConnection ? '#FBBC05' : 
+                 isMinerConnection ? '#FBBC05' : '#ffffff'
+        }
       }, eds));
     },
     [setEdges]
@@ -1079,13 +431,25 @@ export default function ArchitectureFlowDiagram() {
 
   const onInit = useCallback((instance) => {
     setReactFlowInstance(instance);
+    instance.fitView(); // Auto-fit the view on initialization
   }, []);
 
   return (
-    <div style={{ width: '100%', height: '750px' }}>
+    <div className="architecture-flow-diagram" style={{ 
+      width: '100%', 
+      height: '800px',
+      overflow: 'auto',
+      backgroundColor: '#000000',
+      position: 'relative',
+      padding: 0,
+      margin: 0,
+    }}>
+      {svgDefinitions}
       <ReactFlow
-        className="architecture-flow-diagram"
-        style={{ width: '100%', height: '750px' }}
+        style={{ 
+          width: '100%', 
+          height: '100%',
+        }}
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
@@ -1093,41 +457,48 @@ export default function ArchitectureFlowDiagram() {
         onConnect={onConnect}
         onInit={onInit}
         edgeTypes={edgeTypes}
-        fitView={true}
-        fitViewOptions={{ padding: 0.1 }}
-        defaultViewport={{ x: 0, y: 0, zoom: 0.4 }}
+        fitView={true} // Enable auto-fit to fill the container
+        defaultViewport={{ x: 0, y: 0, zoom: 0.8 }} // Centered and adjusted zoom
         attributionPosition="bottom-right"
-        minZoom={0.1}
-        maxZoom={4}
+        minZoom={0.2}
+        maxZoom={2}
         defaultEdgeOptions={{
           style: edgeStyles.dashed,
           animated: false,
           type: 'step',
           labelBgStyle: { fill: 'rgba(30, 30, 30, 0.7)' },
-          labelStyle: { fill: '#ffffff' },
+          labelStyle: { fill: '#ffffff', fontFamily: 'monospace' },
+          labelBgPadding: [8, 4],
         }}
         proOptions={{ hideAttribution: true }}
       >
         <MiniMap
-          nodeStrokeColor={(n) => {
-            if (n.style?.background) return n.style.background;
-            return '#fff';
-          }}
-          nodeColor={(n) => {
-            if (n.style?.background) return n.style.background;
-            return '#fff';
-          }}
-          nodeBorderRadius={2}
-          style={{ 
-            width: 120, 
-            height: 80,
+          nodeStrokeColor={(n) => n.style?.background || '#fff'}
+          nodeColor={(n) => n.style?.background || '#fff'}
+          nodeBorderRadius={4}
+          style={{
             bottom: 10,
             right: 10,
-            background: 'rgba(20, 20, 20, 0.8)'
+            background: 'rgba(0, 0, 0, 0.7)',
+            border: 'none',
           }}
         />
-        <Controls className="flow-controls" />
-        <Background color="#000000" gap={16} className="flow-background" />
+        <Controls 
+          position="bottom-left"
+          style={{
+            bottom: 10,
+            left: 10,
+            background: 'rgba(0, 0, 0, 0.7)',
+            border: 'none'
+          }}
+        />
+        <Background 
+          variant="dots" 
+          gap={20}
+          size={1}
+          color="#555555"
+          style={{ backgroundColor: '#000000' }}
+        />
       </ReactFlow>
     </div>
   );
