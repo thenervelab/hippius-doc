@@ -1,4 +1,4 @@
-# API
+# Blockchain RPC
 
 Explore the Hippius API for interacting with the Substrate blockchain, including balance history and more.
 
@@ -384,10 +384,10 @@ or
 Retrieves the IP address assigned to a specific hypervisor.
 
 #### Parameters
-- `hypervisor_id` (Vec<u8>): The unique identifier of the hypervisor
+- `hypervisor_id` (Vec\<u8\>): The unique identifier of the hypervisor
 
 #### Response
-Returns an optional IP address as a `Vec<u8>`:
+Returns an optional IP address as a `Vec\<u8\>`:
 - If an IP is assigned to the hypervisor, returns the IP address
 - If no IP is assigned, returns `null`
 
@@ -424,10 +424,10 @@ or
 Retrieves the IP address assigned to a specific virtual machine (VM).
 
 #### Parameters
-- `vm_id` (Vec<u8>): The unique identifier of the VM
+- `vm_id` (Vec\<u8\>): The unique identifier of the VM
 
 #### Response
-Returns an optional IP address as a `Vec<u8>`:
+Returns an optional IP address as a `Vec\<u8\>`:
 - If an IP is assigned to the VM, returns the IP address
 - If no IP is assigned, returns `null`
 
@@ -464,10 +464,10 @@ or
 Retrieves the IP address assigned to a specific storage miner.
 
 #### Parameters
-- `miner_id` (Vec<u8>): The unique identifier of the storage miner
+- `miner_id` (Vec\<u8\>): The unique identifier of the storage miner
 
 #### Response
-Returns an optional IP address as a `Vec<u8>`:
+Returns an optional IP address as a `Vec\<u8\>`:
 - If an IP is assigned to the storage miner, returns the IP address
 - If no IP is assigned, returns `null`
 
@@ -504,7 +504,7 @@ or
 Retrieves the size of a specific bucket.
 
 #### Parameters
-- [bucket_name](cci:1://file:///home/faiz/Documents/GitHub/thebrain/pallets/storage-s3/src/lib.rs:111:8-133:9) (Vec<u8>): The name of the bucket to retrieve the size for.
+- [bucket_name](cci:1://file:///home/faiz/Documents/GitHub/thebrain/pallets/storage-s3/src/lib.rs:111:8-133:9) (Vec\<u8\>): The name of the bucket to retrieve the size for.
 
 #### Response
 Returns the size of the bucket as a `u128` value.
