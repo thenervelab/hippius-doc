@@ -52,7 +52,37 @@ const sidebars: SidebarsConfig = {
           label: 'Blockchain',
           items: [
             'blockchain/intro', // Hippius blockchain intro
-            'blockchain/pallets', // Hippius pallets
+            {
+              type: 'category',
+              label: 'Hippius Pallets',
+              items: [
+                'blockchain/pallets', // Main page
+                {
+                  type: 'category',
+                  label: 'Pallet Details',
+                  items: [
+                    'pallets/alpha-bridge', // Subpage for AlphaBridge
+                    'pallets/credits',       // Subpage for Credits
+                    'pallets/rankings',      // Subpage for Rankings
+                    'pallets/marketplace',
+                    'pallets/registration',
+                    'pallets/ipfsPin',
+                    'pallets/executionUnit',
+                    'pallets/backup',
+                    'pallets/containerRegistry',
+                    'pallets/storageS3',
+                    'pallets/computePallet',
+                    'pallets/palletIp',
+                    'pallets/bittensor',
+                    'pallets/metagraph',
+                    'pallets/subAccount',
+                    'pallets/notifications',
+                    'pallets/accountProfile',
+                    'pallets/utils',
+                  ],
+                },
+              ],
+            },// Hippius pallets
             { type: 'category', label: 'API', items: ['blockchain/api'] }, // Swagger UI link
           ],
         },
