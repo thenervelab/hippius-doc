@@ -64,15 +64,6 @@ The pallet defines several error types to handle various failure scenarios:
 - `StorageOverflow`: Raised when a storage operation exceeds its limits.
 - `SubmissionDisabled`: Raised when submission of weights is disabled.
 
-## Additional Types
-
-### NodeMetricsData Struct
-
-The pallet uses the `NodeMetricsData` struct from the `pallet_execution_unit` to represent the performance metrics of miners.
-
-### NodeInfo Struct
-
-The pallet uses the `NodeInfo` struct from the `pallet_registration` to represent information about registered nodes.
 
 ## Conclusion
 
