@@ -55,8 +55,8 @@ const sidebars: SidebarsConfig = {
             {
               type: 'category',
               label: 'Hippius Pallets',
+              link: { type: 'doc', id: 'blockchain/pallets' }, // Link to the main page
               items: [
-                'blockchain/pallets', // Main page
                 {
                   type: 'category',
                   label: 'Pallet Details',
@@ -82,7 +82,8 @@ const sidebars: SidebarsConfig = {
                   ],
                 },
               ],
-            },// Hippius pallets
+            },
+            
             { type: 'category', label: 'API', items: ['blockchain/api'] }, // Swagger UI link
           ],
         },
