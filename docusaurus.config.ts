@@ -7,7 +7,7 @@ import type * as Preset from "@docusaurus/preset-classic";
 const config: Config = {
   title: "Hippius Docs",
   tagline: "Transparent, Decentralized, Anonymous Cloud Storage",
-  favicon: "img/favicon.ico", // Update with Hippius favicon
+  favicon: "img/logo.png", // Update with Hippius favicon
 
   url: "https://docs.hippius.io",
   baseUrl: "/",

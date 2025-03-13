@@ -52,7 +52,38 @@ const sidebars: SidebarsConfig = {
           label: 'Blockchain',
           items: [
             'blockchain/intro', // Hippius blockchain intro
-            'blockchain/pallets', // Hippius pallets
+            {
+              type: 'category',
+              label: 'Hippius Pallets',
+              link: { type: 'doc', id: 'blockchain/pallets' }, // Link to the main page
+              items: [
+                {
+                  type: 'category',
+                  label: 'Pallet Details',
+                  items: [
+                    'pallets/alpha-bridge', // Subpage for AlphaBridge
+                    'pallets/credits',       // Subpage for Credits
+                    'pallets/rankings',      // Subpage for Rankings
+                    'pallets/marketplace',
+                    'pallets/registration',
+                    'pallets/ipfsPin',
+                    'pallets/executionUnit',
+                    'pallets/backup',
+                    'pallets/containerRegistry',
+                    'pallets/storageS3',
+                    'pallets/computePallet',
+                    'pallets/palletIp',
+                    'pallets/bittensor',
+                    'pallets/metagraph',
+                    'pallets/subAccount',
+                    'pallets/notifications',
+                    'pallets/accountProfile',
+                    'pallets/utils',
+                  ],
+                },
+              ],
+            },
+            
             { type: 'category', label: 'API', items: ['blockchain/api'] }, // Swagger UI link
           ],
         },
@@ -63,6 +94,11 @@ const sidebars: SidebarsConfig = {
             { type: 'category', label: 'IPFS', items: ['storage/ipfs/setup', 'storage/ipfs/pinning'] },
             { type: 'category', label: 'S3', items: ['storage/s3/integration', { type: 'link', label: 'Pricing', href: 'https://hippius.io#pricing' }] },
           ],
+        },
+        {
+          type: 'category',
+          label: 'CLI',
+          items: ['cli/usage'],
         },
       ],
     },

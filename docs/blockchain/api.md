@@ -588,6 +588,190 @@ If no miner is found for the provided account ID, the response will be `null`.
 }
 ```
 
+### 19. `get_free_credits_rpc`
+
+#### Description
+Retrieves the free credits for a specific account or all accounts if none is provided.
+
+#### Parameters
+- `account` `(Option<AccountId32>)`: The account to check free credits for. If `None`, returns free credits for all accounts.
+
+#### Response
+Returns a list of tuples containing:
+- `AccountId32`: The account ID.
+- `u128`: The amount of free credits.
+
+#### Example Request
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "get_free_credits_rpc",
+    "params": ["5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKv3gB"],
+    "id": 1
+}
+```
+### 20. `get_referred_users`
+
+#### Description
+Retrieves all users referred by a specific account.
+
+#### Parameters
+- `account` (AccountId32): The account to check referrals for.
+
+#### Response
+Returns a list of tuples containing:
+- Returns a list of AccountId32 objects representing the referred users.
+
+#### Example Request
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "get_referred_users",
+    "params": ["5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKv3gB"],
+    "id": 1
+}
+```
+
+### 21. `get_referral_rewards`
+
+#### Description
+Retrieves total referral rewards earned by a specific account.
+
+#### Parameters
+- `account` (AccountId32): The account to check referral rewards for.
+
+#### Response
+- Returns the total rewards as a u128 value.
+
+#### Example Request
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "get_referral_rewards",
+    "params": ["5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKv3gB"],
+    "id": 1
+}
+```
+
+### 22. `total_referral_codes`
+
+#### Description
+Retrieves the total number of referral codes created in the network.
+
+#### Response
+- Returns the total count as a u32 value.
+
+#### Example Request
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "total_referral_codes",
+    "params": [],
+    "id": 1
+}
+```
+
+### 23. `total_referral_rewards`
+
+#### Description
+Retrieves the total referral rewards distributed across the network
+
+#### Response
+- Returns the total rewards as a u128 value.
+
+#### Example Request
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "total_referral_rewards",
+    "params": [],
+    "id": 1
+}
+```
+
+### 24. `get_referral_codes`
+
+#### Description
+Retrieves all referral codes owned by a specific account.
+
+#### Parameters
+- `account` (AccountId32): The account to check referral codes for.
+
+#### Response
+- Returns a list of `Vec<u8>` representing the referral codes.
+
+#### Example Request
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "get_referral_codes",
+    "params": ["5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKv3gB"],
+    "id": 1
+}
+```
+
+### 25. `get_batches_for_user`
+
+#### Description
+Retrieves all batches associated with a specific user account.
+
+#### Parameters
+- `account_id` (AccountId32): The account ID of the user to retrieve batches for.
+
+#### Response
+Returns a list of `Batch<AccountId32, u32>` objects, each containing:
+- `owner`: The account ID of the owner.
+- `credit_amount`: The total credit amount associated with the batch.
+- `alpha_amount`: The total alpha amount associated with the batch.
+- `remaining_credits`: The remaining credits in the batch.
+- `remaining_alpha`: The remaining alpha in the batch.
+- `pending_alpha`: The pending alpha in the batch.
+- `is_frozen`: Indicates whether the batch is frozen.
+- `release_time`: The time at which the batch will be released.
+
+#### Example Request
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "get_batches_for_user",
+    "params": ["5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKv3gB"],
+    "id": 1
+}
+```
+
+
+### 26. `get_batch_by_id`
+
+#### Description
+Retrieves a specific batch by its unique ID.
+
+#### Parameters
+- `batch_id` (u64): The unique identifier of the batch to retrieve.
+
+#### Response
+Returns an optional `Batch<AccountId32, u32>` object containing:
+- `owner`: The account ID of the owner.
+- `credit_amount`: The total credit amount associated with the batch.
+- `alpha_amount`: The total alpha amount associated with the batch.
+- `remaining_credits`: The remaining credits in the batch.
+- `remaining_alpha`: The remaining alpha in the batch.
+- `pending_alpha`: The pending alpha in the batch.
+- `is_frozen`: Indicates whether the batch is frozen.
+- `release_time`: The time at which the batch will be released.
+
+If no batch is found for the provided ID, the response will be `null`.
+
+#### Example Request
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "get_batches_for_user",
+    "params": ["5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKv3gB"],
+    "id": 1
+}
+```
+
+
 #### Notes
 - These methods are part of the IP management system in the Hippius network
 - Useful for retrieving network-assigned IP addresses for different node types
