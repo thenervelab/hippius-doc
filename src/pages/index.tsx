@@ -122,7 +122,7 @@ function HomepageHeader() {
         <div className="flex gap-y-5 delay-700 duration-500 flex-wrap relative items-center justify-center mt-8">
           <Button
             asLink
-            href={URLS.DASHBOARD}
+            href={URLS.LEARN}
             size="lg"
             variant="secondary"
             icon={<Icons.ArrowRight />}
