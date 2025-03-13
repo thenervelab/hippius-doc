@@ -14,7 +14,7 @@ export default function FooterLinkItem({ item }: Props): ReactNode {
   return (
     <Link
       className={clsx(
-        "footer__link-item flex items-center gap-x-2 font-medium hover:text-white",
+        "footer__link-item flex items-center gap-x-2 font-medium text-white hover:text-white",
         className
       )}
       {...(href

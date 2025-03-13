@@ -75,7 +75,7 @@ const config: Config = {
   themeConfig: {
     image: "img/hippius-social-card.jpg", // Update with Hippius social card
     colorMode: {
-      defaultMode: "dark",
+      defaultMode: "light",
       disableSwitch: true, // Force dark mode
     },
     navbar: {
