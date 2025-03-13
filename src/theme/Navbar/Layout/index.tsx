@@ -61,7 +61,7 @@ export default function NavbarLayout({ children }: Props): ReactNode {
           lineWidth: 1,
           cellDim: 5,
         }}
-        className="absolute w-full h-full top-0 bottom-0 left-0 opacity-5"
+        className="absolute w-full h-full z-[-1] top-0 bottom-0 left-0 opacity-5"
       />
       {children}
       <NavbarBackdrop onClick={mobileSidebar.toggle} />

@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        "desktop-nav": "996px",
+      },
       boxShadow: {
         "root-nav": "0px 12px 36px 0px rgba(0, 0, 0, 0.14)",
         tooltip: "0px 12px 36px 0px rgba(0, 0, 0, 0.14)",

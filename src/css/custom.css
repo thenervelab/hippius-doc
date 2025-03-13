@@ -52,11 +52,6 @@
   --success-10: 3 48 30;
 }
 
-/* Code blocks */
-code {
-  background-color: #2a2a4e;
-}
-
 /* Buttons */
 .button--primary {
   background-color: #1e90ff;

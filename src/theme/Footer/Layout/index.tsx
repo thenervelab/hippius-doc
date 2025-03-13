@@ -9,7 +9,7 @@ export default function FooterLayout({
   copyright,
 }: Props): ReactNode {
   return (
-    <footer className="relative bg-primary-50 py-14 px-6 flex text-white justify-center">
+    <footer className="relative bg-primary-50 py-8 sm:py-14 px-6 flex text-white justify-center">
       <Graphsheet
         majorCell={{
           lineColor: [255, 255, 255, 1.0],

@@ -15,7 +15,7 @@ function DefaultNavbarItemDesktop({
     <NavbarNavLink
       className={clsx(
         isDropdownItem ? "dropdown__link" : "navbar__item navbar__link",
-        "flex items-center",
+        "desktop-nav:flex items-center",
         className
       )}
       isDropdownLink={isDropdownItem}

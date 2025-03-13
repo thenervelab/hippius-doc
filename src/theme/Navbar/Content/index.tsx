@@ -8,7 +8,7 @@ import NavbarItem, { type Props as NavbarItemConfig } from "@theme/NavbarItem";
 import NavbarColorModeToggle from "@theme/Navbar/ColorModeToggle";
 import SearchBar from "@theme/SearchBar";
 import NavbarMobileSidebarToggle from "@theme/Navbar/MobileSidebar/Toggle";
-import * as Icons from "@site/src/components/icons";
+import NavbarLogo from "@theme/Navbar/Logo";
 import NavbarSearch from "@theme/Navbar/Search";
 
 import styles from "./styles.module.css";
@@ -48,7 +48,7 @@ function NavbarContentLayout({
   right: ReactNode;
 }) {
   return (
-    <div className="navbar__inner relative">
+    <div className="navbar__inner">
       <div className="navbar__items">{left}</div>
       <div className="navbar__items navbar__items--right">{right}</div>
     </div>
@@ -69,12 +69,7 @@ export default function NavbarContent(): ReactNode {
         // TODO stop hardcoding items?
         <>
           {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
-          <div className="flex items-center gap-x-2 mr-6">
-            <div className="flex items-center justify-center size-8 bg-primary-50 rounded">
-              <Icons.HippiusLogo className="size-4 text-white" />
-            </div>
-            <span className="font-medium text-base md:text-xl">Hippius</span>
-          </div>
+          <NavbarLogo />
           <NavbarItems items={leftItems} />
         </>
       }
