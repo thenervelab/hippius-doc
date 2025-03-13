@@ -94,6 +94,14 @@ const sidebars: SidebarsConfig = {
             { type: 'category', label: 'S3', items: ['storage/s3/integration', { type: 'link', label: 'Pricing', href: 'https://hippius.io#pricing' }] },
           ],
         },
+        {
+          type: 'category',
+          label: 'CLI',
+          items: [
+            { type: 'category', label: 'Installation', items: ['cli/installation'] },
+            { type: 'category', label: 'Usage', items: ['cli/usage'] },
+          ],
+        },
       ],
     },
   ],
