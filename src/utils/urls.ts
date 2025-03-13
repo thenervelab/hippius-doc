@@ -7,7 +7,7 @@ export const URLS = {
   GITHUB_ORG: "https://github.com/thenervelab",
   TWITTER: "https://x.com/hippius_subnet",
   DISCORD: "https://discord.hippius.com",
-  LEARN: "https://docs.hippius.com/learn/intro",
+  LEARN: "/learn/intro",
   API: "https://docs.hippius.com/blockchain/api",
   X: "https://x.com/hippius_subnet",
 };
