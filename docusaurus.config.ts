@@ -85,11 +85,11 @@ const config: Config = {
         src: "img/logo.png", // Add Hippius logo
       },
       items: [
-        {
-          to: "/", // Points to index.tsx
-          label: "Home",
-          position: "left",
-        },
+        // {
+        //   to: "/", // Points to index.tsx
+        //   label: "Home",
+        //   position: "left",
+        // },
         {
           to: "/learn/intro",
           label: "Learn",

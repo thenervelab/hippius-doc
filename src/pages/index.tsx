@@ -1,12 +1,10 @@
 import type { ReactNode } from "react";
-import clsx from "clsx";
+
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import Heading from "@theme/Heading";
 import { H1, P, H4 } from "@site/src/components/typography";
 
-import styles from "./index.module.css";
 import Graphsheet from "../components/graphsheet";
 import Button from "../components/button";
 import { URLS } from "../utils/urls";
@@ -83,7 +81,7 @@ export const SMARTER_CLOUD: SmallCardInfo[] = [
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header className="relative justify-center bg-primary-50 flex flex-col px-6 pt-20 pb-40 items-center w-full">
+    <header className="relative text-white justify-center bg-primary-50 flex flex-col px-6 pt-20 pb-40 items-center w-full">
       <div className="absolute w-full top-0 h-full opacity-5">
         <Graphsheet
           majorCell={{

@@ -13,13 +13,6 @@
 }
 
 :root {
-  --ifm-color-primary: #1e90ff; /* Hippius blue */
-  --ifm-background-color: #1a1a2e; /* Dark blue background */
-  --ifm-font-color-base: #e0e0e0; /* Light gray text */
-  --ifm-heading-color: #ffffff; /* White headers */
-  --ifm-menu-color: #e0e0e0; /* Sidebar text */
-  --ifm-menu-color-background-active: #2a2a4e; /* Active sidebar item */
-
   --font-geist-sans: Geist;
 
   /* Primary Shades */
