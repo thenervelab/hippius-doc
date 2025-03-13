@@ -98,10 +98,7 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'CLI',
-          items: [
-            { type: 'category', label: 'Installation', items: ['cli/installation'] },
-            { type: 'category', label: 'Usage', items: ['cli/usage'] },
-          ],
+          items: ['cli/usage'],
         },
       ],
     },
