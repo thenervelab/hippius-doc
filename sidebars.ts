@@ -31,6 +31,7 @@ const sidebars: SidebarsConfig = {
       label: 'Earn',
       items: [
         'earn/staking', // Staking on Hippius
+        'earn/installing-validator', // Installing a validator node
         'earn/storage-miner', // Setting up storage miners
         'earn/blockchain-ocw', // Setting up blockchain OCW miners
         {
