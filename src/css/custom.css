@@ -56,6 +56,10 @@
   --ifm-h1-font-size: 2.5rem;
 }
 
+.markdown a {
+  text-decoration: underline !important;
+}
+
 @media (max-width: 576px) {
   .markdown h1:first-child {
     --ifm-h1-font-size: 2rem;
