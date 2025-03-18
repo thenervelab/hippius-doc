@@ -159,6 +159,48 @@ sudo systemctl status hippius
 
 > **Important**: Keep your seed phrase and keys secure. Never share them with anyone. Make sure to back them up safely.
 
+### 6. Generate and Register Session Keys
+
+In addition to the keys above, you need to generate session keys and register them in the blockchain:
+
+1. With your Hippius node running, execute the following command on your validator server:
+```bash
+curl -H "Content-Type: application/json" -d '{"id":1, "jsonrpc":"2.0", "method": "author_rotateKeys", "params":[]}' http://localhost:9944
+```
+
+2. The response will contain a session key in the format:
+```json
+{
+  "jsonrpc": "2.0",
+  "result": "0x...",
+  "id": 1
+}
+```
+
+3. Save the value from the "result" field (starting with "0x"). This is your session key that will be used when staking.
+
+## Staking and Bonding Your Validator
+
+To complete the validator setup, you need to register and bond your account in Polkadot.js Apps:
+
+1. Go to [Polkadot.js Apps](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network) connected to the Hippius network
+2. Navigate to "Network" → "Staking" → "Account actions"
+3. Click on "Stash" button
+4. In the bonding preferences:
+   - Select the same account for both Stash and Controller accounts
+   - Enter the amount you wish to bond
+   - Set your payment destination
+5. Click "Bond" and sign the transaction
+6. Once bonded, click on "Validate" button
+7. In the validate form:
+   - Enter the session key you generated earlier
+   - Set your commission rate and other preferences
+8. Click "Validate" and sign the transaction
+
+> **Important**: Make sure to use the same key for both your stash and controller accounts to simplify management.
+
+If you need help during any part of this process, join the [Hippius Discord community](https://discord.gg/hippius) where you can get assistance from the team and other validators.
+
 ## Components Installed
 
 ### IPFS Node
