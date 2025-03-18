@@ -66,31 +66,6 @@ Different node types serve different functions in the Hippius network:
 - **Storage Miner (S3)**: For S3-compatible storage
 - **Compute Miner**: For computation resources (future)
 
-### Additional Info Needed (On Future Dashboard)
-
-When the Hippius Dashboard becomes available, you'll be able to provide more details about your node:
-
-#### For All Node Types:
-- Node Name
-- Contact Information
-- Node Public Key
-
-#### For Storage Miners:
-- Available Storage
-- Geographic Region
-- API Endpoint
-
-#### For Validators:
-- Commission Rate
-
-## Staking (for validators)
-
-For validator nodes, you'll need to stake Alpha tokens. This can be done through the Polkadot.js Apps interface:
-
-1. Navigate to "Network" → "Staking"
-2. Use the "Account actions" tab to stake tokens
-3. Follow the prompts to bond tokens to your validator
-4. The minimum staking requirement is 10,000 Alpha
 
 ## Verifying Registration
 
