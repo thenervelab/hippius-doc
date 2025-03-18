@@ -199,7 +199,7 @@ To complete the validator setup, you need to register and bond your account in P
 
 > **Important**: Make sure to use the same key for both your stash and controller accounts to simplify management.
 
-If you need help during any part of this process, join the [Hippius Discord community](https://discord.gg/hippius) where you can get assistance from the team and other validators.
+If you need help during any part of this process, join the [Hippius Discord community](https://discord.hippius.com) where you can get assistance from the team and other validators.
 
 ## Components Installed
 
