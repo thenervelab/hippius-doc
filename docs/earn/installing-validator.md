@@ -65,8 +65,7 @@ The default configuration in `group_vars/all.yml` includes:
 
 ```yaml
 # Hippius Configuration
-hippius_binary_url: "http://141.94.106.80/hippius"
-hippius_chain_spec_url: "http://141.94.106.80/premain.json"
+hippius_binary_url: "https://download.hippius.com/hippius"
 hippius_node_name: "hippius-validator"
 hippius_ports:
   rpc: 9944
