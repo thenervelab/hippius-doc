@@ -9,9 +9,9 @@ A validator node is a crucial component of the Hippius network that helps secure
 - Ansible 2.9+ installed on your control machine
 - Docker and docker-compose installed on control machine
 - Minimum system requirements:
-  - 10 CPU cores
-  - 64GB RAM
-  - 500GB SSD storage
+  - 12 CPU cores
+  - 128GB RAM
+  - 2TB NVME storage
   - Stable internet connection
 - Alpha tokens for tx fees
 
