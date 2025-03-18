@@ -33,7 +33,7 @@ const sidebars: SidebarsConfig = {
         'earn/staking', // Staking on Hippius
         'earn/installing-validator', // Installing a validator node
         'earn/storage-miner', // Setting up storage miners
-        'earn/blockchain-ocw', // Setting up blockchain OCW miners
+        'earn/register-in-blockchain', // Registering nodes in the blockchain
         {
           type: 'category',
           label: 'Compute VMs',
