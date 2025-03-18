@@ -119,7 +119,7 @@ sudo systemctl stop hippius
     --database paritydb \
     --name hippius-validator \
     --telemetry-url "wss://telemetry.hippius.com/submit/ 0" \
-    --chain /opt/hippius/premain.json \
+    --chain hippius \
     --node-key-file /opt/hippius/data/chains/hippius_mainnet/network/secret_ed25519
 ```
 
