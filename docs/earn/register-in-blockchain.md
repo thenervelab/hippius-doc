@@ -15,7 +15,7 @@ Before registering, ensure you have:
 
 ### Step 1: Access Polkadot.js Apps
 
-1. Go to the [Polkadot.js Apps](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network#/extrinsics) connected to the Hippius network
+1. Go to the [Polkadot.js Apps](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network#/extrinsics) https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network#/extrinsics connected to the Hippius network
 2. Ensure you're connected to the Hippius network endpoint: `wss://rpc.hippius.network`
 3. Connect your wallet using the Polkadot.js extension
 
