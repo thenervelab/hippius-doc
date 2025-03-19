@@ -146,6 +146,15 @@ hippius-cli insert-key --seed-phrase <seed-phrase> --public-key <public-key>
 
 # Generate new keys
 hippius-cli generate-keys
+
+# Get HIPS key files
+hippius-cli get-hips-key
+
+# Get Ipfs node ID
+hippius-cli get-ipfs-node-id
+
+# Get node ID
+hippius-cli get-node-id
 ```
 
 ### Image and File Operations
