@@ -17,7 +17,7 @@ The `hipc` tool provides a comprehensive set of commands for interacting with a 
 ## Quick Examples
 ```bash
 # Pin files to storage
-hippius-cli storage pin <file-hash1> <file-hash2>
+hipc storage pin <file-hash1> <file-hash2>
 
 ```
 
@@ -61,14 +61,14 @@ hippius-cli storage pin <file-hash1> <file-hash2>
 
 ```bash
 # Clone the repository
-git clone https://github.com/thenervelab/hippius-cli.git
-cd hippius-cli
+git clone https://github.com/thenervelab/hipc.git
+cd hipc
 
 # Build and install
 cargo install --path .
 
 # Move the binary to a location in your PATH
-cp target/release/hippius-cli /usr/local/bin/
+cp target/release/hipc /usr/local/bin/
 ```
 
 ---
@@ -78,104 +78,104 @@ cp target/release/hippius-cli /usr/local/bin/
 ### Storage Operations
 ```bash
 # Pin files to storage
-hippius-cli storage pin <file-hash1> <file-hash2>
+hipc storage pin <file-hash1> <file-hash2>
 
 # Unpin a file from storage
-hippius-cli storage unpin <file-hash>
+hipc storage unpin <file-hash>
 ```
 
 ### Node Management
 ```bash
 # Register a Validator node
-hippius-cli register-node --node-type Validator --node-id my-validator-node
+hipc register-node --node-type Validator --node-id my-validator-node
 
 # Register a Storage Miner node
-hippius-cli register-node --node-type StorageMiner --node-id my-storage-node --ipfs-node-id <optional-ipfs-node-id>
+hipc register-node --node-type StorageMiner --node-id my-storage-node --ipfs-node-id <optional-ipfs-node-id>
 
 # Get information about your registered node
-hippius-cli get-node-info
+hipc get-node-info
 ```
 
 ### Miner Operations
 ```bash
 
 # Fetch storage-related information
-hippius-cli miner storage
+hipc miner storage
 
 # Get storage miner registration requirements
-hippius-cli miner register-storage-miner
+hipc miner register-storage-miner
 
 # Get validator registration requirements
-hippius-cli miner register-validator
+hipc miner register-validator
 ```
 
 ### Account Operations
 ```bash
 # Transfer funds from one account to another
-hippius-cli account transfer --account-id <account_id> --amount <amount>
+hipc account transfer --account-id <account_id> --amount <amount>
 
 # Stake funds
-hippius-cli account stake --amount <amount>
+hipc account stake --amount <amount>
 
 # Unstake funds
-hippius-cli account unStake --amount <amount>
+hipc account unStake --amount <amount>
 
 # Withdraw funds
-hippius-cli account withdraw --amount <amount>
+hipc account withdraw --amount <amount>
 ```
 
 ### Credits and Financial Operations
 ```bash
 # Check free credits for your account
-hippius-cli get-credits
+hipc get-credits
 
 # List locked credits
-hippius-cli list-locked-credits
+hipc list-locked-credits
 
 # Get current lock period
-hippius-cli get-current-lock-period
+hipc get-current-lock-period
 
 # Get minimum lock amount
-hippius-cli get-min-lock-amount
+hipc get-min-lock-amount
 ```
 
 ### Key Management
 ```bash
 # Insert a key to the local node
-hippius-cli insert-key --seed-phrase <seed-phrase> --public-key <public-key>
+hipc insert-key --seed-phrase <seed-phrase> --public-key <public-key>
 
 # Generate new keys
-hippius-cli generate-keys
+hipc generate-keys
 
 # Get HIPS key files
-hippius-cli get-hips-key
+hipc get-hips-key
 
 # Get Ipfs node ID
-hippius-cli get-ipfs-node-id
+hipc get-ipfs-node-id
 
 # Get node ID
-hippius-cli get-node-id
+hipc get-node-id
 ```
 
 ### Image and File Operations
 ```bash
 # List available images
-hippius-cli list-images
+hipc list-images
 
 # List IPFS files
-hippius-cli list-ipfs-files
+hipc list-ipfs-files
 
 # Bulk upload files
-hippius-cli bulk-upload --files <file1> <file2> <file3>
+hipc bulk-upload --files <file1> <file2> <file3>
 ```
 
 ### Plan and Ranking Operations
 ```bash
 # List available plans
-hippius-cli list-plans
+hipc list-plans
 
 # Get miner rankings
-hippius-cli get-rankings
+hipc get-rankings
 ```
 
 ---
@@ -191,7 +191,7 @@ SUBSTRATE_SEED_PHRASE=your-seed-phrase-here
 ---
 
 ## Contributing
-Contributions are welcome! Feel free to submit pull requests or open issues on the [GitHub repository](https://github.com/thenervelab/hippius-cli).
+Contributions are welcome! Feel free to submit pull requests or open issues on the [GitHub repository](https://github.com/thenervelab/hipc).
 
 ---
 
