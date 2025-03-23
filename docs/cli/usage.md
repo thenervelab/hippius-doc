@@ -61,8 +61,8 @@ hipc storage pin <file-hash1> <file-hash2>
 
 ```bash
 # Clone the repository
-git clone https://github.com/thenervelab/hipc.git
-cd hipc
+git clone https://github.com/thenervelab/hippius-cli.git
+cd hippius-cli
 
 # Build and install
 cargo install --path .
