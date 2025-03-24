@@ -35,10 +35,14 @@ hipc storage pin <file-hash1> <file-hash2>
 - Pin and unpin files
 - Decentralized file storage management
 
-### Node Management 
+### Node Management
 - Register different node types:
-  - Validator
-  - Storage Miner
+  - **Validator**
+    - Register a Validator node with a hotkey
+    - Register a Validator node with a coldkey
+  - **Storage Miner**
+    - Register a Storage Miner node with a hotkey
+    - Register a Storage Miner node with a coldkey
 - Query node information
 - View node registration requirements
 
@@ -113,15 +117,25 @@ hipc storage unpin <file-hash>
 ```
 
 ### Node Management
+
+- **Register a Validator node with a hotkey**
 ```bash
-# Register a Validator node
-hipc register-node --node-type Validator --node-id my-validator-node
+hipc register-node-with-hotkey --hips-key <HIPS_KEY> --hotkey-address <HOTKEY_ADDRESS> --node-type Validator --node-id <NODE_ID> --ipfs-node-id <optional-ipfs-node-id>
+```
 
-# Register a Storage Miner node
-hipc register-node --node-type StorageMiner --node-id my-storage-node --ipfs-node-id <optional-ipfs-node-id>
+- **Register a Storage Miner node with a hotkey**
+```bash
+hipc register-node-with-hotkey --hips-key <HIPS_KEY> --hotkey-address <HOTKEY_ADDRESS> --node-type StorageMiner --node-id <NODE_ID> --ipfs-node-id <IPFS_NODE_ID>
+```
 
-# Get information about your registered node
-hipc get-node-info
+- **Register a Validator node with a hotkey**
+```bash
+hipc register-node-with-hotkey --hips-key <HIPS_KEY> --hotkey-address <HOTKEY_ADDRESS> --node-type Validator --node-id <NODE_ID> --ipfs-node-id <IPFS_NODE_ID>
+```
+
+- **Register a Storage Miner node with a hotkey**
+```bash
+hipc register-node-with-hotkey --hips-key <HIPS_KEY> --hotkey-address <HOTKEY_ADDRESS> --node-type StorageMiner --node-id <NODE_ID> --ipfs-node-id <IPFS_NODE_ID>
 ```
 
 ### Miner Operations
