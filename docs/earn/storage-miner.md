@@ -109,7 +109,7 @@ To run both the Hippius blockchain node and IPFS with a ZFS pool efficiently, th
 
 ### Basic Deployment
 
-1. Configure your inventory in `inventory/hosts`:
+1. Configure your inventory in `inventory/production/hosts.yml`:
    ```
    [ipfs_nodes]
    your-server-ip-or-hostname
@@ -121,7 +121,8 @@ To run both the Hippius blockchain node and IPFS with a ZFS pool efficiently, th
 
 3. Run the playbook:
    ```bash
-   ansible-playbook -i inventory/hosts site.yml
+   ansible-playbook -i inventory/production/hosts.yml site.yml -e "hippius_hotkey_mnemonic='YOUR SEED WORDS'"
+
    ```
 
 ### ZFS Configuration
@@ -129,7 +130,7 @@ To run both the Hippius blockchain node and IPFS with a ZFS pool efficiently, th
 To use ZFS for IPFS storage, specify the available disks:
 
 ```bash
-ansible-playbook -i inventory/hosts site.yml -e "zfs_disks=['sdb','sdc']"
+ansible-playbook -i inventory/production/hosts.yml site.yml -e "hippius_hotkey_mnemonic='YOUR SEED WORDS'" -e "zfs_disks=['sdb','sdc']"
 ```
 
 This creates a ZFS pool named "ipfs" using the specified disks.
@@ -139,13 +140,13 @@ This creates a ZFS pool named "ipfs" using the specified disks.
 To deploy or update only the Hippius node:
 
 ```bash
-ansible-playbook -i inventory/hosts site.yml --tags hippius
+ansible-playbook -i inventory/production/hosts.yml site.yml --tags hippius
 ```
 
 Or use the dedicated playbook:
 
 ```bash
-ansible-playbook -i inventory/hosts hippius.yml
+ansible-playbook -i inventory/production/hosts.yml hippius.yml
 ```
 
 ### Updating Hippius Binary
@@ -153,7 +154,7 @@ ansible-playbook -i inventory/hosts hippius.yml
 To update just the Hippius binary without changing configuration:
 
 ```bash
-ansible-playbook -i inventory/hosts update_hippius.yml
+ansible-playbook -i inventory/production/hosts.yml update_hippius.yml
 ```
 
 ## Configuration
