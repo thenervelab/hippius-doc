@@ -37,7 +37,7 @@ Before registering, ensure you have:
 
    - **nodeId**: Enter your node's ID in byte format (0x prefixed hex)
      - This is the ID of your Hippius node generated during node setup
-     - Format should be like: `0x1234...` (hexadecimal format)
+     - Format should be like: `1......` (not the hexadecimal format)
      - You can also use the file upload option to select a key file
 
    - **payInCredits**: Boolean indicating whether to pay in credits (default: false to pay in Alpha)
