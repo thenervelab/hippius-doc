@@ -27,7 +27,7 @@ Before registering, ensure you have:
 
 ### Step 3: Configure the Registration Extrinsic
 
-1. From the "submit the following extrinsic" dropdown, select `registration` → `registerNode(nodeType, nodeId, payInCredits, ipfsNodeId)`
+1. From the "submit the following extrinsic" dropdown, select `registration` → `registerNodeWithColdKey(nodeType, nodeId, payInCredits, ipfsNodeId)`
 
 2. Configure the parameters:
    - **nodeType**: Select the appropriate type:
