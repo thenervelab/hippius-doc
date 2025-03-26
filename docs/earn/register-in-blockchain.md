@@ -35,14 +35,14 @@ Before registering, ensure you have:
      - `Validator` for validator nodes
      - `ComputeMiner` for compute nodes
 
-   - **nodeId**: Enter your node's ID in byte format (0x prefixed hex)
+   - **nodeId**: Enter your node's ID in string format
      - This is the ID of your Hippius node generated during node setup
      - Format should be like: `1......` (not the hexadecimal format)
      - You can also use the file upload option to select a key file
 
    - **payInCredits**: Boolean indicating whether to pay in credits (default: false to pay in Alpha)
    
-   - **ipfsNodeId**: Your IPFS node ID 
+   - **ipfsNodeId**: Your IPFS node ID  in string format
 
 ### Step 4: Submit the Transaction
 
