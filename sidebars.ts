@@ -24,6 +24,7 @@ const sidebars: SidebarsConfig = {
         'use/ipfs-website', // Hosting a website on IPFS
         'use/react-ipfs', // Publishing a React app to IPFS
         'use/bridge', // Using the Hippius bridge
+        'use/testing-phase', // Testing phase participation
       ],
     },
     {
