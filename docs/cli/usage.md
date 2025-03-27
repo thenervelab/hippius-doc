@@ -30,11 +30,6 @@ hipc storage pin <file-hash1> <file-hash2>
 - List all available wallets
 - View wallet balance
 - Transfer funds between wallets
-  
-### Storage Operations
-- Pin and unpin files
-  - Decentralized file storage management
-  - Upload a file to IPFS
 
 ### Node Management
 - Register different node types:
@@ -54,6 +49,12 @@ hipc storage pin <file-hash1> <file-hash2>
 ### Marketplace Interactions
 - Discover available resources
 - Check account credits
+
+
+### Image And Storage Operations
+- Pin and unpin files
+- Upload a file to IPFS
+- Bulk upload files
 
 ---
 
@@ -83,8 +84,6 @@ cargo install --path .
 cp target/release/hipc /usr/local/bin/
 ```
 
----
-
 ## Usage Guide
 
 ### Wallet Management
@@ -107,22 +106,6 @@ Register the hotkey with your account
 hipc list-wallets
 ```
 
-
-
-### Storage Operations
-```bash
-# Pin files to storage
-hipc storage pin <file-hash1> <file-hash2>
-
-# Unpin a file from storage
-hipc storage unpin <file-hash>
-```
-
-- **Upload a file to IPFS**
-```bash
-hipc upload-to-ipfs <file-path>
-```
-
 ### Node Management
 
 - **Register a Validator node with a hotkey**
@@ -135,14 +118,14 @@ hipc register-node-with-hotkey --hips-key <HIPS_KEY> --hotkey-address <HOTKEY_AD
 hipc register-node-with-hotkey --hips-key <HIPS_KEY> --hotkey-address <HOTKEY_ADDRESS> --node-type StorageMiner --node-id <NODE_ID> --ipfs-node-id <IPFS_NODE_ID>
 ```
 
-- **Register a Validator node with a hotkey**
+- **Register a Validator node with a coldkey**
 ```bash
-hipc register-node-with-hotkey --hips-key <HIPS_KEY> --hotkey-address <HOTKEY_ADDRESS> --node-type Validator --node-id <NODE_ID> --ipfs-node-id <IPFS_NODE_ID>
+hipc register-node-with-coldkey --hips-key <HIPS_KEY> --node-type Validator --node-id <NODE_ID> --ipfs-node-id <IPFS_NODE_ID>
 ```
 
-- **Register a Storage Miner node with a hotkey**
+- **Register a Storage Miner node with a coldkey**
 ```bash
-hipc register-node-with-hotkey --hips-key <HIPS_KEY> --hotkey-address <HOTKEY_ADDRESS> --node-type StorageMiner --node-id <NODE_ID> --ipfs-node-id <IPFS_NODE_ID>
+hipc register-node-with-coldkey --hips-key <HIPS_KEY> --node-type StorageMiner --node-id <NODE_ID> --ipfs-node-id <IPFS_NODE_ID>
 ```
 
 - **Swap the owner of a registered node**
@@ -159,14 +142,13 @@ hipc get-node-info
 ```bash
 
 # Fetch storage-related information
-hipc miner storage
+hipc miner <node-type>
 
 # Get storage miner registration requirements
-hipc miner register-storage-miner
-
-# Get validator registration requirements
-hipc miner register-validator
+hipc miner register-<node-type>
 ```
+Here Possible Node Types are Validator, StorageMiner ComputeMiner
+
 
 ### Account Operations
 ```bash
@@ -216,7 +198,7 @@ hipc get-ipfs-node-id
 hipc get-node-id
 ```
 
-### Image and File Operations
+### Image and Storage Operations
 ```bash
 # List available images
 hipc list-images
@@ -224,9 +206,19 @@ hipc list-images
 # List IPFS files
 hipc list-ipfs-files
 
+# Pin files to storage
+hipc storage pin <file-hash1> <file-hash2>
+
+# Unpin a file from storage
+hipc storage unpin <file-hash>
+
 # Bulk upload files
 hipc bulk-upload --files <file1> <file2> <file3>
+
+# Upload a file to IPFS
+hipc upload-to-ipfs <file-path>
 ```
+
 
 ### Plan and Ranking Operations
 ```bash
@@ -256,4 +248,3 @@ Contributions are welcome! Feel free to submit pull requests or open issues on t
 
 ## License
 This project is licensed under the [MIT License](#).
-
