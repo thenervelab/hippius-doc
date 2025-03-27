@@ -9,32 +9,47 @@ const sidebars: SidebarsConfig = {
       label: 'Learn',
       items: [
         'learn/intro', // What is Hippius?
-        'learn/substrate-staking', // Substrate, BABE, staking concepts
-        'learn/mnemonic-auth', // Mnemonic Authentication
-        'learn/encryption', // Encryption System
-        'learn/storage-systems', // Decentralized Storage Systems
         'learn/architecture', // System Architecture
         'learn/weights', // Weight Calculation System
+  
+        {
+          type: 'category',
+          label: 'Core Technologies',
+          items: [
+            "learn/substrate", //substrate
+            'learn/mnemonic-auth', // Mnemonic Authentication
+            'learn/encryption', // Encryption System
+            'learn/storage-systems', // Decentralized Storage Systems
+          ],
+          collapsed: false, // Collapsed by default (not yet released)
+        },
+        //pulled into distinct pages 
+        //'learn/substrate-staking', // Substrate, BABE, staking concepts
+        
+
+
       ],
     },
     {
       type: 'category',
       label: 'Use',
       items: [
+        'use/testing-phase', // Testing phase participation
         'use/ipfs-website', // Hosting a website on IPFS
         'use/react-ipfs', // Publishing a React app to IPFS
         'use/bridge', // Using the Hippius bridge
-        'use/testing-phase', // Testing phase participation
+   
       ],
     },
     {
       type: 'category',
       label: 'Earn',
       items: [
-        'earn/staking', // Staking on Hippius
+
         'earn/installing-validator', // Installing a validator node
         'earn/storage-miner', // Setting up storage miners
         'earn/register-in-blockchain', // Registering nodes in the blockchain
+        'earn/staking', // Staking on Hippius
         {
           type: 'category',
           label: 'Compute VMs',
@@ -49,6 +64,8 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Develop',
       items: [
+        'cli/usage',
+        'blockchain/api',
         {
           type: 'category',
           label: 'Blockchain',
@@ -58,11 +75,9 @@ const sidebars: SidebarsConfig = {
               type: 'category',
               label: 'Hippius Pallets',
               link: { type: 'doc', id: 'blockchain/pallets' }, // Link to the main page
+              collapsed: true,
               items: [
-                {
-                  type: 'category',
-                  label: 'Pallet Details',
-                  items: [
+           
                     'pallets/alpha-bridge', // Subpage for AlphaBridge
                     'pallets/credits',       // Subpage for Credits
                     'pallets/rankings',      // Subpage for Rankings
@@ -81,27 +96,23 @@ const sidebars: SidebarsConfig = {
                     'pallets/notifications',
                     'pallets/accountProfile',
                     'pallets/utils',
-                  ],
-                },
+                
               ],
             },
             
-            { type: 'category', label: 'API', items: ['blockchain/api'] }, // Swagger UI link
+          //  { type: 'category', label: 'API', items: ['blockchain/api'] }, // Swagger UI link
           ],
         },
         {
           type: 'category',
           label: 'Storage',
+          collapsed: false,
           items: [
             { type: 'category', label: 'IPFS', items: ['storage/ipfs/setup', 'storage/ipfs/pinning'] },
             { type: 'category', label: 'S3', items: ['storage/s3/integration', { type: 'link', label: 'Pricing', href: 'https://hippius.io#pricing' }] },
           ],
         },
-        {
-          type: 'category',
-          label: 'CLI',
-          items: ['cli/usage'],
-        },
+    
       ],
     },
   ],

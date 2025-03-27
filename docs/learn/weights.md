@@ -17,56 +17,56 @@ As more miners join the network and upgrade their hardware:
 The final weight of each node is calculated on a scale of 1-65535 (16-bit) based on several key components:
 
 ### Base Scores (100%)
-- Availability (35%)
-- Performance (20%)
-- Reliability (15%)
-- Capacity (15%)
-- Network (10%)
-- Geographic Diversity (5%)
+- [Availability (35%)](#1-availability-score-35)
+- [Performance (20%)](#2-performance-score-20)
+- [Reliability (15%)](#3-reliability-score-15)
+- [Capacity (15%)](#4-capacity-score-15)
+- [Network (10%)](#5-network-score-10)
+- [Geographic Diversity (5%)](#6-geographic-diversity-score-5)
 
 ### Modifiers
 - Bonuses (up to +30%)
 - Penalties (up to -80%)
-- Network Scaling Factor
+- [Network Scaling Factor](#network-scaling-factor)
 - Relative Position Factor
 
-## Component Breakdown
+## Scoring Component Breakdown
 
-### 1. Availability Score
+### 1. Availability Score (35%)
 Measures the node's ability to respond to pin checks:
 - Based on successful_pin_checks / total_pin_checks ratio
 - Minimum 10 checks required to qualify
 - Frequency bonus for nodes with >100 checks
 - Long-term reliability bonus (>30 days)
 
-### 2. Performance Score
+### 2. Performance Score (20%)
 Evaluates node's operational efficiency:
 - Response Time (40%): Normalized score based on response latency
 - Bandwidth (40%): Score based on available bandwidth (capped at 10Gbps)
 - Storage Proof Time (20%): Efficiency of storage proof generation
 
-### 3. Reliability Score
+### 3. Reliability Score (15%)
 Assesses node's consistency:
 - Uptime Ratio (50%): Minutes online vs total minutes
 - Challenge Success (30%): Successful vs total challenges
 - Stability Bonus (20%): Additional score for consistent performance
 - Minimum 95% uptime expected for full score
 
-### 4. Capacity Score
+### 4. Capacity Score (15%)
 Evaluates storage capabilities:
 - Usage Ratio (40%): Current vs total storage
 - Growth Rate (30%): Storage growth over time
 - Free Space Management (30%): Optimal range 60-80% usage
 - Minimum requirement: 500GB storage ( will be increased over time )
 
-### 5. Network Score
+### 5. Network Score (10%)
 Measures network connectivity:
 - Peer Count (35%): Progressive scoring based on peer connections
 - Latency (35%): Network response time
 - Stability (30%): Long-term connection reliability
 - Minimum 10 peers required
 
-### 6. Geographic Diversity Score
+### 6. Geographic Diversity Score (5%)
 Promotes network decentralization:
 - Distribution Quality (40%): Based on global node spread
 - Location Uniqueness (40%): Rewards underrepresented regions

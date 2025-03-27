@@ -1,4 +1,4 @@
-# Blockchain RPC
+# API - Blockchain RPC
 
 Explore the Hippius API for interacting with the Substrate blockchain, including balance history and more.
 
