@@ -33,7 +33,8 @@ hipc storage pin <file-hash1> <file-hash2>
   
 ### Storage Operations
 - Pin and unpin files
-- Decentralized file storage management
+  - Decentralized file storage management
+  - Upload a file to IPFS
 
 ### Node Management
 - Register different node types:
@@ -115,6 +116,11 @@ hipc storage pin <file-hash1> <file-hash2>
 
 # Unpin a file from storage
 hipc storage unpin <file-hash>
+```
+
+- **Upload a file to IPFS**
+```bash
+hipc upload-to-ipfs <file-path>
 ```
 
 ### Node Management
