@@ -112,7 +112,7 @@ function HomepageHeader() {
             className="px-4 py-2 bg-white rounded text-grey-40 font-digital"
             to="/learn/intro"
           >
-            ⏱️ 5 Minutes Read
+            ⏱️ 5 Minute Read
           </Link>
         </div>
         <H1 className="text-center mt-4 max-w-[1050px]">
