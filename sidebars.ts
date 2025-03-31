@@ -45,8 +45,8 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Earn',
       items: [
-
         'earn/installing-validator', // Installing a validator node
+        'earn/register-validator-in-chain', // Register a validator in the chain
         'earn/storage-miner', // Setting up storage miners
         'earn/register-in-blockchain', // Registering nodes in the blockchain
         'earn/staking', // Staking on Hippius
