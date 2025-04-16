@@ -24,7 +24,7 @@ export const CATEGORIES: (SmallCardInfo & {
     description: "Understand Hippius and web3 basics.",
     icon: <Icons.Book className="text-primary-50 relative" />,
     cta: {
-      label: "Go to Learn",
+      label: "Learn",
       href: "/learn/intro",
     },
   },
@@ -33,7 +33,7 @@ export const CATEGORIES: (SmallCardInfo & {
     description: "Create and host a website or app on IPFS.",
     icon: <Icons.Cursor className="text-primary-50 relative size-5" />,
     cta: {
-      label: "Go to Use",
+      label: "Use",
       href: "/use/ipfs-website",
     },
   },
@@ -42,7 +42,7 @@ export const CATEGORIES: (SmallCardInfo & {
     description: "Stake tokens or run miners to contribute and earn rewards.",
     icon: <Icons.DollarSquare className="text-primary-50 relative" />,
     cta: {
-      label: "Go to Earn",
+      label: "Earn",
       href: "/earn/staking",
     },
   },
@@ -51,7 +51,7 @@ export const CATEGORIES: (SmallCardInfo & {
     description: "Build on Hippius with our developer guides and API.",
     icon: <Icons.Code className="text-primary-50 relative" />,
     cta: {
-      label: "Go to Develop",
+      label: "Develop",
       href: "/blockchain/intro",
     },
   },
