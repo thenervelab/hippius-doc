@@ -22,7 +22,7 @@ export const CATEGORIES: (SmallCardInfo & {
   {
     title: "Learn",
     description: "Understand Hippius and web3 basics.",
-    icon: <Icons.Book className="text-primary-50 relative" />,
+    icon: <Icons.Book className="text-primary-50 relative size-7" />,
     cta: {
       label: "Learn",
       href: "/learn/intro",
@@ -40,7 +40,7 @@ export const CATEGORIES: (SmallCardInfo & {
   {
     title: "Earn",
     description: "Stake tokens or run miners to contribute and earn rewards.",
-    icon: <Icons.DollarSquare className="text-primary-50 relative" />,
+    icon: <Icons.DollarSquare className="text-primary-50 relative size-7" />,
     cta: {
       label: "Earn",
       href: "/earn/staking",
@@ -49,7 +49,7 @@ export const CATEGORIES: (SmallCardInfo & {
   {
     title: "Develop",
     description: "Build on Hippius with our developer guides and API.",
-    icon: <Icons.Code className="text-primary-50 relative" />,
+    icon: <Icons.Code className="text-primary-50 relative size-7" />,
     cta: {
       label: "Develop",
       href: "/blockchain/intro",
@@ -62,19 +62,19 @@ export const SMARTER_CLOUD: SmallCardInfo[] = [
     title: "Decentralized Storage",
     description:
       "Store files securely on IPFS with Hippius pinning, or use our S3-compatible storage for enterprise-grade compatibility.",
-    icon: <Icons.FormatSquare className="text-primary-50 relative" />,
+    icon: <Icons.FormatSquare className="text-primary-50 relative size-7" />,
   },
   {
     title: "Blockchain-Powered",
     description:
       "Our Substrate blockchain ensures transparency and trust, with staking and rewards for network participants",
-    icon: <Icons.Box className="text-primary-50 relative" />,
+    icon: <Icons.Box className="text-primary-50 relative size-7" />,
   },
   {
     title: "Anonymous & Secure",
     description:
       "Protect your data with anonymous storage solutions, backed by cryptographic guarantees.",
-    icon: <Icons.DollarSquare className="text-primary-50 relative" />,
+    icon: <Icons.DollarSquare className="text-primary-50 relative size-7" />,
   },
 ];
 
