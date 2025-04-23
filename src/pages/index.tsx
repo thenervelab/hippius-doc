@@ -81,7 +81,7 @@ export const SMARTER_CLOUD: SmallCardInfo[] = [
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header className="relative text-white justify-center bg-primary-50 flex flex-col px-6 pt-20 pb-40 items-center w-full">
+    <header className="relative text-white justify-center min-h-[800px] lg:min-h-[auto] bg-primary-50 flex flex-col px-6 pt-20 pb-40 items-center w-full">
       <div className="absolute w-full top-0 h-full opacity-5">
         <Graphsheet
           majorCell={{
