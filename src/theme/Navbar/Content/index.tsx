@@ -68,7 +68,6 @@ export default function NavbarContent(): ReactNode {
       left={
         // TODO stop hardcoding items?
         <>
-          {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
           <NavbarLogo />
           <NavbarItems items={leftItems} />
         </>
@@ -78,6 +77,8 @@ export default function NavbarContent(): ReactNode {
         // Ask the user to add the respective navbar items => more flexible
         <>
           <NavbarItems items={rightItems} />
+          {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
+
           <NavbarColorModeToggle className={styles.colorModeToggle} />
           {!searchBarItem && (
             <NavbarSearch>
