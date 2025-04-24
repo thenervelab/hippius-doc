@@ -1,6 +1,8 @@
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
+const { version } = require('./package.json');
+
 
 // Node.js environment - no browser APIs/JSX
 
@@ -140,6 +142,9 @@ const config: Config = {
             {
               label: "Substrate & Staking",
               to: "/learn/substrate-staking",
+            },
+            {
+              html: `<span class="font-digital text-xs" style="color: #89A8EC;" >Ver ${version}</span>`,
             },
           ],
         },
