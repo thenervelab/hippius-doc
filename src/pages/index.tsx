@@ -98,7 +98,7 @@ function HomepageHeader() {
       </div>
       <div className="absolute flex items-center justify-center bottom-10 left-10 size-20">
         <Icons.CircularBittensor
-          className="animate-spin"
+          className="animate-spin absolute"
           style={{
             animationDuration: "10s",
           }}
