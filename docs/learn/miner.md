@@ -6,7 +6,7 @@ When you register a hotkey on Bittensor, this becomes your Hippius coldkey.  Reg
 
 ![miner diagram][def]
 
-[def]: /static/img/miner_diagram.png
+[def]: /img/miner_diagram.png
 
 
 [Running a miner](https://github.com/thenervelab/hippius-storage-miner)
