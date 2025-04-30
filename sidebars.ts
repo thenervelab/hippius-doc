@@ -11,6 +11,7 @@ const sidebars: SidebarsConfig = {
         'learn/intro', // What is Hippius?
         'learn/architecture', // System Architecture
         'learn/weights', // Weight Calculation System
+        'learn/miner', //miner diagram - link to GH
   
         {
           type: 'category',
