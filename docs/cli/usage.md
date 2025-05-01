@@ -226,14 +226,11 @@ hippius config import-env
 ### Advanced Operations
 
 ```bash
-# Erasure code a file with default parameters (k=3, m=5)
+# Erasure code a file with default parameters (k=3, m=5), will also publish globally by default
 hippius erasure-code large_file.mp4
 
 # Erasure code with custom parameters
 hippius erasure-code important_data.zip --k 4 --m 10 --chunk-size 2097152 --encrypt
-
-# Erasure code and publish globally
-hippius erasure-code large_file.mp4 --publish
 
 # Reconstruct a file from erasure-coded chunks
 hippius reconstruct QmMetadataCID reconstructed_file.mp4
