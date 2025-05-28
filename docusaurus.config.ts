@@ -163,6 +163,11 @@ const config: Config = {
               label: "Account Management",
               to: "/use/account-management",
             },
+            {
+              label: "Hipstats",
+              href: "https://hipstats.com",
+            },
+            
           ],
         },
         {
