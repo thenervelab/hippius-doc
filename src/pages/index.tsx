@@ -156,7 +156,7 @@ function HomepageFeatures() {
           className="absolute w-full h-full duration-500 opacity-15"
         />
         <div className="bg-white-cloud-gradient absolute w-full h-full" />
-        <div className="flex flex-col text-grey-40 items-center relative justify-center w-full h-full pt-14 pb-10">
+        <div className="flex flex-col text-grey-40 items-center relative justify-center w-full h-full mt-0 md:pt-14 pb-10">
           <P size="sm" className="text-center font-digital">
             categories
           </P>
@@ -166,7 +166,7 @@ function HomepageFeatures() {
           <div className="flex gap-8 mt-8 items-center flex-wrap justify-center max-w-screen-xl w-full mx-auto">
             {CATEGORIES.map((offering, i) => (
               <div
-                className="flex flex-col items-center font-medium max-w-[250px]"
+                className="flex flex-col items-center font-medium max-w-[300px] md:max-w-[250px] border rounded-lg py-4 px-12 border-grey-80 bg-grey-100 md:px-0 md:py-0 md:border-none md:bg-transparent"
                 key={i}
               >
                 <AbstractIconWrapper className="size-10 duration-500 delay-300">
