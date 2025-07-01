@@ -1,4 +1,4 @@
-import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
+import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 
 // Node.js environment - no browser APIs/JSX
 
@@ -12,7 +12,7 @@ const sidebars: SidebarsConfig = {
         'learn/architecture', // System Architecture
         'learn/weights', // Weight Calculation System
         'learn/miner', //miner diagram - link to GH
-  
+
         {
           type: 'category',
           label: 'Core Technologies',
@@ -26,7 +26,7 @@ const sidebars: SidebarsConfig = {
         },
         //pulled into distinct pages 
         //'learn/substrate-staking', // Substrate, BABE, staking concepts
-        
+
 
 
       ],
@@ -35,11 +35,10 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Use',
       items: [
-        'use/testing-phase', // Testing phase participation
         'use/ipfs-website', // Hosting a website on IPFS
         'use/react-ipfs', // Publishing a React app to IPFS
         'use/bridge', // Using the Hippius bridge
-   
+
       ],
     },
     {
@@ -78,30 +77,30 @@ const sidebars: SidebarsConfig = {
               link: { type: 'doc', id: 'blockchain/pallets' }, // Link to the main page
               collapsed: true,
               items: [
-           
-                    'pallets/alpha-bridge', // Subpage for AlphaBridge
-                    'pallets/credits',       // Subpage for Credits
-                    'pallets/rankings',      // Subpage for Rankings
-                    'pallets/marketplace',
-                    'pallets/registration',
-                    'pallets/ipfsPin',
-                    'pallets/executionUnit',
-                    'pallets/backup',
-                    'pallets/containerRegistry',
-                    'pallets/storageS3',
-                    'pallets/computePallet',
-                    'pallets/palletIp',
-                    'pallets/bittensor',
-                    'pallets/metagraph',
-                    'pallets/subAccount',
-                    'pallets/notifications',
-                    'pallets/accountProfile',
-                    'pallets/utils',
-                
+
+                'pallets/alpha-bridge', // Subpage for AlphaBridge
+                'pallets/credits',       // Subpage for Credits
+                'pallets/rankings',      // Subpage for Rankings
+                'pallets/marketplace',
+                'pallets/registration',
+                'pallets/ipfsPin',
+                'pallets/executionUnit',
+                'pallets/backup',
+                'pallets/containerRegistry',
+                'pallets/storageS3',
+                'pallets/computePallet',
+                'pallets/palletIp',
+                'pallets/bittensor',
+                'pallets/metagraph',
+                'pallets/subAccount',
+                'pallets/notifications',
+                'pallets/accountProfile',
+                'pallets/utils',
+
               ],
             },
-            
-          //  { type: 'category', label: 'API', items: ['blockchain/api'] }, // Swagger UI link
+
+            //  { type: 'category', label: 'API', items: ['blockchain/api'] }, // Swagger UI link
           ],
         },
         {
@@ -113,7 +112,7 @@ const sidebars: SidebarsConfig = {
             { type: 'category', label: 'S3', items: ['storage/s3/integration', { type: 'link', label: 'Pricing', href: 'https://hippius.io#pricing' }] },
           ],
         },
-    
+
       ],
     },
   ],
