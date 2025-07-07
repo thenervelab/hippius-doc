@@ -109,7 +109,7 @@ const sidebars: SidebarsConfig = {
           collapsed: false,
           items: [
             { type: 'category', label: 'IPFS', items: ['storage/ipfs/setup', 'storage/ipfs/pinning'] },
-            { type: 'category', label: 'S3', items: ['storage/s3/integration', { type: 'link', label: 'Pricing', href: 'https://hippius.io#pricing' }] },
+            { type: 'category', label: 'S3', items: ['storage/s3/integration', { type: 'link', label: 'Pricing', href: 'https://hippius.com/pricing' }] },
           ],
         },
 
