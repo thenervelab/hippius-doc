@@ -42,3 +42,8 @@ export { default as Book } from "./book";
 export { default as Code } from "./code";
 export { default as Cursor } from "./cursor";
 export { default as EyeSlash } from "./eye-slash";
+export { default as Mac } from "./mac";
+export { default as Windows } from "./windows";
+export { default as Linux } from "./linux";
+export { default as DocumentText } from "./document-text";
+export { default as More } from "./more";

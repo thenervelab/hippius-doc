@@ -8,7 +8,7 @@ import { H1, P, H4 } from "@site/src/components/typography";
 import Graphsheet from "../components/graphsheet";
 import Button from "../components/button";
 import { URLS } from "../utils/urls";
-import * as Icons from "@site/src/components/icons";
+import * as Icons from "@site/src/components/ui/icons";
 import AbstractIconWrapper from "../components/abstract-icon-wrapper";
 
 import { SmallCardInfo } from "../types/small-card-info";
