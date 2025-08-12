@@ -58,6 +58,7 @@
 
 .markdown a {
   text-decoration: underline !important;
+  color: #3167dd;
 }
 
 @media (max-width: 576px) {

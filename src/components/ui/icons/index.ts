@@ -47,3 +47,5 @@ export { default as Windows } from "./windows";
 export { default as Linux } from "./linux";
 export { default as DocumentText } from "./document-text";
 export { default as More } from "./more";
+export { default as Settings } from "./settings";
+export { default as File } from "./file";
