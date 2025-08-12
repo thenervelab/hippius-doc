@@ -16,7 +16,7 @@ Our file system is one of our core innovations, offering a unique, decentralized
 
 ## Erasure Coding
 
-Rewrite paragraph as: To enable truly decentralized storage, we use erasure coding to split uploaded files into multiple chunks, which are then distributed across miners worldwide. You can track these chunks using our [CID Tracker](https://hipstats.com). Simply copy and paste the CID in our tracker to view a detailed history of where each chunk has been hosted.
+Rewrite paragraph as: To enable truly decentralized storage, we use erasure coding to split uploaded files into multiple chunks, which are then distributed across miners worldwide. You can track these chunks using our [CID Tracker](https://hipstats.com/cid-tracker/bafybeihfmsk2jmld2mtppgkiujllylgj7ixkfhl6hlkqmkisls6njs2toe). Simply copy and paste the CID in our tracker to view a detailed history of where each chunk has been hosted.
 
 ![Upload Your Files modal](/img/desktop/file-system-erasure.png)
 
