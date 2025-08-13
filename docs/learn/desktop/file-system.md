@@ -66,4 +66,4 @@ Public files do not use any encryption and are accessible to the public. We reco
   <li>Click <BgStyledText>Upload Folder</BgStyledText> button in the modal to start the uploading process.</li>
 </Ordered>
 
-It usually takes some time to complete the upload to Hippius, but you can always monitor the upload progress.
+**It usually takes some time to complete the upload to Hippius, but you can always monitor the upload progress.**

@@ -45,6 +45,8 @@ type ItemProps = {
   /** exactly two children: [headerNode, contentNode] */
   children: React.ReactNode;
   className?: string;
+  /** Apply padding-bottom only (no top padding) */
+  isFirst?: boolean;
 };
 
 /**
@@ -52,7 +54,12 @@ type ItemProps = {
  * First child = header content (MDX/JSX — use <h2>…</h2> as requested).
  * Second child = accordion panel content.
  */
-export function DocAccordionItem({ value, children, className }: ItemProps) {
+export function DocAccordionItem({
+  value,
+  children,
+  className,
+  isFirst = false,
+}: ItemProps) {
   const kids = React.Children.toArray(children);
   if (kids.length !== 2 && process.env.NODE_ENV !== "production") {
     console.warn(
@@ -67,7 +74,8 @@ export function DocAccordionItem({ value, children, className }: ItemProps) {
       <Accordion.Header className="!mb-0">
         <Accordion.Trigger
           className={cn(
-            "group w-full py-3 flex items-center justify-between text-left",
+            "group w-full flex items-center justify-between text-left",
+            isFirst ? "pb-3" : "py-3",
             "outline-none"
           )}
         >

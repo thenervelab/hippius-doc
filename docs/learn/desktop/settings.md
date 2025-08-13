@@ -17,13 +17,11 @@ import Icon from '@site/src/components/Icon';
 
 ## File Settings
 
-<DocAccordionItem value="file-settings">
-  {/* 1) HEADER */}
-  <>
-   File Settings
-  </>
-  <>
-    <p>In file settings, select and change folder for private and public syncing.<br/>If files are added or removed, these changes will be synced automatically.</p>
+<DocAccordionItem value="file-settings" isFirst> <>
+File Settings
+</>
+<>
+<p>In file settings, select and change folder for private and public syncing.<br/>If files are added or removed, these changes will be synced automatically.</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>

@@ -65,4 +65,4 @@ When you are done, click on the <BgStyledText>Sync Folder</BgStyledText> button 
   <li>Upload the CSV into the drop zone.</li>
 </Ordered>
 
-It usually takes some time to complete the upload to Hippius, but you can always monitor the upload progress.
+**It usually takes some time to complete the upload to Hippius, but you can always monitor the upload progress.**
