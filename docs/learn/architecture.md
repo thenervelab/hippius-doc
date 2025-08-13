@@ -1,5 +1,6 @@
 ---
 sidebar_position: 6
+description: 3
 ---
 
 import ArchitectureDiagram from '@site/src/components/ArchitectureDiagram';
@@ -17,27 +18,33 @@ The following diagram illustrates the flow of data, transactions, and rewards wi
 ## Key Components
 
 ### Client Interaction
+
 - Clients can purchase storage and compute services using FIAT, Alpha, or TAO
 - Payments are processed through the dashboard interface
 - Credits are created in the marketplace with corresponding alpha deposits
 
 ### Blockchain Infrastructure
+
 - **Bittensor Blockchain**: The parent blockchain that Hippius connects to as a subnet
 - **Hippius Blockchain**: Powered by Substrate with its native currency (alpha)
 - **Bridge**: Allows alpha to move between Hippius and Bittensor blockchains
 - **Validators**: Produce blocks, assign tasks to miners, and report weights to Bittensor
 
 ### Marketplace
+
 - Central hub for service requests
 - Manages credit system and payment processing
 - Submits requests to validators for miner assignment
 
 ### Miners
+
 1. **S3 Storage Miners**:
+
    - Provide volume-based storage with authentication services
    - Run offchain workers to interact with the blockchain
 
 2. **IPFS Storage Miners**:
+
    - Provide content-addressed storage through IPFS
    - Run offchain workers to interact with the blockchain
 
@@ -47,6 +54,7 @@ The following diagram illustrates the flow of data, transactions, and rewards wi
    - Run offchain workers to interact with the blockchain
 
 ### Reward Distribution
+
 - Marketplace revenue is distributed based on service usage:
   - 60% to miners providing the resources
   - 30% to validators and stakers securing the network
@@ -63,4 +71,4 @@ The following diagram illustrates the flow of data, transactions, and rewards wi
 6. Rewards are distributed according to the allocation formula
 7. Validators evaluate miner performance and report weights to Bittensor
 
-This architecture ensures a decentralized, efficient, and economically sustainable ecosystem for storage and compute services. 
+This architecture ensures a decentralized, efficient, and economically sustainable ecosystem for storage and compute services.

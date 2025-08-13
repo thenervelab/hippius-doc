@@ -1,3 +1,7 @@
+---
+description: 6
+---
+
 # Installing a Validator Node
 
 A validator node is a crucial component of the Hippius network that helps secure the network, validate transactions, and participate in consensus. This guide will walk you through the process of setting up and running a validator node using our professional-grade Ansible deployment.
@@ -32,8 +36,7 @@ Create or modify the inventory file at `inventory/production/hosts.yml`:
 all:
   children:
     ipfs_nodes:
-      hosts:
-        YOUR_VALIDATOR_IP  # Replace with your server's IP address
+      hosts: YOUR_VALIDATOR_IP # Replace with your server's IP address
       vars:
         ansible_user: ubuntu
         ansible_become: yes
@@ -46,8 +49,7 @@ For example, if your validator's IP address is `123.45.67.89`, your `hosts.yml` 
 all:
   children:
     ipfs_nodes:
-      hosts:
-        123.45.67.89
+      hosts: 123.45.67.89
       vars:
         ansible_user: ubuntu
         ansible_become: yes
@@ -55,6 +57,7 @@ all:
 ```
 
 Make sure to:
+
 - Replace `YOUR_VALIDATOR_IP` with your actual server IP address
 - Ensure the `ubuntu` user has sudo privileges on the target machine
 - Verify Python 3 is installed on the target machine
@@ -95,6 +98,7 @@ ansible-playbook -i inventory/production/hosts.yml site.yml
 ```
 
 This will:
+
 - Install and configure IPFS node
 - Set up Subtensor node (mainnet-lite)
 - Deploy Hippius validator
@@ -106,11 +110,13 @@ This will:
 After the deployment completes, you need to configure your validator keys. This is a crucial step for participating in consensus.
 
 1. First, stop the Hippius service:
+
 ```bash
 sudo systemctl stop hippius
 ```
 
 2. Start Hippius temporarily in non-validator mode:
+
 ```bash
 /opt/hippius/bin/hippius \
     --base-path /opt/hippius/data \
@@ -148,11 +154,13 @@ curl -H "Content-Type: application/json" -d '{ "jsonrpc":"2.0", "id":1, "method"
 4. After successfully injecting all keys, stop the temporary node (Ctrl+C in the terminal running Hippius)
 
 5. Restart Hippius in validator mode:
+
 ```bash
 sudo systemctl start hippius
 ```
 
 6. Verify the service is running:
+
 ```bash
 sudo systemctl status hippius
 ```
@@ -164,11 +172,13 @@ sudo systemctl status hippius
 In addition to the keys above, you need to generate session keys and register them in the blockchain:
 
 1. With your Hippius node running, execute the following command on your validator server:
+
 ```bash
 curl -H "Content-Type: application/json" -d '{"id":1, "jsonrpc":"2.0", "method": "author_rotateKeys", "params":[]}' http://localhost:9944
 ```
 
 2. The response will contain a session key in the format:
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -204,12 +214,14 @@ If you need help during any part of this process, join the [Hippius Discord comm
 ## Components Installed
 
 ### IPFS Node
+
 - Runs as dedicated IPFS user
 - API port: 5001
 - Gateway port: 8080
 - Managed via systemd
 
 ### Subtensor Node
+
 - Runs via Docker
 - External ports:
   - RPC: 9945
@@ -218,6 +230,7 @@ If you need help during any part of this process, join the [Hippius Discord comm
 - Uses warp sync for faster synchronization
 
 ### Hippius Validator
+
 - Runs with off-chain worker support
 - Default ports:
   - RPC: 9944
@@ -278,12 +291,14 @@ The Ansible deployment automatically implements several security best practices:
 ### Common Issues
 
 1. Deployment fails
+
    - Check SSH connectivity
    - Verify Ansible version
    - Ensure target host meets requirements
    - Check network connectivity
 
 2. Services not starting
+
    - Check system resources
    - Verify port availability
    - Review service logs
@@ -308,4 +323,4 @@ The Ansible deployment automatically implements several security best practices:
 - Monitor validator performance
 - Set up alerting for service issues
 
-Remember to maintain your validator node regularly and stay updated with network upgrades. The Ansible deployment makes maintenance easier by providing a consistent and automated setup process. 
+Remember to maintain your validator node regularly and stay updated with network upgrades. The Ansible deployment makes maintenance easier by providing a consistent and automated setup process.

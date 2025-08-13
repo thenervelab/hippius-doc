@@ -3,6 +3,7 @@ id: referral-system
 title: Hippius Referral System
 sidebar_label: Referral System
 slug: /learn/desktop/referral-system
+description: 1
 ---
 
 ## Sharing Your Referral Link

@@ -12,7 +12,11 @@ export default function DocHero() {
   const { metadata } = useDoc();
   const title = metadata.title;
   const section = inferSectionLabel(metadata.permalink);
-  const kicker = `${section} • 2 mins read`;
+  const kicker = +metadata.description
+    ? `${section} • ${metadata.description} ${
+        +metadata.description > 1 ? "mins" : "min"
+      } read`
+    : `${section} • 2 mins read`;
 
   return (
     <div
