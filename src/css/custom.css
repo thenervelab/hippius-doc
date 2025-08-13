@@ -360,3 +360,8 @@ article .theme-doc-breadcrumbs {
     border-radius: 4px;
   }
 }
+img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+}
