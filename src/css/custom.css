@@ -360,8 +360,19 @@ article .theme-doc-breadcrumbs {
     border-radius: 4px;
   }
 }
-img {
-  width: 100%;
-  height: auto;
+
+.markdown img {
+  max-width: 100%;
   aspect-ratio: auto;
+  height: auto;
+  image-rendering: -webkit-optimize-contrast; /* For Webkit browsers */
+  image-rendering: crisp-edges; /* For Firefox */
+  -ms-interpolation-mode: nearest-neighbor; /* For IE */
+}
+
+/* For retina displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .markdown img {
+    image-rendering: auto;
+  }
 }
