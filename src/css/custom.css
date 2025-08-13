@@ -314,10 +314,10 @@
   transform-origin: 0 0;
   transition: transform 0.3s ease;
 }
-.theme-doc-markdown .doc-accordion-mode div > h2 {
+.theme-doc-markdown .doc-accordion-mode > h2 {
   opacity: 0;
-  width: 0;
-  height: 0;
+  width: 0.02px;
+  height: 0.02px;
   margin-bottom: 0;
 }
 @keyframes slideDown {

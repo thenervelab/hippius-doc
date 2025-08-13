@@ -32,7 +32,7 @@ export function DocAccordion({
       type={multiple ? "multiple" : "single"}
       defaultValue={mappedDefault}
       collapsible
-      className={cn("w-full", className)}
+      className={cn("w-full doc-accordion-mode", className)}
     >
       {children}
     </Accordion.Root>

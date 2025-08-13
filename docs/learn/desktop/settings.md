@@ -11,8 +11,6 @@ import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import BgStyledText from '@site/src/components/BgStyledText';
 import Icon from '@site/src/components/Icon';
 
-<div className="doc-accordion-mode">
-
 <DocAccordion defaultValue="file-settings">
 
 ## File Settings
@@ -21,6 +19,7 @@ import Icon from '@site/src/components/Icon';
 File Settings
 </>
 <>
+
 <p>In file settings, select and change folder for private and public syncing.<br/>If files are added or removed, these changes will be synced automatically.</p>
 
     <Ordered>
@@ -151,6 +150,27 @@ File Settings
 </>
 </DocAccordionItem>
 
+## Customize RPC
+
+<DocAccordionItem value="customize-rpc">
+  <>
+  Customize RPC
+  </>
+  <>
+    <p>The RPC endpoint determines which blockchain network you connect to. By default, we use wss://rpc.hippius.network. Custom endpoints can provide better performance in specific regions or enable connection to test networks. Always ensure you're using a trusted RPC provider for security.</p>
+
+    <Ordered>
+      <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
+      <li>Click <BgStyledIconWithText text="Customize RPC" icon="Box" />.</li>
+      <li>Enter RPC.</li>
+      <li>Save the edited RPC.</li>
+    </Ordered>
+
+    ![Custom RPC screen](/img/desktop/settings-rpc.png)
+
+</>
+</DocAccordionItem>
+
 ## Backup App Data
 
 <DocAccordionItem value="backup">
@@ -191,27 +211,4 @@ File Settings
 </>
 </DocAccordionItem>
 
-## Customize RPC
-
-<DocAccordionItem value="customize-rpc">
-  <>
-  Customize RPC
-  </>
-  <>
-    <p>The RPC endpoint determines which blockchain network you connect to. By default, we use wss://rpc.hippius.network. Custom endpoints can provide better performance in specific regions or enable connection to test networks. Always ensure you're using a trusted RPC provider for security.</p>
-
-    <Ordered>
-      <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
-      <li>Click <BgStyledIconWithText text="Customize RPC" icon="Box" />.</li>
-      <li>Enter RPC.</li>
-      <li>Save the edited RPC.</li>
-    </Ordered>
-
-    ![Custom RPC screen](/img/desktop/settings-rpc.png)
-
-</>
-</DocAccordionItem>
-
 </DocAccordion>
-
-</div>
