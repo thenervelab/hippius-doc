@@ -1,7 +1,7 @@
 ---
 id: installation-and-setup
 title: Hippius Desktop App
-sidebar_label: Installation & Setup Guide
+sidebar_label: Desktop App
 slug: /learn/desktop/installation-and-setup
 ---
 
