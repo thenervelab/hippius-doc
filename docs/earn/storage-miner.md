@@ -1,7 +1,3 @@
----
-description: 6
----
-
 # Hippius Storage Miner Ansible Deployment
 
 This Ansible project provides a professional-grade deployment for Hippius storage miner nodes with IPFS storage, optimized with ZFS for performance and reliability.
@@ -9,7 +5,6 @@ This Ansible project provides a professional-grade deployment for Hippius storag
 ## Overview
 
 The deployment configures:
-
 - IPFS node with optional ZFS storage pool
 - Hippius blockchain node configured as a storage miner
 - Proper system configuration and security settings
@@ -18,7 +13,7 @@ The deployment configures:
 
 ```
 .
-├── inventory/           # Host inventory files
+├── inventory/           # Host inventory files  
 ├── roles/               # Role-based tasks
 │   ├── common/          # System updates and firewall
 │   ├── ipfs/            # IPFS node with ZFS setup
@@ -26,7 +21,7 @@ The deployment configures:
 ├── group_vars/          # Variables for all groups
 ├── site.yml             # Main playbook
 ├── hippius.yml          # Hippius-only playbook
-├── update_hippius.yml   # Binary update playbook
+├── update_hippius.yml   # Binary update playbook  
 └── README.md            # This file
 ```
 
@@ -44,40 +39,34 @@ The deployment configures:
 To run both the Hippius blockchain node and IPFS with a ZFS pool efficiently, these are the recommended server specifications:
 
 #### CPU
-
 - **Minimum**: 4 dedicated cores (8 vCPUs)
 - **Recommended**: 8+ dedicated cores (16+ vCPUs)
 - **Reasoning**: The blockchain node needs consistent CPU performance for validation and processing. ZFS benefits from additional cores for checksumming and compression operations.
 
 #### Memory (RAM)
-
 - **Minimum**: 16GB
 - **Recommended**: 32GB or more
-- **Reasoning**:
+- **Reasoning**: 
   - Blockchain nodes typically require 8-16GB RAM for optimal performance
   - ZFS is memory-hungry and benefits significantly from extra RAM for the ARC cache
   - IPFS can use substantial memory when handling many concurrent operations
 
 #### Storage
-
-- **System Disk**:
-
+- **System Disk**: 
   - SSD with 100GB+ for OS and applications
 
 - **ZFS Pool for IPFS**:
-
   - **Minimum**: 2TB usable space
   - **Recommended**: 4TB+ usable space
   - **Disk Type**: NVMe SSDs or enterprise SSDs preferred for performance
   - **Configuration**: At least 2 disks for basic redundancy (mirror)
   - **ZFS ARC Cache**: Benefits greatly from additional RAM
 
-- **Blockchain Data**:
+- **Blockchain Data**: 
   - **Initial**: 100GB reserved, SSD-based storage
   - **Growth**: Plan for 50-100GB+ annual growth
 
 #### Network
-
 - **Bandwidth**: 1Gbps minimum, with at least 100Mbps sustained throughput
 - **Monthly Traffic**: Plan for 5-10TB+ of monthly traffic (especially for IPFS)
 - **Public IP**: Static public IP address recommended
@@ -85,7 +74,6 @@ To run both the Hippius blockchain node and IPFS with a ZFS pool efficiently, th
 #### Example Server Configurations
 
 ##### Mid-range Configuration
-
 - 8 vCPUs
 - 32GB RAM
 - 100GB SSD for system
@@ -93,7 +81,6 @@ To run both the Hippius blockchain node and IPFS with a ZFS pool efficiently, th
 - 1Gbps network connection
 
 ##### High-performance Configuration
-
 - 16+ vCPUs
 - 64GB RAM
 - 200GB SSD for system
@@ -103,14 +90,12 @@ To run both the Hippius blockchain node and IPFS with a ZFS pool efficiently, th
 ## Components
 
 ### IPFS Node
-
 - Runs as dedicated IPFS user
 - ZFS storage pool for optimal performance
 - Configurable API and gateway ports
 - Systemd service for automatic startup
 
 ### Hippius Node
-
 - Runs as root user
 - Configured with off-chain worker support
 - Default substrate ports (configurable)
@@ -125,19 +110,16 @@ To run both the Hippius blockchain node and IPFS with a ZFS pool efficiently, th
 ### Basic Deployment
 
 1. Configure your inventory in `inventory/production/hosts.yml`:
-
    ```
    [ipfs_nodes]
    your-server-ip-or-hostname
    ```
 
 2. Review and adjust variables in `group_vars/all.yml`:
-
    - IPFS configuration and ZFS settings
    - Hippius binary location and ports
 
 3. Run the playbook:
-
    ```bash
    ansible-playbook -i inventory/production/hosts.yml site.yml -e "hippius_hotkey_mnemonic='YOUR SEED WORDS'"
 
@@ -181,13 +163,13 @@ ansible-playbook -i inventory/production/hosts.yml update_hippius.yml
 
 ```yaml
 # ZFS Configuration for IPFS
-zfs_disks: [] # Default empty, specify disk names like ['sdb','sdc']
+zfs_disks: []  # Default empty, specify disk names like ['sdb','sdc']
 
 # IPFS Configuration
 ipfs_version: "v0.33.2"
 ipfs_user: ipfs
 ipfs_group: ipfs
-ipfs_home: /zfs/ipfs # ZFS dataset mountpoint
+ipfs_home: /zfs/ipfs    # ZFS dataset mountpoint
 ipfs_data_dir: "{{ ipfs_home }}/data"
 ipfs_api_address: "/ip4/127.0.0.1/tcp/5001"
 ipfs_gateway_address: "/ip4/127.0.0.1/tcp/8080"
@@ -196,7 +178,7 @@ ipfs_gateway_address: "/ip4/127.0.0.1/tcp/8080"
 hippius_binary_url: "https://download.hippius.com/hippius"
 hippius_home: /opt/hippius
 hippius_data_dir: "{{ hippius_home }}/data"
-hippius_key: "" # Optional: Provide ED25519 key in hex format
+hippius_key: ""  # Optional: Provide ED25519 key in hex format
 hippius_ports:
   rpc: 9944
   p2p: 30333
@@ -240,7 +222,6 @@ zpool scrub ipfs
 ## Troubleshooting
 
 ### Check service logs:
-
 ```bash
 # IPFS logs
 journalctl -u ipfs -f
@@ -252,13 +233,11 @@ journalctl -u hippius -f
 ### Common Issues
 
 #### IPFS Not Starting
-
 - Check permissions: `ls -la /zfs/ipfs`
 - Verify ZFS mounts: `zfs list`
 - Check IPFS config: `cat /zfs/ipfs/data/config`
 
 #### Hippius Not Connecting to Network
-
 - Check bootnodes configuration
 - Verify firewall settings: `ufw status`
 - Check Hippius logs for specific errors
@@ -268,13 +247,11 @@ journalctl -u hippius -f
 After the deployment completes, you need to configure your HIPS key. This is required for your storage miner to participate in the network.
 
 1. First, ensure your Hippius node is running:
-
 ```bash
 systemctl status hippius
 ```
 
 2. If it's not running, start it:
-
 ```bash
 systemctl start hippius
 ```
@@ -286,13 +263,11 @@ curl -H "Content-Type: application/json" -d '{ "jsonrpc":"2.0", "id":1, "method"
 ```
 
 4. Verify your HIPS key was inserted successfully by checking the logs:
-
 ```bash
 journalctl -u hippius -f | grep -i key
 ```
 
 5. Restart Hippius to ensure the key is properly loaded:
-
 ```bash
 systemctl restart hippius
 ```
@@ -309,3 +284,6 @@ After successfully setting up your storage miner and configuring your HIPS key:
 4. Stay updated with network upgrades and changes
 
 Remember to keep your system up to date and regularly check for any security or performance issues.
+
+
+

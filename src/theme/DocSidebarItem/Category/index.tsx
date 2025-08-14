@@ -24,7 +24,7 @@ import useIsBrowser from "@docusaurus/useIsBrowser";
 import DocSidebarItems from "@theme/DocSidebarItems";
 import type { Props } from "@theme/DocSidebarItem/Category";
 import Graphsheet from "@site/src/components/graphsheet";
-import { ChevronDown } from "@site/src/components/ui/icons";
+import { ChevronDown } from "@site/src/components/icons";
 import cn from "@site/src/utils/cn";
 
 // If we navigate to a category and it becomes active, it should automatically

@@ -1,6 +1,5 @@
 ---
 sidebar_position: 4
-description: 4
 ---
 
 # Mnemonic Authentication
@@ -28,20 +27,17 @@ When you log in, we use your mnemonic to generate your public-private key pair. 
 ## Advantages Over Browser Extensions
 
 ### No Dependencies:
-
 - No need to install or maintain browser extensions
 - Works across all modern browsers without compatibility issues
 - No version conflicts or update requirements
 
 ### Enhanced Security:
-
 - No persistent storage of sensitive data
 - No attack surface from third-party extensions
 - Protection against extension-based phishing attacks
 - Immune to extension-specific vulnerabilities
 
 ### Better User Experience:
-
 - Consistent experience across all devices
 - No need to sync extensions between browsers
 - Faster loading without extension overhead
@@ -49,15 +45,12 @@ When you log in, we use your mnemonic to generate your public-private key pair. 
 ## Security Considerations
 
 ### Zero Storage Policy:
-
 We never store your mnemonic or private keys. They exist only in memory during your session and are cleared when you log out or close the browser.
 
 ### Client-Side Operations:
-
 All cryptographic operations happen in your browser. Your mnemonic never leaves your device, ensuring complete privacy.
 
 ### Secure Key Generation:
-
 Keys are generated using cryptographically secure random number generation and follow industry-standard protocols.
 
 ## Important: No Recovery Option
@@ -100,4 +93,4 @@ Our application is designed with security in mind:
 - Never share your mnemonic with anyone
 - Use a secure device when entering your mnemonic
 - Always log out when using shared devices
-- Regularly verify your backup of the mnemonic phrase
+- Regularly verify your backup of the mnemonic phrase 

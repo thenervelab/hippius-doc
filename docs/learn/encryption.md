@@ -1,6 +1,5 @@
 ---
 sidebar_position: 5
-description: 3
 ---
 
 # Encryption System
@@ -26,14 +25,12 @@ This documentation explains how our encryption system works, from key generation
 ### Process
 
 #### Seed Generation
-
 - Initial seed is derived from user's mnemonic using `mnemonicToMiniSecret`
 - The seed is then modified based on the key type:
   - Message keys: last byte set to `0x01`
   - Data keys: last byte set to `0x02`
 
 #### Key Pair Creation
-
 - TweetNaCl generates the key pair from the modified seed
 - Public key is encoded in base58 format
 - Private key is never stored, only regenerated when needed
@@ -41,13 +38,11 @@ This documentation explains how our encryption system works, from key generation
 ### Key Types
 
 #### Message Keys
-
 - Used for encrypted messaging between users
 - Public key is shared in user's profile
 - Private key is regenerated for message encryption/decryption
 
 #### Data Keys
-
 - Used for encrypted data storage
 - Public key is shared in user's profile
 - Private key is regenerated for data encryption/decryption
@@ -63,7 +58,7 @@ const bobPublicKey = bobKeys.publicKey;
 
 // Alice's private key (generated from her mnemonic)
 const aliceMnemonic = "...";
-const alicePrivateKey = getPrivateKey(aliceMnemonic, "message");
+const alicePrivateKey = getPrivateKey(aliceMnemonic, 'message');
 ```
 
 ### Receiving a Message (Bob from Alice)
@@ -75,20 +70,18 @@ const alicePublicKey = aliceKeys.publicKey;
 
 // Bob's private key (generated from his mnemonic)
 const bobMnemonic = "...";
-const bobPrivateKey = getPrivateKey(bobMnemonic, "message");
+const bobPrivateKey = getPrivateKey(bobMnemonic, 'message');
 ```
 
 ## Security Considerations
 
 ### Key Management
-
 - Private keys are never stored, only generated when needed
 - Public keys are stored in base58 format
 - Mnemonics must be securely managed by users
 - Different keys for messaging and data prevent cross-purpose usage
 
 ### Encryption Security
-
 - Uses TweetNaCl's proven box encryption
 - Implements curve25519-xsalsa20-poly1305
 - Each message uses a unique random nonce
@@ -101,4 +94,4 @@ const bobPrivateKey = getPrivateKey(bobMnemonic, "message");
 - Validate all inputs before encryption/decryption
 - Handle encryption/decryption errors gracefully
 - Never store or transmit private keys
-- Keep mnemonics secure and private
+- Keep mnemonics secure and private 

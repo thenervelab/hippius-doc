@@ -1,7 +1,3 @@
----
-description: 10
----
-
 # Hippius S3 API - User Guide
 
 Welcome to the Hippius S3 API! This guide will help you get started with storing and retrieving your files using our S3-compatible storage service powered by IPFS.
@@ -11,7 +7,6 @@ Welcome to the Hippius S3 API! This guide will help you get started with storing
 Hippius S3 provides a fully S3-compatible API that stores your data on the decentralized IPFS network. You can use any standard S3 client library to interact with our service.
 
 **Key Features:**
-
 - Full S3 API compatibility
 - Decentralized storage via IPFS
 - Secure authentication using blockchain wallet credentials
@@ -23,7 +18,6 @@ Hippius S3 provides a fully S3-compatible API that stores your data on the decen
 ### Prerequisites
 
 You'll need:
-
 - A Hippius blockchain wallet with sub-accounts
 - Sub-accounts with appropriate permissions (Upload and/or Delete)
 - Your sub-account seed phrase (encoded as Base64 for the access key)
@@ -34,7 +28,6 @@ You'll need:
 ### Authentication
 
 Hippius S3 uses a unique authentication method, instead of the regular AWS access key and secret, we use your sub-account id's seed phrase for as both
-
 - **Access Key**: Your sub-account seed phrase encoded in Base64 (aka your API key)
 - **Secret Key**: Your sub-account seed phrase (plain text, used locally to sign)
 
@@ -88,7 +81,7 @@ print(f"Bucket '{bucket_name}' created successfully!")
 with open("my_file.pdf", "rb") as file_data:
     file_size = file_data.seek(0, 2)  # Get file size
     file_data.seek(0)  # Reset to beginning
-
+    
     client.put_object(
         bucket_name,
         "documents/my_file.pdf",
@@ -123,22 +116,22 @@ npm install minio
 ### Client Configuration
 
 ```javascript
-const Minio = require("minio");
+const Minio = require('minio');
 
 // Your sub-account seed phrase
-const seedPhrase = "your_subaccount_seed_phrase_here";
+const seedPhrase = 'your_subaccount_seed_phrase_here';
 
 // Encode seed phrase for access key
-const accessKey = Buffer.from(seedPhrase, "utf8").toString("base64");
+const accessKey = Buffer.from(seedPhrase, 'utf8').toString('base64');
 
 // Create client
 const minioClient = new Minio.Client({
-  endPoint: "s3.hippius.com",
-  port: 443,
-  useSSL: true, // Use HTTPS in production
-  accessKey: accessKey,
-  secretKey: seedPhrase,
-  region: "decentralized",
+    endPoint: 's3.hippius.com',
+    port: 443,
+    useSSL: true,  // Use HTTPS in production
+    accessKey: accessKey,
+    secretKey: seedPhrase,
+    region: 'decentralized'
 });
 ```
 
@@ -150,12 +143,12 @@ const bucketName = `my-bucket-${Date.now()}`;
 
 // Create bucket
 async function createBucket() {
-  try {
-    await minioClient.makeBucket(bucketName, "decentralized");
-    console.log(`Bucket '${bucketName}' created successfully!`);
-  } catch (err) {
-    console.log("Error creating bucket:", err);
-  }
+    try {
+        await minioClient.makeBucket(bucketName, 'decentralized');
+        console.log(`Bucket '${bucketName}' created successfully!`);
+    } catch (err) {
+        console.log('Error creating bucket:', err);
+    }
 }
 
 createBucket();
@@ -166,17 +159,17 @@ createBucket();
 ```javascript
 // File upload
 async function uploadFile() {
-  const filePath = "./my_file.pdf";
-  const fileName = "documents/my_file.pdf";
-
-  try {
-    await minioClient.fPutObject(bucketName, fileName, filePath, {
-      "Content-Type": "application/pdf",
-    });
-    console.log("File uploaded successfully!");
-  } catch (err) {
-    console.log("Error uploading file:", err);
-  }
+    const filePath = './my_file.pdf';
+    const fileName = 'documents/my_file.pdf';
+    
+    try {
+        await minioClient.fPutObject(bucketName, fileName, filePath, {
+            'Content-Type': 'application/pdf'
+        });
+        console.log('File uploaded successfully!');
+    } catch (err) {
+        console.log('Error uploading file:', err);
+    }
 }
 
 uploadFile();
@@ -187,16 +180,12 @@ uploadFile();
 ```javascript
 // Download to file
 async function downloadToFile() {
-  try {
-    await minioClient.fGetObject(
-      bucketName,
-      "documents/my_file.pdf",
-      "./downloaded_file.pdf"
-    );
-    console.log("File downloaded successfully!");
-  } catch (err) {
-    console.log("Error downloading file:", err);
-  }
+    try {
+        await minioClient.fGetObject(bucketName, 'documents/my_file.pdf', './downloaded_file.pdf');
+        console.log('File downloaded successfully!');
+    } catch (err) {
+        console.log('Error downloading file:', err);
+    }
 }
 
 downloadToFile();
@@ -220,9 +209,9 @@ from minio import Minio
 
 def create_public_bucket(seed_phrase, bucket_name, endpoint="s3.hippius.com"):
     """Create public bucket using bucket policy (for empty buckets only)."""
-
+    
     access_key = base64.b64encode(seed_phrase.encode("utf-8")).decode("utf-8")
-
+    
     # Create MinIO client
     client = Minio(
         endpoint,
@@ -231,11 +220,11 @@ def create_public_bucket(seed_phrase, bucket_name, endpoint="s3.hippius.com"):
         secure=True,
         region="decentralized"
     )
-
+    
     # Step 1: Create empty bucket
     client.make_bucket(bucket_name)
     print(f"✓ Empty bucket '{bucket_name}' created")
-
+    
     # Step 2: Set bucket policy using MinIO client
     policy = {
         "Version": "2012-10-17",
@@ -248,9 +237,9 @@ def create_public_bucket(seed_phrase, bucket_name, endpoint="s3.hippius.com"):
             }
         ]
     }
-
+    
     client.set_bucket_policy(bucket_name, json.dumps(policy))
-    print(f"✓ Bucket policy applied - '{bucket_name}' is now public")
+    print(f"✓ Bucket policy applied - '{bucket_name}' is now public")            
 
 
 # Usage - only works on empty buckets
@@ -260,7 +249,6 @@ create_public_bucket(seed_phrase, bucket_name)
 ```
 
 **Important Notes:**
-
 - Bucket policies can only be applied to **empty buckets**
 - This is a **one-way transition** - once public, buckets cannot be made private again
 - Only standard S3 public read policies are supported
@@ -310,18 +298,16 @@ print(f"Public access URL: https://get.hippius.network/ipfs/{ipfs_cid}")
 
 ```javascript
 // Upload file to public bucket
-const fileContent = Buffer.from(
-  "Hello, decentralized world! This file is publicly accessible."
-);
+const fileContent = Buffer.from("Hello, decentralized world! This file is publicly accessible.");
 const objectName = "public-file.txt";
 
 await minioClient.putObject(publicBucketName, objectName, fileContent, {
-  "Content-Type": "text/plain",
+    'Content-Type': 'text/plain'
 });
 
 // Get the IPFS CID from object metadata
 const stat = await minioClient.statObject(publicBucketName, objectName);
-const ipfsCid = stat.etag.replace(/"/g, ""); // Remove quotes from ETag
+const ipfsCid = stat.etag.replace(/"/g, '');  // Remove quotes from ETag
 
 console.log(`File uploaded! IPFS CID: ${ipfsCid}`);
 console.log(`Public access URL: https://get.hippius.network/ipfs/${ipfsCid}`);
@@ -354,7 +340,7 @@ def public_bucket_example():
     seed_phrase = "your_subaccount_seed_phrase_here"
     bucket_name = f"demo-public-{int(time.time())}"
     access_key = base64.b64encode(seed_phrase.encode("utf-8")).decode("utf-8")
-
+    
     # Create MinIO client
     client = Minio(
         "s3.hippius.com",
@@ -363,12 +349,12 @@ def public_bucket_example():
         secure=True,
         region="decentralized"
     )
-
+    
     # Step 1: Create empty bucket
     print("1. Creating empty bucket...")
     client.make_bucket(bucket_name)
     print(f"✓ Empty bucket '{bucket_name}' created")
-
+    
     # Step 2: Set bucket policy to make it public
     print("2. Setting bucket policy to make bucket public...")
     policy = {
@@ -382,10 +368,10 @@ def public_bucket_example():
             }
         ]
     }
-
+    
     client.set_bucket_policy(bucket_name, json.dumps(policy))
     print(f"✓ Bucket policy applied - '{bucket_name}' is now public")
-
+    
     # Step 3: Upload file
     print("3. Uploading file...")
     file_content = b"This is a publicly accessible file on IPFS!"
@@ -396,12 +382,12 @@ def public_bucket_example():
         length=len(file_content),
         content_type="text/plain"
     )
-
+    
     # Step 4: Get CID and access via IPFS
     print("4. Getting IPFS CID...")
     stat = client.stat_object(bucket_name, "demo.txt")
     cid = stat.etag.strip('"')
-
+    
     print(f"✓ File uploaded successfully!")
     print(f"IPFS CID: {cid}")
     print(f"Public URL: https://get.hippius.network/ipfs/{cid}")
@@ -412,13 +398,13 @@ public_bucket_example()
 
 ### Key Differences: Private vs Public
 
-| Feature         | Private Buckets                    | Public Buckets                           |
-| --------------- | ---------------------------------- | ---------------------------------------- |
-| **Encryption**  | ✅ Encrypted with per-bucket keys  | ❌ Stored unencrypted                    |
-| **Access**      | 🔒 Requires authentication         | 🌍 Publicly accessible                   |
-| **IPFS Access** | ❌ Cannot access via IPFS gateways | ✅ Direct IPFS gateway access            |
-| **Use Cases**   | Sensitive data, private files      | Public content, websites, shared files   |
-| **Creation**    | Standard S3 `make_bucket()`        | Requires `x-amz-acl: public-read` header |
+| Feature | Private Buckets | Public Buckets |
+|---------|----------------|----------------|
+| **Encryption** | ✅ Encrypted with per-bucket keys | ❌ Stored unencrypted |
+| **Access** | 🔒 Requires authentication | 🌍 Publicly accessible |
+| **IPFS Access** | ❌ Cannot access via IPFS gateways | ✅ Direct IPFS gateway access |
+| **Use Cases** | Sensitive data, private files | Public content, websites, shared files |
+| **Creation** | Standard S3 `make_bucket()` | Requires `x-amz-acl: public-read` header |
 
 ## Advanced Features
 
@@ -476,7 +462,7 @@ For files larger than 5MB, use multipart uploads:
 with open("large_file.zip", "rb") as file_data:
     file_size = file_data.seek(0, 2)
     file_data.seek(0)
-
+    
     client.put_object(
         bucket_name,
         "large_file.zip",
@@ -487,6 +473,7 @@ with open("large_file.zip", "rb") as file_data:
         num_parallel_uploads=3       # 3 parallel uploads
     )
 ```
+
 
 ## Best Practices
 
@@ -502,19 +489,16 @@ with open("large_file.zip", "rb") as file_data:
 ### Common Issues
 
 **Authentication Errors**
-
 - Verify your seed phrase is correct
 - Ensure Base64 encoding is properly applied to the access key
 - Check that your sub-account has the required permissions
 
 **Upload Failures**
-
 - Verify your account has sufficient credits
 - Check that bucket names are valid (lowercase, no special characters)
 - Ensure your sub-account has Upload permissions
 
 **Permission Denied**
-
 - Check sub-account permissions (Upload/Delete roles)
 - Verify you're accessing buckets owned by your main account
 - Ensure your account has active credits
@@ -536,7 +520,6 @@ Our support team monitors this channel and will help you resolve any issues quic
 ## Supported Operations
 
 ✅ **Supported**
-
 - Bucket operations (create, delete, list, tags)
 - Object operations (upload, download, delete, list, metadata)
 - Multipart uploads
@@ -544,16 +527,14 @@ Our support team monitors this channel and will help you resolve any issues quic
 - Lifecycle policies
 
 ⚠️ **Limited Support**
-
 - Range requests (partial support)
 - S3 Select (limited functionality)
 
 ❌ **Not Supported**
-
 - Bucket versioning
 - Cross-region replication
 - Server-side encryption configuration
 
 ---
 
-_This guide covers the essential operations for using Hippius S3. For advanced features and specific use cases, refer to the standard S3 documentation, as our API is fully compatible with S3 clients._
+*This guide covers the essential operations for using Hippius S3. For advanced features and specific use cases, refer to the standard S3 documentation, as our API is fully compatible with S3 clients.*
