@@ -28,7 +28,7 @@ const sidebars: SidebarsConfig = {
           type: "category",
           label: "Hippius Desktop App",
           items: [
-            "learn/desktop/installation-and-setup", // Installation & Setup Guide
+            "learn/desktop/desktop-app", // Desktop App
             "learn/desktop/using-desktop-app", // Using the Desktop App
             "learn/desktop/file-system", // File System
             "learn/desktop/settings", // Desktop App Settings

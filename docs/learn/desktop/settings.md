@@ -21,7 +21,8 @@ File Settings
 </>
 <>
 
-<p>In file settings, select and change folder for private and public syncing.<br/>If files are added or removed, these changes will be synced automatically.</p>
+<p>In File settings, select and change folder for private and public syncing.<br/>
+If files are edited or removed, those changes will be synced automatically.</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
@@ -86,14 +87,14 @@ File Settings
   Sub Accounts
   </>
   <>
-    <p>Sub accounts lets you assign upload and delete rights. They store their own seed, yet all files still belong to your main account. We’re currently using these sub accounts to upload files to S3 storage.</p>
-
-    ![Sub accounts table](/img/desktop/settings-sub-accounts.png)
+    <p>Sub-accounts let you assign upload and delete rights. They use their own seed, yet all files still belong to your main account. We’re currently using these sub-accounts to upload files to S3 storage.</p>
 
     <Ordered>
       <li>Click on the <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
       <li>Click <BgStyledIconWithText text="Sub Accounts" icon="KeySquare" />.</li>
     </Ordered>
+
+    ![Sub accounts table](/img/desktop/settings-sub-accounts.png)
 
     ### Create a New Sub Account
 
@@ -163,7 +164,7 @@ File Settings
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
       <li>Click <BgStyledIconWithText text="Customize RPC" icon="Box" />.</li>
-      <li>Enter RPC.</li>
+      <li>Click Edit RPC.</li>
       <li>Save the edited RPC.</li>
     </Ordered>
 
@@ -179,7 +180,7 @@ File Settings
  Backup App Data
   </>
   <>
-    <p>Regular backups help you recover your data stored on this device if you lose access to it. Save your backup .ZIP file in a secure location.</p>
+    <p>Regular backups help you recover your data stored on this device if you lose access to it. Save your backup ZIP file in a secure location.</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>

@@ -10,13 +10,13 @@ import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import Icon from '@site/src/components/Icon';
 
-## Get started with the app
+## Get started with the App
 
 <Ordered>
   <li>Click the <Icon /> icon to open the app</li>
   <li>Enter your access key to sign in or create an account if you do not have one yet.</li>
   <li>To create a new account you will first need to save the provided access key securely, then set your new passcode.</li>
-  <li>You can also easily restore a back up by uploading it to the required drop zone.</li>
+  <li>You can also easily restore a backup by uploading it to the required drop zone.</li>
 </Ordered>
 
 ![Onboarding — access key, passcode, restore backup](/img/desktop/using-get-started.png)
@@ -40,7 +40,7 @@ When you are done, click on the <BgStyledText>Sync Folder</BgStyledText> button 
 
 <Ordered>
   <li>Click the <Icon /> icon to open the app</li>
-  <li>Home page: Click on <BgStyledIconWithText text="Files" icon="DocumentText" /> or <BgStyledText>Upload File</BgStyledText> button which is on the home page.</li>
+  <li>Home page: Click on <BgStyledIconWithText text="Files" icon="DocumentText" />, or <BgStyledText>Upload File</BgStyledText> button which is on the home page.</li>
   <li>Choose the method you want to use to upload your file or folder.</li>
 </Ordered>
 

@@ -20,7 +20,7 @@ Each transaction is recorded on the blockchain.
 
 ## Receiving Balance
 
-You can add to your balance from external providers using the simple steps below.
+You can add tokens to your balance from external providers using the simple steps below.
 
 ### Top Up Your Balance
 
@@ -35,7 +35,7 @@ You can add to your balance from external providers using the simple steps below
 
 ## Sending Balance
 
-You can send our Hippius Alpha to any wallet address. You can also save regularly funded wallet addresses to your [Address Book](#address-book).
+You can send Hippius Alpha to any wallet address directly on our blockchain. For added convenience, you can also save frequently used or regularly funded wallet addresses to your Address Book.
 
 ### Sending to Other Wallets
 
@@ -59,7 +59,7 @@ When you are low on credits and need to upload files, you can use the “Add Cre
   <li>Double click the <Icon /> icon to open the app.</li>
   <li>Click on <BgStyledIconWithText text="Wallet" icon="Wallet" />.</li>
   <li>Click on <BgStyledText>Add Credits</BgStyledText> button.</li>
-  <li>Our desktop app will redirect you to the website where you can complete the add credit process. You will need your account's Access Key to continue.</li>
+  <li>Our desktop app will redirect you to the website where you can complete the add credit process. You will need your account's access key to continue.</li>
   <li>When payment is complete, it takes a few minutes to reflect in the balance.</li>
 </Ordered>
 
