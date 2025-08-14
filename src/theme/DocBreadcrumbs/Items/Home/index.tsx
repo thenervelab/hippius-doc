@@ -5,7 +5,7 @@ import { translate } from "@docusaurus/Translate";
 import IconHome from "@theme/Icon/Home";
 
 import styles from "./styles.module.css";
-import { Home2 } from "@site/src/components/icons";
+import { Home2 } from "@site/src/components/ui/icons";
 
 export default function HomeBreadcrumbItem(): ReactNode {
   const homeHref = useBaseUrl("/");
