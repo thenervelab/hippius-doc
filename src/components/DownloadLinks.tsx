@@ -41,7 +41,7 @@ const DownloadLinks: React.FC = () => {
   }, []);
 
   return (
-    <div className={"flex flex-wrap  gap-2 my-6"}>
+    <div className="flex flex-wrap gap-2 my-6">
       {[
         {
           icon: <Icons.Mac className="size-4" />,
@@ -61,7 +61,7 @@ const DownloadLinks: React.FC = () => {
       ].map((os) => (
         <button
           key={os.name}
-          className="w-[217px] h-[36px] flex items-center justify-between bg-white border border-grey-80 hover:bg-primary-100 hover:border-primary-60 rounded cursor-pointer px-2 "
+          className="w-[217px] h-[36px] flex items-center justify-between bg-white border border-grey-80 hover:bg-primary-100 hover:border-primary-60 rounded cursor-pointer px-2"
           onClick={() =>
             downloadForSpecificPlatform(
               os.value as keyof DownloadOptions,
@@ -69,9 +69,9 @@ const DownloadLinks: React.FC = () => {
             )
           }
         >
-          <div className="flex gap-2 items-center ">
+          <div className="flex gap-2 items-center">
             {os.icon}
-            <p className=" text-grey-10 text-sm">{os.name}</p>
+            <p className="text-grey-10 text-sm">{os.name}</p>
           </div>
           <Icons.ArrowRight className="size-5" />
         </button>

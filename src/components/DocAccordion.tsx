@@ -82,28 +82,16 @@ export function DocAccordionItem({
           <h2 className="!mb-0">{header}</h2>
 
           {/* Your icon */}
-          <div
-            className={
-              "ml-3 h-5 w-5 rounded border-[1.5px] border-grey-10 flex items-center justify-center"
-            }
-          >
+          <div className="ml-3 h-5 w-5 rounded border-[1.5px] border-grey-10 flex items-center justify-center">
             <Icons.ArrowDown
-              className={cn(
-                "  shrink-0 transition-transform duration-200 ease-out",
-                "group-data-[state=open]:rotate-180"
-              )}
+              className="shrink-0 transition-transform duration-200 ease-out group-data-[state=open]:rotate-180"
               aria-hidden
             />
           </div>
         </Accordion.Trigger>
       </Accordion.Header>
 
-      <Accordion.Content
-        className={cn(
-          "overflow-hidden will-change-[height,opacity,transform]",
-          "AccordionContent"
-        )}
-      >
+      <Accordion.Content className="overflow-hidden will-change-[height,opacity,transform] AccordionContent">
         <div className="markdown mb-3">{content}</div>
       </Accordion.Content>
     </Accordion.Item>

@@ -4,7 +4,7 @@ import { Icons } from "./ui";
 export default function BgStyledIconWithText({
   text,
   icon,
-  iconClassName = "size-4 inline-block -translate-y-[1px] ",
+  iconClassName = "size-4 inline-block -translate-y-[1px]",
   paddingClassName = "px-1.5 py-0.5",
 }: {
   text: string;
