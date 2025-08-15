@@ -19,10 +19,10 @@ This tool enables you to store, access, sync and manage files securely on a dece
 ## Benefits of using the Desktop App
 
 <Ordered>
-  <li>Directly add files to the Hippius blockchain.</li>
-  <li>Monitor space usage.</li>
-  <li>Sync folders to the blockchain.</li>
-  <li>Download files from the app and save to your computer.</li>
+  <li>Fast access to files.</li>
+  <li>Encrypted and secure.</li>
+  <li>Optimized functionality.</li>
+  <li>Easy to use.</li>
 </Ordered>
 
 ![Desktop App — Files screen](/img/desktop/desktop-benefits.png)
