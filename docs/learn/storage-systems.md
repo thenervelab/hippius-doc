@@ -1,5 +1,6 @@
 ---
 sidebar_position: 5
+description: 4
 ---
 
 # Decentralized Storage Systems
@@ -43,6 +44,7 @@ Hippius's S3-compatible storage uses a hybrid architecture that combines coordin
 ### Architecture
 
 - **Coordination Layer**:
+
   - Metadata management: Tracks file locations and manages object metadata
   - Access control: Handles authentication and user permissions
   - Resource allocation: Manages storage distribution and retrieval
@@ -83,6 +85,7 @@ Both storage systems are integrated into Hippius's economic model:
 ## Choosing the Right Storage
 
 - **Use IPFS when**:
+
   - Content needs to be publicly accessible
   - Full decentralization is required
   - Data integrity is critical
@@ -93,4 +96,4 @@ Both storage systems are integrated into Hippius's economic model:
   - Data needs to be frequently updated
   - You require bucket-based organization
   - Private access control is needed
-  - Performance and scalability are priorities 
+  - Performance and scalability are priorities

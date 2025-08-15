@@ -1,3 +1,7 @@
+---
+description: 10
+---
+
 # Hippius SDK & CLI Documentation
 
 Welcome to the Hippius SDK and CLI documentation! This guide will help you store, manage, and retrieve files using the Hippius decentralized storage network.
@@ -10,6 +14,7 @@ Hippius combines two powerful technologies to provide resilient decentralized st
 - **[Substrate Blockchain](https://docs.polkadot.com/develop/parachains/intro-polkadot-sdk/#substrate)**: A framework for building custom blockchains, used by Hippius to store file references and handle transactions
 
 This combination provides:
+
 1. **Redundant Storage**: Your files are stored across multiple nodes
 2. **Tamper Resistance**: File references are secured on a blockchain
 3. **Resilient Access**: Files can be retrieved even if some nodes go offline
@@ -78,21 +83,21 @@ hippius --version
 
 These flags can be used with any command:
 
-| Flag | Description | Default | Example |
-|------|-------------|---------|---------|
-| `--gateway` | IPFS gateway URL for downloads | `https://ipfs.io` | `--gateway https://dweb.link` |
-| `--api-url` | IPFS API URL for uploads | `https://store.hippius.network` | `--api-url http://localhost:5001` |
-| `--local-ipfs` | Use local IPFS node | `False` | `--local-ipfs` |
-| `--substrate-url` | Substrate node WebSocket URL | `wss://rpc.hippius.network` | `--substrate-url wss://custom.node` |
-| `--miner-ids` | Comma-separated miner IDs | none | `--miner-ids miner1,miner2,miner3` |
-| `--encrypt` | Enable file encryption | Configured default | `--encrypt` |
-| `--no-encrypt` | Disable file encryption | n/a | `--no-encrypt` |
-| `--decrypt` | Enable file decryption | `True` with encrypted files | `--decrypt` |
-| `--no-decrypt` | Disable file decryption | n/a | `--no-decrypt` |
-| `--encryption-key` | Base64-encoded encryption key | From config | `--encryption-key BASE64_KEY` |
-| `--account` | Account name to use | Active account | `--account my_account` |
-| `--password` | Password for encrypted seed phrase | n/a | `--password "my password"` |
-| `--verbose` | Enable verbose output | `False` | `--verbose` |
+| Flag               | Description                        | Default                         | Example                             |
+| ------------------ | ---------------------------------- | ------------------------------- | ----------------------------------- |
+| `--gateway`        | IPFS gateway URL for downloads     | `https://ipfs.io`               | `--gateway https://dweb.link`       |
+| `--api-url`        | IPFS API URL for uploads           | `https://store.hippius.network` | `--api-url http://localhost:5001`   |
+| `--local-ipfs`     | Use local IPFS node                | `False`                         | `--local-ipfs`                      |
+| `--substrate-url`  | Substrate node WebSocket URL       | `wss://rpc.hippius.network`     | `--substrate-url wss://custom.node` |
+| `--miner-ids`      | Comma-separated miner IDs          | none                            | `--miner-ids miner1,miner2,miner3`  |
+| `--encrypt`        | Enable file encryption             | Configured default              | `--encrypt`                         |
+| `--no-encrypt`     | Disable file encryption            | n/a                             | `--no-encrypt`                      |
+| `--decrypt`        | Enable file decryption             | `True` with encrypted files     | `--decrypt`                         |
+| `--no-decrypt`     | Disable file decryption            | n/a                             | `--no-decrypt`                      |
+| `--encryption-key` | Base64-encoded encryption key      | From config                     | `--encryption-key BASE64_KEY`       |
+| `--account`        | Account name to use                | Active account                  | `--account my_account`              |
+| `--password`       | Password for encrypted seed phrase | n/a                             | `--password "my password"`          |
+| `--verbose`        | Enable verbose output              | `False`                         | `--verbose`                         |
 
 ### Basic File Operations
 
@@ -126,7 +131,7 @@ Manage your accounts and check storage:
 # List all your accounts
 hippius account list
 
-# Create a new account 
+# Create a new account
 hippius account create --name my_new_account
 
 # Import an account from a file
@@ -171,7 +176,8 @@ hippius pinning-status --no-contents
 
 > 🔍 **Understanding Credits vs Balance**: Hippius uses two different economic mechanisms:
 >
-> **Account Balance (tokens)**: 
+> **Account Balance (tokens)**:
+>
 > - The blockchain's native cryptocurrency
 > - Transferable between accounts
 > - Used for blockchain transactions
@@ -179,6 +185,7 @@ hippius pinning-status --no-contents
 > - Acquired through exchanges or transfers
 >
 > **Free Credits**:
+>
 > - Storage-specific allocations
 > - Non-transferable
 > - Used exclusively for storing files
@@ -243,11 +250,13 @@ hippius keygen --copy
 ```
 
 > ⚡ **Important Note About IPFS Propagation**: When uploading and then immediately downloading files, you may encounter gateway timeouts or "not found" errors. This is normal behavior in distributed networks - content requires time to propagate. For best results:
+>
 > 1. Wait 30-60 seconds after uploading before attempting to download
-> 2. Use the `--publish` flag for better availability 
+> 2. Use the `--publish` flag for better availability
 > 3. Try different gateways if one isn't responding (`--gateway https://dweb.link`)
 
 > ⚠️ **Note for Directory Erasure Coding**: When erasure coding a directory, you have two options:
+>
 > 1. Archive the directory first, then apply erasure coding to the archive
 > 2. Apply erasure coding to individual files within the directory
 >
@@ -276,6 +285,7 @@ The SDK uses Python's `asyncio` library for handling asynchronous operations:
 ```
 
 This approach provides several benefits:
+
 - Improved throughput for concurrent operations
 - Better use of system resources
 - Non-blocking network I/O
@@ -293,14 +303,14 @@ from hippius_sdk import HippiusClient
 async def run_example():
     # Initialize the client with default connections to Hippius network
     client = HippiusClient()
-    
+
     print("=== Hippius SDK Complete Example ===\n")
-    
+
     # Create a test file
     test_file = "test_file.txt"
     with open(test_file, "w") as f:
         f.write("This is a test file for Hippius SDK.")
-    
+
     try:
         # 1. Upload a file to IPFS
         print("Uploading file...")
@@ -308,31 +318,31 @@ async def run_example():
         cid = result["cid"]
         print(f"File uploaded with CID: {cid}")
         print(f"File size: {result['size_formatted']}\n")
-        
+
         # 2. Publish globally
         print("Publishing file globally...")
         publish_result = await client.ipfs_client.publish_global(cid)
         print(f"Global publishing successful: {publish_result['published']}")
         print(f"Message: {publish_result['message']}\n")
-        
+
         # 3. Wait for IPFS propagation (important for reliability)
         print("Waiting for IPFS propagation (30 seconds)...")
         await asyncio.sleep(30)  # Allow time for IPFS propagation
-        
+
         # 4. Download the file
         download_path = "downloaded_file.txt"
         print(f"Downloading file with CID {cid}...")
         dl_result = await client.download_file(cid, download_path)
         print(f"File downloaded to: {dl_result['output_path']}")
         print(f"Download completed in {dl_result['elapsed_seconds']} seconds\n")
-        
+
         # 5. Check if a file exists
         print(f"Checking if CID {cid} exists...")
         exists_result = await client.exists(cid)
         print(f"File exists: {exists_result['exists']}")
         if exists_result['exists']:
             print(f"Gateway URL: {exists_result['gateway_url']}\n")
-        
+
         # 6. Get file content
         print(f"Getting content for CID {cid}...")
         content_result = await client.cat(cid)
@@ -341,7 +351,7 @@ async def run_example():
         else:
             print(f"Binary content (hex): {content_result['hex_preview']}")
         print(f"Content size: {content_result['size_formatted']}\n")
-        
+
         # 7. Pin the file
         print(f"Pinning file with CID {cid}...")
         pin_result = await client.pin(cid)
@@ -349,16 +359,16 @@ async def run_example():
         if not pin_result['success']:
             print(f"Reason: {pin_result['message']}")
         print()
-        
+
         # 8. Utility functions (synchronous)
         print("Using utility functions...")
         formatted_cid = client.format_cid(cid)
         print(f"Formatted CID: {formatted_cid}")
-        
+
         formatted_size = client.format_size(1024 * 1024)
         print(f"1024*1024 bytes formatted: {formatted_size}")  # Output: 1.00 MB
         print()
-        
+
         # 9. Demonstrate error handling with retry
         print("Demonstrating error handling with retry logic...")
         async def retry_with_backoff(func, max_retries=3):
@@ -372,7 +382,7 @@ async def run_example():
                     print(f"Attempt {attempt+1} failed: {e}")
                     print(f"Retrying in {wait_time} seconds...")
                     await asyncio.sleep(wait_time)
-        
+
         try:
             # This will fail but demonstrate proper retry handling
             await retry_with_backoff(
@@ -382,9 +392,9 @@ async def run_example():
         except Exception as e:
             print(f"Expected error caught after retries: {e}")
         print()
-        
+
         print("All examples completed successfully!")
-        
+
     finally:
         # Clean up test files
         for path in [test_file, download_path]:
@@ -460,18 +470,18 @@ from hippius_sdk import HippiusClient
 
 async def file_operations():
     client = HippiusClient()
-    
+
     # Upload a file
     print("Uploading file...")
     result = await client.upload_file("path/to/your/file.txt")
     cid = result["cid"]
     print(f"File uploaded with CID: {cid}")
-    
+
     # Check if a file exists
     print("Checking if file exists...")
     exists_result = await client.exists(cid)
     print(f"File exists: {exists_result['exists']}")
-    
+
     # Get file content directly
     print("Getting file content...")
     content_result = await client.cat(cid)
@@ -479,7 +489,7 @@ async def file_operations():
         print(f"Content preview: {content_result['text_preview']}")
     else:
         print(f"Binary content (hex): {content_result['hex_preview']}")
-        
+
     # Download a file
     print("Downloading file...")
     dl_result = await client.download_file(cid, "path/to/save/file.txt")
@@ -498,28 +508,28 @@ from hippius_sdk import HippiusClient
 
 async def directory_operations():
     client = HippiusClient()
-    
+
     # Upload a directory
     print("Uploading directory...")
     dir_result = await client.upload_directory("path/to/your/directory")
     dir_cid = dir_result["cid"]
     file_count = dir_result["file_count"]
     total_size = dir_result["size_formatted"]
-    
+
     print(f"Directory uploaded with CID: {dir_cid}")
     print(f"Contains {file_count} files, total size: {total_size}")
-    
+
     # Download individual files from the directory
     print(f"Accessing files in directory...")
-    
+
     # Example file in the directory - adjust path as needed
     file_path = f"{dir_cid}/example.txt"
-    
+
     # Check if file exists in the directory
     exists_result = await client.exists(file_path)
     if exists_result['exists']:
         print(f"Found file in directory: {file_path}")
-        
+
         # Download the specific file
         await client.download_file(file_path, "downloaded_example.txt")
         print("Downloaded file from directory successfully")
@@ -539,7 +549,7 @@ from hippius_sdk import HippiusClient
 
 async def safe_operations():
     client = HippiusClient()
-    
+
     # Handle file upload errors
     try:
         result = await client.upload_file("path/to/your/file.txt")
@@ -550,8 +560,8 @@ async def safe_operations():
         print("Error: Permission denied when reading file")
     except Exception as e:
         print(f"Upload error: {e}")
-    
-    # Handle download errors    
+
+    # Handle download errors
     try:
         dl_result = await client.download_file("QmInvalidCID", "output.txt")
     except FileNotFoundError:
@@ -562,7 +572,7 @@ async def safe_operations():
         print(f"Error: Invalid CID format - {e}")
     except Exception as e:
         print(f"Download error: {e}")
-    
+
     # Handle connection errors
     try:
         # This will fail if the gateway is unreachable
@@ -604,6 +614,7 @@ hippius keygen --copy
 The SDK can be configured to use encryption in several ways:
 
 1. Through environment variables:
+
    ```
    # In your .env file
    HIPPIUS_ENCRYPTION_KEY=your-base64-encoded-key
@@ -611,45 +622,47 @@ The SDK can be configured to use encryption in several ways:
    ```
 
 2. Through configuration:
+
    ```bash
    hippius config set encryption encryption_key your-base64-encoded-key
    hippius config set encryption encrypt_by_default true
    ```
 
 3. Directly in code:
+
    ```python
    import base64
    from hippius_sdk import HippiusClient
-   
+
    def setup_encryption():
        """Set up a client with encryption enabled (synchronous function)"""
        # If you have an existing key
        # encryption_key = base64.b64decode("your-base64-encoded-key")
-       
+
        # Or generate a new key programmatically (synchronous method)
        client = HippiusClient()
        encoded_key = client.generate_encryption_key()
        print(f"Generated key: {encoded_key}")
-       
+
        # Decode the generated key for use
        encryption_key = base64.b64decode(encoded_key)
-       
+
        # Create a client with encryption enabled
        encrypted_client = HippiusClient(
            encrypt_by_default=True,
            encryption_key=encryption_key
        )
-       
+
        return encrypted_client
-   
+
    async def main():
        # Get encrypted client (this call is synchronous, no await needed)
        client = setup_encryption()
-       
+
        # Now use the client for async operations
        result = await client.upload_file("sensitive_data.txt")
        print(f"Encrypted file uploaded: {result['cid']}")
-       
+
    asyncio.run(main())
    ```
 
@@ -660,31 +673,31 @@ Once configured, encryption works transparently:
 ```python
 async def encryption_example():
     client = HippiusClient(encrypt_by_default=True)
-    
+
     # Upload with encryption (uses default setting)
     result = await client.upload_file("sensitive_data.txt")
-    
+
     # Explicitly enable/disable encryption for a specific operation
     encrypted_result = await client.upload_file("sensitive_data.txt", encrypt=True)
     unencrypted_result = await client.upload_file("public_data.txt", encrypt=False)
-    
+
     # Download and decrypt automatically
     dl_result = await client.download_file(encrypted_result['cid'], "decrypted_file.txt")
-    
+
     # Explicitly control decryption
     decrypted_result = await client.download_file(
-        encrypted_result['cid'], 
-        "output.txt", 
+        encrypted_result['cid'],
+        "output.txt",
         decrypt=True
     )
-    
+
     # Get raw encrypted content without decryption
     raw_result = await client.download_file(
-        encrypted_result['cid'], 
-        "still_encrypted.txt", 
+        encrypted_result['cid'],
+        "still_encrypted.txt",
         decrypt=False
     )
-    
+
     # View encrypted content
     content = await client.cat(encrypted_result['cid'], decrypt=True)
 
@@ -724,6 +737,7 @@ Original File
 ```
 
 Where:
+
 - **k**: Minimum number of chunks needed to reconstruct the file
 - **m**: Total number of chunks created (where m > k)
 - The file can be reconstructed from any k chunks out of m total
@@ -736,12 +750,12 @@ import asyncio
 
 async def erasure_coding_example():
     client = HippiusClient()
-    
+
     # Erasure code a file with default parameters (k=3, m=5)
     result = await client.erasure_code_file("large_file.mp4")
     metadata_cid = result["metadata_cid"]
     print(f"File erasure coded with metadata CID: {metadata_cid}")
-    
+
     # Use custom parameters for more redundancy and publish globally
     # Publishing makes the content more widely available across the IPFS network
     result = await client.erasure_code_file(
@@ -751,23 +765,23 @@ async def erasure_coding_example():
         chunk_size=2097152, # 2MB chunks
         encrypt=True        # Encrypt before splitting
     )
-    
+
     # Publish the metadata globally for better availability
     publish_result = await client.ipfs_client.publish_global(result["metadata_cid"])
     print(f"Metadata published globally: {publish_result['published']}")
-    
+
     # Important: Wait for IPFS propagation before attempting reconstruction
     # This is crucial for reliable operation, especially with erasure-coded files
     print("Waiting for IPFS propagation (60 seconds)...")
     await asyncio.sleep(60)  # Allow time for IPFS propagation
-    
+
     # Reconstruct a file from its metadata
     reconstructed_path = await client.reconstruct_from_erasure_code(
         metadata_cid=metadata_cid,
         output_file="reconstructed_file.mp4",
         verbose=True  # Enable detailed debugging information
     )
-    
+
     print(f"File reconstructed to: {reconstructed_path}")
 
 asyncio.run(erasure_coding_example())
@@ -784,26 +798,26 @@ Erasure coding is particularly useful for:
 
 #### Erasure Coding vs. Simple Replication
 
-| Feature | Erasure Coding | Simple Replication |
-|---------|---------------|-------------------|
-| Space Efficiency | High (typically ~1.6x size) | Low (typically 3x size) |
-| Redundancy | Customizable (k,m parameters) | Fixed |
-| Recovery | Can lose up to (m-k) chunks | Must have 1 complete copy |
-| Complexity | Higher | Lower |
-| Ideal for | Large, important files | Small, easily replaced files |
+| Feature          | Erasure Coding                | Simple Replication           |
+| ---------------- | ----------------------------- | ---------------------------- |
+| Space Efficiency | High (typically ~1.6x size)   | Low (typically 3x size)      |
+| Redundancy       | Customizable (k,m parameters) | Fixed                        |
+| Recovery         | Can lose up to (m-k) chunks   | Must have 1 complete copy    |
+| Complexity       | Higher                        | Lower                        |
+| Ideal for        | Large, important files        | Small, easily replaced files |
 
 #### Advanced Options
 
 ```python
 async def advanced_erasure_coding():
     client = HippiusClient()
-    
+
     # For extremely large files, use larger chunks
     result = await client.erasure_code_file(
         file_path="massive_video.mp4",
         chunk_size=10485760  # 10MB chunks
     )
-    
+
     # For small files, use smaller parameters
     result = await client.erasure_code_file(
         file_path="small_doc.txt",
@@ -816,6 +830,7 @@ asyncio.run(advanced_erasure_coding())
 ```
 
 > 🔍 **Power User Info**: The erasure coding implementation automatically adjusts parameters for small files:
+>
 > - If a file is too small to be split into `k` chunks, the SDK will adjust the chunk size
 > - For very small files, the content is split into exactly `k` sub-blocks
 > - Parameters are always optimized to provide the requested level of redundancy
@@ -833,6 +848,7 @@ hippius erasure-code-dir my_important_files/ --k 4 --m 8 --encrypt
 ```
 
 > ⚠️ **Important Note**: When erasure coding a directory:
+>
 > - Each file is processed independently and gets its own metadata CID
 > - The original directory structure is not preserved for reconstruction
 > - You'll need to reconstruct each file individually using its specific metadata CID
@@ -851,26 +867,26 @@ import asyncio
 async def account_management():
     # Initialize the account manager
     account_manager = AccountManager()
-    
+
     # Create a coldkey (main account)
     coldkey = await account_manager.create_coldkey(
         name="my_hippius_coldkey",  # Optional custom name
         mnemonic=None  # Will generate if not provided
     )
-    
+
     print(f"Created coldkey with address: {coldkey['address']}")
-    
+
     # Create a hotkey associated with the coldkey
     hotkey = await account_manager.create_hotkey(
         name="my_hippius_hotkey_1",  # Optional custom name
         coldkey_address=coldkey["address"]  # Optional association
     )
-    
+
     print(f"Created hotkey with address: {hotkey['address']}")
-    
+
     # List all coldkeys
     coldkeys = await account_manager.list_coldkeys()
-    
+
     # List hotkeys for a specific coldkey
     hotkeys = await account_manager.list_hotkeys(coldkey_address=coldkey["address"])
 
@@ -884,7 +900,7 @@ Proxy relationships allow hotkeys to act on behalf of coldkeys:
 ```python
 async def proxy_management():
     account_manager = AccountManager()
-    
+
     # Create a proxy relationship on the blockchain
     result = await account_manager.create_proxy_relationship(
         coldkey_address="5H1QBRF7T7dgKwzVGCgS4wioudvMRf9K4NEDzfuKLnuyBNzH",
@@ -892,12 +908,12 @@ async def proxy_management():
         proxy_type="NonTransfer",  # Type of permissions granted
         delay=0  # Blocks before proxy becomes active
     )
-    
+
     # List proxy relationships
     proxies = await account_manager.list_proxies(
         coldkey_address="5H1QBRF7T7dgKwzVGCgS4wioudvMRf9K4NEDzfuKLnuyBNzH"
     )
-    
+
     # Remove a proxy relationship
     result = await account_manager.remove_proxy(
         coldkey_address="5H1QBRF7T7dgKwzVGCgS4wioudvMRf9K4NEDzfuKLnuyBNzH",
@@ -908,9 +924,10 @@ asyncio.run(proxy_management())
 ```
 
 > 🔍 **Power User Info**: Different proxy types grant different permissions:
+>
 > - `NonTransfer`: Can perform operations except transferring funds
 > - Other types may be available depending on the chain configuration
-> 
+>
 > It's recommended to create separate hotkeys for different applications to limit impact if one is compromised.
 
 #### Seed Phrase Management
@@ -920,13 +937,13 @@ For enhanced security, Hippius supports encrypting your seed phrases:
 ```python
 async def seed_management():
     client = HippiusClient()
-    
+
     # Set a seed phrase for the active account
     await client.set_seed_phrase("your twelve word seed phrase here")
-    
+
     # Set with encryption (will prompt for password)
     await client.set_seed_phrase("your twelve word seed phrase here", encode=True)
-    
+
     # Check seed phrase status
     status = await client.get_seed_status()
     print(f"Seed phrase is {'encrypted' if status['encoded'] else 'not encrypted'}")
@@ -935,6 +952,7 @@ asyncio.run(seed_management())
 ```
 
 > 🔍 **Power User Info**: Password-based encryption leverages:
+>
 > - PBKDF2 with SHA-256 for key derivation
 > - Strong cryptography to protect your seed phrase
 > - Your password is never stored, only used temporarily to decrypt
@@ -984,13 +1002,13 @@ async def configuration_management():
     # Get a configuration value
     gateway = get_config_value("ipfs", "gateway")
     print(f"Current gateway: {gateway}")
-    
+
     # Set a configuration value
     set_config_value("ipfs", "gateway", "https://dweb.link")
-    
+
     # Client will automatically use configuration values
     client = HippiusClient()
-    
+
     # Or override specific settings
     client = HippiusClient(ipfs_gateway="https://custom-gateway.example")
 
@@ -998,6 +1016,7 @@ asyncio.run(configuration_management())
 ```
 
 > 🔍 **Power User Info**: Configuration precedence (highest to lowest):
+>
 > 1. Parameters passed directly to the client
 > 2. Environment variables
 > 3. Configuration file values
@@ -1078,7 +1097,7 @@ load_dotenv()
 async def main():
     # Create a client
     client = HippiusClient()
-    
+
     # Test a simple operation
     print("Testing IPFS client...")
     try:
@@ -1131,6 +1150,7 @@ hippius --help
 
 **Problem**: Files not found or gateway timeouts immediately after uploading
 **Solution**:
+
 1. Wait for content to propagate through the IPFS network:
    ```python
    # In Python code
@@ -1143,7 +1163,6 @@ hippius --help
    sleep 60  # Wait 60 seconds before downloading
    hippius download QmCID123 output.txt
    ```
-   
 2. Use the global publishing feature:
    ```bash
    # With CLI
@@ -1154,8 +1173,8 @@ hippius --help
    result = await client.upload_file("myfile.txt")
    await client.ipfs_client.publish_global(result["cid"])
    ```
-   
 3. Implement retry logic for important operations:
+
    ```python
    async def retry_with_backoff(func, max_retries=3):
        for attempt in range(max_retries):
@@ -1167,7 +1186,7 @@ hippius --help
                wait_time = 2 ** attempt  # Exponential backoff
                print(f"Retrying in {wait_time} seconds...")
                await asyncio.sleep(wait_time)
-   
+
    # Use the retry function
    await retry_with_backoff(
        lambda: client.download_file(cid, "output.txt")
@@ -1178,6 +1197,7 @@ hippius --help
 
 **Problem**: Unable to connect to IPFS node
 **Solution**:
+
 1. Check if your IPFS gateway is accessible:
    ```bash
    curl -s https://ipfs.io/ipfs/QmPChd2hVbrJ6bfo3WBcTW4iZnpHm8TEzWkLHmLpXhF68A
@@ -1192,6 +1212,7 @@ hippius --help
 
 **Problem**: Import errors or missing functionality
 **Solution**:
+
 1. Install all extra dependencies:
    ```bash
    pip install hippius[all]
@@ -1207,6 +1228,7 @@ hippius --help
 
 **Problem**: `hippius` command not found after installing
 **Solution**:
+
 1. Check if it's installed:
    ```bash
    pip show hippius
@@ -1225,6 +1247,7 @@ hippius --help
 
 **Problem**: Errors about missing account address
 **Solution**:
+
 1. Set a default address:
    ```bash
    hippius address set-default 5H1QBRF7T7dgKwzVGCgS4wioudvMRf9K4NEDzfuKLnuyBNzH
@@ -1238,6 +1261,7 @@ hippius --help
 
 **Problem**: Errors connecting to Substrate blockchain
 **Solution**:
+
 1. Check your substrate URL:
    ```bash
    hippius config get substrate url
@@ -1252,18 +1276,21 @@ hippius --help
 
 **Problem**: "Wrong length for input blocks"
 **Solution**: This typically happens with very small files. Try smaller k and m values:
+
 ```bash
 hippius erasure-code small_file.txt --k 2 --m 3
 ```
 
 **Problem**: "zfec is required"
 **Solution**: Install the missing package:
+
 ```bash
 pip install zfec
 ```
 
 **Problem**: Slow performance with large files
 **Solution**: Increase chunk size:
+
 ```bash
 hippius erasure-code large_file.mp4 --chunk-size 5242880  # 5MB chunks
 ```
@@ -1273,11 +1300,13 @@ hippius erasure-code large_file.mp4 --chunk-size 5242880  # 5MB chunks
 If you encounter issues not covered here:
 
 1. Check the verbose output:
+
    ```bash
    hippius --verbose command args
    ```
 
 2. Check for common environment issues:
+
    ```bash
    hippius doctor
    ```

@@ -1,5 +1,5 @@
 import cn from "@site/src/utils/cn";
-import { IconGrid } from "../icons";
+import { IconGrid } from "../ui/icons";
 
 type Props = {
   children: React.ReactNode;
