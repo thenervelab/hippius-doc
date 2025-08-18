@@ -24,19 +24,6 @@ const sidebars: SidebarsConfig = {
           ],
           collapsed: false, // Collapsed by default (not yet released)
         },
-        {
-          type: "category",
-          label: "Hippius Desktop App",
-          items: [
-            "learn/desktop/desktop-app", // Desktop App
-            "learn/desktop/using-desktop-app", // Using the Desktop App
-            "learn/desktop/file-system", // File System
-            "learn/desktop/settings", // Desktop App Settings
-            "learn/desktop/wallet", // Hippius Wallet
-            "learn/desktop/referral-system", // Referral System
-          ],
-          collapsed: false, // Collapsed by default (not yet released)
-        },
       ],
     },
     {
@@ -46,6 +33,19 @@ const sidebars: SidebarsConfig = {
         "use/ipfs-website", // Hosting a website on IPFS
         "use/react-ipfs", // Publishing a React app to IPFS
         "use/bridge", // Using the Hippius bridge
+        {
+          type: "category",
+          label: "Hippius Desktop App",
+          items: [
+            "use/desktop/desktop-app", // Desktop App
+            "use/desktop/using-desktop-app", // Using the Desktop App
+            "use/desktop/file-system", // File System
+            "use/desktop/settings", // Desktop App Settings
+            "use/desktop/wallet", // Hippius Wallet
+            "use/desktop/referral-system", // Referral System
+          ],
+          collapsed: false, // Collapsed by default (not yet released)
+        },
       ],
     },
     {

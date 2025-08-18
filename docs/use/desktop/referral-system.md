@@ -2,7 +2,7 @@
 id: referral-system
 title: Hippius Referral System
 sidebar_label: Referral System
-slug: /learn/desktop/referral-system
+slug: /use/desktop/referral-system
 description: 1
 ---
 
