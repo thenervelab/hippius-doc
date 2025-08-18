@@ -77,6 +77,7 @@ export function DocAccordionItem({
             "group w-full flex items-center justify-between text-left",
             isFirst ? "pb-3" : "py-3",
             "outline-none"
+            // "hover:bg-grey-80 hover:px-3 hover:pt-3 rounded transition-all duration-200"
           )}
         >
           <h2 className="!mb-0">{header}</h2>

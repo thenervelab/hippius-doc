@@ -2,7 +2,7 @@
 id: desktop-app
 title: Hippius Desktop App
 sidebar_label: Desktop App
-slug: /learn/desktop/desktop-app
+slug: /use/desktop/desktop-app
 ---
 
 import Ordered from '@site/src/components/Ordered';

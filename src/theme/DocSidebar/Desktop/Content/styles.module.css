@@ -6,7 +6,10 @@
   @supports (scrollbar-gutter: stable) {
     .menu {
       /* padding: 0.5rem 0 0.5rem 0.5rem; */
-      scrollbar-gutter: stable;
+      scrollbar-gutter: stable both-edges;
+
+      /* Always keep at least the scrollbar width as padding on the end side */
+      padding-inline-end: max(0.5rem, 0px);
     }
   }
 

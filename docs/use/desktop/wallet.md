@@ -2,7 +2,7 @@
 id: wallet
 title: Wallet
 sidebar_label: Wallet
-slug: /learn/desktop/wallet
+slug: /use/desktop/wallet
 ---
 
 import Ordered from '@site/src/components/Ordered';
