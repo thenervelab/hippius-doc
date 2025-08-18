@@ -71,13 +71,17 @@ export function DocAccordionItem({
 
   return (
     <Accordion.Item value={value} className={cn(className)}>
-      <Accordion.Header className="!mb-0">
+      <Accordion.Header
+        className={cn("!mb-0", {
+          "border-t border-grey-80": !isFirst,
+        })}
+      >
         <Accordion.Trigger
           className={cn(
-            "group w-full flex items-center justify-between text-left",
-            isFirst ? "pb-3" : "py-3",
-            "outline-none"
-            // "hover:bg-grey-80 hover:px-3 hover:pt-3 rounded transition-all duration-200"
+            "group w-full flex items-center justify-between text-left rounded transition-all",
+            isFirst ? "pb-6 hover:mb-3" : "py-6 hover:my-3",
+            "outline-none",
+            "hover:bg-primary-100 hover:px-3 hover:pt-3 hover:pb-3 duration-200 hover:text-[#1F51BE]"
           )}
         >
           <h2 className="!mb-0">{header}</h2>
@@ -85,7 +89,7 @@ export function DocAccordionItem({
           {/* Your icon */}
           <div className="ml-3 h-5 w-5 rounded border-[1.5px] border-grey-10 flex items-center justify-center">
             <Icons.ArrowDown
-              className="shrink-0 transition-transform duration-200 ease-out group-data-[state=open]:rotate-180"
+              className="shrink-0 transition-transform duration-200 ease-out group-data-[state=open]:rotate-180 text-grey-10"
               aria-hidden
             />
           </div>
@@ -93,7 +97,7 @@ export function DocAccordionItem({
       </Accordion.Header>
 
       <Accordion.Content className="overflow-hidden will-change-[height,opacity,transform] AccordionContent">
-        <div className="markdown mb-3">{content}</div>
+        <div className="markdown mb-6">{content}</div>
       </Accordion.Content>
     </Accordion.Item>
   );

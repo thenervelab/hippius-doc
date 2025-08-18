@@ -1,7 +1,7 @@
 ---
 id: settings
-title: Desktop App Settings
-sidebar_label: Desktop App Settings
+title: App Settings
+sidebar_label: App Settings
 slug: /use/desktop/settings
 description: 5
 ---

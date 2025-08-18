@@ -27,7 +27,7 @@ Private files take the default encryption key which can be changed in the [Encry
 ### Uploading Private Files {#uploading-private-files}
 
 <Ordered>
-  <li>Double click the Hippius <Icon /> icon to open the app.</li>
+  <li>Double click the <Icon /> icon to open the app.</li>
   <li>Click on <BgStyledIconWithText text="Files" icon="DocumentText" /> and select <BgStyledText>Private</BgStyledText>.</li>
   <li>Click the <BgStyledText>Upload File</BgStyledText> button.</li>
   <li>Enter an encryption key to secure your files. If left blank, Hippius will automatically use the default encryption key.</li>
@@ -37,7 +37,7 @@ Private files take the default encryption key which can be changed in the [Encry
 ### Uploading Private Folders {#uploading-private-folders}
 
 <Ordered>
-  <li>Double click the Hippius <Icon /> icon to open the app.</li>
+  <li>Double click the <Icon /> icon to open the app.</li>
   <li>Click on <BgStyledIconWithText text="Files" icon="DocumentText" /> and select <BgStyledText>Private</BgStyledText>.</li>
   <li>Click <BgStyledText>Add Folder</BgStyledText> button.</li>
   <li>Select the folder location and enter an optional encryption key.</li>
@@ -51,7 +51,7 @@ Public files do not use any encryption and are accessible to the public. We reco
 ### Uploading Public Files {#uploading-public-files}
 
 <Ordered>
-  <li>Double click the Hippius <Icon /> icon to open the app.</li>
+  <li>Double click the <Icon /> icon to open the app.</li>
   <li>Click on <BgStyledIconWithText text="Files" icon="DocumentText" /> and select <BgStyledText>Public</BgStyledText>.</li>
   <li>Click <BgStyledText>Upload File</BgStyledText> button.</li>
   <li>Click <BgStyledText>Upload File</BgStyledText> button in the modal to start the uploading process.</li>
@@ -60,7 +60,7 @@ Public files do not use any encryption and are accessible to the public. We reco
 ### Uploading Public Folders {#uploading-public-folders}
 
 <Ordered>
-  <li>Double click the Hippius <Icon /> icon to open the app.</li>
+  <li>Double click the <Icon /> icon to open the app.</li>
   <li>Click on <BgStyledIconWithText text="Files" icon="DocumentText" /> and select <BgStyledText>Public</BgStyledText>.</li>
   <li>Click <BgStyledText>Add Folder</BgStyledText> button.</li>
   <li>Click <BgStyledText>Upload Folder</BgStyledText> button in the modal to start the uploading process.</li>
