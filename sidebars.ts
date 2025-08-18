@@ -38,9 +38,9 @@ const sidebars: SidebarsConfig = {
           label: "Hippius Desktop App",
           items: [
             "use/desktop/desktop-app", // Desktop App
-            "use/desktop/using-desktop-app", // Using the Desktop App
+            "use/desktop/using-the-app", // Using the App
             "use/desktop/file-system", // File System
-            "use/desktop/settings", // Desktop App Settings
+            "use/desktop/settings", // App Settings
             "use/desktop/wallet", // Hippius Wallet
             "use/desktop/referral-system", // Referral System
           ],

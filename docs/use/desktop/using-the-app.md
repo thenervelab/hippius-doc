@@ -1,8 +1,8 @@
 ---
-id: using-desktop-app
-title: Using the Desktop App
-sidebar_label: Using the Desktop App
-slug: /use/desktop/using-desktop-app
+id: using-the-app
+title: Using the App
+sidebar_label: Using the App
+slug: /use/desktop/using-the-app
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -30,7 +30,7 @@ When you are done, click on the <BgStyledText>Sync Folder</BgStyledText> button 
 ### Change Folder for File Sync
 
 <Ordered>
-  <li>Double click the Hippius <Icon /> icon to open the app.</li>
+  <li>Double click the <Icon /> icon to open the app.</li>
   <li>Click on the <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
   <li>Click on the <BgStyledIconWithText text="File Settings" icon="File" />.</li>
   <li>Choose the new folder you want to use and click the <BgStyledText>Sync Folder</BgStyledText> button.</li>
