@@ -130,7 +130,7 @@ function HomepageHeader() {
             Get Started
           </Button>
           <Button asLink href={URLS.DASHBOARD} variant="ghost" size="lg">
-            Try Free Storage
+            Access Console
           </Button>
         </div>
       </div>
