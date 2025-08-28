@@ -173,6 +173,22 @@ If files are edited or removed, those changes will be synced automatically.</p>
 </>
 </DocAccordionItem>
 
+## Session Timeout
+
+<DocAccordionItem value="session-timeout">
+  <>
+  Session Timeout
+  </>
+  <>
+    <p>The session timeout determines how long you stay signed in before being automatically logged out. We recommend choosing a duration that balances security and convenience.</p>
+
+    <p><strong>Note: The passcode is only required on the first login. The app will keep you signed in for the set duration (default 24 hours, adjustable) without prompting again during that period.</strong></p>
+
+    ![Session Timeout screen](/img/desktop/session-timeout.png)
+
+</>
+</DocAccordionItem>
+
 ## Backup App Data
 
 <DocAccordionItem value="backup">
