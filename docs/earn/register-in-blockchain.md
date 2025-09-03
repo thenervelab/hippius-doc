@@ -35,7 +35,7 @@ hippius-env\Scripts\activate
 ### 2: Install Hippius CLI Package
 
 ```bash
-pip install hippius==0.2.49
+pip install hippius
 ```
 
 ### 3: Preparing Node Information
@@ -83,7 +83,7 @@ Replace the parameters accordingly:
 - `--node-type`: One of `StorageMiner`, `Validator`, `ComputeMiner`
 - `--ipfs-peer-id`: Your IPFS node ID as string
 - `--ipfs-priv-b64`: Your IPFS private key in base64
-- `--block-width`: Block width parameter (u64 integer, usually depends on network config)
+- `--block-width`: Block width parameter (u64 integer)
 
 ---
 
