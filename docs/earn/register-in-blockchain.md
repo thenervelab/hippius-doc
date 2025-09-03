@@ -32,10 +32,16 @@ On Windows use:
 hippius-env\Scripts\activate
 ```
 
-### 2: Install Hippius CLI Package
+### 2: Install and login to Hippius CLI
 
 ```bash
 pip install hippius
+
+# Give your account a name, have your seed phrase handy, encrypt it and don't forget the password
+hippius account login
+
+# You should now be able to see your newly added account by doing
+hippius account list
 ```
 
 ### 3: Preparing Node Information
@@ -116,7 +122,6 @@ hippius miner verify-node \
 --node-priv-hex <node-private-hex> \
 --ipfs-peer-id <ipfs-node-id> \
 --ipfs-priv-b64 "<ipfs-private-key-base64>" \
---node-type <node-type> \
 --block-width <u64>
 ```
 
@@ -132,7 +137,6 @@ hippius miner verify-coldkey-node \
 --node-priv-hex <node-private-hex> \
 --ipfs-peer-id <ipfs-node-id> \
 --ipfs-priv-b64 "<ipfs-private-key-base64>" \
---node-type <node-type> \
 --block-width <u64>
 ```
 

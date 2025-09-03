@@ -66,11 +66,23 @@ poetry add hippius
 # With clipboard support for encryption key utility
 poetry add hippius -E clipboard
 ```
-
 To verify the installation:
 
 ```bash
 hippius --version
+```
+
+### Logging in
+Have your seed phrase ready and then run:
+```bash
+# You _should_ encrypt it, pick a password and remember it, you will use it later
+hippius account login
+```
+
+You can verify you configured your account properly by doing:
+
+```bash
+hippius account list
 ```
 
 ---
