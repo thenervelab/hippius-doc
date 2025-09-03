@@ -1,87 +1,171 @@
 # Registering in the Hippius Blockchain
 
-After setting up your validator or storage miner node, you need to register it in the Hippius blockchain to start participating in the network and earning rewards. This guide walks you through the registration process using Polkadot.js Apps, which is currently the only available method for node registration.
+After setting up your validator or storage miner node, you need to register it in the Hippius blockchain to start participating in the network and earning rewards. This guide walks you through the updated registration process using the new Hippius CLI Python tool, which is now the primary method for node registration. The old Polkadot.js Apps method is still available but has been deprecated in favor of this streamlined CLI approach.
 
 ## Prerequisites
 
 Before registering, ensure you have:
 
 - A running validator or storage miner node
-- HIPS key properly configured (see [Installing Validator](installing-validator.md) or [Storage Miner](storage-miner.md) guides)
-- Access to Polkadot.js Apps and the Polkadot.js browser extension
+- Node keys properly configured (see [Installing Validator](installing-validator.md) or [Storage Miner](storage-miner.md) guides)
+- Python 3.7+ installed on your system
+- Access to the Hippius CLI Python package (`hippius` version `0.2.49` or later)
 - Alpha tokens for registration fees and staking
+- IPFS node set up and configured (if applicable)
 
-## Registration via Polkadot.js Apps
+---
 
-### Step 1: Access Polkadot.js Apps
+## Updated Registration Process Using Hippius CLI (Python)
 
-1. Go to the [Polkadot.js Apps](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network#/extrinsics) https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network#/extrinsics connected to the Hippius network
-2. Ensure you're connected to the Hippius network endpoint: `wss://rpc.hippius.network`
-3. Connect your wallet using the Polkadot.js extension
+###  1: Create and Activate Python Virtual Environment
 
-### Step 2: Navigate to Extrinsics
+It is recommended to create a clean Python environment for the Hippius CLI tool.
 
-1. From the top navigation menu, select "Developer"
-2. Click on "Extrinsics"
-3. In the extrinsics submission form, you'll see options to select an account and the extrinsic to submit
+python3 -m venv hippius-env
+source hippius-env/bin/activate # Linux/macOS
 
-### Step 3: Configure the Registration Extrinsic
+On Windows use:
+hippius-env\Scripts\activate
+text
 
-1. From the "submit the following extrinsic" dropdown, select `registration` → `registerNodeWithColdKey(nodeType, nodeId, payInCredits, ipfsNodeId)`
+###  2: Install Hippius CLI Package
 
-2. Configure the parameters:
-   - **nodeType**: Select the appropriate type:
-     - `StorageMiner` for IPFS or S3 storage miners
-     - `Validator` for validator nodes
-     - `ComputeMiner` for compute nodes
+pip install hippius==0.2.49
 
-   - **nodeId**: Enter your node's ID in string format
-     - This is the ID of your Hippius node generated during node setup
-     - Format should be like: `1......` (not the hexadecimal format)
-     - You can also use the file upload option to select a key file
+text
 
-   - **payInCredits**: Boolean indicating whether to pay in credits (default: false to pay in Alpha)
-   
-   - **ipfsNodeId**: Your IPFS node ID  in string format
+###  3: Preparing Node Information
 
-### Step 4: Submit the Transaction
+- Get your substrate node key info by inspecting or generating keys:
 
-1. Review all entries for accuracy
-2. Click "Submit Transaction"
-3. Review the transaction details in the confirmation window
-4. Sign the transaction with your account
+Inspect existing node key
+./hippius key inspect-node-key --file <node-key-path>
 
-### Step 5: Confirm Registration
+Or generate a new node key
+./hippius key generate-node-key
 
-1. Check that the transaction is included in a block
-2. Verify your node registration was successful by navigating to "Network" → "Explorer" 
-3. Look for your extrinsic in recent transactions
+text
 
-## Node Type Details
+- Obtain IPFS node ID and private key in base64 format from your IPFS config:
 
-Different node types serve different functions in the Hippius network:
+sudo cat ~/.ipfs/config
 
-- **Validator Node**: For block production and validation
-- **Storage Miner (IPFS)**: For decentralized IPFS storage
-- **Storage Miner (S3)**: For S3-compatible storage
-- **Compute Miner**: For computation resources (future)
+text
 
+---
 
-## Verifying Registration
+###  4: Register Coldkey Node
 
-After registration, verify your node appears on the network:
+Use the following command to register your coldkey node (coldkeys control staking and governance keys):
 
-1. In Polkadot.js Apps, go to "Developer" → "Chain state"
-2. Query the registration pallet to verify your node ID is registered
+hippius miner register-coldkey
+--node-id <substrate-node-id>
+--node-priv-hex <substrate-node-private-hex>
+--node-type StorageMiner
+--ipfs-peer-id <ipfs-node-id>
+--ipfs-priv-b64 "<ipfs-private-key-base64>"
+--block-width <u64>
 
+text
+
+Replace the parameters accordingly:
+
+- `--node-id`: Your substrate node ID (not hex)
+- `--node-priv-hex`: Your substrate private key in hex format
+- `--node-type`: One of `StorageMiner`, `Validator`, `ComputeMiner`
+- `--ipfs-peer-id`: Your IPFS node ID as string
+- `--ipfs-priv-b64`: Your IPFS private key in base64
+- `--block-width`: Block width parameter (u64 integer, usually depends on network config)
+
+---
+
+###  5: Register Hotkey Node
+
+The hotkey is used for operational actions like block signing. Register it with:
+
+hippius miner register-hotkey
+--node-id <substrate-node-id>
+--node-priv-hex <substrate-node-private-hex>
+--node-type <node-type>
+--ipfs-peer-id <ipfs-node-id>
+--ipfs-priv-b64 "<ipfs-private-key-base64>"
+--block-width <u64>
+--coldkey <coldkey-address>
+
+text
+
+- Include the `--coldkey` parameter with the coldkey address registered as Coldkey.
+
+---
+
+###  6: Verify Registered Hotkey Node
+
+Verify your hotkey node registration by running:
+
+hippius miner verify-node
+--node-id <node-id>
+--node-priv-hex <node-private-hex>
+--ipfs-peer-id <ipfs-node-id>
+--ipfs-priv-b64 "<ipfs-private-key-base64>"
+--node-type <node-type>
+--block-width <u64>
+
+text
+
+---
+
+###  7: Verify Registered Coldkey Node
+
+Similarly, verify the coldkey node registration:
+
+hippius miner verify-coldkey-node
+--node-id <node-id>
+--node-priv-hex <node-private-hex>
+--ipfs-peer-id <ipfs-node-id>
+--ipfs-priv-b64 "<ipfs-private-key-base64>"
+--node-type <node-type>
+--block-width <u64>
+
+text
+
+---
+
+## Optional: Previous Registration Method Using Polkadot.js Apps
+
+The previous Polkadot.js Apps method is still available but deprecated. For reference:
+
+1. Visit [Polkadot.js Apps](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network#/extrinsics)
+2. Connect to `wss://rpc.hippius.network`
+3. Navigate to **Developer** → **Extrinsics**
+4. Select the extrinsic: `registration` → `registerNodeWithColdKey(nodeType, nodeId, payInCredits, ipfsNodeId)`
+5. Enter parameters accordingly
+6. Submit and sign the transaction
+7. Verify registration on chain explorer
+
+---
+
+## Node Type Descriptions
+
+- **Validator**: For block production and validation
+- **StorageMiner**: For decentralized IPFS or S3 storage
+- **ComputeMiner**: For compute resource nodes (future functionality)
+
+---
+
+## Verifying Registration on Chain
+
+After registration, confirm your node is recognized:
+
+1. In Polkadot.js Apps, go to **Developer** → **Chain state**
+2. Query the registration pallet for your node ID
+
+---
 
 ## Next Steps
 
-After successful registration:
+- Continuously monitor your node's health and status.
+- Set up monitoring tools for uptime and performance.
+- Optimize configuration to maximize rewards.
+- Stay updated with Hippius network upgrades and documentation.
 
-1. Monitor your node's status
-2. Set up additional monitoring tools
-3. Optimize performance for better rewards
-4. Stay updated with network upgrades and changes
-
-Remember that your node must remain online and in good standing to earn rewards and maintain its registration status. 
+**Note:** Your node must remain online and in good standing to keep earning rewards and maintain registration status.
