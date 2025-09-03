@@ -17,56 +17,64 @@ Before registering, ensure you have:
 
 ## Updated Registration Process Using Hippius CLI (Python)
 
-###  1: Create and Activate Python Virtual Environment
+### 1: Create and Activate Python Virtual Environment
 
 It is recommended to create a clean Python environment for the Hippius CLI tool.
 
+```bash
 python3 -m venv hippius-env
 source hippius-env/bin/activate # Linux/macOS
+```
 
 On Windows use:
+
+```bash
 hippius-env\Scripts\activate
-text
+```
 
-###  2: Install Hippius CLI Package
+### 2: Install Hippius CLI Package
 
+```bash
 pip install hippius==0.2.49
+```
 
-text
-
-###  3: Preparing Node Information
+### 3: Preparing Node Information
 
 - Get your substrate node key info by inspecting or generating keys:
 
-Inspect existing node key
+Inspect existing node key:
+
+```bash
 ./hippius key inspect-node-key --file <node-key-path>
+```
 
-Or generate a new node key
+Or generate a new node key:
+
+```bash
 ./hippius key generate-node-key
-
-text
+```
 
 - Obtain IPFS node ID and private key in base64 format from your IPFS config:
 
+```bash
 sudo cat ~/.ipfs/config
-
-text
+```
 
 ---
 
-###  4: Register Coldkey Node
+### 4: Register Coldkey Node
 
 Use the following command to register your coldkey node (coldkeys control staking and governance keys):
 
-hippius miner register-coldkey
---node-id <substrate-node-id>
---node-priv-hex <substrate-node-private-hex>
---node-type StorageMiner
---ipfs-peer-id <ipfs-node-id>
---ipfs-priv-b64 "<ipfs-private-key-base64>"
+```bash
+hippius miner register-coldkey \
+--node-id <substrate-node-id> \
+--node-priv-hex <substrate-node-private-hex> \
+--node-type StorageMiner \
+--ipfs-peer-id <ipfs-node-id> \
+--ipfs-priv-b64 "<ipfs-private-key-base64>" \
 --block-width <u64>
-
-text
+```
 
 Replace the parameters accordingly:
 
@@ -79,54 +87,54 @@ Replace the parameters accordingly:
 
 ---
 
-###  5: Register Hotkey Node
+### 5: Register Hotkey Node
 
 The hotkey is used for operational actions like block signing. Register it with:
 
-hippius miner register-hotkey
---node-id <substrate-node-id>
---node-priv-hex <substrate-node-private-hex>
---node-type <node-type>
---ipfs-peer-id <ipfs-node-id>
---ipfs-priv-b64 "<ipfs-private-key-base64>"
---block-width <u64>
+```bash
+hippius miner register-hotkey \
+--node-id <substrate-node-id> \
+--node-priv-hex <substrate-node-private-hex> \
+--node-type <node-type> \
+--ipfs-peer-id <ipfs-node-id> \
+--ipfs-priv-b64 "<ipfs-private-key-base64>" \
+--block-width <u64> \
 --coldkey <coldkey-address>
-
-text
+```
 
 - Include the `--coldkey` parameter with the coldkey address registered as Coldkey.
 
 ---
 
-###  6: Verify Registered Hotkey Node
+### 6: Verify Registered Hotkey Node
 
 Verify your hotkey node registration by running:
 
-hippius miner verify-node
---node-id <node-id>
---node-priv-hex <node-private-hex>
---ipfs-peer-id <ipfs-node-id>
---ipfs-priv-b64 "<ipfs-private-key-base64>"
---node-type <node-type>
+```bash
+hippius miner verify-node \
+--node-id <node-id> \
+--node-priv-hex <node-private-hex> \
+--ipfs-peer-id <ipfs-node-id> \
+--ipfs-priv-b64 "<ipfs-private-key-base64>" \
+--node-type <node-type> \
 --block-width <u64>
-
-text
+```
 
 ---
 
-###  7: Verify Registered Coldkey Node
+### 7: Verify Registered Coldkey Node
 
 Similarly, verify the coldkey node registration:
 
-hippius miner verify-coldkey-node
---node-id <node-id>
---node-priv-hex <node-private-hex>
---ipfs-peer-id <ipfs-node-id>
---ipfs-priv-b64 "<ipfs-private-key-base64>"
---node-type <node-type>
+```bash
+hippius miner verify-coldkey-node \
+--node-id <node-id> \
+--node-priv-hex <node-private-hex> \
+--ipfs-peer-id <ipfs-node-id> \
+--ipfs-priv-b64 "<ipfs-private-key-base64>" \
+--node-type <node-type> \
 --block-width <u64>
-
-text
+```
 
 ---
 
