@@ -46,19 +46,23 @@ hippius account list
 
 ### 3: Preparing Node Information
 
-- Get your substrate node key info by inspecting or generating keys:
+**Choose based on your situation:**
 
-Inspect existing node key:
-
+#### If you already have a running node (most common):
 ```bash
-./hippius key inspect-node-key --file <node-key-path>
+# Use existing keys - get your current node ID
+/opt/hippius/bin/hippius key inspect-node-key --file /opt/hippius/data/chains/hippius_mainnet/network/secret_ed25519
 ```
 
-Or generate a new node key:
-
-```bash
-./hippius key generate-node-key
+#### If you're setting up fresh OR need to replace corrupted keys:
+```bash  
+# Generate new keys (⚠️ This creates a NEW identity)
+/opt/hippius/bin/hippius key generate-node-key --file /opt/hippius/data/chains/hippius_mainnet/network/secret_ed25519
 ```
+
+⚠️ **Warning:** Generating new keys on an existing validator will change your node identity and break your current registration.
+
+The output will show your node's peer ID and private key in hex format. Save both values - you'll need them for registration.
 
 - Obtain IPFS node ID and private key in base64 format from your IPFS config:
 
@@ -84,8 +88,8 @@ hippius miner register-coldkey \
 
 Replace the parameters accordingly:
 
-- `--node-id`: Your substrate node ID (not hex)
-- `--node-priv-hex`: Your substrate private key in hex format
+- `--node-id`: Your substrate node ID from step 3 (peer ID format, not hex)
+- `--node-priv-hex`: Your substrate private key in hex format from step 3
 - `--node-type`: One of `StorageMiner`, `Validator`, `ComputeMiner`
 - `--ipfs-peer-id`: Your IPFS node ID as string
 - `--ipfs-priv-b64`: Your IPFS private key in base64
