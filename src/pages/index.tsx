@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import { H1, P, H4 } from "@site/src/components/typography";
+import { H1, P } from "@site/src/components/typography";
 
 import Graphsheet from "../components/graphsheet";
 import Button from "../components/button";
@@ -160,9 +160,9 @@ function HomepageFeatures() {
           <P size="sm" className="text-center font-digital">
             categories
           </P>
-          <H4 className="mt-4 text-grey-10 max-w-screen-sm text-center">
+          <h2 className="text-3xl lg:text-4xl font-medium font-grotesk mt-4 text-grey-10 max-w-screen-sm text-center">
             Learn various aspects of the Hippius infrastructure
-          </H4>
+          </h2>
           <div className="flex gap-8 mt-8 items-center flex-wrap justify-center max-w-screen-xl w-full mx-auto">
             {CATEGORIES.map((offering, i) => (
               <div
@@ -213,9 +213,9 @@ function HomepageFeatures() {
           <P size="sm" className="text-center font-digital">
             Hippius: A Smarter Cloud
           </P>
-          <H4 className="mt-4 text-grey-10 max-w-screen-sm text-center">
+          <h2 className="text-3xl lg:text-4xl font-medium font-grotesk mt-4 text-grey-10 max-w-screen-sm text-center">
             Hippius is the solution to storage on Bittensor
-          </H4>
+          </h2>
           <div className="flex gap-8 mt-10 flex-wrap justify-center max-w-screen-xl w-full mx-auto">
             {SMARTER_CLOUD.map((offering, i) => (
               <div

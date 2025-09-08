@@ -1,8 +1,7 @@
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
-const { version } = require('./package.json');
-
+const { version } = require("./package.json");
 
 // Node.js environment - no browser APIs/JSX
 
@@ -41,6 +40,7 @@ const config: Config = {
         },
       };
     },
+    require.resolve("./plugins/inline-critical-css.cjs"),
   ],
 
   // Add custom scripts
@@ -84,7 +84,7 @@ const config: Config = {
       title: "Hippius",
       logo: {
         alt: "Hippius Logo",
-        src: "img/logo.png", // Add Hippius logo
+        src: "img/logo.svg",
       },
       items: [
         // {
@@ -167,7 +167,6 @@ const config: Config = {
               label: "Hipstats",
               href: "https://hipstats.com",
             },
-            
           ],
         },
         {
