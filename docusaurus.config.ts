@@ -8,7 +8,7 @@ const { version } = require("./package.json");
 const config: Config = {
   title: "Hippius Docs",
   tagline: "Transparent, Decentralized, Anonymous Cloud Storage",
-  favicon: "img/logo.png", // Update with Hippius favicon
+  favicon: "img/favicon.ico",
 
   url: "https://docs.hippius.io",
   baseUrl: "/",
