@@ -11,10 +11,7 @@ const Graph: React.FC<
     <div className={cn("w-full h-full", className)}>
       <canvas
         ref={canvasRef}
-        className={cn(
-          "w-full h-full opacity-0 duration-1000",
-          loaded && "opacity-1"
-        )}
+        className={cn("w-full h-full opacity-0", loaded && "opacity-1")}
       ></canvas>
     </div>
   );

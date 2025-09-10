@@ -201,7 +201,7 @@ function HomepageFeatures() {
             lineWidth: 1,
             cellDim: 20,
           }}
-          className="absolute w-full h-full  opacity-15"
+          className="absolute w-full h-full opacity-15"
         />
         <div className="bg-white-cloud-gradient absolute w-full h-full" />
         <div className="flex flex-col text-grey-40 items-center relative justify-center w-full h-full pt-14 pb-10">
