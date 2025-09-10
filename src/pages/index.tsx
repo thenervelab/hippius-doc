@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 
 import Link from "@docusaurus/Link";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import { H1, P } from "@site/src/components/typography";
 
@@ -79,7 +78,6 @@ export const SMARTER_CLOUD: SmallCardInfo[] = [
 ];
 
 function HomepageHeader() {
-  const { siteConfig } = useDocusaurusContext();
   return (
     <header className="relative text-white justify-center min-h-[800px] lg:min-h-[auto] bg-primary-50 flex flex-col px-6 pt-20 pb-40 items-center w-full">
       <div className="absolute w-full top-0 h-full opacity-5">
@@ -119,7 +117,7 @@ function HomepageHeader() {
           Learn how Hippius works with our documentation
         </H1>
 
-        <div className="flex gap-y-5 delay-700 duration-500 flex-wrap relative items-center justify-center mt-8">
+        <div className="flex gap-y-5  flex-wrap relative items-center justify-center mt-8">
           <Button
             asLink
             href={URLS.LEARN}
@@ -153,7 +151,7 @@ function HomepageFeatures() {
             lineWidth: 1,
             cellDim: 20,
           }}
-          className="absolute w-full h-full duration-500 opacity-15"
+          className="absolute w-full h-full opacity-15"
         />
         <div className="bg-white-cloud-gradient absolute w-full h-full" />
         <div className="flex flex-col text-grey-40 items-center relative justify-center w-full h-full mt-0 md:pt-14 pb-10">
@@ -169,16 +167,13 @@ function HomepageFeatures() {
                 className="flex flex-col items-center font-medium max-w-[300px] md:max-w-[250px] border rounded-lg py-4 px-12 border-grey-80 bg-grey-100 md:px-0 md:py-0 md:border-none md:bg-transparent"
                 key={i}
               >
-                <AbstractIconWrapper className="size-10 duration-500 delay-300">
+                <AbstractIconWrapper className="size-10 ">
                   {offering.icon}
                 </AbstractIconWrapper>
                 <P className="mt-4" size="lg">
                   {offering.title}
                 </P>
-                <P
-                  className="mt-2 text-grey-50 text-center duration-500 delay-700"
-                  size="sm"
-                >
+                <P className="mt-2 text-grey-50 text-center " size="sm">
                   {offering.description}
                 </P>
                 <Link
@@ -206,7 +201,7 @@ function HomepageFeatures() {
             lineWidth: 1,
             cellDim: 20,
           }}
-          className="absolute w-full h-full duration-500 opacity-15"
+          className="absolute w-full h-full  opacity-15"
         />
         <div className="bg-white-cloud-gradient absolute w-full h-full" />
         <div className="flex flex-col text-grey-40 items-center relative justify-center w-full h-full pt-14 pb-10">
@@ -222,23 +217,20 @@ function HomepageFeatures() {
                 className="flex flex-col items-center font-medium max-w-72"
                 key={i}
               >
-                <AbstractIconWrapper className="size-10 duration-500 delay-300">
+                <AbstractIconWrapper className="size-10">
                   {offering.icon}
                 </AbstractIconWrapper>
                 <P className="mt-4" size="lg">
                   {offering.title}
                 </P>
-                <P
-                  className="mt-2 text-grey-50 text-center duration-500 delay-700"
-                  size="sm"
-                >
+                <P className="mt-2 text-grey-50 text-center" size="sm">
                   {offering.description}
                 </P>
               </div>
             ))}
           </div>
           <Button
-            className="mt-8 duration-500 delay-500"
+            className="mt-8"
             icon={<Icons.ArrowRight />}
             asLink
             href={URLS.DASHBOARD}
