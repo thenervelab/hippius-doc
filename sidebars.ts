@@ -43,6 +43,7 @@ const sidebars: SidebarsConfig = {
             "use/desktop/file-system", // File System
             "use/desktop/settings", // App Settings
             "use/desktop/wallet", // Hippius Wallet
+            "use/desktop/billing", // Billing
             "use/desktop/referral-system", // Referral System
           ],
           collapsed: false, // Collapsed by default (not yet released)
