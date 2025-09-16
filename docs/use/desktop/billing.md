@@ -21,9 +21,9 @@ To add credits to your account we direct you to our web app where you can choose
 ### Add Credits
 
 <Ordered>
-  <li>Double click the <Icon /> icon to open the app</li>
-  <li>Click on <BgStyledIconWithText text="Billing" icon="Billing" /></li>
-  <li>Click the <BgStyledText>Add Credits</BgStyledText> button which takes you to the console to complete the process</li>
+  <li>Double click the <Icon /> icon to open the app.</li>
+  <li>Click on <BgStyledIconWithText text="Billing" icon="Billing" />.</li>
+  <li>Click the <BgStyledText>Add Credits</BgStyledText> button which takes you to the console to complete the process.</li>
 </Ordered>
 
 ## Subscribe to a Plan
@@ -31,10 +31,10 @@ To add credits to your account we direct you to our web app where you can choose
 You can choose a plan to subcribe to that is renewed every month. You can choose from the 3 Credits, 15 Credits, 150 Credits and 450 Credits plans
 
 <Ordered>
-  <li>Double click the <Icon /> icon to open the app</li>
-  <li>Click on <BgStyledIconWithText text="Billing" icon="Billing" /></li>
-  <li>Click on <BgStyledText>Subscribe to a Plan</BgStyledText> button</li>
-  <li>Select Subscribe on the desired plan where you are directed to pay with Stripe</li>
+  <li>Double click the <Icon /> icon to open the app.</li>
+  <li>Click on <BgStyledIconWithText text="Billing" icon="Billing" />.</li>
+  <li>Click on <BgStyledText>Subscribe to a Plan</BgStyledText> button.</li>
+  <li>Select Subscribe on the desired plan where you are directed to pay with Stripe.</li>
 </Ordered>
 
 ## Manage Subscription
