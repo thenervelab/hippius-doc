@@ -160,10 +160,6 @@ const config: Config = {
               to: "/use/react-ipfs",
             },
             {
-              label: "Account Management",
-              to: "/use/account-management",
-            },
-            {
               label: "Hipstats",
               href: "https://hipstats.com",
             },

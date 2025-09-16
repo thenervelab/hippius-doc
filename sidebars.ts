@@ -18,6 +18,7 @@ const sidebars: SidebarsConfig = {
           label: "Core Technologies",
           items: [
             "learn/substrate", //substrate
+            "learn/substrate-staking", //substrate
             "learn/mnemonic-auth", // Mnemonic Authentication
             "learn/encryption", // Encryption System
             "learn/storage-systems", // Decentralized Storage Systems

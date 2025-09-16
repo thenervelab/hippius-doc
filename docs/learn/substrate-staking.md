@@ -1,4 +1,5 @@
 ---
+sidebar_label: Substrate & Staking
 sidebar_position: 3
 ---
 
@@ -11,6 +12,7 @@ An accessible guide to the core technologies powering the Hippius network.
 Substrate is a modular blockchain development framework created by Parity Technologies. It provides a flexible foundation for building custom blockchains without having to implement every component from scratch.
 
 **Key benefits of Substrate for Hippius:**
+
 - **Modularity**: Customizable runtime modules (pallets) for specific functionality
 - **Upgradability**: Forkless runtime upgrades via on-chain governance
 - **Performance**: Efficient, lightweight client with WebAssembly execution
@@ -23,6 +25,7 @@ Hippius leverages Substrate's architecture to deliver a specialized blockchain o
 Blind Assignment for Blockchain Extension (BABE) is the consensus protocol used by Hippius to determine block production rights.
 
 **How BABE works:**
+
 1. **Epoch-based timing**: The chain is divided into epochs (time periods)
 2. **VRF-based slot assignment**: Validators use Verifiable Random Functions to determine if they have the right to produce a block in a given slot
 3. **Probabilistic finality**: Initially provides probabilistic finality
@@ -35,12 +38,14 @@ This hybrid approach ensures both consistent block production and fast finality,
 Hippius uses Nominated Proof-of-Stake to secure the network and distribute block rewards efficiently.
 
 **Key components of NPoS:**
+
 1. **Validators**: Node operators who produce blocks and validate transactions
 2. **Nominators**: Token holders who stake their tokens to support validators
 3. **Stake-weighted selection**: Validators are selected based on total stake (their own plus nominations)
 4. **Reward distribution**: Rewards are distributed proportionally to stake
 
 **Benefits of NPoS:**
+
 - More energy-efficient than Proof-of-Work systems
 - Broader participation than traditional Proof-of-Stake
 - Economic security through stake slashing for malicious behavior
@@ -59,6 +64,7 @@ Staking on Hippius creates a robust economic model that aligns incentives for ne
 ### Revenue Distribution
 
 Marketplace revenue is distributed according to the following allocation:
+
 - **60%** to miners who provide storage and compute resources
 - **30%** to validators and stakers who secure the network
 - **10%** to treasury for ongoing development and ecosystem growth
