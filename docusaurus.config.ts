@@ -108,14 +108,14 @@ const config: Config = {
           position: "left",
         },
         {
+          to: "/blockchain/intro",
+          label: "Develop",
+          position: "left",
+        },
+        {
           type: "html",
           position: "right",
           value: '<div style="width: 20px;"></div>', // Spacer for visual separation
-        },
-        {
-          to: "/blockchain/intro",
-          label: "Develop",
-          position: "right",
         },
         {
           href: "http://api.hippius.io/swagger-ui",
@@ -162,6 +162,10 @@ const config: Config = {
             {
               label: "Hipstats",
               href: "https://hipstats.com",
+            },
+            {
+              label: "Hippius Community",
+              href: "https://community.hippius.com/",
             },
           ],
         },
