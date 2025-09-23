@@ -121,21 +121,25 @@ const config: Config = {
           to: "/learn/intro",
           label: "Learn",
           position: "left",
+          activeBasePath: "/learn",
         },
         {
           to: "/use/ipfs-website",
           label: "Use",
           position: "left",
+          activeBasePath: "/use",
         },
         {
           to: "/earn/staking",
           label: "Earn",
           position: "left",
+          activeBasePath: "/earn",
         },
         {
           to: "/blockchain/intro",
           label: "Develop",
           position: "left",
+          activeBaseRegex: "^/(blockchain|cli|pallets|storage)(/|$)",
         },
         {
           type: "html",
