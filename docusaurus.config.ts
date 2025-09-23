@@ -6,7 +6,7 @@ const { version } = require("./package.json");
 // Node.js environment - no browser APIs/JSX
 
 const config: Config = {
-  title: "Hippius Docs",
+  title: "Hippius Docs - Learn, use, earn and develop with Hippius",
   tagline: "Transparent, Decentralized, Anonymous Cloud Storage",
   favicon: "img/favicon.ico",
 
@@ -76,6 +76,31 @@ const config: Config = {
 
   themeConfig: {
     image: "img/hippius-social-card.jpg", // Update with Hippius social card
+    metadata: [
+      {
+        name: "description",
+        content:
+          "Learn how Hippius works, how to use our products, how to earn when staking on Hippius network and how to develop app with Hippius.",
+      },
+      {
+        property: "og:description",
+        content:
+          "Learn how Hippius works, how to use our products, how to earn when staking on Hippius network and how to develop app with Hippius.",
+      },
+      {
+        property: "og:title",
+        content: "Hippius Docs - Learn, use, earn and develop with Hippius",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Learn how Hippius works, how to use our products, how to earn when staking on Hippius network and how to develop app with Hippius.",
+      },
+      {
+        name: "twitter:title",
+        content: "Hippius Docs - Learn, use, earn and develop with Hippius",
+      },
+    ],
     colorMode: {
       defaultMode: "light",
       disableSwitch: true, // Force dark mode

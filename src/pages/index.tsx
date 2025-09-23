@@ -246,8 +246,8 @@ function HomepageFeatures() {
 export default function Home(): ReactNode {
   return (
     <Layout
-      title="Welcome to Hippius"
-      description="Hippius is a transparent, decentralized, anonymous cloud storage platform built on a custom Substrate blockchain, leveraging IPFS and S3-compatible storage."
+      title="Hippius Docs - Learn, use, earn and develop with Hippius"
+      description="Learn how Hippius works, how to use our products, how to earn when staking on Hippius network and how to develop app with Hippius."
     >
       <main>
         <HomepageHeader />
