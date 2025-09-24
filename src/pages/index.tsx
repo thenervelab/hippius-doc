@@ -245,10 +245,7 @@ function HomepageFeatures() {
 
 export default function Home(): ReactNode {
   return (
-    <Layout
-      title="Hippius Docs - Learn, use, earn and develop with Hippius"
-      description="Learn how Hippius works, how to use our products, how to earn when staking on Hippius network and how to develop app with Hippius."
-    >
+    <Layout>
       <main>
         <HomepageHeader />
         <HomepageFeatures />

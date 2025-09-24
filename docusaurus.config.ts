@@ -75,7 +75,7 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: "img/hippius-doc-meta-image.png", // Updated with Hippius meta image
+    image: "img/meta-image.png",
     metadata: [
       {
         name: "description",
@@ -88,12 +88,8 @@ const config: Config = {
           "Learn how Hippius works, how to use our products, how to earn when staking on Hippius network and how to develop app with Hippius.",
       },
       {
-        property: "og:title",
-        content: "Hippius Docs - Learn, use, earn and develop with Hippius",
-      },
-      {
         property: "og:image",
-        content: "img/hippius-doc-meta-image.png",
+        content: "https://docs.hippius.com/img/meta-image.png",
       },
       {
         property: "og:image:width",
@@ -113,12 +109,8 @@ const config: Config = {
           "Learn how Hippius works, how to use our products, how to earn when staking on Hippius network and how to develop app with Hippius.",
       },
       {
-        name: "twitter:title",
-        content: "Hippius Docs - Learn, use, earn and develop with Hippius",
-      },
-      {
         name: "twitter:image",
-        content: "img/hippius-doc-meta-image.png",
+        content: "https://docs.hippius.com/img/meta-image.png",
       },
       {
         name: "twitter:card",
