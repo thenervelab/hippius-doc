@@ -75,7 +75,7 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: "img/hippius-social-card.jpg", // Update with Hippius social card
+    image: "img/hippius-doc-meta-image.png", // Updated with Hippius meta image
     metadata: [
       {
         name: "description",
@@ -92,6 +92,22 @@ const config: Config = {
         content: "Hippius Docs - Learn, use, earn and develop with Hippius",
       },
       {
+        property: "og:image",
+        content: "img/hippius-doc-meta-image.png",
+      },
+      {
+        property: "og:image:width",
+        content: "1200",
+      },
+      {
+        property: "og:image:height",
+        content: "630",
+      },
+      {
+        property: "og:image:type",
+        content: "image/png",
+      },
+      {
         name: "twitter:description",
         content:
           "Learn how Hippius works, how to use our products, how to earn when staking on Hippius network and how to develop app with Hippius.",
@@ -99,6 +115,14 @@ const config: Config = {
       {
         name: "twitter:title",
         content: "Hippius Docs - Learn, use, earn and develop with Hippius",
+      },
+      {
+        name: "twitter:image",
+        content: "img/hippius-doc-meta-image.png",
+      },
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
       },
     ],
     colorMode: {
