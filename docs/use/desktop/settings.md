@@ -60,40 +60,40 @@ If files are edited or removed, those changes will be synced automatically.</p>
 </>
 </DocAccordionItem>
 
-## Sub Accounts
+## API Keys
 
 <DocAccordionItem value="sub-accounts">
   <>
-  Sub Accounts
+  API Keys
   </>
   <>
-    <p>Sub-accounts let you assign upload and delete rights. They use their own seed, yet all files still belong to your main account. We’re currently using these sub-accounts to upload files to S3 storage.</p>
+    <p>API keys allow for S3 operations and do not allow for any other party to have access to your account.</p>
 
     <Ordered>
       <li>Click on the <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
-      <li>Click <BgStyledIconWithText text="Sub Accounts" icon="KeySquare" />.</li>
+      <li>Click <BgStyledIconWithText text="API Keys" icon="KeySquare" />.</li>
     </Ordered>
 
     ![Sub accounts table](/img/desktop/settings/settings-sub-accounts.png)
 
-    ### Create a New Sub Account
+    ### Create a New API Key
 
     <Ordered>
-      <li>Click on <BgStyledText>New Sub Account</BgStyledText>.</li>
-      <li>Enter the address and select the role assigned to this account.</li>
-      <li>Click on the <BgStyledText>Create Sub Account</BgStyledText> button.</li>
+      <li>Click on <BgStyledText>Add API Key</BgStyledText>.</li>
+      <li>Enter the address and select the role assigned to this API Key.</li>
+      <li>Click on the <BgStyledText>Add API Key</BgStyledText> button.</li>
     </Ordered>
 
     ![Create sub account modal](/img/desktop/settings/settings-sub-account-create.png)
 
-    ### Generate Sub Account
+    ### Generate API Key
 
     <Ordered>
-      <li>Click on <BgStyledText>Generate New Account</BgStyledText>.</li>
-      <li>Save the generated access key.</li>
-      <li>Click on <BgStyledText>Add as Sub Account</BgStyledText> to make this sub account.</li>
-      <li>Assign a role and click on <BgStyledText>Create Sub Account</BgStyledText> to share it to the account.</li>
-      <li>Enter the passcode to save the seed of the sub account.</li>
+      <li>Click on <BgStyledText>Generate New API Key</BgStyledText>.</li>
+      <li>Save the account API key.</li>
+      <li>Select the permission for the API Key.</li>
+      <li>Click on <BgStyledText>Add API Key</BgStyledText> to save.</li>
+      <li>Enter the Seed phrase and passcode.</li>
     </Ordered>
 
     ![Generate sub account modal](/img/desktop/settings/settings-sub-account-generate.png)
