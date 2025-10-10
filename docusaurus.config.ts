@@ -152,7 +152,7 @@ const config: Config = {
           activeBasePath: "/earn",
         },
         {
-          to: "/blockchain/intro",
+          to: "/cli/usage",
           label: "Develop",
           position: "left",
           activeBaseRegex: "^/(blockchain|cli|pallets|storage)(/|$)",

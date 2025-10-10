@@ -51,7 +51,7 @@ export const CATEGORIES: (SmallCardInfo & {
     icon: <Icons.Code className="text-primary-50 relative size-7" />,
     cta: {
       label: "Develop",
-      href: "/blockchain/intro",
+      href: "/cli/usage",
     },
   },
 ];
