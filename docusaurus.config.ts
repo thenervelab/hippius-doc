@@ -225,6 +225,10 @@ const config: Config = {
               label: "Storage Miners",
               to: "/earn/storage-miner",
             },
+            {
+              label: "Alphanomics",
+              href: "https://community.hippius.com/",
+            },
           ],
         },
         {
