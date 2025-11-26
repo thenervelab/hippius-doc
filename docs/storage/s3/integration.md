@@ -24,19 +24,28 @@ Hippius S3 provides a fully S3-compatible API that stores your data on the decen
 
 You'll need:
 
-- A Hippius blockchain wallet with sub-accounts
-- Sub-accounts with appropriate permissions (Upload and/or Delete)
-- Your sub-account seed phrase (encoded as Base64 for the access key)
-- An s3 compatible client in your programming language of choice (tested with Minio, but any should do the job)
+- A Hippius account (create one at https://console.hippius.com)
+- Access keys for authentication (create at https://console.hippius.com/settings)
+- An S3-compatible client in your programming language of choice (tested with Minio and AWS CLI, but any should work)
 
-**Creating Sub-Accounts (API Keys)**: If you don't have sub-accounts yet, follow our guide to create them: https://docs.hippius.com/pallets/subAccount#1-adding-sub-accounts
+**Creating Access Keys**: Visit https://console.hippius.com/settings to generate your access key ID and secret key. You can create:
+- **Main keys**: Full access to all your buckets (recommended for personal use)
+- **Sub keys**: Require explicit ACL grants (recommended for applications/services)
 
 ### Authentication
 
-Hippius S3 uses a unique authentication method, instead of the regular AWS access key and secret, we use your sub-account id's seed phrase for as both
+Hippius S3 uses standard S3-compatible authentication with access keys:
 
-- **Access Key**: Your sub-account seed phrase encoded in Base64 (aka your API key)
-- **Secret Key**: Your sub-account seed phrase (plain text, used locally to sign)
+- **Access Key ID**: Your access key starting with `hip_` (e.g., `hip_abc123...`)
+- **Secret Key**: Your access key secret (keep this secure!)
+
+Get your credentials at: https://console.hippius.com/settings
+
+**Legacy Subaccount Authentication**: If you're using subaccount seed phrases for authentication, they still work but are deprecated. We encourage switching to access keys for better security and management. Access keys provide:
+- Revocable credentials (seed phrases are permanent)
+- Fine-grained access control via ACLs
+- Separate keys for different applications
+- No need for Base64 encoding
 
 ## Python Setup
 
@@ -49,21 +58,36 @@ pip install minio
 ### Client Configuration
 
 ```python
-import base64
 from minio import Minio
 
-# Your sub-account seed phrase
-seed_phrase = "your_subaccount_seed_phrase_here"
-
-# Encode seed phrase for access key
-access_key = base64.b64encode(seed_phrase.encode("utf-8")).decode("utf-8")
+# Your access key credentials from https://console.hippius.com/settings
+access_key_id = "hip_your_access_key_id_here"
+secret_key = "your_secret_key_here"
 
 # Create client
 client = Minio(
     "s3.hippius.com",
+    access_key=access_key_id,
+    secret_key=secret_key,
+    secure=True,  # Use HTTPS in production
+    region="decentralized"
+)
+```
+
+**Legacy Subaccount Setup** (deprecated):
+```python
+import base64
+from minio import Minio
+
+# For existing subaccount users only - switch to access keys recommended
+seed_phrase = "your_subaccount_seed_phrase_here"
+access_key = base64.b64encode(seed_phrase.encode("utf-8")).decode("utf-8")
+
+client = Minio(
+    "s3.hippius.com",
     access_key=access_key,
     secret_key=seed_phrase,
-    secure=True,  # Use HTTPS in production
+    secure=True,
     region="decentralized"
 )
 ```
@@ -125,17 +149,33 @@ npm install minio
 ```javascript
 const Minio = require("minio");
 
-// Your sub-account seed phrase
-const seedPhrase = "your_subaccount_seed_phrase_here";
-
-// Encode seed phrase for access key
-const accessKey = Buffer.from(seedPhrase, "utf8").toString("base64");
+// Your access key credentials from https://console.hippius.com/settings
+const accessKeyId = "hip_your_access_key_id_here";
+const secretKey = "your_secret_key_here";
 
 // Create client
 const minioClient = new Minio.Client({
   endPoint: "s3.hippius.com",
   port: 443,
   useSSL: true, // Use HTTPS in production
+  accessKey: accessKeyId,
+  secretKey: secretKey,
+  region: "decentralized",
+});
+```
+
+**Legacy Subaccount Setup** (deprecated):
+```javascript
+const Minio = require("minio");
+
+// For existing subaccount users only - switch to access keys recommended
+const seedPhrase = "your_subaccount_seed_phrase_here";
+const accessKey = Buffer.from(seedPhrase, "utf8").toString("base64");
+
+const minioClient = new Minio.Client({
+  endPoint: "s3.hippius.com",
+  port: 443,
+  useSSL: true,
   accessKey: accessKey,
   secretKey: seedPhrase,
   region: "decentralized",
@@ -214,20 +254,17 @@ To create a public bucket in Hippius S3, you first create a regular private buck
 
 ```python
 import json
-import base64
 import time
 from minio import Minio
 
-def create_public_bucket(seed_phrase, bucket_name, endpoint="s3.hippius.com"):
+def create_public_bucket(access_key_id, secret_key, bucket_name, endpoint="s3.hippius.com"):
     """Create public bucket using bucket policy (for empty buckets only)."""
 
-    access_key = base64.b64encode(seed_phrase.encode("utf-8")).decode("utf-8")
-
-    # Create MinIO client
+    # Create MinIO client with access keys from https://console.hippius.com/settings
     client = Minio(
         endpoint,
-        access_key=access_key,
-        secret_key=seed_phrase,
+        access_key=access_key_id,
+        secret_key=secret_key,
         secure=True,
         region="decentralized"
     )
@@ -254,9 +291,11 @@ def create_public_bucket(seed_phrase, bucket_name, endpoint="s3.hippius.com"):
 
 
 # Usage - only works on empty buckets
-seed_phrase = "your_subaccount_seed_phrase_here"
+# Get credentials from https://console.hippius.com/settings
+access_key_id = "hip_your_access_key_id_here"
+secret_key = "your_secret_key_here"
 bucket_name = f"my-public-bucket-{int(time.time())}"
-create_public_bucket(seed_phrase, bucket_name)
+create_public_bucket(access_key_id, secret_key, bucket_name)
 ```
 
 **Important Notes:**
@@ -277,11 +316,11 @@ import time
 from minio import Minio
 from io import BytesIO
 
-# Setup client (same as before)
+# Setup client (get credentials from https://console.hippius.com/settings)
 client = Minio(
     "s3.hippius.com",
-    access_key=base64.b64encode(seed_phrase.encode("utf-8")).decode("utf-8"),
-    secret_key=seed_phrase,
+    access_key="hip_your_access_key_id_here",
+    secret_key="your_secret_key_here",
     secure=True,
     region="decentralized"
 )
@@ -345,21 +384,21 @@ https://cloudflare-ipfs.com/ipfs/{CID}
 
 ```python
 import time
-import base64
 import json
 from minio import Minio
 from io import BytesIO
 
 def public_bucket_example():
-    seed_phrase = "your_subaccount_seed_phrase_here"
+    # Get credentials from https://console.hippius.com/settings
+    access_key_id = "hip_your_access_key_id_here"
+    secret_key = "your_secret_key_here"
     bucket_name = f"demo-public-{int(time.time())}"
-    access_key = base64.b64encode(seed_phrase.encode("utf-8")).decode("utf-8")
 
     # Create MinIO client
     client = Minio(
         "s3.hippius.com",
-        access_key=access_key,
-        secret_key=seed_phrase,
+        access_key=access_key_id,
+        secret_key=secret_key,
         secure=True,
         region="decentralized"
     )
@@ -413,9 +452,10 @@ public_bucket_example()
 ### Key Differences: Private vs Public
 
 | Feature         | Private Buckets                    | Public Buckets                           |
-| --------------- | ---------------------------------- |------------------------------------------|
-| **Encryption**  | ✅ Encrypted with per-bucket keys  | ✅ Encrypted with per-bucket keys        |
+| --------------- | ---------------------------------- | ---------------------------------------- |
+| **Encryption**  | ✅ Encrypted with per-bucket keys  | ❌ Stored unencrypted                    |
 | **Access**      | 🔒 Requires authentication         | 🌍 Publicly accessible                   |
+| **IPFS Access** | ❌ Cannot access via IPFS gateways | ✅ Direct IPFS gateway access            |
 | **Use Cases**   | Sensitive data, private files      | Public content, websites, shared files   |
 | **Creation**    | Standard S3 `make_bucket()`        | Requires `x-amz-acl: public-read` header |
 
@@ -442,13 +482,20 @@ ACLs let you control who can access your buckets and objects. Use ACLs to share 
 Before sharing with others, you need canonical user IDs:
 
 ```bash
-# Using AWS CLI
-export AWS_ACCESS_KEY_ID="$(echo -n 'your seed phrase' | base64)"
-export AWS_SECRET_ACCESS_KEY="your seed phrase"
+# Using AWS CLI with access keys from https://console.hippius.com/settings
+export AWS_ACCESS_KEY_ID="hip_your_access_key_id_here"
+export AWS_SECRET_ACCESS_KEY="your_secret_key_here"
 export AWS_DEFAULT_REGION=decentralized
 
 aws s3api list-buckets --endpoint-url https://s3.hippius.com \
   --query 'Owner.ID' --output text
+```
+
+**Legacy subaccount method** (deprecated):
+```bash
+export AWS_ACCESS_KEY_ID="$(echo -n 'your seed phrase' | base64)"
+export AWS_SECRET_ACCESS_KEY="your seed phrase"
+export AWS_DEFAULT_REGION=decentralized
 ```
 
 Output will be your Substrate address (e.g., `5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty`)
