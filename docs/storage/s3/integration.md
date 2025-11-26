@@ -413,12 +413,136 @@ public_bucket_example()
 ### Key Differences: Private vs Public
 
 | Feature         | Private Buckets                    | Public Buckets                           |
-| --------------- | ---------------------------------- | ---------------------------------------- |
-| **Encryption**  | ✅ Encrypted with per-bucket keys  | ❌ Stored unencrypted                    |
+| --------------- | ---------------------------------- |------------------------------------------|
+| **Encryption**  | ✅ Encrypted with per-bucket keys  | ✅ Encrypted with per-bucket keys        |
 | **Access**      | 🔒 Requires authentication         | 🌍 Publicly accessible                   |
-| **IPFS Access** | ❌ Cannot access via IPFS gateways | ✅ Direct IPFS gateway access            |
 | **Use Cases**   | Sensitive data, private files      | Public content, websites, shared files   |
 | **Creation**    | Standard S3 `make_bucket()`        | Requires `x-amz-acl: public-read` header |
+
+## Access Control Lists (ACLs)
+
+ACLs let you control who can access your buckets and objects. Use ACLs to share data with other Hippius accounts, grant access to specific [access keys](https://console.hippius.com/settings), or make content public.
+
+### What ACLs Support
+
+**Permission Types:**
+- **READ**: List bucket contents / Download objects
+- **WRITE**: Upload/delete objects in bucket
+- **READ_ACP**: View ACL permissions
+- **WRITE_ACP**: Modify ACL permissions
+- **FULL_CONTROL**: All permissions
+
+**Grant Types:**
+- **Canonical User ID**: Grant to another Hippius account (all their keys get access)
+- **Access Key**: Grant to specific [access key](https://console.hippius.com/settings) (fine-grained control)
+- **Groups**: Grant to `AllUsers` (public) or `AuthenticatedUsers` (any logged-in user)
+
+### Getting Your Canonical User ID
+
+Before sharing with others, you need canonical user IDs:
+
+```bash
+# Using AWS CLI
+export AWS_ACCESS_KEY_ID="$(echo -n 'your seed phrase' | base64)"
+export AWS_SECRET_ACCESS_KEY="your seed phrase"
+export AWS_DEFAULT_REGION=decentralized
+
+aws s3api list-buckets --endpoint-url https://s3.hippius.com \
+  --query 'Owner.ID' --output text
+```
+
+Output will be your Substrate address (e.g., `5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty`)
+
+### Common ACL Operations
+
+#### Make Bucket Public (Canned ACL)
+
+```bash
+# Simple public-read ACL
+aws s3api put-bucket-acl --bucket mybucket --acl public-read \
+  --endpoint-url https://s3.hippius.com
+```
+
+#### Share Bucket with Another Account
+
+```bash
+# Grant READ to another account's canonical ID
+aws s3api put-bucket-acl --bucket mybucket \
+  --grant-read 'id="their_canonical_id_here"' \
+  --grant-full-control 'id="your_canonical_id_here"' \
+  --endpoint-url https://s3.hippius.com
+```
+
+**Important**: Always include `--grant-full-control` for yourself to maintain access!
+
+#### Grant to Specific Access Key
+
+If you created [access keys](https://console.hippius.com/settings) for your applications, grant them specific permissions:
+
+```bash
+# Grant READ to a specific access key
+aws s3api put-bucket-acl --bucket mybucket \
+  --grant-read 'accessKey="hip_your_access_key_id"' \
+  --grant-full-control 'id="your_canonical_id"' \
+  --endpoint-url https://s3.hippius.com
+```
+
+**Note**: `accessKey=` is a Hippius extension for fine-grained access control.
+
+#### Make Single Object Public
+
+```bash
+# Keep bucket private, make one object public
+aws s3api put-object-acl --bucket mybucket --key document.pdf \
+  --acl public-read --endpoint-url https://s3.hippius.com
+```
+
+#### Check Current Permissions
+
+```bash
+# View bucket ACL
+aws s3api get-bucket-acl --bucket mybucket \
+  --endpoint-url https://s3.hippius.com
+
+# View object ACL
+aws s3api get-object-acl --bucket mybucket --key file.pdf \
+  --endpoint-url https://s3.hippius.com
+```
+
+#### Revoke All Access
+
+```bash
+# Reset to private (owner only)
+aws s3api put-bucket-acl --bucket mybucket --acl private \
+  --endpoint-url https://s3.hippius.com
+```
+
+### Supported Canned ACLs
+
+- `private` - Owner only (default)
+- `public-read` - Owner full control + public read access
+- `public-read-write` - Owner full control + public read/write
+- `authenticated-read` - Owner full control + any authenticated user read
+
+### Access Keys and ACLs
+
+Hippius supports two types of [access keys](https://console.hippius.com/settings):
+
+- **Main keys**: Automatically have full access to your buckets (bypass ACLs)
+- **Sub keys**: Require explicit ACL grants for access
+
+Create and manage access keys at: https://console.hippius.com/settings
+
+### Quick Reference
+
+| Task | Command |
+|------|---------|
+| Make public | `aws s3api put-bucket-acl --bucket B --acl public-read --endpoint-url https://s3.hippius.com` |
+| Share with user | `aws s3api put-bucket-acl --bucket B --grant-read 'id="THEIR_ID"' --grant-full-control 'id="YOUR_ID"' --endpoint-url https://s3.hippius.com` |
+| Grant to access key | `aws s3api put-bucket-acl --bucket B --grant-read 'accessKey="hip_KEY"' --grant-full-control 'id="YOUR_ID"' --endpoint-url https://s3.hippius.com` |
+| Check ACL | `aws s3api get-bucket-acl --bucket B --endpoint-url https://s3.hippius.com` |
+
+For more detailed ACL documentation including cross-account sharing examples and troubleshooting, see `acl-release.md` or `acl-quickstart.md`.
 
 ## Advanced Features
 
