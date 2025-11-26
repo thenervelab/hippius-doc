@@ -25,10 +25,10 @@ Hippius S3 provides a fully S3-compatible API that stores your data on the decen
 You'll need:
 
 - A Hippius account (create one at https://console.hippius.com)
-- Access keys for authentication (create at https://console.hippius.com/settings)
+- Access keys for authentication (create at https://console.hippius.com/dashboard/settings)
 - An S3-compatible client in your programming language of choice (tested with Minio and AWS CLI, but any should work)
 
-**Creating Access Keys**: Visit https://console.hippius.com/settings to generate your access key ID and secret key. You can create:
+**Creating Access Keys**: Visit https://console.hippius.com/dashboard/settings to generate your access key ID and secret key. You can create:
 - **Main keys**: Full access to all your buckets (recommended for personal use)
 - **Sub keys**: Require explicit ACL grants (recommended for applications/services)
 
@@ -39,7 +39,7 @@ Hippius S3 uses standard S3-compatible authentication with access keys:
 - **Access Key ID**: Your access key starting with `hip_` (e.g., `hip_abc123...`)
 - **Secret Key**: Your access key secret (keep this secure!)
 
-Get your credentials at: https://console.hippius.com/settings
+Get your credentials at: https://console.hippius.com/dashboard/settings
 
 **Legacy Subaccount Authentication**: If you're using subaccount seed phrases for authentication, they still work but are deprecated. We encourage switching to access keys for better security and management. Access keys provide:
 - Revocable credentials (seed phrases are permanent)
@@ -60,7 +60,7 @@ pip install minio
 ```python
 from minio import Minio
 
-# Your access key credentials from https://console.hippius.com/settings
+# Your access key credentials from https://console.hippius.com/dashboard/settings
 access_key_id = "hip_your_access_key_id_here"
 secret_key = "your_secret_key_here"
 
@@ -149,7 +149,7 @@ npm install minio
 ```javascript
 const Minio = require("minio");
 
-// Your access key credentials from https://console.hippius.com/settings
+// Your access key credentials from https://console.hippius.com/dashboard/settings
 const accessKeyId = "hip_your_access_key_id_here";
 const secretKey = "your_secret_key_here";
 
@@ -264,7 +264,7 @@ aws s3api put-bucket-acl --bucket mybucket --acl public-read \
 import json
 from minio import Minio
 
-# Get credentials from https://console.hippius.com/settings
+# Get credentials from https://console.hippius.com/dashboard/settings
 client = Minio(
     "s3.hippius.com",
     access_key="hip_your_access_key_id_here",
@@ -402,7 +402,7 @@ from minio import Minio
 from io import BytesIO
 
 def create_and_use_public_bucket():
-    # Get credentials from https://console.hippius.com/settings
+    # Get credentials from https://console.hippius.com/dashboard/settings
     client = Minio(
         "s3.hippius.com",
         access_key="hip_your_access_key_id_here",
@@ -463,7 +463,7 @@ create_and_use_public_bucket()
 
 ## Access Control Lists (ACLs)
 
-ACLs let you control who can access your buckets and objects. Use ACLs to share data with other Hippius accounts, grant access to specific [access keys](https://console.hippius.com/settings), or make content public.
+ACLs let you control who can access your buckets and objects. Use ACLs to share data with other Hippius accounts, grant access to specific [access keys](https://console.hippius.com/dashboard/settings), or make content public.
 
 ### What ACLs Support
 
@@ -476,7 +476,7 @@ ACLs let you control who can access your buckets and objects. Use ACLs to share 
 
 **Grant Types:**
 - **Canonical User ID**: Grant to another Hippius account (all their keys get access)
-- **Access Key**: Grant to specific [access key](https://console.hippius.com/settings) (fine-grained control)
+- **Access Key**: Grant to specific [access key](https://console.hippius.com/dashboard/settings) (fine-grained control)
 - **Groups**: Grant to `AllUsers` (public) or `AuthenticatedUsers` (any logged-in user)
 
 ### Getting Your Canonical User ID
@@ -484,7 +484,7 @@ ACLs let you control who can access your buckets and objects. Use ACLs to share 
 Before sharing with others, you need canonical user IDs:
 
 ```bash
-# Using AWS CLI with access keys from https://console.hippius.com/settings
+# Using AWS CLI with access keys from https://console.hippius.com/dashboard/settings
 export AWS_ACCESS_KEY_ID="hip_your_access_key_id_here"
 export AWS_SECRET_ACCESS_KEY="your_secret_key_here"
 export AWS_DEFAULT_REGION=decentralized
@@ -526,7 +526,7 @@ aws s3api put-bucket-acl --bucket mybucket \
 
 #### Grant to Specific Access Key
 
-If you created [access keys](https://console.hippius.com/settings) for your applications, grant them specific permissions:
+If you created [access keys](https://console.hippius.com/dashboard/settings) for your applications, grant them specific permissions:
 
 ```bash
 # Grant READ to a specific access key
@@ -575,12 +575,12 @@ aws s3api put-bucket-acl --bucket mybucket --acl private \
 
 ### Access Keys and ACLs
 
-Hippius supports two types of [access keys](https://console.hippius.com/settings):
+Hippius supports two types of [access keys](https://console.hippius.com/dashboard/settings):
 
 - **Main keys**: Automatically have full access to your buckets (bypass ACLs)
 - **Sub keys**: Require explicit ACL grants for access
 
-Create and manage access keys at: https://console.hippius.com/settings
+Create and manage access keys at: https://console.hippius.com/dashboard/settings
 
 ### Quick Reference
 

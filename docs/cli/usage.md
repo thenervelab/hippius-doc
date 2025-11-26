@@ -107,7 +107,7 @@ Hippius now uses **HIPPIUS_KEY** for authentication instead of seed phrases for 
 
 #### For General File Operations (Recommended)
 
-Get your HIPPIUS_KEY from https://console.hippius.com/settings, then run:
+Get your HIPPIUS_KEY from https://console.hippius.com/dashboard/settings, then run:
 
 ```bash
 # This will prompt for your HIPPIUS_KEY
@@ -117,7 +117,7 @@ hippius account login
 
 The command will guide you through:
 1. **Account Name**: Choose a name for your account
-2. **HIPPIUS_KEY**: Enter the key from console.hippius.com/settings
+2. **HIPPIUS_KEY**: Enter the key from console.hippius.com/dashboard/settings
 3. **Encryption**: Optionally protect your key with a password (recommended)
 
 #### For Miner Operations (Legacy)
@@ -587,7 +587,7 @@ client = HippiusClient(
 #### 2. With Explicit HIPPIUS_KEY
 
 ```python
-# Provide HIPPIUS_KEY directly (get from console.hippius.com/settings)
+# Provide HIPPIUS_KEY directly (get from console.hippius.com/dashboard/settings)
 client = HippiusClient(
     ipfs_api_url="http://localhost:5001",
     hippius_key="hip_your_key_here",
@@ -1447,7 +1447,7 @@ Please provide a custom IPFS node URL...
 
 **Problem**: "HIPPIUS_KEY required" or authentication failures
 **Solution**:
-1. Run `hippius account login` and enter your key from https://console.hippius.com/settings
+1. Run `hippius account login` and enter your key from https://console.hippius.com/dashboard/settings
 2. If key is encrypted, provide password:
    ```bash
    hippius --hippius-key-password "your_password" credits
