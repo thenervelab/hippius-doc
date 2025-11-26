@@ -242,81 +242,70 @@ async function downloadToFile() {
 downloadToFile();
 ```
 
-## Public Buckets and IPFS Access
+## Public Buckets
 
-By default, all buckets are **private** (encrypted). Files stored in private buckets are encrypted with unique per-bucket keys and can only be accessed through authenticated S3 API calls.
+By default, all buckets are **private** and require authentication to access. Public buckets allow anyone to read objects without credentials, similar to AWS S3 public buckets.
 
-**Public buckets** store files **unencrypted** on IPFS, making them directly accessible via public IPFS gateways using their CID (Content Identifier).
+### Making Buckets Public
 
-### Creating Public Buckets
+You can make buckets public using either ACLs or bucket policies.
 
-To create a public bucket in Hippius S3, you first create a regular private bucket, then use bucket policies to make it public. This method only works on empty buckets and provides a one-way transition from private to public.
+#### Option 1: Using ACLs (Simple)
+
+```bash
+# Make entire bucket public using AWS CLI
+aws s3api put-bucket-acl --bucket mybucket --acl public-read \
+  --endpoint-url https://s3.hippius.com
+```
+
+#### Option 2: Using Bucket Policies (Recommended)
 
 ```python
 import json
-import time
 from minio import Minio
 
-def create_public_bucket(access_key_id, secret_key, bucket_name, endpoint="s3.hippius.com"):
-    """Create public bucket using bucket policy (for empty buckets only)."""
-
-    # Create MinIO client with access keys from https://console.hippius.com/settings
-    client = Minio(
-        endpoint,
-        access_key=access_key_id,
-        secret_key=secret_key,
-        secure=True,
-        region="decentralized"
-    )
-
-    # Step 1: Create empty bucket
-    client.make_bucket(bucket_name)
-    print(f"✓ Empty bucket '{bucket_name}' created")
-
-    # Step 2: Set bucket policy using MinIO client
-    policy = {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Effect": "Allow",
-                "Principal": "*",
-                "Action": ["s3:GetObject"],
-                "Resource": [f"arn:aws:s3:::{bucket_name}/*"]
-            }
-        ]
-    }
-
-    client.set_bucket_policy(bucket_name, json.dumps(policy))
-    print(f"✓ Bucket policy applied - '{bucket_name}' is now public")
-
-
-# Usage - only works on empty buckets
 # Get credentials from https://console.hippius.com/settings
-access_key_id = "hip_your_access_key_id_here"
-secret_key = "your_secret_key_here"
-bucket_name = f"my-public-bucket-{int(time.time())}"
-create_public_bucket(access_key_id, secret_key, bucket_name)
+client = Minio(
+    "s3.hippius.com",
+    access_key="hip_your_access_key_id_here",
+    secret_key="your_secret_key_here",
+    secure=True,
+    region="decentralized"
+)
+
+bucket_name = "my-public-bucket"
+
+# Create bucket
+client.make_bucket(bucket_name)
+
+# Set public read policy
+policy = {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": ["s3:GetObject"],
+            "Resource": [f"arn:aws:s3:::{bucket_name}/*"]
+        }
+    ]
+}
+
+client.set_bucket_policy(bucket_name, json.dumps(policy))
+print(f"✓ Bucket '{bucket_name}' is now public")
 ```
 
-**Important Notes:**
+### Uploading to Public Buckets
 
-- Bucket policies can only be applied to **empty buckets**
-- This is a **one-way transition** - once public, buckets cannot be made private again
-- Only standard S3 public read policies are supported
-- The bucket must be owned by your account to set policies
-
-### Uploading to Public Buckets and Getting CIDs
-
-Once you have a public bucket, upload files normally with any S3 client:
+Upload files normally - they become publicly accessible automatically:
 
 #### Python Example
 
 ```python
-import time
 from minio import Minio
 from io import BytesIO
 
-# Setup client (get credentials from https://console.hippius.com/settings)
+# Setup client
 client = Minio(
     "s3.hippius.com",
     access_key="hip_your_access_key_id_here",
@@ -326,138 +315,151 @@ client = Minio(
 )
 
 # Upload file to public bucket
-file_content = b"Hello, decentralized world! This file is publicly accessible."
-object_name = "public-file.txt"
+file_content = b"Hello! This file is publicly accessible."
+bucket_name = "my-public-bucket"
+object_name = "documents/public-file.txt"
 
 client.put_object(
-    public_bucket_name,
+    bucket_name,
     object_name,
     BytesIO(file_content),
     length=len(file_content),
     content_type="text/plain"
 )
 
-# Get the IPFS CID from object metadata
-stat = client.stat_object(public_bucket_name, object_name)
-ipfs_cid = stat.etag.strip('"')  # CID is in the ETag field
-
-print(f"File uploaded! IPFS CID: {ipfs_cid}")
-print(f"Public access URL: https://get.hippius.network/ipfs/{ipfs_cid}")
+print(f"✓ File uploaded!")
+print(f"Public URL: https://s3.hippius.com/{bucket_name}/{object_name}")
 ```
 
 #### JavaScript Example
 
 ```javascript
 // Upload file to public bucket
-const fileContent = Buffer.from(
-  "Hello, decentralized world! This file is publicly accessible."
-);
-const objectName = "public-file.txt";
+const fileContent = Buffer.from("Hello! This file is publicly accessible.");
+const bucketName = "my-public-bucket";
+const objectName = "documents/public-file.txt";
 
-await minioClient.putObject(publicBucketName, objectName, fileContent, {
+await minioClient.putObject(bucketName, objectName, fileContent, {
   "Content-Type": "text/plain",
 });
 
-// Get the IPFS CID from object metadata
-const stat = await minioClient.statObject(publicBucketName, objectName);
-const ipfsCid = stat.etag.replace(/"/g, ""); // Remove quotes from ETag
-
-console.log(`File uploaded! IPFS CID: ${ipfsCid}`);
-console.log(`Public access URL: https://get.hippius.network/ipfs/${ipfsCid}`);
+console.log(`✓ File uploaded!`);
+console.log(`Public URL: https://s3.hippius.com/${bucketName}/${objectName}`);
 ```
 
-### Accessing Files via IPFS
+### Accessing Public Files
 
-Files in public buckets can be accessed directly via IPFS gateways:
+Public objects are accessible via standard S3 path-style URLs - no authentication required:
 
 ```bash
-# Hippius Gateway (recommended)
-https://get.hippius.network/ipfs/{CID}
+# Direct browser access or curl
+https://s3.hippius.com/{bucket-name}/{object-key}
 
-# Other public IPFS gateways
-https://ipfs.io/ipfs/{CID}
-https://gateway.pinata.cloud/ipfs/{CID}
-https://cloudflare-ipfs.com/ipfs/{CID}
+# Examples:
+https://s3.hippius.com/my-public-bucket/document.pdf
+https://s3.hippius.com/my-public-bucket/images/photo.jpg
+https://s3.hippius.com/my-public-bucket/documents/public-file.txt
 ```
 
-### Complete Public Bucket Workflow
+### Making Individual Objects Public
+
+Keep your bucket private but make specific objects public:
+
+```bash
+# Using AWS CLI
+aws s3api put-object-acl --bucket mybucket --key document.pdf \
+  --acl public-read --endpoint-url https://s3.hippius.com
+```
 
 ```python
-import time
+# Using Minio Python client
+from minio import Minio
+
+client = Minio(
+    "s3.hippius.com",
+    access_key="hip_your_access_key_id_here",
+    secret_key="your_secret_key_here",
+    secure=True,
+    region="decentralized"
+)
+
+# Upload with public-read ACL
+client.fput_object(
+    "my-private-bucket",
+    "public-document.pdf",
+    "local-file.pdf",
+    metadata={"x-amz-acl": "public-read"}
+)
+
+print("Public URL: https://s3.hippius.com/my-private-bucket/public-document.pdf")
+```
+
+### Complete Public Bucket Example
+
+```python
 import json
 from minio import Minio
 from io import BytesIO
 
-def public_bucket_example():
+def create_and_use_public_bucket():
     # Get credentials from https://console.hippius.com/settings
-    access_key_id = "hip_your_access_key_id_here"
-    secret_key = "your_secret_key_here"
-    bucket_name = f"demo-public-{int(time.time())}"
-
-    # Create MinIO client
     client = Minio(
         "s3.hippius.com",
-        access_key=access_key_id,
-        secret_key=secret_key,
+        access_key="hip_your_access_key_id_here",
+        secret_key="your_secret_key_here",
         secure=True,
         region="decentralized"
     )
 
-    # Step 1: Create empty bucket
-    print("1. Creating empty bucket...")
-    client.make_bucket(bucket_name)
-    print(f"✓ Empty bucket '{bucket_name}' created")
+    bucket_name = "my-demo-public-bucket"
 
-    # Step 2: Set bucket policy to make it public
-    print("2. Setting bucket policy to make bucket public...")
+    # Step 1: Create bucket
+    print("1. Creating bucket...")
+    client.make_bucket(bucket_name)
+
+    # Step 2: Make it public with bucket policy
+    print("2. Setting public read policy...")
     policy = {
         "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Effect": "Allow",
-                "Principal": "*",
-                "Action": ["s3:GetObject"],
-                "Resource": [f"arn:aws:s3:::{bucket_name}/*"]
-            }
-        ]
+        "Statement": [{
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": ["s3:GetObject"],
+            "Resource": [f"arn:aws:s3:::{bucket_name}/*"]
+        }]
     }
-
     client.set_bucket_policy(bucket_name, json.dumps(policy))
-    print(f"✓ Bucket policy applied - '{bucket_name}' is now public")
 
-    # Step 3: Upload file
+    # Step 3: Upload a file
     print("3. Uploading file...")
-    file_content = b"This is a publicly accessible file on IPFS!"
+    file_content = b"This is a publicly accessible file!"
+    object_name = "demo.txt"
+
     client.put_object(
         bucket_name,
-        "demo.txt",
+        object_name,
         BytesIO(file_content),
         length=len(file_content),
         content_type="text/plain"
     )
 
-    # Step 4: Get CID and access via IPFS
-    print("4. Getting IPFS CID...")
-    stat = client.stat_object(bucket_name, "demo.txt")
-    cid = stat.etag.strip('"')
+    # Step 4: Access publicly
+    public_url = f"https://s3.hippius.com/{bucket_name}/{object_name}"
+    print(f"✓ Success! File is publicly accessible at:")
+    print(f"  {public_url}")
+    print(f"\nTry it: curl {public_url}")
 
-    print(f"✓ File uploaded successfully!")
-    print(f"IPFS CID: {cid}")
-    print(f"Public URL: https://get.hippius.network/ipfs/{cid}")
-    print(f"Alternative: https://ipfs.io/ipfs/{cid}")
-
-public_bucket_example()
+create_and_use_public_bucket()
 ```
 
 ### Key Differences: Private vs Public
 
-| Feature         | Private Buckets                    | Public Buckets                           |
-| --------------- | ---------------------------------- | ---------------------------------------- |
-| **Encryption**  | ✅ Encrypted with per-bucket keys  | ❌ Stored unencrypted                    |
-| **Access**      | 🔒 Requires authentication         | 🌍 Publicly accessible                   |
-| **IPFS Access** | ❌ Cannot access via IPFS gateways | ✅ Direct IPFS gateway access            |
-| **Use Cases**   | Sensitive data, private files      | Public content, websites, shared files   |
-| **Creation**    | Standard S3 `make_bucket()`        | Requires `x-amz-acl: public-read` header |
+| Feature        | Private Buckets                   | Public Buckets                                   |
+| -------------- | --------------------------------- | ------------------------------------------------ |
+| **Encryption** | ✅ Encrypted with per-bucket keys | ❌ Encrypted with per-bucket keys                 |
+| **Access**     | 🔒 Requires authentication        | 🌍 Publicly accessible via `https://s3.hippius.com/bucket/key` |
+| **Use Cases**  | Sensitive data, private files     | Public content, websites, shared files           |
+| **Creation**   | Standard `make_bucket()`          | `make_bucket()` + ACL/bucket policy              |
 
 ## Access Control Lists (ACLs)
 
