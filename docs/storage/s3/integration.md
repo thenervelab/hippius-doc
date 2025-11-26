@@ -456,7 +456,7 @@ create_and_use_public_bucket()
 
 | Feature        | Private Buckets                   | Public Buckets                                   |
 | -------------- | --------------------------------- | ------------------------------------------------ |
-| **Encryption** | ✅ Encrypted with per-bucket keys | ❌ Encrypted with per-bucket keys                 |
+| **Encryption** | ✅ Encrypted with per-bucket keys | ✅ Encrypted with per-bucket keys                 |
 | **Access**     | 🔒 Requires authentication        | 🌍 Publicly accessible via `https://s3.hippius.com/bucket/key` |
 | **Use Cases**  | Sensitive data, private files     | Public content, websites, shared files           |
 | **Creation**   | Standard `make_bucket()`          | `make_bucket()` + ACL/bucket policy              |
