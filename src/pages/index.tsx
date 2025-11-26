@@ -1,9 +1,8 @@
 import type { ReactNode } from "react";
 
 import Link from "@docusaurus/Link";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import { H1, P, H4 } from "@site/src/components/typography";
+import { H1, P } from "@site/src/components/typography";
 
 import Graphsheet from "../components/graphsheet";
 import Button from "../components/button";
@@ -52,7 +51,7 @@ export const CATEGORIES: (SmallCardInfo & {
     icon: <Icons.Code className="text-primary-50 relative size-7" />,
     cta: {
       label: "Develop",
-      href: "/blockchain/intro",
+      href: "/cli/usage",
     },
   },
 ];
@@ -79,7 +78,6 @@ export const SMARTER_CLOUD: SmallCardInfo[] = [
 ];
 
 function HomepageHeader() {
-  const { siteConfig } = useDocusaurusContext();
   return (
     <header className="relative text-white justify-center min-h-[800px] lg:min-h-[auto] bg-primary-50 flex flex-col px-6 pt-20 pb-40 items-center w-full">
       <div className="absolute w-full top-0 h-full opacity-5">
@@ -119,7 +117,7 @@ function HomepageHeader() {
           Learn how Hippius works with our documentation
         </H1>
 
-        <div className="flex gap-y-5 delay-700 duration-500 flex-wrap relative items-center justify-center mt-8">
+        <div className="flex gap-y-5  flex-wrap relative items-center justify-center mt-8">
           <Button
             asLink
             href={URLS.LEARN}
@@ -153,32 +151,29 @@ function HomepageFeatures() {
             lineWidth: 1,
             cellDim: 20,
           }}
-          className="absolute w-full h-full duration-500 opacity-15"
+          className="absolute w-full h-full opacity-15"
         />
         <div className="bg-white-cloud-gradient absolute w-full h-full" />
         <div className="flex flex-col text-grey-40 items-center relative justify-center w-full h-full mt-0 md:pt-14 pb-10">
           <P size="sm" className="text-center font-digital">
             categories
           </P>
-          <H4 className="mt-4 text-grey-10 max-w-screen-sm text-center">
+          <h2 className="text-3xl lg:text-4xl font-medium font-grotesk mt-4 text-grey-10 max-w-screen-sm text-center">
             Learn various aspects of the Hippius infrastructure
-          </H4>
+          </h2>
           <div className="flex gap-8 mt-8 items-center flex-wrap justify-center max-w-screen-xl w-full mx-auto">
             {CATEGORIES.map((offering, i) => (
               <div
                 className="flex flex-col items-center font-medium max-w-[300px] md:max-w-[250px] border rounded-lg py-4 px-12 border-grey-80 bg-grey-100 md:px-0 md:py-0 md:border-none md:bg-transparent"
                 key={i}
               >
-                <AbstractIconWrapper className="size-10 duration-500 delay-300">
+                <AbstractIconWrapper className="size-10 ">
                   {offering.icon}
                 </AbstractIconWrapper>
                 <P className="mt-4" size="lg">
                   {offering.title}
                 </P>
-                <P
-                  className="mt-2 text-grey-50 text-center duration-500 delay-700"
-                  size="sm"
-                >
+                <P className="mt-2 text-grey-50 text-center " size="sm">
                   {offering.description}
                 </P>
                 <Link
@@ -206,39 +201,36 @@ function HomepageFeatures() {
             lineWidth: 1,
             cellDim: 20,
           }}
-          className="absolute w-full h-full duration-500 opacity-15"
+          className="absolute w-full h-full opacity-15"
         />
         <div className="bg-white-cloud-gradient absolute w-full h-full" />
         <div className="flex flex-col text-grey-40 items-center relative justify-center w-full h-full pt-14 pb-10">
           <P size="sm" className="text-center font-digital">
             Hippius: A Smarter Cloud
           </P>
-          <H4 className="mt-4 text-grey-10 max-w-screen-sm text-center">
+          <h2 className="text-3xl lg:text-4xl font-medium font-grotesk mt-4 text-grey-10 max-w-screen-sm text-center">
             Hippius is the solution to storage on Bittensor
-          </H4>
+          </h2>
           <div className="flex gap-8 mt-10 flex-wrap justify-center max-w-screen-xl w-full mx-auto">
             {SMARTER_CLOUD.map((offering, i) => (
               <div
                 className="flex flex-col items-center font-medium max-w-72"
                 key={i}
               >
-                <AbstractIconWrapper className="size-10 duration-500 delay-300">
+                <AbstractIconWrapper className="size-10">
                   {offering.icon}
                 </AbstractIconWrapper>
                 <P className="mt-4" size="lg">
                   {offering.title}
                 </P>
-                <P
-                  className="mt-2 text-grey-50 text-center duration-500 delay-700"
-                  size="sm"
-                >
+                <P className="mt-2 text-grey-50 text-center" size="sm">
                   {offering.description}
                 </P>
               </div>
             ))}
           </div>
           <Button
-            className="mt-8 duration-500 delay-500"
+            className="mt-8"
             icon={<Icons.ArrowRight />}
             asLink
             href={URLS.DASHBOARD}
@@ -253,10 +245,7 @@ function HomepageFeatures() {
 
 export default function Home(): ReactNode {
   return (
-    <Layout
-      title="Welcome to Hippius"
-      description="Hippius is a transparent, decentralized, anonymous cloud storage platform built on a custom Substrate blockchain, leveraging IPFS and S3-compatible storage."
-    >
+    <Layout>
       <main>
         <HomepageHeader />
         <HomepageFeatures />

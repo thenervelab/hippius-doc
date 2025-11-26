@@ -18,6 +18,7 @@ const sidebars: SidebarsConfig = {
           label: "Core Technologies",
           items: [
             "learn/substrate", //substrate
+            "learn/substrate-staking", //substrate
             "learn/mnemonic-auth", // Mnemonic Authentication
             "learn/encryption", // Encryption System
             "learn/storage-systems", // Decentralized Storage Systems
@@ -41,7 +42,8 @@ const sidebars: SidebarsConfig = {
             "use/desktop/using-the-app", // Using the App
             "use/desktop/file-system", // File System
             "use/desktop/settings", // App Settings
-            "use/desktop/wallet", // Hippius Wallet
+            // "use/desktop/wallet", // Hippius Wallet
+            "use/desktop/billing", // Billing
             "use/desktop/referral-system", // Referral System
           ],
           collapsed: false, // Collapsed by default (not yet released)

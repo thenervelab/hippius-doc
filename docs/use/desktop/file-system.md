@@ -22,7 +22,7 @@ To enable truly decentralized storage, we use erasure coding to split uploaded f
 
 ## Private Files
 
-Private files take the default encryption key which can be changed in the [Encryption Key](/learn/desktop/settings#encryption-key) section in the settings page. We advise uploading files or folders with personal information as [Private Files](#private-files) or [Private Folders](#uploading-private-folders).
+Private files take the default encryption key which can be changed in the [Encryption Key](/use/desktop/settings#encryption-key) section in the settings page. We advise uploading files or folders with personal information as [Private Files](#private-files) or [Private Folders](#uploading-private-folders).
 
 ### Uploading Private Files {#uploading-private-files}
 

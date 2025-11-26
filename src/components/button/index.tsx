@@ -6,7 +6,7 @@ import classes from "./button.module.css";
 import cn from "@site/src/utils/cn";
 
 const buttonVariants = cva({
-  base: "rounded-[4px] py-3 px-4 w-[208px] min-w-fit font-medium duration-300 flex justify-center items-center gap-x-2",
+  base: "rounded-[4px] py-3 px-4 w-[208px] min-w-fit font-medium flex justify-center items-center gap-x-2",
   variants: {
     variant: {
       primary: cn(

@@ -2,6 +2,7 @@ import * as Accordion from "@radix-ui/react-accordion";
 import React from "react";
 import { Icons } from "./ui";
 import cn from "../utils/cn";
+import Graphsheet from "@site/src/components/graphsheet";
 
 type RootProps = {
   /** For multiple: pass an array (e.g. ["file-settings"]). For single: pass a string. */
@@ -68,7 +69,7 @@ export function DocAccordionItem({
   }
   const header = kids[0] ?? null;
   const content = kids[1] ?? null;
-
+  console.log("Rendering DocAccordionItem:", value);
   return (
     <Accordion.Item value={value} className={cn(className)}>
       <Accordion.Header
@@ -79,19 +80,50 @@ export function DocAccordionItem({
         <Accordion.Trigger
           className={cn(
             "group w-full flex items-center justify-between text-left rounded transition-all",
-            isFirst ? "pb-6 hover:mb-3" : "py-6 hover:my-3",
-            "outline-none",
-            "hover:bg-primary-100 hover:px-3 hover:pt-3 hover:pb-3 duration-200 hover:text-[#1F51BE]"
+            isFirst ? "pb-4" : "py-4 ",
+            "outline-none"
+            // "hover:bg-primary-100 hover:px-3 hover:pt-3 hover:pb-3 duration-200 hover:text-[#1F51BE]"
           )}
         >
-          <h2 className="!mb-0">{header}</h2>
+          <div
+            className={cn(
+              "flex flex-wrap rounded transition-colors duration-200 ease-[cubic-bezier(0.08,0.52,0.52,1)] relative text-base w-full justify-between py-2 px-3 items-center hover:bg-[#0000000d]"
+            )}
+          >
+            <>
+              <Graphsheet
+                majorCell={{
+                  lineColor: [31, 80, 189, 1.0],
+                  lineWidth: 2,
+                  cellDim: 40,
+                }}
+                minorCell={{
+                  lineColor: [49, 103, 211, 1.0],
+                  lineWidth: 1,
+                  cellDim: 5,
+                }}
+                className="absolute w-full h-full top-0 bottom-0 left-0 opacity-10 group-data-[state=open]:block hidden"
+              />
 
-          {/* Your icon */}
-          <div className="ml-3 h-5 w-5 rounded border-[1.5px] border-grey-10 flex items-center justify-center">
-            <Icons.ArrowDown
-              className="shrink-0 transition-transform duration-200 ease-out group-data-[state=open]:rotate-180 text-grey-10"
-              aria-hidden
-            />
+              <div className="absolute w-full h-full top-0 bottom-0 left-0 group-data-[state=open]:block hidden">
+                <div className="size-1.5 border-2 border-primary-50 border-r-0 border-b-0 absolute left-0 top-0" />
+                <div className="size-1.5 border-2 border-primary-50 border-r-0 border-t-0 absolute left-0 bottom-0" />
+                <div className="size-1.5 border-2 border-primary-50 border-l-0 border-t-0 absolute right-0 bottom-0" />
+                <div className="size-1.5 border-2 border-primary-50 border-l-0 border-b-0 absolute right-0 top-0" />
+              </div>
+            </>
+
+            <h2 className="!mb-0 font-medium group-hover:bg-none group-hover:text-[#3578e5] z-10">
+              {header}
+            </h2>
+
+            {/* Your icon */}
+            <div className="ml-3 h-5 w-5 rounded border-[1.5px] border-grey-10 flex items-center justify-center">
+              <Icons.ArrowDown
+                className="shrink-0 transition-transform duration-200 ease-out group-data-[state=open]:rotate-180 text-grey-10"
+                aria-hidden
+              />
+            </div>
           </div>
         </Accordion.Trigger>
       </Accordion.Header>

@@ -31,7 +31,7 @@ If files are edited or removed, those changes will be synced automatically.</p>
       <li>Choose the new folder you want to use and click <BgStyledText>Sync Folder</BgStyledText>.</li>
     </Ordered>
 
-    ![File settings screen](/img/desktop/settings-file.png)
+    ![File settings screen](/img/desktop/settings/settings-file.png)
 
 </>
 </DocAccordionItem>
@@ -55,68 +55,48 @@ If files are edited or removed, those changes will be synced automatically.</p>
       <li>Save your changes.</li>
     </Ordered>
 
-    ![Change passcode modal](/img/desktop/settings-passcode.png)
+    ![Change passcode modal](/img/desktop/settings/settings-passcode.png)
 
 </>
 </DocAccordionItem>
 
-## Encryption Key
-
-<DocAccordionItem value="encryption-key">
-  <>
- Encryption Key
-  </>
-  <>
-    <p>Your unique encryption key protects data integrity and access. Keep it safe—only you can regenerate or use it to secure your files on our decentralized storage network.</p>
-
-    <Ordered>
-      <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
-      <li>Click on <BgStyledIconWithText text="Encryption Key" icon="Key" />.</li>
-      <li>You can now generate a new encryption key which is to be stored securely.</li>
-    </Ordered>
-
-    ![Encryption key screen](/img/desktop/settings-encryption.png)
-
-</>
-</DocAccordionItem>
-
-## Sub Accounts
+## API Keys
 
 <DocAccordionItem value="sub-accounts">
   <>
-  Sub Accounts
+  API Keys
   </>
   <>
-    <p>Sub-accounts let you assign upload and delete rights. They use their own seed, yet all files still belong to your main account. We’re currently using these sub-accounts to upload files to S3 storage.</p>
+    <p>API keys allow for S3 operations and do not allow for any other party to have access to your account.</p>
 
     <Ordered>
       <li>Click on the <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
-      <li>Click <BgStyledIconWithText text="Sub Accounts" icon="KeySquare" />.</li>
+      <li>Click <BgStyledIconWithText text="API Keys" icon="KeySquare" />.</li>
     </Ordered>
 
-    ![Sub accounts table](/img/desktop/settings-sub-accounts.png)
+    ![Sub accounts table](/img/desktop/settings/settings-sub-accounts.png)
 
-    ### Create a New Sub Account
+    ### Create a New API Key
 
     <Ordered>
-      <li>Click on <BgStyledText>New Sub Account</BgStyledText>.</li>
-      <li>Enter the address and select the role assigned to this account.</li>
-      <li>Click on the <BgStyledText>Create Sub Account</BgStyledText> button.</li>
+      <li>Click on <BgStyledText>Add API Key</BgStyledText>.</li>
+      <li>Enter the address and select the role assigned to this API Key.</li>
+      <li>Click on the <BgStyledText>Add API Key</BgStyledText> button.</li>
     </Ordered>
 
-    ![Create sub account modal](/img/desktop/settings-sub-account-create.png)
+    ![Create sub account modal](/img/desktop/settings/settings-sub-account-create.png)
 
-    ### Generate Sub Account
+    ### Generate API Key
 
     <Ordered>
-      <li>Click on <BgStyledText>Generate New Account</BgStyledText>.</li>
-      <li>Save the generated access key.</li>
-      <li>Click on <BgStyledText>Add as Sub Account</BgStyledText> to make this sub account.</li>
-      <li>Assign a role and click on <BgStyledText>Create Sub Account</BgStyledText> to share it to the account.</li>
-      <li>Enter the passcode to save the seed of the sub account.</li>
+      <li>Click on <BgStyledText>Generate New API Key</BgStyledText>.</li>
+      <li>Save the account API key.</li>
+      <li>Select the permission for the API Key.</li>
+      <li>Click on <BgStyledText>Add API Key</BgStyledText> to save.</li>
+      <li>Enter the Seed phrase and passcode.</li>
     </Ordered>
 
-    ![Generate sub account modal](/img/desktop/settings-sub-account-generate.png)
+    ![Generate sub account modal](/img/desktop/settings/settings-sub-account-generate.png)
 
     ### Deleting Sub Accounts
 
@@ -127,7 +107,7 @@ If files are edited or removed, those changes will be synced automatically.</p>
 
     **Note that this action is irreversible.**
 
-    ![Delete sub account confirm](/img/desktop/settings-sub-account-delete.png)
+    ![Delete sub account confirm](/img/desktop/settings/settings-sub-account-delete.png)
 
 </>
 </DocAccordionItem>
@@ -147,7 +127,7 @@ If files are edited or removed, those changes will be synced automatically.</p>
       <li>Choose your notification preferences.</li>
     </Ordered>
 
-    ![Notifications screen](/img/desktop/settings-notifications.png)
+    ![Notifications screen](/img/desktop/settings/settings-notifications.png)
 
 </>
 </DocAccordionItem>
@@ -168,7 +148,7 @@ If files are edited or removed, those changes will be synced automatically.</p>
       <li>Save the edited RPC.</li>
     </Ordered>
 
-    ![Custom RPC screen](/img/desktop/settings-rpc.png)
+    ![Custom RPC screen](/img/desktop/settings/settings-rpc.png)
 
 </>
 </DocAccordionItem>
@@ -184,7 +164,7 @@ If files are edited or removed, those changes will be synced automatically.</p>
 
     <p><strong>Note: The passcode is only required on the first login. The app will keep you signed in for the set duration (default 24 hours, adjustable) without prompting again during that period.</strong></p>
 
-    ![Session Timeout screen](/img/desktop/session-timeout.png)
+    ![Session Timeout screen](/img/desktop/settings/settings-session-timeout.png)
 
 </>
 </DocAccordionItem>
@@ -204,27 +184,27 @@ If files are edited or removed, those changes will be synced automatically.</p>
       <li>Click the <BgStyledText>Download</BgStyledText> button to get your saved phrase.</li>
     </Ordered>
 
-    ![Backup app data screen](/img/desktop/settings-backup.png)
+    ![Backup app data screen](/img/desktop/settings/settings-backup.png)
 
 </>
 </DocAccordionItem>
 
-## Reset App Data
+## Reset App
 
 <DocAccordionItem value="reset">
   <>
-   Reset App Data
+   Reset App 
   </>
   <>
-    <p>Use this option if you’re experiencing issues or want to start fresh. Your blockchain data and files stored on the decentralized network remain secure and accessible after reset.</p>
+    <p>Use this option if you're experiencing issues or want to start fresh. Your blockchain data and files stored on the decentralized network remain secure and accessible after reset.</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
-      <li>Click <BgStyledIconWithText text="Reset App Data" icon="Trash" />.</li>
+      <li>Click <BgStyledIconWithText text="Reset App" icon="Trash" />.</li>
       <li>Confirm this step in the modal that pops up and the reset will begin.</li>
     </Ordered>
 
-    ![Reset app data modal](/img/desktop/settings-reset.png)
+    ![Reset app data modal](/img/desktop/settings/settings-reset.png)
 
 </>
 </DocAccordionItem>
