@@ -10,7 +10,7 @@ import BgStyledText from '@site/src/components/BgStyledText';
 
 ## Introduction
 
-The Virtual Machines section allows you to create and manage compute instances within the Hippius Desktop App. This guide covers essential tasks for launching and operating VMs.
+The Virtual Machines section allows you to create and manage compute instances within Hippius. This guide covers essential tasks for launching and operating VMs.
 
 :::note Beta Access Required
 Virtual Machines is currently available only to beta users. To request access, please contact the Hippius admin team.
