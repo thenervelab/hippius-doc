@@ -34,6 +34,7 @@ const sidebars: SidebarsConfig = {
         "use/ipfs-website", // Hosting a website on IPFS
         "use/react-ipfs", // Publishing a React app to IPFS
         "use/bridge", // Using the Hippius bridge
+        "use/s3-token-management", // S3 Token Management
         {
           type: "category",
           label: "Hippius Desktop App",
