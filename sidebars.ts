@@ -35,7 +35,7 @@ const sidebars: SidebarsConfig = {
         "use/react-ipfs", // Publishing a React app to IPFS
         "use/bridge", // Using the Hippius bridge
         "use/s3-token-management", // S3 Token Management
-        "use/desktop/virtual-machines", // Virtual Machines
+        "use/virtual-machines", // Virtual Machines
         {
           type: "category",
           label: "Hippius Desktop App",

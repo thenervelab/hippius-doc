@@ -2,7 +2,7 @@
 id: virtual-machines
 title: Virtual Machines
 sidebar_label: Virtual Machines
-slug: /use/desktop/virtual-machines
+slug: /use/virtual-machines
 ---
 
 import Ordered from '@site/src/components/Ordered';
