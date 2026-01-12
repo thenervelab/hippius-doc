@@ -36,6 +36,7 @@ const sidebars: SidebarsConfig = {
         "use/bridge", // Using the Hippius bridge
         "use/s3-token-management", // S3 Token Management
         "use/virtual-machines", // Virtual Machines
+        "use/help-support", // Help & Support
         {
           type: "category",
           label: "Hippius Desktop App",
