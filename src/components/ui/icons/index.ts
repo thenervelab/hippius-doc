@@ -56,3 +56,4 @@ export { default as KeySquare } from "./key-square";
 export { default as Key } from "./key";
 export { default as WalletAdd } from "./wallet-add";
 export { default as Billing } from "./billing";
+export { default as ShieldTick } from "./shield-tick";

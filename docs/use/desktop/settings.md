@@ -10,7 +10,6 @@ import DocAccordion, { DocAccordionItem } from '@site/src/components/DocAccordio
 import Ordered from '@site/src/components/Ordered';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import BgStyledText from '@site/src/components/BgStyledText';
-import Icon from '@site/src/components/Icon';
 
 <DocAccordion defaultValue="file-settings">
 
@@ -21,93 +20,63 @@ File Settings
 </>
 <>
 
-<p>In File settings, select and change folder for private and public syncing.<br/>
-If files are edited or removed, those changes will be synced automatically.</p>
+    ### Selecting Sync Folder
+
+    <p>Select a folder on your device to sync with Hippius. Changes made in this folder will automatically sync to the cloud.</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
       <li>Click on <BgStyledIconWithText text="File Settings" icon="File" />.</li>
-      <li>Choose to change either private or public folder.</li>
-      <li>Choose the new folder you want to use and click <BgStyledText>Sync Folder</BgStyledText>.</li>
+      <li>Review the current sync folder path.</li>
+      <li>Click <BgStyledText>Change Folder</BgStyledText> to select a new location. The folder is automatically saved once selected.</li>
+      <li>To pause syncing, click <BgStyledText>Stop Syncing</BgStyledText>.</li>
     </Ordered>
+
+    <p>This folder serves as your private sync path, ensuring secure and private synchronization between your device and Hippius.</p>
+
+    ### File Deletion Behavior Settings
+
+    <p>Configure how file deletions are handled between your local device and the cloud.</p>
+
+    <Ordered>
+      <li>Under <strong>File Deletion Behaviour</strong>, choose how deletions should be handled.</li>
+      <li>Click <BgStyledText>Save Changes</BgStyledText> to apply your deletion behavior settings.</li>
+    </Ordered>
+
+    <p><strong>File Deletion Behaviour options:</strong></p>
+    <ul>
+      <li><strong>Upload only (Default)</strong>: Never download deletions; keep cloud backups even if local files are removed.</li>
+      <li><strong>Remote Backup</strong>: Keep a copy in the cloud; local deletions do not remove cloud files.</li>
+      <li><strong>Mirror Local Delete</strong>: Delete cloud files when you delete them locally.</li>
+      <li><strong>Restore Local Files</strong>: Re-download deleted files from the cloud to your device.</li>
+    </ul>
 
     ![File settings screen](/img/desktop/settings/settings-file.png)
 
 </>
 </DocAccordionItem>
 
-## Change Passcode
+## Master Token
 
-<DocAccordionItem value="change-passcode">
+<DocAccordionItem value="master-token">
   <>
- Change Passcode
-
-</>
-<>
-
-<p>Your passcode encrypts your access key and secures your data. Only you can change it, keeping you in complete control of your access and security. It is recommended to use a strong password.</p>
+  Master Token
+  </>
+  <>
+    <p>Your master token authenticates API requests to the Hippius platform.</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
-      <li>Click on <BgStyledIconWithText text="Change Passcode" icon="WalletAdd" />.</li>
-      <li>Enter your current passcode.</li>
-      <li>Enter your desired passcode and re-enter it for confirmation.</li>
-      <li>Save your changes.</li>
+      <li>Click on <BgStyledIconWithText text="Master Token" icon="KeySquare" />.</li>
+      <li>Copy the token using the copy icon.</li>
+      <li>Use the <strong>Token Usage</strong> field as a reference for the Authorization header.</li>
     </Ordered>
 
-    ![Change passcode modal](/img/desktop/settings/settings-passcode.png)
+    :::warning Keep your master token secure
+    Anyone with this token can access your account. Treat it like a password.
+    :::
 
-</>
-</DocAccordionItem>
-
-## API Keys
-
-<DocAccordionItem value="sub-accounts">
-  <>
-  API Keys
-  </>
-  <>
-    <p>API keys allow for S3 operations and do not allow for any other party to have access to your account.</p>
-
-    <Ordered>
-      <li>Click on the <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
-      <li>Click <BgStyledIconWithText text="API Keys" icon="KeySquare" />.</li>
-    </Ordered>
-
-    ![Sub accounts table](/img/desktop/settings/settings-sub-accounts.png)
-
-    ### Create a New API Key
-
-    <Ordered>
-      <li>Click on <BgStyledText>Add API Key</BgStyledText>.</li>
-      <li>Enter the address and select the role assigned to this API Key.</li>
-      <li>Click on the <BgStyledText>Add API Key</BgStyledText> button.</li>
-    </Ordered>
-
-    ![Create sub account modal](/img/desktop/settings/settings-sub-account-create.png)
-
-    ### Generate API Key
-
-    <Ordered>
-      <li>Click on <BgStyledText>Generate New API Key</BgStyledText>.</li>
-      <li>Save the account API key.</li>
-      <li>Select the permission for the API Key.</li>
-      <li>Click on <BgStyledText>Add API Key</BgStyledText> to save.</li>
-      <li>Enter the Seed phrase and passcode.</li>
-    </Ordered>
-
-    ![Generate sub account modal](/img/desktop/settings/settings-sub-account-generate.png)
-
-    ### Deleting Sub Accounts
-
-    <Ordered>
-      <li>Click on <BgStyledIconWithText icon="Trash" /> button.</li>
-      <li>Confirm the action.</li>
-    </Ordered>
-
-    **Note that this action is irreversible.**
-
-    ![Delete sub account confirm](/img/desktop/settings/settings-sub-account-delete.png)
+    ![Master token screen](/img/desktop/settings/settings-master-token.png)
 
 </>
 </DocAccordionItem>
@@ -119,15 +88,27 @@ If files are edited or removed, those changes will be synced automatically.</p>
    Notifications
   </>
   <>
-    <p>You will receive in-app notifications when your credits are low or when your uploads are complete.</p>
+    <p>Control which in-app notifications you receive and manage email preferences.</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
       <li>Click on <BgStyledIconWithText text="Notifications" icon="Notification" />.</li>
-      <li>Choose your notification preferences.</li>
+      <li>Select the notification types you want, such as <strong>Credits</strong> and <strong>Files</strong>.</li>
+      <li>Click <BgStyledText>Save</BgStyledText>.</li>
     </Ordered>
 
     ![Notifications screen](/img/desktop/settings/settings-notifications.png)
+
+    ### Email Preferences
+
+    <Ordered>
+      <li>Click <BgStyledText>Email Notifications</BgStyledText> in the notifications panel.</li>
+      <li>Toggle <strong>Receive Email Notifications</strong> on or off.</li>
+      <li>Select the email types you want: <strong>Low credit balance alerts</strong>, <strong>Zero balance alerts</strong>, and <strong>Marketing emails & newsletter</strong>.</li>
+      <li>Click <BgStyledText>Save Changes</BgStyledText>.</li>
+    </Ordered>
+
+    ![Email notification preferences](/img/desktop/settings/email-preference.png)
 
 </>
 </DocAccordionItem>
@@ -153,58 +134,23 @@ If files are edited or removed, those changes will be synced automatically.</p>
 </>
 </DocAccordionItem>
 
-## Session Timeout
+## VPN Settings
 
-<DocAccordionItem value="session-timeout">
+<DocAccordionItem value="vpn-settings">
   <>
-  Session Timeout
+  VPN Settings
   </>
   <>
-    <p>The session timeout determines how long you stay signed in before being automatically logged out. We recommend choosing a duration that balances security and convenience.</p>
-
-    <p><strong>Note: The passcode is only required on the first login. The app will keep you signed in for the set duration (default 24 hours, adjustable) without prompting again during that period.</strong></p>
-
-    ![Session Timeout screen](/img/desktop/settings/settings-session-timeout.png)
-
-</>
-</DocAccordionItem>
-
-## Backup App Data
-
-<DocAccordionItem value="backup">
-  <>
- Backup App Data
-  </>
-  <>
-    <p>Regular backups help you recover your data stored on this device if you lose access to it. Save your backup ZIP file in a secure location.</p>
+    <p>Configure how the VPN behaves when the desktop app starts.</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
-      <li>Click on the <BgStyledIconWithText text="Backup App Data" icon="Wallet" />.</li>
-      <li>Click the <BgStyledText>Download</BgStyledText> button to get your saved phrase.</li>
+      <li>Click on <BgStyledIconWithText text="VPN Settings" icon="ShieldTick" />.</li>
+      <li>Toggle <strong>Autoconnect on Startup</strong> to enable or disable automatic VPN connection.</li>
+      <li>Click <BgStyledText>Update</BgStyledText>.</li>
     </Ordered>
 
-    ![Backup app data screen](/img/desktop/settings/settings-backup.png)
-
-</>
-</DocAccordionItem>
-
-## Reset App
-
-<DocAccordionItem value="reset">
-  <>
-   Reset App 
-  </>
-  <>
-    <p>Use this option if you're experiencing issues or want to start fresh. Your blockchain data and files stored on the decentralized network remain secure and accessible after reset.</p>
-
-    <Ordered>
-      <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
-      <li>Click <BgStyledIconWithText text="Reset App" icon="Trash" />.</li>
-      <li>Confirm this step in the modal that pops up and the reset will begin.</li>
-    </Ordered>
-
-    ![Reset app data modal](/img/desktop/settings/settings-reset.png)
+    ![VPN settings screen](/img/desktop/settings/vpn-settings.png)
 
 </>
 </DocAccordionItem>
