@@ -56,18 +56,18 @@ File Settings
 </>
 </DocAccordionItem>
 
-## Master Token
+## API Token
 
-<DocAccordionItem value="master-token">
+<DocAccordionItem value="api-token">
   <>
-  Master Token
+  API Token
   </>
   <>
-    <p>Your master token authenticates API requests to the Hippius platform.</p>
+    <p>Your api token authenticates API requests to the Hippius platform.</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
-      <li>Click on <BgStyledIconWithText text="Master Token" icon="KeySquare" />.</li>
+      <li>Click on <BgStyledIconWithText text="API Token" icon="KeySquare" />.</li>
       <li>Copy the token using the copy icon.</li>
       <li>Use the <strong>Token Usage</strong> field as a reference for the Authorization header.</li>
     </Ordered>

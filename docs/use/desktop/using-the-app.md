@@ -41,28 +41,8 @@ When you are done, click on the <BgStyledText>Sync Folder</BgStyledText> button 
 <Ordered>
   <li>Click the <Icon /> icon to open the app</li>
   <li>Home page: Click on <BgStyledIconWithText text="Files" icon="DocumentText" />, or <BgStyledText>Upload File</BgStyledText> button which is on the home page.</li>
-  <li>Choose the method you want to use to upload your file or folder.</li>
-</Ordered>
-
-### Use Hippius Folder
-
-<Ordered>
-  <li>Open app.</li>
-  <li>Add the file or folder you want to sync.</li>
-</Ordered>
-
-### Use CID
-
-<Ordered>
-  <li>Enter the CID of the file sourced from IPFS.</li>
-  <li>Choose a name for the file.</li>
-  <li>Register the CID.</li>
-</Ordered>
-
-### Use CSV
-
-<Ordered>
-  <li>Upload the CSV into the drop zone.</li>
+  <li>Choose the file or folder you want to upload.</li>
+  <li>Click the upload button to start the upload process.</li>
 </Ordered>
 
 **It usually takes some time to complete the upload to Hippius, but you can always monitor the upload progress.**
