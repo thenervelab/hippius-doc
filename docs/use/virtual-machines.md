@@ -258,9 +258,9 @@ Use the instance options menu to perform actions on a VM.
 
 ![Instance options menu](/img/desktop/virtual-machines/vm-options.png)
 
-### Open VNC console
+### Access Console
 
-**Coming Soon**: VNC console access is currently under development and will be available in a future release.
+**Coming Soon**: Console access is currently under development and will be available in a future release.
 
 ### Start an instance
 
