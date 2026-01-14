@@ -163,7 +163,7 @@ const config: Config = {
           value: '<div style="width: 20px;"></div>', // Spacer for visual separation
         },
         {
-          href: "http://api.hippius.io/swagger-ui",
+          href: "https://api.hippius.com/",
           label: "API",
           position: "right",
         },
