@@ -40,8 +40,8 @@ These modern authentication methods provide:
 
 If you created your account before November 2025, you have two options:
 
-1. **Mnemonic Authentication** — Continue using your existing mnemonic phrase (legacy method, documented below)
-2. **OAuth Authentication** — Link your account to Google, Apple, or GitHub for a modern sign-in experience
+1. **Mnemonic Authentication** - Continue using your existing mnemonic phrase (legacy method, documented below)
+2. **OAuth Authentication** - Link your account to Google, Apple, or GitHub for a modern sign-in experience
 
 ---
 
