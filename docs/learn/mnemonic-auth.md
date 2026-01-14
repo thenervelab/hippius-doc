@@ -1,15 +1,57 @@
 ---
 sidebar_position: 4
-description: 4
+description: Legacy authentication method for existing Hippius users
 ---
 
-# Mnemonic Authentication
+# Mnemonic Authentication (Legacy)
 
-Learn about our secure, extension-free authentication system using cryptographic mnemonics.
+:::warning Legacy Authentication Method
+**Mnemonic authentication is ONLY available for existing users who created accounts before November 2025.**
 
-## Overview
+New users cannot use mnemonic authentication. If you're a new user, please use one of our modern authentication methods: **Google**, **Apple** (coming soon), or **GitHub** OAuth.
 
-Hippius uses a mnemonic-based authentication system that provides secure access without requiring browser extensions or storing sensitive data. Your mnemonic phrase acts as both your identity and encryption key, giving you complete control over your account security.
+→ [See Authentication Methods](#authentication-methods) for details.
+:::
+
+Learn about our secure, extension-free authentication system using cryptographic mnemonics. This method is maintained for existing users who registered before the transition to OAuth-based authentication.
+
+## Authentication Methods
+
+Hippius offers different authentication options depending on when you created your account:
+
+### For New Users (November 2025 onwards)
+
+New users must authenticate using one of the following OAuth providers:
+
+| Provider   | Description                                |
+| ---------- | ------------------------------------------ |
+| **Google** | Sign in with your Google account           |
+| **Apple**  | Sign in with your Apple ID _(Coming Soon)_ |
+| **GitHub** | Sign in with your GitHub account           |
+
+These modern authentication methods provide:
+
+- Seamless single sign-on experience
+- Two-factor authentication support from your provider
+- No need to manage or backup recovery phrases
+- Industry-standard OAuth 2.0 security
+
+### For Existing Users (before November 2025)
+
+If you created your account before November 2025, you have two options:
+
+1. **Mnemonic Authentication** — Continue using your existing mnemonic phrase (legacy method, documented below)
+2. **OAuth Authentication** — Link your account to Google, Apple, or GitHub for a modern sign-in experience
+
+---
+
+## Overview (Legacy Mnemonic System)
+
+Hippius originally used a mnemonic-based authentication system that provides secure access without requiring browser extensions or storing sensitive data. Your mnemonic phrase acts as both your identity and encryption key, giving you complete control over your account security.
+
+:::note
+This section documents the legacy mnemonic authentication system for existing users only.
+:::
 
 ## How It Works
 
@@ -25,7 +67,11 @@ From your mnemonic, we derive multiple cryptographic keys for different purposes
 
 When you log in, we use your mnemonic to generate your public-private key pair. The public key identifies you, while the private key proves your identity.
 
-## Advantages Over Browser Extensions
+## Advantages Over Browser Extensions (Legacy)
+
+:::info
+These advantages apply to the legacy mnemonic system. New users should use OAuth authentication instead.
+:::
 
 ### No Dependencies:
 
@@ -46,7 +92,7 @@ When you log in, we use your mnemonic to generate your public-private key pair. 
 - No need to sync extensions between browsers
 - Faster loading without extension overhead
 
-## Security Considerations
+## Security Considerations (Legacy Mnemonic System)
 
 ### Zero Storage Policy:
 
@@ -94,7 +140,11 @@ Our application is designed with security in mind:
 - We use secure input fields that prevent accidental exposure of sensitive data
 - All cryptographic operations are performed client-side for maximum security
 
-## Best Practices
+## Best Practices (Legacy Mnemonic Users)
+
+:::tip Consider Migrating to OAuth
+If you're an existing user still using mnemonic authentication, consider linking your account to Google, Apple, or GitHub for a more convenient sign-in experience while maintaining the same level of security.
+:::
 
 - Store your mnemonic phrase securely offline
 - Never share your mnemonic with anyone

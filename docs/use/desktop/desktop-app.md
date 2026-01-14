@@ -14,7 +14,7 @@ import Icon from '@site/src/components/Icon';
 ## Introduction
 
 Welcome to the Hippius Desktop App documentation!
-This tool enables you to store, access, sync and manage files securely on a decentralized blockchain network using IPFS (InterPlanetary File System). Whether you're new to decentralized storage or an experienced user, this guide will walk you through installing, using, and customizing the app to suit your needs. Let’s get started.
+This tool enables you to store, access, sync and manage files securely on a decentralized blockchain network using Arion distributed storage. Whether you're new to decentralized storage or an experienced user, this guide will walk you through installing, using, and customizing the app to suit your needs. Let’s get started.
 
 ## Benefits of using the Desktop App
 

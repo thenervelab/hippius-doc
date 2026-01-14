@@ -14,6 +14,7 @@ This page provides a comprehensive overview of the Hippius system architecture, 
 The following diagram illustrates the flow of data, transactions, and rewards within the Hippius network:
 
 <ArchitectureDiagram />
+<br/>
 
 ## Key Components
 
@@ -43,15 +44,92 @@ The following diagram illustrates the flow of data, transactions, and rewards wi
    - Provide volume-based storage with authentication services
    - Run offchain workers to interact with the blockchain
 
-2. **IPFS Storage Miners**:
+2. **Arion Storage Miners**:
 
-   - Provide content-addressed storage through IPFS
-   - Run offchain workers to interact with the blockchain
+   - Provide deterministic distributed storage using the CRUSH algorithm
+   - Store encrypted data shards as part of the Reed-Solomon erasure coding scheme (10+20)
+   - Emit signed heartbeats every 30 seconds for health monitoring
+   - Content-addressed by BLAKE3 hash for data integrity verification
+   - Run offchain workers to interact with the Substrate blockchain
+   - Participate in Grid Streaming for parallel data retrieval via QUIC protocol
 
 3. **Compute Miners**:
    - Provide virtual machine environments for computation
    - Support smart contract execution
    - Run offchain workers to interact with the blockchain
+
+<br/>
+### Arion Miner ↔ Blockchain Interaction
+
+Arion miners interact with the Substrate blockchain through several key mechanisms:
+
+| Component               | Blockchain Interaction                                                                                |
+| ----------------------- | ----------------------------------------------------------------------------------------------------- |
+| **Cluster Map**         | Published to the blockchain; miners register their storage capacity and receive placement assignments |
+| **Heartbeats**          | Miners emit signed heartbeats; Validators monitor liveness and update on-chain status                 |
+| **Placement Groups**    | Blockchain maintains PG-to-Miner mappings calculated via `CRUSH(PG_ID, Cluster_Map)`                  |
+| **Reputation Scoring**  | On-chain metrics track age, uptime, and integrity audit results                                       |
+| **Reward Distribution** | Blockchain distributes Alpha rewards based on storage provision and successful audits                 |
+
+### Arion Miner Node Architecture
+
+Each Arion miner node operates as part of a decentralized mesh network with the following internal architecture:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    ARION MINER NODE                         │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│   ┌──────────────────────────────────────────────────────┐  │
+│   │                 BLOCKCHAIN LAYER                     │  │
+│   │  • Substrate Client (Hippius Full Node)              │  │
+│   │  • Offchain Worker for task coordination             │  │
+│   │  • Signed Heartbeat Emission (every 30s)             │  │
+│   └──────────────────────────────────────────────────────┘  │
+│                           │                                 │
+│                           ▼                                 │
+│   ┌──────────────────────────────────────────────────────┐  │
+│   │                  STORAGE ENGINE                      │  │
+│   │  • CRUSH Placement Calculator                        │  │
+│   │  • Placement Group (PG) Manager                      │  │
+│   │  • Reed-Solomon Shard Storage (10+20 scheme)         │  │
+│   │  • BLAKE3 Content Addressing & Integrity             │  │
+│   └──────────────────────────────────────────────────────┘  │
+│                           │                                 │
+│                           ▼                                 │
+│   ┌──────────────────────────────────────────────────────┐  │
+│   │                  NETWORK LAYER                       │  │
+│   │  • QUIC Protocol (RFC 9000) for Grid Streaming       │  │
+│   │  • TLS 1.3 Encryption with Key Rotation              │  │
+│   │  • Ed25519 Node Identity                             │  │
+│   │  • DERP Relay for NAT Traversal                      │  │
+│   └──────────────────────────────────────────────────────┘  │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+#### Key Components
+
+| Component            | Description                                                                   |
+| -------------------- | ----------------------------------------------------------------------------- |
+| **Substrate Client** | Connects to the Hippius blockchain for coordination and state synchronization |
+| **Offchain Worker**  | Handles storage tasks, responds to validator assignments, submits proofs      |
+| **CRUSH Calculator** | Locally computes placement group assignments using the cluster map            |
+| **Shard Storage**    | Stores encrypted data shards with Reed-Solomon erasure coding                 |
+| **BLAKE3 Hasher**    | Provides content-addressing and integrity verification for all shards         |
+| **QUIC Transport**   | Enables multiplexed, low-latency data streaming to Gateways and users         |
+
+#### Miner Lifecycle
+
+1. **Registration**: Miner registers on-chain with storage capacity and stake
+2. **Map Sync**: Downloads the Cluster Map from the blockchain
+3. **Heartbeat Loop**: Emits signed heartbeats every 30 seconds to prove liveness
+4. **Shard Reception**: Receives and stores shards based on CRUSH placement assignments
+5. **Grid Streaming**: Serves shard requests via parallel QUIC streams
+6. **Audit Response**: Responds to Validator integrity challenges with shard proofs
+7. **Reward Collection**: Receives Alpha rewards based on Ranking Pallet scores
+
+For detailed technical information about Arion, see [Arion Storage Architecture](/learn/arion-storage-architecture).
 
 ### Reward Distribution
 

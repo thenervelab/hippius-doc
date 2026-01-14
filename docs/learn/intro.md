@@ -1,6 +1,6 @@
 # What is Hippius?
 
-Hippius is a decentralized cloud storage platform powered by a custom Substrate blockchain, IPFS, and S3-compatible storage. Learn how it enables transparent, anonymous storage with blockchain trust.
+Hippius is a decentralized cloud storage platform powered by a custom Substrate blockchain, Arion distributed storage, and S3-compatible storage. Learn how it enables transparent, anonymous storage with blockchain trust.
 
 # Chain
 
@@ -38,7 +38,7 @@ Losing your mnemonic means permanently losing access to your account
 
 Hippius offers two complementary storage systems, each with unique advantages:
 
-1. **IPFS (InterPlanetary File System)**: Fully decentralized, content-addressed storage with blockchain-managed pinning
+1. **Arion Distributed Storage**: Deterministic, content-addressed storage with self-healing and parallel retrieval
 2. **Hybrid S3**: S3-compatible object storage with decentralized storage volumes
 
 [More](storage-systems)

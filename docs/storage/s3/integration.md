@@ -4,16 +4,16 @@ description: 10
 
 # Hippius S3 API - User Guide
 
-Welcome to the Hippius S3 API! This guide will help you get started with storing and retrieving your files using our S3-compatible storage service powered by IPFS.
+Welcome to the Hippius S3 API! This guide will help you get started with storing and retrieving your files using our S3-compatible storage service powered by Arion distributed storage.
 
 ## Overview
 
-Hippius S3 provides a fully S3-compatible API that stores your data on the decentralized IPFS network. You can use any standard S3 client library to interact with our service.
+Hippius S3 provides a fully S3-compatible API that stores your data on Hippius's decentralized storage layer. You can use any standard S3 client library to interact with our service.
 
 **Key Features:**
 
 - Full S3 API compatibility
-- Decentralized storage via IPFS
+- Decentralized storage via Arion
 - Secure authentication using blockchain wallet credentials
 - Multi-part uploads for large files
 - Bucket and object tagging
@@ -703,7 +703,7 @@ Our support team monitors this channel and will help you resolve any issues quic
 ## Rate Limits
 
 - 100 requests per minute per account
-- Large file uploads may take longer due to IPFS processing
+- Large file uploads may take longer due to distributed storage processing
 - Parallel uploads are supported for better performance
 
 ## Supported Operations

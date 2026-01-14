@@ -29,11 +29,11 @@ export const CATEGORIES: (SmallCardInfo & {
   },
   {
     title: "Use",
-    description: "Create and host a website or app on IPFS.",
+    description: "Create and host a website or app with Hippius.",
     icon: <Icons.Cursor className="text-primary-50 relative size-5" />,
     cta: {
       label: "Use",
-      href: "/use/ipfs-website",
+      href: "/use/bridge",
     },
   },
   {
@@ -60,7 +60,7 @@ export const SMARTER_CLOUD: SmallCardInfo[] = [
   {
     title: "Decentralized Storage",
     description:
-      "Store files securely on IPFS with Hippius pinning, or use our S3-compatible storage for enterprise-grade compatibility.",
+      "Store files securely on Arion distributed storage, or use our S3-compatible storage for enterprise-grade compatibility.",
     icon: <Icons.FormatSquare className="text-primary-50 relative size-7" />,
   },
   {

@@ -41,6 +41,16 @@ const config: Config = {
       };
     },
     require.resolve("./plugins/inline-critical-css.cjs"),
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "legacy",
+        path: "legacy",
+        routeBasePath: "legacy",
+        sidebarPath: "./sidebarsLegacy.ts",
+        editUrl: "https://github.com/thenervelab/hippius-doc/edit/main/",
+      },
+    ],
   ],
 
   // Add custom scripts
@@ -140,7 +150,7 @@ const config: Config = {
           activeBasePath: "/learn",
         },
         {
-          to: "/use/ipfs-website",
+          to: "/use/bridge",
           label: "Use",
           position: "left",
           activeBasePath: "/use",
@@ -197,16 +207,16 @@ const config: Config = {
           title: "Use",
           items: [
             {
-              label: "Host a Website on IPFS",
-              to: "/use/ipfs-website",
-            },
-            {
-              label: "Publish a React App",
-              to: "/use/react-ipfs",
+              label: "Hippius Bridge",
+              to: "/use/bridge",
             },
             {
               label: "Hipstats",
               href: "https://hipstats.com",
+            },
+            {
+              label: "S3 Token Management",
+              to: "/use/s3-token-management",
             },
             {
               label: "Hippius Community",
@@ -258,6 +268,15 @@ const config: Config = {
             {
               label: "GitHub",
               href: "https://github.com/thenervelab/hippius-doc",
+            },
+          ],
+        },
+        {
+          title: "Legacy",
+          items: [
+            {
+              label: "Legacy Documentation",
+              to: "/legacy/",
             },
           ],
         },
