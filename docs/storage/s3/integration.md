@@ -29,6 +29,7 @@ You'll need:
 - An S3-compatible client in your programming language of choice (tested with Minio and AWS CLI, but any should work)
 
 **Creating Access Keys**: Visit https://console.hippius.com/dashboard/settings to generate your access key ID and secret key. You can create:
+
 - **Main keys**: Full access to all your buckets (recommended for personal use)
 - **Sub keys**: Require explicit ACL grants (recommended for applications/services)
 
@@ -42,6 +43,7 @@ Hippius S3 uses standard S3-compatible authentication with access keys:
 Get your credentials at: https://console.hippius.com/dashboard/settings
 
 **Legacy Subaccount Authentication**: If you're using subaccount seed phrases for authentication, they still work but are deprecated. We encourage switching to access keys for better security and management. Access keys provide:
+
 - Revocable credentials (seed phrases are permanent)
 - Fine-grained access control via ACLs
 - Separate keys for different applications
@@ -75,6 +77,7 @@ client = Minio(
 ```
 
 **Legacy Subaccount Setup** (deprecated):
+
 ```python
 import base64
 from minio import Minio
@@ -165,6 +168,7 @@ const minioClient = new Minio.Client({
 ```
 
 **Legacy Subaccount Setup** (deprecated):
+
 ```javascript
 const Minio = require("minio");
 
@@ -454,12 +458,12 @@ create_and_use_public_bucket()
 
 ### Key Differences: Private vs Public
 
-| Feature        | Private Buckets                   | Public Buckets                                   |
-| -------------- | --------------------------------- | ------------------------------------------------ |
-| **Encryption** | ✅ Encrypted with per-bucket keys | ✅ Encrypted with per-bucket keys                 |
+| Feature        | Private Buckets                   | Public Buckets                                                 |
+| -------------- | --------------------------------- | -------------------------------------------------------------- |
+| **Encryption** | ✅ Encrypted with per-bucket keys | ✅ Encrypted with per-bucket keys                              |
 | **Access**     | 🔒 Requires authentication        | 🌍 Publicly accessible via `https://s3.hippius.com/bucket/key` |
-| **Use Cases**  | Sensitive data, private files     | Public content, websites, shared files           |
-| **Creation**   | Standard `make_bucket()`          | `make_bucket()` + ACL/bucket policy              |
+| **Use Cases**  | Sensitive data, private files     | Public content, websites, shared files                         |
+| **Creation**   | Standard `make_bucket()`          | `make_bucket()` + ACL/bucket policy                            |
 
 ## Access Control Lists (ACLs)
 
@@ -468,6 +472,7 @@ ACLs let you control who can access your buckets and objects. Use ACLs to share 
 ### What ACLs Support
 
 **Permission Types:**
+
 - **READ**: List bucket contents / Download objects
 - **WRITE**: Upload/delete objects in bucket
 - **READ_ACP**: View ACL permissions
@@ -475,6 +480,7 @@ ACLs let you control who can access your buckets and objects. Use ACLs to share 
 - **FULL_CONTROL**: All permissions
 
 **Grant Types:**
+
 - **Canonical User ID**: Grant to another Hippius account (all their keys get access)
 - **Access Key**: Grant to specific [access key](https://console.hippius.com/dashboard/settings) (fine-grained control)
 - **Groups**: Grant to `AllUsers` (public) or `AuthenticatedUsers` (any logged-in user)
@@ -494,6 +500,7 @@ aws s3api list-buckets --endpoint-url https://s3.hippius.com \
 ```
 
 **Legacy subaccount method** (deprecated):
+
 ```bash
 export AWS_ACCESS_KEY_ID="$(echo -n 'your seed phrase' | base64)"
 export AWS_SECRET_ACCESS_KEY="your seed phrase"
@@ -584,12 +591,12 @@ Create and manage access keys at: https://console.hippius.com/dashboard/settings
 
 ### Quick Reference
 
-| Task | Command |
-|------|---------|
-| Make public | `aws s3api put-bucket-acl --bucket B --acl public-read --endpoint-url https://s3.hippius.com` |
-| Share with user | `aws s3api put-bucket-acl --bucket B --grant-read 'id="THEIR_ID"' --grant-full-control 'id="YOUR_ID"' --endpoint-url https://s3.hippius.com` |
+| Task                | Command                                                                                                                                            |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Make public         | `aws s3api put-bucket-acl --bucket B --acl public-read --endpoint-url https://s3.hippius.com`                                                      |
+| Share with user     | `aws s3api put-bucket-acl --bucket B --grant-read 'id="THEIR_ID"' --grant-full-control 'id="YOUR_ID"' --endpoint-url https://s3.hippius.com`       |
 | Grant to access key | `aws s3api put-bucket-acl --bucket B --grant-read 'accessKey="hip_KEY"' --grant-full-control 'id="YOUR_ID"' --endpoint-url https://s3.hippius.com` |
-| Check ACL | `aws s3api get-bucket-acl --bucket B --endpoint-url https://s3.hippius.com` |
+| Check ACL           | `aws s3api get-bucket-acl --bucket B --endpoint-url https://s3.hippius.com`                                                                        |
 
 For more detailed ACL documentation including cross-account sharing examples and troubleshooting, see `acl-release.md` or `acl-quickstart.md`.
 
