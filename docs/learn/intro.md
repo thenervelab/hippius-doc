@@ -34,6 +34,12 @@ Losing your mnemonic means permanently losing access to your account
 
 :::
 
+# Confidential Computing
+
+Hippius Confidential Compute (HCC) runs your workloads inside AMD SEV-SNP encrypted virtual machines. The host system cannot read VM memory, and continuous TPM attestation proves the environment has not been tampered with.
+
+[More](confidential-computing)
+
 # Storage
 
 Hippius offers two complementary storage systems, each with unique advantages:
