@@ -32,8 +32,6 @@ const sidebars: SidebarsConfig = {
       type: "category",
       label: "Use",
       items: [
-        "use/ipfs-website", // Hosting a website on IPFS
-        "use/react-ipfs", // Publishing a React app to IPFS
         "use/bridge", // Using the Hippius bridge
         "use/s3-token-management", // S3 Token Management
         "use/virtual-machines", // Virtual Machines
@@ -63,14 +61,6 @@ const sidebars: SidebarsConfig = {
         "earn/storage-miner", // Setting up storage miners
         "earn/register-in-blockchain", // Registering nodes in the blockchain
         "earn/staking", // Staking on Hippius
-        {
-          type: "category",
-          label: "Compute VMs",
-          items: [
-            "earn/compute-vms", // Compute VMs (post-launch)
-          ],
-          collapsed: true, // Collapsed by default (not yet released)
-        },
       ],
     },
     {
