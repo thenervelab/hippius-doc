@@ -22,6 +22,7 @@ const sidebars: SidebarsConfig = {
             "learn/mnemonic-auth", // Mnemonic Authentication
             "learn/encryption", // Encryption System
             "learn/storage-systems", // Decentralized Storage Systems
+            "learn/confidential-computing", // Confidential Computing
             "learn/vm-computing", // Decentralized Storage Systems
           ],
           collapsed: false, // Collapsed by default (not yet released)
