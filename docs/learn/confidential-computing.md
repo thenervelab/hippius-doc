@@ -228,19 +228,98 @@ This "fail-secure" design ensures no workload runs in an insecure environment.
 
 ## Disk Encryption and Key Delivery
 
+Disk encryption is a critical component of confidential computing - it ensures data at rest is protected even when running on untrusted miner hardware. This section covers the technical implementation details.
+
+:::info
+For a quick overview of what disk encryption means for your VMs, see [VM Computing - Disk Encryption](vm-computing#disk-encryption).
+:::
+
+### Encryption Specifications
+
+| Feature            | Specification                                    |
+| ------------------ | ------------------------------------------------ |
+| **Format**         | LUKS2 (Linux Unified Key Setup)                  |
+| **Cipher**         | AES-256-XTS                                      |
+| **Key Derivation** | Argon2id (memory-hard, resistant to GPU attacks) |
+| **Key Length**     | 512-bit encryption keys                          |
+| **Per-VM Keys**    | Each VM has a unique encryption key              |
+
 ### How Keys Are Delivered
 
 VMs use LUKS2 disk encryption with keys delivered securely:
 
 <Ordered>
-  <li>Validator generates unique LUKS keys for each VM.</li>
-  <li>During VM boot, initramfs requests the LUKS key via vsock.</li>
-  <li>Miner forwards the request to the validator (never sees the key).</li>
-  <li>Validator delivers the encrypted key directly to the VM.</li>
-  <li>VM decrypts its root filesystem and boots.</li>
+  <li>**Key Generation**: Validator generates a unique 512-bit LUKS key for each VM.</li>
+  <li>**Image Creation**: VM disk image is encrypted with LUKS2 during build.</li>
+  <li>**Boot Request**: VM initramfs requests the LUKS key via Nebula VPN.</li>
+  <li>**Secure Relay**: Miner forwards the request to the validator (never sees the key).</li>
+  <li>**Direct Delivery**: Key is delivered directly into the VM's encrypted memory (SEV-SNP protected).</li>
+  <li>**Disk Unlock**: VM decrypts its root filesystem and boots normally.</li>
 </Ordered>
 
 The miner host **never** sees plaintext encryption keys - they are delivered directly to the encrypted VM memory.
+
+### Key Delivery Flow
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                  LUKS KEY DELIVERY FLOW                      │
+├──────────────────────────────────────────────────────────────┤
+│                                                              │
+│   ┌─────────────────┐                                        │
+│   │   Validator     │  Generates and stores unique           │
+│   │   (Trusted)     │  LUKS key per VM                       │
+│   └────────┬────────┘                                        │
+│            │                                                 │
+│            │ Key delivered via Nebula VPN                    │
+│            │ (encrypted overlay network)                     │
+│            │                                                 │
+│            ▼                                                 │
+│   ┌─────────────────────────────────────────────┐            │
+│   │              MINER HOST                     │            │
+│   │   ┌─────────────────────────────────────┐   │            │
+│   │   │     SEV-SNP Encrypted VM            │   │            │
+│   │   │  ┌──────────────────────────────┐   │   │            │
+│   │   │  │  Initramfs fetches key       │   │   │            │
+│   │   │  │  directly into encrypted     │   │   │            │
+│   │   │  │  memory at boot              │   │   │            │
+│   │   │  └──────────────────────────────┘   │   │            │
+│   │   │         │                           │   │            │
+│   │   │         ▼                           │   │            │
+│   │   │  ┌──────────────────────────────┐   │   │            │
+│   │   │  │  LUKS decrypts root disk     │   │   │            │
+│   │   │  │  VM boots normally           │   │   │            │
+│   │   │  └──────────────────────────────┘   │   │            │
+│   │   └─────────────────────────────────────┘   │            │
+│   │                                             │            │
+│   │   Miner host CANNOT see:                    │            │
+│   │   - Encryption keys (in VM memory)          │            │
+│   │   - Decrypted disk contents                 │            │
+│   │   - VM memory (SEV-SNP encrypted)           │            │
+│   └─────────────────────────────────────────────┘            │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
+```
+
+### Security Guarantees
+
+| Benefit                  | Description                                                   |
+| ------------------------ | ------------------------------------------------------------- |
+| **Data Confidentiality** | Even if miner hardware is seized, your data remains encrypted |
+| **No Key Exposure**      | Miner host never sees plaintext keys or data                  |
+| **Unique Keys Per VM**   | Compromise of one VM doesn't affect others                    |
+| **Hardware-Backed**      | Combined with SEV-SNP, keys exist only in encrypted VM memory |
+| **Automatic**            | Encryption is enabled by default - no configuration needed    |
+
+### Disk Operations Security
+
+Even operations like disk resize maintain security:
+
+<Unordered>
+  <li>**Miner-side resize**: Only expands the QCOW2 image and GPT partition</li>
+  <li>**LUKS resize**: Happens inside the VM where the key is available</li>
+  <li>**No key transmission**: The miner never receives the LUKS key during resize</li>
+</Unordered>
 
 ---
 

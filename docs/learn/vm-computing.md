@@ -3,6 +3,9 @@ sidebar_position: 5
 description: Understanding Hippius Virtual Machines - decentralized compute infrastructure
 ---
 
+import Ordered from '@site/src/components/Ordered';
+import Unordered from '@site/src/components/Unordered';
+
 # VM Computing
 
 Hippius Virtual Machines provide decentralized compute infrastructure that integrates seamlessly with blockchain technology and distributed storage systems.
@@ -17,6 +20,7 @@ Hippius VM Computing enables users to deploy and manage virtual machines on a de
 | -------------------------------- | ---------------------------------------------------- |
 | **Decentralized Infrastructure** | VMs run on a distributed network of compute miners   |
 | **Blockchain Integration**       | All VM operations are recorded and verified on-chain |
+| **Encrypted Disks**              | LUKS2 full disk encryption with secure key delivery  |
 | **Credit-Based Billing**         | Pay-as-you-go model using Hippius credits            |
 | **Secure Access**                | SSH key authentication for secure instance access    |
 | **Storage Integration**          | Native integration with IPFS and S3 storage systems  |
@@ -165,10 +169,12 @@ VMs operate on a credit-based billing model:
 
 The compute infrastructure involves multiple blockchain participants:
 
-1. **Validators**: Assign VM tasks to appropriate compute miners
-2. **Compute Miners**: Host and run virtual machine instances
-3. **Offchain Workers**: Handle VM provisioning and management
-4. **Ranking Pallet**: Distribute rewards based on compute provision
+<Ordered>
+  <li>**Validators**: Assign VM tasks to appropriate compute miners</li>
+  <li>**Compute Miners**: Host and run virtual machine instances</li>
+  <li>**Offchain Workers**: Handle VM provisioning and management</li>
+  <li>**Ranking Pallet**: Distribute rewards based on compute provision</li>
+</Ordered>
 
 ---
 
@@ -262,6 +268,7 @@ Marketplace Revenue Distribution:
 Each VM is isolated from other instances:
 
 - **Hardware Virtualization**: KVM/libvirt provides strong isolation
+- **AMD SEV-SNP**: Hardware memory encryption on supported miners
 - **Network Segmentation**: Nebula mesh networking for secure communication
 - **Resource Limits**: CPU, memory, and I/O quotas enforced
 
@@ -275,14 +282,41 @@ Multiple layers of access security:
 | **Nebula Network**  | Encrypted mesh networking              |
 | **Firewall**        | Instance-level network rules           |
 | **Blockchain Auth** | Wallet-based ownership verification    |
+| **Disk Encryption** | LUKS2 with per-VM unique keys          |
 
 ### Data Protection
 
-VM data is protected through:
+VM data is protected through multiple layers of encryption and secure key management.
 
-- **Encrypted Storage**: Data at rest encryption
-- **Secure Transit**: TLS encryption for all network traffic
-- **Backup Options**: Regular snapshots and backups available
+---
+
+## Disk Encryption
+
+All Hippius VMs use **full disk encryption by default**. Your data is automatically encrypted at rest using LUKS2 with AES-256-XTS - you don't need to configure anything.
+
+### What This Means for You
+
+| Protection                 | Benefit                                                |
+| -------------------------- | ------------------------------------------------------ |
+| **Automatic Encryption**   | Every VM disk is encrypted without any setup required  |
+| **Per-VM Unique Keys**     | Each VM has its own encryption key                     |
+| **Miner Cannot Read Data** | Even the hardware host cannot access your files        |
+| **Seizure Protection**     | Data remains encrypted even if hardware is compromised |
+
+### How It Works (Summary)
+
+<Ordered>
+  <li>When you create a VM, a unique encryption key is generated</li>
+  <li>Your VM's disk is encrypted during image creation</li>
+  <li>At boot, the key is delivered securely via encrypted network</li>
+  <li>The key exists only in your VM's protected memory - never on the miner's storage</li>
+</Ordered>
+
+:::tip
+For the full technical details on disk encryption, key delivery, and how it integrates with hardware security (AMD SEV-SNP), see [Confidential Computing](confidential-computing#disk-encryption-and-key-delivery).
+:::
+
+For more details on hardware-level encryption and attestation, see [Confidential Computing](confidential-computing).
 
 ---
 
@@ -292,19 +326,23 @@ VM data is protected through:
 
 Before creating a VM, ensure you have:
 
-1. **Hippius Account**: Registered and logged in
-2. **Credits**: Minimum 10 credits in your account
-3. **SSH Key**: Generated and added to your account
+<Ordered>
+  <li>**Hippius Account**: Registered and logged in</li>
+  <li>**Credits**: Minimum 10 credits in your account</li>
+  <li>**SSH Key**: Generated and added to your account</li>
+</Ordered>
 
 <br/>
 ### Quick Start
 
-1. Navigate to **Virtual Machines** in the dashboard
-2. Click **Create VM**
-3. Select a configuration model
-4. Configure OS, image, and SSH key
-5. Review and create the instance
-6. Connect via SSH using the Nebula IP
+<Ordered>
+  <li>Navigate to **Virtual Machines** in the dashboard</li>
+  <li>Click **Create VM**</li>
+  <li>Select a configuration model</li>
+  <li>Configure OS, image, and SSH key</li>
+  <li>Review and create the instance</li>
+  <li>Connect via SSH using the Nebula IP</li>
+</Ordered>
 
 For detailed instructions, see the [Virtual Machines User Guide](/use/virtual-machines).
 
@@ -318,6 +356,7 @@ Hippius VM Computing brings the benefits of decentralization to compute infrastr
 | ----------------- | ---------------------------------------------- |
 | **Decentralized** | No single point of failure or control          |
 | **Integrated**    | Native blockchain and storage integration      |
+| **Encrypted**     | LUKS2 disk encryption with secure key delivery |
 | **Secure**        | Multiple layers of security and isolation      |
 | **Flexible**      | Various configurations for different workloads |
 | **Economical**    | Credit-based pay-as-you-go billing             |
