@@ -33,7 +33,7 @@ export const CATEGORIES: (SmallCardInfo & {
     icon: <Icons.Cursor className="text-primary-50 relative size-5" />,
     cta: {
       label: "Use",
-      href: "/use/ipfs-website",
+      href: "/use/bridge",
     },
   },
   {

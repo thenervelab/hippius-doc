@@ -12,7 +12,7 @@ Hippius is a **transparent, decentralized, anonymous cloud storage platform** bu
 ## Get Started
 
 - **Learn**: Understand Hippius and web3 basics in our [Learn section](/learn/intro).
-- **Use**: Host a website or app on IPFS with our [Use guides](/use/ipfs-website).
+- **Use**: Host a website or app on IPFS with our [Use guides](/use/bridge).
 - **Earn**: Stake tokens or run miners to contribute and earn rewards in our [Earn section](/earn/staking).
 - **Develop**: Build on Hippius with our [Develop section](/blockchain/intro) and [API](https://api.hippius.com/).
 

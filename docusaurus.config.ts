@@ -140,7 +140,7 @@ const config: Config = {
           activeBasePath: "/learn",
         },
         {
-          to: "/use/ipfs-website",
+          to: "/use/bridge",
           label: "Use",
           position: "left",
           activeBasePath: "/use",
@@ -196,14 +196,6 @@ const config: Config = {
         {
           title: "Use",
           items: [
-            {
-              label: "Host a Website on IPFS",
-              to: "/use/ipfs-website",
-            },
-            {
-              label: "Publish a React App",
-              to: "/use/react-ipfs",
-            },
             {
               label: "Hipstats",
               href: "https://hipstats.com",
