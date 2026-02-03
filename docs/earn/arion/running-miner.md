@@ -30,8 +30,8 @@ You should have completed the [Running Blockchain Node](./running-blockchain-nod
 
 ```bash
 # Clone repository
-git clone https://github.com/thenervelab/hippius-arion.git
-cd hippius-arion
+git clone https://github.com/thenervelab/arion.git
+cd arion
 
 # Build release binary
 cargo build --release --bin miner
@@ -44,9 +44,9 @@ cargo build --release --bin miner
 The miner needs the validator's and warden's P2P node IDs:
 
 ```bash
-export VALIDATOR_NODE_ID="c099a3ac8b04f94b56bc15cc8b0d17fdd18dd9038d43b67e3233a9a55dfd33f3"
+export VALIDATOR_NODE_ID="5eb35b3109fd1eb7353cb5393d92f1331b0a5c93e6af916632e1e9eddc37d94d"
 
-export WARDEN_NODE_ID="540d87ae8ac3eb861db1cef3f299862d05ae4e7bcf193acb0939e3749b331b27"
+export WARDEN_NODE_ID="70d27c756b0f9a71fc89a6e571c9bdf9e63f8531e125714d0f164be0e11e6846"
 ```
 
 **Important:** Without `WARDEN_NODE_ID`, the miner cannot authorize proof-of-storage challenges from the warden, resulting in failed audits and reputation penalties.
@@ -61,8 +61,8 @@ The miner communicates with the validator via P2P. The `VALIDATOR_NODE_ID` is th
 
 ```bash
 # Required for P2P communication
-export VALIDATOR_NODE_ID="c099a3ac8b04f94b56bc15cc8b0d17fdd18dd9038d43b67e3233a9a55dfd33f3"
-export WARDEN_NODE_ID="540d87ae8ac3eb861db1cef3f299862d05ae4e7bcf193acb0939e3749b331b27" # Required for PoS audits
+export VALIDATOR_NODE_ID="5eb35b3109fd1eb7353cb5393d92f1331b0a5c93e6af916632e1e9eddc37d94d"
+export WARDEN_NODE_ID="70d27c756b0f9a71fc89a6e571c9bdf9e63f8531e125714d0f164be0e11e6846" # Required for PoS audits
 
 # Miner configuration
 export PORT=3001
@@ -94,8 +94,8 @@ sudo chown -R $USER:$USER /var/lib/hippius/miner
 
 ```bash
 cd /var/lib/hippius/miner
-export VALIDATOR_NODE_ID="c099a3ac8b04f94b56bc15cc8b0d17fdd18dd9038d43b67e3233a9a55dfd33f3"
-export WARDEN_NODE_ID="540d87ae8ac3eb861db1cef3f299862d05ae4e7bcf193acb0939e3749b331b27"
+export VALIDATOR_NODE_ID="5eb35b3109fd1eb7353cb5393d92f1331b0a5c93e6af916632e1e9eddc37d94d"
+export WARDEN_NODE_ID="70d27c756b0f9a71fc89a6e571c9bdf9e63f8531e125714d0f164be0e11e6846"
 export PORT=3001
 export HOSTNAME="$(hostname -I | awk '{print $1}')"
 export STORAGE_PATH="data"
@@ -182,8 +182,8 @@ To register your miner in the Arion pallet, you need to generate a cryptographic
 **First, build the registration tool (if not already done):**
 
 ```bash
-# Navigate to the hippius-arion repository root
-cd /path/to/hippius-arion
+# Navigate to the rion repository root
+cd /path/to/arion
 
 # Build the tools package with the registration data generator
 cargo build --release -p tools --bin generate_registration_data
@@ -218,7 +218,7 @@ chmod 600 /var/lib/hippius/miner/data/keypair.bin
 # family:    5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
 # child:     5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty
 #
-# node_id:   0x540d87ae8ac3eb861db1cef3f299862d05ae4e7bcf193acb0939e3749b331b27
+# node_id:   0x70d27c756b0f9a71fc89a6e571c9bdf9e63f8531e125714d0f164be0e11e6846
 # node_sig:  0x123abc...def (64 bytes)
 #
 # WARNING: These values are for one-time registration. Do not share publicly.
