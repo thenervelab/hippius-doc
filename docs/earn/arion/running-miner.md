@@ -36,13 +36,9 @@ cargo build --release --bin miner
 The miner needs the validator's and warden's P2P node IDs:
 
 ```bash
-# Get validator node ID from K8s (or ask your operator)
-kubectl logs -n hippius-arion validator-0 | grep "node_id"
-export VALIDATOR_NODE_ID="<validator_node_id>"
+export VALIDATOR_NODE_ID="c099a3ac8b04f94b56bc15cc8b0d17fdd18dd9038d43b67e3233a9a55dfd33f3"
 
-# Get warden node ID from K8s (required for PoS audits)
-kubectl logs -n hippius-arion warden-0 | grep "node_id"
-export WARDEN_NODE_ID="<warden_node_id>"
+export WARDEN_NODE_ID="540d87ae8ac3eb861db1cef3f299862d05ae4e7bcf193acb0939e3749b331b27"
 ```
 
 **Important:** Without `WARDEN_NODE_ID`, the miner cannot authorize proof-of-storage challenges from the warden, resulting in failed audits and reputation penalties.
