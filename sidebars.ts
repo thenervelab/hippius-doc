@@ -127,6 +127,11 @@ const sidebars: SidebarsConfig = {
                 },
               ],
             },
+            {
+              type: "category",
+              label: "Arion",
+              items: ["storage/arion/running-miner"],
+            },
           ],
         },
       ],
