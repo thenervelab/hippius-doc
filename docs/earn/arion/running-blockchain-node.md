@@ -129,19 +129,8 @@ cargo build --release
 ./target/release/hippius --version
 ```
 
-## 2. Prepare Chain Specification
 
-You'll need the `customSpec.json` chain specification file. This should be provided by the network operator or available in the repository.
-
-```bash
-# Check if customSpec.json exists
-ls -la customSpec.json
-
-# If not present, obtain it from the network operator
-# or generate from chain spec in the repository
-```
-
-## 3. Run the Miner Node
+## 2. Run the Miner Node
 
 ### Make Binary Executable
 
@@ -156,7 +145,7 @@ Use the following command with the validator's P2P identity:
 ```bash
 ./target/release/hippius \
   --base-path /var/lib/hippius/chain \
-  --chain customSpec.json \
+  --chain mainnet \
   --bootnodes /ip4/57.128.82.161/tcp/30333/p2p/12D3KooWMuNG6ASCMDsyA45sUgYsYs1qHHrhkfhaMx7QNF98aWMZ \
   --offchain-worker Always \
   --name "My Miner Node" \
