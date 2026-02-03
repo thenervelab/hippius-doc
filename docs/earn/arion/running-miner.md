@@ -61,8 +61,8 @@ The miner communicates with the validator via P2P. The `VALIDATOR_NODE_ID` is th
 
 ```bash
 # Required for P2P communication
-export VALIDATOR_NODE_ID="<validator_node_id_from_step_2>"
-export WARDEN_NODE_ID="<warden_node_id_from_step_2>"  # Required for PoS audits
+export VALIDATOR_NODE_ID="c099a3ac8b04f94b56bc15cc8b0d17fdd18dd9038d43b67e3233a9a55dfd33f3"
+export WARDEN_NODE_ID="540d87ae8ac3eb861db1cef3f299862d05ae4e7bcf193acb0939e3749b331b27" # Required for PoS audits
 
 # Miner configuration
 export PORT=3001
@@ -94,8 +94,8 @@ sudo chown -R $USER:$USER /var/lib/hippius/miner
 
 ```bash
 cd /var/lib/hippius/miner
-export VALIDATOR_NODE_ID="<validator_node_id>"
-export WARDEN_NODE_ID="<warden_node_id>"
+export VALIDATOR_NODE_ID="c099a3ac8b04f94b56bc15cc8b0d17fdd18dd9038d43b67e3233a9a55dfd33f3"
+export WARDEN_NODE_ID="540d87ae8ac3eb861db1cef3f299862d05ae4e7bcf193acb0939e3749b331b27"
 export PORT=3001
 export HOSTNAME="$(hostname -I | awk '{print $1}')"
 export STORAGE_PATH="data"
