@@ -10,6 +10,14 @@ Before running a miner, you need to set up and run a **Hippius Blockchain Node**
 
 ## Prerequisites
 
+:::info
+You should have completed the [Running Blockchain Node](./running-blockchain-node) guide, which includes:
+- Setting up the Hippius blockchain node
+- Installing and running IPFS
+- Registering your coldkey or child node on-chain
+:::
+
+**System Requirements:**
 - Ubuntu 22.04+ (or similar Linux)
 - 8GB+ RAM, 2+ CPU cores
 - 2TB+ available storage
@@ -136,61 +144,27 @@ journalctl -u hippius-miner -f | grep "node_id"
 ```
 :::
 
-## 6. Register Miner On-Chain
+## 6. Register Miner in Arion Pallet
 
-The miner **must be registered on-chain** in `pallet-arion` before it can join the network. Without registration, you will see:
+The miner **must be registered in the Arion pallet** before it can join the network and start mining. Without registration, you will see:
 
 - `FAMILY_REJECTED:node_id not registered on-chain (...)`
 
-### Prerequisites: Coldkey and Proxy Account Setup
+:::info Coldkey Registration
+Before registering your miner in the Arion pallet, you need to have a registered coldkey. Please follow the coldkey registration steps in the blockchain node guide:
 
-Before registering a miner, you need to complete three on-chain registrations using Polkadot.js Apps. All extrinsics should be submitted through:
+📖 **[Follow the Coldkey Registration Guide](./running-blockchain-node#5-register-your-node-on-chain)**
 
-**Polkadot.js Apps URL:** [https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network#/extrinsics](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network#/extrinsics)
+This includes:
+- Registering your coldkey (main account)
+- Optionally setting up a child account with proxy if needed
 
-**RPC Endpoint:** `wss://rpc.hippius.network`
-
-#### Prerequisite Step 1: Register Coldkey as Storage Miner
-
-Your coldkey (main family account) must be registered in the Registration Pallet before you can register miners.
-
-1. Navigate to [Polkadot.js Apps](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network#/extrinsics)
-2. Go to **Developer → Extrinsics**
-3. Select your **coldkey account** (main account)
-4. Choose pallet: **registration**
-5. Choose extrinsic: **registerNodeWithColdkey**
-6. Fill in the parameters:
-   - `nodeType`: Select **Validator** (for storage miners)
-   - `nodeId`: Your node ID (bytes)
-   - `payInCredits`: Select **No**
-   - `ipfsNodeId`: Leave as **None**
-7. Sign and submit the transaction
-
-![Register Coldkey](/img/arion/register-coldkey.png)
-
-#### Prerequisite Step 2: Create and Register Child as Proxy
-
-Create a child account and register it as a proxy of your coldkey. This allows the child account to operate on behalf of the coldkey without accessing its funds.
-
-1. **Create a child account** (use Polkadot.js extension or any wallet)
-2. Navigate to [Polkadot.js Apps](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network#/extrinsics)
-3. Go to **Developer → Extrinsics**
-4. Select your **coldkey account** (main account)
-5. Choose pallet: **proxy**
-6. Choose extrinsic: **addProxy**
-7. Fill in the parameters:
-   - `delegate`: Your child account address
-   - `proxyType`: Select **Any** (or your preferred proxy type)
-   - `delay`: Set to **0** (blocks)
-8. Sign and submit the transaction
-
-![Register Proxy](/img/arion/register-proxy.png)
-
-:::note
-The `arion-pallet` verifies both that the coldkey is registered AND that a valid proxy relationship exists between coldkey and child accounts. Without this proxy setup, child registration will fail with `ProxyVerificationFailed`.
+Complete the coldkey registration first, then return here to register your **miner** in the Arion pallet.
 :::
 
-### Registration Steps
+### Miner Registration in Arion
+
+After completing the blockchain node registration (coldkey or hotkey), proceed with registering your miner:
 
 #### Step 1: Get the Miner Node ID
 
@@ -201,9 +175,11 @@ journalctl -u hippius-miner -f | grep "node_id"
 # Copy the node_id value from the output
 ```
 
-#### Step 2: Build the Registration Tool
+#### Step 2: Generate Miner Registration Signature
 
-Before generating registration data, you need to build the tools package which contains the `generate_registration_data` binary.
+To register your miner in the Arion pallet, you need to generate a cryptographic signature using the miner's keypair.
+
+**First, build the registration tool (if not already done):**
 
 ```bash
 # Navigate to the hippius-arion repository root
@@ -215,11 +191,7 @@ cargo build --release -p tools --bin generate_registration_data
 # Binary will be at: target/release/generate_registration_data
 ```
 
-#### Step 3: Generate Registration Signature
-
-The registration tool reads your miner's keypair and generates the cryptographic signature required for on-chain registration.
-
-**First, ensure your keypair has secure permissions:**
+**Ensure your miner keypair has secure permissions:**
 
 ```bash
 # Check current permissions
@@ -232,7 +204,7 @@ chmod 600 /var/lib/hippius/miner/data/keypair.bin
 **Generate the registration data:**
 
 ```bash
-# Generate registration data
+# Generate registration data for your miner
 ./target/release/generate_registration_data \
   --family <YOUR_FAMILY_ACCOUNT> \
   --child <YOUR_CHILD_ACCOUNT> \
@@ -252,18 +224,18 @@ chmod 600 /var/lib/hippius/miner/data/keypair.bin
 # WARNING: These values are for one-time registration. Do not share publicly.
 ```
 
-#### Step 4: Register Child in Arion Pallet
+#### Step 3: Register Miner in Arion Pallet
 
-Now register your miner's child account and node ID in the Arion pallet using the signature generated in Step 3.
+Now register your miner in the Arion pallet using the signature generated in Step 2.
 
 1. Navigate to [Polkadot.js Apps](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network#/extrinsics)
 2. Go to **Developer → Extrinsics**
 3. Select your **coldkey account** (family/main account)
 4. Choose pallet: **arion**
 5. Choose extrinsic: **registerChild**
-6. Fill in the parameters (copy from Step 3 tool output):
-   - `family`: Your coldkey account address (AccountId32)
-   - `child`: Your child account address (AccountId32)
+6. Fill in the parameters (copy from Step 2 tool output):
+   - `family`: Your coldkey account address (AccountId32) - this is your main account for staking and governance
+   - `child`: Your hotkey account address (AccountId32) - this is the child account that will be used for mining operations
    - `nodeId`: The `node_id` from tool output (paste the full `0x...` hex string as [u8;32])
    - `nodeSig`: The `node_sig` from tool output (paste the full `0x...` hex string as [u8;64])
 7. Sign and submit the transaction
@@ -274,7 +246,7 @@ Now register your miner's child account and node ID in the Arion pallet using th
 Make sure to copy the exact `node_id` and `node_sig` values from the `generate_registration_data` tool output. These are cryptographically linked and must match exactly.
 :::
 
-#### Step 5: Wait for Chain Registry Update
+#### Step 4: Wait for Chain Registry Update
 
 Wait for the validator's `chain-registry-cache` to refresh (default poll is every 30s) and re-check miner logs.
 
