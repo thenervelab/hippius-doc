@@ -44,7 +44,7 @@ cargo build --release --bin miner
 The miner needs the validator's and warden's P2P node IDs:
 
 ```bash
-export VALIDATOR_NODE_ID="5eb35b3109fd1eb7353cb5393d92f1331b0a5c93e6af916632e1e9eddc37d94d"
+export VALIDATOR_NODE_ID="c099a3ac8b04f94b56bc15cc8b0d17fdd18dd9038d43b67e3233a9a55dfd33f3"
 
 export WARDEN_NODE_ID="70d27c756b0f9a71fc89a6e571c9bdf9e63f8531e125714d0f164be0e11e6846"
 ```
