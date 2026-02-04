@@ -204,7 +204,7 @@ Presigned URLs work with any player or client that supports range requests, maki
 
 Live demo: https://s3.hippius.com/micky/index.html
 
-For more examples (Python, JavaScript, async client), see the [presigned URL guide](hippius-s3-presigned-url-demo.md) and the [`examples/`](examples/) directory.
+For more examples (Python, JavaScript, async client), see the [presigned URL guide](https://github.com/thenervelab/hippius-s3/blob/main/examples/presigned-urls-demo.md) and the [`examples/`](https://github.com/thenervelab/hippius-s3/tree/main/examples) directory.
 
 ## JavaScript Setup
 
@@ -664,8 +664,6 @@ Create and manage access keys at: https://console.hippius.com/dashboard/settings
 | Share with user     | `aws s3api put-bucket-acl --bucket B --grant-read 'id="THEIR_ID"' --grant-full-control 'id="YOUR_ID"' --endpoint-url https://s3.hippius.com`       |
 | Grant to access key | `aws s3api put-bucket-acl --bucket B --grant-read 'accessKey="hip_KEY"' --grant-full-control 'id="YOUR_ID"' --endpoint-url https://s3.hippius.com` |
 | Check ACL           | `aws s3api get-bucket-acl --bucket B --endpoint-url https://s3.hippius.com`                                                                        |
-
-For more detailed ACL documentation including cross-account sharing examples and troubleshooting, see `acl-release.md` or `acl-quickstart.md`.
 
 ## Advanced Features
 
