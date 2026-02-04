@@ -4,18 +4,20 @@ description: 10
 
 # Hippius S3 API - User Guide
 
-Welcome to the Hippius S3 API! This guide will help you get started with storing and retrieving your files using our S3-compatible storage service powered by IPFS.
+Welcome to the Hippius S3 API! This guide will help you get started with storing and retrieving your files using our S3-compatible decentralized storage service.
 
 ## Overview
 
-Hippius S3 provides a fully S3-compatible API that stores your data on the decentralized IPFS network. You can use any standard S3 client library to interact with our service.
+Hippius S3 provides a fully S3-compatible API that stores your data on the decentralized Hippius network. You can use any standard S3 client library to interact with our service.
 
 **Key Features:**
 
-- Full S3 API compatibility
-- Decentralized storage via IPFS
-- Secure authentication using blockchain wallet credentials
-- Multi-part uploads for large files
+- Full S3 API compatibility (tested with MinIO, boto3, AWS CLI)
+- Decentralized storage across the Hippius network
+- Presigned URLs for secure, time-limited file sharing
+- Video streaming with range requests
+- ACL support for fine-grained access control
+- Multi-part uploads for large files (up to ~5 TiB)
 - Bucket and object tagging
 
 ## Getting Started
@@ -71,7 +73,7 @@ client = Minio(
     "s3.hippius.com",
     access_key=access_key_id,
     secret_key=secret_key,
-    secure=True,  # Use HTTPS in production
+    secure=True,
     region="decentralized"
 )
 ```
@@ -225,7 +227,7 @@ const secretKey = "your_secret_key_here";
 const minioClient = new Minio.Client({
   endPoint: "s3.hippius.com",
   port: 443,
-  useSSL: true, // Use HTTPS in production
+  useSSL: true,
   accessKey: accessKeyId,
   secretKey: secretKey,
   region: "decentralized",
@@ -738,9 +740,8 @@ with open("large_file.zip", "rb") as file_data:
 1. **Bucket Naming**: Use lowercase letters, numbers, and hyphens only
 2. **Object Keys**: Can include forward slashes to simulate folders
 3. **Large Files**: Use multipart uploads for files > 5MB
-4. **Error Handling**: Always wrap operations in try-catch blocks
-5. **Connection Management**: Close responses and release connections
-6. **Security**: Never expose your seed phrase in client-side code
+4. **Connection Management**: Close responses and release connections after downloads
+5. **Security**: Never expose your access key secret in client-side code
 
 ## Troubleshooting
 
@@ -748,20 +749,20 @@ with open("large_file.zip", "rb") as file_data:
 
 **Authentication Errors**
 
-- Verify your seed phrase is correct
-- Ensure Base64 encoding is properly applied to the access key
-- Check that your sub-account has the required permissions
+- Verify your access key ID and secret are correct
+- Ensure your access key starts with `hip_`
+- Check that your sub key has the required ACL grants
 
 **Upload Failures**
 
 - Verify your account has sufficient credits
 - Check that bucket names are valid (lowercase, no special characters)
-- Ensure your sub-account has Upload permissions
+- Ensure your access key has the required permissions
 
 **Permission Denied**
 
-- Check sub-account permissions (Upload/Delete roles)
-- Verify you're accessing buckets owned by your main account
+- Check that your access key has the required ACL grants
+- Verify you're accessing buckets owned by your account
 - Ensure your account has active credits
 
 ### Getting Help
@@ -775,7 +776,7 @@ Our support team monitors this channel and will help you resolve any issues quic
 ## Rate Limits
 
 - 100 requests per minute per account
-- Large file uploads may take longer due to IPFS processing
+- Large file uploads may take longer due to network processing
 - Parallel uploads are supported for better performance
 
 ## Supported Operations
