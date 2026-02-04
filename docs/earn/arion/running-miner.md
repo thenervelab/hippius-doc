@@ -38,14 +38,14 @@ cargo build --release --bin miner
 
 # Copy binary to system location
 sudo mkdir -p /var/lib/hippius/miner
-sudo cp target/release/miner /var/lib/hippius/miner/
+sudo cp ~/arion/target/release/miner /var/lib/hippius/miner/
 
 # Binary is now available at: /var/lib/hippius/miner/miner
 ```
 
 ## 2. Get Node IDs
 
-The miner needs the validator's and warden's P2P node IDs:
+The miner needs the validator's and warden's P2P node IDs and a Family Account (coldkey):
 
 ```bash
 export VALIDATOR_NODE_ID="185651f2fb19c919d40c3c58660cf463ebe7ded1c1a326eef4dad28292171cdb"
@@ -100,6 +100,7 @@ sudo chown -R $USER:$USER /var/lib/hippius/miner
 cd /var/lib/hippius/miner
 export VALIDATOR_NODE_ID="185651f2fb19c919d40c3c58660cf463ebe7ded1c1a326eef4dad28292171cdb"
 export WARDEN_NODE_ID="70d27c756b0f9a71fc89a6e571c9bdf9e63f8531e125714d0f164be0e11e6846"
+export FAMILY_ID="${FAMILY_ID:-default}"
 export PORT=3001
 export HOSTNAME="$(hostname -I | awk '{print $1}')"
 export STORAGE_PATH="data"
@@ -125,7 +126,7 @@ Environment="RUST_LOG=info"
 
 # K8s Validator connection
 Environment="VALIDATOR_NODE_ID=185651f2fb19c919d40c3c58660cf463ebe7ded1c1a326eef4dad28292171cdb"
-
+Environment="FAMILY_ID=<coldkey-SS58>"
 # Storage configuration
 Environment="STORAGE_PATH=/var/lib/hippius/miner/storage"
 Environment="STORAGE_CAPACITY_GB=100"
@@ -138,6 +139,7 @@ Environment="ARION_API_KEY=Arion"
 
 ExecStart=/usr/local/bin/hippius/miner \
     --validator-node-id 185651f2fb19c919d40c3c58660cf463ebe7ded1c1a326eef4dad28292171cdb \
+    ----family-id <coldkey-SS58> \
     --storage-path /var/lib/hippius/miner/storage \
     --port 3001
 
