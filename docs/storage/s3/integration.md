@@ -139,6 +139,71 @@ response.release_conn()
 print("File downloaded successfully!")
 ```
 
+### Presigned URLs
+
+Generate temporary, shareable download links without exposing your credentials. Presigned URLs expire after a set duration (max 7 days).
+
+```python
+from datetime import timedelta
+from minio import Minio
+
+client = Minio(
+    "s3.hippius.com",
+    access_key="hip_your_access_key_id_here",
+    secret_key="your_secret_key_here",
+    secure=True,
+    region="decentralized",
+)
+
+# Upload a file
+client.fput_object("my-bucket", "video.mp4", "video.mp4")
+
+# Generate a presigned download URL (valid for 1 hour)
+url = client.presigned_get_object("my-bucket", "video.mp4", expires=timedelta(hours=1))
+print(f"Presigned URL: {url}")
+```
+
+Using boto3:
+
+```python
+import boto3
+from botocore.config import Config
+
+s3 = boto3.client(
+    "s3",
+    endpoint_url="https://s3.hippius.com",
+    aws_access_key_id="hip_your_access_key_id_here",
+    aws_secret_access_key="your_secret_key_here",
+    region_name="decentralized",
+    config=Config(signature_version="s3v4", s3={"addressing_style": "path"}),
+)
+
+url = s3.generate_presigned_url(
+    "get_object",
+    Params={"Bucket": "my-bucket", "Key": "video.mp4"},
+    ExpiresIn=3600,
+)
+print(f"Presigned URL: {url}")
+```
+
+Using AWS CLI:
+
+```bash
+aws s3 presign s3://my-bucket/video.mp4 --endpoint-url https://s3.hippius.com --expires-in 3600
+```
+
+Presigned URLs work with any player or client that supports range requests, making them ideal for video streaming:
+
+```html
+<video controls width="720">
+  <source src="YOUR_PRESIGNED_URL_HERE" type="video/mp4" />
+</video>
+```
+
+Live demo: https://s3.hippius.com/micky/index.html
+
+For more examples (Python, JavaScript, async client), see the [presigned URL guide](hippius-s3-presigned-url-demo.md) and the [`examples/`](examples/) directory.
+
 ## JavaScript Setup
 
 ### Installation
@@ -719,20 +784,18 @@ Our support team monitors this channel and will help you resolve any issues quic
 
 - Bucket operations (create, delete, list, tags)
 - Object operations (upload, download, delete, list, metadata)
+- Presigned URLs
+- Range requests (video streaming, partial downloads)
 - Multipart uploads
 - Object and bucket tagging
+- ACLs and bucket policies
 - Lifecycle policies
-
-⚠️ **Limited Support**
-
-- Range requests (partial support)
-- S3 Select (limited functionality)
 
 ❌ **Not Supported**
 
 - Bucket versioning
 - Cross-region replication
-- Server-side encryption configuration
+- S3 Select
 
 ---
 
