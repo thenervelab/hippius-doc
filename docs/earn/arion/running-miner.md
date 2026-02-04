@@ -100,7 +100,7 @@ sudo chown -R $USER:$USER /var/lib/hippius/miner
 cd /var/lib/hippius/miner
 export VALIDATOR_NODE_ID="185651f2fb19c919d40c3c58660cf463ebe7ded1c1a326eef4dad28292171cdb"
 export WARDEN_NODE_ID="70d27c756b0f9a71fc89a6e571c9bdf9e63f8531e125714d0f164be0e11e6846"
-export FAMILY_ID="${FAMILY_ID:-default}"
+export FAMILY_ID="<coldkey-SS58>"
 export PORT=3001
 export HOSTNAME="$(hostname -I | awk '{print $1}')"
 export STORAGE_PATH="data"
@@ -139,7 +139,7 @@ Environment="ARION_API_KEY=Arion"
 
 ExecStart=/usr/local/bin/hippius/miner \
     --validator-node-id 185651f2fb19c919d40c3c58660cf463ebe7ded1c1a326eef4dad28292171cdb \
-    ----family-id <coldkey-SS58> \
+    --family-id <coldkey-SS58> \
     --storage-path /var/lib/hippius/miner/storage \
     --port 3001
 
