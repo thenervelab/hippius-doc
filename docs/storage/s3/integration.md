@@ -4,18 +4,20 @@ description: 10
 
 # Hippius S3 API - User Guide
 
-Welcome to the Hippius S3 API! This guide will help you get started with storing and retrieving your files using our S3-compatible storage service powered by IPFS.
+Welcome to the Hippius S3 API! This guide will help you get started with storing and retrieving your files using our S3-compatible decentralized storage service.
 
 ## Overview
 
-Hippius S3 provides a fully S3-compatible API that stores your data on the decentralized IPFS network. You can use any standard S3 client library to interact with our service.
+Hippius S3 provides a fully S3-compatible API that stores your data on the decentralized Hippius network. You can use any standard S3 client library to interact with our service.
 
 **Key Features:**
 
-- Full S3 API compatibility
-- Decentralized storage via IPFS
-- Secure authentication using blockchain wallet credentials
-- Multi-part uploads for large files
+- Full S3 API compatibility (tested with MinIO, boto3, AWS CLI)
+- Decentralized storage across the Hippius network
+- Presigned URLs for secure, time-limited file sharing
+- Video streaming with range requests
+- ACL support for fine-grained access control
+- Multi-part uploads for large files (up to ~5 TiB)
 - Bucket and object tagging
 
 ## Getting Started
@@ -71,7 +73,7 @@ client = Minio(
     "s3.hippius.com",
     access_key=access_key_id,
     secret_key=secret_key,
-    secure=True,  # Use HTTPS in production
+    secure=True,
     region="decentralized"
 )
 ```
@@ -139,6 +141,71 @@ response.release_conn()
 print("File downloaded successfully!")
 ```
 
+### Presigned URLs
+
+Generate temporary, shareable download links without exposing your credentials. Presigned URLs expire after a set duration (max 7 days).
+
+```python
+from datetime import timedelta
+from minio import Minio
+
+client = Minio(
+    "s3.hippius.com",
+    access_key="hip_your_access_key_id_here",
+    secret_key="your_secret_key_here",
+    secure=True,
+    region="decentralized",
+)
+
+# Upload a file
+client.fput_object("my-bucket", "video.mp4", "video.mp4")
+
+# Generate a presigned download URL (valid for 1 hour)
+url = client.presigned_get_object("my-bucket", "video.mp4", expires=timedelta(hours=1))
+print(f"Presigned URL: {url}")
+```
+
+Using boto3:
+
+```python
+import boto3
+from botocore.config import Config
+
+s3 = boto3.client(
+    "s3",
+    endpoint_url="https://s3.hippius.com",
+    aws_access_key_id="hip_your_access_key_id_here",
+    aws_secret_access_key="your_secret_key_here",
+    region_name="decentralized",
+    config=Config(signature_version="s3v4", s3={"addressing_style": "path"}),
+)
+
+url = s3.generate_presigned_url(
+    "get_object",
+    Params={"Bucket": "my-bucket", "Key": "video.mp4"},
+    ExpiresIn=3600,
+)
+print(f"Presigned URL: {url}")
+```
+
+Using AWS CLI:
+
+```bash
+aws s3 presign s3://my-bucket/video.mp4 --endpoint-url https://s3.hippius.com --expires-in 3600
+```
+
+Presigned URLs work with any player or client that supports range requests, making them ideal for video streaming:
+
+```html
+<video controls width="720">
+  <source src="YOUR_PRESIGNED_URL_HERE" type="video/mp4" />
+</video>
+```
+
+Live demo: https://s3.hippius.com/micky/index.html
+
+For more examples (Python, JavaScript, async client), see the [presigned URL guide](https://github.com/thenervelab/hippius-s3/blob/main/examples/presigned-urls-demo.md) and the [`examples/`](https://github.com/thenervelab/hippius-s3/tree/main/examples) directory.
+
 ## JavaScript Setup
 
 ### Installation
@@ -160,7 +227,7 @@ const secretKey = "your_secret_key_here";
 const minioClient = new Minio.Client({
   endPoint: "s3.hippius.com",
   port: 443,
-  useSSL: true, // Use HTTPS in production
+  useSSL: true,
   accessKey: accessKeyId,
   secretKey: secretKey,
   region: "decentralized",
@@ -598,8 +665,6 @@ Create and manage access keys at: https://console.hippius.com/dashboard/settings
 | Grant to access key | `aws s3api put-bucket-acl --bucket B --grant-read 'accessKey="hip_KEY"' --grant-full-control 'id="YOUR_ID"' --endpoint-url https://s3.hippius.com` |
 | Check ACL           | `aws s3api get-bucket-acl --bucket B --endpoint-url https://s3.hippius.com`                                                                        |
 
-For more detailed ACL documentation including cross-account sharing examples and troubleshooting, see `acl-release.md` or `acl-quickstart.md`.
-
 ## Advanced Features
 
 ### Bucket Operations
@@ -673,9 +738,8 @@ with open("large_file.zip", "rb") as file_data:
 1. **Bucket Naming**: Use lowercase letters, numbers, and hyphens only
 2. **Object Keys**: Can include forward slashes to simulate folders
 3. **Large Files**: Use multipart uploads for files > 5MB
-4. **Error Handling**: Always wrap operations in try-catch blocks
-5. **Connection Management**: Close responses and release connections
-6. **Security**: Never expose your seed phrase in client-side code
+4. **Connection Management**: Close responses and release connections after downloads
+5. **Security**: Never expose your access key secret in client-side code
 
 ## Troubleshooting
 
@@ -683,20 +747,20 @@ with open("large_file.zip", "rb") as file_data:
 
 **Authentication Errors**
 
-- Verify your seed phrase is correct
-- Ensure Base64 encoding is properly applied to the access key
-- Check that your sub-account has the required permissions
+- Verify your access key ID and secret are correct
+- Ensure your access key starts with `hip_`
+- Check that your sub key has the required ACL grants
 
 **Upload Failures**
 
 - Verify your account has sufficient credits
 - Check that bucket names are valid (lowercase, no special characters)
-- Ensure your sub-account has Upload permissions
+- Ensure your access key has the required permissions
 
 **Permission Denied**
 
-- Check sub-account permissions (Upload/Delete roles)
-- Verify you're accessing buckets owned by your main account
+- Check that your access key has the required ACL grants
+- Verify you're accessing buckets owned by your account
 - Ensure your account has active credits
 
 ### Getting Help
@@ -710,7 +774,7 @@ Our support team monitors this channel and will help you resolve any issues quic
 ## Rate Limits
 
 - 100 requests per minute per account
-- Large file uploads may take longer due to IPFS processing
+- Large file uploads may take longer due to network processing
 - Parallel uploads are supported for better performance
 
 ## Supported Operations
@@ -719,20 +783,18 @@ Our support team monitors this channel and will help you resolve any issues quic
 
 - Bucket operations (create, delete, list, tags)
 - Object operations (upload, download, delete, list, metadata)
+- Presigned URLs
+- Range requests (video streaming, partial downloads)
 - Multipart uploads
 - Object and bucket tagging
+- ACLs and bucket policies
 - Lifecycle policies
-
-⚠️ **Limited Support**
-
-- Range requests (partial support)
-- S3 Select (limited functionality)
 
 ❌ **Not Supported**
 
 - Bucket versioning
 - Cross-region replication
-- Server-side encryption configuration
+- S3 Select
 
 ---
 
