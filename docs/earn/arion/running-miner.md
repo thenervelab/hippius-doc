@@ -36,7 +36,11 @@ cd arion
 # Build release binary
 cargo build --release --bin miner
 
-# Binary is at: target/release/miner
+# Copy binary to system location
+sudo mkdir -p /var/lib/hippius/miner
+sudo cp target/release/miner /var/lib/hippius/miner/
+
+# Binary is now available at: /var/lib/hippius/miner/miner
 ```
 
 ## 2. Get Node IDs
@@ -100,7 +104,7 @@ export PORT=3001
 export HOSTNAME="$(hostname -I | awk '{print $1}')"
 export STORAGE_PATH="data"
 export MAX_STORAGE=<Max_storage_Miners_Provide> 
-./target/release/miner
+./miner
 ```
 
 ### As Systemd Service (Recommended)
@@ -111,13 +115,32 @@ Create `/etc/systemd/system/hippius-miner.service`:
 [Unit]
 Description=Hippius Miner
 After=network.target
+Wants=network.target
 
 [Service]
 Type=simple
 User=ubuntu
 WorkingDirectory=/var/lib/hippius/miner
-# This repo's miner uses env vars for run-mode; see above
-ExecStart=/usr/local/bin/hippius/miner run
+Environment="RUST_LOG=info"
+
+# K8s Validator connection
+Environment="VALIDATOR_NODE_ID=185651f2fb19c919d40c3c58660cf463ebe7ded1c1a326eef4dad28292171cdb"
+
+# Storage configuration
+Environment="STORAGE_PATH=/var/lib/hippius/miner/storage"
+Environment="STORAGE_CAPACITY_GB=100"
+
+# Iroh networking (K8s relay)
+Environment="IROH_RELAY_URL=https://relay.hippius.com"
+
+# API Key (matches validator)
+Environment="ARION_API_KEY=Arion"
+
+ExecStart=/usr/local/bin/hippius/miner \
+    --validator-node-id 185651f2fb19c919d40c3c58660cf463ebe7ded1c1a326eef4dad28292171cdb \
+    --storage-path /var/lib/hippius/miner/storage \
+    --port 3001
+
 Restart=always
 RestartSec=10
 
