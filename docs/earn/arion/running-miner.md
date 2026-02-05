@@ -45,12 +45,13 @@ sudo cp ~/arion/target/release/miner /var/lib/hippius/miner/
 
 ## 2. Get Node IDs
 
-The miner needs the validator's and warden's P2P node IDs and a Family Account (coldkey):
+The miner needs the validator's and warden's P2P node IDs, along with your family ID (coldkey address):
 
 ```bash
 export VALIDATOR_NODE_ID="185651f2fb19c919d40c3c58660cf463ebe7ded1c1a326eef4dad28292171cdb"
-
 export WARDEN_NODE_ID="70d27c756b0f9a71fc89a6e571c9bdf9e63f8531e125714d0f164be0e11e6846"
+# Replace with your coldkey SS58 address to receive incentives
+export FAMILY_ID="<your-coldkey-ss58-address>"
 ```
 
 **Important:** Without `WARDEN_NODE_ID`, the miner cannot authorize proof-of-storage challenges from the warden, resulting in failed audits and reputation penalties.
@@ -110,7 +111,7 @@ export MAX_STORAGE=<Max_storage_Miners_Provide>
 
 ### As Systemd Service (Recommended)
 
-Create `/etc/systemd/system/hippius-miner.service`:
+Create `/etc/systemd/system/hippius-miner.service` with the following content. Make sure to replace the placeholder values with your actual configuration:
 
 ```ini
 [Unit]
@@ -124,21 +125,20 @@ User=ubuntu
 WorkingDirectory=/var/lib/hippius/miner
 Environment="RUST_LOG=info"
 
-# K8s Validator connection
-Environment="VALIDATOR_NODE_ID=185651f2fb19c919d40c3c58660cf463ebe7ded1c1a326eef4dad28292171cdb"
-Environment="FAMILY_ID=<coldkey-SS58>"
-# Storage configuration
-Environment="STORAGE_PATH=/var/lib/hippius/miner/storage"
-Environment="STORAGE_CAPACITY_GB=100"
-
-# Iroh networking (K8s relay)
+# Iroh networking (hippius relay)
 Environment="IROH_RELAY_URL=https://relay.hippius.com"
 
 # API Key (matches validator)
 Environment="ARION_API_KEY=Arion"
 
+# Storage capacity (in GB)
+Environment="STORAGE_CAPACITY_GB=100"
+
+# All node-specific configurations are passed as command-line arguments
+# to avoid duplication and ensure consistency
 ExecStart=/usr/local/bin/hippius/miner \
     --validator-node-id 185651f2fb19c919d40c3c58660cf463ebe7ded1c1a326eef4dad28292171cdb \
+    --warden-node-id 70d27c756b0f9a71fc89a6e571c9bdf9e63f8531e125714d0f164be0e11e6846 \
     --family-id <coldkey-SS58> \
     --storage-path /var/lib/hippius/miner/storage \
     --port 3001
@@ -149,6 +149,24 @@ RestartSec=10
 [Install]
 WantedBy=multi-user.target
 ```
+
+:::tip Note on Node IDs
+The validator and warden node IDs provided in this documentation are the current production values. If these values change, the documentation will be automatically updated. Always use the values provided in the latest version of this documentation.
+:::
+
+:::important IPFS Node Requirement
+Before starting the miner, ensure your IPFS node is running. The miner requires IPFS for storage operations. You can check the IPFS status with:
+
+```bash
+sudo systemctl status ipfs
+```
+
+If IPFS is not running, start it with:
+
+```bash
+sudo systemctl start ipfs
+```
+:::
 
 Enable and start:
 
