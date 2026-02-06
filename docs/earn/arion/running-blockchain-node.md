@@ -235,7 +235,7 @@ Use the following command with the validator's P2P identity:
 ./target/release/hippius \
   --base-path /var/lib/hippius/chain \
   --chain mainnet \
-  --bootnodes /ip4/57.128.82.161/tcp/30333/p2p/12D3KooWMuNG6ASCMDsyA45sUgYsYs1qHHrhkfhaMx7QNF98aWMZ \
+  --bootnodes /ip4/198.244.165.236/tcp/30333/ws/p2p/12D3KooWAXNTAcp2d8rFG6iW43nYhkciWepUFJxr8yzZbELyYByb \
   --offchain-worker Always \
   --name "My Miner Node" \
   --rpc-cors all \
@@ -273,7 +273,7 @@ WorkingDirectory=/home/ubuntu/thebrain
 ExecStart=/usr/local/bin/hippius \
   --base-path /var/lib/hippius/chain \
   --chain /home/ubuntu/thebrain/customSpec.json \
-  --bootnodes /ip4/57.128.82.161/tcp/30333/p2p/12D3KooWMuNG6ASCMDsyA45sUgYsYs1qHHrhkfhaMx7QNF98aWMZ \
+  --bootnodes /ip4/198.244.165.236/tcp/30333/ws/p2p/12D3KooWAXNTAcp2d8rFG6iW43nYhkciWepUFJxr8yzZbELyYByb \
   --offchain-worker Always \
   --name "Miner Node" \
   --rpc-cors all \
