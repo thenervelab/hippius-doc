@@ -320,6 +320,64 @@ journalctl -u hippius-miner --since "5 minutes ago"
 ls -la /var/lib/hippius/miner/data/blobs/
 ```
 
+## 9. Deregistering a Miner
+
+If you need to deregister your miner from the network, you can do so through the Arion pallet. The deregistration process involves two steps:
+
+1. **Deregister** - Unregister the miner and enter unbonding period
+2. **Claim Unbonded** - Claim your deposit after the unbonding period ends
+
+### Step 1: Deregister Child (Miner)
+
+This will unregister your miner from the network and start the unbonding period for your deposit.
+
+1. Navigate to [Polkadot.js Apps](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network#/extrinsics)
+2. Go to **Developer → Extrinsics**
+3. Select your **coldkey account** (family/main account)
+4. Choose pallet: **arion**
+5. Choose extrinsic: **deregisterChild**
+6. Fill in the parameters:
+   - `child`: Your hotkey account address (AccountId32) - the child account used for mining operations
+7. Sign and submit the transaction
+
+![Deregister Child in Arion](/img/arion/deregister-child-arion.png)
+
+:::warning
+Once you deregister your miner:
+- The miner will be **immediately unregistered** from the network
+- Your miner will **stop receiving** storage assignments
+- Your deposit will enter an **unbonding period** (configured by the chain)
+- You **cannot re-register** the same child account until the cooldown period expires
+:::
+
+### Step 2: Claim Unbonded Deposit
+
+After the unbonding period has ended, you can claim your deposit back.
+
+1. Navigate to [Polkadot.js Apps](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network#/extrinsics)
+2. Go to **Developer → Extrinsics**
+3. Select your **coldkey account** (family/main account)
+4. Choose pallet: **arion**
+5. Choose extrinsic: **claimUnbonded**
+6. Fill in the parameters:
+   - `child`: Your hotkey account address (AccountId32) - the same child account you deregistered
+7. Sign and submit the transaction
+
+![Claim Unbonded in Arion](/img/arion/claim-unbonded-arion.png)
+
+:::info Unbonding Period
+The unbonding period is set by the chain configuration and may vary. During this period:
+- Your deposit remains **locked** and cannot be claimed
+- The child account remains in **cooldown** and cannot be re-registered
+- After the period ends, you can call `claimUnbonded` to release your deposit
+
+To check if your unbonding period has ended, you can query the chain state in Polkadot.js Apps:
+- Go to **Developer → Chain State**
+- Select **arion** pallet
+- Select **childRegistrations(AccountId32)** storage
+- Enter your child account address to check the `unbonding_end` block number
+:::
+
 ## Configuration Options
 
 | Option | Env Var | Description | Default |
