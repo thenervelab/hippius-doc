@@ -64,6 +64,14 @@ const sidebars: SidebarsConfig = {
         "earn/storage-miner", // Setting up storage miners
         "earn/register-in-blockchain", // Registering nodes in the blockchain
         "earn/staking", // Staking on Hippius
+        {
+          type: "category",
+          label: "Miners",
+          items: [
+            "earn/arion/running-blockchain-node",
+            "earn/arion/running-miner",
+          ],
+        },
       ],
     },
     {
@@ -83,6 +91,7 @@ const sidebars: SidebarsConfig = {
               link: { type: "doc", id: "blockchain/pallets" }, // Link to the main page
               collapsed: true,
               items: [
+                "pallets/arion-pallet", // Arion Pallet
                 "pallets/alpha-bridge", // Subpage for AlphaBridge
                 "pallets/credits", // Subpage for Credits
                 "pallets/rankings", // Subpage for Rankings
