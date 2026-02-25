@@ -26,7 +26,7 @@ export default function FooterLayout({
       <div className="relative w-full max-w-screen-xl">
         {links}
         {(logo || copyright) && (
-          <div className="flex font-medium">
+          <div className="footer__bottom flex font-medium">
             {logo && <div>{logo}</div>}
             {copyright}
           </div>

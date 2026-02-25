@@ -378,3 +378,45 @@ article .theme-doc-breadcrumbs {
     image-rendering: auto;
   }
 }
+
+.footer__bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+}
+
+.footer__copyright {
+  width: 100%;
+}
+
+.footer__legal-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.footer__copyright-text {
+  font-weight: 500;
+}
+
+.footer__legal-link {
+  color: #ffffff !important;
+  font-weight: 500;
+}
+
+.footer__legal-link:hover {
+  text-decoration-line: underline;
+}
+
+.footer__legal-dot {
+  opacity: 0.9;
+}
+
+@media (max-width: 576px) {
+  .footer__legal-row {
+    font-size: 0.95rem;
+  }
+}
