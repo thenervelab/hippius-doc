@@ -47,6 +47,9 @@ const sidebars: SidebarsConfig = {
             "use/desktop/desktop-app", // Desktop App
             "use/desktop/using-the-app", // Using the App
             "use/desktop/file-system", // File System
+            // "use/desktop/wallet", // Wallet
+            // "use/desktop/staking", // Staking
+            // "use/desktop/bridge", // Bridge
             "use/desktop/settings", // App Settings
             "use/desktop/billing", // Billing
             "use/desktop/referral-system", // Referral System

@@ -41,7 +41,7 @@ This direction locks your Alpha tokens on the Bittensor network. Hippius guardia
   <li>Approve each transaction in your wallet extension when prompted.</li>
 </Ordered>
 
-![Bridge Tokens](/img/desktop/wallet/bridge-tokens.png)
+![Bridge Tokens](/img/wallet/bridge-tokens.png)
 
 :::note
 A minimum bridge amount applies. The gas fee is shown before you confirm. The bridge process takes approximately 120 seconds.
@@ -78,7 +78,7 @@ Bridge transactions are tracked per direction:
 - **Alpha → hAlpha**: Shows deposit events (lock confirmed, guardians minting)
 - **hAlpha → Alpha**: Shows unlock events (burn confirmed, guardians releasing)
 
-![Bridge Transactions](/img/desktop/wallet/bridge-transactions.png)
+![Bridge Transactions](/img/wallet/bridge-transactions.png)
 
 ## How the Bridge Works
 

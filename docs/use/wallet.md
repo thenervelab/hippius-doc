@@ -36,7 +36,7 @@ If no wallet extension is detected, the **Active Wallet** selector will display 
   <li>Approve the Hippius connection request in your wallet extension when prompted.</li>
 </Ordered>
 
-![Install Extension](/img/desktop/wallet/install-extension.png)
+![Install Extension](/img/wallet/install-extension.png)
 
 ### Selecting an Active Wallet
 
@@ -49,7 +49,7 @@ Once connected, all your extension accounts appear in the **Active Wallet** drop
 </Ordered>
 
 Your selection is remembered across sessions. If you close and reopen the app, the same wallet will be active.
-![Active Wallets](/img/desktop/wallet/active-wallets.png)
+![Active Wallets](/img/wallet/active-wallets.png)
 
 
 :::tip
@@ -79,7 +79,7 @@ The Wallet page displays three widget cards at a glance:
 
 Below the widgets you'll find a **Balance Overview** chart and tabs for **Transaction History** and **Address Book**.
 
-![Wallet Overview](/img/desktop/wallet/wallet-overview.png)
+![Wallet Overview](/img/wallet/wallet-overview.png)
 
 ## Sending Balance
 
@@ -97,7 +97,7 @@ You can send hAlpha to any wallet on the Hippius blockchain.
 
 A loading notification will appear while the transaction is being processed. You'll receive a success notification with the block hash once it's confirmed.
 
-![Send balance modal](/img/desktop/wallet/send-balance.png)
+![Send balance modal](/img/wallet/send-balance.png)
 
 :::note
 The transaction fee is automatically deducted. If your balance is too low to cover the fee, you'll see an error before the dialog opens.
@@ -112,7 +112,7 @@ The transaction fee is automatically deducted. If your balance is too low to cov
   <li>Send tokens to this address from any Hippius-compatible wallet.</li>
 </Ordered>
 
-![Receive balance modal](/img/desktop/wallet/receive-balance.png)
+![Receive balance modal](/img/wallet/receive-balance.png)
 
 ## Balance Overview Chart
 
@@ -141,7 +141,7 @@ The **Transaction History** tab shows all your incoming and outgoing token trans
 
 You can sort by block number, amount, or date. Results are paginated at 10 per page.
 
-![Transaction History](/img/desktop/wallet/transaction-history.png)
+![Transaction History](/img/wallet/transaction-history.png)
 
 :::tip
 Switching your Active Wallet will update the transaction history to show transfers for the newly selected account.
@@ -151,7 +151,7 @@ Switching your Active Wallet will update the transaction history to show transfe
 
 The Address Book lets you save wallet addresses you frequently send tokens to.
 
-![Add new address modal](/img/desktop/wallet/address-book.png)
+![Add new address modal](/img/wallet/address-book.png)
 
 ### Adding a New Address
 
