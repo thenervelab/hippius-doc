@@ -37,8 +37,8 @@ const sidebars: SidebarsConfig = {
         "use/s3-token-management", // S3 Token Management
         "use/virtual-machines", // Virtual Machines
         // "use/wallet", // Hippius Wallet
-        // "use/staking", // Staking
         // "use/bridge-tokens", // Bridge Tokens
+        // "use/staking", // Staking
         "use/help-support", // Help & Support
         {
           type: "category",
@@ -48,8 +48,8 @@ const sidebars: SidebarsConfig = {
             "use/desktop/using-the-app", // Using the App
             "use/desktop/file-system", // File System
             // "use/desktop/wallet", // Wallet
-            // "use/desktop/staking", // Staking
             // "use/desktop/bridge", // Bridge
+            // "use/desktop/staking", // Staking
             "use/desktop/settings", // App Settings
             "use/desktop/billing", // Billing
             "use/desktop/referral-system", // Referral System
