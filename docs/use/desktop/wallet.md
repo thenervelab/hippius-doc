@@ -6,7 +6,7 @@ slug: /use/desktop/wallet
 ---
 
 import Ordered from '@site/src/components/Ordered';
-import UnOrdered from '@site/src/components/UnOrdered';
+import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import Icon from '@site/src/components/Icon';
@@ -68,12 +68,12 @@ Alternatively, you can click <BgStyledText>Import Wallet</BgStyledText> to impor
 
 Hippius Desktop uses a secure password-based signing model:
 
-<UnOrdered>
+<Unordered>
 <li> Your mnemonic phrase is **encrypted** with your password and stored locally</li>
 <li> When you perform any transaction (send, stake, unstake, bridge), you're prompted to enter your password</li>
 <li> The password **temporarily decrypts** your mnemonic to sign the transaction</li>
 <li> After signing, the decrypted mnemonic is immediately cleared from memory</li>
-</UnOrdered>
+</Unordered>
 
 This means you don't need to "unlock" your wallet upfront — your wallet is effectively locked at all times, and you authenticate each transaction individually.
 

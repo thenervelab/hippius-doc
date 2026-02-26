@@ -6,7 +6,7 @@ slug: /use/desktop/bridge
 ---
 
 import Ordered from '@site/src/components/Ordered';
-import UnOrdered from '@site/src/components/UnOrdered';
+import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import Icon from '@site/src/components/Icon';
@@ -15,10 +15,10 @@ import Icon from '@site/src/components/Icon';
 
 The Hippius Bridge allows you to transfer tokens between the Bittensor network (Alpha) and the Hippius network (hAlpha). You can bridge in either direction:
 
-<UnOrdered>
+<Unordered>
 <li>**Alpha → hAlpha**: Lock your Alpha tokens on Bittensor and receive hAlpha on Hippius</li>
 <li>**hAlpha → Alpha**: Burn your hAlpha tokens on Hippius and receive Alpha on Bittensor</li>
-</UnOrdered>
+</Unordered>
 Bridging is processed by a decentralized network of Hippius guardians and typically completes within a few minutes.
 
 ## Accessing the Bridge
@@ -74,12 +74,12 @@ The **Bridge Transactions** widget appears in the bottom-left corner during and 
 ### Widget Header
 
 The header shows the overall status:
-<UnOrdered>
+<Unordered>
 <li>**Spinner icon** — A bridge operation is in progress</li>
 <li>**Checkmark icon** — All transactions completed successfully</li>
 <li>**Warning icon** — There was an issue loading bridge data</li>
 <li>**X icon** — A transaction failed</li>
-</UnOrdered>
+</Unordered>
 
 Click the header to expand or collapse the transaction details.
 
@@ -98,11 +98,11 @@ When you initiate a bridge, the widget shows step-by-step progress:
 | **Complete** | Tokens have been delivered |
 
 Each step shows:
-<UnOrdered>
+<Unordered>
 <li>A status icon (loading spinner, checkmark, or error)</li>
 <li>The step name</li>
 <li>Additional details when available</li>
-</UnOrdered>
+</Unordered>
 
 {/* ![Bridge Progress](/img/desktop/wallet/bridge-progress.png) */}
 
@@ -120,11 +120,11 @@ Each step shows:
 
 Use the filter tabs to view specific transaction types:
 
-<UnOrdered>
+<Unordered>
 <li>**All** — Shows all bridge transactions</li>
 <li>**Deposits** — Alpha → hAlpha transactions only</li>
 <li>**Withdrawals** — hAlpha → Alpha transactions only</li>
-</UnOrdered>
+</Unordered>
 
 The count badge shows how many pending transactions exist in each category.
 
@@ -143,37 +143,37 @@ Each transaction is displayed as a card showing:
 | **Votes** | Guardian confirmation progress (when processing) |
 
 Click a transaction card to expand and see additional details:
-<UnOrdered>
+<Unordered>
 <li>Full request ID</li>
 <li>Block numbers</li>
 <li>Timestamps</li>
 <li>Guardian vote count and threshold</li>
-</UnOrdered>
+</Unordered>
 
 {/* ![Transaction Card](/img/desktop/wallet/transaction-card.png) */}
 
 ### Dismissing the Widget
-<UnOrdered>
+<Unordered>
 <li>**Auto-dismiss**: Successfully completed transactions automatically clear after a few seconds</li>
 <li>**Manual dismiss**: Click the **Dismiss** button when a transaction completes or fails</li>
 <li>The widget hides completely when there are no transactions to display</li>
-</UnOrdered>
+</Unordered>
 
 ### Error Handling
 
 If a bridge transaction fails, the widget shows:
-<UnOrdered>
+<Unordered>
 <li>A red error indicator</li>
 <li>A user-friendly error message explaining what went wrong</li>
 <li>A **Dismiss** button to clear the failed transaction</li>
-</UnOrdered>
+</Unordered>
 
 Common errors include:
-<UnOrdered>
+<Unordered>
 <li>**Insufficient balance** — Not enough tokens or gas fees</li>
 <li>**Proxy error** — Failed to add/remove the bridge proxy</li>
 <li>**Network timeout** — Transaction took too long to confirm</li>
-</UnOrdered>
+</Unordered>
 
 
 :::tip

@@ -6,7 +6,7 @@ slug: /use/desktop/staking
 ---
 
 import Ordered from '@site/src/components/Ordered';
-import UnOrdered from '@site/src/components/UnOrdered';
+import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import Icon from '@site/src/components/Icon';
@@ -126,11 +126,11 @@ Transferable → [Stake] → Bonded (Staked)
 ## Staking Rewards
 
 Staked tokens earn rewards proportional to:
-<UnOrdered>
+<Unordered>
 <li>The amount staked</li>
 <li>The duration of staking</li>
 <li>The overall network staking participation</li>
-</UnOrdered>
+</Unordered>
 
 Rewards are automatically added to your staked balance. You don't need to manually claim them.
 
