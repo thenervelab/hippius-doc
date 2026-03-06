@@ -234,8 +234,8 @@ export default function DocSidebarItemCategory({
           {!href && collapsible && (
             <div
               className={cn(
-                "size-4 flex items-center justify-center relative rounded border-grey-50 border-[1px] text-center duration-300",
-                !collapsed && "rotate-180"
+                "size-4 flex items-center justify-center relative rounded border-grey-50 border-[1px] text-center transition-transform duration-300",
+                collapsed && "-rotate-90"
               )}
             >
               <ChevronDown className="size-2 text-grey-50" />
