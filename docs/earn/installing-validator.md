@@ -35,7 +35,7 @@ Create or modify the inventory file at `inventory/production/hosts.yml`:
 ```yaml
 all:
   children:
-    ipfs_nodes:
+    validators:
       hosts: YOUR_VALIDATOR_IP # Replace with your server's IP address
       vars:
         ansible_user: ubuntu
@@ -48,7 +48,7 @@ For example, if your validator's IP address is `123.45.67.89`, your `hosts.yml` 
 ```yaml
 all:
   children:
-    ipfs_nodes:
+    validators:
       hosts: 123.45.67.89
       vars:
         ansible_user: ubuntu
@@ -81,10 +81,6 @@ subtensor_ports:
   p2p: 30334
   ws: 9934
 
-# IPFS Configuration
-ipfs_version: "v0.26.0"
-ipfs_api_address: "/ip4/127.0.0.1/tcp/5001"
-ipfs_gateway_address: "/ip4/127.0.0.1/tcp/8080"
 ```
 
 You can modify these values if needed, but the defaults are recommended for most users.
@@ -99,7 +95,6 @@ ansible-playbook -i inventory/production/hosts.yml site.yml
 
 This will:
 
-- Install and configure IPFS node
 - Set up Subtensor node (mainnet-lite)
 - Deploy Hippius validator
 - Configure firewall rules
@@ -213,13 +208,6 @@ If you need help during any part of this process, join the [Hippius Discord comm
 
 ## Components Installed
 
-### IPFS Node
-
-- Runs as dedicated IPFS user
-- API port: 5001
-- Gateway port: 8080
-- Managed via systemd
-
 ### Subtensor Node
 
 - Runs via Docker
@@ -243,9 +231,6 @@ If you need help during any part of this process, join the [Hippius Discord comm
 ### Check Service Status
 
 ```bash
-# Check IPFS status
-systemctl status ipfs
-
 # Check Subtensor status
 docker-compose -f /opt/subtensor/docker-compose.yml ps
 
@@ -256,9 +241,6 @@ systemctl status hippius
 ### View Logs
 
 ```bash
-# IPFS logs
-journalctl -u ipfs -f
-
 # Subtensor logs
 docker-compose -f /opt/subtensor/docker-compose.yml logs -f
 
@@ -280,7 +262,6 @@ journalctl -u hippius -f
 
 The Ansible deployment automatically implements several security best practices:
 
-- IPFS runs as a dedicated system user
 - Subtensor runs in a Docker container with resource limits
 - Firewall rules are automatically configured
 - Secure key management for the validator

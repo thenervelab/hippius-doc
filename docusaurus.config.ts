@@ -140,7 +140,7 @@ const config: Config = {
           activeBasePath: "/learn",
         },
         {
-          to: "/use/bridge",
+          to: "/use/quickstart",
           label: "Use",
           position: "left",
           activeBasePath: "/use",
@@ -152,7 +152,7 @@ const config: Config = {
           activeBasePath: "/earn",
         },
         {
-          to: "/cli/usage",
+          to: "/storage/s3/integration",
           label: "Develop",
           position: "left",
           activeBaseRegex: "^/(blockchain|cli|pallets|storage)(/|$)",
@@ -196,6 +196,10 @@ const config: Config = {
         {
           title: "Use",
           items: [
+            {
+              label: "Quickstart",
+              to: "/use/quickstart",
+            },
             {
               label: "Hipstats",
               href: "https://hipstats.com",

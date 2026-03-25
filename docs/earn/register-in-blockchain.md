@@ -11,7 +11,7 @@ Before registering, ensure you have:
 - Python 3.7+ installed on your system
 - Access to the Hippius CLI Python package (`hippius` version `0.2.49` or later)
 - Alpha tokens for registration fees and staking
-- IPFS node set up and configured (if applicable)
+- Arion miner set up and configured (if applicable)
 
 ---
 
@@ -64,11 +64,7 @@ hippius account list
 
 The output will show your node's peer ID and private key in hex format. Save both values - you'll need them for registration.
 
-- Obtain IPFS node ID and private key in base64 format from your IPFS config:
-
-```bash
-sudo cat ~/.ipfs/config
-```
+- If registering a StorageMiner, obtain your Arion miner node ID from the miner logs (see [Arion Miner Setup](/earn/arion/running-miner)).
 
 ---
 
@@ -81,8 +77,6 @@ hippius miner register-coldkey \
 --node-id <substrate-node-id> \
 --node-priv-hex <substrate-node-private-hex> \
 --node-type StorageMiner \
---ipfs-peer-id <ipfs-node-id> \
---ipfs-priv-b64 "<ipfs-private-key-base64>" \
 --block-width <u64>
 ```
 
@@ -91,8 +85,6 @@ Replace the parameters accordingly:
 - `--node-id`: Your substrate node ID from step 3 (peer ID format, not hex)
 - `--node-priv-hex`: Your substrate private key in hex format from step 3
 - `--node-type`: One of `StorageMiner`, `Validator`, `ComputeMiner`
-- `--ipfs-peer-id`: Your IPFS node ID as string
-- `--ipfs-priv-b64`: Your IPFS private key in base64
 - `--block-width`: Block width parameter (u64 integer)
 
 ---
@@ -106,8 +98,6 @@ hippius miner register-hotkey \
 --node-id <substrate-node-id> \
 --node-priv-hex <substrate-node-private-hex> \
 --node-type <node-type> \
---ipfs-peer-id <ipfs-node-id> \
---ipfs-priv-b64 "<ipfs-private-key-base64>" \
 --block-width <u64> \
 --coldkey <coldkey-address>
 ```
@@ -124,8 +114,6 @@ Verify your hotkey node registration by running:
 hippius miner verify-node \
 --node-id <node-id> \
 --node-priv-hex <node-private-hex> \
---ipfs-peer-id <ipfs-node-id> \
---ipfs-priv-b64 "<ipfs-private-key-base64>" \
 --block-width <u64>
 ```
 
@@ -139,8 +127,6 @@ Similarly, verify the coldkey node registration:
 hippius miner verify-coldkey-node \
 --node-id <node-id> \
 --node-priv-hex <node-private-hex> \
---ipfs-peer-id <ipfs-node-id> \
---ipfs-priv-b64 "<ipfs-private-key-base64>" \
 --block-width <u64>
 ```
 
@@ -154,7 +140,7 @@ The previous Polkadot.js Apps method is still available but deprecated. For refe
 2. Connect to `wss://rpc.hippius.network`
 3. Navigate to **Developer** → **Extrinsics**
 4. Select the extrinsic: `registration` → `registerNodeWithColdKey(nodeType, nodeId, payInCredits, ipfsNodeId)`
-5. Enter parameters accordingly
+5. Enter parameters accordingly (note: `ipfsNodeId` is a legacy parameter name — leave as None)
 6. Submit and sign the transaction
 7. Verify registration on chain explorer
 
@@ -163,7 +149,7 @@ The previous Polkadot.js Apps method is still available but deprecated. For refe
 ## Node Type Descriptions
 
 - **Validator**: For block production and validation
-- **StorageMiner**: For decentralized IPFS or S3 storage
+- **StorageMiner**: For decentralized Arion or S3 storage
 - **ComputeMiner**: For compute resource nodes (future functionality)
 
 ---

@@ -1,7 +1,7 @@
 # IPFS Setup
 
-Configure an IPFS node for Hippius pinning.
+:::warning Deprecated
+IPFS storage has been replaced by Arion, Hippius's purpose-built decentralized storage engine. This page is no longer maintained.
 
-1. Install IPFS: `go get ipfs`.
-2. Start your node: `ipfs daemon`.
-3. Connect to Hippius network (details coming soon).
+See [Decentralized Storage Systems](/learn/storage-systems) for current storage documentation, or the [Quickstart guide](/use/quickstart) to get started with S3-compatible storage.
+:::

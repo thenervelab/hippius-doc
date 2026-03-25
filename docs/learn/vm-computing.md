@@ -23,7 +23,7 @@ Hippius VM Computing enables users to deploy and manage virtual machines on a de
 | **Encrypted Disks**              | LUKS2 full disk encryption with secure key delivery  |
 | **Credit-Based Billing**         | Pay-as-you-go model using Hippius credits            |
 | **Secure Access**                | SSH key authentication for secure instance access    |
-| **Storage Integration**          | Native integration with IPFS and S3 storage systems  |
+| **Storage Integration**          | Native integration with Arion and S3 storage systems  |
 
 ---
 
@@ -185,10 +185,10 @@ The compute infrastructure involves multiple blockchain participants:
 
 VMs have seamless access to Hippius storage systems:
 
-#### IPFS Distributed Storage
+#### Arion Distributed Storage
 
-- **High-Speed Access**: Content-addressed storage for fast file retrieval
-- **Data Durability**: Replicated storage across multiple nodes
+- **High-Speed Access**: Deterministic data placement for fast shard retrieval
+- **Data Durability**: Erasure-coded storage across multiple miners
 - **Decentralized**: No single point of failure
 
 #### S3-Compatible Storage
@@ -216,7 +216,7 @@ VMs have seamless access to Hippius storage systems:
 │              │                  │                            │
 │              ▼                  ▼                            │
 │   ┌──────────────────┐  ┌──────────────────┐                 │
-│   │  IPFS Storage    │  │   S3 Storage     │                 │
+│   │  Arion Storage   │  │   S3 Storage     │                 │
 │   │  (Distributed)   │  │   (Volumes)      │                 │
 │   └──────────────────┘  └──────────────────┘                 │
 │                                                              │
@@ -361,4 +361,4 @@ Hippius VM Computing brings the benefits of decentralization to compute infrastr
 | **Flexible**      | Various configurations for different workloads |
 | **Economical**    | Credit-based pay-as-you-go billing             |
 
-By combining decentralized compute with IPFS storage and blockchain coordination, Hippius provides a complete platform for building and running applications without relying on centralized cloud providers.
+By combining decentralized compute with Arion storage and blockchain coordination, Hippius provides a complete platform for building and running applications without relying on centralized cloud providers.

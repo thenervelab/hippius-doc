@@ -102,8 +102,8 @@ The pallet defines a `SystemInfo` struct to represent system specifications:
   - `network_bandwidth_mb_s`: The network bandwidth in megabytes per second.
   - `primary_network_interface`: Information about the primary network interface.
   - `disks`: Information about the disks attached to the node.
-  - `ipfs_repo_size`: The size of the IPFS repository.
-  - `ipfs_storage_max`: The maximum storage for IPFS.
+  - `ipfs_repo_size`: The size of the storage repository (legacy field name).
+  - `ipfs_storage_max`: The maximum storage capacity (legacy field name).
   - `cpu_model`: The model of the CPU.
   - `vm_count`: The number of virtual machines running on the node.
   - `is_sev_enabled`: Indicates whether Secure Encrypted Virtualization (SEV) is enabled.
@@ -120,7 +120,7 @@ The pallet defines a `NodeMetricsData` struct to represent performance metrics f
   - `geolocation`: The geolocation of the node.
   - `primary_network_interface`: The primary network interface details.
   - `disks`: Information about the disks.
-  - `ipfs_repo_size`: The size of the IPFS repository.
+  - `ipfs_repo_size`: The size of the storage repository (legacy field name).
   - `cpu_model`: The model of the CPU.
   - `cpu_cores`: The number of CPU cores.
   - `memory_mb`: The amount of memory allocated in megabytes.

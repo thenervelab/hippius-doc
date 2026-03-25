@@ -17,8 +17,8 @@ This document provides an overview of the custom pallets integrated into TheBrai
 ## 5. Registration
 - **Description**: Manages Node registrations within the system. It ensures sommth registration process for nodes.
 
-## 6. IPFS Pin
-- **Description**: Integrates with IPFS to manage and pin user data, ensuring that important files remain accessible and are not lost over time. It handle Pin , Unpin Operations
+## 6. IPFS Pin (Deprecated)
+- **Description**: ~~Integrates with IPFS to manage and pin user data.~~ This pallet has been superseded by the [Arion Pallet](/pallets/arion-pallet) for decentralized storage operations.
 
 ## 7. ExecutionUnit
 - **Description**: Manages the assignment of storage and compute requests to the appropriate miners based on their specifications and capabilities. This pallet ensures that resources are allocated efficiently and effectively within the blockchain ecosystem.

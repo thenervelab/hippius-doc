@@ -1,0 +1,183 @@
+# Hippius - Decentralized S3-Compatible Storage
+
+> Hippius is a decentralized cloud storage platform that provides a fully S3-compatible API backed by Arion distributed storage and a custom Substrate blockchain. Any S3 client works with Hippius out of the box.
+
+## Quick Start
+
+1. Create account at console.hippius.com (Google or GitHub OAuth)
+2. Add credits via Console > Billing (credit card via Stripe, or TAO)
+3. Create S3 credentials via Console > S3 Storage > Create Master Token — save your Access Key ID (hip_...) and Secret Key
+4. Configure your S3 client with the connection details below and start uploading
+
+IMPORTANT: Hippius uses its own account system. ETH wallets, TAO wallets,
+and Polkadot browser extensions are NOT used for S3 storage access.
+TAO can be used only to pay for credits, not for authentication.
+
+## S3 Connection Details
+
+- Endpoint: https://s3.hippius.com
+- Region: decentralized
+- Signature: AWS Signature V4
+- Addressing style: path
+
+## Common Operations (AWS CLI)
+
+Configure credentials:
+
+    export AWS_ACCESS_KEY_ID="hip_your_key"
+    export AWS_SECRET_ACCESS_KEY="your_secret"
+    export AWS_DEFAULT_REGION="decentralized"
+
+Create bucket:
+
+    aws s3 mb s3://my-bucket --endpoint-url https://s3.hippius.com
+
+Upload file:
+
+    aws s3 cp file.txt s3://my-bucket/file.txt --endpoint-url https://s3.hippius.com
+
+Download file:
+
+    aws s3 cp s3://my-bucket/file.txt file.txt --endpoint-url https://s3.hippius.com
+
+List objects:
+
+    aws s3 ls s3://my-bucket/ --endpoint-url https://s3.hippius.com
+
+Generate presigned URL (1 hour):
+
+    aws s3 presign s3://my-bucket/file.txt --endpoint-url https://s3.hippius.com --expires-in 3600
+
+## Client Configurations
+
+### Python (minio)
+
+    from minio import Minio
+    client = Minio(
+        "s3.hippius.com",
+        access_key="hip_your_key",
+        secret_key="your_secret",
+        secure=True,
+        region="decentralized",
+    )
+
+### Python (boto3)
+
+    import boto3
+    from botocore.config import Config
+    s3 = boto3.client(
+        "s3",
+        endpoint_url="https://s3.hippius.com",
+        aws_access_key_id="hip_your_key",
+        aws_secret_access_key="your_secret",
+        region_name="decentralized",
+        config=Config(signature_version="s3v4", s3={"addressing_style": "path"}),
+    )
+
+### JavaScript (minio)
+
+    const Minio = require("minio");
+    const client = new Minio.Client({
+        endPoint: "s3.hippius.com",
+        port: 443,
+        useSSL: true,
+        accessKey: "hip_your_key",
+        secretKey: "your_secret",
+        region: "decentralized",
+    });
+
+## Supported S3 Operations
+
+- Bucket: CreateBucket, DeleteBucket, ListBuckets, HeadBucket
+- Object: PutObject, GetObject, HeadObject, DeleteObject, CopyObject
+- List: ListObjects, ListObjectsV2
+- Multipart: InitiateMultipartUpload, UploadPart, CompleteMultipartUpload, AbortMultipartUpload
+- Tags: PutObjectTagging, GetObjectTagging, DeleteObjectTagging, PutBucketTagging, GetBucketTagging, DeleteBucketTagging
+- ACL: PutBucketAcl, GetBucketAcl, PutObjectAcl, GetObjectAcl
+- Policy: PutBucketPolicy, GetBucketPolicy, DeleteBucketPolicy
+- Other: PresignedGetObject, PresignedPutObject, PutBucketLifecycle
+
+## Not Supported
+
+- Bucket versioning
+- Cross-region replication
+- S3 Select
+
+## Management API (api.hippius.com)
+
+Full OpenAPI spec: https://api.hippius.com/?format=openapi
+
+Authenticate with a bearer token obtained via OAuth (/auth/exchange/).
+
+### Token management (programmatic S3 credential CRUD)
+
+- GET  /objectstore/master-tokens/              List master tokens
+- POST /objectstore/master-tokens/              Create master token
+- POST /objectstore/master-tokens/{id}/revoke/  Revoke master token
+- POST /objectstore/master-tokens/{id}/rotate/  Rotate master token secret
+- Same endpoints exist for sub-tokens at /objectstore/sub-tokens/
+
+### Billing & credits
+
+- GET  /billing/credits/balance/                    Check credit balance
+- GET  /billing/latest-tao-price/                   Get current TAO/USD price (public, no auth)
+- POST /billing/stripe/create-checkout-session/     Create Stripe payment session ($20-$10,000)
+- POST /billing/stripe/create-subscription/         Create recurring subscription
+- GET  /billing/stripe/subscription-plans/          List available plans
+
+### Pay with TAO (programmatic crypto top-up)
+
+  Step 1: Create a crypto transaction
+    curl -X POST https://api.hippius.com/billing/transactions/ \
+      -H "Authorization: Token YOUR_TOKEN" \
+      -H "Content-Type: application/json" \
+      -d '{"payment_type": "crypto", "amount": "50.00", "currency": "TAO"}'
+    Response includes "payment_address" — send TAO to this address on Bittensor.
+
+  Step 2: Send TAO to the payment_address returned above.
+    Credits are applied automatically once the transaction is confirmed on-chain.
+
+  Step 3: Poll for confirmation
+    curl https://api.hippius.com/billing/transactions/{id}/ \
+      -H "Authorization: Token YOUR_TOKEN"
+    Look for "status": "completed" and "substrate_success": true.
+
+  Step 4: Verify credits
+    curl https://api.hippius.com/billing/credits/balance/ \
+      -H "Authorization: Token YOUR_TOKEN"
+
+  Transaction endpoints:
+  - POST /billing/transactions/                     Create payment (crypto or stripe)
+  - GET  /billing/transactions/                     List all transactions
+  - GET  /billing/transactions/{id}/                Get transaction status
+
+### What requires the web console
+
+Account creation at console.hippius.com (Google/GitHub OAuth, one-time step)
+
+## Rate Limits
+
+100 requests per minute per account
+
+## Pricing
+
+See https://hippius.com/pricing for current storage and bandwidth rates.
+
+## Become a Storage Miner
+
+Earn rewards by providing storage capacity to the Hippius network. See the miner setup guide:
+https://docs.hippius.io/earn/arion/running-blockchain-node
+
+## Support
+
+If you have issues with any Hippius service, report them in one of these channels:
+
+- Hippius Discord support channel: https://discord.com/channels/1298001698874327131/1442875352484548609
+- Bittensor Discord (Subnet 75 / Hippius): https://discord.com/channels/799672011265015819/1349124437752152075
+
+## Links
+
+- Documentation: https://docs.hippius.io
+- Console: https://console.hippius.com
+- Discord: https://discord.hippius.com
+- X/Twitter: https://x.com/hippius_subnet
