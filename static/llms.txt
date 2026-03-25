@@ -177,7 +177,7 @@ If you have issues with any Hippius service, report them in one of these channel
 
 ## Links
 
-- Documentation: https://docs.hippius.io
+- Website: https://hippius.com
+- Documentation: https://docs.hippius.com
 - Console: https://console.hippius.com
-- Discord: https://discord.hippius.com
 - X/Twitter: https://x.com/hippius_subnet
