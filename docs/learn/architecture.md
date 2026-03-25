@@ -43,9 +43,9 @@ The following diagram illustrates the flow of data, transactions, and rewards wi
    - Provide volume-based storage with authentication services
    - Run offchain workers to interact with the blockchain
 
-2. **IPFS Storage Miners**:
+2. **Arion Storage Miners**:
 
-   - Provide content-addressed storage through IPFS
+   - Provide decentralized storage through the Arion network
    - Run offchain workers to interact with the blockchain
 
 3. **Compute Miners**:

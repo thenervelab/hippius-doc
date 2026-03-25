@@ -100,7 +100,7 @@ The pallet defines an `ImageMetadata` struct to represent metadata for a virtual
 
 - **Fields**:
   - `name`: The name of the image.
-  - `image_url`: The IPFS hash of the image.
+  - `image_url`: The hash/URL of the image.
 
 ### ComputeRequest Struct
 

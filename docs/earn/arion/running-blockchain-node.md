@@ -7,11 +7,10 @@ This guide is specifically for **miner nodes**. If you're setting up a validator
 :::
 
 :::info Complete Miner Setup
-To run a complete Hippius storage miner, you need **three components running**:
+To run a complete Hippius storage miner, you need **two components running**:
 
-1. ✅ **Hippius Blockchain Node** (this guide) - For on-chain registration and network participation
-2. ✅ **IPFS Node** (covered in this guide) - For distributed storage
-3. ✅ **Arion Miner** - The actual mining software
+1. **Hippius Blockchain Node** (this guide) - For on-chain registration and network participation
+2. **Arion Miner** - The actual mining software
 
 After completing this guide, proceed to the [**Arion Miner Setup**](./running-miner) to run the mining software.
 :::
@@ -20,20 +19,17 @@ After completing this guide, proceed to the [**Arion Miner Setup**](./running-mi
 
 ### Ideal Server Specifications
 
-To run both the Hippius blockchain node and IPFS with a ZFS pool efficiently, these are the recommended server specifications:
-
 #### CPU
 - **Minimum**: 4 dedicated cores (8 vCPUs)
 - **Recommended**: 8+ dedicated cores (16+ vCPUs)
-- **Reasoning**: The blockchain node needs consistent CPU performance for validation and processing. ZFS benefits from additional cores for checksumming and compression operations.
+- **Reasoning**: The blockchain node needs consistent CPU performance for validation and processing.
 
 #### Memory (RAM)
 - **Minimum**: 16GB
 - **Recommended**: 32GB or more
 - **Reasoning**:
   - Blockchain nodes typically require 8-16GB RAM for optimal performance
-  - ZFS is memory-hungry and benefits significantly from extra RAM for the ARC cache
-  - IPFS can use substantial memory when handling many concurrent operations
+  - Arion miner benefits from additional RAM for shard operations
 
 #### Storage
 
@@ -46,22 +42,20 @@ Miners must provide **at least 2TB of total storage capacity**. This is a mandat
 **System Disk:**
 - 100GB+ SSD for OS and applications
 
-**ZFS Pool for IPFS (Primary Storage):**
+**Arion Storage (Primary Storage):**
 - **Minimum**: 2TB usable space **(required)**
 - **Recommended**: 4TB+ usable space
 - **Disk Type**: NVMe SSDs or enterprise SSDs preferred for performance
-- **Configuration**: At least 2 disks for basic redundancy (mirror)
-- **ZFS ARC Cache**: Benefits greatly from additional RAM
 
 **Blockchain Data:**
 - **Initial**: 100GB reserved, SSD-based storage
 - **Growth**: Plan for 50-100GB+ annual growth
 
-**Minimum Total:** 2TB+ (primarily for IPFS storage pool)
+**Minimum Total:** 2TB+ (primarily for Arion storage)
 
 #### Network
 - **Bandwidth**: 1Gbps minimum, with at least 100Mbps sustained throughput
-- **Monthly Traffic**: Plan for 5-10TB+ of monthly traffic (especially for IPFS)
+- **Monthly Traffic**: Plan for 5-10TB+ of monthly traffic
 - **Public IP**: Static public IP address recommended
 
 ## Prerequisites
@@ -117,109 +111,7 @@ cargo build --release
 ./target/release/hippius --version
 ```
 
-## 2. Install and Run IPFS Node
-
-The Arion miner requires a running IPFS node for distributed storage operations. You need to install, configure, and run IPFS in the background.
-
-:::info
-IPFS must be running continuously alongside your Arion miner. The miner uses IPFS to store and retrieve data shards.
-:::
-
-### Install IPFS
-
-```bash
-# Download IPFS (Kubo) - latest version
-wget https://dist.ipfs.tech/kubo/v0.25.0/kubo_v0.25.0_linux-amd64.tar.gz
-
-# Extract the archive
-tar -xvzf kubo_v0.25.0_linux-amd64.tar.gz
-
-# Install IPFS binary
-cd kubo
-sudo bash install.sh
-
-# Verify installation
-ipfs --version
-```
-
-### Initialize IPFS
-
-```bash
-# Initialize IPFS repository (creates ~/.ipfs)
-ipfs init
-
-# Optional: Configure IPFS for server profile (recommended for miners)
-ipfs config profile apply server
-```
-
-### Configure IPFS for Storage Mining
-
-```bash
-# Set storage limits (adjust based on your available storage)
-ipfs config Datastore.StorageMax "2TB"
-
-# Enable garbage collection
-ipfs config --json Datastore.GCPeriod '"1h"'
-
-# Optional: Configure API and gateway ports
-ipfs config Addresses.API /ip4/127.0.0.1/tcp/5001
-ipfs config Addresses.Gateway /ip4/127.0.0.1/tcp/8080
-```
-
-### Run IPFS as Systemd Service (Recommended)
-
-Create `/etc/systemd/system/ipfs.service`:
-
-```ini
-[Unit]
-Description=IPFS Daemon
-After=network.target
-
-[Service]
-Type=simple
-User=ubuntu
-Environment="IPFS_PATH=/home/ubuntu/.ipfs"
-ExecStart=/usr/local/bin/ipfs daemon
-Restart=always
-RestartSec=10
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Enable and start the IPFS service:
-
-```bash
-# Start the IPFS service
-sudo systemctl daemon-reload
-sudo systemctl enable ipfs
-sudo systemctl start ipfs
-
-# Check status
-sudo systemctl status ipfs
-
-# View logs
-journalctl -u ipfs -f
-```
-
-### Verify IPFS is Running
-
-```bash
-# Check IPFS daemon status
-ipfs swarm peers
-
-# Check IPFS ID (your node's identity)
-ipfs id
-
-# Test IPFS storage
-echo "Hello IPFS" | ipfs add
-```
-
-:::tip
-Keep the IPFS daemon running at all times. The Arion miner depends on IPFS for distributed storage operations. Without IPFS running, the miner cannot store or retrieve data shards.
-:::
-
-## 3. Run the Blockchain Node
+## 2. Run the Blockchain Node
 
 ### Make Binary Executable
 
@@ -309,7 +201,7 @@ sudo systemctl status hippius-node
 journalctl -u hippius-node -f
 ```
 
-## 4. Insert Keys via RPC
+## 3. Insert Keys via RPC
 
 After the node is running, you need to insert your miner keys. This allows the node to sign transactions on behalf of your miner account.
 
@@ -362,15 +254,14 @@ Check the logs for a success message:
 journalctl -u hippius-node -f | grep "Inserted key"
 ```
 
-## 5. Register Your Node On-Chain
+## 4. Register Your Node On-Chain
 
 After inserting keys, you need to register your node in the Registration Pallet. This step connects your blockchain node identity with your miner registration.
 
 ### Get Required Information
 
-1. **Node Identity**: Found in node logs (step 4 above)
-2. **IPFS Node ID**: If running IPFS services (optional for basic mining)
-3. **Account**: The account whose keys you inserted
+1. **Node Identity**: Found in node logs (step 3 above)
+2. **Account**: The account whose keys you inserted
 
 ### Choose Registration Method
 
@@ -384,18 +275,18 @@ Use this method if you're registering your primary/main account node.
 2. Go to **Developer → Extrinsics**
 3. Select your **main account** (coldkey)
 4. Choose pallet: **registration**
-5. Choose extrinsic: **coldkeyNodeRegistration** 
+5. Choose extrinsic: **coldkeyNodeRegistration**
 6. Fill in the parameters:
    - **nodeType**: Select **StorageMiner**
-   - **nodeId**: Your node identity (from step 4)
-   - **ipfsNodeId**: Optional - leave as **None** if not using IPFS
+   - **nodeId**: Your node identity (from step 3)
+   - **ipfsNodeId**: Optional — leave as **None**
    - **payInCredits**: Select **No**
 7. Sign and submit the transaction
 
 ![Register Coldkey](/img/arion/register-coldkey.png)
 
 :::tip
-The signing account should be the same account whose keys you inserted via RPC in step 4. This ensures the node can properly sign transactions on-chain.
+The signing account should be the same account whose keys you inserted via RPC in step 3. This ensures the node can properly sign transactions on-chain.
 :::
 
 #### Option B: Register Child Node (Hotkey)
@@ -411,21 +302,21 @@ This guide will walk you through:
 
 After completing the hotkey registration, return here to continue with the miner setup.
 
-## 6. Setup and Run Arion Miner
+## 5. Setup and Run Arion Miner
 
 :::warning Critical Next Step
-After setting up your blockchain node and IPFS, you **must** set up and run the **Arion Miner** to actually perform storage mining operations and earn rewards.
+After setting up your blockchain node, you **must** set up and run the **Arion Miner** to actually perform storage mining operations and earn rewards.
 
-The blockchain node and IPFS are prerequisites that run in the background. The **Arion Miner is the actual mining software** that:
+The blockchain node is a prerequisite that runs in the background. The **Arion Miner is the actual mining software** that:
 - Connects to the validator via P2P
-- Stores and retrieves data shards using IPFS
+- Stores and retrieves data shards
 - Participates in proof-of-storage challenges
 - Earns mining rewards
 
 🚀 **[Proceed to Arion Miner Setup Guide](./running-miner)** to complete your miner setup.
 :::
 
-## 7. Verify Node Operation
+## 6. Verify Node Operation
 
 ### Check Sync Status
 
@@ -462,17 +353,7 @@ journalctl -u hippius-node --since "10 minutes ago"
 df -h /var/lib/hippius/chain
 ```
 
-### Verify IPFS is Running
-
-```bash
-# Check IPFS status
-sudo systemctl status ipfs
-
-# View IPFS logs
-journalctl -u ipfs -f
-```
-
-## 8. Configuration Reference
+## 7. Configuration Reference
 
 ### Network Ports
 
@@ -493,7 +374,7 @@ sudo ufw allow 9944/tcp
 sudo ufw allow 9933/tcp
 ```
 
-## 9. Troubleshooting
+## 8. Troubleshooting
 
 ### "Failed to connect to bootnode"
 
@@ -520,7 +401,7 @@ sudo ufw allow 9933/tcp
 - Ensure sufficient disk space: `df -h`
 
 
-## 10. Maintenance
+## 9. Maintenance
 
 ### Update Node
 
@@ -553,17 +434,15 @@ sudo rm -rf /var/lib/hippius/chain/chains/*/db
 sudo systemctl start hippius-node
 ```
 
-## 11. Next Steps
+## 10. Next Steps
 
-After setting up your blockchain node and IPFS:
+After setting up your blockchain node:
 
 1. ✅ Ensure blockchain node is fully synced
-2. ✅ Verify IPFS daemon is running
-3. ✅ Verify keys are inserted in blockchain node
-4. ✅ Register node on-chain (coldkey or child node)
-5. 🚀 **[Set up and run Arion Miner](./running-miner)** - Required to start mining!
+2. ✅ Verify keys are inserted in blockchain node
+3. ✅ Register node on-chain (coldkey or child node)
+4. 🚀 **[Set up and run Arion Miner](./running-miner)** - Required to start mining!
 
 :::warning Important
-The blockchain node and IPFS must remain running in the background. The **Arion Miner** is what actually performs storage mining operations. You need all three components (blockchain node, IPFS, and Arion miner) running to earn rewards.
+The blockchain node must remain running in the background. The **Arion Miner** is what actually performs storage mining operations. You need both components (blockchain node and Arion miner) running to earn rewards.
 :::
-
