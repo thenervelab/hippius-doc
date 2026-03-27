@@ -62,21 +62,21 @@ jobs:
         echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
         kubectl config set-cluster rancher --insecure-skip-tls-verify=true
 
-        kubectl create namespace hippius-docs-dev --insecure-skip-tls-verify=true || true
+        kubectl create namespace docs-dev --insecure-skip-tls-verify=true || true
 
         kubectl create secret docker-registry registry \
-          --namespace=hippius-docs-dev \
+          --namespace=docs-dev \
           --docker-server=registry.starkleytech.com \
           --docker-username=${{ secrets.REGISTRY_USERNAME }} \
           --docker-password=${{ secrets.REGISTRY_PASSWORD }} \
           --insecure-skip-tls-verify=true \
           --dry-run=client -o yaml | kubectl apply -f - --insecure-skip-tls-verify=true
 
-        sed -i "s|\${IMAGE}|registry.starkleytech.com/hippius/docs:dev-${{ steps.sha.outputs.SHORT_SHA }}|g" k8s/deployment-dev.yaml
+        sed -i "s|\${IMAGE}|registry.starkleytech.com/hippius/docs:dev-${{ steps.sha.outputs.SHORT_SHA }}|g" k8s/staging/manifests.yaml
 
-        kubectl apply -f k8s/deployment-dev.yaml --validate=false --insecure-skip-tls-verify=true
+        kubectl apply -f k8s/staging/manifests.yaml --validate=false --insecure-skip-tls-verify=true
 
-        kubectl rollout status deployment/hippius-docs-dev -n hippius-docs-dev --timeout=180s --insecure-skip-tls-verify=true
+        kubectl rollout status deployment/hippius-docs-dev -n docs-dev --timeout=180s --insecure-skip-tls-verify=true
 
     - name: Notify Mattermost (success)
       if: success()
