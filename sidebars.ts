@@ -9,36 +9,39 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         "learn/intro",
-        "use/quickstart",
       ],
     },
 
     // ── STORAGE ────────────────────────────────────────────────────
     {
       type: "category",
-      label: "Storage",
+      label: "S3 Storage",
       collapsed: false,
       items: [
+        "use/quickstart",
+        "use/s3-token-management",
         {
           type: "category",
-          label: "S3 Storage",
+          label: "Client guides",
           collapsed: false,
           items: [
-            "storage/s3/integration",
-            "use/s3-token-management",
-            {
-              type: "link",
-              label: "API Reference ↗",
-              href: "https://api.hippius.com/",
-            },
-            {
-              type: "link",
-              label: "Pricing ↗",
-              href: "https://hippius.com/pricing",
-            },
+            "storage/s3/python",
+            "storage/s3/javascript",
+            "storage/s3/aws-cli",
+            "storage/s3/rclone",
           ],
         },
-        "learn/storage-systems",
+        "storage/s3/integration",
+        {
+          type: "link",
+          label: "API Reference ↗",
+          href: "https://api.hippius.com/",
+        },
+        {
+          type: "link",
+          label: "Pricing ↗",
+          href: "https://hippius.com/pricing",
+        },
       ],
     },
 
@@ -68,7 +71,7 @@ const sidebars: SidebarsConfig = {
         "use/virtual-machines",
         "use/wallet",
         "use/staking",
-        "use/bridge-tokens",
+        // "use/bridge-tokens", // Bridge not yet live
       ],
     },
 
