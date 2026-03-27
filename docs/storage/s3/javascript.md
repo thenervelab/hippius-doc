@@ -26,8 +26,8 @@ const s3 = new S3Client({
   endpoint: "https://s3.hippius.com",
   region: "decentralized",
   credentials: {
-    accessKeyId: "hip_your_access_key_id",
-    secretAccessKey: "your_secret_key",
+    accessKeyId: "<YOUR_ACCESS_KEY_ID>",
+    secretAccessKey: "<YOUR_SECRET_KEY>",
   },
   forcePathStyle: true,
 });
@@ -100,7 +100,7 @@ import { GetObjectCommand } from "@aws-sdk/client-s3";
 
 const url = await getSignedUrl(
   s3,
-  new GetObjectCommand({ Bucket: "my-bucket", Key: "file.txt" }),
+  new GetObjectCommand({ Bucket: "my-bucket", Key: "hello.txt" }),
   { expiresIn: 3600 }, // 1 hour
 );
 console.log(url);
@@ -125,8 +125,8 @@ const client = new Client({
   endPoint: "s3.hippius.com",
   port: 443,
   useSSL: true,
-  accessKey: "hip_your_access_key_id",
-  secretKey: "your_secret_key",
+  accessKey: "<YOUR_ACCESS_KEY_ID>",
+  secretKey: "<YOUR_SECRET_KEY>",
   region: "decentralized",
 });
 ```
@@ -145,6 +145,7 @@ await client.fPutObject("my-bucket", "file.txt", "./file.txt");
 
 // From buffer
 import { Readable } from "stream";
+
 const buffer = Buffer.from("Hello from Hippius!");
 await client.putObject(
   "my-bucket", "hello.txt",
@@ -163,7 +164,7 @@ await client.fGetObject("my-bucket", "file.txt", "./downloaded.txt");
 ### Presigned URL
 
 ```javascript
-const url = await client.presignedGetObject("my-bucket", "file.txt", 3600);
+const url = await client.presignedGetObject("my-bucket", "hello.txt", 3600);
 console.log(url);
 ```
 
@@ -195,4 +196,82 @@ await fetch(uploadUrl, {
   body: file, // File object from <input type="file">
   headers: { "Content-Type": file.type },
 });
+```
+
+---
+
+## Complete Working Example (Node.js + AWS SDK v3)
+
+Save this script as `hippius-s3.mjs` and run it with your credentials:
+
+```javascript
+import {
+  S3Client,
+  CreateBucketCommand,
+  PutObjectCommand,
+  ListObjectsV2Command,
+  GetObjectCommand
+} from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+
+// 1. Connect to Hippius S3
+const s3 = new S3Client({
+  endpoint: "https://s3.hippius.com",
+  region: "decentralized",
+  credentials: {
+    accessKeyId: "<YOUR_ACCESS_KEY_ID>",
+    secretAccessKey: "<YOUR_SECRET_KEY>",
+  },
+  forcePathStyle: true,
+});
+
+const bucketName = "hippius-demo-bucket";
+const fileKey = "greeting.txt";
+
+async function main() {
+  // 2. Create bucket
+  console.log(`Creating bucket: ${bucketName}`);
+  try {
+    await s3.send(new CreateBucketCommand({ Bucket: bucketName }));
+  } catch (err) {
+    if (err.name === 'BucketAlreadyOwnedByYou' || err.name === 'BucketAlreadyExists') {
+      console.log("Bucket already exists.");
+    } else {
+      throw err;
+    }
+  }
+
+  // 3. Upload string
+  console.log(`Uploading file: ${fileKey}`);
+  await s3.send(new PutObjectCommand({
+    Bucket: bucketName,
+    Key: fileKey,
+    Body: "Welcome to Hippius S3 Storage!",
+    ContentType: "text/plain",
+  }));
+
+  // 4. List objects
+  console.log("Listing objects:");
+  const listRes = await s3.send(new ListObjectsV2Command({ Bucket: bucketName }));
+  for (const obj of listRes.Contents || []) {
+    console.log(` - ${obj.Key} (${obj.Size} bytes)`);
+  }
+
+  // 5. Download file
+  console.log("Downloading file:");
+  const getRes = await s3.send(new GetObjectCommand({ Bucket: bucketName, Key: fileKey }));
+  const content = await getRes.Body.transformToString();
+  console.log(` File content: ${content}`);
+
+  // 6. Generate presigned URL
+  console.log("Generating presigned URL:");
+  const url = await getSignedUrl(
+    s3,
+    new GetObjectCommand({ Bucket: bucketName, Key: fileKey }),
+    { expiresIn: 3600 }
+  );
+  console.log(` URL: ${url}`);
+}
+
+main().catch(console.error);
 ```

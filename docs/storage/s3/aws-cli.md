@@ -12,7 +12,7 @@ The AWS CLI works out of the box with Hippius S3. All standard `aws s3` and `aws
 ## Prerequisites
 
 - AWS CLI installed: [docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
-- Hippius S3 credentials from [console.hippius.com](https://console.hippius.com/dashboard/settings)
+- Hippius S3 credentials from [console.hippius.com](https://console.hippius.com)
 
 ## Configuration
 
@@ -31,23 +31,30 @@ Enter when prompted:
 Or set environment variables for one-off commands:
 
 ```bash
-export AWS_ACCESS_KEY_ID=hip_your_access_key_id
-export AWS_SECRET_ACCESS_KEY=your_secret_key
-export AWS_DEFAULT_REGION=decentralized
+export AWS_ACCESS_KEY_ID="<YOUR_ACCESS_KEY_ID>"
+export AWS_SECRET_ACCESS_KEY="<YOUR_SECRET_KEY>"
+export AWS_DEFAULT_REGION="decentralized"
 ```
 
-## Connection details
+## ⚠️ Mandatory: The Endpoint URL
 
-Always pass `--endpoint-url https://s3.hippius.com` to every command.
+Because you are using the AWS CLI with a custom S3 provider, **you MUST pass `--endpoint-url https://s3.hippius.com` to every single command.** If you forget this flag, the AWS CLI will attempt to connect to Amazon's servers and your request will fail.
 
-To avoid typing it every time, create a shell alias:
+:::tip Pro Tip: Create a Shell Alias
+Typing the endpoint URL and profile flag every time is tedious. Add these aliases to your `~/.bashrc` or `~/.zshrc`:
 
 ```bash
 alias hs3='aws s3 --profile hippius --endpoint-url https://s3.hippius.com'
 alias hs3api='aws s3api --profile hippius --endpoint-url https://s3.hippius.com'
 ```
 
+Now you can just type:
+`hs3 ls` or `hs3 mb s3://my-bucket`
+:::
+
 ## Common operations
+
+*The examples below use the full command syntax. If you set up the alias above, you can replace `aws s3 ...` with `hs3 ...`.*
 
 ### List buckets
 

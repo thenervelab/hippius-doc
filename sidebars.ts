@@ -17,6 +17,7 @@ const sidebars: SidebarsConfig = {
         "storage/s3/javascript",
         "storage/s3/aws-cli",
         "storage/s3/rclone",
+        "use/troubleshooting",
         "storage/s3/integration",
         {
           type: "link",
@@ -108,40 +109,12 @@ const sidebars: SidebarsConfig = {
     },
 
     // ── DEVELOP ────────────────────────────────────────────────────
-    // Kept but collapsed — internal/developer reference
     {
       type: "category",
-      label: "Blockchain & Pallets",
+      label: "Develop",
       collapsed: true,
       items: [
         "blockchain/api",
-        "blockchain/intro",
-        {
-          type: "category",
-          label: "Pallets",
-          link: { type: "doc", id: "blockchain/pallets" },
-          collapsed: true,
-          items: [
-            "pallets/arion-pallet",
-            "pallets/alpha-bridge",
-            "pallets/credits",
-            "pallets/rankings",
-            "pallets/marketplace",
-            "pallets/registration",
-            "pallets/executionUnit",
-            "pallets/backup",
-            "pallets/containerRegistry",
-            "pallets/storageS3",
-            "pallets/computePallet",
-            "pallets/palletIp",
-            "pallets/bittensor",
-            "pallets/metagraph",
-            "pallets/subAccount",
-            "pallets/notifications",
-            "pallets/accountProfile",
-            "pallets/utils",
-          ],
-        },
       ],
     },
 

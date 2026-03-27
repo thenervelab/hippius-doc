@@ -12,7 +12,7 @@ slug: /storage/s3/rclone
 ## Prerequisites
 
 - rclone installed: `brew install rclone` / `apt install rclone` / [rclone.org/install](https://rclone.org/install/)
-- Hippius S3 credentials from [console.hippius.com](https://console.hippius.com/dashboard/settings)
+- Hippius S3 credentials from [console.hippius.com](https://console.hippius.com)
 
 ## Configuration
 
@@ -22,11 +22,12 @@ Run `rclone config` and create a new remote, or add this directly to your `~/.co
 [hippius]
 type = s3
 provider = Other
-access_key_id = hip_your_access_key_id
-secret_access_key = your_secret_key
+access_key_id = <YOUR_ACCESS_KEY_ID>
+secret_access_key = <YOUR_SECRET_KEY>
 endpoint = https://s3.hippius.com
 region = decentralized
 acl = private
+force_path_style = true
 ```
 
 Verify it works:
@@ -94,7 +95,7 @@ Files appear at `~/hippius-mount`. Unmount with:
 
 ```bash
 fusermount -u ~/hippius-mount   # Linux
-umount ~/hippius-mount           # macOS
+umount ~/hippius-mount          # macOS
 ```
 
 :::note
