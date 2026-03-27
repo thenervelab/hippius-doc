@@ -114,21 +114,21 @@ function HomepageHeader() {
           </Link>
         </div>
         <H1 className="text-center mt-4 max-w-[1050px]">
-          Learn how Hippius works with our documentation
+          Decentralized S3 storage — any client, no wallet required
         </H1>
 
         <div className="flex gap-y-5  flex-wrap relative items-center justify-center mt-8">
           <Button
             asLink
-            href={URLS.LEARN}
+            href={URLS.USE}
             size="lg"
             variant="secondary"
             icon={<Icons.ArrowRight />}
           >
-            Get Started
+            Store your first file
           </Button>
           <Button asLink href={URLS.DASHBOARD} variant="ghost" size="lg">
-            Access Console
+            Open Console
           </Button>
         </div>
       </div>
