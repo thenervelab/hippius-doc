@@ -44,7 +44,7 @@ const sidebars: SidebarsConfig = {
         "use/desktop/billing",
         "use/desktop/referral-system",
         "use/desktop/wallet",
-        // "use/desktop/staking", // Not yet live
+        "use/desktop/staking",
       ],
     },
 
@@ -54,10 +54,10 @@ const sidebars: SidebarsConfig = {
       label: "Console",
       collapsed: true,
       items: [
-        // "use/virtual-machines", // Beta only, screenshots not ready
+        "use/virtual-machines",
         "use/wallet",
-        // "use/staking", // Not yet live
-        // "use/bridge-tokens", // Bridge not yet live
+        "use/staking",
+        "use/bridge-tokens",
       ],
     },
 
