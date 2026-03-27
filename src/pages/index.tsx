@@ -29,11 +29,11 @@ export const CATEGORIES: (SmallCardInfo & {
   },
   {
     title: "Use",
-    description: "Create and host a website or app on IPFS.",
+    description: "Store files, run VMs, manage tokens — from the console or desktop app.",
     icon: <Icons.Cursor className="text-primary-50 relative size-5" />,
     cta: {
       label: "Use",
-      href: "/use/bridge",
+      href: "/use/quickstart",
     },
   },
   {
@@ -60,7 +60,7 @@ export const SMARTER_CLOUD: SmallCardInfo[] = [
   {
     title: "Decentralized Storage",
     description:
-      "Store files securely on IPFS with Hippius pinning, or use our S3-compatible storage for enterprise-grade compatibility.",
+      "Store files on Arion — Reed-Solomon erasure coding, CRUSH placement, QUIC-based P2P. Accessible via standard S3 API.",
     icon: <Icons.FormatSquare className="text-primary-50 relative size-7" />,
   },
   {

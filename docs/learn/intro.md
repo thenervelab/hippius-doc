@@ -1,52 +1,58 @@
+---
+id: intro
+title: What is Hippius?
+sidebar_label: What is Hippius?
+slug: /learn/intro
+---
+
 # What is Hippius?
 
-Hippius is a decentralized cloud storage platform powered by a custom Substrate blockchain, Arion decentralized storage, and S3-compatible endpoints. Learn how it enables transparent, anonymous storage with blockchain trust.
+Hippius is a decentralized cloud storage platform. Store files, host websites, run VMs — without relying on AWS, Google Cloud, or any single company.
 
-# Chain
+Under the hood it runs on a custom [Substrate](https://substrate.io/) blockchain, uses [Arion](/learn/storage-systems) for storage (Reed-Solomon erasure coding + CRUSH placement), and exposes a standard S3-compatible API.
 
-Hippius leverages Substrate's architecture to deliver a specialized blockchain optimized for decentralized storage and compute services.
+## The two ways to use Hippius
 
-[More](substrate-staking)
+**As a user** — store and retrieve files using any S3 client (boto3, AWS CLI, rclone). Sign up with Google or GitHub, no wallet required. → [Quickstart](/use/quickstart)
 
-# Consensus
+**As a network participant** — run a storage miner or validator to earn rewards. → [Run a Miner](/earn/arion/running-blockchain-node)
 
-Blind Assignment for Blockchain Extension (BABE) is the consensus protocol used by Hippius to determine block production rights.
+## Products
 
-[More](babe-consensus-mechanism)
+| Product | What it does |
+|---|---|
+| **S3 Storage** | S3-compatible API backed by Arion. Store anything. |
+| **Desktop App** | Native app (macOS, Windows, Linux) with sync, file manager, wallet |
+| **Web Console** | Browser-based dashboard for storage, VMs, staking, tokens |
+| **Confidential Compute** | VMs inside AMD SEV-SNP encrypted enclaves |
+| **Token Bridge** | Move Alpha ↔ hAlpha between native chain and EVM |
 
-# Nominated Proof of Stake
+## How storage works
 
-Hippius uses Nominated Proof-of-Stake to secure the network and distribute block rewards efficiently.
+```
+You → S3 API → Gateway → Validator
+                              ↓
+                    Reed-Solomon encode (k=10, m=20)
+                              ↓
+                    CRUSH placement → Miners (P2P/QUIC)
+```
 
-[More](nominated-proof-of-stake-npos)
+Upload flow: the gateway forwards your file to a validator, which erasure-codes it into 30 shards (10 data + 20 parity) and places them across miners via the CRUSH algorithm. Any 10 shards can reconstruct the original.
 
-# Security & Authentication
+Download flow: the gateway fetches any 10 shards from miners and reconstructs your file on the fly.
 
-New users authenticate via **OAuth** (Google or GitHub) through the [Hippius Console](https://console.hippius.com). For S3 storage access, you create access keys (`hip_*` tokens) in the console — no wallet or browser extension required.
+## Authentication
 
-See the [Quickstart guide](/use/quickstart) to get started.
+New users sign in with Google or GitHub OAuth through [console.hippius.com](https://console.hippius.com). No wallet, no seed phrase, no browser extension.
 
-:::info Legacy Users
-If you previously used a mnemonic seed phrase for authentication, it still works but is deprecated. See [Mnemonic Authentication](mnemonic-auth) for details.
+S3 access keys (`hip_*`) are created in the console and used with any S3 client.
+
+:::info Legacy
+If you previously used a mnemonic seed phrase, it still works but is deprecated. See [Mnemonic Authentication](/learn/mnemonic-auth).
 :::
 
-# Confidential Computing
+## Next steps
 
-Hippius Confidential Compute (HCC) runs your workloads inside AMD SEV-SNP encrypted virtual machines. The host system cannot read VM memory, and continuous TPM attestation proves the environment has not been tampered with.
-
-[More](confidential-computing)
-
-# Storage
-
-Hippius offers two complementary storage systems, each with unique advantages:
-
-1. **Arion Storage**: Purpose-built decentralized storage using the CRUSH algorithm, Reed-Solomon erasure coding, and QUIC-based P2P networking
-2. **S3-Compatible Access**: Standard S3 API backed by Arion for seamless integration with existing tools
-
-[More](storage-systems)
-
-# Encryption
-
-The Hippius network provides end-to-end encryption for both messaging and data storage.
-
-[More](encryption)
+- [Store your first file →](/use/quickstart)
+- [Understand the storage architecture →](/learn/storage-systems)
+- [Run a miner →](/earn/arion/running-blockchain-node)
