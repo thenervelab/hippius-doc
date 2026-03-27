@@ -1,0 +1,95 @@
+name: CI/CD Pipeline — Dev (Staging)
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      # Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Get short SHA for tagging
+      - name: Get short SHA
+        id: sha
+        run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          version: latest
+          buildkitd-flags: --debug
+
+      # Login to Custom Registry
+      - name: Login to Custom Registry
+        uses: docker/login-action@v2
+        with:
+          registry: registry.starkleytech.com
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+          logout: true
+
+      # Build and push Docker image
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: |
+            registry.starkleytech.com/hippius/docs-dev:${{ steps.sha.outputs.SHORT_SHA }}
+            registry.starkleytech.com/hippius/docs-dev:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64
+          provenance: false
+          sbom: false
+          outputs: type=registry,compression=gzip,compression-level=3,force-compression=true
+
+      # Set up kubectl
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v3
+
+      # Deploy to Kubernetes (staging)
+      - name: Deploy to Rancher K8s (staging)
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
+
+          kubectl config set-cluster rancher --insecure-skip-tls-verify=true
+
+          # Create namespace if it doesn't exist
+          kubectl create namespace docs-dev --insecure-skip-tls-verify=true || true
+
+          # Create/update registry pull secret in namespace
+          kubectl create secret docker-registry registry \
+            --namespace=docs-dev \
+            --docker-server=registry.starkleytech.com \
+            --docker-username=${{ secrets.REGISTRY_USERNAME }} \
+            --docker-password=${{ secrets.REGISTRY_PASSWORD }} \
+            --insecure-skip-tls-verify=true \
+            --dry-run=client -o yaml | kubectl apply -f - --insecure-skip-tls-verify=true
+
+          # Replace image placeholder and apply manifests
+          sed -i "s|\${IMAGE}|registry.starkleytech.com/hippius/docs-dev:${{ steps.sha.outputs.SHORT_SHA }}|g" k8s/staging/manifests.yaml
+          kubectl apply -f k8s/staging/manifests.yaml --validate=false --insecure-skip-tls-verify=true
+
+          # Wait for rollout
+          kubectl rollout status deployment/hippius-docs-dev -n docs-dev --timeout=180s --insecure-skip-tls-verify=true
+
+          echo "Deployment status:"
+          kubectl get deployments -n docs-dev --insecure-skip-tls-verify=true
+
+          echo "Pod status:"
+          kubectl get pods -n docs-dev --insecure-skip-tls-verify=true
+
+          echo "Ingress:"
+          kubectl get ingress -n docs-dev --insecure-skip-tls-verify=true
