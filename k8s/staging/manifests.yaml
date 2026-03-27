@@ -49,29 +49,3 @@ spec:
   selector:
     app: hippius-docs-dev
 
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: hippius-docs-dev
-  namespace: docs-dev
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-spec:
-  ingressClassName: nginx
-  tls:
-    - hosts:
-        - docs-dev.hippicode.com
-      secretName: hippius-docs-dev-tls
-  rules:
-    - host: docs-dev.hippicode.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: hippius-docs-dev
-                port:
-                  number: 80
