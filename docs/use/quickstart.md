@@ -164,6 +164,13 @@ aws s3 cp s3://my-first-bucket/hello.txt - --endpoint-url https://s3.hippius.com
 
 ## Next Steps
 
-- [S3 API Reference](/storage/s3/integration) — Full list of operations, presigned URLs, ACLs, public buckets, and more
-- [Token Management](/use/s3-token-management) — Create sub-tokens, manage access levels
-- [Pricing](https://hippius.com/pricing) — Storage and bandwidth costs
+**Client guides:**
+- [Python (boto3 + minio)](/storage/s3/python)
+- [JavaScript / Node.js](/storage/s3/javascript)
+- [AWS CLI](/storage/s3/aws-cli)
+- [rclone (sync + mount)](/storage/s3/rclone)
+
+**Reference:**
+- [S3 API Reference](/storage/s3/integration) — presigned URLs, ACLs, public buckets, multipart uploads
+- [Token Management](/use/s3-token-management) — sub-tokens, scoped access
+- [Pricing](https://hippius.com/pricing) — storage and bandwidth costs
