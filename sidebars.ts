@@ -2,17 +2,10 @@ import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 
 const sidebars: SidebarsConfig = {
   docsSidebar: [
-    // ── GETTING STARTED ────────────────────────────────────────────
-    {
-      type: "category",
-      label: "Getting Started",
-      collapsed: false,
-      items: [
-        "learn/intro",
-      ],
-    },
+    // ── INTRO ──────────────────────────────────────────────────────
+    "learn/intro",
 
-    // ── STORAGE ────────────────────────────────────────────────────
+    // ── S3 STORAGE ─────────────────────────────────────────────────
     {
       type: "category",
       label: "S3 Storage",
@@ -20,17 +13,10 @@ const sidebars: SidebarsConfig = {
       items: [
         "use/quickstart",
         "use/s3-token-management",
-        {
-          type: "category",
-          label: "Client guides",
-          collapsed: false,
-          items: [
-            "storage/s3/python",
-            "storage/s3/javascript",
-            "storage/s3/aws-cli",
-            "storage/s3/rclone",
-          ],
-        },
+        "storage/s3/python",
+        "storage/s3/javascript",
+        "storage/s3/aws-cli",
+        "storage/s3/rclone",
         "storage/s3/integration",
         {
           type: "link",
@@ -85,6 +71,7 @@ const sidebars: SidebarsConfig = {
         "earn/arion/running-miner",
         "earn/register-in-blockchain",
         "earn/storage-miner",
+        "cli/usage",
       ],
     },
 
@@ -99,57 +86,14 @@ const sidebars: SidebarsConfig = {
       ],
     },
 
-    // ── DEVELOP ────────────────────────────────────────────────────
+    // ── CONCEPTS ───────────────────────────────────────────────────
     {
       type: "category",
-      label: "Develop",
-      collapsed: true,
-      items: [
-        "blockchain/api",
-        {
-          type: "category",
-          label: "Blockchain",
-          collapsed: true,
-          items: [
-            "blockchain/intro",
-            {
-              type: "category",
-              label: "Pallets",
-              link: { type: "doc", id: "blockchain/pallets" },
-              collapsed: true,
-              items: [
-                "pallets/arion-pallet",
-                "pallets/alpha-bridge",
-                "pallets/credits",
-                "pallets/rankings",
-                "pallets/marketplace",
-                "pallets/registration",
-                "pallets/executionUnit",
-                "pallets/backup",
-                "pallets/containerRegistry",
-                "pallets/storageS3",
-                "pallets/computePallet",
-                "pallets/palletIp",
-                "pallets/bittensor",
-                "pallets/metagraph",
-                "pallets/subAccount",
-                "pallets/notifications",
-                "pallets/accountProfile",
-                "pallets/utils",
-              ],
-            },
-          ],
-        },
-      ],
-    },
-
-    // ── LEARN / CONCEPTS ───────────────────────────────────────────
-    {
-      type: "category",
-      label: "Concepts",
+      label: "How it works",
       collapsed: true,
       items: [
         "learn/architecture",
+        "learn/storage-systems",
         "learn/encryption",
         "learn/confidential-computing",
         "learn/vm-computing",
@@ -160,6 +104,44 @@ const sidebars: SidebarsConfig = {
         "learn/mnemonic-auth",
         "learn/miner",
         "learn/weights",
+      ],
+    },
+
+    // ── DEVELOP ────────────────────────────────────────────────────
+    // Kept but collapsed — internal/developer reference
+    {
+      type: "category",
+      label: "Blockchain & Pallets",
+      collapsed: true,
+      items: [
+        "blockchain/api",
+        "blockchain/intro",
+        {
+          type: "category",
+          label: "Pallets",
+          link: { type: "doc", id: "blockchain/pallets" },
+          collapsed: true,
+          items: [
+            "pallets/arion-pallet",
+            "pallets/alpha-bridge",
+            "pallets/credits",
+            "pallets/rankings",
+            "pallets/marketplace",
+            "pallets/registration",
+            "pallets/executionUnit",
+            "pallets/backup",
+            "pallets/containerRegistry",
+            "pallets/storageS3",
+            "pallets/computePallet",
+            "pallets/palletIp",
+            "pallets/bittensor",
+            "pallets/metagraph",
+            "pallets/subAccount",
+            "pallets/notifications",
+            "pallets/accountProfile",
+            "pallets/utils",
+          ],
+        },
       ],
     },
 
