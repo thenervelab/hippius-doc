@@ -1,74 +1,75 @@
 ---
 sidebar_position: 6
-description: 3
+description: Comprehensive overview of the Hippius system architecture and component interactions.
 ---
-
-import ArchitectureDiagram from '@site/src/components/ArchitectureDiagram';
 
 # System Architecture
 
-This page provides a comprehensive overview of the Hippius system architecture, showing how different components interact within the ecosystem.
+This page provides a comprehensive overview of the Hippius system architecture, showing how different components interact within the ecosystem to provide decentralized storage and compute.
 
-## Architecture Diagram
+## Overview
 
-The following diagram illustrates the flow of data, transactions, and rewards within the Hippius network:
+Hippius operates as a decentralized network that connects clients needing storage and compute resources with miners providing those services. The architecture ensures secure, reliable, and verifiable service delivery through a combination of cryptographic proofs, distributed storage algorithms, and blockchain-based coordination.
 
-<ArchitectureDiagram />
+## Component Map
 
-## Key Components
+The core infrastructure relies on several specialized node types working together:
 
-### Client Interaction
+```text
+Client Application (S3 API / Dashboard)
+ │
+ ▼
+Gateway                  ← Handles HTTP ingress, authentication, and request routing
+ │
+ ▼
+Validator                ← Orchestrates data placement, erasure coding, and task assignment
+ │
+ ├──► Miner A            ← Stores data shards or executes compute tasks
+ ├──► Miner B            ← Stores data shards or executes compute tasks
+ ├──► Miner C            ← Stores data shards or executes compute tasks
+ │    ...
+ └──► Miner N            ← Stores data shards or executes compute tasks
 
-- Clients can purchase storage and compute services using FIAT, Alpha, or TAO
-- Payments are processed through the dashboard interface
-- Credits are created in the marketplace with corresponding alpha deposits
+Warden                   ← Audits miners with cryptographic proof-of-storage challenges
+Chain Submitter          ← Publishes cluster maps and state to the blockchain
+```
 
-### Blockchain Infrastructure
+### Key Roles
 
-- **Bittensor Blockchain**: The parent blockchain that Hippius connects to as a subnet
-- **Hippius Blockchain**: Powered by Substrate with its native currency (alpha)
-- **Bridge**: Allows alpha to move between Hippius and Bittensor blockchains
-- **Validators**: Produce blocks, assign tasks to miners, and report weights to Bittensor
+- **Gateway**: The entry point for client requests, providing standard APIs (like S3 compatibility) and handling authentication.
+- **Validator**: The orchestrator that processes data (e.g., Reed-Solomon encoding), determines placement using the CRUSH algorithm, and assigns tasks to miners.
+- **Miner**: The resource providers in the network. Storage miners store encrypted data shards, while compute miners provide virtual machine environments.
+- **Warden**: Responsible for verifying that miners are actually providing the services they claim, using zero-knowledge proofs (Plonky3 ZK circuits).
+- **Chain Submitter**: Bridges the off-chain activities with the on-chain state, ensuring verifiable records of the network topology and storage proofs.
 
-### Marketplace
+## Data Flow
 
-- Central hub for service requests
-- Manages credit system and payment processing
-- Submits requests to validators for miner assignment
+### Uploading Data
+1. A client sends a file via the Gateway using standard protocols (e.g., S3 API).
+2. The Gateway authenticates the request and passes the data to a Validator.
+3. The Validator encrypts the data and splits it into multiple shards (e.g., 10 data + 20 parity) using Reed-Solomon erasure coding.
+4. The Validator uses the CRUSH algorithm to determine the optimal, deterministic placement of these shards across available Miners.
+5. Shards are securely transferred to the assigned Miners over the network.
 
-### Miners
+### Downloading Data
+1. A client requests a file through the Gateway.
+2. The Validator uses the CRUSH algorithm to locate the Miners holding the file's shards.
+3. The Validator retrieves the necessary minimum number of shards (e.g., any 10 out of 30) from the Miners.
+4. The Validator reconstructs the original file, decrypts it, and streams it back to the client via the Gateway.
 
-1. **S3 Storage Miners**:
+## Network Layer
 
-   - Provide volume-based storage with authentication services
-   - Run offchain workers to interact with the blockchain
+Communication between nodes (Validators, Miners, Wardens) happens over **QUIC** connections using **Iroh**. This provides:
+- **Security**: Connections are encrypted and authenticated by default, using Ed25519 public keys as node identities.
+- **Performance**: Multiplexed transfers allow multiple data shards to be sent in parallel over a single connection.
+- **Connectivity**: Direct UDP paths with hole-punching capabilities and fallback relays ensure reliable peer-to-peer communication even across complex network topologies.
 
-2. **Arion Storage Miners**:
+## Blockchain Layer
 
-   - Provide decentralized storage through the Arion network
-   - Run offchain workers to interact with the blockchain
+Hippius utilizes a dual-blockchain approach to manage state, identity, and economics:
 
-3. **Compute Miners**:
-   - Provide virtual machine environments for computation
-   - Support smart contract execution
-   - Run offchain workers to interact with the blockchain
+- **Hippius Blockchain**: A Substrate-based chain that maintains the network state, manages the native currency (Alpha), and records cluster maps published by Chain Submitters.
+- **Bittensor Network**: Hippius connects to Bittensor as a subnet. Validators report miner performance (weights) to Bittensor, integrating with its broader decentralized intelligence and incentive mechanisms.
+- **Bridge**: A cross-chain bridge facilitates the seamless transfer of value (Alpha/TAO) between the Hippius and Bittensor ecosystems.
 
-### Reward Distribution
-
-- Marketplace revenue is distributed based on service usage:
-  - 60% to miners providing the resources
-  - 30% to validators and stakers securing the network
-  - 10% to treasury for ongoing development
-- All rewards are distributed in Alpha, which can be bridged to Bittensor
-
-## Workflow
-
-1. Clients purchase services through the dashboard
-2. The marketplace creates credits and deposits the alpha equivalent
-3. When clients consume services, requests are submitted to validators
-4. Validators assign appropriate miners to fulfill the request
-5. Miners provide the requested service (storage or compute)
-6. Rewards are distributed according to the allocation formula
-7. Validators evaluate miner performance and report weights to Bittensor
-
-This architecture ensures a decentralized, efficient, and economically sustainable ecosystem for storage and compute services.
+This layered architecture ensures that Hippius remains decentralized, fault-tolerant, and economically aligned across all participants.
