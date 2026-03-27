@@ -1,0 +1,6 @@
+{
+  "defaultAgent": "gemini",
+  "defaultPermissions": "approve-all",
+  "nonInteractivePermissions": "deny",
+  "authPolicy": "skip"
+}

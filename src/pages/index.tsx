@@ -60,19 +60,19 @@ export const SMARTER_CLOUD: SmallCardInfo[] = [
   {
     title: "Decentralized Storage",
     description:
-      "Store files on Arion — Reed-Solomon erasure coding, CRUSH placement, QUIC-based P2P. Accessible via standard S3 API.",
+      "Files split into 30 shards across independent miners using Reed-Solomon erasure coding. Any 10 shards reconstruct your file — tolerates up to 20 simultaneous miner failures.",
     icon: <Icons.FormatSquare className="text-primary-50 relative size-7" />,
   },
   {
     title: "Blockchain-Powered",
     description:
-      "Our Substrate blockchain ensures transparency and trust, with staking and rewards for network participants",
+      "A custom Substrate blockchain governs miner registration, cluster maps, and rewards. Every storage placement decision is verifiable on-chain.",
     icon: <Icons.Box className="text-primary-50 relative size-7" />,
   },
   {
     title: "Anonymous & Secure",
     description:
-      "Protect your data with anonymous storage solutions, backed by cryptographic guarantees.",
+      "Per-object NaCl encryption before storage. Miners only see encrypted bytes. Sign up with Google or GitHub — no KYC, no wallet required.",
     icon: <Icons.DollarSquare className="text-primary-50 relative size-7" />,
   },
 ];
