@@ -14,15 +14,16 @@ import Icon from '@site/src/components/Icon';
 
 <Ordered>
   <li>Click the <Icon /> icon to open the app.</li>
-  <li>On the login screen, choose one of the available sign-in methods: <BgStyledText>Continue with Google</BgStyledText>, <BgStyledText>Continue with GitHub</BgStyledText>, <BgStyledText>Continue with Apple</BgStyledText>, or <BgStyledText>Continue with Access Key</BgStyledText>.</li>
-  <li>For <strong>Google</strong>, <strong>GitHub</strong>, or <strong>Apple</strong>, you will be redirected to the provider's sign-in page in your browser. Once authenticated, you will be returned to the app automatically.</li>
+  <li>On the login screen, choose one of the available login methods: <BgStyledText>Continue with Google</BgStyledText>, <BgStyledText>Continue with GitHub</BgStyledText>, <BgStyledText>Continue with Apple</BgStyledText>, or <BgStyledText>Continue with Access Key</BgStyledText>.</li>
+  <li>For <strong>Google</strong>, <strong>GitHub</strong>, or <strong>Apple</strong>, you will be redirected to the provider's login page in your browser. Once authenticated, you will be returned to the app automatically.</li>
   <li>For <strong>Access Key</strong>, enter your 12-word recovery phrase and click <BgStyledText>Log In</BgStyledText>.</li>
 </Ordered>
 
-{/* 📸 SCREENSHOT NEEDED: login-screen.png — The login screen showing Continue with Google, Continue with GitHub, Continue with Apple, and Continue with Access Key buttons */}
+
+![Google, Continue with GitHub, Continue with Apple, and Continue with Access Key Login Screen](/img/desktop/login-screen.png)
 
 :::tip
-If you are a new user, your account will be created automatically when you sign in for the first time — no separate sign-up step is required.
+If you are a new user, your account will be created automatically when you sign in for the first time. No separate sign up step is required.
 :::
 
 ## Onboarding
@@ -30,14 +31,14 @@ If you are a new user, your account will be created automatically when you sign 
 After signing in for the first time, you will be guided through a **3-step onboarding wizard** that introduces the key features of Hippius Desktop:
 
 <Ordered>
-  <li><strong>Welcome to Hippius</strong> — Overview of the platform's core capabilities: fast sync, on-device encryption, multi-folder sync, conflict resolution, and the modern interface.</li>
-  <li><strong>Multi-Folder Sync</strong> — Learn how to sync multiple folders at once with automatic encryption, sync from other devices, and custom device naming.</li>
-  <li><strong>Recovery Phrase</strong> — Understand the importance of your recovery phrase and how to back it up securely. Tips include writing it on paper, storing it safely, never sharing it, and keeping copies in multiple places.</li>
+  <li><strong>Welcome to Hippius</strong>: Overview of the platform's core capabilities including fast sync, encryption, multi-folder sync, conflict resolution, and the modern interface.</li>
+  <li><strong>Multi-Folder Sync</strong>: Learn how to sync multiple folders at once with automatic encryption, sync from other devices, and custom device naming.</li>
+  <li><strong>Recovery Phrase</strong>: Understand the importance of your recovery phrase and how to back it up securely. Tips include writing it on paper, storing it safely, never sharing it, and keeping copies in multiple places.</li>
 </Ordered>
 
 You can click <BgStyledText>Skip</BgStyledText> at any time to bypass the remaining onboarding steps. Use the <BgStyledText>Previous</BgStyledText> and <BgStyledText>Next</BgStyledText> buttons to navigate between steps. On the final step, click <BgStyledText>Continue</BgStyledText> to enter the app.
 
-{/* 📸 SCREENSHOT NEEDED: onboarding-welcome.png — The onboarding wizard showing the "Get Started" screen with bullet points and the left panel illustration */}
+![The onboarding wizard showing the "Get Started" screen with bullet points and the left panel illustration](/img/desktop/onboarding-welcome.png)
 
 ## Set Up Your First Sync Folder
 
@@ -50,9 +51,9 @@ When you first navigate to the **Files** page, you will see the sync setup scree
   <li>Once confirmed, your folder is added and syncing begins automatically.</li>
 </Ordered>
 
-{/* 📸 SCREENSHOT NEEDED: files-onboarding.png — The FilesOnboarding screen showing the Local Sync Folders section with the Add Folder button and Sync from Other Devices section */}
+![The FilesOnboarding screen showing the Local Sync Folders section with the Add Folder button and Sync from Other Devices section](/img/desktop/files-onboarding.png)
 
-{/* 📸 SCREENSHOT NEEDED: hcfs-setup-dialog.png — The HcfsSetupDialog showing password and confirm password fields with the warning message */}
+![The HcfsSetupDialog showing password and confirm password fields with the warning message](/img/desktop/hcfs-setup-dialog.png)
 
 :::danger Important
 Your encryption password cannot be recovered. If you forget it, you will need your recovery phrase (mnemonic) to restore access to your files. Keep both your password and recovery phrase stored safely.
@@ -71,7 +72,7 @@ Hippius supports syncing **multiple folders** simultaneously. You can add additi
   <li>Click <BgStyledText>Add Folder</BgStyledText> to confirm. Syncing starts automatically.</li>
 </Ordered>
 
-{/* 📸 SCREENSHOT NEEDED: add-local-folder-dialog.png — The AddLocalFolderDialog showing folder selection and the Add Folder button */}
+![The AddLocalFolderDialog showing folder selection and the Add Folder button ](/img/desktop/add-local-folder-dialog.png)
 
 Each folder syncs independently and shows its own status (**Syncing**, **Paused**, or **Error**).
 
@@ -90,7 +91,7 @@ You can manage all your synced folders from the **Settings → Sync & Storage** 
   <li>Click <BgStyledText>Upload File</BgStyledText> in the modal to start the upload.</li>
 </Ordered>
 
-{/* 📸 SCREENSHOT NEEDED: upload-file-with-folder-select.png — The upload dialog showing the folder selector dropdown (visible when 2+ folders exist) */}
+![The upload dialog showing the folder selector dropdown (visible when 2+ folders exist ](/img/desktop/upload-file-with-folder-select.png)
 
 :::info
 If syncing is stopped for a folder, you will see an alert prompting you to resume syncing before files can be uploaded.
@@ -115,13 +116,13 @@ A **sync progress widget** appears in the bottom-right corner of the app wheneve
 - Byte-level progress counters
 - Summary of synced and deleted files
 
-{/* 📸 SCREENSHOT NEEDED: sync-progress-widget.png — The SyncStatusDialog widget in both collapsed (showing percentage) and expanded (showing file list) states */}
+![The SyncStatusDialog widget in both collapsed (showing percentage) and expanded (showing file list) states](/img/desktop/sync-progress-widget.png)
 
 Click on the widget to expand it and see the full file list. The widget automatically closes when sync completes, or you can dismiss it manually.
 
 ## Drag and Drop
 
-You can drag and drop files directly onto the Files page to upload them — this works both in the root folder and inside subfolders.
+You can drag and drop files directly onto the Files page to upload them. This works both in the root folder and inside subfolders.
 
 <Ordered>
   <li>Navigate to the folder where you want to upload files.</li>
@@ -150,7 +151,7 @@ If the app feels too large or too small for your display, use zoom controls to f
 
 When you have two or more sync folders, a **tab bar** appears at the top of the Files page allowing you to filter files by folder.
 
-- **All** — Shows files from all synced folders
-- **Individual folder tabs** — Shows files from that specific folder only
+- **All**: Shows files from all synced folders
+- **Individual folder tabs**: Shows files from that specific folder only
 
-{/* 📸 SCREENSHOT NEEDED: sync-folder-tabs.png — The SyncFolderTabs bar showing the All tab and individual folder tabs */}
+![The SyncFolderTabs bar showing the All tab and individual folder tabs](/img/desktop/sync-folder-tabs.png)

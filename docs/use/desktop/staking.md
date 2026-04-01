@@ -13,7 +13,7 @@ import Icon from '@site/src/components/Icon';
 
 ## Introduction
 
-Staking lets you lock your hAlpha tokens to help secure the Hippius network. Your staked tokens earn rewards over time. When you're ready, you can unstake your tokens — they enter an unbonding period before becoming available to withdraw.
+Staking lets you lock your hAlpha tokens to help secure the Hippius network. Your staked tokens earn rewards over time. When you're ready, you can unstake your tokens. They enter an unbonding period before becoming available to withdraw.
 
 The Hippius Desktop app provides a seamless staking experience with local wallet signing, so you never need to expose your mnemonic phrase to external extensions.
 
@@ -50,7 +50,7 @@ You can access staking features in multiple ways:
   <li>Your available balance (excluding already staked and unbonding tokens) is shown at the top.</li>
   <li>Enter the amount you wish to stake. Click <BgStyledText>Max</BgStyledText> to stake your full available balance.</li>
   <li>Click <BgStyledText>Stake Now</BgStyledText>.</li>
-  <li>Review the confirmation dialog — note that this transaction cannot be reversed.</li>
+  <li>Review the confirmation dialog. Note that this transaction cannot be reversed.</li>
   <li>Enter your wallet password to sign the transaction.</li>
   <li>Click <BgStyledText>Confirm</BgStyledText>.</li>
 </Ordered>
@@ -73,7 +73,7 @@ Unstaking schedules your staked tokens for release. They enter an **unbonding pe
   <li>Your current staked balance is shown at the top.</li>
   <li>Enter the amount you wish to unstake.</li>
   <li>Click <BgStyledText>Unstake hAlpha</BgStyledText>.</li>
-  <li>Review the confirmation dialog — note the warning about the unbonding period.</li>
+  <li>Review the confirmation dialog. Note the warning about the unbonding period.</li>
   <li>Enter your wallet password to sign the transaction.</li>
   <li>Click <BgStyledText>Confirm</BgStyledText>.</li>
 </Ordered>

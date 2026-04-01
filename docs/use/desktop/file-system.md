@@ -3,6 +3,7 @@ id: file-system
 title: File System
 sidebar_label: File System
 slug: /use/desktop/file-system
+description: 5
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -12,7 +13,7 @@ import Icon from '@site/src/components/Icon';
 
 ## Introduction
 
-The Hippius File System is one of our core innovations, offering a unique, decentralized approach to storage. Designed to be efficient and accessible, it was built with a strong focus on security and privacy. All files are encrypted on your device before syncing to the Hippius network — only you can read them.
+The Hippius File System is one of our core innovations, offering a unique, decentralized approach to storage. Designed to be efficient and accessible, it was built with a strong focus on security and privacy. All files are encrypted on your device before syncing to the Hippius network, so only you can read them.
 
 The desktop app supports **multi-folder sync**, allowing you to sync multiple folders from your device simultaneously. Each folder syncs independently and can be managed, paused, or removed individually.
 
@@ -28,7 +29,7 @@ Files uploaded to Hippius are automatically added to your sync folder and encryp
   <li>Click the <BgStyledText>Upload File</BgStyledText> button in the modal to start the upload process.</li>
 </Ordered>
 
-{/* 📸 SCREENSHOT NEEDED: file-system-upload-multi.png — The Upload File modal with the folder selector dropdown visible (for multi-folder users) */}
+![Upload file modal](/img/desktop/upload-file-with-folder-select.png)
 
 :::info Private & Encrypted
 All files uploaded are stored privately and encrypted. Files are added to your sync folder and secured automatically.
@@ -60,14 +61,14 @@ The Files page shows all your synced files and folders. You can navigate through
 
 When you have **two or more sync folders**, a tab bar appears at the top of the Files page:
 
-- **All** — Displays files from every synced folder
-- **Individual folder tabs** — Shows files from that specific folder only
+- **All**: Displays files from every synced folder
+- **Individual folder tabs**: Shows files from that specific folder only
 
-{/* 📸 SCREENSHOT NEEDED: files-page-with-tabs.png — The Files page showing SyncFolderTabs with All and individual folder tabs, plus the file listing below */}
+![Files page with folder tabs](/img/desktop/sync-folder-tabs.png)
 
 ### File Actions (Context Menu)
 
-Right-click any file or folder (or click the <BgStyledIconWithText icon="More" paddingClassName="px-1 py-1" /> menu) to access the full set of actions:
+Right click any file or folder (or click the <BgStyledIconWithText icon="More" paddingClassName="px-1 py-1" /> menu) to access the full set of actions:
 
 | Action | Applies To | Description |
 |---|---|---|
@@ -79,7 +80,7 @@ Right-click any file or folder (or click the <BgStyledIconWithText icon="More" p
 | **View on Explorer** | Uploaded files | Open the file's Arion Hash tracker on hipstats.com |
 | **Delete** | Files & Folders | Remove the item (disabled while actively syncing) |
 
-{/* 📸 SCREENSHOT NEEDED: file-context-menu.png — The right-click context menu on a file showing all available actions */}
+![File context menu](/img/desktop/file-context-menu.png)
 
 :::tip
 Pictures, videos, and PDFs open directly in the desktop app's built-in viewer. Other file types will open in your default system application.
@@ -89,12 +90,12 @@ Pictures, videos, and PDFs open directly in the desktop app's built-in viewer. O
 
 The Files page supports two display layouts:
 
-- **List View** — A traditional table format showing file name, size, modified date, and sync status in columns
-- **Card View** — A grid layout with file thumbnails for quick visual browsing
+- **List View**: A traditional table format showing file name, size, modified date, and sync status in columns
+- **Card View**: A grid layout with file thumbnails for quick visual browsing
 
 Toggle between views using the view mode buttons at the top of the Files page. Your selection is remembered across sessions.
 
-{/* 📸 SCREENSHOT NEEDED: file-view-modes.png — The Files page in both list and card view modes */}
+![File view modes](/img/desktop/file-view-modes.png)
 
 ### Creating Folders
 
@@ -117,22 +118,22 @@ Whenever files are syncing, a **progress widget** appears in the bottom-right co
 
 The widget shows a compact circular progress indicator with the current sync percentage and a status icon:
 
-- **Spinner** — Files are actively syncing
-- **Checkmark** — Sync completed successfully
-- **Error icon** — Some files failed to sync
-- **X icon** — Disconnected from sync network
+- **Spinner**: Files are actively syncing
+- **Checkmark**: Sync completed successfully
+- **Error icon**: Some files failed to sync
+- **X icon**: Disconnected from sync network
 
-{/* 📸 SCREENSHOT NEEDED: sync-widget-collapsed.png — The collapsed SyncStatusDialog showing the circular progress indicator with percentage */}
+![Sync widget collapsed](/img/desktop/sync-widget-collapsed.png)
 
 ### Expanded View
 
 Click the widget to expand it and see detailed information:
 
-- **Status banner** — Summary like "5 synced, 2 deleted" or "3 files failed to sync"
-- **Overall progress bar** — With byte counters showing uploaded/total
-- **File list** — Up to 20 files showing individual status and progress
+- **Status banner**: Summary like "5 synced, 2 deleted" or "3 files failed to sync"
+- **Overall progress bar**: With byte counters showing uploaded/total
+- **File list**: Up to 20 files showing individual status and progress
 
-{/* 📸 SCREENSHOT NEEDED: sync-widget-expanded.png — The expanded SyncStatusDialog showing the file list with individual progress bars */}
+![Sync widget expanded](/img/desktop/sync-widget-expanded.png)
 
 The widget auto-dismisses when sync completes. If there are errors, you can close it manually after reviewing the results.
 
@@ -146,7 +147,6 @@ When conflicts are detected during a sync cycle, a **conflict banner** appears a
 
 > **"X file conflict(s) detected during sync."**
 
-{/* 📸 SCREENSHOT NEEDED: conflicts-banner.png — The amber ConflictsBanner showing conflict count with Review and Resolve and Dismiss buttons */}
 
 Click <BgStyledText>Review & Resolve</BgStyledText> to open the Staged Changes dialog, or click the dismiss icon to skip the review and let sync continue with default behavior.
 
@@ -162,8 +162,6 @@ The **Staged Changes** dialog organizes pending sync operations into clear secti
   <li><strong>Conflicts</strong> — Files with conflicting changes that require your decision</li>
 </Ordered>
 
-{/* 📸 SCREENSHOT NEEDED: staged-changes-dialog.png — The StagedChangesDialog showing the sections (Upload, Download, Delete Locally, Delete from Server, Conflicts) */}
-
 ### Resolving Conflicts
 
 For each conflicting file, choose a resolution from the dropdown:
@@ -173,9 +171,8 @@ For each conflicting file, choose a resolution from the dropdown:
 | **Keep Local** | Use your local version of the file |
 | **Accept Remote** | Replace your local file with the remote version |
 | **Keep Both** | Create a renamed copy of your local file (e.g., `file_conflict_...`) and accept the remote version |
-| **Skip** | Do nothing — leave the file unresolved for now |
+| **Skip** | Do nothing, leave the file unresolved for now |
 
-{/* 📸 SCREENSHOT NEEDED: conflict-resolution-dropdown.png — A conflict file row showing the resolution dropdown with the four options */}
 
 You can use the <BgStyledText>Apply All</BgStyledText> buttons to apply the same resolution to all conflicts at once. The <BgStyledText>Sync Now</BgStyledText> button remains disabled until every conflict has a resolution selected.
 
@@ -208,7 +205,7 @@ You can stop syncing for individual folders at any time. When syncing is stopped
   <li>Confirm in the dialog that appears.</li>
 </Ordered>
 
-{/* 📸 SCREENSHOT NEEDED: stop-sync-dialog.png — The StopSyncDialog confirmation showing folder name and the Stop syncing button */}
+![Stop sync dialog](/img/desktop/stop-sync-dialog.png)
 
 ### Resuming Sync
 
@@ -226,8 +223,7 @@ If the sync stopped alert appears on the Dashboard or Files page, click the <BgS
 
 The app monitors your connection to the Hippius sync network and displays alerts when connectivity changes:
 
-- **Connected** — Sync is operating normally
-- **Reconnecting** — Temporarily lost connection, attempting to reconnect
-- **Disconnected** — Unable to reach the sync network; files will sync when connection is restored
+- **Connected**: Sync is operating normally
+- **Reconnecting**: Temporarily lost connection, attempting to reconnect
+- **Disconnected**: Unable to reach the sync network. Files will sync when connection is restored
 
-{/* 📸 SCREENSHOT NEEDED: connectivity-alerts.png — The SyncConnectivityAlert showing the different connection states */}

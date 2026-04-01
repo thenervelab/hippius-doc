@@ -32,7 +32,7 @@ Sync & Storage
       <li>Enter a new name and confirm to save.</li>
     </Ordered>
 
-    {/* 📸 SCREENSHOT NEEDED: settings-device-name.png — The Device Name section at the top of Sync & Storage showing the editable device name */}
+    ![Sync & Storage settings](/img/desktop/settings/sync-and-storage-settings.png)
 
     ### Managing Multiple Folders
 
@@ -47,7 +47,6 @@ Sync & Storage
       <li>Syncing starts automatically for the new folder.</li>
     </Ordered>
 
-    {/* 📸 SCREENSHOT NEEDED: settings-local-folders.png — The LocalFoldersSection showing a grid of folder cards with status badges and the Add Folder button */}
 
     <p>Each folder card shows:</p>
     <ul>
@@ -61,19 +60,19 @@ Sync & Storage
 
     <p>Click the three-dot menu on any folder card to access these options:</p>
     <ul>
-      <li><strong>Pause Sync</strong> — Temporarily pause syncing for this folder. A confirmation dialog will appear.</li>
-      <li><strong>Resume Syncing</strong> — Resume syncing for a paused folder.</li>
-      <li><strong>Remove Folder</strong> — Remove the folder from sync tracking. Your local files stay on your device, and remote files remain on the server.</li>
-      <li><strong>Delete from Server</strong> — Permanently delete all remote files for this folder. You must type the folder name to confirm this action.</li>
+      <li><strong>Pause Sync</strong>: Temporarily pause syncing for this folder. A confirmation dialog will appear.</li>
+      <li><strong>Resume Syncing</strong>: Resume syncing for a paused folder.</li>
+      <li><strong>Remove Folder</strong>: Remove the folder from sync tracking. Your local files stay on your device, and remote files remain on the server.</li>
+      <li><strong>Delete from Server</strong>: Permanently delete all remote files for this folder. You must type the folder name to confirm this action.</li>
     </ul>
 
-    {/* 📸 SCREENSHOT NEEDED: settings-folder-menu.png — The folder card dropdown menu showing Pause Sync, Resume Syncing, Remove Folder, and Delete from Server options */}
+    ![Folder menu options](/img/desktop/settings/settings-folder-menu.png)
 
     :::danger Deleting from Server
     The **Delete from Server** option permanently removes all remote files for that folder. This action cannot be undone. You will be required to type the exact folder name to confirm.
     :::
 
-    {/* 📸 SCREENSHOT NEEDED: settings-delete-server-dialog.png — The DeleteServerDialog with the typed folder name confirmation input */}
+    ![Delete from server confirmation](/img/desktop/settings/settings-delete-server-dialog.png)
 
     ### Syncing from Other Devices
 
@@ -86,9 +85,8 @@ Sync & Storage
       <li>Click <BgStyledText>Start Syncing</BgStyledText> to begin downloading and syncing.</li>
     </Ordered>
 
-    {/* 📸 SCREENSHOT NEEDED: settings-remote-folders.png — The RemoteFoldersSection showing remote folder cards with device name, file count, and size */}
 
-    {/* 📸 SCREENSHOT NEEDED: settings-sync-destination-dialog.png — The SyncDestinationDialog showing the remote folder info and the Choose Destination Folder button */}
+    ![Sync destination dialog](/img/desktop/settings/settings-sync-destination-dialog.png)
 
     <p>Each remote folder card shows:</p>
     <ul>
@@ -114,17 +112,17 @@ Sync & Storage
       <li>Click <BgStyledText>Backup Recovery Phrase</BgStyledText> to start the backup process.</li>
     </Ordered>
 
-    {/* 📸 SCREENSHOT NEEDED: settings-recovery-phrase.png — The Recovery Phrase settings card showing the Backup Recovery Phrase button */}
+    ![Recovery phrase settings](/img/desktop/settings/settings-recovery-phrase.png)
 
     ### Backup Flow
 
     <p>The backup process guides you through four steps:</p>
 
     <Ordered>
-      <li><strong>Security best practices</strong> — Review tips for safely storing your phrase (write on paper, use a secure location, never share, keep multiple copies). Click <BgStyledText>I Understand, Show My Recovery Phrase</BgStyledText> to continue.</li>
-      <li><strong>View your phrase</strong> — Your 12-word recovery phrase is displayed (blurred by default). Click <strong>Show</strong> to reveal it. You can copy it to the clipboard or download an encrypted backup as a password-protected ZIP file.</li>
-      <li><strong>Verify your phrase</strong> — You will be asked to enter 3 randomly selected words from your phrase to confirm you have backed it up correctly.</li>
-      <li><strong>Confirmation</strong> — A success screen confirms your phrase is secured.</li>
+      <li><strong>Security best practices</strong>: Review tips for safely storing your phrase (write on paper, use a secure location, never share, keep multiple copies). Click <BgStyledText>I Understand, Show My Recovery Phrase</BgStyledText> to continue.</li>
+      <li><strong>View your phrase</strong>: Your 12-word recovery phrase is displayed (blurred by default). Click <strong>Show</strong> to reveal it. You can copy it to the clipboard or download an encrypted backup as a password-protected ZIP file.</li>
+      <li><strong>Verify your phrase</strong>: You will be asked to enter 3 randomly selected words from your phrase to confirm you have backed it up correctly.</li>
+      <li><strong>Confirmation</strong>: A success screen confirms your phrase is secured.</li>
     </Ordered>
 
     :::danger Important
@@ -158,7 +156,7 @@ Sync & Storage
     Anyone with this token can access your account. Treat it like a password.
     :::
 
-    ![Master token screen](/img/desktop/settings/settings-master-token.png)
+    ![Master token screen](/img/desktop/settings/settings-api-token.png)
 
 </>
 </DocAccordionItem>

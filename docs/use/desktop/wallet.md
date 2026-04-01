@@ -15,7 +15,7 @@ import Icon from '@site/src/components/Icon';
 
 The Hippius Desktop Wallet provides complete control over your hAlpha tokens with local wallet management. Unlike the web version, the desktop app stores encrypted wallet data locally on your device, providing enhanced security and offline access to your wallet addresses.
 
-You can create new wallets, import existing ones via mnemonic phrases or backup files, send and receive tokens, view your balance and transaction history, and manage an address book — all secured with your personal password.
+You can create new wallets, import existing ones via mnemonic phrases or backup files, send and receive tokens, view your balance and transaction history, and manage an address book. Everything is secured with your personal password.
 
 ## Getting Started
 
@@ -29,7 +29,7 @@ When you first launch Hippius Desktop, you'll be guided through wallet setup. Yo
 
 <Ordered>
   <li>When you first open the wallet page, a unique 12-word mnemonic phrase is automatically generated and displayed on screen.</li>
-  <li><strong>Write down this phrase and store it securely</strong> — this is the only way to recover your wallet if you lose access.</li>
+  <li><strong>Write down this phrase and store it securely.</strong> This is the only way to recover your wallet if you lose access.</li>
   <li>Click <BgStyledText>I've Saved My Mnemonic</BgStyledText> to continue.</li>
   <li>Enter a name for your wallet (e.g., "Main Wallet").</li>
   <li>Create a strong password to encrypt your wallet.</li>
@@ -75,7 +75,7 @@ Hippius Desktop uses a secure password-based signing model:
 <li> After signing, the decrypted mnemonic is immediately cleared from memory</li>
 </Unordered>
 
-This means you don't need to "unlock" your wallet upfront — your wallet is effectively locked at all times, and you authenticate each transaction individually.
+This means you don't need to "unlock" your wallet upfront. Your wallet is effectively locked at all times, and you authenticate each transaction individually.
 
 :::tip
 This design provides enhanced security: even if someone gains access to your device, they cannot make transactions without knowing your password.
@@ -161,7 +161,7 @@ Export your wallet as an encrypted backup file to restore it later or transfer t
   <li>Click the three-dot menu (⋮) in the Actions column next to the wallet you want to export.</li>
   <li>Select <BgStyledText>Export</BgStyledText> from the dropdown.</li>
   <li>Choose where to save the <code>.zip</code> backup file.</li>
-  <li>The backup contains your encrypted wallet data — you'll need your original password to import it later.</li>
+  <li>The backup contains your encrypted wallet data. You'll need your original password to import it later.</li>
 </Ordered>
 
 :::note
@@ -173,7 +173,7 @@ The exported backup is encrypted with your wallet password. Keep both the backup
 <Ordered>
   <li>Click the three-dot menu (⋮) in the Actions column next to the wallet you want to delete.</li>
   <li>Select <BgStyledText>Delete</BgStyledText> from the dropdown.</li>
-  <li>Review the warning — this action cannot be undone unless you have a backup or your mnemonic phrase.</li>
+  <li>Review the warning. This action cannot be undone unless you have a backup or your mnemonic phrase.</li>
   <li>Click <BgStyledText>Confirm Delete</BgStyledText>.</li>
 </Ordered>
 
@@ -270,11 +270,11 @@ Click the action menu (three dots) on any address entry to **Edit** or **Delete*
 
 ## Security Best Practices
 
-1. **Never share your mnemonic phrase** — it provides full access to your wallet
+1. **Never share your mnemonic phrase.** It provides full access to your wallet
 2. **Use a strong, unique password** for each wallet
 3. **Export backups** of important wallets and store them securely offline
 4. **Keep your mnemonic phrase written down** in a secure physical location
-5. **Verify addresses** before sending tokens — transactions cannot be reversed
+5. **Verify addresses** before sending tokens. Transactions cannot be reversed
 
 ## Frequently Asked Questions
 

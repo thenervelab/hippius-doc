@@ -12,7 +12,7 @@ import Icon from '@site/src/components/Icon';
 
 ## Introduction
 
-The Billing page gives you a complete overview of your credits, subscription plan, and payment history — all within the desktop app. You can add credits, manage subscriptions, and view transaction history without leaving the app.
+The Billing page gives you a complete overview of your credits, subscription plan, and payment history, all within the desktop app. You can add credits, manage subscriptions, and view transaction history without leaving the app.
 
 ## Billing Dashboard
 
