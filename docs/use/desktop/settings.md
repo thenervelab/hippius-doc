@@ -11,47 +11,129 @@ import Ordered from '@site/src/components/Ordered';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import BgStyledText from '@site/src/components/BgStyledText';
 
-<DocAccordion defaultValue="file-settings">
+<DocAccordion defaultValue="sync-storage">
 
-## File Settings
+## Sync & Storage
 
-<DocAccordionItem value="file-settings" isFirst> <>
-File Settings
+<DocAccordionItem value="sync-storage" isFirst> <>
+Sync & Storage
 </>
 <>
 
-    ### Selecting Sync Folder
+    The Sync & Storage settings let you manage your device name, all your synced folders, add new ones, sync folders from other devices, and control per-folder sync behavior.
 
-    <p>Select a folder on your device to sync with Hippius. Changes made in this folder will automatically sync to the cloud.</p>
+    ### Device Name
+
+    <p>Your device name is shown at the top of the Sync & Storage section. By default, it is set to your computer's actual device name. This name is displayed on remote folder cards so you can identify which device a folder was synced from.</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
-      <li>Click on <BgStyledIconWithText text="File Settings" icon="File" />.</li>
-      <li>Review the current sync folder path.</li>
-      <li>Click <BgStyledText>Change Folder</BgStyledText> to select a new location. The folder is automatically saved once selected.</li>
-      <li>To pause syncing, click <BgStyledText>Stop Syncing</BgStyledText>.</li>
+      <li>In the <strong>Device Name</strong> section, click the edit icon next to your current device name.</li>
+      <li>Enter a new name and confirm to save.</li>
     </Ordered>
 
-    <p>This folder serves as your private sync path, ensuring secure and private synchronization between your device and Hippius.</p>
+    {/* 📸 SCREENSHOT NEEDED: settings-device-name.png — The Device Name section at the top of Sync & Storage showing the editable device name */}
 
-    ### File Deletion Behavior Settings
+    ### Managing Multiple Folders
 
-    <p>Configure how file deletions are handled between your local device and the cloud.</p>
+    <p>You can sync multiple folders simultaneously. Each folder syncs independently and shows its own status.</p>
+
+    #### Adding a Local Folder
 
     <Ordered>
-      <li>Under <strong>File Deletion Behaviour</strong>, choose how deletions should be handled.</li>
-      <li>Click <BgStyledText>Save Changes</BgStyledText> to apply your deletion behavior settings.</li>
+      <li>In the <strong>Local Folders</strong> section, click the <BgStyledText>Add Folder</BgStyledText> button.</li>
+      <li>Select a folder from your device.</li>
+      <li>Click <BgStyledText>Add Folder</BgStyledText> to confirm.</li>
+      <li>Syncing starts automatically for the new folder.</li>
     </Ordered>
 
-    <p><strong>File Deletion Behaviour options:</strong></p>
+    {/* 📸 SCREENSHOT NEEDED: settings-local-folders.png — The LocalFoldersSection showing a grid of folder cards with status badges and the Add Folder button */}
+
+    <p>Each folder card shows:</p>
     <ul>
-      <li><strong>Upload only (Default)</strong>: Never download deletions; keep cloud backups even if local files are removed.</li>
-      <li><strong>Remote Backup</strong>: Keep a copy in the cloud; local deletions do not remove cloud files.</li>
-      <li><strong>Mirror Local Delete</strong>: Delete cloud files when you delete them locally.</li>
-      <li><strong>Restore Local Files</strong>: Re-download deleted files from the cloud to your device.</li>
+      <li>Folder name and full path</li>
+      <li>Status badge: <strong>Syncing</strong> (green), <strong>Paused</strong> (grey), or <strong>Error</strong> (red)</li>
+      <li>File count and last synced time</li>
+      <li>A menu with folder actions</li>
     </ul>
 
-    ![File settings screen](/img/desktop/settings/settings-file.png)
+    #### Per-Folder Actions
+
+    <p>Click the three-dot menu on any folder card to access these options:</p>
+    <ul>
+      <li><strong>Pause Sync</strong> — Temporarily pause syncing for this folder. A confirmation dialog will appear.</li>
+      <li><strong>Resume Syncing</strong> — Resume syncing for a paused folder.</li>
+      <li><strong>Remove Folder</strong> — Remove the folder from sync tracking. Your local files stay on your device, and remote files remain on the server.</li>
+      <li><strong>Delete from Server</strong> — Permanently delete all remote files for this folder. You must type the folder name to confirm this action.</li>
+    </ul>
+
+    {/* 📸 SCREENSHOT NEEDED: settings-folder-menu.png — The folder card dropdown menu showing Pause Sync, Resume Syncing, Remove Folder, and Delete from Server options */}
+
+    :::danger Deleting from Server
+    The **Delete from Server** option permanently removes all remote files for that folder. This action cannot be undone. You will be required to type the exact folder name to confirm.
+    :::
+
+    {/* 📸 SCREENSHOT NEEDED: settings-delete-server-dialog.png — The DeleteServerDialog with the typed folder name confirmation input */}
+
+    ### Syncing from Other Devices
+
+    <p>If you have synced folders from other devices, they appear in the <strong>Remote Folders</strong> section. You can sync them to your current device.</p>
+
+    <Ordered>
+      <li>In the <strong>Remote Folders</strong> section, find the folder you want to sync.</li>
+      <li>Click the three-dot menu and select <BgStyledText>Sync to This Device</BgStyledText>.</li>
+      <li>Choose a destination folder on your local device.</li>
+      <li>Click <BgStyledText>Start Syncing</BgStyledText> to begin downloading and syncing.</li>
+    </Ordered>
+
+    {/* 📸 SCREENSHOT NEEDED: settings-remote-folders.png — The RemoteFoldersSection showing remote folder cards with device name, file count, and size */}
+
+    {/* 📸 SCREENSHOT NEEDED: settings-sync-destination-dialog.png — The SyncDestinationDialog showing the remote folder info and the Choose Destination Folder button */}
+
+    <p>Each remote folder card shows:</p>
+    <ul>
+      <li>Folder name and the device it was synced from</li>
+      <li>File count, total size, and last modified date</li>
+    </ul>
+
+</>
+</DocAccordionItem>
+
+## Recovery Phrase
+
+<DocAccordionItem value="recovery-phrase">
+  <>
+  Recovery Phrase
+  </>
+  <>
+    <p>Your recovery phrase (12-word mnemonic) is the only way to restore access to your encrypted sync folders. Back it up securely and never share it with anyone.</p>
+
+    <Ordered>
+      <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
+      <li>Click on <BgStyledIconWithText text="Recovery Phrase" icon="KeySquare" />.</li>
+      <li>Click <BgStyledText>Backup Recovery Phrase</BgStyledText> to start the backup process.</li>
+    </Ordered>
+
+    {/* 📸 SCREENSHOT NEEDED: settings-recovery-phrase.png — The Recovery Phrase settings card showing the Backup Recovery Phrase button */}
+
+    ### Backup Flow
+
+    <p>The backup process guides you through four steps:</p>
+
+    <Ordered>
+      <li><strong>Security best practices</strong> — Review tips for safely storing your phrase (write on paper, use a secure location, never share, keep multiple copies). Click <BgStyledText>I Understand, Show My Recovery Phrase</BgStyledText> to continue.</li>
+      <li><strong>View your phrase</strong> — Your 12-word recovery phrase is displayed (blurred by default). Click <strong>Show</strong> to reveal it. You can copy it to the clipboard or download an encrypted backup as a password-protected ZIP file.</li>
+      <li><strong>Verify your phrase</strong> — You will be asked to enter 3 randomly selected words from your phrase to confirm you have backed it up correctly.</li>
+      <li><strong>Confirmation</strong> — A success screen confirms your phrase is secured.</li>
+    </Ordered>
+
+    :::danger Important
+    If you lose your recovery phrase, you will permanently lose access to your encrypted files. There is no way to recover it.
+    :::
+
+    :::tip Encrypted Backup
+    You can download your recovery phrase as a password-protected ZIP file for additional security. Set a strong password (minimum 8 characters) when prompted.
+    :::
 
 </>
 </DocAccordionItem>
@@ -120,7 +202,7 @@ File Settings
   Customize RPC
   </>
   <>
-    <p>The RPC endpoint determines which blockchain network you connect to. By default, we use wss://rpc.hippius.network. Custom endpoints can provide better performance in specific regions or enable connection to test networks. Always ensure you're using a trusted RPC provider for security.</p>
+    <p>The RPC endpoint determines which blockchain network you connect to. By default, we use wss://rpc.hippius.network. Custom endpoints can provide better performance in specific regions or enable connection to test networks. Always ensure you are using a trusted RPC provider for security.</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>

@@ -19,13 +19,14 @@ This tool enables you to store, access, sync and manage files securely on a dece
 ## Benefits of using the Desktop App
 
 <Ordered>
-  <li>Fast access to files.</li>
-  <li>Encrypted and secure.</li>
-  <li>Optimized functionality.</li>
-  <li>Easy to use.</li>
+  <li>Fast access to files with real-time sync across devices.</li>
+  <li>Encrypted and secure — all files are encrypted on your device before syncing.</li>
+  <li>Multi-folder sync — sync multiple folders simultaneously with independent controls.</li>
+  <li>Conflict resolution — detect and resolve file conflicts with full control.</li>
+  <li>Easy to use with a clean, modern interface.</li>
 </Ordered>
 
-![Desktop App — Files screen](/img/desktop/desktop-benefits.png)
+![Desktop App — Files screen](/img/desktop/multi-folder-sync.png)
 
 ## Installing the Desktop App
 
@@ -56,6 +57,10 @@ Clicking on the <BgStyledIconWithText  icon="More" paddingClassName="px-1 py-1" 
 
 ## Set up Sync
 
-Hippius regularly monitors the desktop folder to maintain synchronization with the blockchain.
+Hippius continuously monitors your synced folders and automatically synchronizes changes with the Hippius network. You can sync **multiple folders** at the same time, each with its own status and controls.
 
-![Desktop App — Sync view](/img/desktop/desktop-sync.png)
+On first launch, you will choose a sync folder and set an encryption password. After that, adding files to your synced folders is all you need to do — the rest happens automatically. See the [Using the App](using-the-app) guide for detailed setup instructions.
+
+{/* 📸 SCREENSHOT NEEDED: dashboard-overview.png — The Home dashboard showing detail cards, Credit Usage and Storage Usage charts, and Recent Files section */}
+
+{/* 📸 SCREENSHOT NEEDED: desktop-sync-updated.png — Updated desktop sync view showing multi-folder sync in action */}
