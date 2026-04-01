@@ -14,7 +14,7 @@ Before proceeding, ensure you have:
 
 1. Navigate to [Polkadot.js Apps for Hippius](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network#/extrinsics)
 
-2. Fill the form as shown in the image below with your Hippius node ID and IPFS node ID:
+2. Fill the form as shown in the image below with your Hippius node ID (the `ipfsNodeId` field is a legacy parameter — leave as None):
 
 ![Validator Configuration Screen](/img/validators/hippius-register-validator.png)
 

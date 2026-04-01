@@ -1,6 +1,6 @@
 # What is Hippius?
 
-Hippius is a decentralized cloud storage platform powered by a custom Substrate blockchain, IPFS, and S3-compatible storage. Learn how it enables transparent, anonymous storage with blockchain trust.
+Hippius is a decentralized cloud storage platform powered by a custom Substrate blockchain, Arion decentralized storage, and S3-compatible endpoints. Learn how it enables transparent, anonymous storage with blockchain trust.
 
 # Chain
 
@@ -20,18 +20,14 @@ Hippius uses Nominated Proof-of-Stake to secure the network and distribute block
 
 [More](nominated-proof-of-stake-npos)
 
-# Security
+# Security & Authentication
 
-Hippius uses a mnemonic-based authentication system that provides secure access without requiring browser extensions or storing sensitive data. Your mnemonic phrase acts as both your identity and encryption key, giving you complete control over your account security.
+New users authenticate via **OAuth** (Google or GitHub) through the [Hippius Console](https://console.hippius.com). For S3 storage access, you create access keys (`hip_*` tokens) in the console — no wallet or browser extension required.
 
-[More](mnemonic-auth)
+See the [Quickstart guide](/use/quickstart) to get started.
 
-:::warning
-
-There is no "forgot password" option
-No one, including our support team, can recover your access key
-Losing your mnemonic means permanently losing access to your account
-
+:::info Legacy Users
+If you previously used a mnemonic seed phrase for authentication, it still works but is deprecated. See [Mnemonic Authentication](mnemonic-auth) for details.
 :::
 
 # Confidential Computing
@@ -44,8 +40,8 @@ Hippius Confidential Compute (HCC) runs your workloads inside AMD SEV-SNP encryp
 
 Hippius offers two complementary storage systems, each with unique advantages:
 
-1. **IPFS (InterPlanetary File System)**: Fully decentralized, content-addressed storage with blockchain-managed pinning
-2. **Hybrid S3**: S3-compatible object storage with decentralized storage volumes
+1. **Arion Storage**: Purpose-built decentralized storage using the CRUSH algorithm, Reed-Solomon erasure coding, and QUIC-based P2P networking
+2. **S3-Compatible Access**: Standard S3 API backed by Arion for seamless integration with existing tools
 
 [More](storage-systems)
 

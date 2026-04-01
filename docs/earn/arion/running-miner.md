@@ -13,7 +13,6 @@ Before running a miner, you need to set up and run a **Hippius Blockchain Node**
 :::info
 You should have completed the [Running Blockchain Node](./running-blockchain-node) guide, which includes:
 - Setting up the Hippius blockchain node
-- Installing and running IPFS
 - Registering your coldkey or child node on-chain
 :::
 
@@ -154,19 +153,6 @@ WantedBy=multi-user.target
 The validator and warden node IDs provided in this documentation are the current production values. If these values change, the documentation will be automatically updated. Always use the values provided in the latest version of this documentation.
 :::
 
-:::important IPFS Node Requirement
-Before starting the miner, ensure your IPFS node is running. The miner requires IPFS for storage operations. You can check the IPFS status with:
-
-```bash
-sudo systemctl status ipfs
-```
-
-If IPFS is not running, start it with:
-
-```bash
-sudo systemctl start ipfs
-```
-:::
 
 Enable and start:
 

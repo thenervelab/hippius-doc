@@ -1,6 +1,6 @@
 # Container Registry Pallet
 
-The Container Registry pallet is a vital component of the Hippius blockchain ecosystem, designed to manage the registration and tracking of Docker images pushed to the registry. This pallet facilitates the storage of image metadata and associated files on IPFS, ensuring efficient and decentralized image management.
+The Container Registry pallet is a vital component of the Hippius blockchain ecosystem, designed to manage the registration and tracking of Docker images pushed to the registry. This pallet facilitates the storage of image metadata and associated files on decentralized storage, ensuring efficient image management.
 
 ## Overview
 
@@ -23,7 +23,7 @@ Users can register their Docker images on the network:
   - `node_type`: The type of the node being registered (e.g., StorageMiner, Validator).
   - `node_id`: A unique identifier for the image.
   - `pay_in_credits`: A boolean indicating whether the fee should be paid in credits.
-  - `ipfs_node_id`: An optional identifier for the IPFS node.
+  - `ipfs_node_id`: An optional node identifier (legacy parameter name).
 
 - **Returns**: A `DispatchResultWithPostInfo` indicating success or failure of the operation.
 

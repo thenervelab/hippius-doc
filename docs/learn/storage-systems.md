@@ -5,95 +5,46 @@ description: 4
 
 # Decentralized Storage Systems
 
-Learn about Hippius's storage solutions that combine reliability with decentralization.
+Learn about Hippius's storage architecture that combines reliability with decentralization.
 
-## Storage Options Overview
+## Arion Storage
 
-Hippius offers two complementary storage systems, each with unique advantages:
-
-1. **IPFS (InterPlanetary File System)**: Fully decentralized, content-addressed storage with blockchain-managed pinning
-2. **Hybrid S3**: S3-compatible object storage with decentralized storage volumes
-
-These systems provide different approaches to data storage, allowing users to choose the right solution for their specific needs.
-
-## IPFS Storage
-
-Hippius implements a fully decentralized, blockchain-managed IPFS pinning system that provides reliable content persistence with built-in redundancy.
+Arion is Hippius's purpose-built decentralized storage engine. It replaces search-based content discovery with mathematical data placement: instead of asking "who has this file?", Arion computes exactly where each shard lives using the CRUSH algorithm and a blockchain-published cluster map.
 
 ### Key Features
 
-- **Content Addressing**: Files are identified by their content hash, ensuring data integrity
-- **Triple Redundancy**: All content is pinned to at least three different miners
-- **Validator Oversight**: Validators monitor pinning status and reassign content if needed
-- **Automatic Recovery**: If a miner goes offline, validators automatically reassign content to maintain redundancy
-- **Verifiable Storage**: Blockchain-based verification ensures miners are actually storing the data
+- **Deterministic Placement**: The CRUSH algorithm maps data shards to miners without a central lookup service
+- **Reed-Solomon Erasure Coding**: Files are split into 10 data shards and 20 parity shards, tolerating up to 20 simultaneous miner failures
+- **QUIC-based P2P Networking**: Built on Iroh for fast, parallel shard retrieval over encrypted QUIC connections
+- **Active Health Monitoring**: Validators continuously verify shard integrity and automatically reconstruct missing data
+- **Auto-Repair**: If a miner goes offline, the network reconstructs and redistributes affected shards to maintain redundancy
 
 ### How It Works
 
-1. When content is uploaded to IPFS, the Hippius blockchain selects three miners to pin the content
-2. Validators continuously monitor the pinning status of all content
-3. If a miner goes offline or fails to maintain the pin, validators select a replacement miner
-4. The new miner retrieves and pins the content, maintaining the triple redundancy
+1. When a file is stored, it is split into data and parity shards via Reed-Solomon erasure coding
+2. The CRUSH algorithm deterministically assigns each shard to independent miners across the network
+3. Shards are streamed to miners in parallel over QUIC connections
+4. Validators monitor shard health and trigger auto-repair when miners leave or fail
+5. On retrieval, shards are fetched in parallel and reassembled — only 10 of 30 shards are needed to reconstruct the original data
 
-This system ensures that content remains available even if individual miners leave the network or experience downtime.
+## S3-Compatible Access
 
-## Hybrid S3 Storage
+Users interact with Arion storage through a standard S3-compatible API. Any tool or library that speaks S3 (AWS CLI, boto3, MinIO SDK) works with Hippius out of the box.
 
-Hippius's S3-compatible storage uses a hybrid architecture that combines coordinated services with decentralized storage volumes.
+The S3 gateway handles authentication, encryption, chunking, and backend coordination — Arion is the storage engine underneath.
 
-### Architecture
-
-- **Coordination Layer**:
-
-  - Metadata management: Tracks file locations and manages object metadata
-  - Access control: Handles authentication and user permissions
-  - Resource allocation: Manages storage distribution and retrieval
-
-- **Storage Layer**:
-  - Distributed volumes: Storage capacity spread across independent miners
-  - Redundancy mechanisms: Uses erasure coding and replication for reliability
-
-### Key Features
-
-- **S3 API Compatibility**: Works with existing S3 tools and libraries
-- **Erasure Coding**: Data is split into fragments with redundancy for reliability
-- **Volume-Based Storage**: Storage capacity is provided by independent miners
-- **Horizontal Scaling**: System capacity grows with the number of miners
-- **Miner Selection**: System chooses miners based on performance and availability metrics
-
-### How It Works
-
-1. Storage miners register their volumes on the network
-2. When data is stored, the coordination layer:
-   - Applies erasure coding to split data into fragments
-   - Distributes fragments across multiple miner volumes
-   - Records metadata about fragment locations
-3. When data is retrieved:
-   - The system locates the necessary fragments
-   - Reconstructs the original data even if some fragments are unavailable
-   - Delivers the data through the S3-compatible API
-4. If miners go offline, the system can reconstruct data from remaining fragments and redistribute to new miners
+See the [Quickstart guide](/use/quickstart) to get started.
 
 ## Storage Economics
 
-Both storage systems are integrated into Hippius's economic model:
+Both storage and compute systems are integrated into Hippius's economic model:
 
 - Miners earn 60% of storage fees for maintaining data
 - Validators earn a portion of the 30% allocated to network security for overseeing storage integrity
 - The 10% treasury allocation helps fund ongoing development of storage systems
 
-## Choosing the Right Storage
+## Choosing the Right Access Method
 
-- **Use IPFS when**:
-
-  - Content needs to be publicly accessible
-  - Full decentralization is required
-  - Data integrity is critical
-  - Content is immutable
-
-- **Use S3 when**:
-  - You need compatibility with existing S3 workflows
-  - Data needs to be frequently updated
-  - You require bucket-based organization
-  - Private access control is needed
-  - Performance and scalability are priorities
+- **S3 API**: For applications, automation, and programmatic access — use any S3-compatible client
+- **Desktop App**: For a graphical interface to manage files and folders
+- **Console**: For account management, billing, and credential creation at [console.hippius.com](https://console.hippius.com)

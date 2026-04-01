@@ -2,9 +2,9 @@
 description: 10
 ---
 
-# Hippius S3 API - User Guide
+# S3 API Reference
 
-Welcome to the Hippius S3 API! This guide will help you get started with storing and retrieving your files using our S3-compatible decentralized storage service.
+Complete reference for the Hippius S3 API. If you're new, start with the [Quickstart guide](/use/quickstart) to get your account and credentials set up.
 
 ## Overview
 
@@ -22,34 +22,9 @@ Hippius S3 provides a fully S3-compatible API that stores your data on the decen
 
 ## Getting Started
 
-### Prerequisites
+Follow the [Quickstart guide](/use/quickstart) to create your account and S3 credentials. Once you have your `hip_*` access key and secret, use the client configurations below.
 
-You'll need:
-
-- A Hippius account (create one at https://console.hippius.com)
-- Access keys for authentication (create at https://console.hippius.com/dashboard/settings)
-- An S3-compatible client in your programming language of choice (tested with Minio and AWS CLI, but any should work)
-
-**Creating Access Keys**: Visit https://console.hippius.com/dashboard/settings to generate your access key ID and secret key. You can create:
-
-- **Main keys**: Full access to all your buckets (recommended for personal use)
-- **Sub keys**: Require explicit ACL grants (recommended for applications/services)
-
-### Authentication
-
-Hippius S3 uses standard S3-compatible authentication with access keys:
-
-- **Access Key ID**: Your access key starting with `hip_` (e.g., `hip_abc123...`)
-- **Secret Key**: Your access key secret (keep this secure!)
-
-Get your credentials at: https://console.hippius.com/dashboard/settings
-
-**Legacy Subaccount Authentication**: If you're using subaccount seed phrases for authentication, they still work but are deprecated. We encourage switching to access keys for better security and management. Access keys provide:
-
-- Revocable credentials (seed phrases are permanent)
-- Fine-grained access control via ACLs
-- Separate keys for different applications
-- No need for Base64 encoding
+Legacy users with seed phrases can refer to [Mnemonic Authentication](/learn/mnemonic-auth).
 
 ## Python Setup
 
@@ -73,25 +48,6 @@ client = Minio(
     "s3.hippius.com",
     access_key=access_key_id,
     secret_key=secret_key,
-    secure=True,
-    region="decentralized"
-)
-```
-
-**Legacy Subaccount Setup** (deprecated):
-
-```python
-import base64
-from minio import Minio
-
-# For existing subaccount users only - switch to access keys recommended
-seed_phrase = "your_subaccount_seed_phrase_here"
-access_key = base64.b64encode(seed_phrase.encode("utf-8")).decode("utf-8")
-
-client = Minio(
-    "s3.hippius.com",
-    access_key=access_key,
-    secret_key=seed_phrase,
     secure=True,
     region="decentralized"
 )
@@ -230,25 +186,6 @@ const minioClient = new Minio.Client({
   useSSL: true,
   accessKey: accessKeyId,
   secretKey: secretKey,
-  region: "decentralized",
-});
-```
-
-**Legacy Subaccount Setup** (deprecated):
-
-```javascript
-const Minio = require("minio");
-
-// For existing subaccount users only - switch to access keys recommended
-const seedPhrase = "your_subaccount_seed_phrase_here";
-const accessKey = Buffer.from(seedPhrase, "utf8").toString("base64");
-
-const minioClient = new Minio.Client({
-  endPoint: "s3.hippius.com",
-  port: 443,
-  useSSL: true,
-  accessKey: accessKey,
-  secretKey: seedPhrase,
   region: "decentralized",
 });
 ```
@@ -565,16 +502,6 @@ export AWS_DEFAULT_REGION=decentralized
 aws s3api list-buckets --endpoint-url https://s3.hippius.com \
   --query 'Owner.ID' --output text
 ```
-
-**Legacy subaccount method** (deprecated):
-
-```bash
-export AWS_ACCESS_KEY_ID="$(echo -n 'your seed phrase' | base64)"
-export AWS_SECRET_ACCESS_KEY="your seed phrase"
-export AWS_DEFAULT_REGION=decentralized
-```
-
-Output will be your Substrate address (e.g., `5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty`)
 
 ### Common ACL Operations
 

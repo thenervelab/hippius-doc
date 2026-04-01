@@ -6,7 +6,7 @@ The Registration pallet is a critical component of the Hippius blockchain ecosys
 
 The Registration pallet provides functionalities to handle the following operations:
 
-- **Node Registration**: Nodes can register their information, including node type and IPFS node ID.
+- **Node Registration**: Nodes can register their information, including node type and node ID.
 - **Node Status Management**: The status of registered nodes can be updated to reflect their operational state.
 - **Fee Management**: The pallet manages fees associated with different node types and enables fee charging.
 
@@ -23,7 +23,7 @@ Users can register their nodes on the network:
   - `node_type`: The type of the node being registered (e.g., Validator, StorageMiner).
   - `node_id`: A unique identifier for the node.
   - `pay_in_credits`: A boolean indicating whether the fee should be paid in credits.
-  - `ipfs_node_id`: An optional identifier for the IPFS node.
+  - `ipfs_node_id`: An optional node identifier (legacy parameter name, historically used for IPFS node ID).
 
 - **Returns**: A `DispatchResultWithPostInfo` indicating success or failure of the operation.
 
@@ -92,7 +92,7 @@ The pallet defines several error types to handle various failure scenarios:
 - `NodeAlreadyRegistered`: Raised when attempting to register a node that is already registered.
 - `NodeNotFound`: Raised when a requested node cannot be found.
 - `NotAminer`: Raised when the node is not a miner.
-- `IpfsNodeIdRequired`: Raised when a required IPFS node ID is missing.
+- `IpfsNodeIdRequired`: Raised when a required node ID is missing (legacy error name).
 - `InsufficientStake`: Raised when the required stake for a node type is not met.
 - `InsufficientBalanceForFee`: Raised when the user does not have enough balance to cover the fee.
 - `FeeTooHigh`: Raised when the fee exceeds the allowed limit.
@@ -107,7 +107,7 @@ The pallet defines a `NodeInfo` struct to represent information about registered
 - **Fields**:
   - `node_id`: The unique identifier for the node.
   - `node_type`: The type of the node (e.g., Validator, StorageMiner).
-  - `ipfs_node_id`: An optional IPFS node ID.
+  - `ipfs_node_id`: An optional node ID (legacy field name).
   - `status`: The current status of the node (e.g., Online, Degraded).
   - `registered_at`: The block number at which the node was registered.
   - `owner`: The account ID of the node owner.

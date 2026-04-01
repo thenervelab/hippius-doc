@@ -25,7 +25,7 @@ Use the left sidebar to open <BgStyledText>Help & Support</BgStyledText>. This p
 <Ordered>
   <li>Click <BgStyledText>New Ticket</BgStyledText>.</li>
   <li>Enter a <strong>Ticket Subject</strong>.</li>
-  <li>Select a <strong>Ticket Category</strong>: <BgStyledText>Account & Billing</BgStyledText>, <BgStyledText>Storage (IPFS & S3)</BgStyledText>, or <BgStyledText>General</BgStyledText>.</li>
+  <li>Select a <strong>Ticket Category</strong>: <BgStyledText>Account & Billing</BgStyledText>, <BgStyledText>Storage (Arion & S3)</BgStyledText>, or <BgStyledText>General</BgStyledText>.</li>
   <li>Choose a <strong>Ticket Severity</strong> (priority) from the dropdown.</li>
   <li>Add a clear <strong>Ticket Description</strong> so the team can reproduce the issue.</li>
   <li>(Optional) Click <BgStyledText>Attach a picture</BgStyledText> to include a screenshot or file.</li>

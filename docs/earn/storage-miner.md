@@ -4,14 +4,14 @@ description: 6
 
 # Hippius Storage Miner Ansible Deployment
 
-This Ansible project provides a professional-grade deployment for Hippius storage miner nodes with IPFS storage, optimized with ZFS for performance and reliability.
+This Ansible project provides a professional-grade deployment for Hippius storage miner nodes, optimized with ZFS for performance and reliability.
 
 ## Overview
 
 The deployment configures:
 
-- IPFS node with optional ZFS storage pool
 - Hippius blockchain node configured as a storage miner
+- Arion miner with optional ZFS storage pool
 - Proper system configuration and security settings
 
 ## Structure
@@ -21,7 +21,7 @@ The deployment configures:
 ├── inventory/           # Host inventory files
 ├── roles/               # Role-based tasks
 │   ├── common/          # System updates and firewall
-│   ├── ipfs/            # IPFS node with ZFS setup
+│   ├── arion/           # Arion miner with ZFS setup
 │   └── hippius/         # Hippius storage miner setup
 ├── group_vars/          # Variables for all groups
 ├── site.yml             # Main playbook
@@ -41,13 +41,13 @@ The deployment configures:
 
 ### Ideal Server Specifications
 
-To run both the Hippius blockchain node and IPFS with a ZFS pool efficiently, these are the recommended server specifications:
+To run both the Hippius blockchain node and Arion miner with a ZFS pool efficiently, these are the recommended server specifications:
 
 #### CPU
 
 - **Minimum**: 4 dedicated cores (8 vCPUs)
 - **Recommended**: 8+ dedicated cores (16+ vCPUs)
-- **Reasoning**: The blockchain node needs consistent CPU performance for validation and processing. ZFS benefits from additional cores for checksumming and compression operations.
+- **Reasoning**: The blockchain node needs consistent CPU performance for validation and processing. ZFS and Arion benefit from additional cores for checksumming, compression, and shard operations.
 
 #### Memory (RAM)
 
@@ -56,7 +56,7 @@ To run both the Hippius blockchain node and IPFS with a ZFS pool efficiently, th
 - **Reasoning**:
   - Blockchain nodes typically require 8-16GB RAM for optimal performance
   - ZFS is memory-hungry and benefits significantly from extra RAM for the ARC cache
-  - IPFS can use substantial memory when handling many concurrent operations
+  - Arion miner benefits from additional RAM for shard operations
 
 #### Storage
 
@@ -64,7 +64,7 @@ To run both the Hippius blockchain node and IPFS with a ZFS pool efficiently, th
 
   - SSD with 100GB+ for OS and applications
 
-- **ZFS Pool for IPFS**:
+- **ZFS Pool for Arion Storage**:
 
   - **Minimum**: 2TB usable space
   - **Recommended**: 4TB+ usable space
@@ -79,7 +79,7 @@ To run both the Hippius blockchain node and IPFS with a ZFS pool efficiently, th
 #### Network
 
 - **Bandwidth**: 1Gbps minimum, with at least 100Mbps sustained throughput
-- **Monthly Traffic**: Plan for 5-10TB+ of monthly traffic (especially for IPFS)
+- **Monthly Traffic**: Plan for 5-10TB+ of monthly traffic
 - **Public IP**: Static public IP address recommended
 
 #### Example Server Configurations
@@ -102,11 +102,11 @@ To run both the Hippius blockchain node and IPFS with a ZFS pool efficiently, th
 
 ## Components
 
-### IPFS Node
+### Arion Miner
 
-- Runs as dedicated IPFS user
+- Runs as dedicated service user
 - ZFS storage pool for optimal performance
-- Configurable API and gateway ports
+- Configurable storage path and ports
 - Systemd service for automatic startup
 
 ### Hippius Node
@@ -127,13 +127,13 @@ To run both the Hippius blockchain node and IPFS with a ZFS pool efficiently, th
 1. Configure your inventory in `inventory/production/hosts.yml`:
 
    ```
-   [ipfs_nodes]
+   [miners]
    your-server-ip-or-hostname
    ```
 
 2. Review and adjust variables in `group_vars/all.yml`:
 
-   - IPFS configuration and ZFS settings
+   - ZFS settings and storage configuration
    - Hippius binary location and ports
 
 3. Run the playbook:
@@ -145,13 +145,13 @@ To run both the Hippius blockchain node and IPFS with a ZFS pool efficiently, th
 
 ### ZFS Configuration
 
-To use ZFS for IPFS storage, specify the available disks:
+To use ZFS for Arion storage, specify the available disks:
 
 ```bash
 ansible-playbook -i inventory/production/hosts.yml site.yml -e "hippius_hotkey_mnemonic='YOUR SEED WORDS'" -e "zfs_disks=['sdb','sdc']"
 ```
 
-This creates a ZFS pool named "ipfs" using the specified disks.
+This creates a ZFS pool using the specified disks.
 
 ### Running Only Hippius Role
 
@@ -180,17 +180,8 @@ ansible-playbook -i inventory/production/hosts.yml update_hippius.yml
 ### Important Variables
 
 ```yaml
-# ZFS Configuration for IPFS
+# ZFS Configuration
 zfs_disks: [] # Default empty, specify disk names like ['sdb','sdc']
-
-# IPFS Configuration
-ipfs_version: "v0.33.2"
-ipfs_user: ipfs
-ipfs_group: ipfs
-ipfs_home: /zfs/ipfs # ZFS dataset mountpoint
-ipfs_data_dir: "{{ ipfs_home }}/data"
-ipfs_api_address: "/ip4/127.0.0.1/tcp/5001"
-ipfs_gateway_address: "/ip4/127.0.0.1/tcp/8080"
 
 # Hippius Configuration
 hippius_binary_url: "https://download.hippius.com/hippius"
@@ -206,7 +197,7 @@ hippius_node_name: "hippius-storage-miner"
 
 ## Security Notes
 
-- IPFS runs as a dedicated system user
+- Arion miner runs as a dedicated system user
 - Hippius validator runs as root (as required)
 - Firewall rules are automatically configured for all required ports
 
@@ -215,9 +206,9 @@ hippius_node_name: "hippius-storage-miner"
 ### Service Management
 
 ```bash
-# IPFS
-systemctl status ipfs
-systemctl restart ipfs
+# Arion Miner
+systemctl status hippius-miner
+systemctl restart hippius-miner
 
 # Hippius
 systemctl status hippius
@@ -228,13 +219,13 @@ systemctl restart hippius
 
 ```bash
 # Check ZFS pool status
-zpool status ipfs
+zpool status
 
 # Check ZFS dataset space usage
 zfs list
 
 # Scrub ZFS pool (recommended monthly)
-zpool scrub ipfs
+zpool scrub <pool-name>
 ```
 
 ## Troubleshooting
@@ -242,8 +233,8 @@ zpool scrub ipfs
 ### Check service logs:
 
 ```bash
-# IPFS logs
-journalctl -u ipfs -f
+# Arion Miner logs
+journalctl -u hippius-miner -f
 
 # Hippius logs
 journalctl -u hippius -f
@@ -251,11 +242,11 @@ journalctl -u hippius -f
 
 ### Common Issues
 
-#### IPFS Not Starting
+#### Arion Miner Not Starting
 
-- Check permissions: `ls -la /zfs/ipfs`
+- Check permissions on the storage path
 - Verify ZFS mounts: `zfs list`
-- Check IPFS config: `cat /zfs/ipfs/data/config`
+- Check miner logs: `journalctl -u hippius-miner -f`
 
 #### Hippius Not Connecting to Network
 

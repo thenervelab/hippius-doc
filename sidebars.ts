@@ -33,7 +33,7 @@ const sidebars: SidebarsConfig = {
       type: "category",
       label: "Use",
       items: [
-        "use/bridge", // Using the Hippius Coming Soon bridge
+        "use/quickstart", // Quickstart guide
         "use/s3-token-management", // S3 Token Management
         "use/virtual-machines", // Virtual Machines
         // "use/wallet", // Hippius Wallet
@@ -100,7 +100,6 @@ const sidebars: SidebarsConfig = {
                 "pallets/rankings", // Subpage for Rankings
                 "pallets/marketplace",
                 "pallets/registration",
-                "pallets/ipfsPin",
                 "pallets/executionUnit",
                 "pallets/backup",
                 "pallets/containerRegistry",
@@ -126,14 +125,14 @@ const sidebars: SidebarsConfig = {
           items: [
             {
               type: "category",
-              label: "IPFS",
-              items: ["storage/ipfs/setup", "storage/ipfs/pinning"],
-            },
-            {
-              type: "category",
               label: "S3",
               items: [
                 "storage/s3/integration",
+                {
+                  type: "link",
+                  label: "API Reference",
+                  href: "https://api.hippius.com/",
+                },
                 {
                   type: "link",
                   label: "Pricing",
