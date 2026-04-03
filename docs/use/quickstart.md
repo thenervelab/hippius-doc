@@ -26,16 +26,12 @@ Credits are consumed as you store and retrieve files. See [pricing](https://hipp
 2. Click **Create Master Token**
 3. Save your **Access Key ID** (starts with `hip_`) and **Secret Key**
 
-<div class="screenshot-container">
-  <img src="/img/getting-started/create-master-token.png" alt="Create master token" />
-</div>
-
 :::warning
 Store your secret key securely — it cannot be retrieved after creation.
 :::
 
 <div class="screenshot-container">
-  <img src="/img/getting-started/master-token-created.png" alt="Master token created" />
+  <img src="/img/getting-started/master-token.png" alt="Master token created" />
 </div>
 
 You can create multiple tokens with different access levels. See [Token Management](/use/s3-token-management) for details. Tokens can also be managed programmatically via the [Management API](https://api.hippius.com/).
