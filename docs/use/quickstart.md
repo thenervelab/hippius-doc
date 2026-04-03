@@ -9,14 +9,16 @@ Hippius S3 is a decentralized, S3-compatible storage service. This guide takes y
 
 That's it — no wallet, seed phrase, or browser extension required.
 
-## Step 2: c
+## Step 2: Add Credits
 
 1. In the console, go to **Billing**
 2. Add credits using **credit card** (Stripe) or **TAO**
 
 Credits are consumed as you store and retrieve files. See [pricing](https://hippius.com/pricing) for details.
 
-![Billing page](/img/getting-started/billing.png)
+<div class="screenshot-container">
+  <img src="/img/getting-started/billing.png" alt="Billing page" />
+</div>
 
 ## Step 3: Create S3 Credentials
 
@@ -24,13 +26,17 @@ Credits are consumed as you store and retrieve files. See [pricing](https://hipp
 2. Click **Create Master Token**
 3. Save your **Access Key ID** (starts with `hip_`) and **Secret Key**
 
-![Create master token](/img/getting-started/create-master-token.png)
+<div class="screenshot-container">
+  <img src="/img/getting-started/create-master-token.png" alt="Create master token" />
+</div>
 
 :::warning
 Store your secret key securely — it cannot be retrieved after creation.
 :::
 
-![Master token created](/img/getting-started/master-token-created.png)
+<div class="screenshot-container">
+  <img src="/img/getting-started/master-token-created.png" alt="Master token created" />
+</div>
 
 You can create multiple tokens with different access levels. See [Token Management](/use/s3-token-management) for details. Tokens can also be managed programmatically via the [Management API](https://api.hippius.com/).
 

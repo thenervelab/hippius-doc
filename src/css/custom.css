@@ -372,6 +372,19 @@ article .theme-doc-breadcrumbs {
   -ms-interpolation-mode: nearest-neighbor; /* For IE */
 }
 
+.screenshot-container {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.screenshot-container img {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-width: 680px;
+  width: 100%;
+}
+
 /* For retina displays */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .markdown img {
