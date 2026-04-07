@@ -45,11 +45,7 @@ Download flow: the gateway fetches any 10 shards from miners and reconstructs yo
 
 New users sign in with Google or GitHub OAuth through [console.hippius.com](https://console.hippius.com). No wallet, no seed phrase, no browser extension.
 
-S3 access keys (`hip_*`) are created in the console and used with any S3 client.
-
-:::info Legacy
-If you previously used a mnemonic seed phrase, it still works but is deprecated. See [Mnemonic Authentication](/learn/mnemonic-auth).
-:::
+S3 access keys are created in the console and used with any S3 client.
 
 ## Next steps
 

@@ -115,3 +115,4 @@ These S3 clients are tested and confirmed to work with Hippius S3:
 - [AWS S3 vs Cloudflare R2 vs Hippius S3 — Detailed Comparison](https://github.com/thenervelab/hippius-s3/blob/main/docs/comparison.md) — In-depth analysis of features, pricing, and trade-offs
 - [AWS S3 API Documentation](https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html) — Any operation marked "Supported" above works identically
 - [hippius-s3 on GitHub](https://github.com/thenervelab/hippius-s3) — Report issues, request features, or contribute
+- [llms.txt](https://docs.hippius.com/llms.txt) — Machine-readable docs for AI agents

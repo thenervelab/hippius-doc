@@ -32,11 +32,7 @@ const sidebars: SidebarsConfig = {
             "storage/s3/examples/nextcloud",
           ],
         },
-        {
-          type: "link",
-          label: "API Reference ↗",
-          href: "https://api.hippius.com/",
-        },
+        "use/hippius-api",
         {
           type: "link",
           label: "Pricing ↗",
@@ -115,7 +111,7 @@ const sidebars: SidebarsConfig = {
         "learn/substrate-staking",
         "learn/babe-consensus-mechanism",
         "learn/nominated-proof-of-stake-npos",
-        "learn/mnemonic-auth",
+
         "learn/miner",
         "learn/weights",
       ],

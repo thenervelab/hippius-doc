@@ -270,4 +270,6 @@ with open("large_file.zip", "rb") as file_data:
 - [Troubleshooting](/use/troubleshooting) — Common errors and fixes
 - [Token Management](/use/s3-token-management) — Create sub-tokens, manage access levels
 - [Pricing](https://hippius.com/pricing) — Storage and bandwidth costs
+- [Hippius Management API](/use/api) — Automate token management and billing
 - [hippius-s3 on GitHub](https://github.com/thenervelab/hippius-s3) — Report issues, request features, or contribute
+- [llms.txt](https://docs.hippius.com/llms.txt) — Machine-readable docs for AI agents and LLMs
