@@ -9,7 +9,6 @@ on:
 jobs:
   test-examples:
     runs-on: ubuntu-latest
-    if: ${{ secrets.HIPPIUS_ACCESS_KEY != '' }}
     steps:
       - uses: actions/checkout@v4
 
