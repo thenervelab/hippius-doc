@@ -71,6 +71,32 @@ const sidebars: SidebarsConfig = {
       ],
     },
 
+    // ── SEPARATOR ──────────────────────────────────────────────────
+    {
+      type: "html",
+      value: "<hr />",
+    },
+
+    // ── CONCEPTS ───────────────────────────────────────────────────
+    {
+      type: "category",
+      label: "How it works",
+      collapsed: true,
+      items: [
+        "learn/architecture",
+        "learn/storage-systems",
+        "learn/encryption",
+        "learn/confidential-computing",
+        "learn/vm-computing",
+        "learn/substrate",
+        "learn/substrate-staking",
+        "learn/babe-consensus-mechanism",
+        "learn/nominated-proof-of-stake-npos",
+        "learn/miner",
+        "learn/weights",
+      ],
+    },
+
     // ── EARN / MINE ────────────────────────────────────────────────
     {
       type: "category",
@@ -93,27 +119,6 @@ const sidebars: SidebarsConfig = {
       items: [
         "earn/installing-validator",
         "earn/register-validator-in-chain",
-      ],
-    },
-
-    // ── CONCEPTS ───────────────────────────────────────────────────
-    {
-      type: "category",
-      label: "How it works",
-      collapsed: true,
-      items: [
-        "learn/architecture",
-        "learn/storage-systems",
-        "learn/encryption",
-        "learn/confidential-computing",
-        "learn/vm-computing",
-        "learn/substrate",
-        "learn/substrate-staking",
-        "learn/babe-consensus-mechanism",
-        "learn/nominated-proof-of-stake-npos",
-
-        "learn/miner",
-        "learn/weights",
       ],
     },
 
