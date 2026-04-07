@@ -60,7 +60,7 @@ This direction burns your hAlpha tokens on Hippius. Guardians detect the burn an
   <li>Your hAlpha balance is displayed at the top.</li>
   <li>Enter the amount to bridge.</li>
   <li>Click <BgStyledText>Bridge Now</BgStyledText>.</li>
-  <li>Review the confirmation dialog — your hAlpha will be burned and Alpha released on Bittensor.</li>
+  <li>Review the confirmation dialog. Your hAlpha will be burned and Alpha released on Bittensor.</li>
   <li>Click <BgStyledText>Confirm Bridge</BgStyledText>.</li>
   <li>Enter your wallet password to sign the transaction.</li>
 </Ordered>
@@ -75,10 +75,10 @@ The **Bridge Transactions** widget appears in the bottom-left corner during and 
 
 The header shows the overall status:
 <Unordered>
-<li>**Spinner icon** — A bridge operation is in progress</li>
-<li>**Checkmark icon** — All transactions completed successfully</li>
-<li>**Warning icon** — There was an issue loading bridge data</li>
-<li>**X icon** — A transaction failed</li>
+<li>**Spinner icon**: A bridge operation is in progress</li>
+<li>**Checkmark icon**: All transactions completed successfully</li>
+<li>**Warning icon**: There was an issue loading bridge data</li>
+<li>**X icon**: A transaction failed</li>
 </Unordered>
 
 Click the header to expand or collapse the transaction details.
@@ -112,8 +112,8 @@ Each step shows:
 |---|---|---|---|
 | **Pending** | Clock | Amber | Transaction submitted, awaiting confirmation |
 | **Processing** | Spinner | Blue | Transaction being processed by guardians |
-| **Completed** | Checkmark | Green | Bridge complete — tokens delivered |
-| **Failed** | X | Red | Transaction failed — check error details |
+| **Completed** | Checkmark | Green | Bridge complete, tokens delivered |
+| **Failed** | X | Red | Transaction failed, check error details |
 | **Timed Out** | Clock | Red | Transaction took too long and expired |
 
 ### Filtering Transactions
@@ -121,9 +121,9 @@ Each step shows:
 Use the filter tabs to view specific transaction types:
 
 <Unordered>
-<li>**All** — Shows all bridge transactions</li>
-<li>**Deposits** — Alpha → hAlpha transactions only</li>
-<li>**Withdrawals** — hAlpha → Alpha transactions only</li>
+<li>**All**: Shows all bridge transactions</li>
+<li>**Deposits**: Alpha → hAlpha transactions only</li>
+<li>**Withdrawals**: hAlpha → Alpha transactions only</li>
 </Unordered>
 
 The count badge shows how many pending transactions exist in each category.
@@ -170,9 +170,9 @@ If a bridge transaction fails, the widget shows:
 
 Common errors include:
 <Unordered>
-<li>**Insufficient balance** — Not enough tokens or gas fees</li>
-<li>**Proxy error** — Failed to add/remove the bridge proxy</li>
-<li>**Network timeout** — Transaction took too long to confirm</li>
+<li>**Insufficient balance**: Not enough tokens or gas fees</li>
+<li>**Proxy error**: Failed to add/remove the bridge proxy</li>
+<li>**Network timeout**: Transaction took too long to confirm</li>
 </Unordered>
 
 
@@ -206,10 +206,10 @@ If a bridge fails, check your balance and try again. Most errors are due to insu
 
 The bridge is secured by multiple layers:
 
-1. **Guardian Network** — Decentralized validators confirm transactions
-2. **Threshold Voting** — Multiple guardians must agree before tokens are released
-3. **Proxy Pattern** — Temporary permissions minimize security exposure
-4. **Local Signing** — Your private keys never leave your device
+1. **Guardian Network**: Decentralized validators confirm transactions
+2. **Threshold Voting**: Multiple guardians must agree before tokens are released
+3. **Proxy Pattern**: Temporary permissions minimize security exposure
+4. **Local Signing**: Your private keys never leave your device
 
 ## Frequently Asked Questions
 

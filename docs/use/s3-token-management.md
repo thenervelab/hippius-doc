@@ -10,12 +10,6 @@ import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import Icon from '@site/src/components/Icon';
 
-## TL;DR
-
-- **Master vs. Sub Tokens:** Master tokens grant full control over all your buckets. Sub tokens allow you to restrict access to specific buckets and set read-only or read/write permissions.
-- **Save your secrets:** Secret keys are displayed exactly once. If you lose a secret key, you must rotate or recreate the token.
-- **Revoke and rotate anytime:** You can manage token lifespans, instantly revoke compromised tokens, or rotate secrets without affecting your underlying data.
-
 ## Overview
 
 Hippius S3 Storage provides a secure token-based authentication system that uses **Master Tokens** and **Sub Tokens** to control access to your storage buckets and objects. This approach, inspired by AWS S3's access key management, gives you fine-grained control over permissions while maintaining security and ease of use.

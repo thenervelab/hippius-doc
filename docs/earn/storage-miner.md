@@ -15,7 +15,9 @@ A storage miner in the Hippius network is a node that provides decentralized sto
 
 ## System Requirements
 
-To run a storage miner effectively, you must meet the following minimum requirements:
+:::warning Minimum Requirements
+Miners must provide at least **2TB of storage** and a **static public IP**. Machines that don't meet these requirements will fail registration or won't earn rewards.
+:::
 
 - **OS**: Ubuntu 22.04+ (or equivalent modern Linux distribution)
 - **CPU**: 4+ dedicated cores (8+ vCPUs recommended)

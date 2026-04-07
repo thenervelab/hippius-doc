@@ -40,6 +40,10 @@ If your transfer speeds are lower than expected:
 - **Parallel Transfers:** Increase the number of concurrent connections. In tools like `rclone`, use flags like `--transfers 8` and `--s3-upload-concurrency 8`.
 - **Network Proximity:** While Hippius is decentralized, initial routing performance can depend on your local ISP peering.
 
+:::tip
+For rclone, combining `--transfers 8 --s3-upload-concurrency 8 --progress` gives you fast parallel uploads with real-time feedback.
+:::
+
 ## Endpoint errors
 
 If your client attempts to connect to Amazon S3 instead of Hippius or reports a DNS error:

@@ -23,7 +23,7 @@ aws configure --profile hippius
 ```
 
 Enter when prompted:
-- **AWS Access Key ID**: your `hip_` access key
+- **AWS Access Key ID**: your access key
 - **AWS Secret Access Key**: your secret key
 - **Default region**: `decentralized`
 - **Default output format**: `json` (or leave blank)
@@ -31,14 +31,16 @@ Enter when prompted:
 Or set environment variables for one-off commands:
 
 ```bash
-export AWS_ACCESS_KEY_ID="<YOUR_ACCESS_KEY_ID>"
-export AWS_SECRET_ACCESS_KEY="<YOUR_SECRET_KEY>"
+export AWS_ACCESS_KEY_ID="YOUR_ACCESS_KEY"
+export AWS_SECRET_ACCESS_KEY="YOUR_SECRET_KEY"
 export AWS_DEFAULT_REGION="decentralized"
 ```
 
-## ⚠️ Mandatory: The Endpoint URL
+## The Endpoint URL
 
-Because you are using the AWS CLI with a custom S3 provider, **you MUST pass `--endpoint-url https://s3.hippius.com` to every single command.** If you forget this flag, the AWS CLI will attempt to connect to Amazon's servers and your request will fail.
+:::warning Mandatory for every command
+You **must** pass `--endpoint-url https://s3.hippius.com` to every command. Without it, the AWS CLI sends requests to Amazon's servers and they will fail.
+:::
 
 :::tip Pro Tip: Create a Shell Alias
 Typing the endpoint URL and profile flag every time is tedious. Add these aliases to your `~/.bashrc` or `~/.zshrc`:

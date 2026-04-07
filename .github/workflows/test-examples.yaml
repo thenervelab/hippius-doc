@@ -1,0 +1,41 @@
+name: Test S3 Examples
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Create .env from secrets
+        run: |
+          cat > examples/.env <<EOF
+          HIPPIUS_ACCESS_KEY=${{ secrets.HIPPIUS_ACCESS_KEY }}
+          HIPPIUS_SECRET_KEY=${{ secrets.HIPPIUS_SECRET_KEY }}
+          EOF
+
+      - name: Install Python deps
+        run: pip install boto3 minio python-dotenv
+
+      - name: Install JavaScript deps
+        working-directory: examples/javascript
+        run: npm init -y && npm install @aws-sdk/client-s3 @aws-sdk/s3-request-presigner minio dotenv
+
+      - name: Run Python examples
+        run: bash examples/test/test_python.sh
+
+      - name: Run JavaScript examples
+        run: bash examples/test/test_javascript.sh

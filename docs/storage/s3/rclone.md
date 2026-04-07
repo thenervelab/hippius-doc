@@ -22,8 +22,8 @@ Run `rclone config` and create a new remote, or add this directly to your `~/.co
 [hippius]
 type = s3
 provider = Other
-access_key_id = <YOUR_ACCESS_KEY_ID>
-secret_access_key = <YOUR_SECRET_KEY>
+access_key_id = YOUR_ACCESS_KEY
+secret_access_key = YOUR_SECRET_KEY
 endpoint = https://s3.hippius.com
 region = decentralized
 acl = private
@@ -98,7 +98,7 @@ fusermount -u ~/hippius-mount   # Linux
 umount ~/hippius-mount          # macOS
 ```
 
-:::note
+:::info FUSE Required
 Mount requires FUSE. On macOS: `brew install --cask macfuse`. On Linux: `apt install fuse`.
 :::
 

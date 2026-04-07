@@ -26,8 +26,8 @@ from botocore.config import Config
 s3 = boto3.client(
     "s3",
     endpoint_url="https://s3.hippius.com",
-    aws_access_key_id="<YOUR_ACCESS_KEY_ID>",
-    aws_secret_access_key="<YOUR_SECRET_KEY>",
+    aws_access_key_id="YOUR_ACCESS_KEY",
+    aws_secret_access_key="YOUR_SECRET_KEY",
     region_name="decentralized",
     config=Config(
         signature_version="s3v4",
@@ -110,8 +110,8 @@ from minio import Minio
 
 client = Minio(
     "s3.hippius.com",
-    access_key="<YOUR_ACCESS_KEY_ID>",
-    secret_key="<YOUR_SECRET_KEY>",
+    access_key="YOUR_ACCESS_KEY",
+    secret_key="YOUR_SECRET_KEY",
     secure=True,
     region="decentralized",
 )
@@ -186,8 +186,8 @@ from botocore.config import Config
 s3 = boto3.client(
     "s3",
     endpoint_url="https://s3.hippius.com",
-    aws_access_key_id="<YOUR_ACCESS_KEY_ID>",
-    aws_secret_access_key="<YOUR_SECRET_KEY>",
+    aws_access_key_id="YOUR_ACCESS_KEY",
+    aws_secret_access_key="YOUR_SECRET_KEY",
     region_name="decentralized",
     config=Config(
         signature_version="s3v4",

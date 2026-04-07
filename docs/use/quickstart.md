@@ -1,58 +1,48 @@
 # Quickstart: Store Your First File on Hippius
 
-This guide takes you from zero to your first file uploaded to Hippius S3 in under 5 minutes.
+Hippius S3 is a decentralized, S3-compatible storage service. This guide takes you from zero to your first file upload in under 5 minutes.
 
 ## Step 1: Create an Account
 
-1. Go to [console.hippius.com](https://console.hippius.com).
-2. Sign up with Google or GitHub.
+1. Go to [console.hippius.com](https://console.hippius.com)
+2. Sign up with **Google** or **GitHub** OAuth
+
+That's it — no wallet, seed phrase, or browser extension required.
 
 ## Step 2: Add Credits
 
-Hippius uses a prepaid credit system for storage and bandwidth.
+1. In the console, go to **Billing**
+2. Add credits using **credit card** (Stripe) or **TAO**
 
-1. In the console, navigate to **Billing**.
-2. Add credits using a credit card or crypto (TAO).
+Credits are consumed as you store and retrieve files. See [pricing](https://hippius.com/pricing) for details.
 
-## Step 3: Create a Token
+<div class="screenshot-container">
+  <img src="/img/getting-started/billing.png" alt="Billing page" />
+</div>
 
-You need S3 credentials to authenticate your requests.
+## Step 3: Create S3 Credentials
 
-1. In the console, navigate to **S3 Storage**.
-2. Click **Create Master Token**.
-3. Save your **Access Key ID** (starts with `hip_`) and **Secret Key**. You will not be able to view the secret key again.
+1. In the console, go to **S3 Storage**
+2. Click **Create Master Token**
+3. Save your **Access Key ID** (starts with `hip_`) and **Secret Key**
 
-## Step 4: Upload Your First File
+:::warning
+Store your secret key securely — it cannot be retrieved after creation.
+:::
 
-Choose your preferred tool to interact with Hippius S3.
+<div class="screenshot-container">
+  <img src="/img/getting-started/master-token.png" alt="Master token created" />
+</div>
+
+You can create multiple tokens with different access levels. See [Token Management](/use/s3-token-management) for details. Tokens can also be managed programmatically via the [Management API](https://api.hippius.com/).
+
+## Step 4: Upload a File
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs>
-<TabItem value="cli" label="AWS CLI">
-
-```bash
-# 1. Configure credentials
-export AWS_ACCESS_KEY_ID="<YOUR_ACCESS_KEY_ID>"
-export AWS_SECRET_ACCESS_KEY="<YOUR_SECRET_KEY>"
-export AWS_DEFAULT_REGION="decentralized"
-
-# 2. Create a bucket
-aws s3 mb s3://my-first-bucket --endpoint-url https://s3.hippius.com
-
-# 3. Create a test file
-echo "Hello from Hippius!" > hello.txt
-
-# 4. Upload the file
-aws s3 cp hello.txt s3://my-first-bucket/hello.txt --endpoint-url https://s3.hippius.com
-
-# 5. Download and verify (prints to stdout)
-aws s3 cp s3://my-first-bucket/hello.txt - --endpoint-url https://s3.hippius.com
-```
-
-</TabItem>
-<TabItem value="python" label="Python (MinIO)">
+<TabItem value="python" label="Python (minio)">
 
 ```bash
 pip install minio
@@ -64,8 +54,8 @@ from io import BytesIO
 
 client = Minio(
     "s3.hippius.com",
-    access_key="<YOUR_ACCESS_KEY_ID>",
-    secret_key="<YOUR_SECRET_KEY>",
+    access_key="YOUR_ACCESS_KEY",
+    secret_key="YOUR_SECRET_KEY",
     secure=True,
     region="decentralized",
 )
@@ -83,15 +73,11 @@ client.put_object(
     content_type="text/plain",
 )
 
-# Download and verify
-response = client.get_object("my-first-bucket", "hello.txt")
-print(response.read().decode())
-response.close()
-response.release_conn()
+print("Uploaded successfully!")
 ```
 
 </TabItem>
-<TabItem value="javascript" label="JavaScript (MinIO)">
+<TabItem value="javascript" label="JavaScript (minio)">
 
 ```bash
 npm install minio
@@ -104,31 +90,72 @@ const client = new Minio.Client({
   endPoint: "s3.hippius.com",
   port: 443,
   useSSL: true,
-  accessKey: "<YOUR_ACCESS_KEY_ID>",
-  secretKey: "<YOUR_SECRET_KEY>",
+  accessKey: "YOUR_ACCESS_KEY",
+  secretKey: "YOUR_SECRET_KEY",
   region: "decentralized",
 });
 
-async function main() {
-  // Create a bucket
-  await client.makeBucket("my-first-bucket", "decentralized");
+// Create a bucket
+await client.makeBucket("my-first-bucket", "decentralized");
 
-  // Upload a file
-  const content = Buffer.from("Hello from Hippius!");
-  await client.putObject("my-first-bucket", "hello.txt", content, {
-    "Content-Type": "text/plain",
-  });
+// Upload a file
+const content = Buffer.from("Hello from Hippius!");
+await client.putObject("my-first-bucket", "hello.txt", content, {
+  "Content-Type": "text/plain",
+});
 
-  // Download and verify
-  const stream = await client.getObject("my-first-bucket", "hello.txt");
-  let data = "";
-  for await (const chunk of stream) {
-    data += chunk.toString();
-  }
-  console.log(data);
+console.log("Uploaded successfully!");
+```
+
+</TabItem>
+<TabItem value="cli" label="AWS CLI">
+
+```bash
+# Configure credentials
+export AWS_ACCESS_KEY_ID="YOUR_ACCESS_KEY"
+export AWS_SECRET_ACCESS_KEY="YOUR_SECRET_KEY"
+export AWS_DEFAULT_REGION="decentralized"
+
+# Create a bucket
+aws s3 mb s3://my-first-bucket --endpoint-url https://s3.hippius.com
+
+# Upload a file
+echo "Hello from Hippius!" > hello.txt
+aws s3 cp hello.txt s3://my-first-bucket/hello.txt --endpoint-url https://s3.hippius.com
+```
+
+</TabItem>
+</Tabs>
+
+## Step 5: Download and Verify
+
+<Tabs>
+<TabItem value="python" label="Python (minio)">
+
+```python
+response = client.get_object("my-first-bucket", "hello.txt")
+print(response.read().decode())
+response.close()
+response.release_conn()
+```
+
+</TabItem>
+<TabItem value="javascript" label="JavaScript (minio)">
+
+```javascript
+const stream = await client.getObject("my-first-bucket", "hello.txt");
+let data = "";
+for await (const chunk of stream) {
+  data += chunk.toString();
 }
+console.log(data);
+```
 
-main().catch(console.error);
+</TabItem>
+<TabItem value="cli" label="AWS CLI">
+
+```bash
+aws s3 cp s3://my-first-bucket/hello.txt - --endpoint-url https://s3.hippius.com
 ```
 
 </TabItem>
@@ -136,9 +163,15 @@ main().catch(console.error);
 
 ## Connection Details
 
-If you are configuring a different S3 client, use these settings:
+| Setting | Value |
+|---|---|
+| **Endpoint** | `https://s3.hippius.com` |
+| **Region** | `decentralized` |
+| **Signature** | AWS Signature V4 |
+| **Addressing** | Path-style |
 
-- **Endpoint URL:** `https://s3.hippius.com`
-- **Region:** `decentralized`
-- **Signature Version:** `s3v4` (AWS Signature Version 4)
-- **Addressing Style:** Path-style (`https://s3.hippius.com/bucket-name`)
+## Next Steps
+
+- [S3 API Reference](/storage/s3/integration) — Full list of operations, presigned URLs, ACLs, public buckets, and more
+- [Token Management](/use/s3-token-management) — Create sub-tokens, manage access levels
+- [Pricing](https://hippius.com/pricing) — Storage and bandwidth costs

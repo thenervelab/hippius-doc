@@ -17,8 +17,21 @@ const sidebars: SidebarsConfig = {
         "storage/s3/javascript",
         "storage/s3/aws-cli",
         "storage/s3/rclone",
+        "storage/s3/compatibility",
         "use/troubleshooting",
         "storage/s3/integration",
+        {
+          type: "category",
+          label: "Example Apps",
+          collapsed: true,
+          items: [
+            "storage/s3/examples/file-sharing",
+            "storage/s3/examples/video-hosting",
+            "storage/s3/examples/image-gallery",
+            "storage/s3/examples/static-site",
+            "storage/s3/examples/nextcloud",
+          ],
+        },
         {
           type: "link",
           label: "API Reference ↗",

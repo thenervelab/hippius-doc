@@ -182,7 +182,7 @@ The miner **must be registered in the Arion pallet** before it can join the netw
 :::info Coldkey Registration
 Before registering your miner in the Arion pallet, you need to have a registered coldkey. Please follow the coldkey registration steps in the blockchain node guide:
 
-📖 **[Follow the Coldkey Registration Guide](./running-blockchain-node#5-register-your-node-on-chain)**
+📖 **[Follow the Coldkey Registration Guide](./running-blockchain-node#4-register-your-node-on-chain)**
 
 This includes:
 - Registering your coldkey (main account)

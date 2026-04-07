@@ -26,8 +26,8 @@ const s3 = new S3Client({
   endpoint: "https://s3.hippius.com",
   region: "decentralized",
   credentials: {
-    accessKeyId: "<YOUR_ACCESS_KEY_ID>",
-    secretAccessKey: "<YOUR_SECRET_KEY>",
+    accessKeyId: "YOUR_ACCESS_KEY",
+    secretAccessKey: "YOUR_SECRET_KEY",
   },
   forcePathStyle: true,
 });
@@ -125,8 +125,8 @@ const client = new Client({
   endPoint: "s3.hippius.com",
   port: 443,
   useSSL: true,
-  accessKey: "<YOUR_ACCESS_KEY_ID>",
-  secretKey: "<YOUR_SECRET_KEY>",
+  accessKey: "YOUR_ACCESS_KEY",
+  secretKey: "YOUR_SECRET_KEY",
   region: "decentralized",
 });
 ```
@@ -219,8 +219,8 @@ const s3 = new S3Client({
   endpoint: "https://s3.hippius.com",
   region: "decentralized",
   credentials: {
-    accessKeyId: "<YOUR_ACCESS_KEY_ID>",
-    secretAccessKey: "<YOUR_SECRET_KEY>",
+    accessKeyId: "YOUR_ACCESS_KEY",
+    secretAccessKey: "YOUR_SECRET_KEY",
   },
   forcePathStyle: true,
 });

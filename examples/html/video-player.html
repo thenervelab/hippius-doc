@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hippius S3 Video Player</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+    video { width: 100%; border-radius: 8px; }
+    .info { color: #666; font-size: 0.9rem; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <h1>Video Player</h1>
+  <p>Streaming video from Hippius S3 using range requests.</p>
+
+  <video controls>
+    <source src="YOUR_PRESIGNED_URL_HERE" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <p class="info">
+    Replace <code>YOUR_PRESIGNED_URL_HERE</code> with a presigned URL generated
+    via the <a href="/storage/s3/python">Python</a> or
+    <a href="/storage/s3/javascript">JavaScript</a> SDK.
+    For public buckets, use <code>https://s3.hippius.com/bucket/video.mp4</code> directly.
+  </p>
+</body>
+</html>
