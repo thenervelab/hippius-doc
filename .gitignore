@@ -24,5 +24,9 @@ yarn-error.log*
 # Examples
 __pycache__/
 
+# Working files
+plan.md
+.acpxrc.json
+
 # Claude Code
 CLAUDE.md

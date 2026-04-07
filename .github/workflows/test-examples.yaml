@@ -9,6 +9,7 @@ on:
 jobs:
   test-examples:
     runs-on: ubuntu-latest
+    if: ${{ secrets.HIPPIUS_ACCESS_KEY != '' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -22,10 +23,10 @@ jobs:
 
       - name: Create .env from secrets
         run: |
-          cat > examples/.env <<EOF
-          HIPPIUS_ACCESS_KEY=${{ secrets.HIPPIUS_ACCESS_KEY }}
-          HIPPIUS_SECRET_KEY=${{ secrets.HIPPIUS_SECRET_KEY }}
-          EOF
+          printf "HIPPIUS_ACCESS_KEY=%s\nHIPPIUS_SECRET_KEY=%s\n" "$HIPPIUS_ACCESS_KEY" "$HIPPIUS_SECRET_KEY" > examples/.env
+        env:
+          HIPPIUS_ACCESS_KEY: ${{ secrets.HIPPIUS_ACCESS_KEY }}
+          HIPPIUS_SECRET_KEY: ${{ secrets.HIPPIUS_SECRET_KEY }}
 
       - name: Install Python deps
         run: pip install boto3 minio python-dotenv
