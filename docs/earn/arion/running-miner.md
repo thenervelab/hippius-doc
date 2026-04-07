@@ -405,3 +405,7 @@ cp ~/miner-keypair-backup.bin /var/lib/hippius/miner/data/keypair.bin
 
 The keypair determines your miner's node ID - losing it means re-registering as a new miner.
 
+:::info How rewards are calculated
+Once your miner is registered and running, your rewards depend on bandwidth served, storage held, and uptime. The system recalculates weights every 6 hours and distributes rewards automatically. See [How Weights & Rewards Work](/learn/weights) for the full details.
+:::
+

@@ -2,328 +2,96 @@
 description: 6
 ---
 
-# Hippius Subnet Weight Calculation System
+# How Weights & Rewards Work
 
-This document explains how node weights are calculated in the Hippius storage subnet. The system uses a comprehensive scoring mechanism that evaluates multiple aspects of node performance to encourage reliability, efficiency, and network health.
+If you're running a miner or thinking about becoming one, this is how Hippius decides how much you earn. The system recalculates every 6 hours and distributes rewards automatically — no manual claiming needed.
 
-:::warning Important Notice: Mining Competition and Hardware Requirements
-Mining in this subnet is highly competitive and hardware requirements will increase over time.
+## The Restaurant Analogy
 
-As more miners join the network and upgrade their hardware:
+Think of the Hippius weight system like a restaurant rating that determines how much of the tip pool each waiter gets.
 
-- Performance benchmarks will naturally increase
-- Minimum hardware requirements will trend upward
-- Older or less powerful setups may see reduced rewards
-- You may need to upgrade your hardware periodically
-  :::
+A **manager (validator)** watches each waiter and scores them on two things: how many customers they served (bandwidth, 70%) and how many tables they manage (storage, 30%). The scoring uses a "diminishing returns" curve — going from 0 to 10 tables matters a lot more than going from 100 to 110.
 
-## Overview
+Waiters can work in **teams (families)**. A team's reputation is built from its best members, but each additional member counts a little less than the previous one (80% decay). Only the top 10 members count. The team score is smoothed over time so one bad or good shift doesn't swing things wildly.
 
-The final weight of each node is calculated on a scale of 1-65535 (16-bit) based on several key components:
+The **tip pool** itself isn't fixed — it depends on how busy the restaurant is. When the restaurant is full (the network stores lots of data), waiters get a bigger share. When it's slow, more goes to the house (validator).
 
-### Base Scores (100%)
+Finally, each waiter's cut is simply their team's share of the total: `your_team_score / all_teams_scores * tip_pool`.
 
-- [Availability (35%)](#1-availability-score-35)
-- [Performance (20%)](#2-performance-score-20)
-- [Reliability (15%)](#3-reliability-score-15)
-- [Capacity (15%)](#4-capacity-score-15)
-- [Network (10%)](#5-network-score-10)
-- [Geographic Diversity (5%)](#6-geographic-diversity-score-5)
+## How It Actually Works
 
-### Modifiers
+The weight calculation flows through five layers:
 
-- Bonuses (up to +30%)
-- Penalties (up to -80%)
-- [Network Scaling Factor](#network-scaling-factor)
-- Relative Position Factor
+### 1. Node Scoring
 
-## Scoring Component Breakdown
+The validator observes each miner and scores it based on two metrics with a **log2 diminishing returns** curve:
 
-### 1. Availability Score (35%)
+- **Bandwidth served (70%)** — how much data you delivered in the reporting window
+- **Storage held (30%)** — how much shard data you're storing
 
-Measures the node's ability to respond to pin checks:
+Your score is then multiplied by your uptime percentage, and any strikes or integrity failures are subtracted directly.
 
-- Based on successful_pin_checks / total_pin_checks ratio
-- Minimum 10 checks required to qualify
-- Frequency bonus for nodes with >100 checks
-- Long-term reliability bonus (>30 days)
+### 2. Family Aggregation
 
-### 2. Performance Score (20%)
+Miners can operate as a **family** — one account owning multiple child nodes. The family's weight is computed by taking the top 10 nodes, sorted by score, with each subsequent node contributing 80% of the previous one's factor.
 
-Evaluates node's operational efficiency:
+The family weight is then smoothed with an exponential moving average (30% new value, 70% previous) and clamped so it can't jump more than 100 points per update cycle. This prevents sudden spikes from gaming.
 
-- Response Time (40%): Normalized score based on response latency
-- Bandwidth (40%): Score based on available bandwidth (capped at 10Gbps)
-- Storage Proof Time (20%): Efficiency of storage proof generation
+### 3. Pool Economics
 
-### 3. Reliability Score (15%)
+The total weight budget is 65,535 (the max value of a 16-bit integer). This budget is split between all miners and the validator based on how much real storage the network holds relative to token emissions. More storage on the network = bigger share for miners.
 
-Assesses node's consistency:
+### 4. Weight Assignment
 
-- Uptime Ratio (50%): Minutes online vs total minutes
-- Challenge Success (30%): Successful vs total challenges
-- Stability Bonus (20%): Additional score for consistent performance
-- Minimum 95% uptime expected for full score
+Each miner's final weight is their family's share of the total: `family_weight / all_families_weight * miner_pool`. Miners that go offline get zeroed out. New miners face an 80% weight reduction for the first ~100 minutes.
 
-### 4. Capacity Score (15%)
+### 5. Rewards
 
-Evaluates storage capabilities:
+Every 3,600 blocks (~6 hours), rewards are distributed proportionally based on weight and automatically staked to the node owner's account.
 
-- Usage Ratio (40%): Current vs total storage
-- Growth Rate (30%): Storage growth over time
-- Free Space Management (30%): Optimal range 60-80% usage
-- Minimum requirement: 500GB storage ( will be increased over time )
+## What Matters Most
 
-### 5. Network Score (10%)
+Ordered by impact on your rewards:
 
-Measures network connectivity:
+1. **Bandwidth (70% of your score)** — This is the biggest lever. The log2 curve means the first few GB matter far more than going from 100 TB to 200 TB. Focus on consistent, reliable bandwidth.
 
-- Peer Count (35%): Progressive scoring based on peer connections
-- Latency (35%): Network response time
-- Stability (30%): Long-term connection reliability
-- Minimum 10 peers required
+2. **Storage (30% of your score)** — Store more shard data. Same diminishing returns apply — initial capacity matters most.
 
-### 6. Geographic Diversity Score (5%)
+3. **Uptime** — Your score is multiplied by your uptime. At 95% uptime you lose 5% of your score. At 50%, you lose half.
 
-Promotes network decentralization:
+4. **Avoid penalties** — Each strike costs 50 weight points. Each integrity failure costs 100. Respond correctly to validator challenges and maintain data integrity.
 
-- Distribution Quality (40%): Based on global node spread
-- Location Uniqueness (40%): Rewards underrepresented regions
-- Regional Balance (20%): Prevents regional concentration
+5. **Stay online** — If your heartbeat goes stale, your weight drops to **zero**. Storage miners get ~5 hours of grace; other types get ~30 minutes.
 
-## Detailed Scoring Mechanics
+6. **Family strategy: quality over quantity** — Adding nodes helps, but with heavy diminishing returns. Your best node contributes 100%, the second best 80%, third 64%, and so on. A few solid nodes beats many weak ones.
 
-### Network Scaling Factor
+7. **Be patient** — New families get a minimum floor weight during a grace period. EMA smoothing means weight builds gradually, not overnight.
 
-The network scaling factor adjusts individual node scores based on overall network health:
+## Key Numbers
 
-```rust
-network_scale = (avg_network_uptime * 60 + avg_success_rate * 40) / 100
-```
+| Parameter | Value |
+|-----------|-------|
+| Bandwidth weight | 70% |
+| Storage weight | 30% |
+| Reward cycle | Every 6 hours (3,600 blocks) |
+| Max nodes per family | Top 10 count |
+| Rank decay per node | 80% of previous |
+| Weight smoothing | 30% new / 70% previous |
+| Max weight change per cycle | +/- 100 |
+| Newcomer grace period | 24 update cycles |
+| Offline threshold (storage) | ~5 hours |
+| Offline threshold (other) | ~30 minutes |
+| Strike penalty | 50 points |
+| Integrity failure penalty | 100 points |
 
-- Averages all node metrics
-- Weighted towards uptime stability
-- Normalizes scores across network conditions
+## Full Technical Reference
 
-### Geographic Distribution Mechanics
+For the complete specification — formulas, code references, worked examples, and configuration parameters — see the detailed weight calculation documentation:
 
-```rust
-uniqueness_score = SCALING_FACTOR - (location_count * SCALING_FACTOR / total_nodes)
-distribution_score = (current_regions * SCALING_FACTOR) / target_regions
-balance_score = if region_count > total/3 { SCALING_FACTOR/2 } else { SCALING_FACTOR }
-```
+**[Hippius Subnet Weight Calculation — Full Technical Reference](https://github.com/thenervelab/thebrain/blob/main/readme_weights.md)**
 
-- Minimum 5 distinct regions
-- No region should exceed 33% of nodes
-- Bonus for underrepresented regions
+## Ready to Start?
 
-### Penalty System Details
-
-```rust
-downtime_penalty = min(hours * 10_000, 500_000)  // 1% per hour, max 50%
-challenge_penalty = min(failures * 5_000, 300_000)  // 0.5% per failure, max 30%
-```
-
-- Maximum combined penalty of 80%
-- Progressive application
-- Recovery period considerations
-
-## Bonus System
-
-Additional rewards for:
-
-- Long-term reliability (0.1% per day, max 20%)
-- Perfect challenge performance (5%)
-- Healthy storage growth (5%)
-
-## Penalty System
-
-Deductions for:
-
-- Downtime (1% per hour, max 50%)
-- Failed challenges (0.5% per failure, max 30%)
-- Poor storage utilization (10%)
-- Maximum combined penalty: 80%
-
-## Relative Position Calculation
-
-Compares node performance against the network:
-
-- Minimum 25% base position
-- Scaled based on performance ranking
-- Competitive bonus for close scores
-- Network scaling factor based on average performance
-
-## Anti-Gaming Measures
-
-- Minimum requirements for valid scoring
-- Penalties for suspicious metrics
-- Progressive scoring system
-- Sanity checks on all metrics
-
-## Edge Cases
-
-The system handles various edge cases:
-
-- New nodes with limited history
-- Network outages
-- Storage fluctuations
-- Geographic isolation
-- Peer connection issues
-
-## Implementation Notes
-
-- All calculations use saturating arithmetic to prevent overflow
-- Internal scaling factor of 1,000,000 for precision
-- Safe conversion between u32 and u64 where needed
-
-## Performance Impact
-
-Scores are most heavily influenced by:
-
-1. Consistent uptime and availability
-2. Storage efficiency and growth
-3. Network connectivity and responsiveness
-4. Geographic distribution
-5. Long-term reliability
-
-## Detailed Scoring Mechanics
-
-### Composite Score Details
-
-Used for relative positioning, combines multiple metrics into a single comparable value:
-
-#### 1. Component Weights:
-
-- Uptime Score (30%)
-- Challenge Success (30%)
-- Response Performance (20%)
-- Storage Efficiency (20%)
-
-#### 2. Multipliers:
-
-```rust
-final_score = (weighted_sum * penalty_multiplier) / SCALING_FACTOR
-```
-
-### Precision and Overflow Protection
-
-#### 1. Internal Scaling:
-
-```rust
-const INTERNAL_SCALING: u32 = 1_000_000;
-```
-
-- All calculations use this factor for precision
-- Prevents loss of significance in divisions
-- Allows fine-grained differentiation
-
-#### 2. Safe Arithmetic:
-
-```rust
-value.saturating_mul(scalar)
-     .saturating_div(divisor)
-```
-
-- Prevents integer overflow
-- Maintains score validity
-- Handles edge cases safely
-
-### Progressive Scoring Examples
-
-#### 1. Uptime Scoring:
-
-```rust
-If uptime > 95%:
-    score = base_score * 1.2  // 20% bonus
-If uptime < 95%:
-    score = base_score * 0.7  // 30% penalty
-```
-
-#### 2. Storage Utilization:
-
-```rust
-If 60% ≤ usage ≤ 80%:
-    score = base_score * 1.2  // Optimal range bonus
-If usage < 30% or usage > 90%:
-    apply 10% penalty
-```
-
-#### 3. Peer Connections:
-
-```rust
-If peers < MIN_PEERS:
-    score = (peer_count/MIN_PEERS) * 0.5  // Progressive penalty
-If peers > MIN_PEERS:
-    bonus = min((peers - MIN_PEERS) * 0.001, 0.5)  // Up to 50% bonus
-```
-
-### Long-term Performance Incentives
-
-#### 1. Reliability Bonuses:
-
-```rust
-uptime_bonus = min(consecutive_days * 1_000, 200_000)  // 0.1% per day, max 20%
-challenge_bonus = if perfect_history { 50_000 } else { 0 }  // 5% for perfect record
-```
-
-#### 2. Growth Incentives:
-
-```rust
-growth_bonus = if healthy_growth { 50_000 } else { 0 }  // 5% for sustained growth
-```
-
-### Practical Example
-
-For a node with:
-
-- 98% uptime
-- 15 peers
-- 70% storage utilization
-- 5ms average response time
-- No recent failures
-
-The calculation flow would be:
-
-#### 1. Base Scores:
-
-```rust
-Availability: ~980,000 (98%)
-Performance: ~850,000 (85%)
-Reliability: ~950,000 (95%)
-Capacity: ~900,000 (90%)
-Network: ~850,000 (85%)
-Diversity: depends on network distribution
-```
-
-#### 2. Weighted Combination:
-
-```rust
-Base Weight = (980k*.35 + 850k*.20 + 950k*.15 + 900k*.15 + 850k*.10 + diversity*.05)
-```
-
-#### 3. Modifiers:
-
-```rust
-Bonus: +15% (long-term reliability)
-No penalties
-Network Scaling: Based on network averages
-Position: Based on relative ranking
-```
-
-#### 4. Final Weight Scaling:
-
-```rust
-Final = (Base * Network_Scale * (1 + Bonus) * Position) / Scaling_Factors
-```
-
-## Best Practices for Node Operators
-
-To achieve optimal weights:
-
-1. Maintain stable uptime (>95%)
-2. Provide adequate storage (>100GB)
-3. Maintain healthy peer connections (>10 peers)
-4. Keep storage utilization between 60-80%
-5. Ensure good network connectivity
-6. Choose underserved geographic locations
+- [Set up a storage miner](/earn/storage-miner) — Start earning rewards by providing storage to the network
+- [Run a blockchain node](/earn/arion/running-blockchain-node) — The first step to becoming a miner
+- [Set up a validator](/earn/installing-validator) — Run the infrastructure that scores miners and submits weights

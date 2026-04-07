@@ -11,7 +11,7 @@ A storage miner in the Hippius network is a node that provides decentralized sto
 - **Stores Data Shards**: Receives and stores encrypted fragments (shards) of user files using Reed-Solomon erasure coding.
 - **Proves Storage**: Continuously answers cryptographic challenges to prove they are storing the exact data they claim to hold.
 - **Participates in Consensus**: Runs a Substrate blockchain node to sync network state, register their presence, and receive instructions.
-- **Earns Rewards**: Gets compensated based on the amount of data stored and their reliability in answering challenges.
+- **Earns Rewards**: Gets compensated based on the amount of data stored and their reliability in answering challenges. See [How Weights & Rewards Work](/learn/weights) for the full breakdown.
 
 ## System Requirements
 

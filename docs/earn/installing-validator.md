@@ -4,7 +4,9 @@ description: 6
 
 # Installing a Validator Node
 
-A validator node is a crucial component of the Hippius network that helps secure the network, validate transactions, and participate in consensus. This guide will walk you through the process of setting up and running a validator node using our professional-grade Ansible deployment.
+A validator node is a crucial component of the Hippius network that helps secure the network, validate transactions, and participate in consensus. Validators also observe miner performance — scoring nodes on bandwidth, storage, and uptime — and submit those weights to determine [how rewards are distributed](/learn/weights).
+
+This guide will walk you through the process of setting up and running a validator node using our professional-grade Ansible deployment.
 
 ## Prerequisites
 
