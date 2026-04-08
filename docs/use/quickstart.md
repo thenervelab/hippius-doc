@@ -13,7 +13,7 @@ Hippius S3 is a decentralized, S3-compatible storage service. This guide takes y
   <li>Sign up with <BgStyledText>Google</BgStyledText> or <BgStyledText>GitHub</BgStyledText> OAuth</li>
 </Ordered>
 
-That's it — no wallet, seed phrase, or browser extension required.
+That's it ✅ — no wallet, seed phrase, or browser extension required.
 
 ## Step 2: Add Credits
 
