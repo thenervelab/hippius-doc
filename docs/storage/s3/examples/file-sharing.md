@@ -4,16 +4,21 @@ sidebar_label: File Sharing
 slug: /storage/s3/examples/file-sharing
 ---
 
+import Ordered from '@site/src/components/Ordered';
+import Unordered from '@site/src/components/Unordered';
+
 # File Sharing with Presigned URLs
 
 Build a simple file sharing service: upload a file and get a time-limited download link. No server-side storage needed — files go straight to Hippius S3.
 
 ## How It Works
 
-1. User uploads a file via your app
-2. Your server stores it in Hippius S3
-3. Your server generates a presigned URL (valid 1–168 hours)
-4. User gets a shareable link that expires automatically
+<Ordered>
+  <li>User uploads a file via your app</li>
+  <li>Your server stores it in Hippius S3</li>
+  <li>Your server generates a presigned URL (valid 1–168 hours)</li>
+  <li>User gets a shareable link that expires automatically</li>
+</Ordered>
 
 ## Python (Flask)
 
@@ -119,7 +124,9 @@ app.listen(3000, () => console.log("Listening on :3000"));
 
 ## Key Points
 
-- Presigned URLs expire automatically — no cleanup needed
-- Max expiry is 7 days (604800 seconds)
-- The download link works without any credentials
-- For upload links (let users upload directly from the browser), use presigned PUT URLs — see the [JavaScript guide](/storage/s3/javascript#browser-uploads-with-presigned-urls)
+<Unordered>
+  <li>Presigned URLs expire automatically — no cleanup needed</li>
+  <li>Max expiry is 7 days (604800 seconds)</li>
+  <li>The download link works without any credentials</li>
+  <li>For upload links (let users upload directly from the browser), use presigned <code>PUT</code> URLs — see the <a href="/storage/s3/javascript#browser-uploads-with-presigned-urls">JavaScript guide</a></li>
+</Unordered>

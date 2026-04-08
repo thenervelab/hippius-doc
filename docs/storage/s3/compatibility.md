@@ -51,7 +51,7 @@ This page lists every S3 API operation and whether Hippius supports it.
 | Operation | Status | Notes |
 |-----------|--------|-------|
 | `PutObject` | ✅ Supported | Up to ~5 TiB via multipart |
-| `GetObject` | ✅ Supported | Range requests supported (video streaming) |
+| `GetObject` | ✅ Supported | [Range requests](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GettingObjectsUsingAPIs.html) supported (video streaming) |
 | `HeadObject` | ✅ Supported | |
 | `DeleteObject` | ✅ Supported | |
 | `DeleteObjects` | ✅ Supported | Bulk delete |

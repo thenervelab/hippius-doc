@@ -7,7 +7,7 @@ slug: /storage/s3/javascript
 
 # JavaScript / Node.js
 
-Use the AWS SDK v3 or the MinIO SDK to interact with Hippius S3 from Node.js or the browser.
+Use the [AWS SDK v3](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/) or the [MinIO SDK](https://min.io/docs/minio/linux/developers/javascript/minio-javascript.html) to interact with Hippius S3 from Node.js or the browser.
 
 ## AWS SDK v3
 
@@ -172,7 +172,7 @@ console.log(url);
 
 ## Browser uploads with presigned URLs
 
-For browser-side uploads, generate a presigned PUT URL on your server and use it client-side — no credentials needed in the browser:
+For browser-side uploads, generate a presigned `PUT` URL on your server and use it client-side — no credentials needed in the browser:
 
 **Server (Node.js):**
 

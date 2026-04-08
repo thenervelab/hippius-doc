@@ -2,6 +2,9 @@
 description: 10
 ---
 
+import Ordered from '@site/src/components/Ordered';
+import Unordered from '@site/src/components/Unordered';
+
 # S3 API Reference
 
 Hippius S3 is a drop-in replacement for Amazon S3. If you already have code that talks to AWS S3, change three things — **endpoint**, **region**, and **credentials** — and everything else works.
@@ -114,7 +117,7 @@ aws s3api put-object-acl --bucket mybucket --key document.pdf \
 
 ## Access Control Lists (ACLs)
 
-ACLs let you control who can access your buckets and objects. Use ACLs to share data with other Hippius accounts, grant access to specific [access keys](https://console.hippius.com/dashboard/settings), or make content public.
+ACLs let you control who can access your buckets and objects. Use ACLs to share data with other Hippius accounts, grant access to specific [access keys](https://console.hippius.com/dashboard/storage/s3/sub-tokens), or make content public.
 
 ### Permission Types
 
@@ -251,25 +254,22 @@ with open("large_file.zip", "rb") as file_data:
 
 ## Best Practices
 
-1. **Bucket Naming**: Use lowercase letters, numbers, and hyphens only
-2. **Object Keys**: Can include forward slashes to simulate folders
-3. **Large Files**: Use multipart uploads for files > 5MB
-4. **Connection Management**: Close responses and release connections after downloads
-5. **Security**: Never expose your secret key in client-side code — use [presigned URLs](/storage/s3/python#presigned-url) for browser access
-
-## Rate Limits
-
-- 100 requests per minute per account
-- Large file uploads may take longer due to network processing
-- Parallel uploads are supported for better performance
+<Ordered>
+  <li><strong>Bucket Naming</strong>: Use lowercase letters, numbers, and hyphens only</li>
+  <li><strong>Object Keys</strong>: Can include forward slashes to simulate folders</li>
+  <li><strong>Large Files</strong>: Use multipart uploads for files &gt; 5MB</li>
+  <li><strong>Security</strong>: Never expose your secret key in client-side code — use <a href="/storage/s3/python#presigned-url">presigned URLs</a> for browser access</li>
+</Ordered>
 
 ## More Resources
 
-- [S3 Compatibility Matrix](/storage/s3/compatibility) — Full list of supported operations
-- [AWS S3 vs Cloudflare R2 vs Hippius S3](https://github.com/thenervelab/hippius-s3/blob/main/docs/comparison.md) — Detailed comparison
-- [Troubleshooting](/use/troubleshooting) — Common errors and fixes
-- [Token Management](/use/s3-token-management) — Create sub-tokens, manage access levels
-- [Pricing](https://hippius.com/pricing) — Storage and bandwidth costs
-- [Hippius Management API](/use/api) — Automate token management and billing
-- [hippius-s3 on GitHub](https://github.com/thenervelab/hippius-s3) — Report issues, request features, or contribute
-- [llms.txt](https://docs.hippius.com/llms.txt) — Machine-readable docs for AI agents and LLMs
+<Unordered>
+  <li><a href="/storage/s3/compatibility">S3 Compatibility Matrix</a> — Full list of supported operations</li>
+  <li><a href="https://github.com/thenervelab/hippius-s3/blob/main/docs/comparison.md">AWS S3 vs Cloudflare R2 vs Hippius S3</a> — Detailed comparison</li>
+  <li><a href="/use/troubleshooting">Troubleshooting</a> — Common errors and fixes</li>
+  <li><a href="/use/s3-token-management">Token Management</a> — Create sub-tokens, manage access levels</li>
+  <li><a href="https://hippius.com/pricing">Pricing</a> — Storage and bandwidth costs</li>
+  <li><a href="/use/api">Hippius Management API</a> — Automate token management and billing</li>
+  <li><a href="https://github.com/thenervelab/hippius-s3">hippius-s3 on GitHub</a> — Report issues, request features, or contribute</li>
+  <li><a href="https://docs.hippius.com/llms.txt">llms.txt</a> — Machine-readable docs for AI agents and LLMs</li>
+</Unordered>

@@ -4,16 +4,21 @@ sidebar_label: Video Hosting
 slug: /storage/s3/examples/video-hosting
 ---
 
+import Ordered from '@site/src/components/Ordered';
+import Unordered from '@site/src/components/Unordered';
+
 # Video Hosting
 
-Host and stream videos from Hippius S3. The S3 API supports range requests, so browsers can seek through videos without downloading the entire file.
+Host and stream videos from Hippius S3. The S3 API supports [range requests](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GettingObjectsUsingAPIs.html), so browsers can seek through videos without downloading the entire file.
 
 ## How It Works
 
-1. Upload your video to Hippius S3
-2. Generate a presigned URL (or use a public bucket)
-3. Point an HTML5 `<video>` tag at the URL
-4. The browser handles seeking and buffering via HTTP range requests
+<Ordered>
+  <li>Upload your video to Hippius S3</li>
+  <li>Generate a presigned URL (or use a public bucket)</li>
+  <li>Point an HTML5 <code>&lt;video&gt;</code> tag at the URL</li>
+  <li>The browser handles seeking and buffering via <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/GettingObjectsUsingAPIs.html">HTTP range requests</a></li>
+</Ordered>
 
 ## Upload a Video
 
@@ -106,7 +111,9 @@ Live demo: [https://s3.hippius.com/micky/index.html](https://s3.hippius.com/mick
 
 ## Key Points
 
-- Hippius S3 supports HTTP range requests out of the box — no configuration needed
-- Large videos benefit from multipart upload (the SDK handles this automatically for files > 5MB)
-- For private videos, generate presigned URLs server-side and inject them into your HTML
-- Presigned URLs work in any player that supports standard HTTP video (VLC, mobile browsers, etc.)
+<Unordered>
+  <li>Hippius S3 supports <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/GettingObjectsUsingAPIs.html">HTTP range requests</a> out of the box — no configuration needed</li>
+  <li>Large videos benefit from multipart upload (the SDK handles this automatically for files &gt; 5MB)</li>
+  <li>For private videos, generate presigned URLs server-side and inject them into your HTML</li>
+  <li>Presigned URLs work in any player that supports standard <code>HTTP</code> video (VLC, mobile browsers, etc.)</li>
+</Unordered>

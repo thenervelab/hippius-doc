@@ -2,6 +2,9 @@
 description: 6
 ---
 
+import Ordered from '@site/src/components/Ordered';
+import Unordered from '@site/src/components/Unordered';
+
 # How Weights & Rewards Work
 
 If you're running a miner or thinking about becoming one, this is how Hippius decides how much you earn. The system recalculates every 6 hours and distributes rewards automatically — no manual claiming needed.
@@ -26,8 +29,10 @@ The weight calculation flows through five layers:
 
 The validator observes each miner and scores it based on two metrics with a **log2 diminishing returns** curve:
 
-- **Bandwidth served (70%)** — how much data you delivered in the reporting window
-- **Storage held (30%)** — how much shard data you're storing
+<Unordered>
+  <li><strong>Bandwidth served (70%)</strong> — how much data you delivered in the reporting window</li>
+  <li><strong>Storage held (30%)</strong> — how much shard data you're storing</li>
+</Unordered>
 
 Your score is then multiplied by your uptime percentage, and any strikes or integrity failures are subtracted directly.
 
@@ -53,19 +58,15 @@ Every 3,600 blocks (~6 hours), rewards are distributed proportionally based on w
 
 Ordered by impact on your rewards:
 
-1. **Bandwidth (70% of your score)** — This is the biggest lever. The log2 curve means the first few GB matter far more than going from 100 TB to 200 TB. Focus on consistent, reliable bandwidth.
-
-2. **Storage (30% of your score)** — Store more shard data. Same diminishing returns apply — initial capacity matters most.
-
-3. **Uptime** — Your score is multiplied by your uptime. At 95% uptime you lose 5% of your score. At 50%, you lose half.
-
-4. **Avoid penalties** — Each strike costs 50 weight points. Each integrity failure costs 100. Respond correctly to validator challenges and maintain data integrity.
-
-5. **Stay online** — If your heartbeat goes stale, your weight drops to **zero**. Storage miners get ~5 hours of grace; other types get ~30 minutes.
-
-6. **Family strategy: quality over quantity** — Adding nodes helps, but with heavy diminishing returns. Your best node contributes 100%, the second best 80%, third 64%, and so on. A few solid nodes beats many weak ones.
-
-7. **Be patient** — New families get a minimum floor weight during a grace period. EMA smoothing means weight builds gradually, not overnight.
+<Ordered>
+  <li><strong>Bandwidth (70% of your score)</strong> — This is the biggest lever. The log2 curve means the first few GB matter far more than going from 100 TB to 200 TB. Focus on consistent, reliable bandwidth.</li>
+  <li><strong>Storage (30% of your score)</strong> — Store more shard data. Same diminishing returns apply — initial capacity matters most.</li>
+  <li><strong>Uptime</strong> — Your score is multiplied by your uptime. At 95% uptime you lose 5% of your score. At 50%, you lose half.</li>
+  <li><strong>Avoid penalties</strong> — Each strike costs 50 weight points. Each integrity failure costs 100. Respond correctly to validator challenges and maintain data integrity.</li>
+  <li><strong>Stay online</strong> — If your heartbeat goes stale, your weight drops to <strong>zero</strong>. Storage miners get ~5 hours of grace; other types get ~30 minutes.</li>
+  <li><strong>Family strategy: quality over quantity</strong> — Adding nodes helps, but with heavy diminishing returns. Your best node contributes 100%, the second best 80%, third 64%, and so on. A few solid nodes beats many weak ones.</li>
+  <li><strong>Be patient</strong> — New families get a minimum floor weight during a grace period. EMA smoothing means weight builds gradually, not overnight.</li>
+</Ordered>
 
 ## Key Numbers
 
@@ -92,6 +93,8 @@ For the complete specification — formulas, code references, worked examples, a
 
 ## Ready to Start?
 
-- [Set up a storage miner](/earn/storage-miner) — Start earning rewards by providing storage to the network
-- [Run a blockchain node](/earn/arion/running-blockchain-node) — The first step to becoming a miner
-- [Set up a validator](/earn/installing-validator) — Run the infrastructure that scores miners and submits weights
+<Unordered>
+  <li><a href="/earn/storage-miner">Set up a storage miner</a> — Start earning rewards by providing storage to the network</li>
+  <li><a href="/earn/arion/running-blockchain-node">Run a blockchain node</a> — The first step to becoming a miner</li>
+  <li><a href="/earn/installing-validator">Set up a validator</a> — Run the infrastructure that scores miners and submits weights</li>
+</Unordered>

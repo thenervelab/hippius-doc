@@ -6,7 +6,7 @@ slug: /storage/s3/examples/image-gallery
 
 # Image Gallery
 
-Build a public image gallery backed by Hippius S3. Upload images, list them with `ListObjectsV2`, and serve them directly from a public bucket.
+Build a public image gallery backed by Hippius S3. Upload images, list them with [`ListObjectsV2`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html), and serve them directly from a public bucket.
 
 ## Setup
 
@@ -131,6 +131,6 @@ console.log(images);
 ## Key Points
 
 - Public buckets serve images directly — no presigned URLs needed
-- Use `ListObjectsV2` with a `Prefix` to list images in a specific folder
+- Use [`ListObjectsV2`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html) with a `Prefix` to list images in a specific folder
 - For private galleries, generate presigned URLs server-side and pass them to the frontend
 - Images are served with proper `Content-Type` headers, so browsers render them correctly

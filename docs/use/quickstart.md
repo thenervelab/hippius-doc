@@ -1,18 +1,26 @@
 # Quickstart: Store Your First File on Hippius
 
+import BgStyledText from '@site/src/components/BgStyledText';
+import Ordered from '@site/src/components/Ordered';
+import Unordered from '@site/src/components/Unordered';
+
 Hippius S3 is a decentralized, S3-compatible storage service. This guide takes you from zero to your first file upload in under 5 minutes.
 
 ## Step 1: Create an Account
 
-1. Go to [console.hippius.com](https://console.hippius.com)
-2. Sign up with **Google** or **GitHub** OAuth
+<Ordered>
+  <li>Go to <a href="https://console.hippius.com">console.hippius.com</a></li>
+  <li>Sign up with <BgStyledText>Google</BgStyledText> or <BgStyledText>GitHub</BgStyledText> OAuth</li>
+</Ordered>
 
 That's it — no wallet, seed phrase, or browser extension required.
 
 ## Step 2: Add Credits
 
-1. In the console, go to **Billing**
-2. Add credits using **credit card** (Stripe) or **TAO**
+<Ordered>
+  <li>In the console, go to <BgStyledText>Billing</BgStyledText></li>
+  <li>Add credits using <strong>credit card</strong> (Stripe) or <strong>TAO</strong></li>
+</Ordered>
 
 Credits are consumed as you store and retrieve files. See [pricing](https://hippius.com/pricing) for details.
 
@@ -22,9 +30,11 @@ Credits are consumed as you store and retrieve files. See [pricing](https://hipp
 
 ## Step 3: Create S3 Credentials
 
-1. In the console, go to **S3 Storage**
-2. Click **Create Master Token**
-3. Save your **Access Key ID** (starts with `hip_`) and **Secret Key**
+<Ordered>
+  <li>In the console, go to <BgStyledText>S3 Storage</BgStyledText></li>
+  <li>Click <BgStyledText>Create Master Token</BgStyledText></li>
+  <li>Save your <strong>Access Key ID</strong> (starts with <code>hip_</code>) and <strong>Secret Key</strong></li>
+</Ordered>
 
 :::warning
 Store your secret key securely — it cannot be retrieved after creation.
@@ -172,6 +182,8 @@ aws s3 cp s3://my-first-bucket/hello.txt - --endpoint-url https://s3.hippius.com
 
 ## Next Steps
 
-- [S3 API Reference](/storage/s3/integration) — Full list of operations, presigned URLs, ACLs, public buckets, and more
-- [Token Management](/use/s3-token-management) — Create sub-tokens, manage access levels
-- [Pricing](https://hippius.com/pricing) — Storage and bandwidth costs
+<Unordered>
+  <li><a href="/storage/s3/integration">S3 API Reference</a> — Full list of operations, presigned URLs, ACLs, public buckets, and more</li>
+  <li><a href="/use/s3-token-management">Token Management</a> — Create sub-tokens, manage access levels</li>
+  <li><a href="https://hippius.com/pricing">Pricing</a> — Storage and bandwidth costs</li>
+</Unordered>

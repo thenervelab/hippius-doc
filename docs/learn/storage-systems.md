@@ -3,6 +3,9 @@ sidebar_position: 5
 description: How Hippius stores your data across a decentralized network using Arion, Reed-Solomon erasure coding, and the CRUSH algorithm.
 ---
 
+import Ordered from '@site/src/components/Ordered';
+import Unordered from '@site/src/components/Unordered';
+
 # How Storage Works
 
 Hippius stores data on **Arion** — a purpose-built distributed storage engine. This page explains the architecture: how files are split, placed, and recovered across the network.
@@ -11,9 +14,11 @@ Hippius stores data on **Arion** — a purpose-built distributed storage engine.
 
 When you upload a file:
 
-1. It's split into **30 shards** (10 data + 20 parity) using Reed-Solomon erasure coding
-2. Each shard is placed on a different miner using the **CRUSH algorithm**
-3. To download, only **10 of 30 shards** are needed — the other 20 are redundancy
+<Ordered>
+  <li>It's split into <strong>30 shards</strong> (10 data + 20 parity) using Reed-Solomon erasure coding</li>
+  <li>Each shard is placed on a different miner using the <strong>CRUSH algorithm</strong></li>
+  <li>To download, only <strong>10 of 30 shards</strong> are needed — the other 20 are redundancy</li>
+</Ordered>
 
 This means up to 20 miners can fail simultaneously and your file is still fully recoverable.
 
@@ -42,10 +47,12 @@ Chain Submitter (:3004)  ← publishes cluster maps to the blockchain
 
 Files are encoded using Reed-Solomon with **k=10, m=20** (2 MiB stripes):
 
-- 10 data shards contain the original content
-- 20 parity shards allow reconstruction if any data shards are lost
-- Any 10 of the 30 shards reconstruct the original file
-- Tolerates up to **20 simultaneous miner failures**
+<Unordered>
+  <li>10 data shards contain the original content</li>
+  <li>20 parity shards allow reconstruction if any data shards are lost</li>
+  <li>Any 10 of the 30 shards reconstruct the original file</li>
+  <li>Tolerates up to <strong>20 simultaneous miner failures</strong></li>
+</Unordered>
 
 This is the same technique used in RAID storage and data center infrastructure.
 
@@ -53,9 +60,11 @@ This is the same technique used in RAID storage and data center infrastructure.
 
 Instead of a central index ("which miner has shard 7?"), CRUSH computes the answer mathematically from a cluster map. This means:
 
-- **No central lookup** — any node can compute shard locations independently
-- **Deterministic** — same input always produces the same placement
-- **Topology-aware** — shards spread across different miners/regions to reduce correlated failures
+<Unordered>
+  <li><strong>No central lookup</strong> — any node can compute shard locations independently</li>
+  <li><strong>Deterministic</strong> — same input always produces the same placement</li>
+  <li><strong>Topology-aware</strong> — shards spread across different miners/regions to reduce correlated failures</li>
+</Unordered>
 
 The cluster map is published to the Hippius blockchain by the chain submitter, making it verifiable and tamper-resistant.
 
@@ -63,20 +72,24 @@ The cluster map is published to the Hippius blockchain by the chain submitter, m
 
 Shard transfers happen over **QUIC** connections using [Iroh](https://iroh.computer/):
 
-- Encrypted and authenticated by default
-- Multiplexed — multiple shards transfer in parallel over a single connection
-- Direct UDP paths between nodes (hole-punching), relay fallback when needed
-- Each miner's identity is its Ed25519 public key (node ID)
+<Unordered>
+  <li>Encrypted and authenticated by default</li>
+  <li>Multiplexed — multiple shards transfer in parallel over a single connection</li>
+  <li>Direct UDP paths between nodes (hole-punching), relay fallback when needed</li>
+  <li>Each miner's identity is its Ed25519 public key (node ID)</li>
+</Unordered>
 
 ## Automatic repair
 
 The **Validator** runs a rebuild agent that:
 
-1. Monitors miner health via heartbeats
-2. Detects when a miner goes offline
-3. Fetches k=10 shards from remaining miners
-4. Reconstructs the missing shards
-5. Places them on new miners using CRUSH
+<Ordered>
+  <li>Monitors miner health via heartbeats</li>
+  <li>Detects when a miner goes offline</li>
+  <li>Fetches k=10 shards from remaining miners</li>
+  <li>Reconstructs the missing shards</li>
+  <li>Places them on new miners using CRUSH</li>
+</Ordered>
 
 The **Warden** audits miners with cryptographic proof-of-storage challenges (Plonky3 ZK circuits) to verify they're actually storing the data they claim to store.
 
