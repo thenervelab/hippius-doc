@@ -98,7 +98,12 @@ const sidebars: SidebarsConfig = {
     },
 
     // ── STAKING ────────────────────────────────────────────────────
-    "earn/staking",
+    {
+      type: "category",
+      label: "Staking",
+      collapsed: true,
+      items: ["earn/staking"],
+    },
 
     // ── EARN / MINE ────────────────────────────────────────────────
     {
