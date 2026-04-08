@@ -1,65 +1,47 @@
-# Hippius - Decentralized S3-Compatible Storage
+# Hippius - Decentralized Cloud Storage
 
-> Hippius is a decentralized cloud storage platform that provides a fully S3-compatible API backed by Arion distributed storage and a custom Substrate blockchain. Any S3 client works with Hippius out of the box.
+> Hippius is a decentralized cloud storage platform backed by Arion distributed storage and a custom Substrate blockchain. It provides a fully S3-compatible API, a desktop app, a web console, and confidential compute. Any S3 client works out of the box.
 
-## Quick Start
+## Products
 
-1. Create account at console.hippius.com (Google or GitHub OAuth)
-2. Add credits via Console > Billing (credit card via Stripe, or TAO)
-3. Create S3 credentials via Console > S3 Storage > Create Master Token — save your Access Key ID (hip_...) and Secret Key
-4. Configure your S3 client with the connection details below and start uploading
+- **S3 Storage** — S3-compatible API at s3.hippius.com. Store anything. Standard clients (boto3, AWS CLI, rclone) work without modification.
+- **Desktop App** — Native app (macOS, Windows, Linux) for file sync, wallet, and storage management.
+- **Web Console** — Browser dashboard at console.hippius.com for storage, VMs, staking, and tokens.
+- **Virtual Machines** — Decentralized compute (beta access).
+- **Confidential Compute** — VMs inside AMD SEV-SNP encrypted enclaves.
 
-IMPORTANT: Hippius uses its own account system. ETH wallets, TAO wallets,
-and Polkadot browser extensions are NOT used for S3 storage access.
-TAO can be used only to pay for credits, not for authentication.
+## Quick Start (S3)
+
+1. Create account at https://console.hippius.com (Google or GitHub OAuth — no wallet needed)
+2. Add credits: Console > Billing (credit card via Stripe, or TAO)
+3. Create S3 credentials: Console > S3 Storage > Create Master Token
+4. Save your Access Key ID (starts with `hip_`) and Secret Key
+5. Connect with any S3 client using the details below
+
+IMPORTANT: Hippius S3 uses its own credential system. ETH wallets, TAO wallets,
+and Polkadot browser extensions are NOT used for S3 access.
+TAO can only be used to pay for credits, not for authentication.
 
 ## S3 Connection Details
 
 - Endpoint: https://s3.hippius.com
 - Region: decentralized
 - Signature: AWS Signature V4
-- Addressing style: path
+- Addressing style: path-style
 
-## Common Operations (AWS CLI)
+## Client Configurations
 
-Configure credentials:
+### AWS CLI
 
     export AWS_ACCESS_KEY_ID="hip_your_key"
     export AWS_SECRET_ACCESS_KEY="your_secret"
     export AWS_DEFAULT_REGION="decentralized"
 
-Create bucket:
-
     aws s3 mb s3://my-bucket --endpoint-url https://s3.hippius.com
-
-Upload file:
-
-    aws s3 cp file.txt s3://my-bucket/file.txt --endpoint-url https://s3.hippius.com
-
-Download file:
-
-    aws s3 cp s3://my-bucket/file.txt file.txt --endpoint-url https://s3.hippius.com
-
-List objects:
-
+    aws s3 cp file.txt s3://my-bucket/ --endpoint-url https://s3.hippius.com
+    aws s3 cp s3://my-bucket/file.txt . --endpoint-url https://s3.hippius.com
     aws s3 ls s3://my-bucket/ --endpoint-url https://s3.hippius.com
-
-Generate presigned URL (1 hour):
-
     aws s3 presign s3://my-bucket/file.txt --endpoint-url https://s3.hippius.com --expires-in 3600
-
-## Client Configurations
-
-### Python (minio)
-
-    from minio import Minio
-    client = Minio(
-        "s3.hippius.com",
-        access_key="hip_your_key",
-        secret_key="your_secret",
-        secure=True,
-        region="decentralized",
-    )
 
 ### Python (boto3)
 
@@ -74,10 +56,31 @@ Generate presigned URL (1 hour):
         config=Config(signature_version="s3v4", s3={"addressing_style": "path"}),
     )
 
+### Python (minio)
+
+    from minio import Minio
+    client = Minio(
+        "s3.hippius.com",
+        access_key="hip_your_key",
+        secret_key="your_secret",
+        secure=True,
+        region="decentralized",
+    )
+
+### JavaScript (AWS SDK v3)
+
+    import { S3Client } from "@aws-sdk/client-s3";
+    const s3 = new S3Client({
+        endpoint: "https://s3.hippius.com",
+        region: "decentralized",
+        credentials: { accessKeyId: "hip_your_key", secretAccessKey: "your_secret" },
+        forcePathStyle: true,
+    });
+
 ### JavaScript (minio)
 
-    const Minio = require("minio");
-    const client = new Minio.Client({
+    const { Client } = require("minio");
+    const client = new Client({
         endPoint: "s3.hippius.com",
         port: 443,
         useSSL: true,
@@ -86,16 +89,31 @@ Generate presigned URL (1 hour):
         region: "decentralized",
     });
 
+### rclone
+
+    # ~/.config/rclone/rclone.conf
+    [hippius]
+    type = s3
+    provider = Other
+    access_key_id = hip_your_key
+    secret_access_key = your_secret
+    endpoint = https://s3.hippius.com
+    region = decentralized
+
+    rclone ls hippius:
+    rclone sync ./folder hippius:my-bucket/folder
+
 ## Supported S3 Operations
 
-- Bucket: CreateBucket, DeleteBucket, ListBuckets, HeadBucket
+- Bucket: CreateBucket, DeleteBucket, ListBuckets, HeadBucket, GetBucketLocation
 - Object: PutObject, GetObject, HeadObject, DeleteObject, CopyObject
 - List: ListObjects, ListObjectsV2
-- Multipart: InitiateMultipartUpload, UploadPart, CompleteMultipartUpload, AbortMultipartUpload
-- Tags: PutObjectTagging, GetObjectTagging, DeleteObjectTagging, PutBucketTagging, GetBucketTagging, DeleteBucketTagging
+- Multipart: InitiateMultipartUpload, UploadPart, CompleteMultipartUpload, AbortMultipartUpload (up to ~5 TiB)
+- Presigned: PresignedGetObject, PresignedPutObject (max 7 days)
+- Tags: PutObjectTagging, GetObjectTagging, DeleteObjectTagging, PutBucketTagging, GetBucketTagging
 - ACL: PutBucketAcl, GetBucketAcl, PutObjectAcl, GetObjectAcl
 - Policy: PutBucketPolicy, GetBucketPolicy, DeleteBucketPolicy
-- Other: PresignedGetObject, PresignedPutObject, PutBucketLifecycle
+- Other: PutBucketLifecycle, range requests (video streaming)
 
 ## Not Supported
 
@@ -106,54 +124,68 @@ Generate presigned URL (1 hour):
 ## Management API (api.hippius.com)
 
 Full OpenAPI spec: https://api.hippius.com/?format=openapi
+Authenticate: POST /auth/exchange/ with OAuth token → returns bearer token
 
-Authenticate with a bearer token obtained via OAuth (/auth/exchange/).
+### Token management
 
-### Token management (programmatic S3 credential CRUD)
-
-- GET  /objectstore/master-tokens/              List master tokens
-- POST /objectstore/master-tokens/              Create master token
-- POST /objectstore/master-tokens/{id}/revoke/  Revoke master token
-- POST /objectstore/master-tokens/{id}/rotate/  Rotate master token secret
-- Same endpoints exist for sub-tokens at /objectstore/sub-tokens/
+    GET  /objectstore/master-tokens/              List master tokens
+    POST /objectstore/master-tokens/              Create master token
+    POST /objectstore/master-tokens/{id}/revoke/  Revoke token
+    POST /objectstore/master-tokens/{id}/rotate/  Rotate secret
+    # Same endpoints at /objectstore/sub-tokens/ for sub-tokens
 
 ### Billing & credits
 
-- GET  /billing/credits/balance/                    Check credit balance
-- GET  /billing/latest-tao-price/                   Get current TAO/USD price (public, no auth)
-- POST /billing/stripe/create-checkout-session/     Create Stripe payment session ($20-$10,000)
-- POST /billing/stripe/create-subscription/         Create recurring subscription
-- GET  /billing/stripe/subscription-plans/          List available plans
+    GET  /billing/credits/balance/                     Check balance
+    GET  /billing/latest-tao-price/                    TAO/USD price (no auth)
+    POST /billing/stripe/create-checkout-session/      Stripe payment ($20–$10,000)
+    POST /billing/stripe/create-subscription/          Recurring subscription
+    GET  /billing/stripe/subscription-plans/           List plans
 
-### Pay with TAO (programmatic crypto top-up)
+### Pay with TAO (programmatic)
 
-  Step 1: Create a crypto transaction
+    # Step 1: Create transaction
     curl -X POST https://api.hippius.com/billing/transactions/ \
       -H "Authorization: Token YOUR_TOKEN" \
       -H "Content-Type: application/json" \
       -d '{"payment_type": "crypto", "amount": "50.00", "currency": "TAO"}'
-    Response includes "payment_address" — send TAO to this address on Bittensor.
+    # Response includes payment_address — send TAO there on Bittensor
 
-  Step 2: Send TAO to the payment_address returned above.
-    Credits are applied automatically once the transaction is confirmed on-chain.
-
-  Step 3: Poll for confirmation
+    # Step 2: Poll for confirmation
     curl https://api.hippius.com/billing/transactions/{id}/ \
       -H "Authorization: Token YOUR_TOKEN"
-    Look for "status": "completed" and "substrate_success": true.
+    # Look for "status": "completed" and "substrate_success": true
 
-  Step 4: Verify credits
+    # Step 3: Verify credits
     curl https://api.hippius.com/billing/credits/balance/ \
       -H "Authorization: Token YOUR_TOKEN"
 
-  Transaction endpoints:
-  - POST /billing/transactions/                     Create payment (crypto or stripe)
-  - GET  /billing/transactions/                     List all transactions
-  - GET  /billing/transactions/{id}/                Get transaction status
+## Storage Architecture (Arion)
 
-### What requires the web console
+Arion is Hippius's purpose-built distributed storage engine. Key properties:
+- Reed-Solomon erasure coding: k=10 data shards + m=20 parity shards per file (any 10 reconstruct the file)
+- CRUSH placement algorithm: deterministic, topology-aware shard placement across miners
+- QUIC-based P2P networking via Iroh
+- Warden service provides proof-of-storage audits
+- Automatic recovery: validator detects offline miners and rebuilds missing shards
 
-Account creation at console.hippius.com (Google/GitHub OAuth, one-time step)
+Upload flow: Client → Gateway (HTTP) → Validator (RS encode + CRUSH place) → Miners (P2P QUIC)
+Download flow: Gateway fetches k=10 shards from miners → reconstructs → returns to client
+
+## Miner CLI
+
+`miner-cli` manages on-chain miner registration. Build from source:
+
+    git clone https://github.com/thenervelab/arion.git && cd arion
+    cargo build --release --bin miner-cli
+
+Commands:
+- `show-node-id` — display miner's P2P identity
+- `register-child --child-ss58 <addr>` — register miner under family account
+- `deregister-child --child-ss58 <addr>` — begin unbonding
+- `claim-unbonded --child-ss58 <addr>` — reclaim deposit after unbonding period
+
+Required flags: `--chain-ws-url wss://rpc.hippius.network --family-mnemonic-file /path/to/mnemonic.txt`
 
 ## Rate Limits
 
@@ -161,23 +193,28 @@ Account creation at console.hippius.com (Google/GitHub OAuth, one-time step)
 
 ## Pricing
 
-See https://hippius.com/pricing for current storage and bandwidth rates.
+https://hippius.com/pricing
 
-## Become a Storage Miner
+## Documentation
 
-Earn rewards by providing storage capacity to the Hippius network. See the miner setup guide:
-https://docs.hippius.io/earn/arion/running-blockchain-node
+- Quickstart: https://docs.hippius.com/use/quickstart
+- S3 API Reference: https://docs.hippius.com/storage/s3/integration
+- Python guide: https://docs.hippius.com/storage/s3/python
+- JavaScript guide: https://docs.hippius.com/storage/s3/javascript
+- AWS CLI guide: https://docs.hippius.com/storage/s3/aws-cli
+- rclone guide: https://docs.hippius.com/storage/s3/rclone
+- Token management: https://docs.hippius.com/use/s3-token-management
+- Miner setup: https://docs.hippius.com/earn/arion/running-blockchain-node
 
 ## Support
 
-If you have issues with any Hippius service, report them in one of these channels:
-
-- Hippius Discord support channel: https://discord.com/channels/1298001698874327131/1442875352484548609
-- Bittensor Discord (Subnet 75 / Hippius): https://discord.com/channels/799672011265015819/1349124437752152075
+- Discord: https://discord.com/channels/1298001698874327131/1442875352484548609
+- Bittensor Discord (Subnet 75): https://discord.com/channels/799672011265015819/1349124437752152075
 
 ## Links
 
 - Website: https://hippius.com
-- Documentation: https://docs.hippius.com
 - Console: https://console.hippius.com
+- Documentation: https://docs.hippius.com
+- API: https://api.hippius.com
 - X/Twitter: https://x.com/hippius_subnet

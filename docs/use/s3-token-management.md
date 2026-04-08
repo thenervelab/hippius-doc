@@ -341,4 +341,6 @@ Master Tokens and Sub Tokens provide a flexible, secure way to manage access to 
 - **Flexibility**: Custom permissions, bucket selection, and expiration dates
 - **Management**: Comprehensive interface in both Console and Desktop App
 
-Start using tokens today to secure your S3 storage and integrate with your applications!
+:::tip Automate with the Hippius API
+All token operations — creating, listing, revoking, and rotating — can also be done programmatically via the [Hippius Management API](/use/api). Use it to automate token lifecycle in CI/CD pipelines, multi-tenant apps, or AI agent workflows.
+:::

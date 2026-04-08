@@ -182,7 +182,7 @@ The miner **must be registered in the Arion pallet** before it can join the netw
 :::info Coldkey Registration
 Before registering your miner in the Arion pallet, you need to have a registered coldkey. Please follow the coldkey registration steps in the blockchain node guide:
 
-📖 **[Follow the Coldkey Registration Guide](./running-blockchain-node#5-register-your-node-on-chain)**
+📖 **[Follow the Coldkey Registration Guide](./running-blockchain-node#4-register-your-node-on-chain)**
 
 This includes:
 - Registering your coldkey (main account)
@@ -404,4 +404,8 @@ cp ~/miner-keypair-backup.bin /var/lib/hippius/miner/data/keypair.bin
 ```
 
 The keypair determines your miner's node ID - losing it means re-registering as a new miner.
+
+:::info How rewards are calculated
+Once your miner is registered and running, your rewards depend on bandwidth served, storage held, and uptime. The system recalculates weights every 6 hours and distributes rewards automatically. See [How Weights & Rewards Work](/learn/weights) for the full details.
+:::
 

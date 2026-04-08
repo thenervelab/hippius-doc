@@ -56,11 +56,13 @@ hippius account list
 
 #### If you're setting up fresh OR need to replace corrupted keys:
 ```bash  
-# Generate new keys (⚠️ This creates a NEW identity)
+# Generate new keys — this creates a NEW identity
 /opt/hippius/bin/hippius key generate-node-key --file /opt/hippius/data/chains/hippius_mainnet/network/secret_ed25519
 ```
 
-⚠️ **Warning:** Generating new keys on an existing validator will change your node identity and break your current registration.
+:::danger
+Generating new keys on an existing validator will change your node identity and break your current registration. Only do this for a fresh setup.
+:::
 
 The output will show your node's peer ID and private key in hex format. Save both values - you'll need them for registration.
 

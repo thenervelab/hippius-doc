@@ -8,6 +8,7 @@ export const URLS = {
   TWITTER: "https://x.com/hippius_subnet",
   DISCORD: "https://discord.hippius.com",
   LEARN: "/learn/intro",
-  API: "https://docs.hippius.com/blockchain/api",
+  USE: "/use/quickstart",
+  API: "https://api.hippius.com/",
   X: "https://x.com/hippius_subnet",
 };

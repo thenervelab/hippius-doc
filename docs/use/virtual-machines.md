@@ -6,6 +6,7 @@ slug: /use/virtual-machines
 ---
 
 import Ordered from '@site/src/components/Ordered';
+import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 
 ## Introduction
@@ -175,8 +176,10 @@ Once your VM is running, you can connect to it using SSH from your local termina
 
 Each running VM displays its connection information in the instance list:
 
-- **Nebula IP**: Use this IP address to connect to your VM (shown in the "NEBULA IP" column)
-- **SSH User**: The default username is `hippius` for all VMs
+<Unordered>
+  <li><strong>Nebula IP</strong>: Use this IP address to connect to your VM (shown in the "NEBULA IP" column)</li>
+  <li><strong>SSH User</strong>: The default username is <code>hippius</code> for all VMs</li>
+</Unordered>
 
 ### Connecting from macOS or Linux
 

@@ -205,7 +205,7 @@ Sync & Storage
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
       <li>Click <BgStyledIconWithText text="Customize RPC" icon="Box" />.</li>
-      <li>Click Edit RPC.</li>
+      <li>Click <BgStyledText>Edit RPC</BgStyledText>.</li>
       <li>Save the edited RPC.</li>
     </Ordered>
 

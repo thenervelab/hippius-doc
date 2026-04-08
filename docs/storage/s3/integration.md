@@ -2,253 +2,34 @@
 description: 10
 ---
 
+import Ordered from '@site/src/components/Ordered';
+import Unordered from '@site/src/components/Unordered';
+
 # S3 API Reference
 
-Complete reference for the Hippius S3 API. If you're new, start with the [Quickstart guide](/use/quickstart) to get your account and credentials set up.
+Hippius S3 is a drop-in replacement for Amazon S3. If you already have code that talks to AWS S3, change three things — **endpoint**, **region**, and **credentials** — and everything else works.
 
-## Overview
+## Connection Parameters
 
-Hippius S3 provides a fully S3-compatible API that stores your data on the decentralized Hippius network. You can use any standard S3 client library to interact with our service.
+| Parameter | Value |
+|-----------|-------|
+| **Endpoint** | `https://s3.hippius.com` |
+| **Region** | `decentralized` |
+| **Signature** | AWS Signature V4 |
+| **Path style** | Required (`forcePathStyle: true`) |
 
-**Key Features:**
+Get your credentials at [console.hippius.com](https://console.hippius.com). See the [Quickstart](/use/quickstart) to go from zero to first upload in 5 minutes.
 
-- Full S3 API compatibility (tested with MinIO, boto3, AWS CLI)
-- Decentralized storage across the Hippius network
-- Presigned URLs for secure, time-limited file sharing
-- Video streaming with range requests
-- ACL support for fine-grained access control
-- Multi-part uploads for large files (up to ~5 TiB)
-- Bucket and object tagging
+## Client Guides
 
-## Getting Started
+| Language | Guide |
+|----------|-------|
+| Python (boto3 & MinIO) | [Python guide](/storage/s3/python) |
+| JavaScript / Node.js | [JavaScript guide](/storage/s3/javascript) |
+| AWS CLI | [AWS CLI guide](/storage/s3/aws-cli) |
+| rclone | [rclone guide](/storage/s3/rclone) |
 
-Follow the [Quickstart guide](/use/quickstart) to create your account and S3 credentials. Once you have your `hip_*` access key and secret, use the client configurations below.
-
-Legacy users with seed phrases can refer to [Mnemonic Authentication](/learn/mnemonic-auth).
-
-## Python Setup
-
-### Installation
-
-```bash
-pip install minio
-```
-
-### Client Configuration
-
-```python
-from minio import Minio
-
-# Your access key credentials from https://console.hippius.com/dashboard/settings
-access_key_id = "hip_your_access_key_id_here"
-secret_key = "your_secret_key_here"
-
-# Create client
-client = Minio(
-    "s3.hippius.com",
-    access_key=access_key_id,
-    secret_key=secret_key,
-    secure=True,
-    region="decentralized"
-)
-```
-
-### Create a Bucket
-
-```python
-import time
-
-# Generate unique bucket name
-bucket_name = f"my-bucket-{int(time.time())}"
-
-# Create bucket
-client.make_bucket(bucket_name)
-print(f"Bucket '{bucket_name}' created successfully!")
-```
-
-### Upload an Object
-
-```python
-# File upload
-with open("my_file.pdf", "rb") as file_data:
-    file_size = file_data.seek(0, 2)  # Get file size
-    file_data.seek(0)  # Reset to beginning
-
-    client.put_object(
-        bucket_name,
-        "documents/my_file.pdf",
-        file_data,
-        file_size,
-        content_type="application/pdf"
-    )
-print("File uploaded successfully!")
-```
-
-### Download an Object
-
-```python
-# Download to file
-response = client.get_object(bucket_name, "documents/my_file.pdf")
-with open("downloaded_file.pdf", "wb") as file:
-    for data in response.stream(1024):
-        file.write(data)
-response.close()
-response.release_conn()
-print("File downloaded successfully!")
-```
-
-### Presigned URLs
-
-Generate temporary, shareable download links without exposing your credentials. Presigned URLs expire after a set duration (max 7 days).
-
-```python
-from datetime import timedelta
-from minio import Minio
-
-client = Minio(
-    "s3.hippius.com",
-    access_key="hip_your_access_key_id_here",
-    secret_key="your_secret_key_here",
-    secure=True,
-    region="decentralized",
-)
-
-# Upload a file
-client.fput_object("my-bucket", "video.mp4", "video.mp4")
-
-# Generate a presigned download URL (valid for 1 hour)
-url = client.presigned_get_object("my-bucket", "video.mp4", expires=timedelta(hours=1))
-print(f"Presigned URL: {url}")
-```
-
-Using boto3:
-
-```python
-import boto3
-from botocore.config import Config
-
-s3 = boto3.client(
-    "s3",
-    endpoint_url="https://s3.hippius.com",
-    aws_access_key_id="hip_your_access_key_id_here",
-    aws_secret_access_key="your_secret_key_here",
-    region_name="decentralized",
-    config=Config(signature_version="s3v4", s3={"addressing_style": "path"}),
-)
-
-url = s3.generate_presigned_url(
-    "get_object",
-    Params={"Bucket": "my-bucket", "Key": "video.mp4"},
-    ExpiresIn=3600,
-)
-print(f"Presigned URL: {url}")
-```
-
-Using AWS CLI:
-
-```bash
-aws s3 presign s3://my-bucket/video.mp4 --endpoint-url https://s3.hippius.com --expires-in 3600
-```
-
-Presigned URLs work with any player or client that supports range requests, making them ideal for video streaming:
-
-```html
-<video controls width="720">
-  <source src="YOUR_PRESIGNED_URL_HERE" type="video/mp4" />
-</video>
-```
-
-Live demo: https://s3.hippius.com/micky/index.html
-
-For more examples (Python, JavaScript, async client), see the [presigned URL guide](https://github.com/thenervelab/hippius-s3/blob/main/examples/presigned-urls-demo.md) and the [`examples/`](https://github.com/thenervelab/hippius-s3/tree/main/examples) directory.
-
-## JavaScript Setup
-
-### Installation
-
-```bash
-npm install minio
-```
-
-### Client Configuration
-
-```javascript
-const Minio = require("minio");
-
-// Your access key credentials from https://console.hippius.com/dashboard/settings
-const accessKeyId = "hip_your_access_key_id_here";
-const secretKey = "your_secret_key_here";
-
-// Create client
-const minioClient = new Minio.Client({
-  endPoint: "s3.hippius.com",
-  port: 443,
-  useSSL: true,
-  accessKey: accessKeyId,
-  secretKey: secretKey,
-  region: "decentralized",
-});
-```
-
-### Create a Bucket
-
-```javascript
-// Generate unique bucket name
-const bucketName = `my-bucket-${Date.now()}`;
-
-// Create bucket
-async function createBucket() {
-  try {
-    await minioClient.makeBucket(bucketName, "decentralized");
-    console.log(`Bucket '${bucketName}' created successfully!`);
-  } catch (err) {
-    console.log("Error creating bucket:", err);
-  }
-}
-
-createBucket();
-```
-
-### Upload an Object
-
-```javascript
-// File upload
-async function uploadFile() {
-  const filePath = "./my_file.pdf";
-  const fileName = "documents/my_file.pdf";
-
-  try {
-    await minioClient.fPutObject(bucketName, fileName, filePath, {
-      "Content-Type": "application/pdf",
-    });
-    console.log("File uploaded successfully!");
-  } catch (err) {
-    console.log("Error uploading file:", err);
-  }
-}
-
-uploadFile();
-```
-
-### Download an Object
-
-```javascript
-// Download to file
-async function downloadToFile() {
-  try {
-    await minioClient.fGetObject(
-      bucketName,
-      "documents/my_file.pdf",
-      "./downloaded_file.pdf"
-    );
-    console.log("File downloaded successfully!");
-  } catch (err) {
-    console.log("Error downloading file:", err);
-  }
-}
-
-downloadToFile();
-```
+For the full list of supported and unsupported S3 operations, see the [S3 Compatibility Matrix](/storage/s3/compatibility).
 
 ## Public Buckets
 
@@ -272,11 +53,10 @@ aws s3api put-bucket-acl --bucket mybucket --acl public-read \
 import json
 from minio import Minio
 
-# Get credentials from https://console.hippius.com/dashboard/settings
 client = Minio(
     "s3.hippius.com",
-    access_key="hip_your_access_key_id_here",
-    secret_key="your_secret_key_here",
+    access_key="YOUR_ACCESS_KEY",
+    secret_key="YOUR_SECRET_KEY",
     secure=True,
     region="decentralized"
 )
@@ -300,73 +80,21 @@ policy = {
 }
 
 client.set_bucket_policy(bucket_name, json.dumps(policy))
-print(f"✓ Bucket '{bucket_name}' is now public")
-```
-
-### Uploading to Public Buckets
-
-Upload files normally - they become publicly accessible automatically:
-
-#### Python Example
-
-```python
-from minio import Minio
-from io import BytesIO
-
-# Setup client
-client = Minio(
-    "s3.hippius.com",
-    access_key="hip_your_access_key_id_here",
-    secret_key="your_secret_key_here",
-    secure=True,
-    region="decentralized"
-)
-
-# Upload file to public bucket
-file_content = b"Hello! This file is publicly accessible."
-bucket_name = "my-public-bucket"
-object_name = "documents/public-file.txt"
-
-client.put_object(
-    bucket_name,
-    object_name,
-    BytesIO(file_content),
-    length=len(file_content),
-    content_type="text/plain"
-)
-
-print(f"✓ File uploaded!")
-print(f"Public URL: https://s3.hippius.com/{bucket_name}/{object_name}")
-```
-
-#### JavaScript Example
-
-```javascript
-// Upload file to public bucket
-const fileContent = Buffer.from("Hello! This file is publicly accessible.");
-const bucketName = "my-public-bucket";
-const objectName = "documents/public-file.txt";
-
-await minioClient.putObject(bucketName, objectName, fileContent, {
-  "Content-Type": "text/plain",
-});
-
-console.log(`✓ File uploaded!`);
-console.log(`Public URL: https://s3.hippius.com/${bucketName}/${objectName}`);
+print(f"Bucket '{bucket_name}' is now public")
 ```
 
 ### Accessing Public Files
 
-Public objects are accessible via standard S3 path-style URLs - no authentication required:
+Public objects are accessible via path-style URLs — no authentication required:
 
-```bash
-# Direct browser access or curl
+```
 https://s3.hippius.com/{bucket-name}/{object-key}
+```
 
-# Examples:
+Examples:
+```
 https://s3.hippius.com/my-public-bucket/document.pdf
 https://s3.hippius.com/my-public-bucket/images/photo.jpg
-https://s3.hippius.com/my-public-bucket/documents/public-file.txt
 ```
 
 ### Making Individual Objects Public
@@ -374,108 +102,24 @@ https://s3.hippius.com/my-public-bucket/documents/public-file.txt
 Keep your bucket private but make specific objects public:
 
 ```bash
-# Using AWS CLI
 aws s3api put-object-acl --bucket mybucket --key document.pdf \
   --acl public-read --endpoint-url https://s3.hippius.com
 ```
 
-```python
-# Using Minio Python client
-from minio import Minio
+### Private vs Public
 
-client = Minio(
-    "s3.hippius.com",
-    access_key="hip_your_access_key_id_here",
-    secret_key="your_secret_key_here",
-    secure=True,
-    region="decentralized"
-)
-
-# Upload with public-read ACL
-client.fput_object(
-    "my-private-bucket",
-    "public-document.pdf",
-    "local-file.pdf",
-    metadata={"x-amz-acl": "public-read"}
-)
-
-print("Public URL: https://s3.hippius.com/my-private-bucket/public-document.pdf")
-```
-
-### Complete Public Bucket Example
-
-```python
-import json
-from minio import Minio
-from io import BytesIO
-
-def create_and_use_public_bucket():
-    # Get credentials from https://console.hippius.com/dashboard/settings
-    client = Minio(
-        "s3.hippius.com",
-        access_key="hip_your_access_key_id_here",
-        secret_key="your_secret_key_here",
-        secure=True,
-        region="decentralized"
-    )
-
-    bucket_name = "my-demo-public-bucket"
-
-    # Step 1: Create bucket
-    print("1. Creating bucket...")
-    client.make_bucket(bucket_name)
-
-    # Step 2: Make it public with bucket policy
-    print("2. Setting public read policy...")
-    policy = {
-        "Version": "2012-10-17",
-        "Statement": [{
-            "Effect": "Allow",
-            "Principal": "*",
-            "Action": ["s3:GetObject"],
-            "Resource": [f"arn:aws:s3:::{bucket_name}/*"]
-        }]
-    }
-    client.set_bucket_policy(bucket_name, json.dumps(policy))
-
-    # Step 3: Upload a file
-    print("3. Uploading file...")
-    file_content = b"This is a publicly accessible file!"
-    object_name = "demo.txt"
-
-    client.put_object(
-        bucket_name,
-        object_name,
-        BytesIO(file_content),
-        length=len(file_content),
-        content_type="text/plain"
-    )
-
-    # Step 4: Access publicly
-    public_url = f"https://s3.hippius.com/{bucket_name}/{object_name}"
-    print(f"✓ Success! File is publicly accessible at:")
-    print(f"  {public_url}")
-    print(f"\nTry it: curl {public_url}")
-
-create_and_use_public_bucket()
-```
-
-### Key Differences: Private vs Public
-
-| Feature        | Private Buckets                   | Public Buckets                                                 |
-| -------------- | --------------------------------- | -------------------------------------------------------------- |
-| **Encryption** | ✅ Encrypted with per-bucket keys | ✅ Encrypted with per-bucket keys                              |
-| **Access**     | 🔒 Requires authentication        | 🌍 Publicly accessible via `https://s3.hippius.com/bucket/key` |
-| **Use Cases**  | Sensitive data, private files     | Public content, websites, shared files                         |
-| **Creation**   | Standard `make_bucket()`          | `make_bucket()` + ACL/bucket policy                            |
+| Feature | Private Buckets | Public Buckets |
+|---------|----------------|----------------|
+| **Encryption** | ✅ Encrypted with per-bucket keys | ✅ Encrypted with per-bucket keys |
+| **Access** | 🔒 Requires authentication | 🌍 Accessible via `https://s3.hippius.com/bucket/key` |
+| **Use Cases** | Sensitive data, private files | Public content, websites, shared files |
+| **Creation** | Standard `make_bucket()` | `make_bucket()` + ACL/bucket policy |
 
 ## Access Control Lists (ACLs)
 
-ACLs let you control who can access your buckets and objects. Use ACLs to share data with other Hippius accounts, grant access to specific [access keys](https://console.hippius.com/dashboard/settings), or make content public.
+ACLs let you control who can access your buckets and objects. Use ACLs to share data with other Hippius accounts, grant access to specific [access keys](https://console.hippius.com/dashboard/storage/s3/sub-tokens), or make content public.
 
-### What ACLs Support
-
-**Permission Types:**
+### Permission Types
 
 - **READ**: List bucket contents / Download objects
 - **WRITE**: Upload/delete objects in bucket
@@ -483,7 +127,7 @@ ACLs let you control who can access your buckets and objects. Use ACLs to share 
 - **WRITE_ACP**: Modify ACL permissions
 - **FULL_CONTROL**: All permissions
 
-**Grant Types:**
+### Grant Types
 
 - **Canonical User ID**: Grant to another Hippius account (all their keys get access)
 - **Access Key**: Grant to specific [access key](https://console.hippius.com/dashboard/settings) (fine-grained control)
@@ -491,12 +135,9 @@ ACLs let you control who can access your buckets and objects. Use ACLs to share 
 
 ### Getting Your Canonical User ID
 
-Before sharing with others, you need canonical user IDs:
-
 ```bash
-# Using AWS CLI with access keys from https://console.hippius.com/dashboard/settings
-export AWS_ACCESS_KEY_ID="hip_your_access_key_id_here"
-export AWS_SECRET_ACCESS_KEY="your_secret_key_here"
+export AWS_ACCESS_KEY_ID="YOUR_ACCESS_KEY"
+export AWS_SECRET_ACCESS_KEY="YOUR_SECRET_KEY"
 export AWS_DEFAULT_REGION=decentralized
 
 aws s3api list-buckets --endpoint-url https://s3.hippius.com \
@@ -505,47 +146,29 @@ aws s3api list-buckets --endpoint-url https://s3.hippius.com \
 
 ### Common ACL Operations
 
-#### Make Bucket Public (Canned ACL)
-
-```bash
-# Simple public-read ACL
-aws s3api put-bucket-acl --bucket mybucket --acl public-read \
-  --endpoint-url https://s3.hippius.com
-```
-
 #### Share Bucket with Another Account
 
 ```bash
-# Grant READ to another account's canonical ID
 aws s3api put-bucket-acl --bucket mybucket \
   --grant-read 'id="their_canonical_id_here"' \
   --grant-full-control 'id="your_canonical_id_here"' \
   --endpoint-url https://s3.hippius.com
 ```
 
-**Important**: Always include `--grant-full-control` for yourself to maintain access!
+:::warning
+Always include `--grant-full-control` for yourself to maintain access!
+:::
 
 #### Grant to Specific Access Key
 
-If you created [access keys](https://console.hippius.com/dashboard/settings) for your applications, grant them specific permissions:
-
 ```bash
-# Grant READ to a specific access key
 aws s3api put-bucket-acl --bucket mybucket \
-  --grant-read 'accessKey="hip_your_access_key_id"' \
+  --grant-read 'accessKey="YOUR_ACCESS_KEY"' \
   --grant-full-control 'id="your_canonical_id"' \
   --endpoint-url https://s3.hippius.com
 ```
 
-**Note**: `accessKey=` is a Hippius extension for fine-grained access control.
-
-#### Make Single Object Public
-
-```bash
-# Keep bucket private, make one object public
-aws s3api put-object-acl --bucket mybucket --key document.pdf \
-  --acl public-read --endpoint-url https://s3.hippius.com
-```
+`accessKey=` is a Hippius extension for fine-grained access control.
 
 #### Check Current Permissions
 
@@ -562,17 +185,16 @@ aws s3api get-object-acl --bucket mybucket --key file.pdf \
 #### Revoke All Access
 
 ```bash
-# Reset to private (owner only)
 aws s3api put-bucket-acl --bucket mybucket --acl private \
   --endpoint-url https://s3.hippius.com
 ```
 
 ### Supported Canned ACLs
 
-- `private` - Owner only (default)
-- `public-read` - Owner full control + public read access
-- `public-read-write` - Owner full control + public read/write
-- `authenticated-read` - Owner full control + any authenticated user read
+- `private` — Owner only (default)
+- `public-read` — Owner full control + public read access
+- `public-read-write` — Owner full control + public read/write
+- `authenticated-read` — Owner full control + any authenticated user read
 
 ### Access Keys and ACLs
 
@@ -581,70 +203,40 @@ Hippius supports two types of [access keys](https://console.hippius.com/dashboar
 - **Main keys**: Automatically have full access to your buckets (bypass ACLs)
 - **Sub keys**: Require explicit ACL grants for access
 
-Create and manage access keys at: https://console.hippius.com/dashboard/settings
-
 ### Quick Reference
 
-| Task                | Command                                                                                                                                            |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Make public         | `aws s3api put-bucket-acl --bucket B --acl public-read --endpoint-url https://s3.hippius.com`                                                      |
-| Share with user     | `aws s3api put-bucket-acl --bucket B --grant-read 'id="THEIR_ID"' --grant-full-control 'id="YOUR_ID"' --endpoint-url https://s3.hippius.com`       |
-| Grant to access key | `aws s3api put-bucket-acl --bucket B --grant-read 'accessKey="hip_KEY"' --grant-full-control 'id="YOUR_ID"' --endpoint-url https://s3.hippius.com` |
-| Check ACL           | `aws s3api get-bucket-acl --bucket B --endpoint-url https://s3.hippius.com`                                                                        |
+| Task | Command |
+|------|---------|
+| Make public | `aws s3api put-bucket-acl --bucket B --acl public-read --endpoint-url https://s3.hippius.com` |
+| Share with user | `--grant-read 'id="THEIR_ID"' --grant-full-control 'id="YOUR_ID"'` |
+| Grant to access key | `--grant-read 'accessKey="hip_KEY"' --grant-full-control 'id="YOUR_ID"'` |
+| Check ACL | `aws s3api get-bucket-acl --bucket B --endpoint-url https://s3.hippius.com` |
 
 ## Advanced Features
 
-### Bucket Operations
+### Bucket & Object Tagging
 
 ```python
-# List all buckets
-buckets = client.list_buckets()
-for bucket in buckets:
-    print(f"Bucket: {bucket.name}, Created: {bucket.creation_date}")
-
-# Check if bucket exists
-exists = client.bucket_exists(bucket_name)
-print(f"Bucket exists: {exists}")
-
-# Set bucket tags
 from minio.commonconfig import Tags
+
+# Bucket tags
 tags = Tags.new_bucket_tags()
 tags["Project"] = "MyProject"
 tags["Environment"] = "Production"
 client.set_bucket_tags(bucket_name, tags)
-```
 
-### Object Operations
-
-```python
-# List objects in bucket
-objects = client.list_objects(bucket_name, recursive=True)
-for obj in objects:
-    print(f"Object: {obj.object_name}, Size: {obj.size}")
-
-# List objects with prefix
-objects = client.list_objects(bucket_name, prefix="documents/")
-for obj in objects:
-    print(f"Document: {obj.object_name}")
-
-# Get object metadata
-stat = client.stat_object(bucket_name, "hello.txt")
-print(f"Size: {stat.size}, Modified: {stat.last_modified}")
-
-# Set object tags
-from minio.commonconfig import Tags
+# Object tags
 obj_tags = Tags.new_object_tags()
 obj_tags["Type"] = "Document"
 obj_tags["Status"] = "Final"
 client.set_object_tags(bucket_name, "hello.txt", obj_tags)
 ```
 
-### Large File Uploads
+### Large File Uploads (Multipart)
 
-For files larger than 5MB, use multipart uploads:
+For files larger than 5MB, the MinIO SDK automatically uses multipart uploads. You can configure part size and parallelism:
 
 ```python
-# Upload large file with multipart
 with open("large_file.zip", "rb") as file_data:
     file_size = file_data.seek(0, 2)
     file_data.seek(0)
@@ -662,67 +254,22 @@ with open("large_file.zip", "rb") as file_data:
 
 ## Best Practices
 
-1. **Bucket Naming**: Use lowercase letters, numbers, and hyphens only
-2. **Object Keys**: Can include forward slashes to simulate folders
-3. **Large Files**: Use multipart uploads for files > 5MB
-4. **Connection Management**: Close responses and release connections after downloads
-5. **Security**: Never expose your access key secret in client-side code
+<Ordered>
+  <li><strong>Bucket Naming</strong>: Use lowercase letters, numbers, and hyphens only</li>
+  <li><strong>Object Keys</strong>: Can include forward slashes to simulate folders</li>
+  <li><strong>Large Files</strong>: Use multipart uploads for files &gt; 5MB</li>
+  <li><strong>Security</strong>: Never expose your secret key in client-side code — use <a href="/storage/s3/python#presigned-url">presigned URLs</a> for browser access</li>
+</Ordered>
 
-## Troubleshooting
+## More Resources
 
-### Common Issues
-
-**Authentication Errors**
-
-- Verify your access key ID and secret are correct
-- Ensure your access key starts with `hip_`
-- Check that your sub key has the required ACL grants
-
-**Upload Failures**
-
-- Verify your account has sufficient credits
-- Check that bucket names are valid (lowercase, no special characters)
-- Ensure your access key has the required permissions
-
-**Permission Denied**
-
-- Check that your access key has the required ACL grants
-- Verify you're accessing buckets owned by your account
-- Ensure your account has active credits
-
-### Getting Help
-
-If you encounter issues or need support:
-
-🐛 **Report bugs**: https://discord.com/channels/1298001698874327131/1298155996128084038
-
-Our support team monitors this channel and will help you resolve any issues quickly.
-
-## Rate Limits
-
-- 100 requests per minute per account
-- Large file uploads may take longer due to network processing
-- Parallel uploads are supported for better performance
-
-## Supported Operations
-
-✅ **Supported**
-
-- Bucket operations (create, delete, list, tags)
-- Object operations (upload, download, delete, list, metadata)
-- Presigned URLs
-- Range requests (video streaming, partial downloads)
-- Multipart uploads
-- Object and bucket tagging
-- ACLs and bucket policies
-- Lifecycle policies
-
-❌ **Not Supported**
-
-- Bucket versioning
-- Cross-region replication
-- S3 Select
-
----
-
-_This guide covers the essential operations for using Hippius S3. For advanced features and specific use cases, refer to the standard S3 documentation, as our API is fully compatible with S3 clients._
+<Unordered>
+  <li><a href="/storage/s3/compatibility">S3 Compatibility Matrix</a> — Full list of supported operations</li>
+  <li><a href="https://github.com/thenervelab/hippius-s3/blob/main/docs/comparison.md">AWS S3 vs Cloudflare R2 vs Hippius S3</a> — Detailed comparison</li>
+  <li><a href="/use/troubleshooting">Troubleshooting</a> — Common errors and fixes</li>
+  <li><a href="/use/s3-token-management">Token Management</a> — Create sub-tokens, manage access levels</li>
+  <li><a href="https://hippius.com/pricing">Pricing</a> — Storage and bandwidth costs</li>
+  <li><a href="/use/api">Hippius Management API</a> — Automate token management and billing</li>
+  <li><a href="https://github.com/thenervelab/hippius-s3">hippius-s3 on GitHub</a> — Report issues, request features, or contribute</li>
+  <li><a href="https://docs.hippius.com/llms.txt">llms.txt</a> — Machine-readable docs for AI agents and LLMs</li>
+</Unordered>

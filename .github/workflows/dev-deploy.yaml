@@ -1,0 +1,97 @@
+name: Dev Branch CI/CD
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Get short SHA
+      id: sha
+      run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+    - name: Get commit message
+      id: commit
+      run: echo "MSG=$(git log -1 --pretty=%s)" >> $GITHUB_OUTPUT
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+      with:
+        version: latest
+        buildkitd-flags: --debug
+
+    - name: Login to Custom Registry
+      uses: docker/login-action@v2
+      with:
+        registry: registry.starkleytech.com
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+        logout: true
+
+    - name: Build and push
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        push: true
+        tags: |
+          registry.starkleytech.com/hippius/docs:dev-${{ steps.sha.outputs.SHORT_SHA }}
+          registry.starkleytech.com/hippius/docs:dev
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        platforms: linux/amd64
+        provenance: false
+        sbom: false
+        outputs: type=registry,compression=gzip,compression-level=3,force-compression=true
+
+    - name: Setup kubectl
+      uses: azure/setup-kubectl@v3
+
+    - name: Deploy to staging
+      run: |
+        mkdir -p $HOME/.kube
+        echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
+        kubectl config set-cluster rancher --insecure-skip-tls-verify=true
+
+        kubectl create namespace docs-dev --insecure-skip-tls-verify=true || true
+
+        kubectl create secret docker-registry registry \
+          --namespace=docs-dev \
+          --docker-server=registry.starkleytech.com \
+          --docker-username=${{ secrets.REGISTRY_USERNAME }} \
+          --docker-password=${{ secrets.REGISTRY_PASSWORD }} \
+          --insecure-skip-tls-verify=true \
+          --dry-run=client -o yaml | kubectl apply -f - --insecure-skip-tls-verify=true
+
+        sed -i "s|\${IMAGE}|registry.starkleytech.com/hippius/docs:dev-${{ steps.sha.outputs.SHORT_SHA }}|g" k8s/staging/manifests.yaml
+
+        kubectl apply -f k8s/staging/manifests.yaml --validate=false --insecure-skip-tls-verify=true
+
+        kubectl rollout status deployment/hippius-docs-dev -n docs-dev --timeout=180s --insecure-skip-tls-verify=true
+
+    - name: Notify Mattermost (success)
+      if: success()
+      run: |
+        curl -s -X POST "${{ secrets.MATTERMOST_WEBHOOK_URL }}" \
+          -H "Content-Type: application/json" \
+          -d "{
+            \"text\": \"### 📝 docs-dev deployed\n**Commit:** \`${{ steps.sha.outputs.SHORT_SHA }}\` — ${{ steps.commit.outputs.MSG }}\n**Preview:** https://docs-dev.hippicode.com\n**Author:** ${{ github.actor }}\"
+          }"
+
+    - name: Notify Mattermost (failure)
+      if: failure()
+      run: |
+        curl -s -X POST "${{ secrets.MATTERMOST_WEBHOOK_URL }}" \
+          -H "Content-Type: application/json" \
+          -d "{
+            \"text\": \"### ❌ docs-dev deploy failed\n**Commit:** \`${{ steps.sha.outputs.SHORT_SHA }}\` — ${{ steps.commit.outputs.MSG }}\n**Logs:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"
+          }"

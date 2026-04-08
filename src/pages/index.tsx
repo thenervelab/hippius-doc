@@ -29,11 +29,11 @@ export const CATEGORIES: (SmallCardInfo & {
   },
   {
     title: "Use",
-    description: "Create and host a website or app on IPFS.",
+    description: "Store files, run VMs, manage tokens — from the console or desktop app.",
     icon: <Icons.Cursor className="text-primary-50 relative size-5" />,
     cta: {
       label: "Use",
-      href: "/use/bridge",
+      href: "/use/quickstart",
     },
   },
   {
@@ -60,19 +60,19 @@ export const SMARTER_CLOUD: SmallCardInfo[] = [
   {
     title: "Decentralized Storage",
     description:
-      "Store files securely on IPFS with Hippius pinning, or use our S3-compatible storage for enterprise-grade compatibility.",
+      "Files split into 30 shards across independent miners using Reed-Solomon erasure coding. Any 10 shards reconstruct your file — tolerates up to 20 simultaneous miner failures.",
     icon: <Icons.FormatSquare className="text-primary-50 relative size-7" />,
   },
   {
     title: "Blockchain-Powered",
     description:
-      "Our Substrate blockchain ensures transparency and trust, with staking and rewards for network participants",
+      "A custom Substrate blockchain governs miner registration, cluster maps, and rewards. Every storage placement decision is verifiable on-chain.",
     icon: <Icons.Box className="text-primary-50 relative size-7" />,
   },
   {
     title: "Anonymous & Secure",
     description:
-      "Protect your data with anonymous storage solutions, backed by cryptographic guarantees.",
+      "Per-object NaCl encryption before storage. Miners only see encrypted bytes. Sign up with Google or GitHub — no KYC, no wallet required.",
     icon: <Icons.DollarSquare className="text-primary-50 relative size-7" />,
   },
 ];
@@ -114,21 +114,21 @@ function HomepageHeader() {
           </Link>
         </div>
         <H1 className="text-center mt-4 max-w-[1050px]">
-          Learn how Hippius works with our documentation
+          Decentralized S3 storage — any client, no wallet required
         </H1>
 
         <div className="flex gap-y-5  flex-wrap relative items-center justify-center mt-8">
           <Button
             asLink
-            href={URLS.LEARN}
+            href={URLS.USE}
             size="lg"
             variant="secondary"
             icon={<Icons.ArrowRight />}
           >
-            Get Started
+            Store your first file
           </Button>
           <Button asLink href={URLS.DASHBOARD} variant="ghost" size="lg">
-            Access Console
+            Open Console
           </Button>
         </div>
       </div>

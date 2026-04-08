@@ -4,7 +4,9 @@ description: 6
 
 # Installing a Validator Node
 
-A validator node is a crucial component of the Hippius network that helps secure the network, validate transactions, and participate in consensus. This guide will walk you through the process of setting up and running a validator node using our professional-grade Ansible deployment.
+A validator node is a crucial component of the Hippius network that helps secure the network, validate transactions, and participate in consensus. Validators also observe miner performance — scoring nodes on bandwidth, storage, and uptime — and submit those weights to determine [how rewards are distributed](/learn/weights).
+
+This guide will walk you through the process of setting up and running a validator node using our professional-grade Ansible deployment.
 
 ## Prerequisites
 
@@ -160,7 +162,9 @@ sudo systemctl start hippius
 sudo systemctl status hippius
 ```
 
-> **Important**: Keep your seed phrase and keys secure. Never share them with anyone. Make sure to back them up safely.
+:::warning
+Keep your seed phrase and keys secure. Never share them with anyone. Make sure to back them up safely.
+:::
 
 ### 6. Generate and Register Session Keys
 
@@ -202,7 +206,9 @@ To complete the validator setup, you need to register and bond your account in P
    - Set your commission rate and other preferences
 8. Click "Validate" and sign the transaction
 
-> **Important**: Make sure to use the same key for both your stash and controller accounts to simplify management.
+:::tip
+Use the same key for both your stash and controller accounts to simplify management.
+:::
 
 If you need help during any part of this process, join the [Hippius Discord community](https://discord.hippius.com) where you can get assistance from the team and other validators.
 

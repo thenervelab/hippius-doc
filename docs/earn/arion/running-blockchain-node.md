@@ -3,7 +3,7 @@
 This guide explains how to set up and run a Hippius Substrate-based blockchain node for storage miners. The blockchain node is required for miners to participate in the network and register on-chain.
 
 :::note
-This guide is specifically for **miner nodes**. If you're setting up a validator node, please refer to the [validator setup guide](/docs/earn/installing-validator).
+This guide is specifically for **miner nodes**. If you're setting up a validator node, please refer to the [validator setup guide](/earn/installing-validator).
 :::
 
 :::info Complete Miner Setup
@@ -293,7 +293,7 @@ The signing account should be the same account whose keys you inserted via RPC i
 
 To register a hotkey (child node), please follow the hotkey registration guide in the Arion Miner documentation:
 
-📖 **[Follow the Hotkey Registration Guide in Arion Miner Setup](./running-miner#register-miner-in-arion-pallet)**
+📖 **[Follow the Hotkey Registration Guide in Arion Miner Setup](./running-miner#6-register-miner-in-arion-pallet)**
 
 This guide will walk you through:
 1. Setting up a proxy relationship between your coldkey and hotkey

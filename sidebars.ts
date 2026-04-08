@@ -1,149 +1,147 @@
 import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 
-// Node.js environment - no browser APIs/JSX
-
 const sidebars: SidebarsConfig = {
   docsSidebar: [
-    {
-      type: "category",
-      label: "Learn",
-      items: [
-        "learn/intro", // What is Hippius?
-        "learn/architecture", // System Architecture
-        "learn/weights", // Weight Calculation System
-        "learn/miner", //miner diagram - link to GH
+    // ── INTRO ──────────────────────────────────────────────────────
+    "learn/intro",
 
-        {
-          type: "category",
-          label: "Core Technologies",
-          items: [
-            "learn/substrate", //substrate
-            "learn/substrate-staking", //substrate
-            "learn/mnemonic-auth", // Mnemonic Authentication
-            "learn/encryption", // Encryption System
-            "learn/storage-systems", // Decentralized Storage Systems
-            "learn/confidential-computing", // Confidential Computing
-            "learn/vm-computing", // Decentralized Storage Systems
-          ],
-          collapsed: false, // Collapsed by default (not yet released)
-        },
-      ],
-    },
+    // ── S3 STORAGE ─────────────────────────────────────────────────
     {
       type: "category",
-      label: "Use",
+      label: "S3 Storage",
+      collapsed: false,
       items: [
-        "use/quickstart", // Quickstart guide
-        "use/s3-token-management", // S3 Token Management
-        "use/virtual-machines", // Virtual Machines
-        // "use/wallet", // Hippius Wallet
-        // "use/bridge-tokens", // Bridge Tokens
-        // "use/staking", // Staking
-        "use/help-support", // Help & Support
+        "use/quickstart",
+        "use/s3-token-management",
+        "storage/s3/python",
+        "storage/s3/javascript",
+        "storage/s3/aws-cli",
+        "storage/s3/rclone",
+        "storage/s3/compatibility",
+        "use/troubleshooting",
+        "storage/s3/integration",
         {
           type: "category",
-          label: "Hippius Desktop App",
+          label: "Example Apps",
+          collapsed: true,
           items: [
-            "use/desktop/desktop-app", // Desktop App
-            "use/desktop/using-the-app", // Using the App
-            "use/desktop/file-system", // File System
-            // "use/desktop/wallet", // Wallet
-            // "use/desktop/bridge", // Bridge
-            // "use/desktop/staking", // Staking
-            "use/desktop/settings", // App Settings
-            "use/desktop/billing", // Billing
-            "use/desktop/referral-system", // Referral System
+            "storage/s3/examples/file-sharing",
+            "storage/s3/examples/video-hosting",
+            "storage/s3/examples/image-gallery",
+            "storage/s3/examples/static-site",
+            "storage/s3/examples/nextcloud",
           ],
-          collapsed: false, // Collapsed by default (not yet released)
+        },
+        "use/hippius-api",
+        {
+          type: "link",
+          label: "Pricing ↗",
+          href: "https://hippius.com/pricing",
         },
       ],
     },
+
+    // ── DESKTOP APP ────────────────────────────────────────────────
     {
       type: "category",
-      label: "Earn",
+      label: "Desktop App",
+      collapsed: true,
       items: [
-        "earn/installing-validator", // Installing a validator node
-        "earn/register-validator-in-chain", // Register a validator in the chain
-        "earn/storage-miner", // Setting up storage miners
-        "earn/register-in-blockchain", // Registering nodes in the blockchain
-        "earn/staking", // Staking on Hippius
-        {
-          type: "category",
-          label: "Miners",
-          items: [
-            "earn/arion/running-blockchain-node",
-            "earn/arion/running-miner",
-          ],
-        },
+        "use/desktop/desktop-app",
+        "use/desktop/using-the-app",
+        "use/desktop/file-system",
+        "use/desktop/settings",
+        "use/desktop/billing",
+        "use/desktop/referral-system",
+        "use/desktop/wallet",
+        "use/desktop/staking",
       ],
     },
+
+    // ── CONSOLE ────────────────────────────────────────────────────
+    {
+      type: "category",
+      label: "Console",
+      collapsed: true,
+      items: [
+        "use/virtual-machines",
+        "use/wallet",
+        "use/staking",
+        "use/bridge-tokens",
+      ],
+    },
+
+    // ── SEPARATOR ──────────────────────────────────────────────────
+    {
+      type: "html",
+      value: "<hr />",
+    },
+
+    // ── CONCEPTS ───────────────────────────────────────────────────
+    {
+      type: "category",
+      label: "How it works",
+      collapsed: true,
+      items: [
+        "learn/architecture",
+        "learn/storage-systems",
+        "learn/encryption",
+        "learn/confidential-computing",
+        "learn/vm-computing",
+        "learn/substrate",
+        "learn/substrate-staking",
+        "learn/babe-consensus-mechanism",
+        "learn/nominated-proof-of-stake-npos",
+        "learn/miner",
+        "learn/weights",
+      ],
+    },
+
+    // ── STAKING ────────────────────────────────────────────────────
+    {
+      type: "category",
+      label: "Staking",
+      collapsed: true,
+      items: ["earn/staking"],
+    },
+
+    // ── EARN / MINE ────────────────────────────────────────────────
+    {
+      type: "category",
+      label: "Run a Miner",
+      collapsed: true,
+      items: [
+        "earn/arion/running-blockchain-node",
+        "earn/arion/running-miner",
+        "earn/register-in-blockchain",
+        "earn/storage-miner",
+        "cli/usage",
+      ],
+    },
+
+    // ── VALIDATORS ─────────────────────────────────────────────────
+    {
+      type: "category",
+      label: "Run a Validator",
+      collapsed: true,
+      items: [
+        "earn/installing-validator",
+        "earn/register-validator-in-chain",
+      ],
+    },
+
+    // ── DEVELOP ────────────────────────────────────────────────────
     {
       type: "category",
       label: "Develop",
+      collapsed: true,
       items: [
-        "cli/usage",
         "blockchain/api",
-        {
-          type: "category",
-          label: "Blockchain",
-          items: [
-            "blockchain/intro", // Hippius blockchain intro
-            {
-              type: "category",
-              label: "Hippius Pallets",
-              link: { type: "doc", id: "blockchain/pallets" }, // Link to the main page
-              collapsed: true,
-              items: [
-                "pallets/arion-pallet", // Arion Pallet
-                "pallets/alpha-bridge", // Subpage for AlphaBridge
-                "pallets/credits", // Subpage for Credits
-                "pallets/rankings", // Subpage for Rankings
-                "pallets/marketplace",
-                "pallets/registration",
-                "pallets/executionUnit",
-                "pallets/backup",
-                "pallets/containerRegistry",
-                "pallets/storageS3",
-                "pallets/computePallet",
-                "pallets/palletIp",
-                "pallets/bittensor",
-                "pallets/metagraph",
-                "pallets/subAccount",
-                "pallets/notifications",
-                "pallets/accountProfile",
-                "pallets/utils",
-              ],
-            },
-
-            //  { type: 'category', label: 'API', items: ['blockchain/api'] }, // Swagger UI link
-          ],
-        },
-        {
-          type: "category",
-          label: "Storage",
-          collapsed: false,
-          items: [
-            {
-              type: "category",
-              label: "S3",
-              items: [
-                "storage/s3/integration",
-                {
-                  type: "link",
-                  label: "API Reference",
-                  href: "https://api.hippius.com/",
-                },
-                {
-                  type: "link",
-                  label: "Pricing",
-                  href: "https://hippius.com/pricing",
-                },
-              ],
-            },
-          ],
-        },
       ],
     },
+
+    // ── SUPPORT ────────────────────────────────────────────────────
+    "use/help-support",
   ],
 };
 

@@ -16,8 +16,9 @@ const config: Config = {
   organizationName: "thenervelab",
   projectName: "hippius-doc",
 
-  onBrokenLinks: "warn",
-  onBrokenMarkdownLinks: "warn",
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "throw",
+  onBrokenAnchors: "warn",
 
   i18n: {
     defaultLocale: "en",

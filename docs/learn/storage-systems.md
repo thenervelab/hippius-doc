@@ -1,50 +1,112 @@
 ---
 sidebar_position: 5
-description: 4
+description: How Hippius stores your data across a decentralized network using Arion, Reed-Solomon erasure coding, and the CRUSH algorithm.
 ---
 
-# Decentralized Storage Systems
+import Ordered from '@site/src/components/Ordered';
+import Unordered from '@site/src/components/Unordered';
 
-Learn about Hippius's storage architecture that combines reliability with decentralization.
+# How Storage Works
 
-## Arion Storage
+Hippius stores data on **Arion** — a purpose-built distributed storage engine. This page explains the architecture: how files are split, placed, and recovered across the network.
 
-Arion is Hippius's purpose-built decentralized storage engine. It replaces search-based content discovery with mathematical data placement: instead of asking "who has this file?", Arion computes exactly where each shard lives using the CRUSH algorithm and a blockchain-published cluster map.
+## The short version
 
-### Key Features
+When you upload a file:
 
-- **Deterministic Placement**: The CRUSH algorithm maps data shards to miners without a central lookup service
-- **Reed-Solomon Erasure Coding**: Files are split into 10 data shards and 20 parity shards, tolerating up to 20 simultaneous miner failures
-- **QUIC-based P2P Networking**: Built on Iroh for fast, parallel shard retrieval over encrypted QUIC connections
-- **Active Health Monitoring**: Validators continuously verify shard integrity and automatically reconstruct missing data
-- **Auto-Repair**: If a miner goes offline, the network reconstructs and redistributes affected shards to maintain redundancy
+<Ordered>
+  <li>It's split into <strong>30 shards</strong> (10 data + 20 parity) using Reed-Solomon erasure coding</li>
+  <li>Each shard is placed on a different miner using the <strong>CRUSH algorithm</strong></li>
+  <li>To download, only <strong>10 of 30 shards</strong> are needed — the other 20 are redundancy</li>
+</Ordered>
 
-### How It Works
+This means up to 20 miners can fail simultaneously and your file is still fully recoverable.
 
-1. When a file is stored, it is split into data and parity shards via Reed-Solomon erasure coding
-2. The CRUSH algorithm deterministically assigns each shard to independent miners across the network
-3. Shards are streamed to miners in parallel over QUIC connections
-4. Validators monitor shard health and trigger auto-repair when miners leave or fail
-5. On retrieval, shards are fetched in parallel and reassembled — only 10 of 30 shards are needed to reconstruct the original data
+## Architecture
 
-## S3-Compatible Access
+```
+You
+ │ HTTPS
+ ▼
+Gateway (:3000)          ← HTTP ingress, handles auth + chunking
+ │ P2P
+ ▼
+Validator (:3002)        ← encodes with Reed-Solomon, runs CRUSH placement
+ │ QUIC (Iroh)
+ ├──► Miner A  ← shard 1
+ ├──► Miner B  ← shard 2
+ ├──► Miner C  ← shard 3
+ │    ...
+ └──► Miner N  ← shard 30
 
-Users interact with Arion storage through a standard S3-compatible API. Any tool or library that speaks S3 (AWS CLI, boto3, MinIO SDK) works with Hippius out of the box.
+Warden (:3003)           ← audits miners with proof-of-storage challenges
+Chain Submitter (:3004)  ← publishes cluster maps to the blockchain
+```
 
-The S3 gateway handles authentication, encryption, chunking, and backend coordination — Arion is the storage engine underneath.
+## Reed-Solomon erasure coding
 
-See the [Quickstart guide](/use/quickstart) to get started.
+Files are encoded using Reed-Solomon with **k=10, m=20** (2 MiB stripes):
 
-## Storage Economics
+<Unordered>
+  <li>10 data shards contain the original content</li>
+  <li>20 parity shards allow reconstruction if any data shards are lost</li>
+  <li>Any 10 of the 30 shards reconstruct the original file</li>
+  <li>Tolerates up to <strong>20 simultaneous miner failures</strong></li>
+</Unordered>
 
-Both storage and compute systems are integrated into Hippius's economic model:
+This is the same technique used in RAID storage and data center infrastructure.
 
-- Miners earn 60% of storage fees for maintaining data
-- Validators earn a portion of the 30% allocated to network security for overseeing storage integrity
-- The 10% treasury allocation helps fund ongoing development of storage systems
+## CRUSH placement
 
-## Choosing the Right Access Method
+Instead of a central index ("which miner has shard 7?"), CRUSH computes the answer mathematically from a cluster map. This means:
 
-- **S3 API**: For applications, automation, and programmatic access — use any S3-compatible client
-- **Desktop App**: For a graphical interface to manage files and folders
-- **Console**: For account management, billing, and credential creation at [console.hippius.com](https://console.hippius.com)
+<Unordered>
+  <li><strong>No central lookup</strong> — any node can compute shard locations independently</li>
+  <li><strong>Deterministic</strong> — same input always produces the same placement</li>
+  <li><strong>Topology-aware</strong> — shards spread across different miners/regions to reduce correlated failures</li>
+</Unordered>
+
+The cluster map is published to the Hippius blockchain by the chain submitter, making it verifiable and tamper-resistant.
+
+## Network layer (Iroh + QUIC)
+
+Shard transfers happen over **QUIC** connections using [Iroh](https://iroh.computer/):
+
+<Unordered>
+  <li>Encrypted and authenticated by default</li>
+  <li>Multiplexed — multiple shards transfer in parallel over a single connection</li>
+  <li>Direct UDP paths between nodes (hole-punching), relay fallback when needed</li>
+  <li>Each miner's identity is its Ed25519 public key (node ID)</li>
+</Unordered>
+
+## Automatic repair
+
+The **Validator** runs a rebuild agent that:
+
+<Ordered>
+  <li>Monitors miner health via heartbeats</li>
+  <li>Detects when a miner goes offline</li>
+  <li>Fetches k=10 shards from remaining miners</li>
+  <li>Reconstructs the missing shards</li>
+  <li>Places them on new miners using CRUSH</li>
+</Ordered>
+
+The **Warden** audits miners with cryptographic proof-of-storage challenges (Plonky3 ZK circuits) to verify they're actually storing the data they claim to store.
+
+## Encryption
+
+Objects are encrypted with per-object NaCl keys before storage. Key management uses envelope encryption (KMS in production). Miners store only encrypted bytes — they cannot read your data.
+
+## S3 compatibility
+
+All of this happens transparently behind a standard S3 API. You use `aws s3 cp`, boto3, rclone — Arion handles the rest.
+
+See the [Quickstart guide](/use/quickstart) or pick a [client guide](/storage/s3/python) to get started.
+
+## Storage economics
+
+| Recipient | Share | Role |
+|---|---|---|
+| Miners | 60% | Store and serve shards |
+| Validators | 30% | Encode, place, audit, repair |
+| Treasury | 10% | Protocol development |
