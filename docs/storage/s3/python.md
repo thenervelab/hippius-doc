@@ -235,13 +235,3 @@ url = s3.generate_presigned_url(
 print(f" URL: {url}")
 ```
 
-## Which library to use?
-
-| | boto3 | minio |
-|---|---|---|
-| Async support | ✅ via aioboto3 | ✅ via AsyncMinio |
-| Presigned URLs | ✅ | ✅ |
-| Familiar to AWS users | ✅ | |
-| Simpler API | | ✅ |
-
-Both work well. If you are already using boto3 elsewhere, stick with it. If you are starting fresh, the MinIO SDK provides a simpler, more modern API.
