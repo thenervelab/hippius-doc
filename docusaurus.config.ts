@@ -120,7 +120,7 @@ const config: Config = {
     ],
     colorMode: {
       defaultMode: "light",
-      disableSwitch: true, // Force dark mode
+      disableSwitch: true,
     },
     navbar: {
       title: "Hippius",

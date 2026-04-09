@@ -76,30 +76,11 @@ After creating a master token, you'll receive two critical pieces of information
 
 ![Master Token Secret Display](/img/s3-token-management/master-token-secret.png)
 
-### Automatic Token Creation (Desktop App)
-
-The Hippius Desktop App simplifies the process by automatically creating a master token for you:
-
-<Ordered>
-  <li>When you first launch the Desktop App and access the <BgStyledIconWithText text="Files" icon="DocumentText" /> section, a master token is automatically created for you.</li>
-  <li>You don't need to manually go through the creation process.</li>
-  <li>The token is securely stored within the app.</li>
-  <li>You can still access and manage tokens through the <BgStyledText>Manage</BgStyledText> section.</li>
-</Ordered>
-
-:::tip Desktop App Advantage
-The desktop app handles master token management automatically on first access, so you can start using storage immediately without the setup hassle!
-:::
-
-:::note Desktop App vs Console
-The Desktop App's **Files** section is for syncing folders and managing files directly. For S3-compatible bucket storage with API access, use the **Hippius Console** at https://console.hippius.com.
-:::
-
 ## Managing Tokens
 
 ### Accessing Token Management
 
-Both the Console and Desktop App provide a comprehensive token management interface:
+The Hippius Console provides a comprehensive token management interface:
 
 <Ordered>
   <li>Navigate to S3 Storage section.</li>
@@ -294,14 +275,12 @@ Set calendar reminders before tokens expire to ensure uninterrupted service for 
 ### Master Tokens
 
 **When to use Master Tokens:**
-- Personal account management in Desktop App
 - Full administrative access to all buckets
 - Bulk operations across multiple buckets
 - Creating and managing sub tokens
 - Account-wide configuration changes
 
 **Example Scenarios:**
-- Daily use in Hippius Desktop App
 - Administrative scripts for bucket management
 - Backup and disaster recovery operations
 - Migrating data between storage systems
@@ -335,11 +314,11 @@ Set calendar reminders before tokens expire to ensure uninterrupted service for 
 
 Master Tokens and Sub Tokens provide a flexible, secure way to manage access to your Hippius S3 Storage:
 
-- **Master Tokens**: Full access, automatically created in Desktop App, manually created in Console
+- **Master Tokens**: Full access, created in the Console
 - **Sub Tokens**: Limited scope, perfect for API integrations and specific use cases
 - **Security**: Secrets shown only once, tokens can be revoked anytime
 - **Flexibility**: Custom permissions, bucket selection, and expiration dates
-- **Management**: Comprehensive interface in both Console and Desktop App
+- **Management**: Comprehensive interface in the Console
 
 :::tip Automate with the Hippius API
 All token operations — creating, listing, revoking, and rotating — can also be done programmatically via the [Hippius Management API](/use/api). Use it to automate token lifecycle in CI/CD pipelines, multi-tenant apps, or AI agent workflows.

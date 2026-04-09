@@ -35,7 +35,7 @@ const sidebars: SidebarsConfig = {
         "use/hippius-api",
         {
           type: "link",
-          label: "Pricing ↗",
+          label: "Pricing",
           href: "https://hippius.com/pricing",
         },
       ],
@@ -54,7 +54,6 @@ const sidebars: SidebarsConfig = {
         "use/desktop/billing",
         "use/desktop/referral-system",
         "use/desktop/wallet",
-        "use/desktop/staking",
       ],
     },
 
@@ -66,8 +65,6 @@ const sidebars: SidebarsConfig = {
       items: [
         "use/virtual-machines",
         "use/wallet",
-        "use/staking",
-        "use/bridge-tokens",
       ],
     },
 
@@ -85,6 +82,7 @@ const sidebars: SidebarsConfig = {
       items: [
         "learn/architecture",
         "learn/storage-systems",
+        "learn/proof-of-storage",
         "learn/encryption",
         "learn/confidential-computing",
         "learn/vm-computing",
@@ -95,14 +93,6 @@ const sidebars: SidebarsConfig = {
         "learn/miner",
         "learn/weights",
       ],
-    },
-
-    // ── STAKING ────────────────────────────────────────────────────
-    {
-      type: "category",
-      label: "Staking",
-      collapsed: true,
-      items: ["earn/staking"],
     },
 
     // ── EARN / MINE ────────────────────────────────────────────────

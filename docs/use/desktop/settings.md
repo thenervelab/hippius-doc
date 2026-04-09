@@ -152,11 +152,11 @@ Sync & Storage
       <li>Use the <strong>Token Usage</strong> field as a reference for the Authorization header.</li>
     </Ordered>
 
-    :::warning Keep your master token secure
+    :::warning Keep your API token secure
     Anyone with this token can access your account. Treat it like a password.
     :::
 
-    ![Master token screen](/img/desktop/settings/settings-api-token.png)
+    ![API token screen](/img/desktop/settings/settings-api-token.png)
 
 </>
 </DocAccordionItem>
