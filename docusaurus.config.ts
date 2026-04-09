@@ -169,6 +169,11 @@ const config: Config = {
           position: "right",
         },
         {
+          href: "https://status.hippius.com/",
+          label: "Status",
+          position: "right",
+        },
+        {
           href: "https://github.com/thenervelab/hippius-doc",
           label: "GitHub",
           position: "right",
