@@ -1,4 +1,4 @@
-# Arrion Miner Setup
+# Arion Miner Setup
 
 This guide explains how to set up and run a Hippius storage miner.
 
