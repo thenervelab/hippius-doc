@@ -66,6 +66,7 @@ Then open `http://localhost:8200` to access the Duplicati web UI.
 
 5. Click **Test connection** to verify, then proceed to configure your **Source Data** and **Schedule**
 
+
 :::warning Required S3 options
 Both `s3-ext-forcepathstyle` and `s3-disable-chunk-encoding` must be set to `true`. Without path style, Duplicati cannot resolve the bucket. Without disabling chunk encoding, uploads will fail with a signature mismatch error.
 :::
