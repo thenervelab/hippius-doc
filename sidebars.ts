@@ -30,6 +30,7 @@ const sidebars: SidebarsConfig = {
             "storage/s3/examples/image-gallery",
             "storage/s3/examples/static-site",
             "storage/s3/examples/nextcloud",
+            "storage/s3/examples/duplicati",
           ],
         },
         "use/hippius-api",

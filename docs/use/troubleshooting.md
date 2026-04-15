@@ -58,7 +58,7 @@ To remove a bucket along with everything inside it, use the `--force` flag which
 
 ```bash
 aws s3 rb s3://my-bucket --force \
-  --profile hippius --endpoint-url https://s3.hippius.com
+  --endpoint-url https://s3.hippius.com
 ```
 
 :::tip Interactive Script
