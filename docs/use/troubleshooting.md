@@ -52,6 +52,19 @@ If your client attempts to connect to Amazon S3 instead of Hippius or reports a 
 - **Wrong Region:** Set the region to `decentralized`.
 - **Addressing Style:** Ensure your client is set to use **Path-style** addressing (`forcePathStyle: true` or equivalent) instead of Virtual Hosted-style.
 
+## Deleting a bucket and all its contents
+
+To remove a bucket along with everything inside it, use the `--force` flag which empties the bucket first and then deletes it:
+
+```bash
+aws s3 rb s3://my-bucket --force \
+  --profile hippius --endpoint-url https://s3.hippius.com
+```
+
+:::tip Interactive Script
+For a guided, interactive experience, you can use the [delete-bucket.sh](https://github.com/thenervelab/hippius-s3/blob/main/scripts/delete-bucket.sh) script which handles credential setup and confirmation prompts for you.
+:::
+
 ## Getting help
 
 Still stuck? We're here to help!
