@@ -114,6 +114,9 @@ const sidebars: SidebarsConfig = {
       ],
     },
 
+    // ── STAKE ──────────────────────────────────────────────────────
+    "earn/staking",
+
     // ── VALIDATORS ─────────────────────────────────────────────────
     {
       type: "category",
