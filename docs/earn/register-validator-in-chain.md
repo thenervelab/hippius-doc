@@ -14,9 +14,15 @@ Before proceeding, ensure you have:
 
 1. Navigate to [Polkadot.js Apps for Hippius](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network#/extrinsics)
 
-2. Fill the form as shown in the image below with your Hippius node ID (the `ipfsNodeId` field is a legacy parameter — leave as None):
+2. Fill the form as shown in the image below with your Hippius node ID and the other required registration fields:
 
-![Validator Configuration Screen](/img/validators/hippius-register-validator.png)
+![Validator Configuration Screen](/img/vali_register.png)
+
+:::tip Simpler coldkey registration (CLI / SDK)
+Submitting **`registerNodeWithColdkey`** from Polkadot.js Apps means filling **`challengeBytes`**, signatures, and related fields by hand. For a **simpler** flow, use the **Hippius CLI** (and related SDK-style tooling): see **[Hippius CLI & SDK](/cli/usage)** and the commands in **[Registering in the Hippius Blockchain](/earn/register-in-blockchain)** — for validators, pass **`--node-type Validator`**.
+
+Where we explain how **coldkey (main) node** registration fits into the Hippius setup and where to go next for the full on-chain registration process, see **[Running a Hippius blockchain node — Section 4: Register your node on-chain](/earn/arion/running-blockchain-node#4-register-your-node-on-chain)**.
+:::
 
 ### Step 2: Generate Session Keys
 

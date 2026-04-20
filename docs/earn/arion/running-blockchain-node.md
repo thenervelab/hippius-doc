@@ -9,10 +9,10 @@ This guide is specifically for **miner nodes**. If you're setting up a validator
 :::info Complete Miner Setup
 To run a complete Hippius storage miner, you need **two components running**:
 
-1. **Hippius Blockchain Node** (this guide) - For on-chain registration and network participation
-2. **Arion Miner** - The actual mining software
+1. **Hippius Blockchain Node** (this guide) — sync, keys, and **coldkey (main) node** registration on the Registration pallet
+2. **Arion Miner** — the mining software; **hotkey / child** registration and Arion pallet steps are documented there, not in this page
 
-After completing this guide, proceed to the [**Arion Miner Setup**](./running-miner) to run the mining software.
+After completing this guide, proceed to the [**Arion Miner Setup**](./running-miner) to run the miner and complete child/hotkey registration.
 :::
 
 ## Server Requirements
@@ -256,51 +256,27 @@ journalctl -u hippius-node -f | grep "Inserted key"
 
 ## 4. Register Your Node On-Chain
 
-After inserting keys, you need to register your node in the Registration Pallet. This step connects your blockchain node identity with your miner registration.
+After inserting keys, register your **main (coldkey) node** on the **Registration** pallet so the chain binds your **libp2p node identity** (peer ID from the logs in step 3) to your **owner** account. That flow uses **`register_node_with_coldkey`** (challenge + Ed25519 proof); it is **not** documented step-by-step here.
 
-### Get Required Information
+### Coldkey (main node) registration
 
-1. **Node Identity**: Found in node logs (step 3 above)
-2. **Account**: The account whose keys you inserted
+Follow the dedicated guide: use the **Hippius CLI** with the **peer ID** from your node logs (**Section 3 — Get your node identity**) and the **Ed25519 key hex** from `hippius key inspect-node-key` on the machine that runs the node (paths and commands are in that guide).
 
-### Choose Registration Method
+**[Registering in the Hippius Blockchain](/earn/register-in-blockchain)** — coldkey registration: use `--node-type StorageMiner` for storage miners or **`--node-type Validator`** for validators (plus verification commands). Validator-only staking steps stay in **[Register a validator in the chain](/earn/register-validator-in-chain)**.
 
-There are two registration methods depending on whether you're registering a **main node** (coldkey) or a **child node** (hotkey):
-
-#### Option A: Register Main Node (Coldkey)
-
-Use this method if you're registering your primary/main account node.
-
-1. Navigate to [Polkadot.js Apps](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network#/extrinsics)
-2. Go to **Developer → Extrinsics**
-3. Select your **main account** (coldkey)
-4. Choose pallet: **registration**
-5. Choose extrinsic: **coldkeyNodeRegistration**
-6. Fill in the parameters:
-   - **nodeType**: Select **StorageMiner**
-   - **nodeId**: Your node identity (from step 3)
-   - **ipfsNodeId**: Optional — leave as **None**
-   - **payInCredits**: Select **No**
-7. Sign and submit the transaction
-
-![Register Coldkey](/img/arion/register-coldkey.png)
+Pallet-level behavior (challenge domain, storage maps) is summarized in **[Registration pallet](/pallets/registration)**.
 
 :::tip
-The signing account should be the same account whose keys you inserted via RPC in step 3. This ensures the node can properly sign transactions on-chain.
+Use the same **coldkey** account you use in the CLI (`hippius account login`) and whose keys you inserted via RPC in **Section 3** above, so the node can sign on-chain operations consistently.
 :::
 
-#### Option B: Register Child Node (Hotkey)
+### Hotkey / child node — not on this page
 
-To register a hotkey (child node), please follow the hotkey registration guide in the Arion Miner documentation:
+**Hotkey** (child) setup, proxies, signatures, and **Arion pallet** registration are **not** done from the blockchain-node guide. Complete them only after you have the miner running:
 
-📖 **[Follow the Hotkey Registration Guide in Arion Miner Setup](./running-miner#6-register-miner-in-arion-pallet)**
+**[Arion Miner Setup — Section 6: Register miner in Arion pallet](./running-miner#6-register-miner-in-arion-pallet)**
 
-This guide will walk you through:
-1. Setting up a proxy relationship between your coldkey and hotkey
-2. Generating the required cryptographic signatures
-3. Registering your hotkey in the Arion pallet
-
-After completing the hotkey registration, return here to continue with the miner setup.
+That section covers `registerChild`, `generate_registration_data`, and the rest of the hotkey path. Then continue with the rest of [**Arion Miner Setup**](./running-miner).
 
 ## 5. Setup and Run Arion Miner
 
@@ -440,7 +416,7 @@ After setting up your blockchain node:
 
 1. ✅ Ensure blockchain node is fully synced
 2. ✅ Verify keys are inserted in blockchain node
-3. ✅ Register node on-chain (coldkey or child node)
+3. ✅ Register **coldkey** on-chain — [Registering in the Hippius Blockchain](/earn/register-in-blockchain); **hotkey/child** — [Arion Miner, section 6](./running-miner#6-register-miner-in-arion-pallet)
 4. 🚀 **[Set up and run Arion Miner](./running-miner)** - Required to start mining!
 
 :::warning Important

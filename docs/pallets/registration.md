@@ -1,137 +1,194 @@
 # Registration Pallet
 
-The Registration pallet is a critical component of the Hippius blockchain ecosystem, enabling nodes to register on the network. This pallet allows for the management of node types, registration status, and associated fees, facilitating a robust and efficient node registration process.
+The Registration pallet lets **main nodes** (coldkey-owned identities) register on Hippius, prove control of a **libp2p** node identity, and manage lifecycle, governance hooks, and fee metadata. User-facing registration is **`register_node_with_coldkey`**, which binds an on-chain owner account to a `node_id` backed by a signed challenge.
 
 ## Overview
 
-The Registration pallet provides functionalities to handle the following operations:
+- **Coldkey / main-node registration**: A signed caller registers a `node_id` for an `owner` account, with replay-safe challenges and Ed25519 verification against the libp2p peer ID encoding.
+- **Governance & ops**: Root and authorities can force-register, ban accounts, toggle node types, fees, deregistration, and validator whitelists.
+- **Lifecycle**: Owners can unregister or swap owner; validators can submit deregistration reports; consensus can remove nodes when enabled.
+- **Fees**: Storage and hooks exist for per–node-type fees and fee charging; registration still carries a `pay_in_credits` parameter for API alignment with fee logic that may be enabled or wired elsewhere in the runtime.
 
-- **Node Registration**: Nodes can register their information, including node type and node ID.
-- **Node Status Management**: The status of registered nodes can be updated to reflect their operational state.
-- **Fee Management**: The pallet manages fees associated with different node types and enables fee charging.
+## Extrinsics
 
-## Key Features
+### `register_node_with_coldkey` (primary)
 
-### 1. Registering Nodes
+Signed extrinsic. Registers the **main node** in **`ColdkeyNodeRegistrationV2`** and records **`Libp2pMainIdentity`** for audits and liveness.
 
-Users can register their nodes on the network:
+**Parameters**
 
-#### Function: `register_node`
+| Parameter | Description |
+|-----------|-------------|
+| `origin` | Signing account (must be signed). |
+| `node_type` | `Validator`, `StorageMiner`, `StorageS3`, `ComputeMiner`, or `GpuMiner`. |
+| `node_id` | Node identifier bytes; must equal `node_id_hex` (libp2p peer ID bytes). |
+| `pay_in_credits` | Reserved for fee-in-credits flows when fee charging is active at registration. |
+| `owner` | On-chain account that owns the registration; must match the decoded challenge `account`. |
+| `main_key_type` | Libp2p key type; **Ed25519** is required and enforced. |
+| `main_public_key` | 32-byte Ed25519 public key. |
+| `main_sig` | 64-byte Ed25519 signature over **`challenge_bytes`**. |
+| `challenge_bytes` | SCALE-encoded **`RegisterChallenge`** (domain, expiry, genesis, account, node hash, etc.). |
+| `node_id_hex` | Same bytes as `node_id`; used with the challenge and peer-ID checks. |
 
-- **Parameters**:
-  - `origin`: The origin of the transaction, representing the user registering the node.
-  - `node_type`: The type of the node being registered (e.g., Validator, StorageMiner).
-  - `node_id`: A unique identifier for the node.
-  - `pay_in_credits`: A boolean indicating whether the fee should be paid in credits.
-  - `ipfs_node_id`: An optional node identifier (legacy parameter name, historically used for IPFS node ID).
+**High-level checks (success path)**
 
-- **Returns**: A `DispatchResultWithPostInfo` indicating success or failure of the operation.
+1. **Challenge**: Decode `RegisterChallenge`; domain must be `HIPPIUS::REGISTER::v1` (padded to 24 bytes); `account == owner`; not expired; `genesis_hash` matches chain genesis; `node_id_hash` matches `blake2_256(node_id_hex)`; `node_id == node_id_hex`; challenge hash not already in **`UsedChallenges`** (replay protection).
+2. **Signature**: Ed25519 verify `main_sig` over `challenge_bytes`; **`verify_peer_id`** ensures `node_id_hex` matches the multihash prefix + public key layout for Ed25519.
+3. **Policy**: Owner not **banned**; owner does not already have a node (**`OwnerAlreadyRegistered`**); **cooldown** after last deregistration (**`NodeCooldownPeriod`**); node not already in **`ColdkeyNodeRegistrationV2`**; **`node_type`** not **disabled**.
+4. **Validators**: **`InsufficientStake`** if active stake for `owner` is below **`MinerStakeThreshold`** (via staking ledger).
+5. **Persist**: Insert **`ColdkeyNodeInfoLite`**, update **`OwnerToNode`**, store **`Libp2pMainIdentity`**, mark challenge used until expiry, emit **`MainNodeRegistered`**.
 
-### 2. Updating Node Status
+**Returns**: `DispatchResultWithPostInfo`.
 
-Users can update the status of their nodes:
+---
 
-#### Function: `set_node_status_to_degraded`
+### `force_register_coldkey_node`
 
-- **Parameters**:
-  - `origin`: The origin of the transaction, representing the user updating the node status.
-  - `node_id`: The unique identifier of the node to be updated.
+**Root only.** Registers `owner` for `node_id` / `node_type` without cryptographic proof. Same bans / duplicate owner / duplicate node checks as the user path where applicable. Emits **`MainNodeRegistered`**.
 
-- **Returns**: A `DispatchResult` indicating success or failure of the operation.
+---
 
-### 3. Enabling or Disabling Fee Charging
+### `set_node_status_to_degraded`
 
-The pallet allows for the management of fee charging:
+**Root only.** If the node exists in **`ColdkeyNodeRegistrationV2`** and is a **`StorageMiner`**, sets status to **`Degraded`** and emits **`NodeStatusUpdated`**. Non–storage-miner types are rejected with **`NotAminer`** (error name reflects historical miner checks).
 
-#### Function: `set_fee_charging`
+---
 
-- **Parameters**:
-  - `origin`: The origin of the transaction, representing the user changing the fee charging status (only root can perform this action).
-  - `enabled`: A boolean indicating whether fee charging should be enabled.
+### `set_fee_charging`
 
-- **Returns**: A `DispatchResult` indicating success or failure of the operation.
+**Root only.** Sets **`FeeChargingEnabled`**. Emits **`FeeChargingStatusChanged`**.
 
-### 4. Updating Node Type Fees
+---
 
-Users can update the fees associated with specific node types:
+### `set_node_type_fee`
 
-#### Function: `set_node_type_fee`
+**Signed authority** (via **`pallet_credits::ensure_is_authority`**). Updates **`CurrentNodeTypeFee`**. Emits **`NodeTypeFeeUpdated`**.
 
-- **Parameters**:
-  - `origin`: The origin of the transaction, representing the user updating the fee (only authorities can perform this action).
-  - `node_type`: The type of node for which the fee is being updated.
-  - `fee`: The new fee amount for the specified node type.
+---
 
-- **Returns**: A `DispatchResult` indicating success or failure of the operation.
+### `set_node_type_disabled`
 
-## Storage Structures
+**Root only.** Updates **`DisabledNodeTypes`**. Emits **`NodeTypeDisabledChanged`**.
 
-The Registration pallet utilizes several storage structures to manage state:
+---
 
-- **DisabledNodeTypes**: A mapping of node types to their disabled status.
-- **NodeRegistration**: A mapping of node IDs to their corresponding node information.
-- **FeeChargingEnabled**: A storage value indicating whether fee charging is enabled.
-- **CurrentNodeTypeFee**: A mapping of node types to their current fees.
-- **LastRegistrationBlock**: A mapping of node types to the last block number at which they were registered.
+### `force_unregister_coldkey_node`
+
+**Root only.** Runs **`do_set_node_status_degraded_or_unregister`**: storage miners become **`Degraded`**; other node types are fully unregistered.
+
+---
+
+### `unregister_main_node`
+
+**Signed owner** of the node in **`ColdkeyNodeRegistrationV2`**. Same degrade-or-unregister behavior as the force path for the given `node_id`.
+
+---
+
+### `swap_node_owner`
+
+**Signed current owner**. Sets a new **`owner`** if the new account is not banned and does not already own a node. Emits **`NodeOwnerSwapped`**.
+
+---
+
+### `submit_deregistration_report`
+
+**Signed** reporter resolved to a **validator owner** (via proxy resolution where applicable). Requires **deregistration enabled**, caller’s registered node to be **`Validator`**, and rate limits via **`ReportSubmissionCount`** / **`MaxDeregRequestsPerPeriod`**. Appends **`DeregistrationReport`** entries per `node_id` to **`TemporaryDeregistrationReports`**. Consensus processing runs on a **`ConsensusPeriod`** boundary in **`on_initialize`**.
+
+---
+
+### `set_account_ban_status`
+
+**Root only.** Inserts or removes **`BannedAccounts`**. Emits **`AccountBanStatusChanged`**.
+
+---
+
+### `set_whitelisted_validators`
+
+**Root only.** Replaces **`WhitelistedValidators`** (bounded; max size enforced). Emits **`WhitelistUpdated`**.
+
+---
+
+### `set_deregistration_enabled`
+
+**Root only.** Sets **`DeregistrationEnabled`**. Emits **`DeregistrationStatusChanged`**.
+
+## Storage (selected)
+
+| Name | Role |
+|------|------|
+| **`ColdkeyNodeRegistrationV2`** | Canonical main-node registry: `node_id` → optional **`ColdkeyNodeInfoLite`**. |
+| **`OwnerToNode`** | `owner` → list of `node_id`s for indexing. |
+| **`Libp2pMainIdentity`** | `node_id` → `(Libp2pKeyType, public_key)` bound at registration. |
+| **`UsedChallenges`** | `blake2_256(challenge_bytes)` → expiry block (replay protection). |
+| **`NodeLastDeregisteredAt`** | Cooldown anchor per `node_id`. |
+| **`DisabledNodeTypes`** | Per–`NodeType` disable flag. |
+| **`FeeChargingEnabled`** | Global fee charging toggle. |
+| **`CurrentNodeTypeFee`** | Per–`NodeType` fee amount. |
+| **`LastRegistrationBlock`** | Used by dynamic fee helpers when registrations update fees. |
+| **`BannedAccounts`** | Banned owner accounts cannot register. |
+| **`WhitelistedValidators`** | Optional validator allowlist (with **`ValidatorWhitelistEnabled`** if used by runtime). |
+| **`TemporaryDeregistrationReports`** | Pending deregistration votes by reporter account. |
+| **`ReportSubmissionCount`** | Rate limiting; periodically cleared in **`on_initialize`**. |
+| **`DeregistrationEnabled`** | Gate for report submission and consensus unregister. |
+
+Legacy or parallel maps (**`ColdkeyNodeRegistration`**, **`NodeRegistration`**, etc.) may still exist for migration or compatibility; **v2 coldkey storage** is the path described for new registrations above.
+
+## Hooks
+
+**`on_initialize`**: Initializes **`CurrentNodeTypeFee`** if empty; clears report counters on an interval; applies **deregistration consensus** on **`ConsensusPeriod`**; clears temporary reports on an epoch-based schedule; periodic housekeeping for duplicate-owner coldkey rows; garbage-collects expired **`UsedChallenges`**.
 
 ## Events
 
-The pallet emits several events to notify the system and users about significant actions:
+- **`MainNodeRegistered`** — `{ node_id }` (primary success for coldkey registration).
+- **`NodeRegistered`** — Defined on the enum; the coldkey registration extrinsics emit **`MainNodeRegistered`** on success.
+- **`NodeUnregistered`**, **`NodeUnregisteredBatch`**
+- **`NodeStatusUpdated`** — `{ node_id, status }`
+- **`FeeChargingStatusChanged`**, **`FeePercentageChanged`**, **`NodeTypeFeeUpdated`**, **`NodeTypeDisabledChanged`**
+- **`NodeOwnerSwapped`**, **`DeregistrationConsensusReached`**, **`DeregistrationConsensusFailed`**
+- **`AccountBanStatusChanged`**, **`WhitelistUpdated`**
+- **`NodeVerified`**, **`ColdkeyNodeVerified`** — Verification flows if used by the runtime.
+- **`DeregistrationStatusChanged`**
 
-- `NodeRegistered`: Triggered when a node is successfully registered (node ID).
-- `NodeStatusUpdated`: Triggered when a node's status is updated (node ID, status).
-- `FeeChargingStatusChanged`: Triggered when the fee charging status is changed (enabled).
-- `NodeTypeFeeUpdated`: Triggered when the fee for a specific node type is updated (node type, fee).
-- `NodeTypeDisabledChanged`: Triggered when the disabled status of a node type is changed (node type, disabled).
+## Errors (reference)
 
-## Errors
+Including but not limited to: **`NoneValue`**, **`StorageOverflow`**, **`IpfsNodeIdRequired`**, **`NodeAlreadyRegistered`**, **`NodeNotFound`**, **`NotAminer`**, **`IpfsNodeIdAlreadyRegistered`**, **`AddressUidNotFoundOnBittensor`**, **`InvalidAccountId`**, **`InsufficientStake`**, **`InsufficientBalanceForFee`**, **`InsufficientCreditsForFee`**, **`FeeTooHigh`**, **`NodeTypeDisabled`**, **`NodeTypeMismatch`**, **`NodeNotRegistered`**, **`DeregistrationDisabled`**, **`NotNodeOwner`**, **`NotAProxyAccount`**, **`InvalidProxyType`**, **`AccountNotRegistered`**, **`NodeNotInUids`**, **`NodeCooldownPeriodNotExpired`**, **`OwnerAlreadyRegistered`**, **`InvalidNodeType`**, **`NodeNotDegradedStorageMiner`**, **`TooManyRequests`**, **`AccountBanned`**, **`ExceededMaxWhitelistedValidators`**, **`NodeNotWhitelisted`**, **`InvalidSignature`**, **`InvalidKeyType`**, **`InvalidChallenge`**, **`InvalidChallengeDomain`**, **`ChallengeExpired`**, **`ChallengeReused`**, **`GenesisMismatch`**, **`PublicKeyMismatch`**, **`ChallengeMismatch`**, **`NodeIdMismatch`**, **`TooManyUnverifiedNodes`**, **`NodeAlreadyVerified`**, **`Unauthorized`**.
 
-The pallet defines several error types to handle various failure scenarios:
+Registration with **`register_node_with_coldkey`** specifically exercises challenge, signature, cooldown, ban, owner-uniqueness, node-type disable, and (for validators) stake errors.
 
-- `NoneValue`: Raised when a function encounters a `None` value unexpectedly.
-- `NodeAlreadyRegistered`: Raised when attempting to register a node that is already registered.
-- `NodeNotFound`: Raised when a requested node cannot be found.
-- `NotAminer`: Raised when the node is not a miner.
-- `IpfsNodeIdRequired`: Raised when a required node ID is missing (legacy error name).
-- `InsufficientStake`: Raised when the required stake for a node type is not met.
-- `InsufficientBalanceForFee`: Raised when the user does not have enough balance to cover the fee.
-- `FeeTooHigh`: Raised when the fee exceeds the allowed limit.
-- `NodeTypeDisabled`: Raised when attempting to register a node type that is disabled.
+## Types
 
-## Additional Types
+### `ColdkeyNodeRegistrationV2` record: `ColdkeyNodeInfoLite`
 
-### NodeInfo Struct
+Minimal fields stored on-chain for a main node:
 
-The pallet defines a `NodeInfo` struct to represent information about registered nodes:
+- **`node_id`**
+- **`node_type`**
+- **`status`** — e.g. **`Online`**, **`Degraded`**
+- **`registered_at`** — block number
+- **`owner`** — account ID
 
-- **Fields**:
-  - `node_id`: The unique identifier for the node.
-  - `node_type`: The type of the node (e.g., Validator, StorageMiner).
-  - `ipfs_node_id`: An optional node ID (legacy field name).
-  - `status`: The current status of the node (e.g., Online, Degraded).
-  - `registered_at`: The block number at which the node was registered.
-  - `owner`: The account ID of the node owner.
+APIs that return **`NodeInfo`** may map this struct into a richer view (for example with **`ipfs_node_id: None`** and **`is_verified: true`** in **`coldkey_lite_to_node_info`**).
 
-### NodeType Enum
+### `NodeType`
 
-The pallet defines a `NodeType` enum to represent different types of nodes:
+- **`Validator`**
+- **`StorageMiner`**
+- **`StorageS3`**
+- **`ComputeMiner`**
+- **`GpuMiner`**
 
-- **Validator**
-- **StorageMiner**
-- **StorageS3**
-- **ComputeMiner**
-- **GpuMiner**
+### `Status`
 
-### Status Enum
+- **`Online`**
+- **`Degraded`**
+- **`Offline`** (defined in the enum; primary transitions in the shown calls focus on **`Online`** / **`Degraded`** and unregister paths.)
 
-The pallet defines a `Status` enum to represent the operational state of nodes:
+### `RegisterChallenge` (conceptual)
 
-- **Online**
-- **Degraded**
-- **Offline**
+The SCALE-encoded challenge binds registration to a specific chain genesis, owner account, expiry block, and **`blake2_256(node_id_hex)`**, under the fixed domain bytes **`HIPPIUS::REGISTER::v1`** (zero-padded to 24 bytes). The exact field order and types match the pallet’s **`RegisterChallenge`** definition in **`types`**.
 
 ## Conclusion
 
-The Registration pallet plays a vital role in the Hippius blockchain ecosystem by facilitating the registration and management of nodes on the network. Its design allows for efficient handling of node types, registration statuses, and associated fees, ensuring a robust and user-friendly experience.
+The Registration pallet centers on **`register_node_with_coldkey`**: cryptographic proof of libp2p identity, one main node per owner in **`ColdkeyNodeRegistrationV2`**, and supporting extrinsics for operations, fees, bans, whitelists, and decentralized deregistration when enabled.
 
-For further information, please refer to the related pallets and documentation within the Hippius ecosystem.
+For cross-pallet behavior (staking thresholds, credits authorities, metagraph), see the related Hippius pallets and runtime configuration.
