@@ -3,7 +3,6 @@ id: file-system
 title: File System
 sidebar_label: File System
 slug: /use/desktop/file-system
-description: 5
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -16,6 +15,84 @@ import Icon from '@site/src/components/Icon';
 The Hippius File System is one of our core innovations, offering a unique, decentralized approach to storage. Designed to be efficient and accessible, it was built with a strong focus on security and privacy. All files are encrypted on your device before syncing to the Hippius network, so only you can read them.
 
 The desktop app supports **multi-folder sync**, allowing you to sync multiple folders from your device simultaneously. Each folder syncs independently and can be managed, paused, or removed individually.
+
+## Encryption {#encryption}
+
+Hippius uses end-to-end encryption to protect your files. Every file is encrypted on your device before it leaves your machine, so the Hippius network only ever stores ciphertext that no one else can read.
+
+### How It Works
+
+When you sign in for the first time, the app prompts you to set an **unlock password**. This password is used to derive a cryptographic key from your mnemonic seed. That key encrypts and decrypts every file in your sync folders.
+
+<Ordered>
+  <li>Files are encrypted <strong>locally</strong> on your device before upload.</li>
+  <li>Files are decrypted <strong>locally</strong> on your device after download.</li>
+  <li>The Hippius network and servers never see your plaintext data.</li>
+</Ordered>
+
+You do not need to set a separate encryption password. Your unlock password handles both file encryption and account recovery automatically.
+
+:::danger Important
+Your unlock password cannot be recovered. If you forget it, you will need your mnemonic seed to restore access to your files. Store both your password and mnemonic seed safely.
+:::
+
+### What the Unlock Password Does
+
+Your unlock password serves multiple purposes:
+
+| Purpose | Description |
+|---|---|
+| **File encryption** | Encrypts and decrypts files on your device during sync |
+| **Multi-device access** | Lets you access your files when you log in on a new device |
+| **Console access** | Lets you preview and download files on [Hippius Console](https://console.hippius.com) |
+
+The app sets up encryption automatically using your unlock password, so you only need to remember one password for everything.
+
+:::info When is the unlock password required?
+- **First login**: The app prompts you to set your unlock password right after signing in for the first time.
+- **New device**: The app asks for your unlock password to decrypt your files on the new device.
+- **Hippius Console**: Enter your unlock password to preview or download files from the web.
+:::
+
+## Unlock Password {#unlock-password}
+
+The unlock password is the single password that protects your encrypted files, both on your device and across all other devices and [Hippius Console](https://console.hippius.com).
+
+### How It Works
+
+When you set your unlock password, the app uses it to encrypt your files locally and also creates an encrypted backup of your account key on the server. This backup can only be decrypted with your unlock password, so no one else can access it.
+
+When you log in on a new device, the app asks for your unlock password to decrypt this backup and set up your files. On Hippius Console, the same password lets you preview and download your files directly from the web. Without the password, the encrypted backup remains locked and your files stay inaccessible.
+
+### Setting Your Unlock Password
+
+The app prompts you to set your unlock password on your first sign-in. This is required before you can use the app.
+
+![Set unlock password dialog](/img/desktop/settings/set-unlock-password-dialog.png)
+
+<Ordered>
+  <li>Enter a strong password (minimum 8 characters).</li>
+  <li>Confirm the password.</li>
+  <li>Click <BgStyledText>Save password</BgStyledText>.</li>
+</Ordered>
+
+Once set, file encryption is configured automatically. You can start adding sync folders right away without any additional setup.
+
+### Changing Your Unlock Password
+
+You can change your unlock password at any time from Settings.
+
+![Change unlock password dialog](/img/desktop/change-unlock-password-dialog.png)
+
+<Ordered>
+  <li>Go to <BgStyledIconWithText text="Settings" icon="Settings" /> → <BgStyledIconWithText text="Security" icon="SecuritySafe" />.</li>
+  <li>Click <BgStyledText>Change Unlock Password</BgStyledText>.</li>
+  <li>Enter your current password.</li>
+  <li>Choose a new password and confirm it.</li>
+  <li>Click <BgStyledText>Change password</BgStyledText>.</li>
+</Ordered>
+
+Changing the password re-encrypts the sealed backup on the server. Your mnemonic seed and encrypted files are not affected. Your desktop app access continues to work normally regardless of this change.
 
 ## Uploading Files
 

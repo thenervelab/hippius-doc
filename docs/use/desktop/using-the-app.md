@@ -33,12 +33,25 @@ After signing in for the first time, you will be guided through a **3-step onboa
 <Ordered>
   <li><strong>Welcome to Hippius</strong>: Overview of the platform's core capabilities including fast sync, encryption, multi-folder sync, conflict resolution, and the modern interface.</li>
   <li><strong>Multi-Folder Sync</strong>: Learn how to sync multiple folders at once with automatic encryption, sync from other devices, and custom device naming.</li>
-  <li><strong>Recovery Phrase</strong>: Understand the importance of your recovery phrase and how to back it up securely. Tips include writing it on paper, storing it safely, never sharing it, and keeping copies in multiple places.</li>
+  <li><strong>Mnemonic Seed</strong>: Understand the importance of your mnemonic seed and how to back it up securely. Tips include writing it on paper, storing it safely, never sharing it, and keeping copies in multiple places.</li>
 </Ordered>
 
 You can click <BgStyledText>Skip</BgStyledText> at any time to bypass the remaining onboarding steps. Use the <BgStyledText>Previous</BgStyledText> and <BgStyledText>Next</BgStyledText> buttons to navigate between steps. On the final step, click <BgStyledText>Continue</BgStyledText> to enter the app.
 
 ![The onboarding wizard showing the "Get Started" screen with bullet points and the left panel illustration](/img/desktop/onboarding-welcome.png)
+
+
+## Set Your Unlock Password
+
+After your first sign-in, the app will prompt you to set an **unlock password**. This password protects your account and encrypts your files.
+
+<Ordered>
+  <li>Enter a strong password (minimum 8 characters).</li>
+  <li>Confirm the password.</li>
+  <li>Click <BgStyledText>Save password</BgStyledText>.</li>
+</Ordered>
+
+Once set, the app handles file encryption automatically. You can start adding sync folders without any additional setup. See [Unlock Password](/use/desktop/file-system#unlock-password) for more details.
 
 ## Set Up Your First Sync Folder
 
@@ -47,19 +60,16 @@ When you first navigate to the **Files** page, you will see the sync setup scree
 <Ordered>
   <li>Click the <BgStyledText>Add Folder</BgStyledText> button under <strong>Local Sync Folders</strong>.</li>
   <li>Select any folder from your device using the file picker.</li>
-  <li>On first setup, the <strong>Encryption Password</strong> dialog will appear. Enter a strong password (minimum 8 characters) and confirm it.</li>
-  <li>Once confirmed, your folder is added and syncing begins automatically.</li>
+  <li>Your folder is added and syncing begins automatically.</li>
 </Ordered>
 
 ![The FilesOnboarding screen showing the Local Sync Folders section with the Add Folder button and Sync from Other Devices section](/img/desktop/files-onboarding.png)
 
-![The HcfsSetupDialog showing password and confirm password fields with the warning message](/img/desktop/hcfs-setup-dialog.png)
-
-:::danger Important
-Your encryption password cannot be recovered. If you forget it, you will need your recovery phrase (mnemonic) to restore access to your files. Keep both your password and recovery phrase stored safely.
-:::
-
 Any files you add to this folder will be encrypted on your device and synced to the Hippius network. You can also skip this step and set up sync later from Settings.
+
+:::info Encryption is automatic
+Your unlock password was set during first login, so file encryption is configured automatically. No additional password setup is needed when adding a sync folder.
+:::
 
 ## Adding More Sync Folders
 

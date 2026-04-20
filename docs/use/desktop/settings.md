@@ -3,7 +3,6 @@ id: settings
 title: App Settings
 sidebar_label: App Settings
 slug: /use/desktop/settings
-description: 5
 ---
 
 import DocAccordion, { DocAccordionItem } from '@site/src/components/DocAccordion';
@@ -97,41 +96,67 @@ Sync & Storage
 </>
 </DocAccordionItem>
 
-## Recovery Phrase
+## Security
 
-<DocAccordionItem value="recovery-phrase">
+<DocAccordionItem value="security">
   <>
-  Recovery Phrase
+  Security
   </>
   <>
-    <p>Your recovery phrase (12-word mnemonic) is the only way to restore access to your encrypted sync folders. Back it up securely and never share it with anyone.</p>
+    <p>The Security settings let you back up your mnemonic seed and manage your unlock password to keep your account and encrypted files secure across all your devices.</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />.</li>
-      <li>Click on <BgStyledIconWithText text="Recovery Phrase" icon="KeySquare" />.</li>
-      <li>Click <BgStyledText>Backup Recovery Phrase</BgStyledText> to start the backup process.</li>
+      <li>Click on <BgStyledIconWithText text="Security" icon="SecuritySafe" />.</li>
     </Ordered>
 
-    ![Recovery phrase settings](/img/desktop/settings/settings-recovery-phrase.png)
+    ![Security settings tab](/img/desktop/settings/security-settings-tab.png)
 
-    ### Backup Flow
+    ### Mnemonic Seed Backup
+
+    <p>Your mnemonic seed is a set of words that gives you full access to your account and encrypted files. It is the only way to restore your account if you lose access. Back it up and store it somewhere safe.</p>
+
+    <Ordered>
+      <li>Click <BgStyledText>Backup Mnemonic Seed</BgStyledText> to start the backup process.</li>
+    </Ordered>
+
+    #### Backup Flow
 
     <p>The backup process guides you through four steps:</p>
 
     <Ordered>
-      <li><strong>Security best practices</strong>: Review tips for safely storing your phrase (write on paper, use a secure location, never share, keep multiple copies). Click <BgStyledText>I Understand, Show My Recovery Phrase</BgStyledText> to continue.</li>
-      <li><strong>View your phrase</strong>: Your 12-word recovery phrase is displayed (blurred by default). Click <strong>Show</strong> to reveal it. You can copy it to the clipboard or download an encrypted backup as a password-protected ZIP file.</li>
-      <li><strong>Verify your phrase</strong>: You will be asked to enter 3 randomly selected words from your phrase to confirm you have backed it up correctly.</li>
-      <li><strong>Confirmation</strong>: A success screen confirms your phrase is secured.</li>
+      <li><strong>Security best practices</strong>: Review tips for safely storing your mnemonic seed (write on paper, use a secure location, never share, keep multiple copies). Click <BgStyledText>I Understand, Show My Mnemonic Seed</BgStyledText> to continue.</li>
+      <li><strong>View your mnemonic seed</strong>: Your 12-word mnemonic seed is displayed (blurred by default). Click <strong>Show</strong> to reveal it. You can copy it to the clipboard or download an encrypted backup as a password-protected ZIP file.</li>
+      <li><strong>Verify your mnemonic seed</strong>: You will be asked to enter 3 randomly selected words from your mnemonic seed to confirm you have backed it up correctly.</li>
+      <li><strong>Confirmation</strong>: A success screen confirms your mnemonic seed is secured.</li>
     </Ordered>
 
     :::danger Important
-    If you lose your recovery phrase, you will permanently lose access to your encrypted files. There is no way to recover it.
+    If you lose your mnemonic seed, you will permanently lose access to your encrypted files. There is no way to recover it.
     :::
 
     :::tip Encrypted Backup
-    You can download your recovery phrase as a password-protected ZIP file for additional security. Set a strong password (minimum 8 characters) when prompted.
+    You can download your mnemonic seed as a password-protected ZIP file for additional security. Set a strong password (minimum 8 characters) when prompted.
     :::
+
+    ### Unlock Password
+
+    <p>Your unlock password is set during your first sign-in and protects your encrypted files across all your devices and on <a href="https://console.hippius.com">Hippius Console</a>. For full details on how it works, see the <a href="/use/desktop/file-system#unlock-password">Unlock Password</a> section in the File System guide.</p>
+
+    #### Changing Your Unlock Password
+
+    <p>You can change your unlock password at any time:</p>
+
+    <Ordered>
+      <li>Click <BgStyledText>Change Unlock Password</BgStyledText>.</li>
+      <li>Enter your current password.</li>
+      <li>Choose a new password and confirm it.</li>
+      <li>Click <BgStyledText>Change password</BgStyledText>.</li>
+    </Ordered>
+
+    ![Change unlock password dialog](/img/desktop/change-unlock-password-dialog.png)
+
+    <p>Changing the password re-encrypts the sealed backup on the server. Your mnemonic seed and encrypted files are not affected. Your desktop app access continues to work normally.</p>
 
 </>
 </DocAccordionItem>

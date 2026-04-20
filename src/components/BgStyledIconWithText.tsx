@@ -12,7 +12,7 @@ export default function BgStyledIconWithText({
   iconClassName?: string;
   paddingClassName?: string;
 }) {
-  const IconComponent = Icons[icon];
+  const IconComponent = icon ? Icons[icon] : undefined;
 
   return (
     <div
@@ -21,7 +21,7 @@ export default function BgStyledIconWithText({
         paddingClassName
       )}
     >
-      {icon && <IconComponent className={iconClassName} />}
+      {IconComponent && <IconComponent className={iconClassName} />}
       {text && <span>{text}</span>}
     </div>
   );

@@ -54,20 +54,24 @@ const sidebars: SidebarsConfig = {
         "use/desktop/settings",
         "use/desktop/billing",
         "use/desktop/referral-system",
-        "use/desktop/wallet",
+        // ⚠️ WARNING: "Wallet" page is NOT live yet. Do NOT uncomment
+        // until the feature is fully released and verified by the team.
+        // "use/desktop/wallet",
       ],
     },
 
-    // ── CONSOLE ────────────────────────────────────────────────────
-    {
-      type: "category",
-      label: "Console",
-      collapsed: true,
-      items: [
-        "use/virtual-machines",
-        "use/wallet",
-      ],
-    },
+    // ⚠️ WARNING: The "Console" section (Virtual Machines, Wallet) is NOT
+    // live yet. Do NOT uncomment until these features are fully released
+    // and verified by the team. Check with team before enabling.
+    // {
+    //   type: "category",
+    //   label: "Console",
+    //   collapsed: true,
+    //   items: [
+    //     "use/virtual-machines",
+    //     "use/wallet",
+    //   ],
+    // },
 
     // ── SEPARATOR ──────────────────────────────────────────────────
     {
