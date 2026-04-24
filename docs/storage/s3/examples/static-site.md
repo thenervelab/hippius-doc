@@ -8,6 +8,10 @@ slug: /storage/s3/examples/static-site
 
 Deploy a static website (HTML, CSS, JS) to a public Hippius S3 bucket and serve it directly. No web server needed.
 
+:::tip Pick the closest region for best performance
+Swap `s3.hippius.com` for `eu-central-1.hippius.com` (Europe) or `us-central-1.hippius.com` (US) to use the regional cache closest to you. See the [S3 API Reference](/storage/s3/integration) for details.
+:::
+
 ## Setup
 
 Create a public bucket for your site:

@@ -29,6 +29,13 @@ TAO can only be used to pay for credits, not for authentication.
 - Signature: AWS Signature V4
 - Addressing style: path-style
 
+### Regional endpoints (for best performance)
+
+Hippius S3 is served through regional caches. Pick the endpoint closest to the client for lower latency. All regions serve the same data — only the endpoint changes.
+
+- Europe: https://eu-central-1.hippius.com (the default https://s3.hippius.com also resolves here)
+- US: https://us-central-1.hippius.com
+
 ## Client Configurations
 
 ### AWS CLI

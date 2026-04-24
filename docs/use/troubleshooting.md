@@ -40,6 +40,14 @@ If your transfer speeds are lower than expected:
 - **Parallel Transfers:** Increase the number of concurrent connections. In tools like `rclone`, use flags like `--transfers 8` and `--s3-upload-concurrency 8`.
 - **Network Proximity:** While Hippius is decentralized, initial routing performance can depend on your local ISP peering.
 
+:::tip Pick the closest region for best performance
+Hippius S3 is served through regional caches. For lower latency, point your client at the endpoint closest to you:
+- **Europe:** `https://eu-central-1.hippius.com` (the default `https://s3.hippius.com` also resolves here)
+- **US:** `https://us-central-1.hippius.com`
+
+All regions serve the same data — just swap the endpoint in your client config.
+:::
+
 :::tip
 For rclone, combining `--transfers 8 --s3-upload-concurrency 8 --progress` gives you fast parallel uploads with real-time feedback.
 :::

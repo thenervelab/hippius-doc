@@ -9,6 +9,14 @@ slug: /storage/s3/javascript
 
 Use the [AWS SDK v3](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/) or the [MinIO SDK](https://min.io/docs/minio/linux/developers/javascript/minio-javascript.html) to interact with Hippius S3 from Node.js or the browser.
 
+:::tip Pick the closest region for best performance
+Hippius S3 is served through regional caches. For lower latency, point your client at the endpoint closest to you:
+- **Europe:** `https://eu-central-1.hippius.com` (the default `https://s3.hippius.com` also resolves here)
+- **US:** `https://us-central-1.hippius.com`
+
+All regions serve the same data — just swap the `endpoint` / `endPoint` in the snippets below.
+:::
+
 ## AWS SDK v3
 
 ### Install

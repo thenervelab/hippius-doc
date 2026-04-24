@@ -9,6 +9,14 @@ slug: /storage/s3/python
 
 Two libraries work well with Hippius S3: **boto3** (AWS SDK) and **minio** (MinIO SDK). Both are fully supported.
 
+:::tip Pick the closest region for best performance
+Hippius S3 is served through regional caches. For lower latency, point your client at the endpoint closest to you:
+- **Europe:** `https://eu-central-1.hippius.com` (the default `https://s3.hippius.com` also resolves here)
+- **US:** `https://us-central-1.hippius.com`
+
+All regions serve the same data — just swap the `endpoint_url` / host in the snippets below.
+:::
+
 ## boto3
 
 ### Install

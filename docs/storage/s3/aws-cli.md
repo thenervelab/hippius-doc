@@ -42,6 +42,14 @@ export AWS_DEFAULT_REGION="decentralized"
 You **must** pass `--endpoint-url https://s3.hippius.com` to every command. Without it, the AWS CLI sends requests to Amazon's servers and they will fail.
 :::
 
+:::tip Pick the closest region for best performance
+Hippius S3 is served through regional caches. For lower latency, replace `s3.hippius.com` in `--endpoint-url` with the region closest to you:
+- **Europe:** `https://eu-central-1.hippius.com` (also `https://s3.hippius.com`)
+- **US:** `https://us-central-1.hippius.com`
+
+All regions serve the same data.
+:::
+
 :::tip Pro Tip: Create a Shell Alias
 Typing the endpoint URL and profile flag every time is tedious. Add these aliases to your `~/.bashrc` or `~/.zshrc`:
 
