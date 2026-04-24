@@ -20,6 +20,14 @@ Hippius S3 is a drop-in replacement for Amazon S3. If you already have code that
 
 Get your credentials at [console.hippius.com](https://console.hippius.com). See the [Quickstart](/use/quickstart) to go from zero to first upload in 5 minutes.
 
+:::tip Pick the closest region for best performance
+Hippius S3 is served through regional caches. For lower latency, point your client at the endpoint closest to you:
+- **Europe:** `https://eu-central-1.hippius.com` (the default `https://s3.hippius.com` also resolves here)
+- **US:** `https://us-central-1.hippius.com`
+
+All regions serve the same data — just swap the endpoint in your client config.
+:::
+
 ## Client Guides
 
 | Language | Guide |

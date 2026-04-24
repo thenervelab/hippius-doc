@@ -20,6 +20,14 @@ This page lists every S3 API operation and whether Hippius supports it.
 | **Signature** | AWS Signature V4 |
 | **Addressing** | Path-style (`s3.hippius.com/bucket/key`) |
 
+:::tip Pick the closest region for best performance
+Hippius S3 is served through regional caches. For lower latency, point your client at the endpoint closest to you:
+- **Europe:** `https://eu-central-1.hippius.com` (the default `https://s3.hippius.com` also resolves here)
+- **US:** `https://us-central-1.hippius.com`
+
+All regions serve the same data — just swap the endpoint in your client config.
+:::
+
 ## Bucket Operations
 
 | Operation | Status | Notes |

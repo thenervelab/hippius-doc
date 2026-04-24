@@ -11,6 +11,10 @@ import Unordered from '@site/src/components/Unordered';
 
 Host and stream videos from Hippius S3. The S3 API supports [range requests](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GettingObjectsUsingAPIs.html), so browsers can seek through videos without downloading the entire file.
 
+:::tip Pick the closest region for best performance
+Swap `s3.hippius.com` for `eu-central-1.hippius.com` (Europe) or `us-central-1.hippius.com` (US) to use the regional cache closest to you. See the [S3 API Reference](/storage/s3/integration) for details.
+:::
+
 ## How It Works
 
 <Ordered>

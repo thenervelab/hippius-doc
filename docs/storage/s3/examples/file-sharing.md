@@ -11,6 +11,10 @@ import Unordered from '@site/src/components/Unordered';
 
 Build a simple file sharing service: upload a file and get a time-limited download link. No server-side storage needed — files go straight to Hippius S3.
 
+:::tip Pick the closest region for best performance
+Swap `s3.hippius.com` for `eu-central-1.hippius.com` (Europe) or `us-central-1.hippius.com` (US) to use the regional cache closest to you. See the [S3 API Reference](/storage/s3/integration) for details.
+:::
+
 ## How It Works
 
 <Ordered>

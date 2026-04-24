@@ -8,6 +8,10 @@ slug: /storage/s3/examples/duplicati
 
 Use Hippius S3 as the backup destination for [Duplicati](https://github.com/duplicati/duplicati), an open-source backup tool with encryption, compression, and scheduling built in. Unlike file sync tools like rclone, Duplicati creates deduplicated, optionally encrypted backup archives — ideal for automated, set-and-forget backups.
 
+:::tip Pick the closest region for best performance
+Swap `s3.hippius.com` for `eu-central-1.hippius.com` (Europe) or `us-central-1.hippius.com` (US) to use the regional cache closest to you. See the [S3 API Reference](/storage/s3/integration) for details.
+:::
+
 ## Prerequisites
 
 Create the bucket before configuring Duplicati:

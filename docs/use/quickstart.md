@@ -46,6 +46,14 @@ Store your secret key securely — it cannot be retrieved after creation.
 
 You can create multiple tokens with different access levels. See [Token Management](/use/s3-token-management) for details. Tokens can also be managed programmatically via the [Management API](https://api.hippius.com/).
 
+:::tip Pick the closest region for best performance
+Hippius S3 is served through regional caches. For lower latency, use the endpoint closest to you in the examples below:
+- **Europe:** `eu-central-1.hippius.com` (the default `s3.hippius.com` also resolves here)
+- **US:** `us-central-1.hippius.com`
+
+All regions serve the same data — just swap the endpoint in your client config.
+:::
+
 ## Step 4: Upload a File
 
 import Tabs from '@theme/Tabs';
