@@ -1,0 +1,321 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1280" width="1500" height="1280" role="img" aria-label="HCFS sync engine three-tree flow">
+  <defs>
+    <style><![CDATA[
+      .bg { fill: #fafafa; }
+      .title { font: 700 28px -apple-system, "Segoe UI", sans-serif; fill: #111827; }
+      .subtitle { font: 400 14px -apple-system, sans-serif; fill: #4b5563; }
+      .section-tag { font: 700 11px -apple-system, sans-serif; letter-spacing: 0.12em; fill: #6b7280; }
+      .box-title { font: 700 14px -apple-system, sans-serif; fill: #111827; }
+      .box-sub { font: 400 11px -apple-system, sans-serif; fill: #6b7280; }
+      .item { font: 400 12px -apple-system, sans-serif; fill: #1f2937; }
+      .item-sm { font: 400 11px -apple-system, sans-serif; fill: #374151; }
+      .code { font: 400 11px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #374151; }
+      .code-b { font: 600 11px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #111827; }
+      .edge { font: 600 11px -apple-system, sans-serif; fill: #1f2937; }
+      .edge-sub { font: 400 10px -apple-system, sans-serif; fill: #6b7280; }
+      .matrix-h { font: 700 11px -apple-system, sans-serif; fill: #111827; }
+      .matrix-c { font: 400 11px ui-monospace, Menlo, monospace; fill: #1f2937; text-anchor: middle; }
+      .matrix-act { font: 600 11px -apple-system, sans-serif; fill: #1f2937; }
+      .arrow { stroke: #374151; stroke-width: 1.8; fill: none; }
+      .arrow-thin { stroke: #6b7280; stroke-width: 1.2; fill: none; }
+      .arrow-bold { stroke: #111827; stroke-width: 2.4; fill: none; }
+      .arrow-async { stroke: #7c3aed; stroke-width: 1.6; fill: none; stroke-dasharray: 5 4; }
+      .divider { stroke: #e5e7eb; stroke-width: 1; stroke-dasharray: 4 4; }
+    ]]></style>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#374151"/>
+    </marker>
+    <marker id="ah-bold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#111827"/>
+    </marker>
+    <marker id="ah-thin" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/>
+    </marker>
+    <filter id="soft" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect class="bg" width="1500" height="1280"/>
+
+  <!-- Title -->
+  <text x="60" y="52" class="title">HCFS sync engine · three-tree comparison</text>
+  <text x="60" y="78" class="subtitle">Client-side. <tspan class="code-b">SyncRunner</tspan> drives <tspan class="code-b">Drive::sync_with_resolver</tspan>, which scans, fetches, classifies with <tspan class="code-b">SyncPlan::build</tspan>, and executes upload/download/rename/delete — persisting the new synced tree.</text>
+
+  <!-- ═════════════ Inputs row ═════════════ -->
+  <text x="60" y="124" class="section-tag">INPUTS · three trees + auxiliary signals</text>
+
+  <!-- Local tree -->
+  <g filter="url(#soft)">
+    <rect x="60" y="140" width="320" height="170" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  </g>
+  <text x="82" y="166" class="box-title">Local tree</text>
+  <text x="82" y="182" class="box-sub">scan_local_files (drive/scan.rs)</text>
+  <text x="82" y="206" class="item">• walk sync root, apply exclude rules</text>
+  <text x="82" y="224" class="item">• mtime cache skips unchanged files</text>
+  <text x="82" y="242" class="item">• computes <tspan class="code">path_hash</tspan> + <tspan class="code">salted_hash</tspan></text>
+  <text x="82" y="260" class="item">• result: <tspan class="code-b">FileTree</tspan> keyed by FileId</text>
+  <text x="82" y="286" class="code">source: disk</text>
+
+  <!-- Remote tree -->
+  <g filter="url(#soft)">
+    <rect x="400" y="140" width="320" height="170" rx="10" fill="#fff7ed" stroke="#d97706" stroke-width="1.5"/>
+  </g>
+  <text x="422" y="166" class="box-title">Remote tree</text>
+  <text x="422" y="182" class="box-sub">HcfsClient::get_state (paged)</text>
+  <text x="422" y="206" class="item">• fetches by ss58 + folder_hash</text>
+  <text x="422" y="224" class="item">• reconcile_remote_timestamps</text>
+  <text x="422" y="242" class="item">• detects stale local state</text>
+  <text x="422" y="260" class="item">• result: <tspan class="code-b">FileTree</tspan> from server</text>
+  <text x="422" y="286" class="code">source: server</text>
+
+  <!-- Synced tree -->
+  <g filter="url(#soft)">
+    <rect x="740" y="140" width="320" height="170" rx="10" fill="#f3f4f6" stroke="#6b7280" stroke-width="1.5"/>
+  </g>
+  <text x="762" y="166" class="box-title">Synced tree (merge base)</text>
+  <text x="762" y="182" class="box-sub">.hippius/sync_state.json</text>
+  <text x="762" y="206" class="item">• last known reconciled state</text>
+  <text x="762" y="224" class="item">• atomically written with .bak</text>
+  <text x="762" y="242" class="item">• advances only on successful sync</text>
+  <text x="762" y="260" class="item">• rekey_file_id on renames</text>
+  <text x="762" y="286" class="code">source: local cache</text>
+
+  <!-- Auxiliary signals -->
+  <g filter="url(#soft)">
+    <rect x="1080" y="140" width="360" height="170" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
+  </g>
+  <text x="1102" y="166" class="box-title">Auxiliary signals</text>
+  <text x="1102" y="182" class="box-sub">engine/runner.rs · sync/rename.rs</text>
+  <text x="1102" y="206" class="item">• <tspan class="code-b">PathRenameHint</tspan> from <tspan class="code">notify</tspan> watcher</text>
+  <text x="1102" y="224" class="item">• <tspan class="code-b">excluded_ids</tspan> from exclude rules</text>
+  <text x="1102" y="242" class="item">• cancel token (graceful shutdown)</text>
+  <text x="1102" y="260" class="item">• SyncMode (normal / force-upload / …)</text>
+  <text x="1102" y="286" class="code">feeds Tier 1 rename detection</text>
+
+  <!-- Down arrows -->
+  <path d="M220 310 L220 360" class="arrow" marker-end="url(#ah)"/>
+  <path d="M560 310 L560 360" class="arrow" marker-end="url(#ah)"/>
+  <path d="M900 310 L900 360" class="arrow" marker-end="url(#ah)"/>
+  <path d="M1260 310 L1260 360" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- ═════════════ SyncPlan::build ═════════════ -->
+  <text x="60" y="346" class="section-tag">PLAN · SyncPlan::build (sync/plan.rs)</text>
+  <g filter="url(#soft)">
+    <rect x="60" y="360" width="1380" height="370" rx="12" fill="#fffbeb" stroke="#ca8a04" stroke-width="1.5"/>
+  </g>
+  <text x="80" y="388" class="box-title">classify_file — for every FileId present in any tree</text>
+
+  <!-- Classification matrix -->
+  <g transform="translate(80,408)">
+    <!-- Header row -->
+    <rect x="0" y="0" width="720" height="28" fill="#fef3c7" stroke="#ca8a04"/>
+    <text x="40" y="18" class="matrix-h" text-anchor="middle">Local</text>
+    <text x="120" y="18" class="matrix-h" text-anchor="middle">Remote</text>
+    <text x="200" y="18" class="matrix-h" text-anchor="middle">Synced</text>
+    <text x="420" y="18" class="matrix-h">→ Action</text>
+
+    <!-- Rows -->
+    <g font-family="ui-monospace, Menlo, monospace" font-size="11">
+      <!-- row helper style done inline -->
+      <rect x="0" y="28" width="720" height="22" fill="#ffffff"/>
+      <text x="40" y="43" class="matrix-c">A</text>
+      <text x="120" y="43" class="matrix-c">A</text>
+      <text x="200" y="43" class="matrix-c">A</text>
+      <text x="280" y="43" class="matrix-act">Unchanged</text>
+
+      <rect x="0" y="50" width="720" height="22" fill="#f9fafb"/>
+      <text x="40" y="65" class="matrix-c">A</text>
+      <text x="120" y="65" class="matrix-c">—</text>
+      <text x="200" y="65" class="matrix-c">—</text>
+      <text x="280" y="65" class="matrix-act" fill="#2563eb">LocalCreate → upload</text>
+
+      <rect x="0" y="72" width="720" height="22" fill="#ffffff"/>
+      <text x="40" y="87" class="matrix-c">—</text>
+      <text x="120" y="87" class="matrix-c">A</text>
+      <text x="200" y="87" class="matrix-c">—</text>
+      <text x="280" y="87" class="matrix-act" fill="#2563eb">RemoteCreate → download</text>
+
+      <rect x="0" y="94" width="720" height="22" fill="#f9fafb"/>
+      <text x="40" y="109" class="matrix-c">A′</text>
+      <text x="120" y="109" class="matrix-c">A</text>
+      <text x="200" y="109" class="matrix-c">A</text>
+      <text x="280" y="109" class="matrix-act" fill="#2563eb">LocalModify → upload</text>
+
+      <rect x="0" y="116" width="720" height="22" fill="#ffffff"/>
+      <text x="40" y="131" class="matrix-c">A</text>
+      <text x="120" y="131" class="matrix-c">A′</text>
+      <text x="200" y="131" class="matrix-c">A</text>
+      <text x="280" y="131" class="matrix-act" fill="#2563eb">RemoteModify → download</text>
+
+      <rect x="0" y="138" width="720" height="22" fill="#f9fafb"/>
+      <text x="40" y="153" class="matrix-c">—</text>
+      <text x="120" y="153" class="matrix-c">A</text>
+      <text x="200" y="153" class="matrix-c">A</text>
+      <text x="280" y="153" class="matrix-act" fill="#ca8a04">LocalDelete → remote delete</text>
+
+      <rect x="0" y="160" width="720" height="22" fill="#ffffff"/>
+      <text x="40" y="175" class="matrix-c">A</text>
+      <text x="120" y="175" class="matrix-c">—</text>
+      <text x="200" y="175" class="matrix-c">A</text>
+      <text x="280" y="175" class="matrix-act" fill="#ca8a04">RemoteDelete → local delete</text>
+
+      <rect x="0" y="182" width="720" height="22" fill="#f9fafb"/>
+      <text x="40" y="197" class="matrix-c">A</text>
+      <text x="120" y="197" class="matrix-c">A</text>
+      <text x="200" y="197" class="matrix-c">—</text>
+      <text x="280" y="197" class="matrix-act">BothModifiedSame → Unchanged</text>
+
+      <rect x="0" y="204" width="720" height="22" fill="#ffffff"/>
+      <text x="40" y="219" class="matrix-c">—</text>
+      <text x="120" y="219" class="matrix-c">—</text>
+      <text x="200" y="219" class="matrix-c">A</text>
+      <text x="280" y="219" class="matrix-act">BothDeleted → Unchanged</text>
+
+      <rect x="0" y="226" width="720" height="22" fill="#fee2e2"/>
+      <text x="40" y="241" class="matrix-c">A′</text>
+      <text x="120" y="241" class="matrix-c">A″</text>
+      <text x="200" y="241" class="matrix-c">A</text>
+      <text x="280" y="241" class="matrix-act" fill="#dc2626">Conflict · ModifyModify</text>
+
+      <rect x="0" y="248" width="720" height="22" fill="#fee2e2"/>
+      <text x="40" y="263" class="matrix-c">A′</text>
+      <text x="120" y="263" class="matrix-c">—</text>
+      <text x="200" y="263" class="matrix-c">A</text>
+      <text x="280" y="263" class="matrix-act" fill="#dc2626">Conflict · ModifyDelete</text>
+
+      <rect x="0" y="270" width="720" height="22" fill="#fee2e2"/>
+      <text x="40" y="285" class="matrix-c">—</text>
+      <text x="120" y="285" class="matrix-c">A′</text>
+      <text x="200" y="285" class="matrix-c">A</text>
+      <text x="280" y="285" class="matrix-act" fill="#dc2626">Conflict · DeleteModify</text>
+
+      <rect x="0" y="292" width="720" height="22" fill="#fee2e2"/>
+      <text x="40" y="307" class="matrix-c">A</text>
+      <text x="120" y="307" class="matrix-c">B</text>
+      <text x="200" y="307" class="matrix-c">—</text>
+      <text x="280" y="307" class="matrix-act" fill="#dc2626">Conflict · CreateCreate</text>
+    </g>
+    <text x="0" y="334" class="item-sm">Legend: A / A′ / A″ = distinct salted_hash · — = absent from tree · excluded_ids short-circuits to LocalSkip</text>
+  </g>
+
+  <!-- Rename detection panel -->
+  <g transform="translate(830,408)">
+    <rect x="0" y="0" width="590" height="310" rx="8" fill="#ffffff" stroke="#ca8a04" stroke-width="1"/>
+    <text x="20" y="26" class="box-title">extract_renames — two-tier detection</text>
+    <text x="20" y="44" class="box-sub">runs after classification; replaces upload+remote_delete pairs</text>
+
+    <rect x="20" y="60" width="550" height="104" rx="6" fill="#f5f3ff" stroke="#7c3aed"/>
+    <text x="40" y="84" class="box-title">Tier 1 · watcher hints</text>
+    <text x="40" y="104" class="item">• <tspan class="code">PathRenameHint { old, new }</tspan> from notify</text>
+    <text x="40" y="122" class="item">• match <tspan class="code">path_hash(old)</tspan> in remote_deletes and <tspan class="code">path_hash(new)</tspan> in uploads</text>
+    <text x="40" y="140" class="item">• accept only if salted_hash matches and size &gt; 0</text>
+    <text x="40" y="158" class="item-sm">Reject hint when content changed → fall back to upload + delete</text>
+
+    <rect x="20" y="176" width="550" height="88" rx="6" fill="#fef3c7" stroke="#ca8a04"/>
+    <text x="40" y="200" class="box-title">Tier 2 · content-hash pairing</text>
+    <text x="40" y="220" class="item">• bucket remaining uploads + remote_deletes by salted_hash</text>
+    <text x="40" y="238" class="item">• pair equal-content non-empty entries → RenameOp</text>
+    <text x="40" y="256" class="item">• empty files deliberately excluded (shared hash → false matches)</text>
+
+    <text x="20" y="288" class="code">output: plan.renames[] executes as batch POST /rename_files</text>
+  </g>
+
+  <!-- Arrow to plan buckets -->
+  <path d="M750 730 L750 770" class="arrow-bold" marker-end="url(#ah-bold)"/>
+
+  <!-- ═════════════ Plan buckets ═════════════ -->
+  <text x="60" y="766" class="section-tag">SYNC PLAN · output buckets</text>
+
+  <g filter="url(#soft)">
+    <rect x="60" y="780" width="1380" height="90" rx="10" fill="#ffffff" stroke="#374151" stroke-width="1.5"/>
+  </g>
+  <g font-size="12" font-family="-apple-system, sans-serif">
+    <rect x="80"  y="800" width="160" height="54" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+    <text x="160" y="822" class="matrix-act" text-anchor="middle">uploads</text>
+    <text x="160" y="840" class="code" text-anchor="middle">Vec&lt;FileId&gt;</text>
+
+    <rect x="250" y="800" width="160" height="54" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+    <text x="330" y="822" class="matrix-act" text-anchor="middle">downloads</text>
+    <text x="330" y="840" class="code" text-anchor="middle">Vec&lt;FileId&gt;</text>
+
+    <rect x="420" y="800" width="160" height="54" rx="6" fill="#fed7aa" stroke="#ca8a04"/>
+    <text x="500" y="822" class="matrix-act" text-anchor="middle">local_deletes</text>
+    <text x="500" y="840" class="code" text-anchor="middle">Vec&lt;FileId&gt;</text>
+
+    <rect x="590" y="800" width="160" height="54" rx="6" fill="#fed7aa" stroke="#ca8a04"/>
+    <text x="670" y="822" class="matrix-act" text-anchor="middle">remote_deletes</text>
+    <text x="670" y="840" class="code" text-anchor="middle">Vec&lt;FileId&gt;</text>
+
+    <rect x="760" y="800" width="160" height="54" rx="6" fill="#ede9fe" stroke="#7c3aed"/>
+    <text x="840" y="822" class="matrix-act" text-anchor="middle">renames</text>
+    <text x="840" y="840" class="code" text-anchor="middle">Vec&lt;RenameOp&gt;</text>
+
+    <rect x="930" y="800" width="160" height="54" rx="6" fill="#fee2e2" stroke="#dc2626"/>
+    <text x="1010" y="822" class="matrix-act" text-anchor="middle">conflicts</text>
+    <text x="1010" y="840" class="code" text-anchor="middle">Vec&lt;SyncConflictInfo&gt;</text>
+
+    <rect x="1100" y="800" width="160" height="54" rx="6" fill="#f3f4f6" stroke="#6b7280"/>
+    <text x="1180" y="822" class="matrix-act" text-anchor="middle">unchanged</text>
+    <text x="1180" y="840" class="code" text-anchor="middle">Vec&lt;FileId&gt;</text>
+
+    <rect x="1270" y="800" width="150" height="54" rx="6" fill="#f3f4f6" stroke="#6b7280"/>
+    <text x="1345" y="822" class="matrix-act" text-anchor="middle">excluded</text>
+    <text x="1345" y="840" class="code" text-anchor="middle">Vec&lt;FileId&gt;</text>
+  </g>
+
+  <!-- Arrow to execute -->
+  <path d="M750 870 L750 910" class="arrow-bold" marker-end="url(#ah-bold)"/>
+
+  <!-- ═════════════ Execute sync plan ═════════════ -->
+  <text x="60" y="906" class="section-tag">EXECUTE · Drive::execute_sync_plan (drive/sync_flow.rs)</text>
+
+  <g filter="url(#soft)">
+    <rect x="60" y="920" width="1380" height="210" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  </g>
+
+  <!-- Conflicts pre-step -->
+  <rect x="80" y="940" width="340" height="170" rx="8" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="100" y="964" class="box-title">1. Resolve conflicts (if any)</text>
+  <text x="100" y="984" class="item">• pass each <tspan class="code-b">SyncConflictInfo</tspan> to user</text>
+  <text x="100" y="1002" class="item">  resolver callback</text>
+  <text x="100" y="1020" class="item">• resolutions:</text>
+  <text x="120" y="1038" class="code">KeepLocal · AcceptRemote</text>
+  <text x="120" y="1054" class="code">KeepBoth · Skip</text>
+  <text x="100" y="1078" class="item">• may rewrite plan into uploads /</text>
+  <text x="100" y="1094" class="item">  downloads / conflict-copies</text>
+
+  <!-- Concurrent ops -->
+  <rect x="440" y="940" width="460" height="170" rx="8" fill="#dbeafe" stroke="#2563eb"/>
+  <text x="460" y="964" class="box-title">2. Concurrent I/O (bounded)</text>
+  <text x="460" y="984" class="item">Uploads</text>
+  <text x="480" y="1002" class="code">encrypt_stream → HcfsClient::upload</text>
+  <text x="480" y="1018" class="code">→ upsert_file_checked (revision CAS)</text>
+  <text x="460" y="1040" class="item">Downloads</text>
+  <text x="480" y="1058" class="code">HcfsClient::download → decrypt_stream</text>
+  <text x="480" y="1074" class="code">→ atomic temp-file rename into place</text>
+  <text x="460" y="1096" class="item-sm">joins on CancellationToken for graceful shutdown</text>
+
+  <!-- Serial ops -->
+  <rect x="920" y="940" width="500" height="170" rx="8" fill="#fed7aa" stroke="#ca8a04"/>
+  <text x="940" y="964" class="box-title">3. Serial ops + state merge</text>
+  <text x="940" y="984" class="item">Renames</text>
+  <text x="960" y="1002" class="code">POST /rename_files (batch)</text>
+  <text x="940" y="1022" class="item">Local deletes</text>
+  <text x="960" y="1040" class="code">fs::remove_file + synced_tree update</text>
+  <text x="940" y="1060" class="item">Remote deletes</text>
+  <text x="960" y="1078" class="code">HcfsClient::delete → drop from trees</text>
+  <text x="940" y="1100" class="item-sm">all successes fold into new synced tree</text>
+
+  <!-- Down arrow to outcome -->
+  <path d="M750 1130 L750 1170" class="arrow-bold" marker-end="url(#ah-bold)"/>
+
+  <!-- ═════════════ Outcome ═════════════ -->
+  <text x="60" y="1166" class="section-tag">OUTCOME</text>
+  <g filter="url(#soft)">
+    <rect x="60" y="1180" width="1380" height="80" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+  </g>
+  <text x="80" y="1206" class="box-title">SyncOutcome → SyncRunner</text>
+  <text x="80" y="1226" class="item">• persist new <tspan class="code-b">synced</tspan> tree atomically (.json + .bak)   •   <tspan class="code">rekey_file_id</tspan> on rename   •   emit throttled progress snapshot (<tspan class="code">emit_snapshot</tspan>)</text>
+  <text x="80" y="1244" class="item">• run post-sync hooks (fire-and-forget)   •   update activity log (<tspan class="code">push_dedup</tspan>)   •   reset health / failure counters or record a retry</text>
+</svg>
