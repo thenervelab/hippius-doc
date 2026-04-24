@@ -138,6 +138,38 @@ const sidebars: SidebarsConfig = {
       ],
     },
 
+    // ── HCFS ───────────────────────────────────────────────────────
+    {
+      type: "category",
+      label: "HCFS",
+      collapsed: true,
+      items: [
+        "hcfs/integration-guide",
+        "hcfs/architecture-diagrams",
+        {
+          type: "category",
+          label: "REST API",
+          collapsed: true,
+          items: [
+            "hcfs/api/overview",
+            "hcfs/api/auth",
+            "hcfs/api/errors",
+            "hcfs/api/upload",
+            "hcfs/api/download",
+            "hcfs/api/delete",
+            "hcfs/api/s3-gateway",
+            "hcfs/api/get-state",
+            "hcfs/api/browse",
+            "hcfs/api/search-files",
+            "hcfs/api/register-relative-paths",
+            "hcfs/api/folders",
+            "hcfs/api/rename-files",
+            "hcfs/api/upload-session",
+          ],
+        },
+      ],
+    },
+
     // ── SUPPORT ────────────────────────────────────────────────────
     "use/help-support",
   ],
