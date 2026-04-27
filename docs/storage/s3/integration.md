@@ -23,7 +23,7 @@ Get your credentials at [console.hippius.com](https://console.hippius.com). See 
 :::tip Pick the closest region for best performance
 Hippius S3 is served through regional caches. For lower latency, point your client at the endpoint closest to you:
 - **Europe:** `https://eu-central-1.hippius.com` (the default `https://s3.hippius.com` also resolves here)
-- **US:** `https://us-central-1.hippius.com`
+- **US:** `https://us-east-1.hippius.com`
 
 All regions serve the same data — just swap the endpoint in your client config.
 :::

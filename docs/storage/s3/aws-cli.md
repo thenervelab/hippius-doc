@@ -45,7 +45,7 @@ You **must** pass `--endpoint-url https://s3.hippius.com` to every command. With
 :::tip Pick the closest region for best performance
 Hippius S3 is served through regional caches. For lower latency, replace `s3.hippius.com` in `--endpoint-url` with the region closest to you:
 - **Europe:** `https://eu-central-1.hippius.com` (also `https://s3.hippius.com`)
-- **US:** `https://us-central-1.hippius.com`
+- **US:** `https://us-east-1.hippius.com`
 
 All regions serve the same data.
 :::

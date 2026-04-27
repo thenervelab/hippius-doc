@@ -9,7 +9,7 @@ slug: /storage/s3/examples/image-gallery
 Build a public image gallery backed by Hippius S3. Upload images, list them with [`ListObjectsV2`](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html), and serve them directly from a public bucket.
 
 :::tip Pick the closest region for best performance
-Swap `s3.hippius.com` for `eu-central-1.hippius.com` (Europe) or `us-central-1.hippius.com` (US) to use the regional cache closest to you. See the [S3 API Reference](/storage/s3/integration) for details.
+Swap `s3.hippius.com` for `eu-central-1.hippius.com` (Europe) or `us-east-1.hippius.com` (US) to use the regional cache closest to you. See the [S3 API Reference](/storage/s3/integration) for details.
 :::
 
 ## Setup
