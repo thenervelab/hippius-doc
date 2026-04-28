@@ -276,7 +276,7 @@ with open("large_file.zip", "rb") as file_data:
   <li><a href="https://github.com/thenervelab/hippius-s3/blob/main/docs/comparison.md">AWS S3 vs Cloudflare R2 vs Hippius S3</a> — Detailed comparison</li>
   <li><a href="/use/troubleshooting">Troubleshooting</a> — Common errors and fixes</li>
   <li><a href="/use/s3-token-management">Token Management</a> — Create sub-tokens, manage access levels</li>
-  <li><a href="https://hippius.com/pricing">Pricing</a> — Storage and bandwidth costs</li>
+  <li><a href="https://hippius.com/pricing">Pricing</a> — Storage costs</li>
   <li><a href="/use/api">Hippius Management API</a> — Automate token management and billing</li>
   <li><a href="https://github.com/thenervelab/hippius-s3">hippius-s3 on GitHub</a> — Report issues, request features, or contribute</li>
   <li><a href="https://docs.hippius.com/llms.txt">llms.txt</a> — Machine-readable docs for AI agents and LLMs</li>

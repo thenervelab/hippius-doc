@@ -110,7 +110,7 @@ umount ~/hippius-mount          # macOS
 Mount requires FUSE. On macOS: `brew install --cask macfuse`. On Linux: `apt install fuse`.
 :::
 
-## Bandwidth and speed tips
+## Speed tips
 
 - Use `--transfers 8` to run 8 parallel transfers
 - Use `--s3-upload-concurrency 8` for faster large file uploads

@@ -193,5 +193,5 @@ All regions serve the same data — just swap the endpoint in your client config
 <Unordered>
   <li><a href="/storage/s3/integration">S3 API Reference</a> — Full list of operations, presigned URLs, ACLs, public buckets, and more</li>
   <li><a href="/use/s3-token-management">Token Management</a> — Create sub-tokens, manage access levels</li>
-  <li><a href="https://hippius.com/pricing">Pricing</a> — Storage and bandwidth costs</li>
+  <li><a href="https://hippius.com/pricing">Pricing</a> — Storage costs</li>
 </Unordered>
