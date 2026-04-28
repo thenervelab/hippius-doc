@@ -60,18 +60,30 @@ const sidebars: SidebarsConfig = {
       ],
     },
 
-    // ⚠️ WARNING: The "Console" section (Virtual Machines, Wallet) is NOT
-    // live yet. Do NOT uncomment until these features are fully released
-    // and verified by the team. Check with team before enabling.
-    {
-      type: "category",
-      label: "Console",
-      collapsed: true,
-      items: [
-        "use/virtual-machines",
-        "use/wallet",
-      ],
-    },
+    // ── CONSOLE ────────────────────────────────────────────────────
+    // ⚠️ WARNING: Console docs are NOT live yet. All pages are marked
+    // unlisted: true and kept out of the sidebar until the team
+    // reviews and approves them. To publish, remove unlisted: true from
+    // each file in docs/use/console/ and uncomment the block below.
+    //
+    // {
+    //   type: "category",
+    //   label: "Console",
+    //   collapsed: true,
+    //   items: [
+    //     "use/console/getting-started",
+    //     "use/console/overview",
+    //     "use/console/drive",
+    //     "use/console/s3",
+    //     "use/console/uploads",
+    //     "use/console/virtual-machines",
+    //     "use/console/wallet",
+    //     "use/console/billing",
+    //     "use/console/referrals",
+    //     "use/console/settings",
+    //     "use/console/support",
+    //   ],
+    // },
 
     // ── SEPARATOR ──────────────────────────────────────────────────
     {
