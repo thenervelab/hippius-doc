@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1100" width="1500" height="1100" role="img" aria-label="Server ingestion: HCFS vs S3 clients">
+  <defs>
+    <style><![CDATA[
+      .bg { fill: #fafafa; }
+      .title { font: 700 28px -apple-system, "Segoe UI", sans-serif; fill: #111827; }
+      .subtitle { font: 400 14px -apple-system, sans-serif; fill: #4b5563; }
+      .section-tag { font: 700 11px -apple-system, sans-serif; letter-spacing: 0.12em; fill: #6b7280; }
+      .box-title { font: 700 14px -apple-system, sans-serif; fill: #111827; }
+      .box-sub { font: 400 11px -apple-system, sans-serif; fill: #6b7280; }
+      .item { font: 400 12px -apple-system, sans-serif; fill: #1f2937; }
+      .item-sm { font: 400 11px -apple-system, sans-serif; fill: #374151; }
+      .code { font: 400 11px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #374151; }
+      .code-b { font: 600 11px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #111827; }
+      .step-num { font: 700 14px -apple-system, sans-serif; fill: #ffffff; }
+      .edge { font: 600 11px -apple-system, sans-serif; fill: #1f2937; }
+      .edge-sub { font: 400 10px -apple-system, sans-serif; fill: #6b7280; }
+      .arrow { stroke: #374151; stroke-width: 1.8; fill: none; }
+      .arrow-async { stroke: #7c3aed; stroke-width: 1.6; fill: none; stroke-dasharray: 5 4; }
+      .divider { stroke: #e5e7eb; stroke-width: 1; stroke-dasharray: 4 4; }
+      .lane-hcfs { fill: #eff6ff; }
+      .lane-s3 { fill: #ecfeff; }
+      .lane-shared { fill: #fff7ed; }
+    ]]></style>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#374151"/>
+    </marker>
+    <marker id="ah-async" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7c3aed"/>
+    </marker>
+    <filter id="soft" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect class="bg" width="1500" height="1100"/>
+
+  <!-- Title -->
+  <text x="60" y="52" class="title">Server ingestion · HCFS native vs S3-compatible</text>
+  <text x="60" y="78" class="subtitle">A single <tspan class="code-b">POST /upload</tspan> endpoint peeks the first multipart field and forks into two handlers. Both write through the same StorageBackend and database.</text>
+
+  <!-- Lane backgrounds -->
+  <rect x="40" y="110" width="680" height="720" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
+  <rect x="780" y="110" width="680" height="720" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <!-- Lane headers -->
+  <rect x="40" y="110" width="680" height="54" rx="10" class="lane-hcfs" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="64" y="142" class="box-title">HCFS native client path</text>
+  <text x="64" y="158" class="box-sub">client: hcfs-client (CLI, Desktop, WASM) — full E2E encryption</text>
+
+  <rect x="780" y="110" width="680" height="54" rx="10" class="lane-s3" stroke="#0891b2" stroke-width="1.5"/>
+  <text x="804" y="142" class="box-title">S3-compatible gateway path</text>
+  <text x="804" y="158" class="box-sub">client: any S3 SDK or the Hippius S3 gateway — server-side metadata</text>
+
+  <!-- ═════ Step 1: Client composes request ═════ -->
+  <circle cx="62" cy="202" r="14" fill="#3b82f6"/>
+  <text x="62" y="207" text-anchor="middle" class="step-num">1</text>
+  <text x="88" y="207" class="box-title">Client composes request</text>
+  <g filter="url(#soft)">
+    <rect x="60" y="222" width="640" height="120" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1"/>
+  </g>
+  <text x="80" y="246" class="item">• Derives signing_key + encryption_key from BIP-39 mnemonic</text>
+  <text x="80" y="266" class="item">• Encrypts file with XChaCha20-Poly1305 (streamed, 256 KB chunks)</text>
+  <text x="80" y="286" class="item">• Builds + signs <tspan class="code-b">Manifest</tspan> (path_hash, salted_hash, revision_seq, base_revision_id…)</text>
+  <text x="80" y="312" class="code">POST /upload  Content-Type: multipart/form-data</text>
+  <text x="80" y="328" class="code">fields: "manifest" (JSON) → "ciphertext" (binary stream)</text>
+
+  <circle cx="802" cy="202" r="14" fill="#0891b2"/>
+  <text x="802" y="207" text-anchor="middle" class="step-num">1</text>
+  <text x="828" y="207" class="box-title">Client composes request</text>
+  <g filter="url(#soft)">
+    <rect x="800" y="222" width="640" height="120" rx="8" fill="#ffffff" stroke="#0891b2" stroke-width="1"/>
+  </g>
+  <text x="820" y="246" class="item">• Standard S3 PutObject-style request (bucket = ss58 address)</text>
+  <text x="820" y="266" class="item">• No client-side encryption, no manifest, no signatures</text>
+  <text x="820" y="286" class="item">• File name is transmitted in cleartext as part of the form</text>
+  <text x="820" y="312" class="code">POST /upload  Content-Type: multipart/form-data</text>
+  <text x="820" y="328" class="code">fields: "account_ss58" (text) → "file" (binary stream)</text>
+
+  <!-- Down arrows to step 2 -->
+  <path d="M380 342 L380 380" class="arrow" marker-end="url(#ah)"/>
+  <path d="M1120 342 L1120 380" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- ═════ Shared dispatcher band ═════ -->
+  <g filter="url(#soft)">
+    <rect x="40" y="380" width="1420" height="70" rx="10" class="lane-shared" stroke="#d97706" stroke-width="1.5"/>
+  </g>
+  <text x="60" y="406" class="box-title">POST /upload · handlers/upload.rs :: upload()</text>
+  <text x="60" y="424" class="item">validate bearer token → parse multipart → <tspan class="code-b">extract_first_field</tspan> → match on field name:</text>
+  <text x="60" y="440" class="code">"manifest" → handle_hcfs_upload    ·    "account_ss58" → handle_s3_upload    ·    * → 400 Invalid upload request</text>
+
+  <!-- Fork arrows to step 2 boxes -->
+  <path d="M380 450 L380 490" class="arrow" marker-end="url(#ah)"/>
+  <path d="M1120 450 L1120 490" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- ═════ Step 2: Handler authorization + validation ═════ -->
+  <circle cx="62" cy="512" r="14" fill="#3b82f6"/>
+  <text x="62" y="517" text-anchor="middle" class="step-num">2</text>
+  <text x="88" y="517" class="box-title">handle_hcfs_upload</text>
+  <text x="88" y="532" class="box-sub">upload.rs:104 — manifest-driven path</text>
+  <g filter="url(#soft)">
+    <rect x="60" y="542" width="640" height="150" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1"/>
+  </g>
+  <text x="80" y="566" class="item">• <tspan class="code-b">parse_manifest</tspan> → verify Ed25519 signature</text>
+  <text x="80" y="586" class="item">• <tspan class="code-b">authorize_hcfs_upload</tspan>: token ss58 == manifest.ss58 (or admin)</text>
+  <text x="80" y="606" class="item">• <tspan class="code-b">validate_manifest</tspan>: revision_seq monotonic · billing gate</text>
+  <text x="80" y="626" class="item">• <tspan class="code-b">check_upload_conflicts</tspan>: existing row &amp; base_revision_id CAS</text>
+  <text x="80" y="646" class="item">• stream "ciphertext" field via <tspan class="code-b">StorageBackend::upload</tspan></text>
+  <text x="80" y="672" class="code">server never learns: plaintext path · plaintext content · user keys</text>
+
+  <circle cx="802" cy="512" r="14" fill="#0891b2"/>
+  <text x="802" y="517" text-anchor="middle" class="step-num">2</text>
+  <text x="828" y="517" class="box-title">handle_s3_upload</text>
+  <text x="828" y="532" class="box-sub">upload.rs:263 — ss58-driven path</text>
+  <g filter="url(#soft)">
+    <rect x="800" y="542" width="640" height="150" rx="8" fill="#ffffff" stroke="#0891b2" stroke-width="1"/>
+  </g>
+  <text x="820" y="566" class="item">• <tspan class="code-b">authorize_s3_upload</tspan>: token ss58 == account_ss58 (or admin)</text>
+  <text x="820" y="586" class="item">• <tspan class="code-b">extract_file_field</tspan> with cleartext filename</text>
+  <text x="820" y="606" class="item">• stream "file" field via <tspan class="code-b">StorageBackend::upload</tspan></text>
+  <text x="820" y="626" class="item">• <tspan class="code-b">build_s3_file_record</tspan>: filename → path_hash, returns existing size for billing</text>
+  <text x="820" y="646" class="item">• <tspan class="code-b">persist_s3_record</tspan>: upsert + storage cleanup on failure</text>
+  <text x="820" y="672" class="code">server sees cleartext filename — path_hash computed server-side</text>
+
+  <!-- Down arrows to step 3 -->
+  <path d="M380 692 L380 730" class="arrow" marker-end="url(#ah)"/>
+  <path d="M1120 692 L1120 730" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- ═════ Step 3: Record + response shape ═════ -->
+  <circle cx="62" cy="752" r="14" fill="#3b82f6"/>
+  <text x="62" y="757" text-anchor="middle" class="step-num">3</text>
+  <text x="88" y="757" class="box-title">FileRecord fields written</text>
+  <g filter="url(#soft)">
+    <rect x="60" y="772" width="640" height="58" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1"/>
+  </g>
+  <text x="80" y="794" class="code-b">path_hash · salted_hash · encrypted_path · revision_id · revision_seq</text>
+  <text x="80" y="812" class="code">size_bytes = plaintext size (from manifest)</text>
+
+  <circle cx="802" cy="752" r="14" fill="#0891b2"/>
+  <text x="802" y="757" text-anchor="middle" class="step-num">3</text>
+  <text x="828" y="757" class="box-title">FileRecord fields written</text>
+  <g filter="url(#soft)">
+    <rect x="800" y="772" width="640" height="58" rx="8" fill="#ecfeff" stroke="#0891b2" stroke-width="1"/>
+  </g>
+  <text x="820" y="794" class="code-b">path_hash(filename) · file_name · revision_id · revision_seq</text>
+  <text x="820" y="812" class="code">size_bytes = Content-Length · encrypted_path = null</text>
+
+  <!-- Arrows into convergence -->
+  <path d="M380 830 L380 870 Q380 900 550 900 L720 900" class="arrow" marker-end="url(#ah)"/>
+  <path d="M1120 830 L1120 870 Q1120 900 950 900 L780 900" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- ═════ Shared storage + response band ═════ -->
+  <g filter="url(#soft)">
+    <rect x="40" y="880" width="1420" height="180" rx="10" class="lane-shared" stroke="#d97706" stroke-width="1.5"/>
+  </g>
+  <text x="60" y="908" class="box-title">Shared storage + persistence (both paths converge)</text>
+
+  <!-- StorageBackend box -->
+  <rect x="60" y="924" width="420" height="116" rx="8" fill="#ffffff" stroke="#d97706" stroke-width="1"/>
+  <text x="80" y="948" class="box-title">StorageBackend.upload</text>
+  <text x="80" y="968" class="item">• compute BLAKE3 ciphertext hash</text>
+  <text x="80" y="988" class="item">• stream ciphertext into Arion (awaited)</text>
+  <text x="80" y="1008" class="item">• round-robin across configured Arion endpoints</text>
+  <text x="80" y="1028" class="code">returns arion_hash</text>
+
+  <!-- Database box -->
+  <rect x="500" y="924" width="420" height="116" rx="8" fill="#ffffff" stroke="#6b7280" stroke-width="1"/>
+  <text x="520" y="948" class="box-title">PostgreSQL · upsert_file_checked</text>
+  <text x="520" y="968" class="item">• atomic CAS on base_revision_id</text>
+  <text x="520" y="988" class="item">• returns 409 Conflict if stale</text>
+  <text x="520" y="1008" class="item">• update_user_summary (bytes / count delta)</text>
+  <text x="520" y="1028" class="code">file_records row + user_storage_summary</text>
+
+  <!-- Billing + response -->
+  <rect x="940" y="924" width="500" height="116" rx="8" fill="#ffffff" stroke="#a21caf" stroke-width="1"/>
+  <text x="960" y="948" class="box-title">Async side-effects + response</text>
+  <text x="960" y="968" class="item">• spawn billing push (JoinSet, non-blocking)</text>
+  <text x="960" y="988" class="item">• emit metrics (<tspan class="code">record_upload_result</tspan>)</text>
+  <text x="960" y="1008" class="item">• HCFS → <tspan class="code-b">UploadResult { revision_id }</tspan></text>
+  <text x="960" y="1028" class="item">• S3 gateway → <tspan class="code-b">S3UploadResult { file_id, revision_id }</tspan></text>
+
+  <!-- Legend -->
+  <g transform="translate(60, 1085)">
+    <rect x="0" y="-13" width="14" height="14" fill="#eff6ff" stroke="#3b82f6"/>
+    <text x="20" y="-1" class="item">HCFS native path</text>
+    <rect x="160" y="-13" width="14" height="14" fill="#ecfeff" stroke="#0891b2"/>
+    <text x="180" y="-1" class="item">S3 gateway path</text>
+    <rect x="310" y="-13" width="14" height="14" fill="#fff7ed" stroke="#d97706"/>
+    <text x="330" y="-1" class="item">Shared on server</text>
+    <line x1="450" y1="-6" x2="490" y2="-6" class="arrow-async"/>
+    <text x="498" y="-1" class="item">async / fire-and-forget</text>
+  </g>
+</svg>

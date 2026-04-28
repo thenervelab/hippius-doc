@@ -180,10 +180,18 @@ aws s3 cp s3://my-first-bucket/hello.txt - --endpoint-url https://s3.hippius.com
 | **Signature** | AWS Signature V4 |
 | **Addressing** | Path-style |
 
+:::tip Pick the closest region for best performance
+Hippius S3 is served through regional caches. For lower latency, point your client at the endpoint closest to you:
+- **Europe:** `https://eu-central-1.hippius.com` (the default `https://s3.hippius.com` also resolves here)
+- **US:** `https://us-east-1.hippius.com`
+
+All regions serve the same data — just swap the endpoint in your client config.
+:::
+
 ## Next Steps
 
 <Unordered>
   <li><a href="/storage/s3/integration">S3 API Reference</a> — Full list of operations, presigned URLs, ACLs, public buckets, and more</li>
   <li><a href="/use/s3-token-management">Token Management</a> — Create sub-tokens, manage access levels</li>
-  <li><a href="https://hippius.com/pricing">Pricing</a> — Storage and bandwidth costs</li>
+  <li><a href="https://hippius.com/pricing">Pricing</a> — Storage costs</li>
 </Unordered>

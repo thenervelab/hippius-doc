@@ -36,6 +36,14 @@ Verify it works:
 rclone ls hippius:
 ```
 
+:::tip Pick the closest region for best performance
+Hippius S3 is served through regional caches. For lower latency, set `endpoint` to the region closest to you:
+- **Europe:** `https://eu-central-1.hippius.com` (the default `https://s3.hippius.com` also resolves here)
+- **US:** `https://us-east-1.hippius.com`
+
+All regions serve the same data.
+:::
+
 ## Common operations
 
 ### List buckets
@@ -102,7 +110,7 @@ umount ~/hippius-mount          # macOS
 Mount requires FUSE. On macOS: `brew install --cask macfuse`. On Linux: `apt install fuse`.
 :::
 
-## Bandwidth and speed tips
+## Speed tips
 
 - Use `--transfers 8` to run 8 parallel transfers
 - Use `--s3-upload-concurrency 8` for faster large file uploads

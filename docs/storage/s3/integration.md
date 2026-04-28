@@ -20,6 +20,14 @@ Hippius S3 is a drop-in replacement for Amazon S3. If you already have code that
 
 Get your credentials at [console.hippius.com](https://console.hippius.com). See the [Quickstart](/use/quickstart) to go from zero to first upload in 5 minutes.
 
+:::tip Pick the closest region for best performance
+Hippius S3 is served through regional caches. For lower latency, point your client at the endpoint closest to you:
+- **Europe:** `https://eu-central-1.hippius.com` (the default `https://s3.hippius.com` also resolves here)
+- **US:** `https://us-east-1.hippius.com`
+
+All regions serve the same data — just swap the endpoint in your client config.
+:::
+
 ## Client Guides
 
 | Language | Guide |
@@ -268,7 +276,7 @@ with open("large_file.zip", "rb") as file_data:
   <li><a href="https://github.com/thenervelab/hippius-s3/blob/main/docs/comparison.md">AWS S3 vs Cloudflare R2 vs Hippius S3</a> — Detailed comparison</li>
   <li><a href="/use/troubleshooting">Troubleshooting</a> — Common errors and fixes</li>
   <li><a href="/use/s3-token-management">Token Management</a> — Create sub-tokens, manage access levels</li>
-  <li><a href="https://hippius.com/pricing">Pricing</a> — Storage and bandwidth costs</li>
+  <li><a href="https://hippius.com/pricing">Pricing</a> — Storage costs</li>
   <li><a href="/use/api">Hippius Management API</a> — Automate token management and billing</li>
   <li><a href="https://github.com/thenervelab/hippius-s3">hippius-s3 on GitHub</a> — Report issues, request features, or contribute</li>
   <li><a href="https://docs.hippius.com/llms.txt">llms.txt</a> — Machine-readable docs for AI agents and LLMs</li>
