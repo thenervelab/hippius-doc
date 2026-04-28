@@ -3,6 +3,7 @@ id: settings
 title: App Settings
 sidebar_label: App Settings
 slug: /use/desktop/settings
+description: 6
 ---
 
 import DocAccordion, { DocAccordionItem } from '@site/src/components/DocAccordion';

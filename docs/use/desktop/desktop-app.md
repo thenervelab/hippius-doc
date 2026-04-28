@@ -3,6 +3,7 @@ id: desktop-app
 title: Hippius Desktop App
 sidebar_label: Desktop App
 slug: /use/desktop/desktop-app
+description: 3
 ---
 
 import Ordered from '@site/src/components/Ordered';

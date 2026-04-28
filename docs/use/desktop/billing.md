@@ -3,6 +3,7 @@ id: billing
 title: Billing
 sidebar_label: Billing
 slug: /use/desktop/billing
+description: 3
 ---
 
 import Ordered from '@site/src/components/Ordered';

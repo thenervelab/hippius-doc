@@ -3,6 +3,7 @@ id: bridge
 title: Bridge
 sidebar_label: Bridge
 slug: /use/desktop/bridge
+description: 7
 ---
 
 import Ordered from '@site/src/components/Ordered';

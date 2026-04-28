@@ -3,6 +3,7 @@ id: using-the-app
 title: Using the App
 sidebar_label: Using the App
 slug: /use/desktop/using-the-app
+description: 6
 ---
 
 import Ordered from '@site/src/components/Ordered';
