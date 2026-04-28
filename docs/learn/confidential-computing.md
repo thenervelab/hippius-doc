@@ -440,4 +440,4 @@ This enables sensitive workloads (financial data, healthcare, AI training) to ru
 
 ## Continue with VMs
 
-For VM creation, sizing, and access, follow [Virtual Machines](/use/virtual-machines). For compute architecture and how VMs integrate with Hippius, see [VM Computing](vm-computing).
+For VM creation, sizing, and access, follow [Virtual Machines](/use/console/virtual-machines). For compute architecture and how VMs integrate with Hippius, see [VM Computing](vm-computing).

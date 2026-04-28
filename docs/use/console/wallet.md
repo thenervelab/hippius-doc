@@ -178,7 +178,7 @@ You can track in flight bridge operations in the **Bridge Transactions** tab at 
 You need a small amount of TAO on the source side to cover gas. If you see <em>"Failed to add escrow proxy. Please ensure you have enough TAO for gas fees"</em>, top up TAO in your source wallet and try again.
 :::
 
-For more on the bridge, see [Bridge Tokens](/use/bridge-tokens).
+For more on the bridge, see [Bridge Tokens](/use/bridge).
 
 ## Transaction History
 
@@ -230,7 +230,7 @@ When you open the Send dialog, click <BgStyledText>Address Book</BgStyledText> i
 
 <Unordered>
   <li><a href="/use/console/billing">Billing</a>: convert hAlpha or fiat into platform credits.</li>
-  <li><a href="/use/bridge-tokens">Bridge Tokens</a>: full bridge guide with troubleshooting.</li>
+  <li><a href="/use/bridge">Bridge Tokens</a>: full bridge guide with troubleshooting.</li>
   <li><a href="/learn/substrate-staking">Substrate Staking</a>: how the staking mechanism works at the protocol level.</li>
   <li><a href="/earn/staking">Staking on Hippius</a>: staking strategy and rewards.</li>
 </Unordered>

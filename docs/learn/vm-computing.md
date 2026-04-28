@@ -344,7 +344,7 @@ Before creating a VM, ensure you have:
   <li>Connect via SSH using the Nebula IP</li>
 </Ordered>
 
-For detailed instructions, see the [Virtual Machines User Guide](/use/virtual-machines).
+For detailed instructions, see the [Virtual Machines User Guide](/use/console/virtual-machines).
 
 ---
 

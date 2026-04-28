@@ -32,7 +32,7 @@ The token is hidden by default. Click the **eye** icon to reveal it, then the **
 Authorization: Bearer <your-token>
 ```
 
-See [Hippius API](/use/hippius-api) for available endpoints.
+See [Hippius API](/use/api) for available endpoints.
 
 :::warning Keep this token private
 Anyone with this token has full access to your account. Never paste it into public documents, repositories, screenshots, or chat messages. If you believe it has been compromised, contact Hippius support immediately.
