@@ -60,19 +60,6 @@ const sidebars: SidebarsConfig = {
       ],
     },
 
-    // ⚠️ WARNING: The "Console" section (Virtual Machines, Wallet) is NOT
-    // live yet. Do NOT uncomment until these features are fully released
-    // and verified by the team. Check with team before enabling.
-    {
-      type: "category",
-      label: "Console",
-      collapsed: true,
-      items: [
-        "use/virtual-machines",
-        "use/wallet",
-      ],
-    },
-
     // ── SEPARATOR ──────────────────────────────────────────────────
     {
       type: "html",
@@ -113,9 +100,6 @@ const sidebars: SidebarsConfig = {
         "cli/usage",
       ],
     },
-
-    // ── STAKE ──────────────────────────────────────────────────────
-    "earn/staking",
 
     // ── VALIDATORS ─────────────────────────────────────────────────
     {
