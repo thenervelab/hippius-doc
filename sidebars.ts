@@ -51,6 +51,7 @@ const sidebars: SidebarsConfig = {
         "use/desktop/desktop-app",
         "use/desktop/using-the-app",
         "use/desktop/file-system",
+        "use/desktop/shared-links",
         "use/desktop/settings",
         "use/desktop/billing",
         "use/desktop/referral-system",
@@ -66,6 +67,10 @@ const sidebars: SidebarsConfig = {
     // reviews and approves them. To publish, remove unlisted: true from
     // each file in docs/use/console/ and uncomment the block below.
     //
+    // Shared Links is temporarily live for review — remove the standalone
+    // entry below and add it back inside this block when the full Console
+    // section goes live.
+    //
     // {
     //   type: "category",
     //   label: "Console",
@@ -74,6 +79,7 @@ const sidebars: SidebarsConfig = {
     //     "use/console/getting-started",
     //     "use/console/overview",
     //     "use/console/drive",
+    //     "use/console/shared-links",
     //     "use/console/s3",
     //     "use/console/uploads",
     //     "use/console/virtual-machines",
@@ -84,6 +90,7 @@ const sidebars: SidebarsConfig = {
     //     "use/console/support",
     //   ],
     // },
+    "use/console/shared-links",
 
     // ── SEPARATOR ──────────────────────────────────────────────────
     {

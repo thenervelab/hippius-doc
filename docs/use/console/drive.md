@@ -159,6 +159,7 @@ For files larger than 100 MB, use the [Hippius Desktop App](/use/desktop/desktop
 ## Where to next
 
 <Unordered>
+  <li><a href="/use/console/shared-links">Shared Links</a>: share any Drive file as a public download link — no account required for recipients.</li>
   <li><a href="/use/console/uploads">Console Uploads</a>: full reference for the upload queue, progress widget, and error handling.</li>
   <li><a href="/use/console/s3">S3 Buckets</a>: S3 compatible storage for use with any S3 client.</li>
   <li><a href="/use/desktop/desktop-app">Hippius Desktop App</a>: real time folder sync and uploads beyond the 100 MB cap.</li>
