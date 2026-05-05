@@ -71,26 +71,25 @@ const sidebars: SidebarsConfig = {
     // entry below and add it back inside this block when the full Console
     // section goes live.
     //
-    // {
-    //   type: "category",
-    //   label: "Console",
-    //   collapsed: true,
-    //   items: [
-    //     "use/console/getting-started",
-    //     "use/console/overview",
-    //     "use/console/drive",
-    //     "use/console/shared-links",
-    //     "use/console/s3",
-    //     "use/console/uploads",
-    //     "use/console/virtual-machines",
-    //     "use/console/wallet",
-    //     "use/console/billing",
-    //     "use/console/referrals",
-    //     "use/console/settings",
-    //     "use/console/support",
-    //   ],
-    // },
-    "use/console/shared-links",
+    {
+      type: "category",
+      label: "Console",
+      collapsed: true,
+      items: [
+        "use/console/getting-started",
+        "use/console/overview",
+        "use/console/drive",
+        "use/console/shared-links",
+        "use/console/s3",
+        "use/console/uploads",
+        "use/console/virtual-machines",
+        "use/console/wallet",
+        "use/console/billing",
+        "use/console/referrals",
+        "use/console/settings",
+        "use/console/support",
+      ],
+    },
 
     // ── SEPARATOR ──────────────────────────────────────────────────
     {
