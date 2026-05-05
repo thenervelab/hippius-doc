@@ -3,7 +3,7 @@ id: shared-links
 title: Shared Links
 sidebar_label: Shared Links
 slug: /use/console/shared-links
-description: Share Drive files securely with anyone — no Hippius account required.
+description: Share any Drive file as a public download link from the Drive page, then manage active links and history from the Shared Links page.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -13,11 +13,13 @@ import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 
 ## Introduction
 
-**Shared Links** lets you share any file from your Drive as a public download link. The person you share with doesn't need a Hippius account, they just click the link in any browser and the file downloads straight to their device.
+Hippius lets you share any file from your Drive as a public download link. Recipients don't need a Hippius account. They just open the link in any browser and the file downloads directly to their device.
 
-Reach Shared Links from the Drive header breadcrumb, or from the sidebar at <BgStyledIconWithText text="Storage" icon="SidebarStorage" /> → <BgStyledIconWithText text="Drive" icon="FolderOpen" /> → **Shared Links**.
+To share a file, go to **Drive**, open the menu on any file, and choose **Share via link**. Hippius creates a secure encrypted copy in your browser and generates a shareable URL.
 
-{/* ![Shared Links page overview](/img/console/drive/shared-links-overview.png) */}
+After sharing, all your active links are tracked on the **Shared Links** page, reached from the Drive header breadcrumb or from the sidebar at <BgStyledIconWithText text="Storage" icon="SidebarStorage" /> → <BgStyledIconWithText text="Drive" icon="FolderOpen" /> → **Shared Links**. From there you can copy a link again, revoke access, and see a history of ended shares.
+
+![Shared Links page overview](/img/console/drive/shared-links-overview.png)
 
 ## How Sharing Works
 
@@ -34,14 +36,14 @@ Here's the challenge: your folder key is private to you. If you just handed some
 So instead, when you share a file, the console runs a three step process entirely inside your browser:
 
 <Ordered>
-  <li><strong>Download and Decrypt</strong> — Your browser fetches the encrypted file from Drive and decrypts it using your folder key. This happens entirely on your device and is never sent to any server in plaintext.</li>
-  <li><strong>Encrypt with a fresh key</strong> — A brand new random key is generated, unique to this one share. Your browser encrypts the file again using that new share key. Your original folder key stays private and is never exposed.</li>
-  <li><strong>Upload</strong> — The newly encrypted copy is uploaded to Hippius as a separate object. This is the copy that recipients will download.</li>
+  <li><strong>Download and Decrypt:</strong> Your browser fetches the encrypted file from Drive and decrypts it using your folder key. This happens entirely on your device and is never sent to any server in plaintext.</li>
+  <li><strong>Encrypt with a fresh key:</strong> A brand new random key is generated, unique to this one share. Your browser encrypts the file again using that new share key. Your original folder key stays private and is never exposed.</li>
+  <li><strong>Upload:</strong> The newly encrypted copy is uploaded to Hippius as a separate object. This is the copy that recipients will download.</li>
 </Ordered>
 
 The share key is embedded in the recipient URL after the `#` symbol. Browsers never send the `#` part of a URL to servers, so it stays entirely in the recipient's browser. Hippius servers store the encrypted file but never see the key that decrypts it.
 
-{/* ![Share creation progress dialog](/img/console/drive/shared-links-create-progress.png) */}
+![Share creation progress dialog](/img/console/drive/shared-links-create-progress.png)
 
 :::info Why does sharing take a few seconds?
 The download, decrypt, encrypt, and upload steps run each time you create a share. For larger files this takes longer. A progress indicator in the share dialog shows you which step is running.
@@ -80,7 +82,7 @@ You create share links from within the Drive file browser, not from the Shared L
 
 The link is live immediately. Anyone you send it to can download the file right away.
 
-{/* ![Share dialog with URL ready](/img/console/drive/shared-links-dialog.png) */}
+![Share dialog with URL ready](/img/console/drive/shared-links-dialog.png)
 
 ## Active Shares
 
@@ -88,7 +90,6 @@ The Active Shares table shows every share currently live on your account. It ref
 
 The table includes shares created from any device or the desktop app, not just this browser. This means you might see shares here that you created elsewhere.
 
-{/* ![Active shares table](/img/console/drive/shared-links-active.png) */}
 
 If a share was created on a different device or browser, the filename shows as `<created on another device>`, as the share key needed to decrypt it isn't available here.
 
@@ -123,17 +124,15 @@ A confirmation dialog will ask you to confirm before anything happens. When you 
 Anyone holding the link loses access the moment you confirm. There is no way to restore a revoked link.
 :::
 
-{/* ![Revoke confirmation dialog](/img/console/drive/shared-links-revoke.png) */}
+![Revoke confirmation dialog](/img/console/drive/shared-links-revoke.png)
 
 ## Share History
 
 The History section appears below the Active Shares table once there is at least one ended share recorded on this device.
 
-{/* ![Share history section](/img/console/drive/shared-links-history.png) */}
-
 ### What gets recorded
 
-History is stored locally in your browser. Every time the active shares list refreshes, the console compares the new list against what was there before. Any share that disappeared gets added to history with a reason:
+Every time the active shares list refreshes, the console compares the new list against what was there before. Any share that disappeared gets added to history with a reason:
 
 | How it ended | What gets recorded |
 |---|---|
@@ -156,12 +155,6 @@ Click the three dot menu on any history row and choose <BgStyledText>Remove from
 ### Clear all history
 
 Click <BgStyledText>Clear all history</BgStyledText> at the top of the History section to remove all entries at once. A confirmation dialog appears first.
-
-:::info History is local to this device and browser
-Share history is stored in your browser's local storage, not on the Hippius server. It is only available on the specific browser and device you are using right now.
-
-Opening Shared Links in a different browser or on a different device shows a separate, independent history. Clearing history here has no effect on other devices, and does not affect any active shares.
-:::
 
 ## What Recipients See
 
@@ -199,7 +192,7 @@ The desktop app also has a Shared Links page with a few extra capabilities:
 | **Copy link after reload** | ❌ No, key is lost when you close or reload the tab | ✅ Yes, key is saved to a local database |
 | **Reshare (extend expiry)** | ❌ Not available | ✅ Available on the creating device |
 | **Revoke** | ✅ Works from any device | ✅ Works from any device |
-| **History** | Browser localStorage (this browser only) | Local database (this device only) |
+| **History** | ✅ Yes | ✅ Yes |
 
 **Why the desktop app can copy links after a reload:** The desktop app saves each share's key to a local SQLite database. The console holds the key only in memory, so when you close or reload the tab it's gone.
 
@@ -211,12 +204,12 @@ The desktop app also has a Shared Links page with a few extra capabilities:
 |---|---|
 | **Max shareable file size** | 5 GB |
 | **Link expiry** | Set by the server, shown in the share dialog after creation |
-| **History** | Stored in browser localStorage, cleared if you clear site data |
+| **History** | ✅ Yes |
 
 ## Where to next
 
 <Unordered>
-  <li><a href="/use/console/drive">Drive</a>: browse, upload, and manage your encrypted files — this is where you create share links.</li>
+  <li><a href="/use/console/drive">Drive</a>: browse, upload, and manage your encrypted files. This is where you create share links.</li>
   <li><a href="/use/desktop/shared-links">Desktop Shared Links</a>: the desktop version with reshare support and persistent link copying.</li>
   <li><a href="/use/console/billing">Billing</a>: manage your storage credits and top up before sharing large files.</li>
 </Unordered>
