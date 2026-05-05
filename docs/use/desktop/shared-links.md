@@ -3,7 +3,7 @@ id: shared-links
 title: Shared Links
 sidebar_label: Shared Links
 slug: /use/desktop/shared-links
-description: Share any synced file as a public download link directly from the desktop app.
+description: Share any synced file as a public download link from the desktop app, then manage active links and history from the Shared Links page.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -13,11 +13,13 @@ import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 
 ## Introduction
 
-**Shared Links** lets you share any synced file from the desktop app as a public download link. The recipient doesn't need a Hippius account, they just click the link in any browser and the file downloads automatically.
+Hippius lets you share any synced file as a public download link. Recipients don't need a Hippius account. They just open the link in any browser and the file downloads directly to their device.
 
-You can find it at <BgStyledIconWithText text="Files" icon="DocumentText" /> → **Shared Links** in the Drive view.
+To share a file, right click it in the desktop app and choose **Share via link**. Hippius creates a secure encrypted copy and generates a shareable URL, which is copied to your clipboard automatically.
 
-{/* ![Shared Links page overview](/img/desktop/shared-links-overview.png) */}
+After sharing, all your active links are tracked on the **Shared Links** page, at <BgStyledIconWithText text="Files" icon="DocumentText" /> → **Shared Links** in the Drive view. From there you can copy a link again, revoke access, reshare a file, and see a history of ended shares.
+
+![Shared Links page overview](/img/desktop/shared-links-overview.png)
 
 ## How Sharing Works
 
@@ -41,7 +43,7 @@ When you right click a file and choose **Share via link**, the desktop:
 
 The server stores the encrypted copy and returns a share token. It never learns the decryption key.
 
-{/* ![Share creation dialog](/img/desktop/shared-links-create.png) */}
+![Share creation dialog](/img/desktop/shared-links-create.png)
 
 :::info Why is sharing fast on desktop?
 The desktop reads your local file directly with no download required. For most files this means the entire share process is as fast as your upload connection allows, with no extra round trip to fetch the file first.
@@ -79,8 +81,6 @@ The link is live immediately. Anyone you send it to can download the file right 
 
 The Active Shares table shows every share currently live on your account, fetched from the server every 30 seconds. It includes shares created from any device or the console, not just this desktop install.
 
-{/* ![Active shares table](/img/desktop/shared-links-active.png) */}
-
 If a share was created on a different device (or on the console), this device doesn't have the share key, so the filename shows as `<unknown>` and some actions are disabled.
 
 ### Copy link
@@ -93,7 +93,7 @@ Click <BgStyledText>Copy link</BgStyledText> from the row's action menu to copy 
 
 Click <BgStyledText>Reshare</BgStyledText> from the row's action menu to create a fresh share for the same file with a new expiry and a new link.
 
-**Reshare is only available on the device that created the original share** — it requires both the share key and the source file's location in your sync folder. See [Reshare Mechanics](#reshare-mechanics) below for the full details.
+**Reshare is only available on the device that created the original share.** It requires both the share key and the source file's location in your sync folder. See [Reshare Mechanics](#reshare-mechanics) below for the full details.
 
 When reshare completes, the old link is immediately revoked and the new URL is copied to your clipboard automatically.
 
@@ -139,8 +139,6 @@ When you click Reshare:
   <li>The new recipient URL is copied to your clipboard automatically.</li>
 </Ordered>
 
-{/* ![Reshare dialog showing new link](/img/desktop/shared-links-reshare.png) */}
-
 **Why Reshare requires the creating device:** The desktop needs to read the local plaintext file again to create the new encrypted copy. The source file's location (drive label and relative path) is stored in a local database on the device that created the original share. This information is not synced across devices.
 
 If the old token has already expired by the time you click Reshare, the revoke step is skipped and the desktop goes straight to creating the new share.
@@ -151,9 +149,9 @@ The console doesn't have access to your local files. It would need to download a
 
 ## Share History
 
-The History section records shares that have ended, whether expired or revoked. History is stored locally on this device and is not synced to other devices.
+The History section records shares that have ended, whether expired or revoked.
 
-{/* ![Share history section](/img/desktop/shared-links-history.png) */}
+![Share history section](/img/desktop/shared-links-history.png)
 
 ### How history is captured
 
@@ -180,10 +178,6 @@ Click the three dot menu on any history row and choose <BgStyledText>Remove from
 ### Clear all history
 
 Click <BgStyledText>Clear all history</BgStyledText> at the top of the History section to remove all local history entries at once. A confirmation dialog appears first. This does not affect any active shares.
-
-:::info History is local to this device
-History is stored in a local database on this machine. It is not synced to other devices. Opening Shared Links on a different device shows a separate history. Clearing history here has no effect anywhere else.
-:::
 
 ## What Recipients See
 
@@ -219,12 +213,12 @@ Each active share uses storage quota. Revoke temporary shares when you're done w
 | **Copy link after restart** | ✅ Yes, key saved in local database | ❌ No, key is in memory only and lost on tab close or reload |
 | **Reshare** | ✅ On creating device | ❌ Not available |
 | **Revoke** | ✅ Any device | ✅ Any device |
-| **History** | Local SQLite database | Browser localStorage |
+| **History** | ✅ Yes | ✅ Yes |
 
 ## Where to next
 
 <Unordered>
   <li><a href="/use/desktop/file-system">File System</a>: manage your sync folders and uploads.</li>
-  <li><a href="/use/console/shared-links">Console Shared Links</a>: the console version — create shares from the web interface.</li>
+  <li><a href="/use/console/shared-links">Console Shared Links</a>: the console version, where you can create shares from the web interface.</li>
   <li><a href="/use/desktop/billing">Billing</a>: manage credits before sharing large files.</li>
 </Unordered>
