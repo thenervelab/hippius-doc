@@ -110,6 +110,14 @@ Hippius S3 is served through regional caches. Pick the endpoint closest to the c
     rclone ls hippius:
     rclone sync ./folder hippius:my-bucket/folder
 
+## Python Libraries
+
+### hippius-hub
+
+Drop-in replacement for `huggingface_hub` backed by Hippius S3 storage. Use the same familiar API (`upload_file`, `download_file`, `snapshot_download`, etc.) while storing models and datasets on decentralized Hippius infrastructure instead of Hugging Face.
+
+- Repository & llms.txt: https://github.com/thenervelab/hippius-hub/blob/main/llms.txt
+
 ## Supported S3 Operations
 
 - Bucket: CreateBucket, DeleteBucket, ListBuckets, HeadBucket, GetBucketLocation
