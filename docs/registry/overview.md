@@ -25,19 +25,22 @@ Both faces share the same authentication, the same backing storage, and the same
 | Purpose | URL |
 | --- | --- |
 | OCI registry (Docker, ORAS, `hippius-hub`) | `registry.hippius.com` |
-| Model search & metadata API | `https://api.hippius.com/api/models/` |
 | Web UI (browse models & containers) | [`hub.hippius.com`](https://hub.hippius.com) |
-| Account settings & credentials | [`console.hippius.com/dashboard/settings`](https://console.hippius.com/dashboard/settings) |
+| Source / issues | [`github.com/thenervelab/hippius-hub`](https://github.com/thenervelab/hippius-hub) |
 
-Models are indexed server-side by **format** (GGUF, safetensors, ONNX, PyTorch, Diffusers), architecture, parameter count, and quantization — so search filters work the way you'd expect.
+Models are indexed server-side by format, architecture, parameter count, and quantization — so search on [hub.hippius.com](https://hub.hippius.com) works the way you'd expect.
 
 ---
 
 ## Get started
 
-- **Pull a model from Python** → [Model Registry](/registry/models). The headline example is three lines: `import hippius_hub as huggingface_hub`, and your existing `transformers.from_pretrained(...)` keeps working.
-- **Push a Docker image** → [Docker Registry](/registry/docker). Standard `docker login` / `docker push` flow against `registry.hippius.com`.
+- **Pull a model from Python** → [Model Registry](/registry/models). Three lines: `import hippius_hub as huggingface_hub`, and your existing `transformers.from_pretrained(...)` keeps working.
+- **Push a Docker image** → [Docker Registry](/registry/docker). Standard `docker login` / `docker push` against `registry.hippius.com`.
 
 :::tip Public pulls, authenticated pushes
-Anyone can pull public models and containers — no account required. You only need to sign in at [console.hippius.com](https://console.hippius.com/dashboard/settings) when you want to push, create a namespace, or access private repositories.
+Anyone can pull public models and containers — no account required. You only need to [sign in](/registry/docker#sign-in) when you want to push, create a namespace, or access private repositories.
 :::
+
+---
+
+## Coming soon: Hub access from the Console
