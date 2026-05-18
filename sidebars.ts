@@ -42,6 +42,18 @@ const sidebars: SidebarsConfig = {
       ],
     },
 
+    // ── REGISTRY ───────────────────────────────────────────────────
+    {
+      type: "category",
+      label: "Registry",
+      collapsed: false,
+      items: [
+        "registry/overview",
+        "registry/model-registry",
+        "registry/docker-registry",
+      ],
+    },
+
     // ── DESKTOP APP ────────────────────────────────────────────────
     {
       type: "category",
