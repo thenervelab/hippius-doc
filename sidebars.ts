@@ -124,6 +124,16 @@ const sidebars: SidebarsConfig = {
       ],
     },
 
+    // ── STAKE ──────────────────────────────────────────────────────
+    {
+      type: "category",
+      label: "Stake",
+      collapsed: true,
+      items: [
+        "earn/staking",
+      ],
+    },
+
     // ── DEVELOP ────────────────────────────────────────────────────
     {
       type: "category",
