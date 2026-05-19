@@ -51,12 +51,4 @@ Browse, manage, and inspect Hub repos directly from [console.hippius.com](https:
 
 **[Repositories](https://console.hippius.com/dashboard/registry)** — see every container and model you've pushed, with pull counts and last-modified timestamps. List and delete are available today; richer artifact-level controls are on the way.
 
-<div class="screenshot-container">
-  <img src="/img/registry/repositories.png" alt="Console: registry repositories list showing pushed containers and models" style="width: auto; max-width: 550px;" />
-</div>
-
 **[Manage](https://console.hippius.com/dashboard/registry/manage)** — pick a subscription plan, toggle namespace public/private access, and rotate docker credentials for CI/CD.
-
-<div class="screenshot-container">
-  <img src="/img/registry/manage-plan.png" alt="Console: registry management showing subscription plan, access level, and docker credentials" style="width: auto; max-width: 550px;" />
-</div>
