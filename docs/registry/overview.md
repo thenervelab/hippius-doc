@@ -41,6 +41,8 @@ Models are indexed server-side by format, architecture, parameter count, and qua
 Anyone can pull public models and containers — no account required. You only need to [sign in](/registry/docker#sign-in) when you want to push, create a namespace, or access private repositories.
 :::
 
+Pricing details are available at [hippius.com/hippius-hub](https://hippius.com/hippius-hub).
+
 ---
 
 ## Coming soon: Hub access from the Console

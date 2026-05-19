@@ -23,17 +23,17 @@ Prebuilt wheels include the Rust download core — no toolchain needed.
 
 ---
 
-## Sign in
+## Authenticate once
 
-Grab credentials at [console.hippius.com/dashboard/settings](https://console.hippius.com/dashboard/settings), then:
+Generate a token at [console.hippius.com/dashboard/settings](https://console.hippius.com/dashboard/settings), then:
 
 ```python
 from hippius_hub import login
 
-login(username="me", password="pwd")
+login(token="hf_xxx")
 ```
 
-Public models can be pulled without logging in.
+The token is cached locally — you only need to do this once per machine. Public models can be pulled without authenticating. See [hippius.com/hippius-hub](https://hippius.com/hippius-hub) for a full end-to-end example.
 
 ---
 

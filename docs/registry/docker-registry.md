@@ -63,6 +63,12 @@ For namespace provisioning, credential helpers, and registry-aware search there'
 
 ---
 
+## Troubleshooting
+
+If `docker push` loops with `500 Cannot find server.`, check `docker info | grep -i proxy`. A daemon-level proxy (e.g. `http.docker.internal:3128`) in Docker Desktop routes the push through an unreachable proxy and the registry is never hit. Fix: Docker Desktop → Settings → Resources → Proxies → disable it or bypass `registry.hippius.com`, then restart Docker Desktop. `NO_PROXY` in your shell does not help — the daemon ignores it.
+
+---
+
 ## Where to next
 
 - [Model Registry](/registry/models) — the `huggingface_hub` drop-in for pulling models from Python.
