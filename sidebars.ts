@@ -48,9 +48,10 @@ const sidebars: SidebarsConfig = {
       label: "Registry",
       collapsed: false,
       items: [
-        "registry/overview",
-        "registry/model-registry",
-        "registry/docker-registry",
+        "registry/quickstart",
+        "registry/pull",
+        "registry/push",
+        "registry/cli",
       ],
     },
 
