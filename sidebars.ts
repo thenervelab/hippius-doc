@@ -42,6 +42,19 @@ const sidebars: SidebarsConfig = {
       ],
     },
 
+    // ── REGISTRY ───────────────────────────────────────────────────
+    {
+      type: "category",
+      label: "Registry",
+      collapsed: false,
+      items: [
+        "registry/quickstart",
+        "registry/pull",
+        "registry/push",
+        "registry/cli",
+      ],
+    },
+
     // ── DESKTOP APP ────────────────────────────────────────────────
     {
       type: "category",
@@ -140,6 +153,16 @@ const sidebars: SidebarsConfig = {
       items: [
         "earn/installing-validator",
         "earn/register-validator-in-chain",
+      ],
+    },
+
+    // ── STAKE ──────────────────────────────────────────────────────
+    {
+      type: "category",
+      label: "Stake",
+      collapsed: true,
+      items: [
+        "earn/staking",
       ],
     },
 
