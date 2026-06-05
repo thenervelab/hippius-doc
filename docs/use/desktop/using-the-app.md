@@ -3,6 +3,7 @@ id: using-the-app
 title: Using the App
 sidebar_label: Using the App
 slug: /use/desktop/using-the-app
+description: 6
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -19,6 +20,7 @@ import Icon from '@site/src/components/Icon';
   <li>For <strong>Access Key</strong>, enter your 12-word recovery phrase and click <BgStyledText>Log In</BgStyledText>.</li>
 </Ordered>
 
+
 ![Google, Continue with GitHub, Continue with Apple, and Continue with Access Key Login Screen](/img/desktop/login-screen.png)
 
 :::tip
@@ -27,19 +29,18 @@ If you are a new user, your account will be created automatically when you sign 
 
 ## Onboarding
 
-After signing in for the first time, you will be guided through a **5-step onboarding wizard** that introduces the key features of Hippius Desktop:
+After signing in for the first time, you will be guided through a **3-step onboarding wizard** that introduces the key features of Hippius Desktop:
 
 <Ordered>
-  <li><strong>Welcome to Hippius</strong>: Overview of your personal cloud, with files encrypted on your device before upload and distributed across a global network of independent nodes.</li>
-  <li><strong>Credits &amp; Billing</strong>: Learn how pay-as-you-go billing works, including top-ups via Stripe or TAO, subscription plans, and how sync simply pauses if you run out of credits.</li>
-  <li><strong>Files &amp; Actions</strong>: Browse, preview, and manage files from one place, with right-click actions to download, reveal in Finder, view details, or track files on the Hipstats explorer.</li>
-  <li><strong>Unlock Password</strong>: Understand how one unlock password encrypts your files locally and gives you access across all your devices and the web console.</li>
+  <li><strong>Welcome to Hippius</strong>: Overview of the platform's core capabilities including fast sync, encryption, multi-folder sync, conflict resolution, and the modern interface.</li>
+  <li><strong>Multi-Folder Sync</strong>: Learn how to sync multiple folders at once with automatic encryption, sync from other devices, and custom device naming.</li>
   <li><strong>Mnemonic Seed</strong>: Understand the importance of your mnemonic seed and how to back it up securely. Tips include writing it on paper, storing it safely, never sharing it, and keeping copies in multiple places.</li>
 </Ordered>
 
-You can click <BgStyledText>Skip</BgStyledText> at any time to bypass the remaining onboarding steps. Use the <BgStyledText>Back</BgStyledText> and <BgStyledText>Next</BgStyledText> buttons to navigate between steps. On the final step, click <BgStyledText>Start Syncing</BgStyledText> to back up your mnemonic seed and enter the app.
+You can click <BgStyledText>Skip</BgStyledText> at any time to bypass the remaining onboarding steps. Use the <BgStyledText>Previous</BgStyledText> and <BgStyledText>Next</BgStyledText> buttons to navigate between steps. On the final step, click <BgStyledText>Continue</BgStyledText> to enter the app.
 
-![The onboarding wizard showing the "Welcome to Hippius" screen with the feature highlights and the app preview illustration](/img/desktop/onboarding-welcome.png)
+![The onboarding wizard showing the "Get Started" screen with bullet points and the left panel illustration](/img/desktop/onboarding-welcome.png)
+
 
 ## Set Your Unlock Password
 
@@ -145,11 +146,11 @@ You can drag and drop files directly onto the Files page to upload them. This wo
 
 Hippius Desktop supports keyboard-driven zoom to adjust the interface size. The entire UI scales proportionally, including text, buttons, charts, and spacing.
 
-| Shortcut                    | Action                     |
-| --------------------------- | -------------------------- |
-| **Cmd/Ctrl + =** (or **+**) | Zoom in (increase by 10%)  |
-| **Cmd/Ctrl + -**            | Zoom out (decrease by 10%) |
-| **Cmd/Ctrl + 0**            | Reset to 100%              |
+| Shortcut | Action |
+|---|---|
+| **Cmd/Ctrl + =** (or **+**) | Zoom in (increase by 10%) |
+| **Cmd/Ctrl + -** | Zoom out (decrease by 10%) |
+| **Cmd/Ctrl + 0** | Reset to 100% |
 
 The zoom range is **50% to 200%**. Your zoom preference is saved and restored across sessions. A brief percentage indicator appears on screen when you change the zoom level.
 
