@@ -3,6 +3,7 @@ id: staking
 title: Staking on Hippius
 sidebar_label: Staking
 slug: /earn/staking
+draft: true
 ---
 
 import BgStyledText from '@site/src/components/BgStyledText';

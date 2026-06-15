@@ -67,9 +67,34 @@ const sidebars: SidebarsConfig = {
         "use/desktop/settings",
         "use/desktop/billing",
         "use/desktop/referral-system",
-        // ⚠️ WARNING: "Wallet" page is NOT live yet. Do NOT uncomment
-        // until the feature is fully released and verified by the team.
-        "use/desktop/wallet",
+        // ⚠️ "Wallet" page is hidden until the feature is live. The page is
+        // also marked `draft: true` in use/desktop/wallet.md to block direct
+        // access. Re-enable both together when ready to publish.
+        // "use/desktop/wallet",
+      ],
+    },
+
+    // ── CONSOLE ────────────────────────────────────────────────────
+    {
+      type: "category",
+      label: "Console",
+      collapsed: true,
+      items: [
+        "use/console/getting-started",
+        "use/console/overview",
+        "use/console/drive",
+        "use/console/shared-links",
+        "use/console/s3",
+        "use/console/uploads",
+        "use/console/virtual-machines",
+        // ⚠️ "Wallet" page is hidden until the feature is live. The page
+        // is also marked `draft: true` in wallet.md to block direct access.
+        // Re-enable both together when ready to publish.
+        // "use/console/wallet",
+        "use/console/billing",
+        "use/console/referrals",
+        "use/console/settings",
+        "use/console/support",
       ],
     },
 
@@ -122,16 +147,6 @@ const sidebars: SidebarsConfig = {
       items: [
         "earn/installing-validator",
         "earn/register-validator-in-chain",
-      ],
-    },
-
-    // ── STAKE ──────────────────────────────────────────────────────
-    {
-      type: "category",
-      label: "Stake",
-      collapsed: true,
-      items: [
-        "earn/staking",
       ],
     },
 
