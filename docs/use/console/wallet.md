@@ -239,5 +239,4 @@ When you open the Send dialog, click <BgStyledText>Address Book</BgStyledText> i
   <li><a href="/use/console/billing">Billing</a>: convert hAlpha or fiat into platform credits.</li>
   <li><a href="/use/bridge">Bridge Tokens</a>: full bridge guide with troubleshooting.</li>
   <li><a href="/learn/substrate-staking">Substrate Staking</a>: how the staking mechanism works at the protocol level.</li>
-  <li><a href="/earn/staking">Staking on Hippius</a>: staking strategy and rewards.</li>
 </Unordered>

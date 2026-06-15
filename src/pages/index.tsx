@@ -38,11 +38,11 @@ export const CATEGORIES: (SmallCardInfo & {
   },
   {
     title: "Earn",
-    description: "Stake tokens or run miners to contribute and earn rewards.",
+    description: "Run miners to contribute and earn rewards.",
     icon: <Icons.DollarSquare className="text-primary-50 relative size-7" />,
     cta: {
       label: "Earn",
-      href: "/earn/staking",
+      href: "/earn/storage-miner",
     },
   },
   {
