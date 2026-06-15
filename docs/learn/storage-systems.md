@@ -8,7 +8,7 @@ import Unordered from '@site/src/components/Unordered';
 
 # How Storage Works
 
-Hippius stores data on **Arion** — a purpose-built distributed storage engine. This page explains the architecture: how files are split, placed, and recovered across the network.
+We store your data on **Arion** — a purpose-built distributed storage engine. This page explains the architecture: how files are split, placed, and recovered across the network.
 
 ## The short version
 

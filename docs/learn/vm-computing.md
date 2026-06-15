@@ -31,7 +31,7 @@ Hippius VM Computing enables users to deploy and manage virtual machines on a de
 
 ### Supported Configurations
 
-Hippius offers flexible VM configurations to match your workload requirements:
+We offer flexible VM configurations to match your workload requirements:
 
 - **Operating Systems**: Linux distributions (Ubuntu, Debian, CentOS, and more)
 - **Pre-installed Applications**: Docker, development tools, and other common software
@@ -344,7 +344,7 @@ Before creating a VM, ensure you have:
   <li>Connect via SSH using the Nebula IP</li>
 </Ordered>
 
-For detailed instructions, see the [Virtual Machines User Guide](/use/virtual-machines).
+For detailed instructions, see the [Virtual Machines User Guide](/use/console/virtual-machines).
 
 ---
 
@@ -361,4 +361,4 @@ Hippius VM Computing brings the benefits of decentralization to compute infrastr
 | **Flexible**      | Various configurations for different workloads |
 | **Economical**    | Credit-based pay-as-you-go billing             |
 
-By combining decentralized compute with Arion storage and blockchain coordination, Hippius provides a complete platform for building and running applications without relying on centralized cloud providers.
+By combining decentralized compute with Arion storage and blockchain coordination, we provide a complete platform for building and running applications without relying on centralized cloud providers.

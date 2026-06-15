@@ -9,7 +9,7 @@ slug: /storage/s3/compatibility
 
 Hippius S3 is a drop-in replacement for Amazon S3 with a focused feature set. If you already have code that works with AWS S3, you only need to change three things: **endpoint URL**, **region**, and **credentials**. Everything else stays the same.
 
-This page lists every S3 API operation and whether Hippius supports it.
+This page lists every S3 API operation and whether we support it.
 
 ## Connection Parameters
 

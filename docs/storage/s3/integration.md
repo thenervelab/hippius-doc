@@ -206,7 +206,7 @@ aws s3api put-bucket-acl --bucket mybucket --acl private \
 
 ### Access Keys and ACLs
 
-Hippius supports two types of [access keys](https://console.hippius.com/dashboard/settings):
+We support two types of [access keys](https://console.hippius.com/dashboard/settings):
 
 - **Main keys**: Automatically have full access to your buckets (bypass ACLs)
 - **Sub keys**: Require explicit ACL grants for access

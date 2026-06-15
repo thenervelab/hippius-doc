@@ -73,6 +73,30 @@ const sidebars: SidebarsConfig = {
       ],
     },
 
+    // ── CONSOLE ────────────────────────────────────────────────────
+    {
+      type: "category",
+      label: "Console",
+      collapsed: true,
+      items: [
+        "use/console/getting-started",
+        "use/console/overview",
+        "use/console/drive",
+        "use/console/shared-links",
+        "use/console/s3",
+        "use/console/uploads",
+        "use/console/virtual-machines",
+        // ⚠️ "Wallet" page is hidden until the feature is live. The page
+        // is also marked `draft: true` in wallet.md to block direct access.
+        // Re-enable both together when ready to publish.
+        // "use/console/wallet",
+        "use/console/billing",
+        "use/console/referrals",
+        "use/console/settings",
+        "use/console/support",
+      ],
+    },
+
     // ── SEPARATOR ──────────────────────────────────────────────────
     {
       type: "html",
