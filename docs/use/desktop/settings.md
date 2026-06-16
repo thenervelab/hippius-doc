@@ -251,6 +251,9 @@ Sync & Storage
     Your theme choice is stored locally, so it only affects this device — your other devices and the <a href="https://console.hippius.com">Hippius Console</a> keep their own setting.
     :::
 
+    ![Appearance screen](/img/desktop/settings/appearance-settings.png)
+
+
 </>
 </DocAccordionItem>
 
