@@ -23,7 +23,7 @@ Reach Drive from the sidebar at <BgStyledIconWithText text="Storage" icon="Sideb
 
 Drive encrypts every file using a key tied to your **unlock password**. The console will ask for this password the first time you upload, preview, or download a file in each session. After you enter it, the key stays in memory until you close the tab. You won't be asked again during the same session.
 
-**Setting up for the first time?** Your unlock password is created when you first sign into the [Hippius Desktop App](/use/desktop/desktop-app). If you haven't installed the desktop app yet, you'll need to do that first to generate your unlock password. Once created, the same password works in the console.
+**Setting up for the first time?** Your unlock password is created when you first sign into the [Hippius Desktop App](/use/desktop/getting-started). If you haven't installed the desktop app yet, you'll need to do that first to generate your unlock password. Once created, the same password works in the console.
 
 :::danger Your unlock password cannot be recovered
 If you forget it, you'll need your 12-word recovery phrase to restore access to your encrypted files. Keep both somewhere safe. We cannot recover either for you.
@@ -70,7 +70,7 @@ Two important things to know before uploading:
 
 <Ordered>
   <li><strong>The destination is the folder you're currently in.</strong> If you're at the Drive root with no folder selected, the upload dialog will ask you to pick a destination folder first.</li>
-  <li><strong>Each file must be under 100 MB.</strong> Files larger than 100 MB will be flagged and cannot be uploaded via the console browser. To upload larger files, use the <a href="/use/desktop/desktop-app">Hippius Desktop App</a>.</li>
+  <li><strong>Each file must be under 100 MB.</strong> Files larger than 100 MB will be flagged and cannot be uploaded via the console browser. To upload larger files, use the <a href="/use/desktop/getting-started">Hippius Desktop App</a>.</li>
 </Ordered>
 
 You can also drag files from your desktop directly onto the Drive page. A full page drop zone appears and the dialog opens with your files pre loaded.
@@ -153,7 +153,7 @@ After topping up, start the upload again from the same dialog or click <BgStyled
 | **Max files per upload batch** | 1000 |
 | **Folder depth** | Unlimited |
 
-For files larger than 100 MB, use the [Hippius Desktop App](/use/desktop/desktop-app), which syncs files incrementally without a browser size cap.
+For files larger than 100 MB, use the [Hippius Desktop App](/use/desktop/getting-started), which syncs files incrementally without a browser size cap.
 
 ## Where to next
 
@@ -161,5 +161,5 @@ For files larger than 100 MB, use the [Hippius Desktop App](/use/desktop/desktop
   <li><a href="/use/console/shared-links">Shared Links</a>: share any Drive file as a public download link — no account required for recipients.</li>
   <li><a href="/use/console/uploads">Console Uploads</a>: full reference for the upload queue, progress widget, and error handling.</li>
   <li><a href="/use/console/s3">S3 Buckets</a>: S3 compatible storage for use with any S3 client.</li>
-  <li><a href="/use/desktop/desktop-app">Hippius Desktop App</a>: real time folder sync and uploads beyond the 100 MB cap.</li>
+  <li><a href="/use/desktop/getting-started">Hippius Desktop App</a>: real time folder sync and uploads beyond the 100 MB cap.</li>
 </Unordered>

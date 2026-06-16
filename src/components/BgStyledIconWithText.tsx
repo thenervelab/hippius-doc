@@ -17,7 +17,7 @@ export default function BgStyledIconWithText({
   return (
     <div
       className={cn(
-        "inline-flex gap-1 bg-grey-80 text-grey-50 rounded items-center justify-center translate-y-[3px]",
+        "inline-flex gap-1 bg-grey-80 text-grey-50 rounded items-center justify-center align-middle",
         paddingClassName
       )}
     >

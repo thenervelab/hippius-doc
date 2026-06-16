@@ -3,6 +3,7 @@ id: staking
 title: Staking
 sidebar_label: Staking
 slug: /use/desktop/staking
+description: 5
 ---
 
 import Ordered from '@site/src/components/Ordered';

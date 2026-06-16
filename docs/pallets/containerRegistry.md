@@ -1,6 +1,6 @@
 # Container Registry Pallet
 
-The Container Registry pallet is a vital component of the Hippius blockchain ecosystem, designed to manage the registration and tracking of Docker images pushed to the registry. This pallet facilitates the storage of image metadata and associated files on decentralized storage, ensuring efficient image management.
+The Container Registry pallet is a vital component of the Hippius blockchain ecosystem, designed to manage the registration and tracking of Docker images pushed to the registry. This pallet facilitates the storage of image metadata and associated files on distributed storage, ensuring efficient image management.
 
 ## Overview
 

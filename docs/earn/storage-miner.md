@@ -4,7 +4,7 @@ description: Arion Storage Miner Overview
 
 # Storage Miner Overview
 
-A storage miner in the Hippius network is a node that provides decentralized storage capacity. Miners participate in the Arion network by storing shards of encrypted user data and proving their storage continuously to the blockchain. In return, they earn rewards for their contribution to the network.
+A storage miner in the Hippius network is a node that provides distributed storage capacity. Miners participate in the Arion network by storing shards of encrypted user data and proving their storage continuously to the blockchain. In return, they earn rewards for their contribution to the network.
 
 ## What a Miner Does
 

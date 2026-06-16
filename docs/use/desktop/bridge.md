@@ -3,6 +3,7 @@ id: bridge
 title: Bridge
 sidebar_label: Bridge
 slug: /use/desktop/bridge
+description: 7
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -19,7 +20,7 @@ The Hippius Bridge allows you to transfer tokens between the Bittensor network (
 <li>**Alpha → hAlpha**: Lock your Alpha tokens on Bittensor and receive hAlpha on Hippius</li>
 <li>**hAlpha → Alpha**: Burn your hAlpha tokens on Hippius and receive Alpha on Bittensor</li>
 </Unordered>
-Bridging is processed by a decentralized network of Hippius guardians and typically completes within a few minutes.
+Bridging is processed by a distributed network of Hippius guardians and typically completes within a few minutes.
 
 ## Accessing the Bridge
 
@@ -206,7 +207,7 @@ If a bridge fails, check your balance and try again. Most errors are due to insu
 
 The bridge is secured by multiple layers:
 
-1. **Guardian Network**: Decentralized validators confirm transactions
+1. **Guardian Network**: Distributed validators confirm transactions
 2. **Threshold Voting**: Multiple guardians must agree before tokens are released
 3. **Proxy Pattern**: Temporary permissions minimize security exposure
 4. **Local Signing**: Your private keys never leave your device

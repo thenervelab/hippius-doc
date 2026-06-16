@@ -4,7 +4,7 @@ import BgStyledText from '@site/src/components/BgStyledText';
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 
-Hippius S3 is a decentralized, S3-compatible storage service. This guide takes you from zero to your first file upload in under 5 minutes.
+Hippius S3 is a distributed, S3-compatible storage service. This guide takes you from zero to your first file upload in under 5 minutes.
 
 ## Step 1: Create an Account
 

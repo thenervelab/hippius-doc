@@ -3,8 +3,16 @@ id: wallet
 title: Wallet
 sidebar_label: Wallet
 slug: /use/desktop/wallet
+description: Create and manage local wallets, send and receive hAlpha, stake and unstake, bridge between Alpha and hAlpha, and track transactions from the Hippius desktop Wallet page.
 draft: true
 ---
+
+{/*
+  ⚠️ This page is hidden. `draft: true` excludes it from the production
+  build (no direct link works) and it is commented out of sidebars.ts.
+  The full content below is preserved. To publish: remove `draft: true`
+  above and re-enable the sidebar entry in sidebars.ts.
+*/}
 
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
@@ -14,287 +22,377 @@ import Icon from '@site/src/components/Icon';
 
 ## Introduction
 
-The Hippius Desktop Wallet provides complete control over your hAlpha tokens with local wallet management. Unlike the web version, the desktop app stores encrypted wallet data locally on your device, providing enhanced security and offline access to your wallet addresses.
+The Hippius desktop **Wallet** gives you full control over your hAlpha tokens with local wallet management. Unlike the web console, the desktop app stores your encrypted wallet data **on your device**, so your keys never leave your machine.
 
-You can create new wallets, import existing ones via mnemonic phrases or backup files, send and receive tokens, view your balance and transaction history, and manage an address book. Everything is secured with your personal password.
+From the Wallet page you can:
 
-## Getting Started
+<Unordered>
+  <li>Send and receive hAlpha.</li>
+  <li>Stake and unstake your tokens.</li>
+  <li>Bridge between Alpha (Bittensor) and hAlpha (Hippius).</li>
+  <li>Keep an address book of frequent recipients.</li>
+  <li>Review your transaction history.</li>
+</Unordered>
 
-When you first launch Hippius Desktop, you'll be guided through wallet setup. You have three options:
+Everything is secured by a password you choose.
 
-- **Enter an existing mnemonic** to use a wallet you already have
-- **Create a new wallet** with a fresh mnemonic phrase
-- **Import a wallet** from a backup file
+Reach the Wallet from the sidebar at <BgStyledIconWithText text="Wallet" icon="Wallet" />.
 
-### Creating a New Wallet
+## How Wallets Work on Desktop
+
+### Your access key
+
+Each wallet is built from a **12-word access key** (sometimes called a recovery phrase elsewhere). This key is the master credential for your wallet:
+
+<Unordered>
+  <li>It is generated on your device when you create a wallet, and shown to you once.</li>
+  <li>Anyone who has it can control your funds and files. Treat it like the keys to a safe.</li>
+  <li><strong>We cannot recover it for you.</strong> If you lose it, your funds and files are permanently inaccessible.</li>
+</Unordered>
+
+### Your password and per-transaction signing
+
+When you set up a wallet you also choose a **password**. The desktop app uses a password-based signing model:
+
+<Unordered>
+  <li>Your access key is <strong>encrypted with your password</strong> and stored locally. It is never sent off your device.</li>
+  <li>Each time you sign something (send, stake, unstake, withdraw, bridge), you enter your password.</li>
+  <li>The password <strong>momentarily decrypts</strong> the access key to sign the transaction, then it's cleared from memory.</li>
+</Unordered>
+
+This means there's no separate "unlock" step. Your wallet is effectively locked at all times, and you authorize each transaction individually.
+
+:::tip
+Even if someone gets access to your device, they can't move your funds without your password. And even with your password, they'd still need your access key to recover the wallet elsewhere.
+:::
+
+## Setting Up Your Wallet
+
+The first time you open the Wallet page (or whenever you have no wallet yet) you'll land on the **Welcome to Hippius Wallet** screen. From here you can take one of three paths, and you can cross-navigate between them with the links at the bottom of each screen.
+
+### Create a New Wallet
 
 <Ordered>
-  <li>When you first open the wallet page, a unique 12-word mnemonic phrase is automatically generated and displayed on screen.</li>
-  <li><strong>Write down this phrase and store it securely.</strong> This is the only way to recover your wallet if you lose access.</li>
-  <li>Click <BgStyledText>I've Saved My Mnemonic</BgStyledText> to continue.</li>
-  <li>Enter a name for your wallet (e.g., "Main Wallet").</li>
-  <li>Create a strong password to encrypt your wallet.</li>
-  <li>Confirm your password and click <BgStyledText>Create Wallet</BgStyledText>.</li>
+  <li>From the Welcome screen, click <BgStyledText>Create New Wallet</BgStyledText>.</li>
+  <li>A fresh <strong>12-word access key</strong> is generated and shown on screen under <strong>Your Access Key</strong>. Use the copy icon to copy it, then store it somewhere safe. Note the <strong>IMPORTANT</strong> reminders: store this key in a secure password manager, never share it with anyone, and Hippius <strong>cannot</strong> help you recover your account if you lose it.</li>
+  <li>Enter a name for your wallet in <strong>Wallet Name</strong> (for example, "Main Wallet").</li>
+  <li>Click <BgStyledText>Continue</BgStyledText>.</li>
+  <li>On the next screen, set a <strong>Password</strong> and re-enter it under <strong>Confirm Password</strong>, then click <BgStyledText>Create Wallet</BgStyledText>.</li>
+  <li>Review the <strong>Save Your Password &amp; Access Key</strong> dialog and click <BgStyledText>I Understand, Create Wallet</BgStyledText> to finish.</li>
 </Ordered>
 
 ![Create New Wallet](/img/desktop/wallet/create-wallet.png)
 
-:::warning Important
-Your mnemonic phrase is the master key to your wallet. Anyone with access to it can control your funds. Never share it, never store it digitally in plain text, and never enter it on websites or apps you don't trust.
+:::warning Your access key is the master key
+Your 12-word access key provides full access to your wallet. Never share it, never store it digitally in plain text, and never enter it on sites or apps you don't trust.
 :::
 
-### Importing a Wallet with Mnemonic
+Your password must be at least **8 characters** and include:
 
-If you have an existing mnemonic phrase from another wallet:
+<Unordered>
+  <li>A lowercase letter</li>
+  <li>An uppercase letter</li>
+  <li>A number</li>
+  <li>A special character</li>
+</Unordered>
+
+### Access an Existing Wallet
+
+If you already have a 12-word access key and want to add the wallet to this device:
 
 <Ordered>
-  <li>On the Welcome screen, click on <BgStyledText>Add Existing Wallet</BgStyledText> and enter your mnemonic phrase in the input field.</li>
-  <li>Click <BgStyledText>Next</BgStyledText>.</li>
-  <li>Enter the password you want to use for this wallet in Hippius Desktop.</li>
-  <li>Click <BgStyledText>Access Wallet</BgStyledText>.</li>
+  <li>On the Welcome screen, enter a <strong>Wallet Name</strong> and paste your key into the <strong>Access Key</strong> field.</li>
+  <li>Click <BgStyledText>Continue</BgStyledText>. The app verifies the key.</li>
+  <li>On the next screen, enter a <strong>Password</strong> to protect this wallet on this device, then continue.</li>
+  <li>Confirm the <strong>Save Your Password &amp; Access Key</strong> dialog by clicking <BgStyledText>I Understand, Continue</BgStyledText>.</li>
 </Ordered>
 
-Alternatively, you can click <BgStyledText>Import Wallet</BgStyledText> to import from a backup file:
+The password you set here is local to this device. The same wallet on another device can have a different password.
+
+### Import a Wallet from Backup
+
+If you have an encrypted backup file exported from Hippius:
 
 <Ordered>
-  <li>Click <BgStyledText>Import Wallet</BgStyledText> on the Welcome screen.</li>
-  <li>Click <BgStyledText>Select Backup File</BgStyledText> and choose your `.zip` backup file.</li>
-  <li>Enter the password that was used when the backup was created.</li>
-  <li>Click <BgStyledText>Import Wallet</BgStyledText>.</li>
+  <li>On the Welcome screen, click <BgStyledText>Import Your Wallet</BgStyledText>.</li>
+  <li>Under <strong>Upload File</strong>, drag and drop your backup or click to browse. Backups are <code>.zip</code> files (older <code>.json</code> backups are also accepted).</li>
+  <li>Enter the <strong>Password</strong> that was set when the backup was created. This is needed to decrypt it.</li>
+  <li>Click <BgStyledText>Import Wallet</BgStyledText>, then confirm the <strong>Save Your Password &amp; Access Key</strong> dialog with <BgStyledText>I Understand, Import</BgStyledText>.</li>
 </Ordered>
 
 ![Import Wallet](/img/desktop/wallet/import-wallet.png)
 
-## How Transaction Signing Works
+### Save Your Password & Access Key
 
-Hippius Desktop uses a secure password-based signing model:
+All three setup paths end with the **Save Your Password & Access Key** confirmation. It's a final reminder that:
 
 <Unordered>
-<li> Your mnemonic phrase is **encrypted** with your password and stored locally</li>
-<li> When you perform any transaction (send, stake, unstake, bridge), you're prompted to enter your password</li>
-<li> The password **temporarily decrypts** your mnemonic to sign the transaction</li>
-<li> After signing, the decrypted mnemonic is immediately cleared from memory</li>
+  <li>We cannot recover your password if you lose it. It is never sent off this device.</li>
+  <li>We cannot recover your access key either. Without it your funds and files are permanently inaccessible.</li>
+  <li>You should store both in a password manager or somewhere offline that only you can reach.</li>
 </Unordered>
 
-This means you don't need to "unlock" your wallet upfront. Your wallet is effectively locked at all times, and you authenticate each transaction individually.
+## The Wallet Page
 
-:::tip
-This design provides enhanced security: even if someone gains access to your device, they cannot make transactions without knowing your password.
-:::
-
-## Wallet Overview
-
-The Wallet page displays three widget cards at a glance:
-
-| Widget | What It Shows |
-|---|---|
-| **Native Balance** | Your current hALPHA balance with Send and Receive buttons |
-| **Stake hAlpha** | Your staked amount, locked balance, unbonding status, redeemable funds, and quick actions |
-| **Bridge Tokens** | A shortcut to bridge tokens between Alpha and hAlpha |
-
-Below the widgets you'll find a **Balance Overview** chart and tabs for **Transaction History** and **Address Book**.
+Once a wallet is active, the Wallet page shows three cards across the top, a balance chart, and a set of tabs.
 
 ![Wallet Overview](/img/desktop/wallet/wallet-overview.png)
 
+| Card | What it shows |
+|---|---|
+| **My Balance** | Your transferable hAlpha balance, a "Last updated" time with a refresh button, and <BgStyledText>Receive</BgStyledText> / <BgStyledText>Send</BgStyledText> buttons. |
+| **Stake hAlpha** | Your staked balance, plus redeemable and unstaking amounts when present, with <BgStyledText>Stake Now</BgStyledText>, <BgStyledText>Unstake hAlpha</BgStyledText>, and (when funds are ready) a <BgStyledText>Withdraw</BgStyledText> action. |
+| **Bridge Tokens** | A shortcut to bridge tokens between Alpha and hAlpha. Click <BgStyledText>Bridge Tokens</BgStyledText> to open the bridge. |
+
+Below the cards, the **Transaction Overview** chart plots your balance over time. Use the time-range selector (**This Week**, **Last 30 Days**, **Last 60 Days**, **1 Year**, **Max**) to change the window, and the refresh button to re-fetch. Below the chart are three tabs: **Transaction History**, **Bridge Transactions**, and **Address Book**.
+
 ## Managing Multiple Wallets
 
-Hippius Desktop supports multiple local wallets. You can switch between them, add new ones, or remove wallets you no longer need.
-
-### Switching Wallets
-
-<Ordered>
-  <li>Click the <BgStyledText>Active Wallet</BgStyledText> dropdown in the top-right corner of the Wallet page.</li>
-  <li>Your local wallets are listed with their names and truncated addresses.</li>
-  <li>Click <BgStyledText>Switch Wallet</BgStyledText> next to the wallet you want to use.</li>
-</Ordered>
-
-Your selection is remembered across sessions. When you make a transaction, you'll be prompted for the password of the currently active wallet.
+The desktop app supports multiple local wallets. The **Active Wallet** selector in the top-right corner of the Wallet page is where you switch between them and add more.
 
 ![Switch Wallet](/img/desktop/wallet/switch-wallet.png)
 
-### Adding a New Wallet
+<Unordered>
+  <li>Click the <strong>Active Wallet</strong> pill to open the <strong>Your Wallets</strong> popover.</li>
+  <li>Each wallet row shows its name and truncated address, with a copy button, an <strong>export backup</strong> icon, and an <strong>open in explorer</strong> icon (which opens the address on hipstats.com).</li>
+  <li>The active wallet shows an <strong>Active wallet</strong> badge; click <BgStyledText>Switch wallet</BgStyledText> on any other wallet to make it active.</li>
+  <li>Click <BgStyledText>Add another wallet</BgStyledText> to start the create flow, or the gear icon to open <strong>Wallet Settings</strong>.</li>
+</Unordered>
 
-You can add additional wallets at any time:
+Your active wallet is remembered across sessions. When you sign a transaction, you're prompted for the active wallet's password. Switching wallets also updates the balance and transaction history to the newly selected account.
 
-<Ordered>
-  <li>Click the <BgStyledText>Active Wallet</BgStyledText> dropdown.</li>
-  <li>Click <BgStyledText>Add Wallet</BgStyledText>.</li>
-  <li>Choose to create a new wallet or import an existing one.</li>
-  <li>Follow the same steps as initial wallet setup.</li>
-</Ordered>
+If you have no wallet yet, the selector reads **No Active Wallet / Wallet Needed** and offers **Create New Wallet** and **Import Your Wallet** shortcuts.
 
 ## Wallet Settings
 
-Access wallet management options through the Wallet Settings:
-
-<Ordered>
-  <li>Click the <BgStyledText>Settings</BgStyledText> menu item or alernatively you can click on the <BgStyledText>Settings</BgStyledText> icon in wallet selection dialog.</li>
-  <li>Navigate to the <BgStyledText>Wallet Settings</BgStyledText> tab.</li>
-</Ordered>
-
-### Wallet Table
-
-The Wallet Settings tab displays a table of all your local wallets with:
-
-| Column | Description |
-|---|---|
-| **Wallet** | Name and truncated address (click to copy) |
-| **Date** | When the wallet was added |
-| **Status** | Active indicator |
-| **Actions** | Three-dot menu with Edit, Export, and Delete options |
+Detailed wallet management lives under <BgStyledIconWithText text="Settings" icon="Settings" /> → **Wallets** (the gear icon in the Active Wallet popover takes you straight there). The page is titled **Wallets** — "Manage the local wallets stored on this device. Switch between them, rename, export a backup, or remove ones you no longer use."
 
 ![Wallet Settings](/img/desktop/wallet/wallet-settings.png)
 
-### Editing a Wallet Name
+The table lists every local wallet:
 
-<Ordered>
-  <li>Click the three-dot menu (⋮) in the Actions column next to the wallet you want to edit.</li>
-  <li>Select <BgStyledText>Edit</BgStyledText> from the dropdown.</li>
-  <li>Enter a new name.</li>
-  <li>Click <BgStyledText>Save</BgStyledText>.</li>
-</Ordered>
+| Column | Description |
+|---|---|
+| **Wallet** | The wallet name, with an **Active** badge on the active wallet. |
+| **Address** | The full SS58 address, with a copy button. |
+| **Added** | When the wallet was added to this device. |
 
-### Exporting a Wallet Backup
+Use <BgStyledText>Create wallet</BgStyledText> or <BgStyledText>Import</BgStyledText> in the card header to add more. Each row has a three-dot (⋮) menu (also available by right-clicking the row) with:
 
-Export your wallet as an encrypted backup file to restore it later or transfer to another device:
+| Action | What it does |
+|---|---|
+| **Set as active** | Makes this the active wallet. (Shows as a disabled **Active wallet** for the current one.) |
+| **Copy address** | Copies the wallet's SS58 address. |
+| **View on Hipstats** | Opens the address on the hipstats.com explorer. |
+| **Export backup** | Saves an encrypted `.zip` backup (named `hippius-wallet-<name>-backup.zip`). |
+| **Rename** | Opens the **Rename Wallet** dialog. |
+| **Delete** | Opens the **Delete Wallet** confirmation. |
 
-<Ordered>
-  <li>Click the three-dot menu (⋮) in the Actions column next to the wallet you want to export.</li>
-  <li>Select <BgStyledText>Export</BgStyledText> from the dropdown.</li>
-  <li>Choose where to save the <code>.zip</code> backup file.</li>
-  <li>The backup contains your encrypted wallet data. You'll need your original password to import it later.</li>
-</Ordered>
+### Renaming a Wallet
 
-:::note
-The exported backup is encrypted with your wallet password. Keep both the backup file and your password safe.
-:::
+Choose **Rename** from the ⋮ menu, enter a new name, and click <BgStyledText>Save</BgStyledText>. As the dialog notes, "The address and access key are unchanged."
+
+### Exporting a Backup
+
+Choose **Export backup** to save an encrypted `.zip` of the wallet. The backup is encrypted with the wallet's password, so keep **both** the file and the password safe. You'll need that password to import it later.
 
 ### Deleting a Wallet
 
-<Ordered>
-  <li>Click the three-dot menu (⋮) in the Actions column next to the wallet you want to delete.</li>
-  <li>Select <BgStyledText>Delete</BgStyledText> from the dropdown.</li>
-  <li>Review the warning. This action cannot be undone unless you have a backup or your mnemonic phrase.</li>
-  <li>Click <BgStyledText>Confirm Delete</BgStyledText>.</li>
-</Ordered>
+Choose **Delete**, then confirm in the **Delete Wallet** dialog. Deleting removes the wallet from this device only.
 
-:::warning
-Deleting a wallet removes it from Hippius Desktop permanently. Make sure you have your mnemonic phrase saved or a backup file exported before deleting.
+:::warning Deleting is permanent on this device
+"Make sure you have a backup of its access key — without it the wallet cannot be recovered." Export a backup or keep your access key before deleting.
 :::
 
-## Sending Balance
-
-You can send hAlpha to any wallet on the Hippius blockchain.
+## Sending hAlpha
 
 <Ordered>
-  <li>Open the Wallet page and ensure the correct wallet is active.</li>
-  <li>Click <BgStyledText>Send Balance</BgStyledText>.</li>
-  <li>Enter the recipient's wallet address, or select one from your Address Book.</li>
-  <li>Enter the amount to send. Click <BgStyledText>Max</BgStyledText> to send your full balance minus the transaction fee.</li>
-  <li>Click <BgStyledText>Send</BgStyledText>.</li>
-  <li>A confirmation dialog appears showing the transaction details (amount, recipient, wallet).</li>
-  <li>Enter your wallet password to decrypt your mnemonic and sign the transaction.</li>
-  <li>Click <BgStyledText>Confirm</BgStyledText>.</li>
+  <li>Make sure the correct wallet is active, then click <BgStyledText>Send</BgStyledText> on the <strong>My Balance</strong> card.</li>
+  <li>In the <strong>Recipient Address</strong> field, paste an address or pick a saved contact from your address book.</li>
+  <li>Enter the <strong>Amount</strong>. Click <BgStyledText>MAX</BgStyledText> to send your full transferable balance minus the network fee. The card shows your <strong>Available</strong> balance for reference.</li>
+  <li>Click <BgStyledText>Send</BgStyledText>. A <strong>Confirm Transaction</strong> dialog appears showing the amount and recipient.</li>
+  <li>Enter your <strong>wallet password</strong> and click <BgStyledText>Confirm Transfer</BgStyledText>.</li>
 </Ordered>
-
-A loading notification will appear while the transaction is being processed. You'll receive a success notification with the block hash once it's confirmed.
 
 ![Send Balance](/img/desktop/wallet/send-balance.png)
 
-:::note
-The transaction fee is automatically deducted. If your balance is too low to cover the fee, you'll see an error before the dialog opens.
-:::
+A progress toast appears in the corner while the transfer is processed, followed by a success or error notification. A couple of things to note:
 
-## Receiving Balance
+<Unordered>
+  <li>You can't send to your own address.</li>
+  <li>You'll be warned if your balance is too low to cover the network fee.</li>
+</Unordered>
+
+## Receiving hAlpha
 
 <Ordered>
-  <li>Open the Wallet page.</li>
-  <li>Click <BgStyledText>Receive Balance</BgStyledText>.</li>
-  <li>Scan the QR code with your phone, or click the copy button next to your deposit address.</li>
-  <li>Send tokens to this address from any Hippius-compatible wallet.</li>
+  <li>Click <BgStyledText>Receive</BgStyledText> on the <strong>My Balance</strong> card.</li>
+  <li>The <strong>Receive Balance</strong> dialog shows a QR code and your <strong>Deposit Address</strong>. Scan the QR code or use the copy button.</li>
+  <li>Send hAlpha to this address from any Hippius-compatible wallet.</li>
 </Ordered>
 
 ![Receive Balance](/img/desktop/wallet/receive-balance.png)
 
-## Balance Overview Chart
+Your deposit address is an SS58-encoded Substrate address, compatible with Polkadot and other Substrate-based chains.
 
-The Balance Overview chart tracks your balance over time. Use the time range selector to view:
+## Staking
 
-- **Last 7 Days** (default)
-- **Last 30 Days**
-- **Last 60 Days**
-- **1 Year**
-- **MAX** (all time)
+The **Stake hAlpha** card is where you stake, unstake, and withdraw. Staking locks hAlpha; unstaking begins an **unbonding** period after which the tokens become **redeemable** and can be withdrawn back to your transferable balance.
 
-Hover over the chart to see the exact balance at any point in time.
+![Stake hAlpha](/img/desktop/wallet/stake-halpha.png)
+
+### Stake
+
+<Ordered>
+  <li>Click <BgStyledText>Stake Now</BgStyledText>.</li>
+  <li>Enter an amount, or use <BgStyledText>MAX</BgStyledText>, <BgStyledText>50%</BgStyledText>, or <BgStyledText>25%</BgStyledText>. The dialog shows how much you have available to stake.</li>
+  <li>Click <BgStyledText>Stake</BgStyledText>, then enter your password and click <BgStyledText>Confirm Stake</BgStyledText>.</li>
+</Ordered>
+
+### Unstake
+
+<Ordered>
+  <li>Click <BgStyledText>Unstake hAlpha</BgStyledText> (enabled only when you have a staked balance).</li>
+  <li>Enter an amount or use the quick buttons. The dialog shows your staked balance.</li>
+  <li>Click <BgStyledText>Unstake</BgStyledText>, enter your password, and click <BgStyledText>Confirm Unstake</BgStyledText>.</li>
+</Ordered>
+
+![Unstake hAlpha](/img/desktop/wallet/unstake-halpha.png)
+
+:::note Unbonding period
+After you unstake, the dialog reminds you: "Tokens will be available to withdraw after the unbonding period completes. This transaction cannot be reversed once confirmed." The Stake card shows an **Unstaking** countdown while tokens are unbonding.
+:::
+
+### Withdraw
+
+Once unbonded tokens are redeemable, a <BgStyledText>Withdraw</BgStyledText> button appears in the Stake card header.
+
+<Ordered>
+  <li>Click <BgStyledText>Withdraw</BgStyledText>. The dialog shows your <strong>Withdrawable</strong> amount.</li>
+  <li>Enter your password and click <BgStyledText>Confirm Withdraw</BgStyledText>.</li>
+</Ordered>
+
+![Withdraw Tokens](/img/desktop/wallet/withdraw-tokens.png)
+
+The full redeemable balance is transferred back to your wallet immediately after confirmation.
+
+## Bridging Tokens
+
+The bridge moves tokens between **Alpha** on Bittensor and **hAlpha** on Hippius. Click <BgStyledText>Bridge Tokens</BgStyledText> on the Bridge card to open it. Use the swap arrow in the middle to flip direction.
+
+![Bridge Alpha to hAlpha](/img/desktop/wallet/bridge-alpha-halpha.png)
+
+<Ordered>
+  <li>Enter the amount to bridge, or use <BgStyledText>MAX</BgStyledText> / <BgStyledText>50%</BgStyledText> / <BgStyledText>25%</BgStyledText>. The dialog shows the <strong>minimum</strong> (for example, "Min: 15.00 ALPHA") and how much you have.</li>
+  <li>Review the <strong>Best price</strong> box: an estimated time of about <strong>120 seconds</strong> and gas fees of about <strong>0.1%</strong>.</li>
+  <li>Click <BgStyledText>Bridge</BgStyledText> and review the confirmation.</li>
+  <li>Enter your password and click <BgStyledText>Confirm Bridge</BgStyledText>.</li>
+</Ordered>
+
+The two directions behave differently:
+
+<Unordered>
+  <li><strong>Alpha → hAlpha</strong> (Bittensor to Hippius): bridges your <strong>staked Alpha</strong> into hAlpha. This requires <strong>three wallet signatures</strong> on Bittensor (add proxy, deposit Alpha, remove proxy); guardians then mint hAlpha on Hippius.</li>
+  <li><strong>hAlpha → Alpha</strong> (Hippius to Bittensor): burns hAlpha on Hippius and releases the equivalent Alpha to your <strong>staked</strong> balance on Bittensor.</li>
+</Unordered>
+
+![Bridge hAlpha to Alpha](/img/desktop/wallet/bridge-halpha-alpha.png)
+
+Bridges run in the background. Track progress in the **Bridge Transactions** tab while guardians process the transfer.
 
 ## Transaction History
 
-The **Transaction History** tab shows all your incoming and outgoing token transfers:
+The **Transaction History** tab lists your incoming and outgoing hAlpha transfers:
 
 | Column | Description |
 |---|---|
-| Block | The blockchain block number |
-| Amount | The transfer amount in hALPHA |
-| From | The sender's address (click to copy) |
-| To | The recipient's address (click to copy) |
-| Transaction Type | **Sent** or **Received** (relative to your active wallet) |
-| Transaction Date | When the transaction was confirmed |
+| **Block** | The blockchain block number. |
+| **Amount (hALPHA)** | The transfer amount. |
+| **From** | The sender's address (copyable). |
+| **To** | The recipient's address (copyable). |
+| **Transaction Type** | A **Sent** or **Received** badge, relative to your active wallet. |
+| **Transaction Date** | When the transaction was confirmed. |
 
-You can sort by block number, amount, or date. Results are paginated at 10 per page.
+You can sort by block, amount, or date. Results are paginated at 10 per page. When there's nothing yet, the tab reads "No transactions yet — When you send or receive hALPHA on this wallet, the transfers will show up here."
 
 ![Transaction History](/img/desktop/wallet/transaction-history.png)
 
-:::tip
-Switching your active wallet will update the transaction history to show transfers for the newly selected account.
-:::
+## Bridge Transactions
+
+The **Bridge Transactions** tab tracks cross-chain bridge activity, with a filter for **All**, **Deposit**, and **Withdrawal**:
+
+| Column | Description |
+|---|---|
+| **Extrinsic Hash** | The transaction hash (copyable, and links to the hipstats.com explorer). |
+| **Amount** | The bridged amount (hALPHA for deposits, ALPHA for withdrawals). |
+| **Bittensor Chain** | Status on the Bittensor side. |
+| **Bittensor Block** | Block number on Bittensor. |
+| **Votes** | Guardian votes collected versus the threshold (for example, 3/3). |
+| **Hippius Chain** | Status on the Hippius side. |
+| **Hippius Block** | Block number on Hippius. |
+
+In-progress bridges are highlighted and pinned to the top. Results paginate at 10 per page.
 
 ## Address Book {#address-book}
 
-The Address Book lets you save wallet addresses you frequently send tokens to.
+The **Address Book** tab saves addresses you send to often, so you don't have to paste an SS58 every time. When sending, the recipient field lets you type an address or pick a saved contact directly.
 
 ![Address Book](/img/desktop/wallet/address-book.png)
 
-### Adding a New Address
+The table shows **Name**, **Wallet Address** (copyable), and **Date Added**, sortable by name or date and paginated at 10 per page.
+
+### Adding an Address
 
 <Ordered>
-  <li>Navigate to the <BgStyledText>Address Book</BgStyledText> tab on the Wallet page.</li>
-  <li>Click <BgStyledText>New Address</BgStyledText>.</li>
-  <li>Enter a name and wallet address.</li>
-  <li>Click <BgStyledText>Save</BgStyledText>.</li>
+  <li>On the <strong>Address Book</strong> tab, click <BgStyledText>New Address</BgStyledText>.</li>
+  <li>Enter a <strong>Name</strong> and the <strong>Address</strong>.</li>
+  <li>Click <BgStyledText>Save Address</BgStyledText>.</li>
 </Ordered>
 
 ### Editing or Deleting an Address
 
-Click the action menu (three dots) on any address entry to **Edit** or **Delete** it.
+Use the three-dot menu on any row:
 
+<Unordered>
+  <li><strong>Edit</strong> opens the <strong>Edit Address</strong> dialog where you can update the name or address, then click <BgStyledText>Update Address</BgStyledText>.</li>
+  <li><strong>Delete</strong> asks you to confirm before removing the contact. This can't be undone.</li>
+</Unordered>
 
 ## Security Best Practices
 
-1. **Never share your mnemonic phrase.** It provides full access to your wallet
-2. **Use a strong, unique password** for each wallet
-3. **Export backups** of important wallets and store them securely offline
-4. **Keep your mnemonic phrase written down** in a secure physical location
-5. **Verify addresses** before sending tokens. Transactions cannot be reversed
+<Ordered>
+  <li><strong>Never share your access key.</strong> It provides full access to your wallet.</li>
+  <li><strong>Use a strong, unique password</strong> for each wallet.</li>
+  <li><strong>Export backups</strong> of important wallets and store them securely offline.</li>
+  <li><strong>Keep your access key written down</strong> in a secure physical location, or in a password manager.</li>
+  <li><strong>Verify addresses before sending.</strong> Transactions cannot be reversed.</li>
+</Ordered>
 
 ## Frequently Asked Questions
 
-### 1. What happens if I forget my wallet password?
+### What happens if I forget my wallet password?
 
-You can re-import your wallet using your mnemonic phrase and set a new password. Your funds are tied to the mnemonic, not the password.
+Re-add your wallet using its 12-word access key and set a new password. Your funds are tied to the access key, not the password.
 
-### 2. Can I use the same wallet in multiple devices?
+### Can I use the same wallet on multiple devices?
 
-Yes, you can import the same wallet (via mnemonic or backup file) on multiple devices. Each device will have its own password.
+Yes. Add the same wallet (via its access key or a backup file) on each device. Each device has its own local password.
 
-### 3. Is my mnemonic stored securely?
+### Is my access key stored securely?
 
-Yes, your mnemonic is encrypted with your password and stored locally on your device. It is never sent to any server.
+Yes. Your access key is encrypted with your password and stored locally on your device. It is never sent to any server.
 
-### 4. What is the difference between Send Balance and Bridge Tokens?
+### What's the difference between Send and Bridge?
 
-Send Balance transfers hAlpha to another address on the Hippius network. Bridge Tokens converts between Alpha (Bittensor) and hAlpha (Hippius) across networks.
+**Send** transfers hAlpha to another address on the Hippius network. **Bridge** converts between Alpha (Bittensor) and hAlpha (Hippius) across networks.
 
-### 5. Why do I need to enter my password for every transaction?
+### Why do I enter my password for every transaction?
 
-This is a security feature. Your mnemonic is encrypted at rest and only decrypted momentarily to sign transactions, then immediately cleared from memory.
+It's a security feature. Your access key is encrypted at rest and only decrypted momentarily to sign each transaction, then immediately cleared from memory.
+
+## Where to next
+
+<Unordered>
+  <li><a href="/use/desktop/billing">Billing</a>: manage credits, the currency used for storage and compute.</li>
+  <li><a href="/use/desktop/drive">Drive</a>: store and sync your files.</li>
+</Unordered>
