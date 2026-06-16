@@ -210,7 +210,7 @@ To complete the validator setup, you need to register and bond your account in P
 Use the same key for both your stash and controller accounts to simplify management.
 :::
 
-If you need help during any part of this process, join the [Hippius Discord community](https://discord.hippius.com) where you can get assistance from the team and other validators.
+If you need help during any part of this process, join the [Hippius Discord community](https://discord.hippius.com) where you can get assistance from our team and other validators.
 
 ## Components Installed
 
@@ -299,7 +299,7 @@ The Ansible deployment automatically implements several security best practices:
 
 - Join our Discord community
 - Check the validator documentation
-- Contact support team
+- Contact our support team
 - Review the [GitHub repository](https://github.com/thenervelab/hippius-validator)
 
 ## Best Practices

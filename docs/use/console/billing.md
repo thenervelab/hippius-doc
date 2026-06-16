@@ -4,7 +4,6 @@ title: Billing
 sidebar_label: Billing
 slug: /use/console/billing
 description: 6
-unlisted: true
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -14,7 +13,7 @@ import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 
 ## Introduction
 
-The **Billing** page is where you manage your **credits**, the currency the Hippius platform uses for storage, S3 traffic, and VM compute time. **1 credit = $1 USD.**
+The **Billing** page is where you manage your **credits**, the currency the Hippius platform uses for storage and S3 traffic. **1 credit = $1 USD.**
 
 From here you can top up your balance with TAO, subscribe to a monthly plan (charged via Stripe), and review every credit transaction on your account.
 
@@ -64,7 +63,7 @@ Use this if your TAO is on an exchange or in a wallet that isn't connected to th
 ![Pay with TAO — Manually tab](/img/console/billing/tao-manual.png)
 
 :::warning TAO transfers are irreversible
-Once a TAO transaction confirms on the blockchain, it cannot be reversed. Verify the destination address before sending. Hippius cannot recover funds sent to the wrong address.
+Once a TAO transaction confirms on the blockchain, it cannot be reversed. Verify the destination address before sending. We cannot recover funds sent to the wrong address.
 :::
 
 ### Top up Shortcut
@@ -123,7 +122,7 @@ The **Transaction History** table at the bottom of the page shows every credit m
 |---|---|
 | **Date** | When the transaction occurred. |
 | **Type** | Top up (card or TAO), Subscription, Usage, or Refund. |
-| **Description** | A short note (payment method, plan name, VM runtime hours, etc.). |
+| **Description** | A short note (payment method, plan name, etc.). |
 | **Amount** | Positive (credits added) or negative (credits consumed). |
 | **Status** | Pending, Completed, or Failed. |
 | **Reference** | Stripe charge ID, TAO transaction hash, or internal ID with a copy icon. |
@@ -140,23 +139,18 @@ Credits are charged for every metered action:
 |---|---|
 | **Drive (HCFS) storage** | Per byte, per minute, based on the storage class. |
 | **S3 storage** | Per byte, per minute, with separate rates for traffic and operations. |
-| **VM runtime** | Per minute. The hourly equivalent is shown on each VM template card. |
-
-A VM that's running but not doing anything still accrues charges. Stop or delete VMs you're no longer using.
 
 If your balance hits zero:
 
 <Unordered>
   <li>New uploads are blocked. The upload dialog shows an Insufficient Credits message with a top up shortcut.</li>
-  <li>Existing VMs continue briefly, but new VM creation is blocked.</li>
   <li>If the balance stays at zero too long, files may be flagged for deletion. You'll receive email warnings well before that happens.</li>
 </Unordered>
 
 ## Where to next
 
 <Unordered>
-  <li><a href="/use/console/wallet">Wallet</a>: manage hAlpha and bridge from TAO if needed.</li>
   <li><a href="/use/console/drive">Drive</a>: start uploading once you have credits.</li>
-  <li><a href="/use/console/virtual-machines">Virtual Machines</a>: credits power VM compute (minimum 10 credits to launch).</li>
-  <li><a href="/use/console/referrals">Referrals</a>: earn 5% on every purchase your referrals make.</li>
+  <li><a href="/use/console/s3">S3 Buckets</a>: set up S3 compatible storage and manage access tokens.</li>
+  <li><a href="/use/console/settings">Settings</a>: manage your subscription plan and preferences.</li>
 </Unordered>

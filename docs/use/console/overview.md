@@ -4,7 +4,6 @@ title: Overview
 sidebar_label: Overview
 slug: /use/console/overview
 description: 3
-unlisted: true
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -38,7 +37,7 @@ Below the panels, the **Files** section shows all your Drive folders in a search
 
 ## Pro View
 
-Pro turns the overview into a full control center. You can upload files, create S3 buckets, launch VMs, and top up credits, all without leaving the home page.
+Pro turns the overview into a full control center. You can upload files, create S3 buckets, and top up credits, all without leaving the home page.
 
 Two shortcut buttons sit in the top right: <BgStyledText>+ Top up Credits</BgStyledText> and <BgStyledText>+ New File</BgStyledText>.
 
@@ -50,8 +49,6 @@ Below the panels, a **Storage Overview** shows your Drive and S3 Buckets side by
   <li><strong>Files</strong>: your total Drive storage size and file count, a table of your folders, and a <BgStyledText>+ New File</BgStyledText> button to start an upload right away.</li>
   <li><strong>S3 Buckets</strong>: your total bucket count and object count, a table of your buckets, and a <BgStyledText>+ Create Bucket</BgStyledText> button.</li>
 </Unordered>
-
-The **Virtual Machines** section lists your VMs with their current status and a <BgStyledText>+ New VM</BgStyledText> button to launch a new one. If you don't have beta access yet, you'll see a "Feature Not Available" message. Contact support to request access.
 
 At the bottom of the page:
 
@@ -67,7 +64,6 @@ At the bottom of the page:
 <Unordered>
   <li><a href="/use/console/drive">Drive</a>: upload and manage your personal encrypted files.</li>
   <li><a href="/use/console/s3">S3 Buckets</a>: manage your S3 compatible buckets and access tokens.</li>
-  <li><a href="/use/console/virtual-machines">Virtual Machines</a>: launch and manage confidential VMs.</li>
   <li><a href="/use/console/billing">Billing</a>: top up credits to keep your services running.</li>
   <li><a href="/use/console/settings">Settings</a>: switch between Normal and Pro view.</li>
 </Unordered>

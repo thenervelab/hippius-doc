@@ -4,7 +4,6 @@ title: Drive
 sidebar_label: Drive
 slug: /use/console/drive
 description: 6
-unlisted: true
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -27,7 +26,7 @@ Drive encrypts every file using a key tied to your **unlock password**. The cons
 **Setting up for the first time?** Your unlock password is created when you first sign into the [Hippius Desktop App](/use/desktop/desktop-app). If you haven't installed the desktop app yet, you'll need to do that first to generate your unlock password. Once created, the same password works in the console.
 
 :::danger Your unlock password cannot be recovered
-If you forget it, you'll need your 12-word recovery phrase to restore access to your encrypted files. Keep both somewhere safe. Hippius cannot recover either for you.
+If you forget it, you'll need your 12-word recovery phrase to restore access to your encrypted files. Keep both somewhere safe. We cannot recover either for you.
 :::
 
 ![Unlock password prompt](/img/console/drive/unlock-password.png)

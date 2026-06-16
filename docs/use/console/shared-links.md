@@ -160,7 +160,7 @@ Click <BgStyledText>Clear all history</BgStyledText> at the top of the History s
 
 When someone opens your share link, they land on a simple download page and no account is needed.
 
-The page shows the filename, the file size, and how much time is left before the link expires. They click **Download** and the file is streamed directly to their device, decrypted entirely in their browser. Hippius never sees the file in plaintext on the recipient's end either.
+The page shows the filename, the file size, and how much time is left before the link expires. They click **Download** and the file is streamed directly to their device, decrypted entirely in their browser. We never see the file in plaintext on the recipient's end either.
 
 If the link has been revoked or has expired, recipients see: _"This link has expired or been revoked."_ The page deliberately does not say which, which prevents anyone from guessing whether a link was ever valid.
 

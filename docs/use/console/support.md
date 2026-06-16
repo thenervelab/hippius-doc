@@ -4,7 +4,6 @@ title: Help & Support
 sidebar_label: Help & Support
 slug: /use/console/support
 description: 4
-unlisted: true
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -14,7 +13,7 @@ import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 
 ## Introduction
 
-The **Help & Support** page is your direct line to the Hippius team. If you hit a bug, have a billing question, or run into something the docs don't cover, open a ticket here. The Hippius team will reply inside the ticket and you'll see their messages the next time you load the page.
+The **Help & Support** page is your direct line to our team. If you hit a bug, have a billing question, or run into something the docs don't cover, open a ticket here. We'll reply inside the ticket and you'll see our messages the next time you load the page.
 
 Reach Help & Support from the sidebar at <BgStyledIconWithText text="Help & Support" icon="HelpCircle" /> (in the Support section).
 
@@ -25,7 +24,7 @@ Reach Help & Support from the sidebar at <BgStyledIconWithText text="Help & Supp
 Click <BgStyledText>+ New Ticket</BgStyledText> in the top right corner to open the **Create a Ticket** dialog.
 
 <Ordered>
-  <li>Enter a clear, one line <strong>Subject</strong>, for example <em>"VM stuck in pending after creation"</em>.</li>
+  <li>Enter a clear, one line <strong>Subject</strong>, for example <em>"Upload stuck in processing after several minutes"</em>.</li>
   <li>Pick a <strong>Ticket Category</strong> from the dropdown (see the categories below).</li>
   <li>Pick a <strong>Ticket Severity</strong>: <strong>Low</strong> (minor issue, question, or feature request), <strong>Medium</strong> (affects you but you have a workaround), or <strong>High</strong> (blocking: you can't use the platform, data loss, or a security concern).</li>
   <li>Describe the problem in the <strong>Description</strong> field. Include what you were doing, what you expected to happen, what actually happened, any error text, and your browser, OS, and the approximate time.</li>
@@ -40,13 +39,13 @@ Click <BgStyledText>+ New Ticket</BgStyledText> in the top right corner to open 
 <Unordered>
   <li><strong>Account & Billing</strong>: credits, subscriptions, payments, or account access issues.</li>
   <li><strong>Storage (My Files & S3)</strong>: uploads, downloads, encryption, S3 client errors, or sync problems.</li>
-  <li><strong>General</strong>: VMs, wallet, bridge, referrals, and so on.</li>
+  <li><strong>General</strong>: feature questions, feedback, and anything else not covered above.</li>
 </Unordered>
 
-The new ticket appears at the top of your tickets table in the **Open** state, and the Hippius team is notified immediately.
+The new ticket appears at the top of your tickets table in the **Open** state, and our team is notified immediately.
 
 :::tip Be specific: it helps us help you faster
-Include your wallet address, browser and OS, the exact time the issue occurred, and a screenshot if you have one. The more context you give, the faster we can diagnose and fix the problem.
+Include your browser and OS, the exact time the issue occurred, and a screenshot if you have one. The more context you give, the faster we can diagnose and fix the problem.
 :::
 
 ## Your Tickets
@@ -55,9 +54,9 @@ All your tickets appear in a table with the subject, category badge, status, and
 
 <Unordered>
   <li><strong>All</strong>: every ticket regardless of status.</li>
-  <li><strong>Open</strong>: newly created, waiting on the Hippius team.</li>
-  <li><strong>In Progress</strong>: someone on the team is actively working on it.</li>
-  <li><strong>Awaiting Response</strong>: the team has replied and is waiting on your input.</li>
+  <li><strong>Open</strong>: newly created, waiting on our team.</li>
+  <li><strong>In Progress</strong>: someone on our team is actively working on it.</li>
+  <li><strong>Awaiting Response</strong>: we've replied and are waiting on your input.</li>
   <li><strong>Closed</strong>: resolved tickets.</li>
 </Unordered>
 
@@ -76,7 +75,7 @@ To reply:
   <li>Click the <BgStyledText>Send</BgStyledText> arrow.</li>
 </Ordered>
 
-Your reply is added to the thread. If the ticket was **Awaiting Response**, the status moves back to **In Progress** and the team is notified.
+Your reply is added to the thread. If the ticket was **Awaiting Response**, the status moves back to **In Progress** and our team is notified.
 
 You cannot reply on a closed ticket. The input field is disabled with a notice explaining this.
 

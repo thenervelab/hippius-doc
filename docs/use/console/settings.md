@@ -4,7 +4,6 @@ title: Settings
 sidebar_label: Settings
 slug: /use/console/settings
 description: 4
-unlisted: true
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -35,7 +34,7 @@ Authorization: Bearer <your-token>
 See [Hippius API](/use/api) for available endpoints.
 
 :::warning Keep this token private
-Anyone with this token has full access to your account. Never paste it into public documents, repositories, screenshots, or chat messages. If you believe it has been compromised, contact Hippius support immediately.
+Anyone with this token has full access to your account. Never paste it into public documents, repositories, screenshots, or chat messages. If you believe it has been compromised, contact our support team immediately.
 :::
 
 
@@ -49,7 +48,7 @@ When the master switch is **off**, no emails are sent regardless of the individu
 |---|---|
 | **File processing status updates** | Emails when your uploads finish processing through the Hippius pipeline. |
 | **Low credit balance alerts** | An email when your balance drops below a set threshold. |
-| **Zero balance alerts** | An email when you run out of credits and uploads or VMs are paused. |
+| **Zero balance alerts** | An email when you run out of credits and uploads are paused. |
 | **Marketing emails & newsletter** | Product updates, announcements, and occasional offers. |
 
 Click any toggle to flip it. The change saves immediately.
@@ -66,14 +65,14 @@ Choose between two dashboard layouts:
 
 **Normal** gives you a focused overview: your recent uploads, credit balance, and storage usage. Best if you're mainly using Hippius for personal file storage.
 
-**Pro** expands the dashboard with your Drive and S3 sections side by side, a VM overview, detailed storage and credit charts, and recent uploads. Best if you actively manage multiple services.
+**Pro** expands the dashboard with your Drive and S3 sections side by side, detailed storage and credit charts, and recent uploads. Best if you actively manage multiple services.
 
 The change takes effect the next time you load the Overview page (or immediately if you're already on it).
 
 
 ## Table Text Size
 
-Choose how rows look across all tables in the console. Drive, S3, Wallet, Billing, and VM tabs all follow this setting.
+Choose how rows look across all tables in the console. Drive, S3, and Billing tabs all follow this setting.
 
 | Option | Best for |
 |---|---|

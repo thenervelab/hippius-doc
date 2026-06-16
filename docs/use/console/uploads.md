@@ -4,7 +4,6 @@ title: Uploads
 sidebar_label: Uploads
 slug: /use/console/uploads
 description: 6
-unlisted: true
 ---
 
 import Ordered from '@site/src/components/Ordered';

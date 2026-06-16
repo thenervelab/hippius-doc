@@ -68,22 +68,14 @@ const sidebars: SidebarsConfig = {
         "use/desktop/settings",
         "use/desktop/billing",
         "use/desktop/referral-system",
-        // ⚠️ WARNING: "Wallet" page is NOT live yet. Do NOT uncomment
-        // until the feature is fully released and verified by the team.
-        "use/desktop/wallet",
+        // ⚠️ "Wallet" page is hidden until the feature is live. The page is
+        // also marked `draft: true` in use/desktop/wallet.md to block direct
+        // access. Re-enable both together when ready to publish.
+        // "use/desktop/wallet",
       ],
     },
 
     // ── CONSOLE ────────────────────────────────────────────────────
-    // ⚠️ WARNING: Console docs are NOT live yet. All pages are marked
-    // unlisted: true and kept out of the sidebar until the team
-    // reviews and approves them. To publish, remove unlisted: true from
-    // each file in docs/use/console/ and uncomment the block below.
-    //
-    // Shared Links is temporarily live for review — remove the standalone
-    // entry below and add it back inside this block when the full Console
-    // section goes live.
-    //
     {
       type: "category",
       label: "Console",
@@ -96,7 +88,10 @@ const sidebars: SidebarsConfig = {
         "use/console/s3",
         "use/console/uploads",
         "use/console/virtual-machines",
-        "use/console/wallet",
+        // ⚠️ "Wallet" page is hidden until the feature is live. The page
+        // is also marked `draft: true` in wallet.md to block direct access.
+        // Re-enable both together when ready to publish.
+        // "use/console/wallet",
         "use/console/billing",
         "use/console/referrals",
         "use/console/settings",
@@ -153,16 +148,6 @@ const sidebars: SidebarsConfig = {
       items: [
         "earn/installing-validator",
         "earn/register-validator-in-chain",
-      ],
-    },
-
-    // ── STAKE ──────────────────────────────────────────────────────
-    {
-      type: "category",
-      label: "Stake",
-      collapsed: true,
-      items: [
-        "earn/staking",
       ],
     },
 

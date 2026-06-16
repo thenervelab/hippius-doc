@@ -4,13 +4,25 @@ title: Virtual Machines
 sidebar_label: Virtual Machines
 slug: /use/console/virtual-machines
 description: 5
-unlisted: true
 ---
 
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
+
+## Coming soon
+
+Virtual Machines on the Hippius Console are **coming soon**. This page will be updated with the full guide once the feature is live.
+
+{/*
+  ───────────────────────────────────────────────────────────────────────
+  ORIGINAL DOCUMENTATION — preserved for future release.
+  To publish: delete the "Coming soon" section above and this comment
+  wrapper (the opening line and the closing line at the very bottom).
+  The image lines below were un-commented so this block stays valid; comment
+  them back out if the matching screenshots are not yet available.
+  ───────────────────────────────────────────────────────────────────────
 
 ## Introduction
 
@@ -21,12 +33,12 @@ From this page you can launch new VMs, start, stop, reboot, and delete existing 
 Reach Virtual Machines from the sidebar at <BgStyledIconWithText text="Confidential Computing" icon="SidebarVm" /> → <BgStyledIconWithText text="Virtual Machines" icon="SidebarVm" />.
 
 :::note Beta Access Required
-Virtual Machines is currently only available to beta users. To request access, contact the Hippius team. If your account doesn't have access yet, the page shows a waiting list state instead of the create flow.
+Virtual Machines is currently only available to beta users. To request access, contact our team. If your account doesn't have access yet, the page shows a waiting list state instead of the create flow.
 :::
 
 For the technical details on how AMD SEV-SNP enclaves work, see [Confidential Computing](/learn/confidential-computing).
 
-{/* ![Virtual Machines page](/img/console/vm/overview.png) */}
+![Virtual Machines page](/img/console/vm/overview.png)
 
 ## Navigating the Page
 
@@ -48,7 +60,7 @@ Before creating a VM, check the **Templates** tab to find the size that fits you
 
 Each template card shows CPU cores, RAM, storage, and the hourly credit cost.
 
-{/* ![Templates tab](/img/console/vm/templates.png) */}
+![Templates tab](/img/console/vm/templates.png)
 
 ## Creating a VM
 
@@ -72,7 +84,7 @@ You need at least **10 credits** in your account before you can launch a VM. Top
   <li>Click <BgStyledText>Next</BgStyledText>.</li>
 </Ordered>
 
-{/* ![Create VM step 1](/img/console/vm/create-step-1.png) */}
+![Create VM step 1](/img/console/vm/create-step-1.png)
 
 ### Step 2: Review and Launch
 
@@ -80,7 +92,7 @@ Confirm the template, OS, image, application, and the hourly cost. Click <BgStyl
 
 The VM appears in the **Instances** tab in the **Pending** state and transitions through **Starting** → **Running** over the next minute or two. Click the refresh icon to check for status updates.
 
-{/* ![Create VM step 2](/img/console/vm/create-step-2.png) */}
+![Create VM step 2](/img/console/vm/create-step-2.png)
 
 ## Managing Instances
 
@@ -99,7 +111,7 @@ Each action opens a confirmation dialog before doing anything.
 Direct in browser console access is coming soon. For now, use SSH to connect to your VM.
 :::
 
-{/* ![Instance options](/img/console/vm/instance-actions.png) */}
+![Instance options](/img/console/vm/instance-actions.png)
 
 ## Connecting via SSH
 
@@ -133,7 +145,7 @@ ssh -i ~/.ssh/id_ed25519 hippius@nebula_ip
 
 **Wrong username:** The default user is `hippius`, not `root`, `ubuntu`, or your own username.
 
-{/* ![SSH connection terminal](/img/console/vm/ssh.png) */}
+![SSH connection terminal](/img/console/vm/ssh.png)
 
 ## Managing SSH Keys
 
@@ -152,7 +164,7 @@ Only OpenSSH public keys are accepted (`ssh-rsa`, `ssh-ed25519`, etc.). Never pa
   <li>Click <BgStyledText>Create Key</BgStyledText>.</li>
 </Ordered>
 
-{/* ![Create SSH key dialog](/img/console/vm/create-ssh-key.png) */}
+![Create SSH key dialog](/img/console/vm/create-ssh-key.png)
 
 ### Generating a New Key Pair
 
@@ -188,12 +200,14 @@ Copy the entire output. That's what you paste into Hippius.
 
 Open the action menu on any key row and select <BgStyledText>Delete SSH Key</BgStyledText>, then confirm. You cannot delete a key that is currently attached to a running VM.
 
-{/* ![Delete SSH key](/img/console/vm/delete-ssh-key.png) */}
+![Delete SSH key](/img/console/vm/delete-ssh-key.png)
 
 ## Where to next
 
 <Unordered>
   <li><a href="/use/console/billing">Billing</a>: top up credits to launch and run VMs.</li>
   <li><a href="/learn/confidential-computing">Confidential Computing</a>: how AMD SEV-SNP enclaves work.</li>
-  <li><a href="/use/console/wallet">Wallet</a>: fund your account with hAlpha.</li>
 </Unordered>
+
+  ───────────────────────────────────────────────────────────────────────
+*/}

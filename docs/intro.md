@@ -12,5 +12,5 @@ Hippius is a **transparent, decentralized, anonymous cloud storage platform** po
 
 - **Learn**: Understand Hippius and web3 basics in our [Learn section](/learn/intro).
 - **Use**: Get started storing files with our [Quickstart guide](/use/quickstart).
-- **Earn**: Stake tokens or run miners to contribute and earn rewards in our [Earn section](/earn/staking).
+- **Earn**: Run miners to contribute and earn rewards in our [Earn section](/earn/storage-miner).
 - **Develop**: Dive into technical details in our [Develop section](/blockchain/intro).

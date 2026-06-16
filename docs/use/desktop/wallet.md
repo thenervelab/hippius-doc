@@ -4,6 +4,7 @@ title: Wallet
 sidebar_label: Wallet
 slug: /use/desktop/wallet
 description: 9
+draft: true
 ---
 
 import Ordered from '@site/src/components/Ordered';

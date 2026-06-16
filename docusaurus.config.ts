@@ -147,7 +147,7 @@ const config: Config = {
           activeBasePath: "/use",
         },
         {
-          to: "/earn/staking",
+          to: "/earn/storage-miner",
           label: "Earn",
           position: "left",
           activeBasePath: "/earn",
@@ -219,10 +219,6 @@ const config: Config = {
         {
           title: "Earn",
           items: [
-            {
-              label: "Staking",
-              to: "/earn/staking",
-            },
             {
               label: "Storage Miners",
               to: "/earn/storage-miner",

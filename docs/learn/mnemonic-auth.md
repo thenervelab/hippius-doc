@@ -17,7 +17,7 @@ Learn about our secure, extension-free authentication system using cryptographic
 
 ## Authentication Methods
 
-Hippius offers different authentication options depending on when you created your account:
+We offer different authentication options depending on when you created your account:
 
 ### For New Users (November 2025 onwards)
 

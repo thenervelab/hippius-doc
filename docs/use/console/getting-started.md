@@ -4,7 +4,6 @@ title: Getting Started
 sidebar_label: Getting Started
 slug: /use/console/getting-started
 description: 3
-unlisted: true
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -19,10 +18,7 @@ The **Hippius Console** is the web dashboard for the Hippius decentralized netwo
 <Unordered>
   <li>Store, browse, and manage personal encrypted files with <strong>Drive</strong>.</li>
   <li>Create S3 compatible <strong>buckets</strong> and connect any S3 client.</li>
-  <li>Launch confidential <strong>virtual machines</strong> inside hardware encrypted enclaves.</li>
-  <li>Top up <strong>credits</strong> with a card or with TAO to pay for storage and compute.</li>
-  <li>Send, receive, stake, and bridge <strong>hAlpha</strong> from your wallet.</li>
-  <li>Share <strong>referral links</strong> and earn 5% on every purchase your referrals make.</li>
+  <li>Top up <strong>credits</strong> with a card or with TAO to pay for storage.</li>
 </Unordered>
 
 ## Signing In
@@ -37,7 +33,7 @@ Go to [console.hippius.com](https://console.hippius.com) and choose how you want
 If this is your first time signing in, your account is created automatically. There is no separate sign up step.
 
 :::info Already using the Hippius Desktop App?
-Your console account and desktop app account are the same. Sign in with the same credentials and your wallet and Drive files will be there waiting for you.
+Your console account and desktop app account are the same. Sign in with the same credentials and your Drive files will be there waiting for you.
 :::
 
 ![Console login screen](/img/console/getting-started/login.png)
@@ -48,7 +44,7 @@ The first time you sign in, you'll be asked to pick a view for your dashboard.
 
 **Normal** gives you a clean, focused dashboard. You'll see your most recent file uploads, your current credit balance, and your storage usage. It's ideal if you're just getting started or mainly use Hippius for personal file storage.
 
-**Pro** expands the dashboard to show your Drive and S3 sections side by side, along with a virtual machine overview and detailed storage and credit charts. It's the better choice if you're actively managing multiple services and want everything at a glance.
+**Pro** expands the dashboard to show your Drive and S3 sections side by side, along with detailed storage and credit charts. It's the better choice if you're actively managing multiple services and want everything at a glance.
 
 You can switch between Normal and Pro at any time from [Settings](/use/console/settings).
 
@@ -60,11 +56,8 @@ The **sidebar on the left** is how you move between sections. It's organised int
 
 <Unordered>
   <li><strong>Storage</strong>: Drive (personal encrypted files) and S3 Buckets.</li>
-  <li><strong>Confidential Computing</strong>: Virtual Machines.</li>
   <li><strong>Billing</strong>: credits, top ups, and subscription plans.</li>
-  <li><strong>Wallet</strong>: send, receive, stake, and bridge hAlpha.</li>
-  <li><strong>Referrals</strong>: your referral links and earnings.</li>
-  <li><strong>Help & Support</strong>: open a ticket with the Hippius team.</li>
+  <li><strong>Help & Support</strong>: open a ticket with our team.</li>
 </Unordered>
 
 
@@ -81,5 +74,4 @@ The console automatically follows your system's dark or light mode. If you'd pre
   <li><a href="/use/console/billing">Billing</a>: top up credits first. You'll need a balance to upload files or run VMs.</li>
   <li><a href="/use/console/drive">Drive</a>: upload and manage your personal encrypted files.</li>
   <li><a href="/use/console/s3">S3 Buckets</a>: set up S3 compatible storage and manage access tokens.</li>
-  <li><a href="/use/console/wallet">Wallet</a>: manage your hAlpha balance, stake, and bridge.</li>
 </Unordered>

@@ -4,8 +4,15 @@ title: Wallet
 sidebar_label: Wallet
 slug: /use/console/wallet
 description: 8
-unlisted: true
+draft: true
 ---
+
+{/*
+  ⚠️ This page is hidden. `draft: true` excludes it from the production
+  build (no direct link works) and it is commented out of sidebars.ts.
+  The full content below is preserved. To publish: remove `draft: true`
+  above and re-enable the sidebar entry in sidebars.ts.
+*/}
 
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
@@ -16,7 +23,7 @@ import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 
 The **Wallet** page is where you manage your **hAlpha**, the native token of the Hippius network. From here you can check your balance, send and receive tokens, stake to earn rewards, bridge between Hippius and Bittensor, and view your full transaction history.
 
-Every action on this page is signed on chain by your connected wallet extension. **Hippius never holds or moves your funds.**
+Every action on this page is signed on chain by your connected wallet extension. **We never hold or move your funds.**
 
 Reach Wallet from the sidebar at <BgStyledIconWithText text="Wallet" icon="WalletMinimal" />.
 
@@ -232,5 +239,4 @@ When you open the Send dialog, click <BgStyledText>Address Book</BgStyledText> i
   <li><a href="/use/console/billing">Billing</a>: convert hAlpha or fiat into platform credits.</li>
   <li><a href="/use/bridge">Bridge Tokens</a>: full bridge guide with troubleshooting.</li>
   <li><a href="/learn/substrate-staking">Substrate Staking</a>: how the staking mechanism works at the protocol level.</li>
-  <li><a href="/earn/staking">Staking on Hippius</a>: staking strategy and rewards.</li>
 </Unordered>

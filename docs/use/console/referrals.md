@@ -4,13 +4,23 @@ title: Referrals
 sidebar_label: Referrals
 slug: /use/console/referrals
 description: 5
-unlisted: true
 ---
 
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
+
+## Coming soon
+
+Referrals on the Hippius Console are **coming soon**. This page will be updated with the full guide once the feature is live.
+
+{/*
+  ───────────────────────────────────────────────────────────────────────
+  ORIGINAL DOCUMENTATION — preserved for future release.
+  To publish: delete the "Coming soon" section above and this comment
+  wrapper (the opening `{/*` line and the closing line at the very bottom).
+  ───────────────────────────────────────────────────────────────────────
 
 ## Introduction
 
@@ -113,6 +123,8 @@ There is no minimum threshold or manual claim. The chain pays out automatically.
 ## Where to next
 
 <Unordered>
-  <li><a href="/use/console/wallet">Wallet</a>: your referral earnings appear in your hAlpha balance.</li>
   <li><a href="/use/console/billing">Billing</a>: referral credits and top ups both appear in your transaction history.</li>
 </Unordered>
+
+  ───────────────────────────────────────────────────────────────────────
+*/}
