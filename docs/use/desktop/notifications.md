@@ -23,6 +23,8 @@ Notifications are grouped into two categories:
 
 You decide which of these categories you want to receive — see [Notification Settings](#notification-settings).
 
+
+
 ## Open Notifications
 
 All notifications are accessed from the **bell icon** in the top right of the app — there is no Notifications entry in the left sidebar.
@@ -37,13 +39,13 @@ Click the **bell icon** to open the notifications dropdown. A badge on the bell 
   <li>Click <BgStyledText>View More</BgStyledText> at the bottom to open the Notifications Hub.</li>
 </Ordered>
 
-<!-- ![Notifications dropdown from the header bell](/img/desktop/notifications/notifications-dropdown.png) -->
+![Notifications dropdown from the header bell](/img/desktop/notifications/notifications-dropdown.png)
 
 ### The Notifications Hub
 
 Click <BgStyledText>View More</BgStyledText> at the bottom of the dropdown to open the full **Notifications Hub**. The page is split into a list of notifications on the left and a details panel on the right.
 
-<!-- ![Notifications Hub page](/img/desktop/notifications/notifications-hub.png) -->
+![Notifications Hub page](/img/desktop/notifications/notifications-hub.png)
 
 ## Filter and Manage Notifications
 
@@ -67,7 +69,8 @@ Select a notification from the list to open it in the details panel on the right
   <li>Open the three dot menu (⋮) in the top right of the panel to mark the notification as read/unread or <BgStyledText>Delete this notification</BgStyledText>.</li>
 </Unordered>
 
-<!-- ![Notification details panel](/img/desktop/notifications/notification-details.png) -->
+![Notification details panel](/img/desktop/notifications/notification-details.png)
+
 
 ## Notification Settings {#notification-settings}
 
@@ -83,4 +86,4 @@ The same preferences are also available in the **Notifications** section of the 
 
 Only enabled categories appear as tabs in the dropdown and on the Notifications Hub. If you haven't enabled any categories, the Hub and the bell dropdown prompt you to turn them on from settings.
 
-<!-- ![Notifications settings dialog](/img/desktop/notifications/notifications-settings.png) -->
+![Notifications settings dialog](/img/desktop/notifications/notifications-settings.png)
