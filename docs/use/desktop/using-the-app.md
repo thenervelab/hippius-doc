@@ -200,3 +200,27 @@ When you have more than one sync folder, switch between them from the **Local** 
 :::tip
 To narrow down the files within the folder you are viewing, use the **File Type**, **Size**, and **Date Range** filters or the search box at the top of the Drive page.
 :::
+
+## Menu Bar Window
+
+Hippius Desktop keeps a compact **menu bar window** in your system tray (the menu bar on macOS, the notification area on Windows). Click the Hippius tray icon to open it for a quick glance at your account without bringing the full app to the front.
+
+{/* SCREENSHOT PLACEHOLDER — add the image at static/img/desktop/menu-bar-window.png, then uncomment the line below. */}
+{/* ![The Hippius menu bar window showing credits, the notification bell, file search, and recent uploads](/img/desktop/menu-bar-window.png) */}
+
+The window has four parts:
+
+<Unordered>
+  <li><strong>Credits</strong>: your current credit balance, shown in the top left so you can keep an eye on it at any time.</li>
+  <li><strong>Notification bell</strong>: in the top right, with a badge for the number of unread notifications.</li>
+  <li><strong>Search Files</strong>: a search box with the <BgStyledText>⌘F</BgStyledText> shortcut.</li>
+  <li><strong>Your Uploads</strong>: your most recently uploaded files, grouped by when they were added (for example <strong>Today</strong>, <strong>Yesterday</strong>, <strong>Last 7 Days</strong>, and <strong>Older</strong>). Each row shows the file name, size, and upload date.</li>
+</Unordered>
+
+Each control is a shortcut into the full app:
+
+<Unordered>
+  <li>Click the <strong>Search Files</strong> box to open Hippius Desktop with the search bar focused, ready for you to find a file.</li>
+  <li>Click the <strong>notification bell</strong> to open your <a href="/use/desktop/notifications">Notifications</a> in the app.</li>
+  <li>Click <BgStyledText>Open Hippius →</BgStyledText> at the bottom to bring the full Hippius Desktop window to the front.</li>
+</Unordered>
