@@ -63,15 +63,18 @@ const sidebars: SidebarsConfig = {
       items: [
         "use/desktop/desktop-app",
         "use/desktop/using-the-app",
-        "use/desktop/file-system",
+        "use/desktop/drive",
         "use/desktop/shared-links",
+        "use/desktop/virtual-machines",
         "use/desktop/settings",
         "use/desktop/billing",
         "use/desktop/referral-system",
-        // ⚠️ "Wallet" page is hidden until the feature is live. The page is
-        // also marked `draft: true` in use/desktop/wallet.md to block direct
-        // access. Re-enable both together when ready to publish.
-        // "use/desktop/wallet",
+        // ⚠️ "Wallet" page is NOT live on PUBLIC. Kept visible here on the
+        // internal working branch for review — do NOT include in any push to
+        // the public origin repo.
+        "use/desktop/wallet",
+        "use/desktop/notifications",
+        "use/help-support",
       ],
     },
 
