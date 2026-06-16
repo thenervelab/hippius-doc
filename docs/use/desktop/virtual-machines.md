@@ -9,6 +9,17 @@ import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 
+## Coming soon
+
+Virtual Machines on the Hippius desktop app are **coming soon**. This page will be updated with the full guide once the feature is live.
+
+{/*
+  ───────────────────────────────────────────────────────────────────────
+  ORIGINAL DOCUMENTATION — preserved for future release.
+  To publish: delete the "Coming soon" section above and this comment
+  wrapper (this opening line and the closing line at the very bottom).
+  ───────────────────────────────────────────────────────────────────────
+
 ## Introduction
 
 The Virtual Machines section allows you to create and manage compute instances within Hippius. This guide covers essential tasks for launching and operating VMs.
@@ -298,3 +309,6 @@ If an instance is stopped, the options menu will show a start action.
   <li>Select <BgStyledText>Delete Instance</BgStyledText>.</li>
   <li>Confirm the action.</li>
 </Ordered>
+
+  ───────────────────────────────────────────────────────────────────────
+*/}

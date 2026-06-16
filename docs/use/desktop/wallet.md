@@ -7,6 +7,13 @@ description: Create and manage local wallets, send and receive hAlpha, stake and
 draft: true
 ---
 
+{/*
+  ⚠️ This page is hidden. `draft: true` excludes it from the production
+  build (no direct link works) and it is commented out of sidebars.ts.
+  The full content below is preserved. To publish: remove `draft: true`
+  above and re-enable the sidebar entry in sidebars.ts.
+*/}
+
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';

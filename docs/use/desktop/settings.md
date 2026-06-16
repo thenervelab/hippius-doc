@@ -3,7 +3,7 @@ id: settings
 title: App Settings
 sidebar_label: App Settings
 slug: /use/desktop/settings
-description: Manage sync folders, local wallets, security, notifications, your API token, and the blockchain RPC endpoint from the Hippius desktop Settings page.
+description: Manage sync folders, security, notifications, appearance, your API token, and the blockchain RPC endpoint from the Hippius desktop Settings page.
 ---
 
 import DocAccordion, { DocAccordionItem } from '@site/src/components/DocAccordion';
@@ -12,7 +12,7 @@ import Unordered from '@site/src/components/Unordered';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import BgStyledText from '@site/src/components/BgStyledText';
 
-The **Settings** page is organized into sections you can open from the left sidebar: **Sync & Storage**, **Wallets**, **Security**, **Notifications**, **API Token**, and **Customize RPC**. Each section has a short description and an info (ⓘ) tooltip next to its title.
+The **Settings** page is organized into sections you can open from the left sidebar: **Sync & Storage**, **Security**, **Notifications**, **Appearance**, **API Token**, and **Customize RPC**. Each section has a short description and an info (ⓘ) tooltip next to its title.
 
 <DocAccordion defaultValue="sync-storage">
 
@@ -96,6 +96,16 @@ Sync & Storage
 </>
 </DocAccordionItem>
 
+{/_
+───────────────────────────────────────────────────────────────────────
+WALLETS SECTION — hidden while the wallet feature is gated off in the
+desktop app (WALLET_FEATURE_ENABLED = false in app/lib/featureFlags.ts).
+Preserved for future release: to restore, delete this comment wrapper
+(the opening `{/_` line and the closing line at the bottom of the
+section), and re-add **Wallets** to the sidebar list in the intro
+paragraph above.
+───────────────────────────────────────────────────────────────────────
+
 ## Wallets
 
 <DocAccordionItem value="wallets">
@@ -116,11 +126,14 @@ Sync & Storage
     ![Wallet settings](/img/desktop/wallet/wallet-settings.png)
 
     :::note
-    Renaming or deleting a wallet here only affects what's stored on this device; the underlying account on Hippius is unchanged. Always export a backup before deleting.
+    Here you can create, import, export backups, rename, and delete the local wallets stored on this device. Renaming or deleting a wallet here only affects what's stored on this device; the underlying account on Hippius is unchanged. Always export a backup before deleting.
     :::
 
 </>
 </DocAccordionItem>
+
+───────────────────────────────────────────────────────────────────────
+\*/}
 
 ## Security
 
@@ -214,6 +227,30 @@ Sync & Storage
     <p>After changing anything, click <BgStyledText>Save Changes</BgStyledText> (or <BgStyledText>Cancel</BgStyledText> to discard). These buttons stay disabled until you have unsaved changes.</p>
 
     ![Email notification preferences](/img/desktop/settings/email-preference.png)
+
+</>
+</DocAccordionItem>
+
+## Appearance
+
+<DocAccordionItem value="appearance">
+  <>
+  Appearance
+  </>
+  <>
+    <p>The <strong>Appearance</strong> section controls how Hippius looks on this device — "Personalize how Hippius looks on this device."</p>
+
+    <Ordered>
+      <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />, then open <strong>Appearance</strong>.</li>
+    </Ordered>
+
+    ### Theme
+
+    <p>Under <strong>Theme</strong>, pick the look you want: <strong>Light</strong>, <strong>Dark</strong>, or <strong>System</strong> to follow your operating system. The change applies right away.</p>
+
+    :::note
+    Your theme choice is stored locally, so it only affects this device — your other devices and the <a href="https://console.hippius.com">Hippius Console</a> keep their own setting.
+    :::
 
 </>
 </DocAccordionItem>

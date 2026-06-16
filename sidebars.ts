@@ -69,9 +69,9 @@ const sidebars: SidebarsConfig = {
         "use/desktop/settings",
         "use/desktop/billing",
         "use/desktop/referral-system",
-        // ⚠️ "Wallet" page is hidden until the feature is live. The page is
-        // also marked `draft: true` in use/desktop/wallet.md to block direct
-        // access. Re-enable both together when ready to publish.
+        // ⚠️ "Wallet" page is hidden until the feature is live. The page
+        // is also marked `draft: true` in wallet.md to block direct access.
+        // Re-enable both together when ready to publish.
         // "use/desktop/wallet",
         "use/desktop/notifications",
         "use/help-support",
@@ -148,10 +148,7 @@ const sidebars: SidebarsConfig = {
       type: "category",
       label: "Run a Validator",
       collapsed: true,
-      items: [
-        "earn/installing-validator",
-        "earn/register-validator-in-chain",
-      ],
+      items: ["earn/installing-validator", "earn/register-validator-in-chain"],
     },
 
     // ── DEVELOP ────────────────────────────────────────────────────
@@ -159,9 +156,7 @@ const sidebars: SidebarsConfig = {
       type: "category",
       label: "Develop",
       collapsed: true,
-      items: [
-        "blockchain/api",
-      ],
+      items: ["blockchain/api"],
     },
 
     // ── HCFS ───────────────────────────────────────────────────────
