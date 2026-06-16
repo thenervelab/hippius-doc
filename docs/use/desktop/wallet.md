@@ -4,6 +4,7 @@ title: Wallet
 sidebar_label: Wallet
 slug: /use/desktop/wallet
 description: Create and manage local wallets, send and receive hAlpha, stake and unstake, bridge between Alpha and hAlpha, and track transactions from the Hippius desktop Wallet page.
+draft: true
 ---
 
 import Ordered from '@site/src/components/Ordered';

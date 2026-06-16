@@ -116,7 +116,7 @@ Sync & Storage
     ![Wallet settings](/img/desktop/wallet/wallet-settings.png)
 
     :::note
-    For the full wallet workflow — creating, importing, exporting backups, renaming, and deleting — see the <a href="/use/desktop/wallet#wallet-settings">Wallet</a> guide. Renaming or deleting a wallet here only affects what's stored on this device; the underlying account on Hippius is unchanged. Always export a backup before deleting.
+    Renaming or deleting a wallet here only affects what's stored on this device; the underlying account on Hippius is unchanged. Always export a backup before deleting.
     :::
 
 </>
