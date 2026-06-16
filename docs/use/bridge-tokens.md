@@ -17,7 +17,7 @@ The Hippius Bridge allows you to transfer tokens between the Bittensor network (
 - **Alpha → hAlpha**: Lock your Alpha tokens on Bittensor and receive hAlpha on Hippius
 - **hAlpha → Alpha**: Burn your hAlpha tokens on Hippius and receive Alpha on Bittensor
 
-Bridging takes approximately 120 seconds and is processed by a decentralized network of Hippius guardians.
+Bridging takes approximately 120 seconds and is processed by a distributed network of Hippius guardians.
 
 ## Accessing the Bridge
 

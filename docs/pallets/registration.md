@@ -189,6 +189,6 @@ The SCALE-encoded challenge binds registration to a specific chain genesis, owne
 
 ## Conclusion
 
-The Registration pallet centers on **`register_node_with_coldkey`**: cryptographic proof of libp2p identity, one main node per owner in **`ColdkeyNodeRegistrationV2`**, and supporting extrinsics for operations, fees, bans, whitelists, and decentralized deregistration when enabled.
+The Registration pallet centers on **`register_node_with_coldkey`**: cryptographic proof of libp2p identity, one main node per owner in **`ColdkeyNodeRegistrationV2`**, and supporting extrinsics for operations, fees, bans, whitelists, and distributed deregistration when enabled.
 
 For cross-pallet behavior (staking thresholds, credits authorities, metagraph), see the related Hippius pallets and runtime configuration.

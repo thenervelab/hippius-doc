@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-description: Understanding Hippius Virtual Machines - decentralized compute infrastructure
+description: Understanding Hippius Virtual Machines - distributed compute infrastructure
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -8,17 +8,17 @@ import Unordered from '@site/src/components/Unordered';
 
 # VM Computing
 
-Hippius Virtual Machines provide decentralized compute infrastructure that integrates seamlessly with blockchain technology and distributed storage systems.
+Hippius Virtual Machines provide distributed compute infrastructure that integrates seamlessly with blockchain technology and distributed storage systems.
 
 ## What is VM Computing on Hippius?
 
-Hippius VM Computing enables users to deploy and manage virtual machines on a decentralized network of compute miners. Unlike traditional cloud providers where resources are concentrated in centralized data centers, Hippius distributes compute workloads across a global mesh of independent miners.
+Hippius VM Computing enables users to deploy and manage virtual machines on a distributed network of compute miners. Unlike traditional cloud providers where resources are concentrated in centralized data centers, Hippius distributes compute workloads across a global mesh of independent miners.
 
 ### Key Characteristics
 
 | Feature                          | Description                                          |
 | -------------------------------- | ---------------------------------------------------- |
-| **Decentralized Infrastructure** | VMs run on a distributed network of compute miners   |
+| **Distributed Infrastructure** | VMs run on a distributed network of compute miners   |
 | **Blockchain Integration**       | All VM operations are recorded and verified on-chain |
 | **Encrypted Disks**              | LUKS2 full disk encryption with secure key delivery  |
 | **Credit-Based Billing**         | Pay-as-you-go model using Hippius credits            |
@@ -88,7 +88,7 @@ Spin up isolated development environments on-demand:
 
 ### 2. Web Application Hosting
 
-Deploy web applications with decentralized infrastructure:
+Deploy web applications with distributed infrastructure:
 
 - **Web Servers**: Host websites and web applications
 - **API Services**: Run backend services and APIs
@@ -102,7 +102,7 @@ Leverage distributed compute for data-intensive workloads:
 - **ETL Pipelines**: Extract, transform, and load data workflows
 - **Analytics**: Run analytics jobs on distributed infrastructure
 
-### 4. Decentralized Applications (dApps)
+### 4. Distributed Applications (dApps)
 
 Build and run blockchain-integrated applications:
 
@@ -189,7 +189,7 @@ VMs have seamless access to Hippius storage systems:
 
 - **High-Speed Access**: Deterministic data placement for fast shard retrieval
 - **Data Durability**: Erasure-coded storage across multiple miners
-- **Decentralized**: No single point of failure
+- **Distributed**: No single point of failure
 
 #### S3-Compatible Storage
 
@@ -350,15 +350,15 @@ For detailed instructions, see the [Virtual Machines User Guide](/use/console/vi
 
 ## Summary
 
-Hippius VM Computing brings the benefits of decentralization to compute infrastructure:
+Hippius VM Computing brings the benefits of distribution to compute infrastructure:
 
 | Benefit           | Description                                    |
 | ----------------- | ---------------------------------------------- |
-| **Decentralized** | No single point of failure or control          |
+| **Distributed** | No single point of failure or control          |
 | **Integrated**    | Native blockchain and storage integration      |
 | **Encrypted**     | LUKS2 disk encryption with secure key delivery |
 | **Secure**        | Multiple layers of security and isolation      |
 | **Flexible**      | Various configurations for different workloads |
 | **Economical**    | Credit-based pay-as-you-go billing             |
 
-By combining decentralized compute with Arion storage and blockchain coordination, we provide a complete platform for building and running applications without relying on centralized cloud providers.
+By combining distributed compute with Arion storage and blockchain coordination, we provide a complete platform for building and running applications without relying on centralized cloud providers.

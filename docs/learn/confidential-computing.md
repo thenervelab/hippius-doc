@@ -434,7 +434,7 @@ Traditional cloud computing requires trusting the infrastructure provider with y
   <li>**No central trust** - cryptographic proofs replace blind faith</li>
 </Unordered>
 
-This enables sensitive workloads (financial data, healthcare, AI training) to run on decentralized infrastructure without compromising confidentiality.
+This enables sensitive workloads (financial data, healthcare, AI training) to run on distributed infrastructure without compromising confidentiality.
 
 ---
 

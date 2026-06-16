@@ -151,7 +151,7 @@ The previous Polkadot.js Apps method is still available but deprecated. For refe
 ## Node Type Descriptions
 
 - **Validator**: For block production and validation
-- **StorageMiner**: For decentralized Arion or S3 storage
+- **StorageMiner**: For distributed Arion or S3 storage
 - **ComputeMiner**: For compute resource nodes (future functionality)
 
 ---

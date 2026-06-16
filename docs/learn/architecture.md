@@ -5,11 +5,11 @@ description: Comprehensive overview of the Hippius system architecture and compo
 
 # System Architecture
 
-This page provides a comprehensive overview of the Hippius system architecture, showing how different components interact within the ecosystem to provide decentralized storage and compute.
+This page provides a comprehensive overview of the Hippius system architecture, showing how different components interact within the ecosystem to provide distributed storage and compute.
 
 ## Overview
 
-Hippius operates as a decentralized network that connects clients needing storage and compute resources with miners providing those services. The architecture ensures secure, reliable, and verifiable service delivery through a combination of cryptographic proofs, distributed storage algorithms, and blockchain-based coordination.
+Hippius operates as a distributed network that connects clients needing storage and compute resources with miners providing those services. The architecture ensures secure, reliable, and verifiable service delivery through a combination of cryptographic proofs, distributed storage algorithms, and blockchain-based coordination.
 
 ## Component Map
 
@@ -69,7 +69,7 @@ Communication between nodes (Validators, Miners, Wardens) happens over **QUIC** 
 Hippius utilizes a dual-blockchain approach to manage state, identity, and economics:
 
 - **Hippius Blockchain**: A Substrate-based chain that maintains the network state, manages the native currency (Alpha), and records cluster maps published by Chain Submitters.
-- **Bittensor Network**: Hippius connects to Bittensor as a subnet. Validators report miner performance (weights) to Bittensor, integrating with its broader decentralized intelligence and incentive mechanisms.
+- **Bittensor Network**: Hippius connects to Bittensor as a subnet. Validators report miner performance (weights) to Bittensor, integrating with its broader distributed intelligence and incentive mechanisms.
 - **Bridge**: A cross-chain bridge facilitates the seamless transfer of value (Alpha/TAO) between the Hippius and Bittensor ecosystems.
 
-This layered architecture ensures that Hippius remains decentralized, fault-tolerant, and economically aligned across all participants.
+This layered architecture ensures that Hippius remains distributed, fault-tolerant, and economically aligned across all participants.

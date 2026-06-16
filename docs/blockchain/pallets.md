@@ -18,7 +18,7 @@ This document provides an overview of the custom pallets integrated into TheBrai
 - **Description**: Manages Node registrations within the system. It ensures sommth registration process for nodes.
 
 ## 6. IPFS Pin (Deprecated)
-- **Description**: ~~Integrates with IPFS to manage and pin user data.~~ This pallet has been superseded by the [Arion Pallet](/pallets/arion-pallet) for decentralized storage operations.
+- **Description**: ~~Integrates with IPFS to manage and pin user data.~~ This pallet has been superseded by the [Arion Pallet](/pallets/arion-pallet) for distributed storage operations.
 
 ## 7. ExecutionUnit
 - **Description**: Manages the assignment of storage and compute requests to the appropriate miners based on their specifications and capabilities. This pallet ensures that resources are allocated efficiently and effectively within the blockchain ecosystem.
@@ -39,7 +39,7 @@ This document provides an overview of the custom pallets integrated into TheBrai
 - **Description**: Manages IP-related functionalities within the blockchain ecosystem. This pallet provides mechanisms for handling IP addresses, ensuring that network interactions are properly managed and secured.
 
 ## 13. Bittensor
-- **Description**: Facilitates the integration with the Bittensor network, allowing our blockchain to connect and interact with its decentralized machine learning ecosystem. This pallet is responsible for submitting the weights of all miners that are also available on Bittensor.
+- **Description**: Facilitates the integration with the Bittensor network, allowing our blockchain to connect and interact with its distributed machine learning ecosystem. This pallet is responsible for submitting the weights of all miners that are also available on Bittensor.
 
 ## 14. Metagraph
 - **Description**: Manages interactions with the Bittensor network to fetch unique identifiers (UIDs) and dividends of miners. This pallet plays a crucial role in ensuring that our blockchain can retrieve and utilize relevant data from the Bittensor ecosystem.

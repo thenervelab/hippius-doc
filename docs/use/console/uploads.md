@@ -25,7 +25,7 @@ The **maximum file size for a single upload via the console is 100 MB**, for bot
 If you need to upload larger files:
 
 <Unordered>
-  <li><strong>Drive</strong>: install the <a href="/use/desktop/desktop-app">Hippius Desktop App</a>, which uses incremental sync with no browser size cap.</li>
+  <li><strong>Drive</strong>: install the <a href="/use/desktop/getting-started">Hippius Desktop App</a>, which uses incremental sync with no browser size cap.</li>
   <li><strong>S3</strong>: use any S3 client that supports multipart uploads (the AWS CLI and every official SDK do). See <a href="/use/quickstart">S3 Quickstart</a>.</li>
 </Unordered>
 :::
@@ -143,6 +143,6 @@ After topping up, start the upload again.
 <Unordered>
   <li><a href="/use/console/drive">Drive</a>: your personal encrypted file storage.</li>
   <li><a href="/use/console/s3">S3 Buckets</a>: S3 compatible bucket storage.</li>
-  <li><a href="/use/desktop/desktop-app">Hippius Desktop App</a>: uploads beyond the 100 MB console limit.</li>
+  <li><a href="/use/desktop/getting-started">Hippius Desktop App</a>: uploads beyond the 100 MB console limit.</li>
   <li><a href="/use/console/billing">Billing</a>: top up credits to keep uploading.</li>
 </Unordered>

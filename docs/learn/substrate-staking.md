@@ -23,7 +23,7 @@ Substrate is a modular blockchain development framework created by Parity Techno
   <li><strong>Flexibility</strong>: Adaptable to various consensus mechanisms and network designs</li>
 </Unordered>
 
-Hippius leverages Substrate's architecture to deliver a specialized blockchain optimized for decentralized storage and compute services.
+Hippius leverages Substrate's architecture to deliver a specialized blockchain optimized for distributed storage and compute services.
 
 ## BABE Consensus Mechanism
 
@@ -84,4 +84,4 @@ Marketplace revenue is distributed according to the following allocation:
   <li><strong>10%</strong> to treasury for ongoing development and ecosystem growth</li>
 </Unordered>
 
-By participating in staking, users not only earn rewards from token emissions and marketplace revenue but also contribute directly to the security and decentralization of the Hippius network.
+By participating in staking, users not only earn rewards from token emissions and marketplace revenue but also contribute directly to the security and distribution of the Hippius network.

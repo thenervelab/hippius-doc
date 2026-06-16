@@ -17,7 +17,7 @@ Hippius lets you share any synced file as a public download link. Recipients don
 
 To share a file, right click it in the desktop app and choose **Share via link**. Hippius creates a secure encrypted copy and generates a shareable URL, which is copied to your clipboard automatically.
 
-After sharing, all your active links are tracked on the **Shared Links** page, at <BgStyledIconWithText text="Files" icon="DocumentText" /> → **Shared Links** in the Drive view. From there you can copy a link again, revoke access, reshare a file, and see a history of ended shares.
+After sharing, all your active links are tracked on the **Shared Links** page. Open it with the <BgStyledText>Shared Links</BgStyledText> button in the top right of the <BgStyledIconWithText text="Drive" icon="Category" /> view header. From there you can copy a link again, revoke access, reshare a file, and see a history of ended shares.
 
 ![Shared Links page overview](/img/desktop/shared-links-overview.png)
 
@@ -37,8 +37,8 @@ When you right click a file and choose **Share via link**, the desktop:
   <li><strong>Reads the local plaintext file</strong> from your sync folder directly. No download or decryption step needed.</li>
   <li><strong>Generates a fresh share key</strong>, a random 32-byte key unique to this one share. This key is completely independent from your folder key.</li>
   <li><strong>Encrypts the file with the share key</strong> using XChaCha20-Poly1305, then uploads the newly encrypted copy to Hippius as a separate object. This is independent of your regular sync copy.</li>
-  <li><strong>Builds the recipient URL</strong>: <code>https://console.hippius.com/share/&lt;token&gt;#k=&lt;share_key&gt;</code>. The key is in the <code>#</code> fragment, and browsers never transmit fragments to servers, so Hippius never sees the key.</li>
-  <li><strong>Shows the link in a modal</strong> and copies it to your clipboard automatically. The link is live immediately.</li>
+  <li><strong>Builds the recipient URL</strong>: <code>https://console.hippius.com/share/&lt;token&gt;#k=&lt;share_key&gt;</code>. The key is in the <code>#</code> fragment, and browsers never transmit fragments to servers, so we never see the key.</li>
+  <li><strong>Shows the link in a modal</strong> and copies it to your clipboard automatically. The modal also shows when the link expires (for example, <em>Expires in 1d</em>). The link is live immediately.</li>
 </Ordered>
 
 The server stores the encrypted copy and returns a share token. It never learns the decryption key.
@@ -68,18 +68,18 @@ The desktop reads your local file directly with no download required. For most f
 ## Creating a Share
 
 <Ordered>
-  <li>In the <BgStyledIconWithText text="Files" icon="DocumentText" /> view, find the file you want to share.</li>
+  <li>In the <BgStyledIconWithText text="Drive" icon="Category" /> view, find the file you want to share. The file must be fully synced.</li>
   <li>Right click the file (or click the <BgStyledText>⋮</BgStyledText> menu on its row) and choose <BgStyledText>Share via link</BgStyledText>.</li>
-  <li>The share dialog opens and runs the encrypt and upload steps automatically.</li>
-  <li>When complete, the share URL is shown in the modal and copied to your clipboard automatically.</li>
-  <li>Click <BgStyledText>Copy link</BgStyledText> if you need to copy it again, then close the dialog.</li>
+  <li>The share dialog opens and runs the encrypt and upload steps automatically, showing <em>Encrypting and uploading…</em> while it works. You can press <BgStyledText>Cancel</BgStyledText> to stop before it finishes.</li>
+  <li>When complete, the share URL is shown in the modal and copied to your clipboard automatically, along with when the link expires.</li>
+  <li>Use the copy icon next to the URL to copy it again, <BgStyledText>Open in browser</BgStyledText> to preview the recipient page, or <BgStyledText>Revoke share</BgStyledText> to cancel the link right away. Click <BgStyledText>Done</BgStyledText> to close the dialog.</li>
 </Ordered>
 
 The link is live immediately. Anyone you send it to can download the file right away.
 
 ## Active Shares
 
-The Active Shares table shows every share currently live on your account, fetched from the server every 30 seconds. It includes shares created from any device or the console, not just this desktop install.
+The Active Shares table shows every share currently live on your account, refreshed from the server every few seconds. It includes shares created from any device or the console, not just this desktop install.
 
 If a share was created on a different device (or on the console), this device doesn't have the share key, so the filename shows as `<unknown>` and some actions are disabled.
 
@@ -118,12 +118,12 @@ There is no grace period. Anyone with the link loses access the moment you confi
 
 If a share was created on a different device or on the console, this device doesn't have the share key. In that case:
 
-| Action | Available | Reason |
-|---|---|---|
-| **Name** | Shows `<unknown>` | Filename is encrypted and decryption requires the key |
-| **Copy link** | ❌ Disabled | The URL includes the key fragment and only the creating device can reconstruct it |
-| **Reshare** | ❌ Disabled | Requires the key and the source file location, both stored on the creating device |
-| **Revoke** | ✅ Available | Only needs the share token, which the server returns in the list |
+| Action        | Available         | Reason                                                                            |
+| ------------- | ----------------- | --------------------------------------------------------------------------------- |
+| **Name**      | Shows `<unknown>` | Filename is encrypted and decryption requires the key                             |
+| **Copy link** | ❌ Disabled       | The URL includes the key fragment and only the creating device can reconstruct it |
+| **Reshare**   | ❌ Disabled       | Requires the key and the source file location, both stored on the creating device |
+| **Revoke**    | ✅ Available      | Only needs the share token, which the server returns in the list                  |
 
 You can always revoke a share from any device, even if you didn't create it here.
 
@@ -157,19 +157,19 @@ The History section records shares that have ended, whether expired or revoked.
 
 Every time the active shares list is fetched, the app compares it against the previous snapshot. Any share token that was present before but is now gone is classified and saved to history:
 
-| What happened | Recorded as |
-|---|---|
-| Its expiry time had passed | **Expired** |
+| What happened                      | Recorded as                                                      |
+| ---------------------------------- | ---------------------------------------------------------------- |
+| Its expiry time had passed         | **Expired**                                                      |
 | It disappeared while still in date | **Revoked elsewhere** (another device or the console revoked it) |
-| You clicked Revoke on this device | **Revoked**, recorded immediately at the moment you confirm |
+| You clicked Revoke on this device  | **Revoked**, recorded immediately at the moment you confirm      |
 
 ### Status badges
 
-| Badge | Meaning |
-|---|---|
-| **Revoked** | You pressed Revoke on this device. |
+| Badge                 | Meaning                                                   |
+| --------------------- | --------------------------------------------------------- |
+| **Revoked**           | You pressed Revoke on this device.                        |
 | **Revoked elsewhere** | The share was revoked from another device or the console. |
-| **Expired** | The server's TTL elapsed. |
+| **Expired**           | The server's TTL elapsed.                                 |
 
 ### Removing entries
 
@@ -205,20 +205,20 @@ Each active share uses storage quota. Revoke temporary shares when you're done w
 
 ## Desktop vs Console
 
-| Feature | Desktop App | Console |
-|---|---|---|
-| **Create a share** | ✅ Yes | ✅ Yes |
-| **How it reads the file** | Local plaintext from sync folder, no download needed | Downloads and decrypts the Drive copy |
-| **Copy link (same session)** | ✅ Yes | ✅ Yes |
-| **Copy link after restart** | ✅ Yes, key saved in local database | ❌ No, key is in memory only and lost on tab close or reload |
-| **Reshare** | ✅ On creating device | ❌ Not available |
-| **Revoke** | ✅ Any device | ✅ Any device |
-| **History** | ✅ Yes | ✅ Yes |
+| Feature                      | Desktop App                                          | Console                                                      |
+| ---------------------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
+| **Create a share**           | ✅ Yes                                               | ✅ Yes                                                       |
+| **How it reads the file**    | Local plaintext from sync folder, no download needed | Downloads and decrypts the Drive copy                        |
+| **Copy link (same session)** | ✅ Yes                                               | ✅ Yes                                                       |
+| **Copy link after restart**  | ✅ Yes, key saved in local database                  | ❌ No, key is in memory only and lost on tab close or reload |
+| **Reshare**                  | ✅ On creating device                                | ❌ Not available                                             |
+| **Revoke**                   | ✅ Any device                                        | ✅ Any device                                                |
+| **History**                  | ✅ Yes                                               | ✅ Yes                                                       |
 
 ## Where to next
 
 <Unordered>
-  <li><a href="/use/desktop/file-system">File System</a>: manage your sync folders and uploads.</li>
+  <li><a href="/use/desktop/drive">Drive</a>: manage your sync folders and uploads.</li>
   <li><a href="/use/console/shared-links">Console Shared Links</a>: the console version, where you can create shares from the web interface.</li>
   <li><a href="/use/desktop/billing">Billing</a>: manage credits before sharing large files.</li>
 </Unordered>

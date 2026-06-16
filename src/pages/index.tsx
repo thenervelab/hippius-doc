@@ -58,7 +58,7 @@ export const CATEGORIES: (SmallCardInfo & {
 
 export const SMARTER_CLOUD: SmallCardInfo[] = [
   {
-    title: "Decentralized Storage",
+    title: "Distributed Storage",
     description:
       "Files split into 30 shards across independent miners using Reed-Solomon erasure coding. Any 10 shards reconstruct your file — tolerates up to 20 simultaneous miner failures.",
     icon: <Icons.FormatSquare className="text-primary-50 relative size-7" />,
@@ -114,7 +114,7 @@ function HomepageHeader() {
           </Link>
         </div>
         <H1 className="text-center mt-4 max-w-[1050px]">
-          Decentralized S3 storage — any client, no wallet required
+          Distributed S3 storage — any client, no wallet required
         </H1>
 
         <div className="flex gap-y-5  flex-wrap relative items-center justify-center mt-8">
