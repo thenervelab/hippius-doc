@@ -1,8 +1,8 @@
 ---
 id: desktop-app
 title: Hippius Desktop App
-sidebar_label: Desktop App
-slug: /use/desktop/desktop-app
+sidebar_label: Getting Started
+slug: /use/desktop/getting-started
 description: 3
 ---
 
