@@ -68,7 +68,10 @@ const sidebars: SidebarsConfig = {
         "use/desktop/virtual-machines",
         "use/desktop/settings",
         "use/desktop/billing",
-        "use/desktop/referral-system",
+        // ⚠️ "Referral System" is coming soon — hidden from the sidebar and
+        // marked `draft: true` in referral-system.md to block direct access.
+        // Re-enable both together when the feature is live.
+        // "use/desktop/referral-system",
         // ⚠️ "Wallet" page is hidden until the feature is live. The page
         // is also marked `draft: true` in wallet.md to block direct access.
         // Re-enable both together when ready to publish.

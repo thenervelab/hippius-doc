@@ -4,6 +4,7 @@ title: Hippius Referral System(Coming Soon)
 sidebar_label: Referral System
 slug: /use/desktop/referral-system
 description: 1
+draft: true
 ---
 
 ## Sharing Your Referral Link
