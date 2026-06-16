@@ -193,9 +193,6 @@ const sidebars: SidebarsConfig = {
         },
       ],
     },
-
-    // ── SUPPORT ────────────────────────────────────────────────────
-    "use/help-support",
   ],
 };
 
