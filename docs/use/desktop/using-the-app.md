@@ -71,7 +71,7 @@ To add your first folder:
   <li>Your folder is added and syncing begins automatically.</li>
 </Ordered>
 
-![The FilesOnboarding screen showing the Local Sync Folders section with the Add Folder button and Sync from Other Devices section](/img/desktop/files-onboarding.png)
+![The FilesOnboarding screen showing the Local Sync Folders section with the Add Folder button and Sync from Other Devices section](/img/desktop/set-up-your-first-sync-folder.png)
 
 Any files you add to this folder will be encrypted on your device and synced to the Hippius network. Setting up sync here is optional — you can add folders later from Settings or by returning to this screen at any time.
 
@@ -81,7 +81,7 @@ Your unlock password was set during first login, so file encryption is configure
 
 Once a folder begins syncing, the **Drive** page opens directly into that folder's contents. To return to the sync setup screen, click **Local** in the breadcrumb at the top of the page.
 
-![The SyncFolderBreadcrumb showing the Local segment that returns to the sync setup screen](/img/desktop/drive-local-breadcrumb.png)
+![Folder Contents](/img/desktop/folder-contents.png)
 
 From the **Local** view you can add more sync folders, sync folders from your other devices, and manage existing ones — the same actions available under **Settings → Sync & Storage**. You can therefore manage syncing in whichever way is more convenient: directly from the Drive page, or from Settings.
 
@@ -101,7 +101,7 @@ In the **Add Local Folder** dialog:
   <li>Click <BgStyledText>Add Folder</BgStyledText> to confirm. Syncing starts automatically.</li>
 </Ordered>
 
-![The AddLocalFolderDialog showing folder selection and the Add Folder button ](/img/desktop/add-local-folder-dialog.png)
+![Add More Folders ](/img/desktop/add-local-folder.png)
 
 Each folder syncs independently and shows its own status (**Syncing**, **Paused**, or **Error**).
 
@@ -150,7 +150,7 @@ The widget has three forms:
   <li><strong>Minified</strong>: Click the <strong>✕</strong> to shrink the widget into a compact circular progress ring. The ring keeps tracking progress and shows a checkmark when complete; click it to restore the full widget.</li>
 </Unordered>
 
-![The Sync Queue widget expanded, showing the per-file list with status badges](/img/desktop/sync-progress-widget.png)
+![The Sync Queue widget expanded, showing the per-file list with status badges](/img/desktop/syncing-progress-widget.png)
 
 :::tip
 Dismissing the widget with **✕** does not stop syncing — it only minimizes the widget to the progress ring. The ring also appears whenever the sidebar is collapsed, and the full card reopens automatically when a new sync starts.
@@ -195,7 +195,7 @@ When you have more than one sync folder, switch between them from the **Local** 
   <li>The Drive page opens that folder, and the breadcrumb updates to show your location.</li>
 </Ordered>
 
-![The Local view showing the synced folder cards used to switch between folders](/img/desktop/drive-local-folders.png)
+![The Local view showing the synced folder cards used to switch between folders](/img/desktop/switching-between-sync-folders.png)
 
 :::tip
 To narrow down the files within the folder you are viewing, use the **File Type**, **Size**, and **Date Range** filters or the search box at the top of the Drive page.
