@@ -205,8 +205,8 @@ To narrow down the files within the folder you are viewing, use the **File Type*
 
 Hippius Desktop keeps a compact **menu bar window** in your system tray (the menu bar on macOS, the notification area on Windows). Click the Hippius tray icon to open it for a quick glance at your account without bringing the full app to the front.
 
-{/* SCREENSHOT PLACEHOLDER — add the image at static/img/desktop/menu-bar-window.png, then uncomment the line below. */}
-{/* ![The Hippius menu bar window showing credits, the notification bell, file search, and recent uploads](/img/desktop/menu-bar-window.png) */}
+
+![The Hippius menu bar window showing credits, the notification bell, file search, and recent uploads](/img/desktop/menu-bar-window.png)
 
 The window has four parts:
 
