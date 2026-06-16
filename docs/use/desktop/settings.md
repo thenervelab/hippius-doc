@@ -96,15 +96,14 @@ Sync & Storage
 </>
 </DocAccordionItem>
 
-{/_
-───────────────────────────────────────────────────────────────────────
-WALLETS SECTION — hidden while the wallet feature is gated off in the
-desktop app (WALLET_FEATURE_ENABLED = false in app/lib/featureFlags.ts).
-Preserved for future release: to restore, delete this comment wrapper
-(the opening `{/_` line and the closing line at the bottom of the
-section), and re-add **Wallets** to the sidebar list in the intro
-paragraph above.
-───────────────────────────────────────────────────────────────────────
+{/*
+  ───────────────────────────────────────────────────────────────────────
+  WALLETS SECTION — hidden while the wallet feature is gated off in the
+  desktop app (WALLET_FEATURE_ENABLED = false in app/lib/featureFlags.ts).
+  Preserved for future release: to restore, delete this comment wrapper
+  (this opening line and the closing line at the bottom of the section),
+  and re-add **Wallets** to the sidebar list in the intro paragraph above.
+  ───────────────────────────────────────────────────────────────────────
 
 ## Wallets
 
@@ -132,8 +131,8 @@ paragraph above.
 </>
 </DocAccordionItem>
 
-───────────────────────────────────────────────────────────────────────
-\*/}
+  ───────────────────────────────────────────────────────────────────────
+*/}
 
 ## Security
 
