@@ -38,7 +38,7 @@ If your transfer speeds are lower than expected:
 
 - **Use Multipart Uploads:** For large files, ensure your S3 client is configured to use multipart uploads. This is often handled automatically by SDKs, but may need manual configuration.
 - **Parallel Transfers:** Increase the number of concurrent connections. In tools like `rclone`, use flags like `--transfers 8` and `--s3-upload-concurrency 8`.
-- **Network Proximity:** While Hippius is decentralized, initial routing performance can depend on your local ISP peering.
+- **Network Proximity:** While Hippius is distributed, initial routing performance can depend on your local ISP peering.
 
 :::tip Pick the closest region for best performance
 Hippius S3 is served through regional caches. For lower latency, point your client at the endpoint closest to you:

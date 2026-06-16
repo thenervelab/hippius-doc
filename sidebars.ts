@@ -63,14 +63,21 @@ const sidebars: SidebarsConfig = {
       items: [
         "use/desktop/desktop-app",
         "use/desktop/using-the-app",
-        "use/desktop/file-system",
+        "use/desktop/drive",
+        "use/desktop/shared-links",
+        "use/desktop/virtual-machines",
         "use/desktop/settings",
         "use/desktop/billing",
-        "use/desktop/referral-system",
-        // ⚠️ "Wallet" page is hidden until the feature is live. The page is
-        // also marked `draft: true` in use/desktop/wallet.md to block direct
-        // access. Re-enable both together when ready to publish.
+        // ⚠️ "Referral System" is coming soon — hidden from the sidebar and
+        // marked `draft: true` in referral-system.md to block direct access.
+        // Re-enable both together when the feature is live.
+        // "use/desktop/referral-system",
+        // ⚠️ "Wallet" page is hidden until the feature is live. The page
+        // is also marked `draft: true` in wallet.md to block direct access.
+        // Re-enable both together when ready to publish.
         // "use/desktop/wallet",
+        "use/desktop/notifications",
+        "use/help-support",
       ],
     },
 
@@ -147,10 +154,7 @@ const sidebars: SidebarsConfig = {
       type: "category",
       label: "Run a Validator",
       collapsed: true,
-      items: [
-        "earn/installing-validator",
-        "earn/register-validator-in-chain",
-      ],
+      items: ["earn/installing-validator", "earn/register-validator-in-chain"],
     },
 
     // ── DEVELOP ────────────────────────────────────────────────────
@@ -158,9 +162,7 @@ const sidebars: SidebarsConfig = {
       type: "category",
       label: "Develop",
       collapsed: true,
-      items: [
-        "blockchain/api",
-      ],
+      items: ["blockchain/api"],
     },
 
     // ── HCFS ───────────────────────────────────────────────────────
@@ -194,9 +196,6 @@ const sidebars: SidebarsConfig = {
         },
       ],
     },
-
-    // ── SUPPORT ────────────────────────────────────────────────────
-    "use/help-support",
   ],
 };
 

@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 # Hippius Hub Registry
 
-**The AI model registry built for decentralized compute.** Hippius Hub is a public registry for AI models and OCI artifacts — pull anything anonymously, push with an account.
+**The AI model registry built for distributed compute.** Hippius Hub is a public registry for AI models and OCI artifacts — pull anything anonymously, push with an account.
 
 It has two faces:
 

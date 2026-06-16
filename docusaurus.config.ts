@@ -7,7 +7,7 @@ const { version } = require("./package.json");
 
 const config: Config = {
   title: "Hippius Docs - Learn, use, earn and develop with Hippius",
-  tagline: "Transparent, Decentralized, Anonymous Cloud Storage",
+  tagline: "Transparent, Distributed, Anonymous Cloud Storage",
   favicon: "img/favicon.ico",
 
   url: "https://docs.hippius.io",

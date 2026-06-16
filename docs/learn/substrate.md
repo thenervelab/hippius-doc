@@ -13,4 +13,4 @@ Substrate is a modular blockchain development framework created by Parity Techno
 - **Performance**: Efficient, lightweight client with WebAssembly execution
 - **Flexibility**: Adaptable to various consensus mechanisms and network designs
 
-Hippius leverages Substrate's architecture to deliver a specialized blockchain optimized for decentralized storage and compute services.
+Hippius leverages Substrate's architecture to deliver a specialized blockchain optimized for distributed storage and compute services.
