@@ -1,7 +1,7 @@
  # IPFS Pallet
 
 :::warning Deprecated
-This pallet has been superseded by the [Arion Pallet](/pallets/arion-pallet) for decentralized storage operations. The IPFS Pin pallet is no longer actively used and is retained here for historical reference only.
+This pallet has been superseded by the [Arion Pallet](/pallets/arion-pallet) for distributed storage operations. The IPFS Pin pallet is no longer actively used and is retained here for historical reference only.
 :::
 
 The IPFS Pallet was a component of the Hippius blockchain ecosystem, designed to manage the storage and retrieval of files using the InterPlanetary File System (IPFS). This pallet facilitated the pinning and unpinning of files, tracked storage requests, and handled interactions with the IPFS network.

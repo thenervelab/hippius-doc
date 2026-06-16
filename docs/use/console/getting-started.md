@@ -13,7 +13,7 @@ import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 
 ## Introduction
 
-The **Hippius Console** is the web dashboard for the Hippius decentralized network. Open it at [console.hippius.com](https://console.hippius.com) in any modern desktop browser. From one place you can:
+The **Hippius Console** is the web dashboard for the Hippius distributed network. Open it at [console.hippius.com](https://console.hippius.com) in any modern desktop browser. From one place you can:
 
 <Unordered>
   <li>Store, browse, and manage personal encrypted files with <strong>Drive</strong>.</li>

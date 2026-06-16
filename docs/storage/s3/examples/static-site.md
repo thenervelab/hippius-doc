@@ -52,7 +52,7 @@ https://s3.hippius.com/my-site/index.html
 </head>
 <body>
   <h1>Hello from Hippius S3!</h1>
-  <p>This page is served from decentralized storage.</p>
+  <p>This page is served from distributed storage.</p>
   <script src="app.js"></script>
 </body>
 </html>

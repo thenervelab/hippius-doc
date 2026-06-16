@@ -1,10 +1,10 @@
 # Welcome to Hippius
 
-Hippius is a **transparent, decentralized, anonymous cloud storage platform** built on a custom Substrate blockchain, leveraging Arion decentralized storage and S3-compatible endpoints for seamless integration.
+Hippius is a **transparent, distributed, anonymous cloud storage platform** built on a custom Substrate blockchain, leveraging Arion distributed storage and S3-compatible endpoints for seamless integration.
 
 ## Why Choose Hippius?
 
-- **Decentralized Storage**: Store files on our decentralized Arion network via S3-compatible endpoints for enterprise-grade compatibility.
+- **Distributed Storage**: Store files on our distributed Arion network via S3-compatible endpoints for enterprise-grade compatibility.
 - **Blockchain-Powered**: Our Substrate blockchain ensures transparency and trust, with staking and rewards for network participants.
 - **Anonymous & Secure**: Protect your data with anonymous storage solutions, backed by cryptographic guarantees.
 - **Easy to Use**: Host websites, publish apps, manage accounts, and bridge assets—all with simple tools.

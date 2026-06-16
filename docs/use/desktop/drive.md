@@ -14,7 +14,7 @@ import Icon from '@site/src/components/Icon';
 
 ## Introduction
 
-Your **Drive** is where your files live in Hippius Desktop. It is powered by the Hippius File System, a decentralized approach to storage built with a strong focus on security and privacy. All files are encrypted on your device before syncing to the Hippius network, so only you can read them.
+Your **Drive** is where your files live in Hippius Desktop. It is powered by the Hippius File System, a distributed approach to storage built with a strong focus on security and privacy. All files are encrypted on your device before syncing to the Hippius network, so only you can read them.
 
 The desktop app supports **multi-folder sync**, allowing you to sync multiple folders from your device simultaneously. Each folder syncs independently and can be managed, paused, or removed individually.
 

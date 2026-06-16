@@ -7,7 +7,7 @@ slug: /learn/intro
 
 # What is Hippius?
 
-Hippius is a decentralized cloud storage platform. Store files, host websites, run VMs — without relying on AWS, Google Cloud, or any single company.
+Hippius is a distributed cloud storage platform. Store files, host websites, run VMs — without relying on AWS, Google Cloud, or any single company.
 
 Under the hood it runs on a custom [Substrate](https://substrate.io/) blockchain, uses [Arion](/learn/storage-systems) for storage (Reed-Solomon erasure coding + CRUSH placement), and exposes a standard S3-compatible API.
 

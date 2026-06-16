@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-description: How Hippius stores your data across a decentralized network using Arion, Reed-Solomon erasure coding, and the CRUSH algorithm.
+description: How Hippius stores your data across a distributed network using Arion, Reed-Solomon erasure coding, and the CRUSH algorithm.
 ---
 
 import Ordered from '@site/src/components/Ordered';
