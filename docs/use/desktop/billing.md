@@ -22,6 +22,8 @@ Reach Billing from the sidebar at <BgStyledIconWithText text="Billing" icon="Bil
 Credits are consumed when you upload files, provision VMs, or use other Hippius services. The info button next to the page title shows the same reminder.
 :::
 
+![Billing screen](/img/desktop/billing-overview.png)
+
 ## Billing Dashboard
 
 The top of the Billing page shows three cards side by side:
