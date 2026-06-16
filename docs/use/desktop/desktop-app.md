@@ -14,8 +14,9 @@ import Icon from '@site/src/components/Icon';
 
 ## Introduction
 
-Welcome to the Hippius Desktop App documentation!
-Our app enables you to store, access, sync and manage files securely on a distributed blockchain network using Arion distributed storage. Whether you’re new to distributed storage or an experienced user, this guide will walk you through installing, using, and customizing the app to suit your needs. Let’s get started.
+A native app for distributed cloud storage. Drag, drop, sync. Your files are encrypted on your device before they leave, and stored across the Arion network.
+
+This guide walks you through installation, sync, sharing, and everything in between.
 
 ## Benefits of using the Desktop App
 
