@@ -92,7 +92,10 @@ const sidebars: SidebarsConfig = {
         // Re-enable both together when ready to publish.
         // "use/console/wallet",
         "use/console/billing",
-        "use/console/referrals",
+        // ⚠️ "Referrals" page is hidden until the feature is live. The page is
+        // also marked `draft: true` in use/console/referrals.md to block direct
+        // access. Re-enable both together when ready to publish.
+        // "use/console/referrals",
         "use/console/settings",
         "use/console/support",
       ],
