@@ -151,7 +151,7 @@ When you have more than one sync folder, switch between them from the **Local** 
   <li>The Drive page opens that folder, and the breadcrumb updates to show your location.</li>
 </Ordered>
 
-![The Local view showing the synced folder cards used to switch between folders](/img/desktop/drive-local-folders.png)
+![The Local view showing the synced folder cards used to switch between folders](/img/desktop/switching-between-sync-folders.png)
 
 ### File Actions (Context Menu)
 
@@ -264,7 +264,7 @@ Click the **Sync Queue** header (or the chevron) to reveal the file list. Each r
   <li><strong>Status badge</strong> — <strong>Pending</strong>, <strong>Encrypting</strong>, a live percentage, <strong>Synced</strong>, <strong>Downloaded</strong>, <strong>Deleted</strong>, or <strong>Error</strong></li>
 </Unordered>
 
-![Sync Queue widget expanded](/img/desktop/sync-progress-widget.png)
+![Sync Queue widget expanded](/img/desktop/syncing-progress-widget.png)
 
 ### Minified View
 
