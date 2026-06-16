@@ -16,6 +16,9 @@ The Help & Support area lets you submit support requests or complaints, track ti
 Help & Support is not available when you sign in with an access key. Sign in with one of the supported providers (such as Google) to view and manage your support tickets.
 :::
 
+![Help Overview](/img/desktop/help/overview.png)
+
+
 ## Open Help & Support
 
 Use the left sidebar to open <BgStyledText>Help & Support</BgStyledText>. This opens the <BgStyledText>My Tickets</BgStyledText> page, which lists your tickets and provides a <BgStyledText>+ New Ticket</BgStyledText> button to create a new request.
@@ -33,7 +36,7 @@ Use the left sidebar to open <BgStyledText>Help & Support</BgStyledText>. This o
   <li>Click <BgStyledText>Submit Ticket</BgStyledText>.</li>
 </Ordered>
 
-![Create a help ticket](/img/help/create-ticket.png)
+![Help Overview](/img/desktop/help/create-ticket.png)
 
 ## Review Tickets
 
@@ -49,7 +52,8 @@ Each ticket includes a messages view for ongoing communication with our support 
   <li>Type a response in the message field to continue the conversation.</li>
 </Ordered>
 
-![View support ticket messages](/img/help/view-messages.png)
+![View support ticket messages](/img/desktop/help/view-messages.png)
+
 
 ## Close a Ticket
 
