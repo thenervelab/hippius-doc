@@ -116,6 +116,13 @@
   stroke: #334063;
 }
 
+/* Download buttons (DownloadLinks): the Linux penguin is a fixed black SVG, so
+   lighten it in dark mode so it stays visible on the dark button. The Mac and
+   arrow icons use currentColor and adapt automatically. */
+[data-theme="dark"] .download-link-btn svg [fill="black"] {
+  fill: #d4d4d4;
+}
+
 .markdown h1:first-child {
   --ifm-h1-font-size: 2.5rem;
 }
