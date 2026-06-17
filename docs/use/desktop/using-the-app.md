@@ -10,6 +10,7 @@ import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import Icon from '@site/src/components/Icon';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Get Started with the App
 
@@ -20,7 +21,7 @@ import Icon from '@site/src/components/Icon';
   <li>For <strong>Access Key</strong>, enter your 12-word recovery phrase and click <BgStyledText>Log In</BgStyledText>.</li>
 </Ordered>
 
-![Google, Continue with GitHub, Continue with Apple, and Continue with Access Key Login Screen](/img/desktop/login-screen.png)
+<Screenshot src="/img/desktop/login-screen.png" alt="Google, Continue with GitHub, Continue with Apple, and Continue with Access Key Login Screen" dark />
 
 :::tip
 If you are a new user, your account will be created automatically when you sign in for the first time. No separate sign up step is required.
@@ -40,7 +41,7 @@ After signing in for the first time, you will be guided through a **5-step onboa
 
 You can click <BgStyledText>Skip</BgStyledText> at any time to bypass the remaining onboarding steps. Use the <BgStyledText>Back</BgStyledText> and <BgStyledText>Next</BgStyledText> buttons to navigate between steps. On the final step, click <BgStyledText>Start Syncing</BgStyledText> to back up your mnemonic seed and enter the app.
 
-![The onboarding wizard showing the "Welcome to Hippius" screen with the feature highlights and the app preview illustration](/img/desktop/onboarding-welcome.png)
+<Screenshot src="/img/desktop/onboarding-welcome.png" alt="The onboarding wizard showing the &quot;Welcome to Hippius&quot; screen with the feature highlights and the app preview illustration" dark />
 
 ## Set Your Unlock Password
 
@@ -71,7 +72,7 @@ To add your first folder:
   <li>Your folder is added and syncing begins automatically.</li>
 </Ordered>
 
-![The FilesOnboarding screen showing the Local Sync Folders section with the Add Folder button and Sync from Other Devices section](/img/desktop/set-up-your-first-sync-folder.png)
+<Screenshot src="/img/desktop/set-up-your-first-sync-folder.png" alt="The FilesOnboarding screen showing the Local Sync Folders section with the Add Folder button and Sync from Other Devices section" dark />
 
 Any files you add to this folder will be encrypted on your device and synced to the Hippius network. Setting up sync here is optional — you can add folders later from Settings or by returning to this screen at any time.
 
@@ -81,7 +82,7 @@ Your unlock password was set during first login, so file encryption is configure
 
 Once a folder begins syncing, the **Drive** page opens directly into that folder's contents. To return to the sync setup screen, click **Local** in the breadcrumb at the top of the page.
 
-![Folder Contents](/img/desktop/folder-contents.png)
+<Screenshot src="/img/desktop/folder-contents.png" alt="Folder Contents" dark />
 
 From the **Local** view you can add more sync folders, sync folders from your other devices, and manage existing ones — the same actions available under **Settings → Sync & Storage**. You can therefore manage syncing in whichever way is more convenient: directly from the Drive page, or from Settings.
 
@@ -101,7 +102,7 @@ In the **Add Local Folder** dialog:
   <li>Click <BgStyledText>Add Folder</BgStyledText> to confirm. Syncing starts automatically.</li>
 </Ordered>
 
-![Add More Folders ](/img/desktop/add-local-folder.png)
+<Screenshot src="/img/desktop/add-local-folder.png" alt="Add More Folders " dark />
 
 Each folder syncs independently and shows its own status (**Syncing**, **Paused**, or **Error**).
 
@@ -120,7 +121,7 @@ You can manage all your synced folders from either the **Drive** page (via the *
   <li>Click <BgStyledText>Upload File</BgStyledText> in the modal to start the upload.</li>
 </Ordered>
 
-![The upload dialog showing the folder selector dropdown (visible when 2+ folders exist ](/img/desktop/upload-file-with-folder-select.png)
+<Screenshot src="/img/desktop/upload-file-with-folder-select.png" alt="The upload dialog showing the folder selector dropdown (visible when 2+ folders exist " dark />
 
 :::info
 If syncing is stopped for a folder, you will see an alert prompting you to resume syncing before files can be uploaded.
@@ -150,7 +151,7 @@ The widget has three forms:
   <li><strong>Minified</strong>: Click the <strong>✕</strong> to shrink the widget into a compact circular progress ring. The ring keeps tracking progress and shows a checkmark when complete; click it to restore the full widget.</li>
 </Unordered>
 
-![The Sync Queue widget expanded, showing the per-file list with status badges](/img/desktop/syncing-progress-widget.png)
+<Screenshot src="/img/desktop/syncing-progress-widget.png" alt="The Sync Queue widget expanded, showing the per-file list with status badges" dark />
 
 :::tip
 Dismissing the widget with **✕** does not stop syncing — it only minimizes the widget to the progress ring. The ring also appears whenever the sidebar is collapsed, and the full card reopens automatically when a new sync starts.
@@ -195,7 +196,7 @@ When you have more than one sync folder, switch between them from the **Local** 
   <li>The Drive page opens that folder, and the breadcrumb updates to show your location.</li>
 </Ordered>
 
-![The Local view showing the synced folder cards used to switch between folders](/img/desktop/switching-between-sync-folders.png)
+<Screenshot src="/img/desktop/switching-between-sync-folders.png" alt="The Local view showing the synced folder cards used to switch between folders" dark />
 
 :::tip
 To narrow down the files within the folder you are viewing, use the **File Type**, **Size**, and **Date Range** filters or the search box at the top of the Drive page.
@@ -206,7 +207,7 @@ To narrow down the files within the folder you are viewing, use the **File Type*
 Hippius Desktop keeps a compact **menu bar window** in your system tray (the menu bar on macOS, the notification area on Windows). Click the Hippius tray icon to open it for a quick glance at your account without bringing the full app to the front.
 
 
-![The Hippius menu bar window showing credits, the notification bell, file search, and recent uploads](/img/desktop/menu-bar-window.png)
+<Screenshot src="/img/desktop/menu-bar-window.png" alt="The Hippius menu bar window showing credits, the notification bell, file search, and recent uploads" dark />
 
 The window has four parts:
 

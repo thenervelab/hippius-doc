@@ -9,6 +9,7 @@ description: Stay on top of activity in Hippius Desktop — review drive and cre
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -39,13 +40,13 @@ Click the **bell icon** to open the notifications dropdown. A badge on the bell 
   <li>Click <BgStyledText>View More</BgStyledText> at the bottom to open the Notifications Hub.</li>
 </Ordered>
 
-![Notifications dropdown from the header bell](/img/desktop/notifications/notifications-dropdown.png)
+<Screenshot src="/img/desktop/notifications/notifications-dropdown.png" alt="Notifications dropdown from the header bell" dark />
 
 ### The Notifications Hub
 
 Click <BgStyledText>View More</BgStyledText> at the bottom of the dropdown to open the full **Notifications Hub**. The page is split into a list of notifications on the left and a details panel on the right.
 
-![Notifications Hub page](/img/desktop/notifications/notifications-hub.png)
+<Screenshot src="/img/desktop/notifications/notifications-hub.png" alt="Notifications Hub page" dark />
 
 ## Filter and Manage Notifications
 
@@ -69,7 +70,7 @@ Select a notification from the list to open it in the details panel on the right
   <li>Open the three dot menu (⋮) in the top right of the panel to mark the notification as read/unread or <BgStyledText>Delete this notification</BgStyledText>.</li>
 </Unordered>
 
-![Notification details panel](/img/desktop/notifications/notification-details.png)
+<Screenshot src="/img/desktop/notifications/notification-details.png" alt="Notification details panel" dark />
 
 
 ## Notification Settings {#notification-settings}
@@ -86,4 +87,4 @@ The same preferences are also available in the **Notifications** section of the 
 
 Only enabled categories appear as tabs in the dropdown and on the Notifications Hub. If you haven't enabled any categories, the Hub and the bell dropdown prompt you to turn them on from settings.
 
-![Notifications settings dialog](/img/desktop/notifications/notifications-settings.png)
+<Screenshot src="/img/desktop/notifications/notifications-settings.png" alt="Notifications settings dialog" dark />

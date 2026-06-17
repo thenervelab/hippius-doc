@@ -10,6 +10,7 @@ import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -19,7 +20,7 @@ To share a file, right click it in the desktop app and choose **Share via link**
 
 After sharing, all your active links are tracked on the **Shared Links** page. Open it with the <BgStyledText>Shared Links</BgStyledText> button in the top right of the <BgStyledIconWithText text="Drive" icon="Category" /> view header. From there you can copy a link again, revoke access, reshare a file, and see a history of ended shares.
 
-![Shared Links page overview](/img/desktop/shared-links-overview.png)
+<Screenshot src="/img/desktop/shared-links-overview.png" alt="Shared Links page overview" dark />
 
 ## How Sharing Works
 
@@ -43,7 +44,7 @@ When you right click a file and choose **Share via link**, the desktop:
 
 The server stores the encrypted copy and returns a share token. It never learns the decryption key.
 
-![Share creation dialog](/img/desktop/shared-links-create.png)
+<Screenshot src="/img/desktop/shared-links-create.png" alt="Share creation dialog" dark />
 
 :::info Why is sharing fast on desktop?
 The desktop reads your local file directly with no download required. For most files this means the entire share process is as fast as your upload connection allows, with no extra round trip to fetch the file first.
@@ -151,7 +152,7 @@ The console doesn't have access to your local files. It would need to download a
 
 The History section records shares that have ended, whether expired or revoked.
 
-![Share history section](/img/desktop/shared-links-history.png)
+<Screenshot src="/img/desktop/shared-links-history.png" alt="Share history section" dark />
 
 ### How history is captured
 

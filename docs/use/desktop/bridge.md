@@ -11,6 +11,7 @@ import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import Icon from '@site/src/components/Icon';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -30,7 +31,7 @@ Bridging is processed by a distributed network of Hippius guardians and typicall
   <li>Ensure the correct wallet is active.</li>
 </Ordered>
 
-![Bridge Page](/img/desktop/wallet/bridge-page.png)
+<Screenshot src="/img/desktop/wallet/bridge-page.png" alt="Bridge Page" dark />
 
 ## Bridging Alpha → hAlpha
 
@@ -46,7 +47,7 @@ This direction locks your Alpha tokens on the Bittensor network. Hippius guardia
   <li>Enter your wallet password when prompted to sign each transaction.</li>
 </Ordered>
 
-![Bridge Alpha to hAlpha](/img/desktop/wallet/bridge-alpha-halpha.png)
+<Screenshot src="/img/desktop/wallet/bridge-alpha-halpha.png" alt="Bridge Alpha to hAlpha" dark />
 
 :::note
 A minimum bridge amount applies. The gas fee is shown before you confirm. The bridge process typically takes 1–3 minutes depending on network conditions.
@@ -66,7 +67,7 @@ This direction burns your hAlpha tokens on Hippius. Guardians detect the burn an
   <li>Enter your wallet password to sign the transaction.</li>
 </Ordered>
 
-![Bridge hAlpha to Alpha](/img/desktop/wallet/bridge-halpha-alpha.png)
+<Screenshot src="/img/desktop/wallet/bridge-halpha-alpha.png" alt="Bridge hAlpha to Alpha" dark />
 
 ## Bridge Transactions Widget
 
@@ -84,7 +85,7 @@ The header shows the overall status:
 
 Click the header to expand or collapse the transaction details.
 
-![Bridge Widget Header](/img/desktop/wallet/bridge-widget-header.png)
+<Screenshot src="/img/desktop/wallet/bridge-widget-header.png" alt="Bridge Widget Header" dark />
 
 ### Bridge Progress Steps
 
@@ -105,7 +106,7 @@ Each step shows:
 <li>Additional details when available</li>
 </Unordered>
 
-{/* ![Bridge Progress](/img/desktop/wallet/bridge-progress.png) */}
+{/* <Screenshot src="/img/desktop/wallet/bridge-progress.png" alt="Bridge Progress" dark /> */}
 
 ### Transaction Status Icons
 
@@ -129,7 +130,7 @@ Use the filter tabs to view specific transaction types:
 
 The count badge shows how many pending transactions exist in each category.
 
-![Bridge Filters](/img/desktop/wallet/bridge-widget-header.png)
+<Screenshot src="/img/desktop/wallet/bridge-widget-header.png" alt="Bridge Filters" dark />
 
 ### Transaction Cards
 
@@ -151,7 +152,7 @@ Click a transaction card to expand and see additional details:
 <li>Guardian vote count and threshold</li>
 </Unordered>
 
-{/* ![Transaction Card](/img/desktop/wallet/transaction-card.png) */}
+{/* <Screenshot src="/img/desktop/wallet/transaction-card.png" alt="Transaction Card" dark /> */}
 
 ### Dismissing the Widget
 <Unordered>
