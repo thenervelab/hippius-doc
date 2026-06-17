@@ -13,8 +13,11 @@ const buttonVariants = cva({
         "relative overflow-hidden bg-primary-50 hover:bg-primary-40 text-white hover:text-white border border-primary-40 rounded",
         classes.primary
       ),
+      // Fixed light colors (not theme tokens): this button sits on the
+      // always-blue hero, so it should stay a white button in both light and
+      // dark mode rather than flipping to black.
       secondary:
-        "relative overflow-hidden bg-grey-100 hover:bg-grey-80 text-grey-10 hover:text-grey-10 border border-grey-80",
+        "relative overflow-hidden bg-white hover:bg-[#f4f4f4] text-[#1d1d1d] hover:text-[#1d1d1d] border border-[#e3e3e3]",
       ghost: "hover:opacity-60 text-white hover:text-white",
     },
     size: {

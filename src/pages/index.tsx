@@ -107,7 +107,7 @@ function HomepageHeader() {
       <div className="relative flex flex-col items-center">
         <div>
           <Link
-            className="px-4 py-2 bg-white rounded text-grey-40 font-digital"
+            className="px-4 py-2 bg-white rounded text-[#353535] font-digital"
             to="/learn/intro"
           >
             ⏱️ 5 Minute Read

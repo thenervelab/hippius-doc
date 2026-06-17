@@ -34,7 +34,7 @@ export default function DocHero() {
           }}
         />
       </div>
-      <div className="flex flex-col justify-between h-full text-grey-100 p-4">
+      <div className="flex flex-col justify-between h-full text-white p-4">
         <div className="text-sm lg:text-base lg:leading-[22px] font-medium">
           {kicker}
         </div>
