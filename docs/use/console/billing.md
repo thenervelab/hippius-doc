@@ -10,6 +10,7 @@ import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -19,7 +20,7 @@ From here you can top up your balance with TAO, subscribe to a monthly plan (cha
 
 Reach Billing from the sidebar at <BgStyledIconWithText text="Billing" icon="CreditCard" />.
 
-![Billing page](/img/console/billing/overview.png)
+<Screenshot src="/img/console/billing/overview.png" alt="Billing page" dark />
 
 ## Your Credit Balance
 
@@ -27,7 +28,7 @@ At the top of the page, a **credits chart** shows your available balance as a la
 
 The chart updates automatically whenever you top up, subscribe, or consume credits.
 
-![Credits chart](/img/console/billing/credits-chart.png)
+<Screenshot src="/img/console/billing/credits-chart.png" alt="Credits chart" dark />
 
 ## Topping Up with TAO
 
@@ -47,7 +48,7 @@ Use this if your TAO is in a browser wallet extension connected to the console.
   <li>Credits are added automatically once the transfer confirms on chain.</li>
 </Ordered>
 
-![Pay with TAO — Bittensor Wallet tab](/img/console/billing/tao-wallet.png)
+<Screenshot src="/img/console/billing/tao-wallet.png" alt="Pay with TAO — Bittensor Wallet tab" dark />
 
 ### Manually
 
@@ -60,7 +61,7 @@ Use this if your TAO is on an exchange or in a wallet that isn't connected to th
   <li>Your credit balance updates automatically at the rate of $1 = 1 credit once the transfer confirms on chain.</li>
 </Ordered>
 
-![Pay with TAO — Manually tab](/img/console/billing/tao-manual.png)
+<Screenshot src="/img/console/billing/tao-manual.png" alt="Pay with TAO — Manually tab" dark />
 
 :::warning TAO transfers are irreversible
 Once a TAO transaction confirms on the blockchain, it cannot be reversed. Verify the destination address before sending. We cannot recover funds sent to the wrong address.
@@ -85,7 +86,7 @@ Below the deposit panel, the **Subscription Plans** section lets you pay by card
 
 Each plan card shows the monthly credit allocation, the effective storage that buys at current rates, and the dollar equivalent. Scroll through the carousel with the arrow buttons to compare plans. Your active plan is highlighted with a check mark and a styled border.
 
-![Subscription plans carousel](/img/console/billing/plans.png)
+<Screenshot src="/img/console/billing/plans.png" alt="Subscription plans carousel" dark />
 
 ### Subscribing
 
@@ -96,7 +97,7 @@ Each plan card shows the monthly credit allocation, the effective storage that b
   <li>Stripe processes the first month's payment immediately and you're returned to Hippius. The plan credits are deposited right away.</li>
 </Ordered>
 
-![Stripe subscription checkout](/img/console/billing/subscribe.png)
+<Screenshot src="/img/console/billing/subscribe.png" alt="Stripe subscription checkout" dark />
 
 ### Switching Plans
 
@@ -110,7 +111,7 @@ To move to a different plan, find the new plan card and click <BgStyledText>Subs
   <li>Click <BgStyledText>Cancel Subscription</BgStyledText> to continue. You'll be redirected to the Stripe customer portal to complete the cancellation.</li>
 </Ordered>
 
-![Cancel subscription dialog](/img/console/billing/cancel.png)
+<Screenshot src="/img/console/billing/cancel.png" alt="Cancel subscription dialog" />
 
 Your existing credits stay available until the end of the current billing period. Pay as you go top ups continue to work after cancellation.
 
@@ -129,7 +130,7 @@ The **Transaction History** table at the bottom of the page shows every credit m
 
 Search by description or reference, sort by date or amount, and use pagination to navigate.
 
-![Transaction history](/img/console/billing/tx-history.png)
+<Screenshot src="/img/console/billing/tx-history.png" alt="Transaction history" dark />
 
 ## How Credits Are Used
 

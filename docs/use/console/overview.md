@@ -10,6 +10,7 @@ import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -17,7 +18,7 @@ The **Overview** is your console home page. Every time you sign in, this is wher
 
 You can switch between **Normal** and **Pro** view at any time from [Settings](/use/console/settings).
 
-![Overview page](/img/console/overview/overview.png)
+<Screenshot src="/img/console/overview/overview.png" alt="Overview page" dark />
 
 ## Normal View
 
@@ -33,7 +34,7 @@ Three panels sit across the top of the page:
 
 Below the panels, the **Files** section shows all your Drive folders in a searchable table. Your total storage size and file count are shown at the top of the section.
 
-![Normal view](/img/console/overview/normal.png)
+<Screenshot src="/img/console/overview/normal.png" alt="Normal view" dark />
 
 ## Pro View
 
@@ -57,7 +58,7 @@ At the bottom of the page:
   <li><strong>Last Uploads</strong>: your most recently uploaded files with timestamps.</li>
 </Unordered>
 
-![Pro view](/img/console/overview/pro.png)
+<Screenshot src="/img/console/overview/pro.png" alt="Pro view" dark />
 
 ## Where to next
 
