@@ -54,6 +54,68 @@
   --success-10: 3 48 30;
 }
 
+/* ── DARK MODE ──────────────────────────────────────────────────────────
+   Infima's built-in dark variables handle the base (page background, text,
+   sidebar, code blocks). Here we mirror the custom token scale so the
+   Tailwind utilities backed by these vars (text-grey-10, bg-grey-100, …)
+   invert automatically across the custom components, and patch a few
+   hardcoded light colors. This is a first pass — the custom components
+   (hero, cards, FAQ, etc.) still need a visual review for edge cases. */
+[data-theme="dark"] {
+  /* Grey scale mirrored: low tokens (used as text) become light, high
+     tokens (used as surfaces) become dark. */
+  --grey-100: 10 10 10;
+  --grey-90: 29 29 29;
+  --grey-80: 42 42 42;
+  --grey-70: 53 53 53;
+  --grey-60: 79 79 79;
+  --grey-50: 125 125 125;
+  --grey-40: 163 163 163;
+  --grey-30: 227 227 227;
+  --grey-20: 244 244 244;
+  --grey-10: 244 244 244;
+
+  /* Keep the brand blue accents, but darken the lightest tints (used as
+     surfaces) so they don't glow on a dark page. */
+  --primary-100: 16 43 101;
+  --primary-90: 24 62 145;
+  --primary-80: 31 81 190;
+}
+
+[data-theme="dark"] .markdown a {
+  color: #6f9bff;
+}
+
+[data-theme="dark"] .table-of-contents__left-border {
+  border-color: #2a2a2a;
+}
+
+[data-theme="dark"] .screenshot-container img {
+  border-color: #2a2a2a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Homepage section vignette: in light mode it fades the graphsheet grid out
+   to a white edge; in dark mode fade it to the dark page background instead,
+   so it stops painting a white card (with a dark hole) over dark sections. */
+[data-theme="dark"] .bg-white-cloud-gradient {
+  background-image: radial-gradient(
+    21.34% 21.34% at 50% 50%,
+    rgba(10, 10, 10, 0) 0%,
+    #0a0a0a 100%
+  );
+}
+
+/* Icon "chip" grid (AbstractIconWrapper): the SVG hardcodes a white fill and
+   light-blue grid lines for light mode. In dark mode, swap the fill for a dark
+   card and mute the grid so it reads as a subtle chip, not a white square. */
+[data-theme="dark"] .abstract-icon-grid rect[fill="white"] {
+  fill: #15161c;
+}
+[data-theme="dark"] .abstract-icon-grid [stroke="#B4C8F3"] {
+  stroke: #334063;
+}
+
 .markdown h1:first-child {
   --ifm-h1-font-size: 2.5rem;
 }
