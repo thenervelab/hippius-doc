@@ -77,12 +77,12 @@ Below the deposit panel, the **Subscription Plans** section lets you pay by card
 
 ### The Four Tiers
 
-| Tier | Best for |
-|---|---|
-| **Personal** | Hobby projects and light personal storage. |
+| Tier             | Best for                                   |
+| ---------------- | ------------------------------------------ |
+| **Personal**     | Hobby projects and light personal storage. |
 | **Professional** | Active personal use with moderate storage. |
-| **Business** | Teams and apps with regular activity. |
-| **Enterprise** | High volume workloads. |
+| **Business**     | Teams and apps with regular activity.      |
+| **Enterprise**   | High volume workloads.                     |
 
 Each plan card shows the monthly credit allocation, the effective storage that buys at current rates, and the dollar equivalent. Scroll through the carousel with the arrow buttons to compare plans. Your active plan is highlighted with a check mark and a styled border.
 
@@ -111,7 +111,7 @@ To move to a different plan, find the new plan card and click <BgStyledText>Subs
   <li>Click <BgStyledText>Cancel Subscription</BgStyledText> to continue. You'll be redirected to the Stripe customer portal to complete the cancellation.</li>
 </Ordered>
 
-<Screenshot src="/img/console/billing/cancel.png" alt="Cancel subscription dialog" />
+<Screenshot src="/img/console/billing/cancel.png" alt="Cancel subscription dialog" dark/>
 
 Your existing credits stay available until the end of the current billing period. Pay as you go top ups continue to work after cancellation.
 
@@ -119,14 +119,14 @@ Your existing credits stay available until the end of the current billing period
 
 The **Transaction History** table at the bottom of the page shows every credit movement on your account: top ups, subscription charges, usage debits, and refunds.
 
-| Column | What it shows |
-|---|---|
-| **Date** | When the transaction occurred. |
-| **Type** | Top up (card or TAO), Subscription, Usage, or Refund. |
-| **Description** | A short note (payment method, plan name, etc.). |
-| **Amount** | Positive (credits added) or negative (credits consumed). |
-| **Status** | Pending, Completed, or Failed. |
-| **Reference** | Stripe charge ID, TAO transaction hash, or internal ID with a copy icon. |
+| Column          | What it shows                                                            |
+| --------------- | ------------------------------------------------------------------------ |
+| **Date**        | When the transaction occurred.                                           |
+| **Type**        | Top up (card or TAO), Subscription, Usage, or Refund.                    |
+| **Description** | A short note (payment method, plan name, etc.).                          |
+| **Amount**      | Positive (credits added) or negative (credits consumed).                 |
+| **Status**      | Pending, Completed, or Failed.                                           |
+| **Reference**   | Stripe charge ID, TAO transaction hash, or internal ID with a copy icon. |
 
 Search by description or reference, sort by date or amount, and use pagination to navigate.
 
@@ -136,10 +136,10 @@ Search by description or reference, sort by date or amount, and use pagination t
 
 Credits are charged for every metered action:
 
-| Action | How it's charged |
-|---|---|
-| **Drive (HCFS) storage** | Per byte, per minute, based on the storage class. |
-| **S3 storage** | Per byte, per minute, with separate rates for traffic and operations. |
+| Action                   | How it's charged                                                      |
+| ------------------------ | --------------------------------------------------------------------- |
+| **Drive (HCFS) storage** | Per byte, per minute, based on the storage class.                     |
+| **S3 storage**           | Per byte, per minute, with separate rates for traffic and operations. |
 
 If your balance hits zero:
 
