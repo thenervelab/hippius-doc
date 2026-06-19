@@ -10,6 +10,7 @@ import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -36,7 +37,7 @@ If this is your first time signing in, your account is created automatically. Th
 Your console account and desktop app account are the same. Sign in with the same credentials and your Drive files will be there waiting for you.
 :::
 
-![Console login screen](/img/console/getting-started/login.png)
+<Screenshot src="/img/console/getting-started/login.png" alt="Console login screen" dark />
 
 ## Choose Your View
 
@@ -48,7 +49,7 @@ The first time you sign in, you'll be asked to pick a view for your dashboard.
 
 You can switch between Normal and Pro at any time from [Settings](/use/console/settings).
 
-![Choose mode screen](/img/console/getting-started/choose-mode.png)
+<Screenshot src="/img/console/getting-started/choose-mode.png" alt="Choose mode screen" dark />
 
 ## Getting Around
 
@@ -65,7 +66,7 @@ The **sidebar on the left** is how you move between sections. It's organised int
 
 The console automatically follows your system's dark or light mode. If you'd prefer a different theme, you can override it at any time from [Settings](/use/console/settings).
 
-![Theme setting](/img/console/getting-started/theme.png)
+<Screenshot src="/img/console/getting-started/theme.png" alt="Theme setting" dark />
 
 ## Where to next
 

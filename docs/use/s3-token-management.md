@@ -9,6 +9,7 @@ import Ordered from '@site/src/components/Ordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import Icon from '@site/src/components/Icon';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Overview
 
@@ -52,7 +53,7 @@ When you access S3 Storage in the Hippius Console for the first time, you'll nee
   <li>Click <BgStyledText>Create Master Token</BgStyledText> to generate your credentials.</li>
 </Ordered>
 
-![Create Master Token Dialog](/img/s3-token-management/create-master-token.png)
+<Screenshot src="/img/s3-token-management/create-master-token.png" alt="Create Master Token Dialog" dark />
 
 ### Saving Your Master Token Credentials
 
@@ -74,7 +75,7 @@ After creating a master token, you'll receive two critical pieces of information
   <li>Click <BgStyledText>I've Saved My New Secret</BgStyledText> to confirm.</li>
 </Ordered>
 
-![Master Token Secret Display](/img/s3-token-management/master-token-secret.png)
+<Screenshot src="/img/getting-started/master-token.png" alt="Master Token Secret Display" dark />
 
 ## Managing Tokens
 
@@ -88,7 +89,7 @@ The Hippius Console provides a comprehensive token management interface:
   <li>You'll see two tabs: <BgStyledText>Sub Tokens</BgStyledText> (manage limited-scope API tokens) and <BgStyledText>Master Tokens</BgStyledText> (manage full-access tokens).</li>
 </Ordered>
 
-![Token Management Interface](/img/s3-token-management/token-management.png)
+<Screenshot src="/img/s3-token-management/token-management.png" alt="Token Management Interface" dark />
 
 ### Master Tokens Tab
 
@@ -125,7 +126,7 @@ Each master token has an options menu (⋮) with the following actions:
 Revoking a master token cannot be undone! Any applications using this token will immediately lose access. Make sure to update all integrations before revoking.
 :::
 
-![Revoke Master Token Dialog](/img/s3-token-management/revoke-master-token.png)
+<Screenshot src="/img/s3-token-management/revoke-master-token.png" alt="Revoke Master Token Dialog" dark />
 
 ### Sub Tokens Tab
 
@@ -158,7 +159,7 @@ Sub tokens allow you to grant limited, scoped access to your S3 buckets. This is
   <li>Click <BgStyledText>Create Sub Token</BgStyledText> to generate the token.</li>
 </Ordered>
 
-![Create Sub Token Dialog](/img/s3-token-management/create-sub-token.png)
+<Screenshot src="/img/s3-token-management/create-sub-token.png" alt="Create Sub Token Dialog" dark />
 
 ### Using Sub Token Credentials
 
@@ -201,7 +202,7 @@ Each sub token has an options menu (⋮) with the following actions:
   <li>Confirm the action in the warning dialog.</li>
 </Ordered>
 
-![Revoke Sub Token Dialog](/img/s3-token-management/revoke-sub-token.png)
+<Screenshot src="/img/s3-token-management/revoke-sub-token.png" alt="Revoke Sub Token Dialog" dark />
 
 :::info Revocation Effects
 - The token becomes invalid immediately

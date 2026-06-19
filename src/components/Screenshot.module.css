@@ -1,0 +1,59 @@
+/* Theme-aware visibility: render both variants, let the active theme show one.
+   Avoids the hydration flicker you'd get from reading the theme in JS. */
+.light {
+  display: block;
+}
+.dark {
+  display: none;
+}
+[data-theme="dark"] .light {
+  display: none;
+}
+[data-theme="dark"] .dark {
+  display: block;
+}
+
+/* The dark-mode panel: a darker take on the light Figma grid background.
+   `container-type: inline-size` lets the grid scale with the panel width
+   (1cqw = 1% of panel width), so cells stay proportional at any size. */
+.frame {
+  container-type: inline-size;
+  position: relative;
+  aspect-ratio: 668 / 350;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 1.5rem 0;
+  background-color: #0d121d;
+  background-image:
+    /* fine grid */
+    linear-gradient(rgba(125, 145, 200, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 145, 200, 0.05) 1px, transparent 1px),
+    /* coarse grid */
+    linear-gradient(rgba(125, 145, 200, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 145, 200, 0.09) 1px, transparent 1px);
+  background-size:
+    2cqw 2cqw,
+    2cqw 2cqw,
+    14cqw 14cqw,
+    14cqw 14cqw;
+}
+
+/* Inner screenshot, absolutely centered and contained within a 482×303 region
+   of the 668×350 panel: 482/668 ≈ 72.16% wide, 303/350 ≈ 86.57% tall. width and
+   height stay auto so the image keeps its own aspect ratio inside those caps —
+   never squashed or cropped. The `.frame` prefix raises specificity above the
+   global `.markdown img` rule so these caps actually win. */
+.frame .frameImg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: auto;
+  max-width: 72.16%;
+  max-height: 86.57%;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+}

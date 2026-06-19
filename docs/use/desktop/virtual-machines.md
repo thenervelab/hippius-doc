@@ -8,6 +8,7 @@ slug: /use/desktop/virtual-machines
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Coming soon
 
@@ -36,7 +37,7 @@ You need at least **10 credits** in your account to create a virtual machine. Ma
 
 Start by clicking the top-right <BgStyledText>Create VM</BgStyledText> button, then select the model that fits your needs and continue with the setup.
 
-![Select a model for a new VM](/img/desktop/virtual-machines/select-modal-in-create-vm.png)
+<Screenshot src="/img/desktop/virtual-machines/select-modal-in-create-vm.png" alt="Select a model for a new VM" dark />
 
 ### Step 1: Configure the VM
 
@@ -52,7 +53,7 @@ Complete the model configuration details.
   <li>Click <BgStyledText>Next</BgStyledText>.</li>
 </Ordered>
 
-![Create VM step 1 filled](/img/desktop/virtual-machines/step-1-create-vm.png)
+<Screenshot src="/img/desktop/virtual-machines/step-1-create-vm.png" alt="Create VM step 1 filled" dark />
 
 ### Step 2: Review and create
 
@@ -64,13 +65,13 @@ Review the summary and create the VM.
   <li>Use <BgStyledText>Go Back</BgStyledText> if you need to edit any settings.</li>
 </Ordered>
 
-![Create VM step 2 summary](/img/desktop/virtual-machines/step-2-create-vm.png)
+<Screenshot src="/img/desktop/virtual-machines/step-2-create-vm.png" alt="Create VM step 2 summary" dark />
 
 ## SSH Keys
 
 SSH keys are required to securely access your instances. Manage all keys in the SSH Keys tab.
 
-![SSH keys list](/img/desktop/virtual-machines/ssh-keys.png)
+<Screenshot src="/img/desktop/virtual-machines/ssh-keys.png" alt="SSH keys list" dark />
 
 **Note:** Only OpenSSH public keys are supported (for example, `ssh-rsa` or `ssh-ed25519`). Never share or paste your private key.
 
@@ -84,7 +85,7 @@ SSH keys are required to securely access your instances. Manage all keys in the 
   <li>Click <BgStyledText>Create Key</BgStyledText>.</li>
 </Ordered>
 
-![Create SSH key modal](/img/desktop/virtual-machines/create-ssh-key.png)
+<Screenshot src="/img/desktop/virtual-machines/create-ssh-key.png" alt="Create SSH key modal" dark />
 
 ### Generate an SSH Key Pair with ssh-keygen
 
@@ -177,7 +178,7 @@ Replace `username` with your actual Windows username. Copy the entire output and
   <li>Confirm deletion in the modal.</li>
 </Ordered>
 
-![Delete SSH key confirmation](/img/desktop/virtual-machines/delete-ssh-key.png)
+<Screenshot src="/img/desktop/virtual-machines/delete-ssh-key.png" alt="Delete SSH key confirmation" dark />
 
 ## Connect to Your VM via SSH
 
@@ -270,7 +271,7 @@ ssh hippius@your_nebula_ip
 
 Use the instance options menu to perform actions on a VM.
 
-![Instance options menu](/img/desktop/virtual-machines/vm-options.png)
+<Screenshot src="/img/desktop/virtual-machines/vm-options.png" alt="Instance options menu" dark />
 
 ### Access Console
 

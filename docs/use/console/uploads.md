@@ -10,6 +10,7 @@ import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -32,9 +33,9 @@ If you need to upload larger files:
 
 ## Starting an Upload
 
-| Where you are | How to open the upload dialog |
-|---|---|
-| **Drive** | Click <BgStyledText>+ New File</BgStyledText> in the page header. |
+| Where you are           | How to open the upload dialog                                      |
+| ----------------------- | ------------------------------------------------------------------ |
+| **Drive**               | Click <BgStyledText>+ New File</BgStyledText> in the page header.  |
 | **Inside an S3 bucket** | Click <BgStyledText>+ Upload</BgStyledText> in the bucket toolbar. |
 
 You can also drag files from your file manager (Finder, Explorer) directly onto the Drive page or inside an open S3 bucket. A full page drop zone appears and the dialog opens with your files already loaded.
@@ -48,7 +49,7 @@ You can also drag files from your file manager (Finder, Explorer) directly onto 
   <li>Click <BgStyledText>Upload</BgStyledText> to start.</li>
 </Ordered>
 
-![Drive upload dialog](/img/console/uploads/drive-dialog.png)
+<Screenshot src="/img/console/uploads/drive-dialog.png" alt="Drive upload dialog" dark />
 
 ### The S3 Upload Dialog
 
@@ -59,7 +60,7 @@ You can also drag files from your file manager (Finder, Explorer) directly onto 
   <li>Click <BgStyledText>Upload</BgStyledText> to start.</li>
 </Ordered>
 
-![S3 upload dialog](/img/console/uploads/s3-dialog.png)
+<Screenshot src="/img/console/uploads/s3-dialog.png" alt="S3 upload dialog" dark />
 
 ## Upload Security
 
@@ -93,14 +94,12 @@ Files upload **one at a time** to avoid saturating your connection or the in-bro
 
 Progress is based on **actual bytes uploaded** via `XMLHttpRequest` progress events, not an estimate or a timer.
 
-![Upload progress widget — expanded](/img/console/uploads/upload-widget.png)
+<Screenshot src="/img/console/uploads/upload-widget.png" alt="Upload progress widget — expanded" dark/>
 
 Once every file in the batch finishes, the widget collapses to a small pill you can dismiss. While any file is still in flight, you can collapse the widget but not close it.
 
 :::tip Closing the browser tab cancels any uploads still in progress.
 :::
-
-
 
 ## When a File Fails
 
@@ -113,15 +112,14 @@ If a file fails to upload:
 
 To retry a failed file, open the upload dialog again and add the file. There is no in place retry button in the widget.
 
-
 Common failure reasons:
 
-| Reason | What to do |
-|---|---|
-| **Network error** | Check your connection and add the file again. |
-| **413 Too Large** (Drive) | The file is over 100 MB. Use the desktop app. |
-| **Auth error** (S3) | Your master or sub token has expired or been revoked. Generate a new one. |
-| **Insufficient credits** | The dialog catches this before the upload starts (see below). |
+| Reason                    | What to do                                                                |
+| ------------------------- | ------------------------------------------------------------------------- |
+| **Network error**         | Check your connection and add the file again.                             |
+| **413 Too Large** (Drive) | The file is over 100 MB. Use the desktop app.                             |
+| **Auth error** (S3)       | Your master or sub token has expired or been revoked. Generate a new one. |
+| **Insufficient credits**  | The dialog catches this before the upload starts (see below).             |
 
 ## Insufficient Credits
 
@@ -131,12 +129,12 @@ After topping up, start the upload again.
 
 ## Limits
 
-| Limit | Drive | S3 |
-|---|---|---|
-| **Max file size via console** | 100 MB | 100 MB |
-| **Max files per batch** | 1000 | 1000 |
-| **Concurrent uploads** | 1 (queue runs one at a time) | 1 (queue runs one at a time) |
-| **Folder depth** | Unlimited | Unlimited |
+| Limit                         | Drive                        | S3                           |
+| ----------------------------- | ---------------------------- | ---------------------------- |
+| **Max file size via console** | 100 MB                       | 100 MB                       |
+| **Max files per batch**       | 1000                         | 1000                         |
+| **Concurrent uploads**        | 1 (queue runs one at a time) | 1 (queue runs one at a time) |
+| **Folder depth**              | Unlimited                    | Unlimited                    |
 
 ## Where to next
 

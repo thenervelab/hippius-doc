@@ -11,6 +11,7 @@ import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import Icon from '@site/src/components/Icon';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -73,7 +74,7 @@ When you log in on a new device, the app asks for your unlock password to decryp
 
 The app prompts you to set your unlock password on your first sign-in. This is required before you can use the app.
 
-![Set unlock password dialog](/img/desktop/settings/set-unlock-password-dialog.png)
+<Screenshot src="/img/desktop/settings/set-unlock-password-dialog.png" alt="Set unlock password dialog" dark />
 
 <Ordered>
   <li>Enter a strong password (minimum 8 characters).</li>
@@ -87,7 +88,7 @@ Once set, file encryption is configured automatically. You can start adding sync
 
 You can change your unlock password at any time from Settings.
 
-![Change unlock password dialog](/img/desktop/change-unlock-password-dialog.png)
+<Screenshot src="/img/desktop/change-unlock-password-dialog.png" alt="Change unlock password dialog" dark />
 
 <Ordered>
   <li>Go to <BgStyledIconWithText text="Settings" icon="Settings" /> → <BgStyledIconWithText text="Security" icon="SecuritySafe" />.</li>
@@ -111,7 +112,7 @@ Files uploaded to Hippius are automatically added to your sync folder and encryp
   <li>Click the <BgStyledText>Upload File</BgStyledText> button in the modal to start the upload process.</li>
 </Ordered>
 
-![Upload file modal](/img/desktop/upload-file-with-folder-select.png)
+<Screenshot src="/img/desktop/upload-file-with-folder-select.png" alt="Upload file modal" dark />
 
 :::info Private & Encrypted
 All files uploaded are stored privately and encrypted. Files are added to your sync folder and secured automatically.
@@ -151,7 +152,7 @@ When you have more than one sync folder, switch between them from the **Local** 
   <li>The Drive page opens that folder, and the breadcrumb updates to show your location.</li>
 </Ordered>
 
-![The Local view showing the synced folder cards used to switch between folders](/img/desktop/switching-between-sync-folders.png)
+<Screenshot src="/img/desktop/switching-between-sync-folders.png" alt="The Local view showing the synced folder cards used to switch between folders" dark />
 
 ### File Actions (Context Menu)
 
@@ -170,7 +171,7 @@ Right click any file or folder (or click the <BgStyledIconWithText icon="More" p
 | **Rename**                        | Files & Folders      | Rename the item on this device; the change syncs to the network |
 | **Delete**                        | Files & Folders      | Remove the item (disabled while syncing)                        |
 
-![File context menu](/img/desktop/file-context-menu.png)
+<Screenshot src="/img/desktop/file-context-menu.png" alt="File context menu" dark />
 
 :::tip
 Pictures, videos, and PDFs open directly in the desktop app's built-in viewer. Other file types will open in your default system application.
@@ -186,7 +187,7 @@ You can rename any file or folder that is fully synced on this device. Renaming 
   <li>Click <BgStyledText>Rename</BgStyledText> to confirm.</li>
 </Ordered>
 
-![Rename file dialog](/img/desktop/rename-file-dialog.png)
+<Screenshot src="/img/desktop/rename-file-dialog.png" alt="Rename file dialog" dark />
 
 The name is validated as you type. A name cannot be empty, contain `/`, `\`, or `:`, end with a `.`, use an operating-system reserved name, or exceed 255 bytes. If you change a file's extension, the dialog warns that the file may open in a different app.
 
@@ -205,7 +206,7 @@ The Drive page supports two display layouts:
 
 Toggle between views using the view mode buttons at the top of the Drive page. Your selection is remembered across sessions.
 
-![File view modes](/img/desktop/file-view-modes.png)
+<Screenshot src="/img/desktop/file-view-modes.png" alt="File view modes" dark />
 
 ### Creating Folders
 
@@ -230,7 +231,7 @@ The **Search file** box at the top of the Drive page searches the sync folder yo
   <li>Results update as you type. Combine it with the <strong>File Type</strong>, <strong>Size</strong>, and <strong>Date Range</strong> filters to narrow down further.</li>
 </Ordered>
 
-![In-folder search on the Drive page](/img/desktop/drive-search-folder.png)
+<Screenshot src="/img/desktop/drive-search-folder.png" alt="In-folder search on the Drive page" dark />
 
 ### Search across everything
 
@@ -242,7 +243,7 @@ The **Search Files** box at the top of the sidebar opens a global search palette
   <li>Start typing to search your whole account. Use <strong>↑</strong> / <strong>↓</strong> to move between results and <strong>Enter</strong> to open the highlighted file; press <strong>Esc</strong> to close.</li>
 </Ordered>
 
-![Global search palette opened from the sidebar](/img/desktop/drive-search-global.png)
+<Screenshot src="/img/desktop/drive-search-global.png" alt="Global search palette opened from the sidebar" dark />
 
 :::tip
 Use the in-folder **Search file** box when you know which folder a file lives in, and the global **Search Files** palette (Ctrl / ⌘ + F) to find a file anywhere in your account — including files uploaded from your other devices.
@@ -264,7 +265,7 @@ Click the **Sync Queue** header (or the chevron) to reveal the file list. Each r
   <li><strong>Status badge</strong> — <strong>Pending</strong>, <strong>Encrypting</strong>, a live percentage, <strong>Synced</strong>, <strong>Downloaded</strong>, <strong>Deleted</strong>, or <strong>Error</strong></li>
 </Unordered>
 
-![Sync Queue widget expanded](/img/desktop/syncing-progress-widget.png)
+<Screenshot src="/img/desktop/syncing-progress-widget.png" alt="Sync Queue widget expanded" dark />
 
 ### Minified View
 
@@ -278,7 +279,7 @@ Click the **✕** to shrink the widget into a compact circular progress ring tha
 
 Click the ring to restore the full widget. The ring also appears whenever the sidebar is collapsed.
 
-![Sync Queue minified progress ring](/img/desktop/sync-progress-minified.png)
+<Screenshot src="/img/desktop/sync-progress-minified.png" alt="Sync Queue minified progress ring" dark />
 
 :::tip
 Dismissing the widget with **✕** does not stop syncing — it only minimizes the widget to the progress ring. The full card reopens automatically when a new sync starts.
@@ -354,7 +355,7 @@ You can manage this from either the **Drive** page's **Local** view or **Setting
   <li>Confirm in the <strong>Pause Sync</strong> dialog that appears.</li>
 </Ordered>
 
-![Pause sync dialog](/img/desktop/pause-sync-dialog.png)
+<Screenshot src="/img/desktop/pause-sync-dialog.png" alt="Pause sync dialog" dark />
 
 ### Resuming Sync
 

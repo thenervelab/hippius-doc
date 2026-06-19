@@ -120,7 +120,10 @@ const config: Config = {
     ],
     colorMode: {
       defaultMode: "light",
-      disableSwitch: true,
+      // Follow the visitor's OS light/dark setting by default, and let them
+      // override it with the navbar toggle.
+      respectPrefersColorScheme: true,
+      disableSwitch: false,
     },
     navbar: {
       title: "Hippius",

@@ -11,6 +11,7 @@ import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import Icon from '@site/src/components/Icon';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -22,7 +23,7 @@ Reach Billing from the sidebar at <BgStyledIconWithText text="Billing" icon="Bil
 Credits are consumed when you upload files, provision VMs, or use other Hippius services. The info button next to the page title shows the same reminder.
 :::
 
-![Billing screen](/img/desktop/billing-overview.png)
+<Screenshot src="/img/desktop/billing-overview.png" alt="Billing screen" dark />
 
 ## Billing Dashboard
 
@@ -125,7 +126,7 @@ You can sort by **Amount** or **Date** by clicking the column header. The table 
 
 If you haven't made any transactions yet, the table shows a "No billing history yet" message pointing you to subscribe to a plan or top up credits.
 
-![Billing history screen](/img/desktop/billing-history.png)
+<Screenshot src="/img/desktop/billing-history.png" alt="Billing history screen" dark />
 
 ## Where to next
 

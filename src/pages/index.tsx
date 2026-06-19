@@ -79,8 +79,9 @@ export const SMARTER_CLOUD: SmallCardInfo[] = [
 
 function HomepageHeader() {
   return (
-    <header className="relative text-white justify-center min-h-[800px] lg:min-h-[auto] bg-primary-50 flex flex-col px-6 pt-20 pb-40 items-center w-full">
-      <div className="absolute w-full top-0 h-full opacity-5">
+    <header className="relative text-white justify-center min-h-[800px] lg:min-h-[auto] bg-primary-50 dark:bg-[#111111] flex flex-col px-6 pt-20 pb-40 items-center w-full">
+      {/* Light-mode grid: white lines on the blue hero */}
+      <div className="absolute w-full top-0 h-full opacity-5 dark:hidden">
         <Graphsheet
           majorCell={{
             lineColor: [255, 255, 255, 0.1],
@@ -89,6 +90,22 @@ function HomepageHeader() {
           }}
           minorCell={{
             lineColor: [255, 255, 255, 0.1],
+            lineWidth: 1,
+            cellDim: 20,
+          }}
+        />
+      </div>
+      {/* Dark-mode grid: identical to the light grid above (same line widths,
+          cells, opacity) — only the colour changes (white → the footer's grey). */}
+      <div className="absolute w-full top-0 h-full opacity-5 hidden dark:block">
+        <Graphsheet
+          majorCell={{
+            lineColor: [150, 150, 150, 0.08],
+            lineWidth: 2,
+            cellDim: 200,
+          }}
+          minorCell={{
+            lineColor: [120, 120, 120, 0.05],
             lineWidth: 1,
             cellDim: 20,
           }}
@@ -107,7 +124,7 @@ function HomepageHeader() {
       <div className="relative flex flex-col items-center">
         <div>
           <Link
-            className="px-4 py-2 bg-white rounded text-grey-40 font-digital"
+            className="px-4 py-2 bg-white rounded text-[#353535] font-digital"
             to="/learn/intro"
           >
             ⏱️ 5 Minute Read

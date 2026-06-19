@@ -11,6 +11,7 @@ import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import Icon from '@site/src/components/Icon';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -29,7 +30,7 @@ The **Stake hAlpha** widget on the Wallet Overview page gives you a quick snapsh
 | **Unbonding** | Tokens currently in the unbonding period, shown with a clock icon and estimated remaining time (e.g., "~1d 14h remaining") |
 | **Redeemable** | Tokens that have finished unbonding and are ready to withdraw (shown with an unlock icon) |
 
-![Staking Widget](/img/desktop/wallet/staking-widget.png)
+<Screenshot src="/img/desktop/wallet/staking-widget.png" alt="Staking Widget" dark />
 
 :::tip
 Hover over the unbonding amount to see detailed information for each unbonding period, including the exact number of blocks remaining and the estimated time.
@@ -58,7 +59,7 @@ You can access staking features in multiple ways:
 
 A loading notification will appear while the staking transaction is processed. Once confirmed, your staked balance will update automatically.
 
-![Stake hAlpha](/img/desktop/wallet/stake-halpha.png)
+<Screenshot src="/img/desktop/wallet/stake-halpha.png" alt="Stake hAlpha" dark />
 
 :::note
 If you already have staked tokens, additional stakes are added to your existing bond automatically. You don't need to do anything different.
@@ -81,7 +82,7 @@ Unstaking schedules your staked tokens for release. They enter an **unbonding pe
 
 After confirmation, the unstaked amount moves to **Unbonding** status. You can track the remaining time on the Stake widget.
 
-![Unstake hAlpha](/img/desktop/wallet/unstake-halpha.png)
+<Screenshot src="/img/desktop/wallet/unstake-halpha.png" alt="Unstake hAlpha" dark />
 
 ## Withdrawing Redeemable Tokens
 
@@ -97,7 +98,7 @@ Once the unbonding period is complete, your tokens become **Redeemable** and can
 
 The dialog closes immediately and a loading notification tracks the withdrawal progress. Once confirmed, the tokens are added back to your transferable balance.
 
-![Withdraw Tokens](/img/desktop/wallet/withdraw-tokens.png)
+<Screenshot src="/img/desktop/wallet/withdraw-tokens.png" alt="Withdraw Tokens" dark />
 
 :::tip
 The **Withdraw** button only appears when you have redeemable tokens. If all your tokens are still unbonding, you'll see the remaining time instead.
