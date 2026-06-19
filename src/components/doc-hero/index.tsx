@@ -19,8 +19,9 @@ export default function DocHero() {
     : `${section} • 2 mins read`;
 
   return (
-    <div className="font-sans w-full h-[130px] lg:h-[170px] bg-primary-50 relative rounded lg:mb-6">
-      <div className="absolute w-full top-0 h-full opacity-5">
+    <div className="font-sans w-full h-[130px] lg:h-[170px] bg-primary-50 dark:bg-[#111111] relative rounded lg:mb-6">
+      {/* Light-mode grid: white lines on the blue banner */}
+      <div className="absolute w-full top-0 h-full opacity-5 dark:hidden">
         <GraphSheetContainer
           majorCell={{
             lineColor: [255, 255, 255, 0.1],
@@ -29,6 +30,22 @@ export default function DocHero() {
           }}
           minorCell={{
             lineColor: [255, 255, 255, 0.1],
+            lineWidth: 1,
+            cellDim: 20,
+          }}
+        />
+      </div>
+      {/* Dark-mode grid: identical to the light grid above (same line widths,
+          cells, opacity) — only the colour changes (white → the footer's grey). */}
+      <div className="absolute w-full top-0 h-full opacity-5 hidden dark:block">
+        <GraphSheetContainer
+          majorCell={{
+            lineColor: [150, 150, 150, 0.08],
+            lineWidth: 2,
+            cellDim: 200,
+          }}
+          minorCell={{
+            lineColor: [120, 120, 120, 0.05],
             lineWidth: 1,
             cellDim: 20,
           }}
