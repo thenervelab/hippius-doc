@@ -10,6 +10,7 @@ import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -17,7 +18,7 @@ import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 
 Reach Drive from the sidebar at <BgStyledIconWithText text="Storage" icon="SidebarStorage" /> → <BgStyledIconWithText text="Drive" icon="FolderOpen" />.
 
-![Drive page overview](/img/console/drive/overview.png)
+<Screenshot src="/img/console/drive/overview.png" alt="Drive page overview" dark />
 
 ## Your Unlock Password
 
@@ -29,7 +30,7 @@ Drive encrypts every file using a key tied to your **unlock password**. The cons
 If you forget it, you'll need your 12-word recovery phrase to restore access to your encrypted files. Keep both somewhere safe. We cannot recover either for you.
 :::
 
-![Unlock password prompt](/img/console/drive/unlock-password.png)
+<Screenshot src="/img/console/drive/unlock-password.png" alt="Unlock password prompt" dark />
 
 ## Browsing Your Files
 
@@ -39,7 +40,7 @@ The **breadcrumb** at the top of the file browser shows where you are: for examp
 
 Files are displayed in a table showing the name, size, type, and upload date.
 
-![Drive page overview](/img/console/drive/browse.png)
+<Screenshot src="/img/console/drive/browse.png" alt="Browsing files in Drive" dark />
 
 ### Sorting
 
@@ -77,7 +78,7 @@ You can also drag files from your desktop directly onto the Drive page. A full p
 
 For a complete reference of the upload queue, progress widget, and error handling, see [Console Uploads](/use/console/uploads).
 
-![Upload dialog](/img/console/drive/upload.png)
+<Screenshot src="/img/console/drive/upload.png" alt="Upload dialog" dark />
 
 ## Previewing Files
 
@@ -95,13 +96,13 @@ For any other file type, use the action menu to **Download** it and open it loca
 
 The preview toolbar has buttons to **Download**, open **Details**, or **Close** the preview.
 
-![Image preview](/img/console/drive/preview-image.png)
+<Screenshot src="/img/console/drive/preview-image.png" alt="Image preview" dark />
 
 ## File Details
 
 Click the action menu (three dots) on any file row and choose <BgStyledText>Details</BgStyledText> to see full metadata without opening a preview. The details panel shows the file name, path, size, MIME type, upload date, IPFS CID, and Hippius file hash, each with a copy icon.
 
-![File details panel](/img/console/drive/details-panel.png)
+<Screenshot src="/img/console/drive/details-panel.png" alt="File details panel" dark />
 
 ## Downloading Files
 
@@ -128,7 +129,7 @@ Deletes run in parallel. Each file is removed independently and a per file toast
 Deleted files cannot be recovered through the console. If a file was also synced from the desktop app, it will be removed there too on the next sync.
 :::
 
-![Selection action bar](/img/console/drive/selection-bar.png)
+<Screenshot src="/img/console/drive/selection-bar.png" alt="Selection action bar" dark />
 
 ## Storage Stats
 

@@ -19,6 +19,7 @@ import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import Icon from '@site/src/components/Icon';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -81,7 +82,7 @@ The first time you open the Wallet page (or whenever you have no wallet yet) you
   <li>Review the <strong>Save Your Password &amp; Access Key</strong> dialog and click <BgStyledText>I Understand, Create Wallet</BgStyledText> to finish.</li>
 </Ordered>
 
-![Create New Wallet](/img/desktop/wallet/create-wallet.png)
+<Screenshot src="/img/desktop/wallet/create-wallet.png" alt="Create New Wallet" dark />
 
 :::warning Your access key is the master key
 Your 12-word access key provides full access to your wallet. Never share it, never store it digitally in plain text, and never enter it on sites or apps you don't trust.
@@ -120,7 +121,7 @@ If you have an encrypted backup file exported from Hippius:
   <li>Click <BgStyledText>Import Wallet</BgStyledText>, then confirm the <strong>Save Your Password &amp; Access Key</strong> dialog with <BgStyledText>I Understand, Import</BgStyledText>.</li>
 </Ordered>
 
-![Import Wallet](/img/desktop/wallet/import-wallet.png)
+<Screenshot src="/img/desktop/wallet/import-wallet.png" alt="Import Wallet" dark />
 
 ### Save Your Password & Access Key
 
@@ -136,7 +137,7 @@ All three setup paths end with the **Save Your Password & Access Key** confirmat
 
 Once a wallet is active, the Wallet page shows three cards across the top, a balance chart, and a set of tabs.
 
-![Wallet Overview](/img/desktop/wallet/wallet-overview.png)
+<Screenshot src="/img/desktop/wallet/wallet-overview.png" alt="Wallet Overview" dark />
 
 | Card | What it shows |
 |---|---|
@@ -150,7 +151,7 @@ Below the cards, the **Transaction Overview** chart plots your balance over time
 
 The desktop app supports multiple local wallets. The **Active Wallet** selector in the top-right corner of the Wallet page is where you switch between them and add more.
 
-![Switch Wallet](/img/desktop/wallet/switch-wallet.png)
+<Screenshot src="/img/desktop/wallet/switch-wallet.png" alt="Switch Wallet" dark />
 
 <Unordered>
   <li>Click the <strong>Active Wallet</strong> pill to open the <strong>Your Wallets</strong> popover.</li>
@@ -167,7 +168,7 @@ If you have no wallet yet, the selector reads **No Active Wallet / Wallet Needed
 
 Detailed wallet management lives under <BgStyledIconWithText text="Settings" icon="Settings" /> → **Wallets** (the gear icon in the Active Wallet popover takes you straight there). The page is titled **Wallets** — "Manage the local wallets stored on this device. Switch between them, rename, export a backup, or remove ones you no longer use."
 
-![Wallet Settings](/img/desktop/wallet/wallet-settings.png)
+<Screenshot src="/img/desktop/wallet/wallet-settings.png" alt="Wallet Settings" dark />
 
 The table lists every local wallet:
 
@@ -214,7 +215,7 @@ Choose **Delete**, then confirm in the **Delete Wallet** dialog. Deleting remove
   <li>Enter your <strong>wallet password</strong> and click <BgStyledText>Confirm Transfer</BgStyledText>.</li>
 </Ordered>
 
-![Send Balance](/img/desktop/wallet/send-balance.png)
+<Screenshot src="/img/desktop/wallet/send-balance.png" alt="Send Balance" dark />
 
 A progress toast appears in the corner while the transfer is processed, followed by a success or error notification. A couple of things to note:
 
@@ -231,7 +232,7 @@ A progress toast appears in the corner while the transfer is processed, followed
   <li>Send hAlpha to this address from any Hippius-compatible wallet.</li>
 </Ordered>
 
-![Receive Balance](/img/desktop/wallet/receive-balance.png)
+<Screenshot src="/img/desktop/wallet/receive-balance.png" alt="Receive Balance" dark />
 
 Your deposit address is an SS58-encoded Substrate address, compatible with Polkadot and other Substrate-based chains.
 
@@ -239,7 +240,7 @@ Your deposit address is an SS58-encoded Substrate address, compatible with Polka
 
 The **Stake hAlpha** card is where you stake, unstake, and withdraw. Staking locks hAlpha; unstaking begins an **unbonding** period after which the tokens become **redeemable** and can be withdrawn back to your transferable balance.
 
-![Stake hAlpha](/img/desktop/wallet/stake-halpha.png)
+<Screenshot src="/img/desktop/wallet/stake-halpha.png" alt="Stake hAlpha" dark />
 
 ### Stake
 
@@ -257,7 +258,7 @@ The **Stake hAlpha** card is where you stake, unstake, and withdraw. Staking loc
   <li>Click <BgStyledText>Unstake</BgStyledText>, enter your password, and click <BgStyledText>Confirm Unstake</BgStyledText>.</li>
 </Ordered>
 
-![Unstake hAlpha](/img/desktop/wallet/unstake-halpha.png)
+<Screenshot src="/img/desktop/wallet/unstake-halpha.png" alt="Unstake hAlpha" dark />
 
 :::note Unbonding period
 After you unstake, the dialog reminds you: "Tokens will be available to withdraw after the unbonding period completes. This transaction cannot be reversed once confirmed." The Stake card shows an **Unstaking** countdown while tokens are unbonding.
@@ -272,7 +273,7 @@ Once unbonded tokens are redeemable, a <BgStyledText>Withdraw</BgStyledText> but
   <li>Enter your password and click <BgStyledText>Confirm Withdraw</BgStyledText>.</li>
 </Ordered>
 
-![Withdraw Tokens](/img/desktop/wallet/withdraw-tokens.png)
+<Screenshot src="/img/desktop/wallet/withdraw-tokens.png" alt="Withdraw Tokens" dark />
 
 The full redeemable balance is transferred back to your wallet immediately after confirmation.
 
@@ -280,7 +281,7 @@ The full redeemable balance is transferred back to your wallet immediately after
 
 The bridge moves tokens between **Alpha** on Bittensor and **hAlpha** on Hippius. Click <BgStyledText>Bridge Tokens</BgStyledText> on the Bridge card to open it. Use the swap arrow in the middle to flip direction.
 
-![Bridge Alpha to hAlpha](/img/desktop/wallet/bridge-alpha-halpha.png)
+<Screenshot src="/img/desktop/wallet/bridge-alpha-halpha.png" alt="Bridge Alpha to hAlpha" dark />
 
 <Ordered>
   <li>Enter the amount to bridge, or use <BgStyledText>MAX</BgStyledText> / <BgStyledText>50%</BgStyledText> / <BgStyledText>25%</BgStyledText>. The dialog shows the <strong>minimum</strong> (for example, "Min: 15.00 ALPHA") and how much you have.</li>
@@ -296,7 +297,7 @@ The two directions behave differently:
   <li><strong>hAlpha → Alpha</strong> (Hippius to Bittensor): burns hAlpha on Hippius and releases the equivalent Alpha to your <strong>staked</strong> balance on Bittensor.</li>
 </Unordered>
 
-![Bridge hAlpha to Alpha](/img/desktop/wallet/bridge-halpha-alpha.png)
+<Screenshot src="/img/desktop/wallet/bridge-halpha-alpha.png" alt="Bridge hAlpha to Alpha" dark />
 
 Bridges run in the background. Track progress in the **Bridge Transactions** tab while guardians process the transfer.
 
@@ -315,7 +316,7 @@ The **Transaction History** tab lists your incoming and outgoing hAlpha transfer
 
 You can sort by block, amount, or date. Results are paginated at 10 per page. When there's nothing yet, the tab reads "No transactions yet — When you send or receive hALPHA on this wallet, the transfers will show up here."
 
-![Transaction History](/img/desktop/wallet/transaction-history.png)
+<Screenshot src="/img/desktop/wallet/transaction-history.png" alt="Transaction History" dark />
 
 ## Bridge Transactions
 
@@ -337,7 +338,7 @@ In-progress bridges are highlighted and pinned to the top. Results paginate at 1
 
 The **Address Book** tab saves addresses you send to often, so you don't have to paste an SS58 every time. When sending, the recipient field lets you type an address or pick a saved contact directly.
 
-![Address Book](/img/desktop/wallet/address-book.png)
+<Screenshot src="/img/desktop/wallet/address-book.png" alt="Address Book" dark />
 
 The table shows **Name**, **Wallet Address** (copyable), and **Date Added**, sortable by name or date and paginated at 10 per page.
 

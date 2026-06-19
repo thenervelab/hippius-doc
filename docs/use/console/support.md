@@ -10,6 +10,7 @@ import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -17,7 +18,7 @@ The **Help & Support** page is your direct line to our team. If you hit a bug, h
 
 Reach Help & Support from the sidebar at <BgStyledIconWithText text="Help & Support" icon="HelpCircle" /> (in the Support section).
 
-![Support page](/img/console/support/overview.png)
+<Screenshot src="/img/console/support/overview.png" alt="Support page" dark />
 
 ## Opening a Ticket
 
@@ -32,7 +33,7 @@ Click <BgStyledText>+ New Ticket</BgStyledText> in the top right corner to open 
   <li>Click <BgStyledText>Create Ticket</BgStyledText>.</li>
 </Ordered>
 
-![Create ticket modal](/img/console/support/create-ticket.png)
+<Screenshot src="/img/console/support/create-ticket.png" alt="Create ticket modal" dark />
 
 ### Ticket Categories
 
@@ -79,7 +80,7 @@ Your reply is added to the thread. If the ticket was **Awaiting Response**, the 
 
 You cannot reply on a closed ticket. The input field is disabled with a notice explaining this.
 
-![Ticket messages dialog](/img/console/support/messages.png)
+<Screenshot src="/img/console/support/messages.png" alt="Ticket messages dialog" dark />
 
 ## Closing a Ticket
 

@@ -1,3 +1,5 @@
+import Screenshot from '@site/src/components/Screenshot';
+
 # Quickstart: Store Your First File on Hippius
 
 import BgStyledText from '@site/src/components/BgStyledText';
@@ -24,9 +26,8 @@ That's it ✅ — no wallet, seed phrase, or browser extension required.
 
 Credits are consumed as you store and retrieve files. See [pricing](https://hippius.com/pricing) for details.
 
-<div class="screenshot-container">
-  <img src="/img/getting-started/billing.png" alt="Billing page" />
-</div>
+
+<Screenshot src="/img/desktop/billing-overview.png" alt="Billing screen" dark />
 
 ## Step 3: Create S3 Credentials
 
@@ -40,9 +41,8 @@ Credits are consumed as you store and retrieve files. See [pricing](https://hipp
 Store your secret key securely — it cannot be retrieved after creation.
 :::
 
-<div class="screenshot-container">
-  <img src="/img/getting-started/master-token.png" alt="Master token created" />
-</div>
+
+<Screenshot src="/img/getting-started/master-token.png" alt="Master Token Created screen" dark />
 
 You can create multiple tokens with different access levels. See [Token Management](/use/s3-token-management) for details. Tokens can also be managed programmatically via the [Management API](https://api.hippius.com/).
 
