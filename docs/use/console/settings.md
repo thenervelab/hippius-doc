@@ -10,6 +10,7 @@ import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -19,7 +20,7 @@ To reach Settings, click the **Hippius** dropdown in the top left of the sidebar
 
 All changes save automatically. There is no save button anywhere on this page.
 
-![Settings page](/img/console/settings/overview.png)
+<Screenshot src="/img/console/settings/overview.png" alt="Settings page" dark />
 
 ## API Token
 

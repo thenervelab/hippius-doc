@@ -11,6 +11,7 @@ import DownloadLinks from '@site/src/components/DownloadLinks';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import Icon from '@site/src/components/Icon';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -28,7 +29,7 @@ This guide walks you through installation, sync, sharing, and everything in betw
   <li>Easy to use with a clean, modern interface.</li>
 </Ordered>
 
-![Desktop App Files screen](/img/desktop/desktop-benefits.png)
+<Screenshot src="/img/desktop/desktop-benefits.png" alt="Desktop App Files screen" dark />
 
 ## Installing the Desktop App
 

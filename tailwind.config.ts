@@ -1,6 +1,9 @@
 import type { Config } from "tailwindcss";
 
 export default {
+  // Sync Tailwind's `dark:` variant with Docusaurus's theme attribute so it
+  // follows the toggle/system theme rather than the OS media query directly.
+  darkMode: ["selector", '[data-theme="dark"]'],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",

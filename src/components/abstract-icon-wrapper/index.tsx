@@ -13,7 +13,7 @@ const AbstractIconWrapper: React.FC<Props> = ({ className, children }) => (
       className
     )}
   >
-    <IconGrid className="absolute w-full h-full" />
+    <IconGrid className="absolute w-full h-full abstract-icon-grid" />
     {children}
   </div>
 );

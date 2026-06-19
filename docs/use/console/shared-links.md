@@ -10,6 +10,7 @@ import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -19,7 +20,7 @@ To share a file, go to **Drive**, open the menu on any file, and choose **Share 
 
 After sharing, all your active links are tracked on the **Shared Links** page, reached from the Drive header breadcrumb or from the sidebar at <BgStyledIconWithText text="Storage" icon="SidebarStorage" /> → <BgStyledIconWithText text="Drive" icon="FolderOpen" /> → **Shared Links**. From there you can copy a link again, revoke access, and see a history of ended shares.
 
-![Shared Links page overview](/img/console/drive/shared-links-overview.png)
+<Screenshot src="/img/console/drive/shared-links-overview.png" alt="Shared Links page overview" dark />
 
 ## How Sharing Works
 
@@ -43,7 +44,7 @@ So instead, when you share a file, the console runs a three step process entirel
 
 The share key is embedded in the recipient URL after the `#` symbol. Browsers never send the `#` part of a URL to servers, so it stays entirely in the recipient's browser. Hippius servers store the encrypted file but never see the key that decrypts it.
 
-![Share creation progress dialog](/img/console/drive/shared-links-create-progress.png)
+<Screenshot src="/img/console/drive/shared-links-create-progress.png" alt="Share creation progress dialog" dark />
 
 :::info Why does sharing take a few seconds?
 The download, decrypt, encrypt, and upload steps run each time you create a share. For larger files this takes longer. A progress indicator in the share dialog shows you which step is running.
@@ -82,7 +83,7 @@ You create share links from within the Drive file browser, not from the Shared L
 
 The link is live immediately. Anyone you send it to can download the file right away.
 
-![Share dialog with URL ready](/img/console/drive/shared-links-dialog.png)
+<Screenshot src="/img/console/drive/shared-links-dialog.png" alt="Share dialog with URL ready" dark />
 
 ## Active Shares
 
@@ -124,7 +125,7 @@ A confirmation dialog will ask you to confirm before anything happens. When you 
 Anyone holding the link loses access the moment you confirm. There is no way to restore a revoked link.
 :::
 
-![Revoke confirmation dialog](/img/console/drive/shared-links-revoke.png)
+<Screenshot src="/img/console/drive/shared-links-revoke.png" alt="Revoke confirmation dialog" dark />
 
 ## Share History
 

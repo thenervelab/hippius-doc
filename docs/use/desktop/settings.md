@@ -11,6 +11,7 @@ import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import BgStyledText from '@site/src/components/BgStyledText';
+import Screenshot from '@site/src/components/Screenshot';
 
 The **Settings** page is organized into sections you can open from the left sidebar: **Sync & Storage**, **Security**, **Notifications**, **Appearance**, **API Token**, and **Customize RPC**. Each section has a short description and an info (ⓘ) tooltip next to its title.
 
@@ -35,7 +36,7 @@ Sync & Storage
       <li>Type a new name (for example, "Work MacBook"), then click <BgStyledText>Save</BgStyledText> (or <BgStyledText>Cancel</BgStyledText> to keep the current one).</li>
     </Ordered>
 
-    ![Sync & Storage settings](/img/desktop/settings/sync-and-storage-settings.png)
+    <Screenshot src="/img/desktop/settings/sync-and-storage-settings.png" alt="Sync & Storage settings" dark />
 
     ### Local Sync Folders
 
@@ -70,13 +71,13 @@ Sync & Storage
       <li><strong>Delete from Server</strong>: permanently delete all remote files for this folder. You must type the folder name to confirm.</li>
     </Unordered>
 
-    ![Folder menu options](/img/desktop/settings/settings-folder-menu.png)
+    <Screenshot src="/img/desktop/settings/settings-folder-menu.png" alt="Folder menu options" dark />
 
     :::danger Deleting from Server is permanent
     **Delete from Server** permanently removes all remote files for that folder and cannot be undone. You'll be required to type the exact folder name, then click **Delete Permanently**, to confirm.
     :::
 
-    ![Delete from server confirmation](/img/desktop/settings/settings-delete-server-dialog.png)
+    <Screenshot src="/img/desktop/settings/settings-delete-server-dialog.png" alt="Delete from server confirmation" dark />
 
     ### Syncing from Other Devices
 
@@ -89,7 +90,7 @@ Sync & Storage
       <li>Click <BgStyledText>Start Syncing</BgStyledText> to begin downloading and keeping the folder in sync.</li>
     </Ordered>
 
-    ![Sync destination dialog](/img/desktop/settings/settings-sync-destination-dialog.png)
+    <Screenshot src="/img/desktop/settings/settings-sync-destination-dialog.png" alt="Sync destination dialog" dark />
 
     <p>The remote folder ⋮ menu also offers <strong>Browse Contents</strong> and <strong>Delete from Server</strong>.</p>
 
@@ -122,7 +123,7 @@ Sync & Storage
 
     <p>Each row's three-dot (⋮) menu offers <strong>Set as active</strong>, <strong>Copy address</strong>, <strong>View on Hipstats</strong>, <strong>Export backup</strong>, <strong>Rename</strong>, and <strong>Delete</strong>.</p>
 
-    ![Wallet settings](/img/desktop/wallet/wallet-settings.png)
+    <Screenshot src="/img/desktop/wallet/wallet-settings.png" alt="Wallet settings" dark />
 
     :::note
     Here you can create, import, export backups, rename, and delete the local wallets stored on this device. Renaming or deleting a wallet here only affects what's stored on this device; the underlying account on Hippius is unchanged. Always export a backup before deleting.
@@ -147,7 +148,7 @@ Sync & Storage
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />, then open <strong>Security</strong>.</li>
     </Ordered>
 
-    ![Security settings tab](/img/desktop/settings/security-settings-tab.png)
+    <Screenshot src="/img/desktop/settings/security-settings-tab.png" alt="Security settings tab" dark />
 
     ### Mnemonic Seed Backup
 
@@ -185,7 +186,7 @@ Sync & Storage
       <li>Click <BgStyledText>Change password</BgStyledText>.</li>
     </Ordered>
 
-    ![Change unlock password dialog](/img/desktop/change-unlock-password-dialog.png)
+    <Screenshot src="/img/desktop/change-unlock-password-dialog.png" alt="Change unlock password dialog" dark />
 
     <p>Changing the password re-encrypts the sealed backup on the server. Your mnemonic seed and the files on your desktop app are not affected.</p>
 
@@ -213,7 +214,7 @@ Sync & Storage
       <li><strong>Drive</strong>: "Notifications for file operations including sync completion and failures."</li>
     </Unordered>
 
-    ![Notifications screen](/img/desktop/settings/settings-notifications.png)
+    <Screenshot src="/img/desktop/settings/settings-notifications.png" alt="Notifications screen" dark />
 
     ### Email Notification
 
@@ -225,7 +226,7 @@ Sync & Storage
 
     <p>After changing anything, click <BgStyledText>Save Changes</BgStyledText> (or <BgStyledText>Cancel</BgStyledText> to discard). These buttons stay disabled until you have unsaved changes.</p>
 
-    ![Email notification preferences](/img/desktop/settings/email-preference.png)
+    <Screenshot src="/img/desktop/settings/email-preference.png" alt="Email notification preferences" dark />
 
 </>
 </DocAccordionItem>
@@ -251,7 +252,7 @@ Sync & Storage
     Your theme choice is stored locally, so it only affects this device — your other devices and the <a href="https://console.hippius.com">Hippius Console</a> keep their own setting.
     :::
 
-    ![Appearance screen](/img/desktop/settings/appearance-settings.png)
+    <Screenshot src="/img/desktop/settings/appearance-settings.png" alt="Appearance screen" dark />
 
 
 </>
@@ -278,7 +279,7 @@ Sync & Storage
     Never share your API token with anyone. It provides full access to your account and should be treated like a password.
     :::
 
-    ![API token screen](/img/desktop/settings/settings-api-token.png)
+    <Screenshot src="/img/desktop/settings/settings-api-token.png" alt="API token screen" dark />
 
 </>
 </DocAccordionItem>
@@ -303,7 +304,7 @@ Sync & Storage
     Changing the RPC endpoint affects your blockchain connection, so the application restarts automatically to apply the change.
     :::
 
-    ![Custom RPC screen](/img/desktop/settings/settings-rpc.png)
+    <Screenshot src="/img/desktop/settings/settings-rpc.png" alt="Custom RPC screen" dark />
 
 </>
 </DocAccordionItem>
