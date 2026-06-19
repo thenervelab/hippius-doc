@@ -1,6 +1,7 @@
 import React, { type ReactNode } from "react";
 import clsx from "clsx";
 import LinkItem from "@theme/Footer/LinkItem";
+import ThemeToggle from "@site/src/components/theme-toggle";
 import type { Props } from "@theme/Footer/Links/MultiColumn";
 
 type ColumnType = Props["columns"][number];
@@ -21,7 +22,13 @@ function ColumnLinkItem({ item }: { item: ColumnItemType }) {
   );
 }
 
-function Column({ column }: { column: ColumnType }) {
+function Column({
+  column,
+  slot,
+}: {
+  column: ColumnType;
+  slot?: ReactNode;
+}) {
   return (
     <div className={clsx("col footer__col", column.className)}>
       <div className="footer__title sm:text-lg">{column.title}</div>
@@ -30,6 +37,7 @@ function Column({ column }: { column: ColumnType }) {
           <ColumnLinkItem key={i} item={item} />
         ))}
       </ul>
+      {slot}
     </div>
   );
 }
@@ -38,7 +46,12 @@ export default function FooterLinksMultiColumn({ columns }: Props): ReactNode {
   return (
     <div className="row footer__links">
       {columns.map((column, i) => (
-        <Column key={i} column={column} />
+        <Column
+          key={i}
+          column={column}
+          // Drop the theme toggle under the first column, below the version.
+          slot={i === 0 ? <ThemeToggle className="mt-4" /> : undefined}
+        />
       ))}
     </div>
   );
