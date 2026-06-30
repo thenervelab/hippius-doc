@@ -512,3 +512,10 @@ article .theme-doc-breadcrumbs {
 .navbar__logo img {
   filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.3));
 }
+
+/* Hippius wordmark in brand blue (matches the console). --primary-50 stays
+   #3167DD in both light and dark mode, and the navbar background is light/dark
+   (never blue), so the blue title reads in both themes. */
+.navbar__brand .navbar__title {
+  color: rgb(var(--primary-50));
+}
