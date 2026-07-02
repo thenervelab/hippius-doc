@@ -1,6 +1,6 @@
-# Hippius - Decentralized Cloud Storage
+# Hippius - Distributed Cloud Storage
 
-> Hippius is a decentralized cloud storage platform backed by Arion distributed storage and a custom Substrate blockchain. S3-compatible API, desktop app, web console, confidential compute, and staking.
+> Hippius is a distributed cloud storage platform backed by Arion distributed storage and a custom Substrate blockchain. It provides a fully S3-compatible API, a desktop app, a web console, and confidential compute. Any S3 client works out of the box.
 
 This file contains the full documentation for Hippius products, intended for LLM ingestion.
 For the condensed version, see https://docs.hippius.com/llms.txt
@@ -25,7 +25,7 @@ For the condensed version, see https://docs.hippius.com/llms.txt
 
 ## What is Hippius?
 
-Hippius is a decentralized cloud storage platform. Store files, host websites, run VMs — without relying on AWS, Google Cloud, or any single company.
+Hippius is a distributed cloud storage platform. Store files, host websites, run VMs — without relying on AWS, Google Cloud, or any single company.
 
 Architecture: custom Substrate blockchain + Arion storage (Reed-Solomon erasure coding + CRUSH placement) + S3-compatible API.
 

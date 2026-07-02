@@ -74,7 +74,17 @@ const config: Config = {
     "@docusaurus/theme-mermaid", // For diagrams
     "docusaurus-theme-github-codeblock", // GitHub-style code blocks
   ],
-
+  headTags: [
+    {
+      tagName: "link",
+      attributes: {
+        rel: "alternate",
+        type: "text/plain",
+        href: "/llms.txt",
+        title: "LLM-friendly summary",
+      },
+    },
+  ],
   themeConfig: {
     image: "img/meta-image.png",
     metadata: [

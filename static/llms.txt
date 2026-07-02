@@ -1,13 +1,13 @@
-# Hippius - Decentralized Cloud Storage
+# Hippius - Distributed Cloud Storage
 
-> Hippius is a decentralized cloud storage platform backed by Arion distributed storage and a custom Substrate blockchain. It provides a fully S3-compatible API, a desktop app, a web console, and confidential compute. Any S3 client works out of the box.
+> Hippius is a distributed cloud storage platform backed by Arion distributed storage and a custom Substrate blockchain. It provides a fully S3-compatible API, a desktop app, a web console, and confidential compute. Any S3 client works out of the box.
 
 ## Products
 
 - **S3 Storage** — S3-compatible API at s3.hippius.com. Store anything. Standard clients (boto3, AWS CLI, rclone) work without modification.
 - **Desktop App** — Native app (macOS, Windows, Linux) for file sync, wallet, and storage management.
 - **Web Console** — Browser dashboard at console.hippius.com for storage, VMs, staking, and tokens.
-- **Virtual Machines** — Decentralized compute (beta access).
+- **Virtual Machines** — Distributed compute (beta access).
 - **Confidential Compute** — VMs inside AMD SEV-SNP encrypted enclaves.
 - **Hippius Hub** - Drop-in replacement for `huggingface_hub` backed by Hippius S3 storage (https://github.com/thenervelab/hippius-hub/blob/main/llms.txt)
 
