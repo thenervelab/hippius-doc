@@ -21,7 +21,7 @@ To share a file, right click it in the desktop app and choose **Share via link**
 After sharing, all your active links are tracked on the **Shared Links** page. Open it with the <BgStyledText>Shared Links</BgStyledText> button in the top right of the <BgStyledIconWithText text="Drive" icon="Category" /> view header. From there you can copy a link again, revoke access, reshare a file, and see a history of ended shares.
 
 :::tip Two ways to share
-Share from the **Drive view** inside the app, or — on macOS — right from **Finder**: right click any file or folder and choose **Share with Hippius**. See [Share from Finder](#share-from-finder).
+Share from the **Drive view** inside the app, or — on macOS — right from **Finder**: right click any file or folder and choose **Share with Hippius**. See [Share from Finder](/use/desktop/share-from-finder).
 :::
 
 <Screenshot src="/img/desktop/shared-links-overview.png" alt="Shared Links page overview" dark />
@@ -82,47 +82,7 @@ The desktop reads your local file directly with no download required. For most f
 
 The link is live immediately. Anyone you send it to can download the file right away.
 
-Sharing from the Drive view creates a **public** link. To create a **password-protected** link, share from Finder (below).
-
-## Share from Finder (macOS) {#share-from-finder}
-
-On macOS you can share a file or folder without opening the Drive view first. Right click any item in Finder and choose **Share with Hippius** — the desktop app comes forward and creates the share for you.
-
-:::info macOS only
-Finder sharing relies on a macOS Finder extension, so it's available on macOS only. On Windows and Linux, create shares from the Drive view as described above.
-:::
-
-<Ordered>
-  <li>In Finder, right click any file or folder in your home folder.</li>
-  <li>Choose <BgStyledText>Share with Hippius</BgStyledText>. If Hippius isn't running or you're signed out, the item reads <BgStyledText>Open Hippius to share</BgStyledText> instead — open the app and sign in, then try again.</li>
-  <li>The app comes forward and asks who can open the link — pick <strong>Anyone with the link</strong> for a public link, or <strong>Password protected</strong> for a private one.</li>
-  <li>Click <BgStyledText>Create share link</BgStyledText>. The app encrypts and uploads the item, then shows the link (and the password, for a protected link) and copies the link to your clipboard automatically.</li>
-</Ordered>
-
-The two access choices are:
-
-<Unordered>
-  <li><strong>Anyone with the link</strong> — a public link. Anyone you send it to can view and download the file until it expires.</li>
-  <li><strong>Password protected</strong> — a private link. We generate a password, and the link can't be opened without it.</li>
-</Unordered>
-
-{/* TODO: screenshot of the Finder "Share with Hippius" menu + the public/password chooser */}
-
-Unlike sharing from the Drive view, Finder sharing works on **any file or folder in your home folder** — it doesn't have to be in one of your synced folders.
-
-:::info Sharing a folder
-When you share a folder, Hippius packs its contents into a single `.zip` file and shares that. The recipient downloads one archive.
-:::
-
-### Password-protected links
-
-For a password-protected link, the app shows a generated **password** next to the link. Copy it with the copy button and **send it to the recipient separately** — ideally over a different channel than the link itself. The recipient must enter this password to open the file.
-
-:::warning Copy the password when you create the link
-The password is shown **once**, right after the share is created. It isn't stored anywhere we can read it, so it won't reappear on the Shared Links page later. Copy it before you close the dialog. If you lose it, revoke the share and create a new one.
-:::
-
-Finder shares appear on the **Shared Links** page just like shares created from the Drive view, so you can copy the link, revoke, and track them the same way.
+Sharing from the Drive view creates a **public** link. To create a **password-protected** link — or to share a file that isn't in a synced folder — use [Share from Finder](/use/desktop/share-from-finder) on macOS.
 
 ## Active Shares
 
