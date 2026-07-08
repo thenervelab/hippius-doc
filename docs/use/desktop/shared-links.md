@@ -199,7 +199,9 @@ When someone opens your share link, they land on a simple page in their browser.
   <li>Everything else — and any file over 100 MB — shows a download card with the filename, size, and a <strong>Download</strong> button. Shared folders arrive as a <code>.zip</code>, so they always download rather than preview.</li>
 </Unordered>
 
-{/* TODO: screenshot of the recipient preview page (image/PDF) with the Download button */}
+{/* TODO screenshot — the recipient share page previewing a file inline (an image or PDF) with the Download button.
+    Add static/img/desktop/shared-links-preview.png AND shared-links-preview-dark.png, then uncomment:
+    <Screenshot src="/img/desktop/shared-links-preview.png" alt="Recipient preview page with Download button" dark /> */}
 
 A **Download** option is always available. The file is decrypted directly in the recipient's browser: on modern browsers (Chrome, Edge, Firefox) the download streams straight to disk with no size limit; on older browsers it's buffered in memory up to 500 MB. The decryption key never reaches our servers.
 

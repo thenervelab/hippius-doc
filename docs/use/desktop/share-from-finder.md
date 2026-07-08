@@ -17,6 +17,10 @@ On macOS you can share a file or folder without opening Hippius first. Right cli
 Finder sharing relies on a macOS Finder extension, so it's available on macOS only. On Windows and Linux, create shares from the [Drive view](/use/desktop/shared-links#creating-a-share) instead.
 :::
 
+{/* TODO screenshot — the macOS Finder right-click menu with "Share with Hippius" highlighted.
+    Add static/img/desktop/share-from-finder-menu.png AND share-from-finder-menu-dark.png, then uncomment:
+    <Screenshot src="/img/desktop/share-from-finder-menu.png" alt="Finder Share with Hippius menu" dark /> */}
+
 ## Share a file or folder
 
 <Ordered>
@@ -33,7 +37,10 @@ The two access choices are:
   <li><strong>Password protected</strong> — a private link. We generate a password, and the link can't be opened without it.</li>
 </Unordered>
 
-{/* TODO: screenshot of the Finder "Share with Hippius" menu + the public/password chooser */}
+{/* TODO screenshot — the app's "General access" chooser (Anyone with the link / Password protected),
+    ideally in the password-protected state so it also shows the generated password.
+    Add static/img/desktop/share-from-finder-chooser.png AND share-from-finder-chooser-dark.png, then uncomment:
+    <Screenshot src="/img/desktop/share-from-finder-chooser.png" alt="Share access chooser: public or password protected" dark /> */}
 
 Unlike sharing from the Drive view, Finder sharing works on **any file or folder in your home folder** — it doesn't have to be in one of your synced folders.
 
