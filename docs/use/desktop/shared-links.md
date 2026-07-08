@@ -3,7 +3,7 @@ id: shared-links
 title: Shared Links
 sidebar_label: Shared Links
 slug: /use/desktop/shared-links
-description: Share any file as a public or password-protected link from the Hippius desktop app — including straight from macOS Finder — then manage active links and history from the Shared Links page.
+description: Share any file as a public or password-protected link from the Hippius desktop app, including straight from macOS Finder, then manage your active links and history from the Shared Links page.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -14,14 +14,14 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-Hippius lets you share a file as a link that anyone can open in a browser, with no Hippius account needed. Depending on the file, recipients can preview it right on the page or download it to their device. Links can be **public** (anyone with the link) or **password-protected**.
+With Hippius you can share a file as a link that anyone can open in a browser, with no Hippius account needed. Depending on the file, they can preview it right on the page or download it to their device. Your links can be **public** (anyone with the link) or **password-protected**.
 
-To share a file, right click it in the desktop app and choose **Share via link**. We create a secure encrypted copy and generate a shareable URL, which is copied to your clipboard automatically. On macOS you can also share straight from Finder — right click any file or folder and choose **Share with Hippius**.
+To share a file, right click it in the desktop app and choose **Share via link**. We create a secure encrypted copy and generate a shareable URL, then copy it to your clipboard for you. On macOS you can also share straight from Finder: just right click any file or folder and choose **Share with Hippius**.
 
 After sharing, all your active links are tracked on the **Shared Links** page. Open it with the <BgStyledText>Shared Links</BgStyledText> button in the top right of the <BgStyledIconWithText text="Drive" icon="Category" /> view header. From there you can copy a link again, revoke access, reshare a file, and see a history of ended shares.
 
 :::tip Two ways to share
-Share from the **Drive view** inside the app, or — on macOS — right from **Finder**: right click any file or folder and choose **Share with Hippius**. See [Share from Finder](/use/desktop/share-from-finder).
+You can share from the **Drive view** inside the app, or, on macOS, right from **Finder**. Just right click any file or folder and choose **Share with Hippius**. See [Share from Finder](/use/desktop/share-from-finder).
 :::
 
 <Screenshot src="/img/desktop/shared-links-overview.png" alt="Shared Links page overview" dark />
@@ -82,7 +82,7 @@ The desktop reads your local file directly with no download required. For most f
 
 The link is live immediately. Anyone you send it to can download the file right away.
 
-Sharing from the Drive view creates a **public** link. To create a **password-protected** link — or to share a file that isn't in a synced folder — use [Share from Finder](/use/desktop/share-from-finder) on macOS.
+Sharing from the Drive view creates a **public** link. If you want a **password-protected** link, or you want to share a file that isn't in a synced folder, use [Share from Finder](/use/desktop/share-from-finder) on macOS.
 
 ## Active Shares
 
@@ -190,22 +190,22 @@ Click <BgStyledText>Clear all history</BgStyledText> at the top of the History s
 
 When someone opens your share link, they land on a simple page in their browser. No Hippius account is needed. What they see depends on the link type and the file.
 
-**Password-protected links** ask for the password first. The recipient enters the password you sent them and the page unlocks. Without it the file can't be opened — and we can't recover it either.
+**Password-protected links** ask for the password first. The recipient types in the password you sent them and the page unlocks. Without it, the file can't be opened, and we can't recover it for them either.
 
 **Preview.** For common file types, the file is shown right on the page so the recipient can view it without downloading:
 
 <Unordered>
   <li><strong>Images, videos, and PDFs</strong> up to 100 MB preview inline, full-page.</li>
-  <li>Everything else — and any file over 100 MB — shows a download card with the filename, size, and a <strong>Download</strong> button. Shared folders arrive as a <code>.zip</code>, so they always download rather than preview.</li>
+  <li>Everything else, and any file over 100 MB, shows a download card with the filename, size, and a <strong>Download</strong> button. Shared folders arrive as a <code>.zip</code>, so they always download rather than preview.</li>
 </Unordered>
 
-{/* TODO screenshot — the recipient share page previewing a file inline (an image or PDF) with the Download button.
+{/* TODO screenshot: the recipient share page previewing a file inline (an image or PDF) with the Download button.
     Add static/img/desktop/shared-links-preview.png AND shared-links-preview-dark.png, then uncomment:
     <Screenshot src="/img/desktop/shared-links-preview.png" alt="Recipient preview page with Download button" dark /> */}
 
 A **Download** option is always available. The file is decrypted directly in the recipient's browser: on modern browsers (Chrome, Edge, Firefox) the download streams straight to disk with no size limit; on older browsers it's buffered in memory up to 500 MB. The decryption key never reaches our servers.
 
-If the link has expired or been revoked, recipients see: _"This link has expired or been revoked."_ The page does not say which, to prevent guessing whether a token was ever valid.
+If the link has expired or been revoked, recipients see: _"This link has expired or been revoked."_ We don't say which, so no one can guess whether a token was ever valid.
 
 ## Storage Usage
 
