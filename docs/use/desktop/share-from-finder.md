@@ -11,10 +11,12 @@ import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import Screenshot from '@site/src/components/Screenshot';
 
-On macOS you don't even need to open Hippius to share something. Just right click any file or folder in Finder and choose **Share with Hippius**, and we'll bring the app forward and set up the share for you. It's also the only place you can create a **password-protected** link, and it works on any file on your Mac, not only the ones in your synced folders.
+Sharing a file with Hippius can be as quick as a right click. On macOS you don't have to open the app, hunt through folders, or upload anything first: point at any file or folder in Finder, choose **Share with Hippius**, and we'll hand you a link that's ready to send.
 
-:::info macOS only
-Finder sharing uses a macOS Finder extension, so for now it's a macOS-only feature. On Windows and Linux, share from the [Drive view](/use/desktop/shared-links#creating-a-share) instead.
+It works on **any** file on your Mac, not just the ones in your synced folders, and it's the only place you can create a **password-protected** link.
+
+:::info Before you start
+You'll need the **latest version** of the Hippius desktop app. Finder sharing is macOS only, since it relies on a macOS Finder extension. On Windows and Linux, share from the [Drive view](/use/desktop/shared-links#creating-a-share) instead.
 :::
 
 <Screenshot src="/img/desktop/share-from-finder-menu.png" alt="Finder Share with Hippius menu" dark />
