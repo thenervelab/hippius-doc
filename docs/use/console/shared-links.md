@@ -159,9 +159,18 @@ Click <BgStyledText>Clear all history</BgStyledText> at the top of the History s
 
 ## What Recipients See
 
-When someone opens your share link, they land on a simple download page and no account is needed.
+When someone opens your share link, they land on a simple page in their browser and no account is needed. What they see depends on the file:
 
-The page shows the filename, the file size, and how much time is left before the link expires. They click **Download** and the file is streamed directly to their device, decrypted entirely in their browser. We never see the file in plaintext on the recipient's end either.
+<Unordered>
+  <li><strong>Images, videos, and PDFs</strong> up to 100 MB preview inline, full-page, so the recipient can view the file without downloading it.</li>
+  <li>Everything else, and any file over 100 MB, shows a download card with the filename, the file size, and how much time is left before the link expires.</li>
+</Unordered>
+
+{/* TODO screenshot: the recipient share page previewing a file inline (an image or PDF) with the Download button.
+    Add static/img/console/drive/shared-links-preview.png AND shared-links-preview-dark.png, then uncomment:
+    <Screenshot src="/img/console/drive/shared-links-preview.png" alt="Recipient preview page with Download button" dark /> */}
+
+A **Download** option is always available. The file is streamed directly to the recipient's device, decrypted entirely in their browser. We never see the file in plaintext on the recipient's end either.
 
 If the link has been revoked or has expired, recipients see: _"This link has expired or been revoked."_ The page deliberately does not say which, which prevents anyone from guessing whether a link was ever valid.
 
@@ -188,6 +197,8 @@ The desktop app also has a Shared Links page with a few extra capabilities:
 | Feature | Console | Desktop App |
 |---|---|---|
 | **Create a share** | ✅ Yes | ✅ Yes |
+| **Share from Finder** | ❌ Not available | ✅ macOS only |
+| **Password-protected link** | ❌ Public links only | ✅ From Finder |
 | **How it reads the file** | Downloads and decrypts the Drive copy | Reads the local plaintext file directly from disk |
 | **Copy link (same session)** | ✅ Yes | ✅ Yes |
 | **Copy link after reload** | ❌ No, key is lost when you close or reload the tab | ✅ Yes, key is saved to a local database |
