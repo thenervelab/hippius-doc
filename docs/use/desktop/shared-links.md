@@ -20,6 +20,10 @@ To share a file, right click it in the desktop app and choose **Share via link**
 
 After sharing, all your active links are tracked on the **Shared Links** page. Open it with the <BgStyledText>Shared Links</BgStyledText> button in the top right of the <BgStyledIconWithText text="Drive" icon="Category" /> view header. From there you can copy a link again, revoke access, reshare a file, and see a history of ended shares.
 
+:::tip Two ways to share
+Share from the **Drive view** inside the app, or — on macOS — right from **Finder**: right click any file or folder and choose **Share with Hippius**. See [Share from Finder](#share-from-finder).
+:::
+
 <Screenshot src="/img/desktop/shared-links-overview.png" alt="Shared Links page overview" dark />
 
 ## How Sharing Works
@@ -80,7 +84,7 @@ The link is live immediately. Anyone you send it to can download the file right 
 
 Sharing from the Drive view creates a **public** link. To create a **password-protected** link, share from Finder (below).
 
-## Share from Finder (macOS)
+## Share from Finder (macOS) {#share-from-finder}
 
 On macOS you can share a file or folder without opening the Drive view first. Right click any item in Finder and choose **Share with Hippius** — the desktop app comes forward and creates the share for you.
 

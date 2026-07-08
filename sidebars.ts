@@ -105,6 +105,11 @@ const sidebars: SidebarsConfig = {
             "use/desktop/using-the-app",
             "use/desktop/drive",
             "use/desktop/shared-links",
+            {
+              type: "link",
+              label: "Share from Finder",
+              href: "/use/desktop/shared-links#share-from-finder",
+            },
             "use/desktop/virtual-machines",
             "use/desktop/settings",
             "use/desktop/billing",
