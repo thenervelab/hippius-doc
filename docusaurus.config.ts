@@ -227,6 +227,10 @@ const config: Config = {
               label: "Hippius Community",
               href: "https://community.hippius.com/",
             },
+            {
+              label: "llms.txt",
+              href: "https://docs.hippius.com/llms.txt",
+            },
           ],
         },
         {
@@ -281,8 +285,6 @@ const config: Config = {
         <a class="footer__legal-link" href="https://hippius.com/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
         <span class="footer__legal-dot" aria-hidden="true">&bull;</span>
         <a class="footer__legal-link" href="https://hippius.com/acceptable-use-policy" target="_blank" rel="noopener noreferrer">Acceptable Use Policy</a>
-        <span class="footer__legal-dot" aria-hidden="true">&bull;</span>
-        <a class="footer__legal-link" href="https://docs.hippius.com/llms.txt" target="_blank" rel="noopener noreferrer">llms.txt</a>
       </span>`,
     },
     prism: {
