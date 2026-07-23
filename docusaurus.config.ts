@@ -217,6 +217,10 @@ const config: Config = {
               label: "Hippius Community",
               href: "https://community.hippius.com/",
             },
+            {
+              label: "llms.txt",
+              href: "https://docs.hippius.com/llms.txt",
+            },
           ],
         },
         {
