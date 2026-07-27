@@ -31,7 +31,7 @@ Published wheels include the pre-built Rust core, so no toolchain is needed. Bui
 | For… | Use | Cached at |
 | --- | --- | --- |
 | `registry` and `models` commands | **API token** from [console.hippius.com/dashboard/settings](https://console.hippius.com/dashboard/settings) | `~/.cache/hippius/hub/api_token` |
-| `upload` / `download` (raw OCI registry IO) | Docker registry credentials | `~/.cache/hippius/hub/token` |
+| `upload` / `download` (model and artifact transfer) | Registry credentials | `~/.cache/hippius/hub/token` |
 
 In practice the API token is all you save by hand — `hippius-hub registry provision <namespace>` mints the docker credentials and writes them into the second cache for you. Pass `--docker-login` to also run `docker login` so `docker push` / `docker pull` work.
 
@@ -49,7 +49,7 @@ hippius-hub login --username <you> --password <secret>   # docker creds, manual 
 | `registry plans` | List pricing tiers and quotas |
 | `registry check <name>` | Is a namespace available? |
 | `registry provision <ns> [--docker-login]` | Create your namespace; new projects are public by default |
-| `registry me` | Plan, quota, status, and robot login of your active project |
+| `registry me` | Plan, quota, status, and registry login of your active project |
 | `registry repos [--page N --page-size M]` | List your repositories |
 | `registry artifacts <repo>` | List artifacts in one repo |
 | `registry usage` | Storage used + 7-day history |
