@@ -15,13 +15,13 @@ import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 
 The **Wallet** page is where you manage your **hAlpha**, the native token of the Hippius network. From here you can check your balance, send and receive tokens, and keep a record of everything that has moved in or out of your account.
 
-Every action on this page is signed on chain by your connected wallet extension. **We never hold or move your funds.**
+We want to be clear about one thing up front: every action on this page is signed on chain by your own wallet extension. **We never hold or move your funds.** We cannot reverse a transaction for you, and we cannot recover tokens sent to the wrong address.
 
-Reach Wallet from the sidebar at <BgStyledIconWithText text="Wallet" icon="WalletMinimal" />.
+Reach Wallet from the sidebar at <BgStyledIconWithText text="Wallet" icon="WalletMinimal" />. The page header reads **Your Balance**, with your active account on the right.
 
 ![Wallet page overview](/img/console/wallet/overview.png)
 
-Staking and bridging live on this same page but have their own guides, because there is more to explain than fits here:
+Staking and bridging live on this same page, but we have given them their own guides because there is more to explain than fits here:
 
 <Unordered>
   <li><a href="/use/console/staking">Staking</a>: stake hAlpha, unstake it, and withdraw once it unlocks.</li>
@@ -30,85 +30,95 @@ Staking and bridging live on this same page but have their own guides, because t
 
 ## Connecting Your Wallet
 
-The console supports four browser extension wallets for signing on chain actions:
+You need a browser extension wallet before you can send, stake, bridge, or sign anything. We support four:
 
-<Unordered>
-  <li><strong>Polkadot.js Extension</strong>: the official Polkadot extension, minimal and reliable.</li>
-  <li><strong>Talisman</strong>: feature rich, supports both Polkadot and Ethereum.</li>
-  <li><strong>SubWallet</strong>: multi chain with a mobile companion app.</li>
-  <li><strong>Taostats</strong>: built for Bittensor users.</li>
-</Unordered>
+| Extension | Notes |
+|---|---|
+| **Taostats Wallet** | Built for Bittensor. This is the one we recommend, and we list it first. |
+| **Polkadot.js** | The official Polkadot extension, minimal and reliable. |
+| **Talisman** | Feature rich, supports both Polkadot and Ethereum. |
+| **SubWallet** | Multi chain, with a mobile companion app. |
 
-You need one of these installed and connected before you can send, stake, bridge, or sign any transaction.
+:::tip We read every extension you have installed
+You are not limited to one. We aggregate accounts from every extension we detect and remove duplicates, so an account held in two extensions appears once. The recommended extension only decides the ordering and which one signs by default.
+:::
 
 ### Installing a Wallet Extension
 
-If no extension is detected, the **Active Wallet** button in the top right corner shows <BgStyledText>Install Extension</BgStyledText>. Click it to open a panel with install links for each supported wallet.
+If we cannot detect an extension, the button in the top right shows <BgStyledText>Install Extension</BgStyledText>. Click it to open a panel with install links.
 
 <Ordered>
-  <li>Click the install link for your preferred extension. The provider's website opens in a new tab.</li>
-  <li>Install the extension and create or import an account.</li>
-  <li>Return to the Hippius Console and click <BgStyledText>I've Installed an Extension</BgStyledText>.</li>
-  <li>Approve the connection request from the extension.</li>
-  <li>Your accounts now appear in the Active Wallet dropdown.</li>
+  <li>Click the install link for the extension you want. The provider's website opens in a new tab.</li>
+  <li>Install it, then create or import an account.</li>
+  <li>Come back to the console and click <BgStyledText>Refresh</BgStyledText> so we pick up the newly installed extension.</li>
+  <li>Approve the connection request when the extension asks.</li>
+  <li>Your accounts now appear in the wallet dropdown.</li>
 </Ordered>
 
 ![Install extension panel](/img/console/wallet/install-extension.png)
 
 ### Selecting Your Active Wallet
 
-Click the **Active Wallet** button in the top right (it shows a green dot, a truncated address, and a chevron). A dropdown lists every account from your connected extension.
+The selector in the top right shows your connected account. Click it to open the list of every account we found.
 
 <Ordered>
   <li>Find the account you want to use.</li>
-  <li>Click <BgStyledText>Switch Wallet</BgStyledText> next to it.</li>
+  <li>Click <BgStyledText>Select Wallet</BgStyledText> next to it.</li>
 </Ordered>
 
-Hover over any truncated address to see it in full. Click the copy icon to copy it, or the link icon to open it on [hipstats.com](https://hipstats.com). Your selection is remembered across sessions.
+Hover a truncated address to see it in full. Click the copy icon to copy it, or the link icon to open it on [hipstats.com](https://hipstats.com). We remember your choice across sessions.
 
 ![Active wallet dropdown](/img/console/wallet/active-wallet.png)
 
 ### Disconnecting
 
-Open the Active Wallet dropdown and click the **logout** icon at the top of the list. Your active wallet is cleared from the console. Your funds stay in your extension wallet, untouched.
+Open the wallet dropdown and click the **logout** icon at the top of the list. We clear the active wallet from the console. Your funds stay in your extension, untouched.
+
+### Hiding Your Balances
+
+If you are sharing your screen or working somewhere public, click the eye icon next to a panel heading to hide sensitive wallet information. Your balances are masked until you toggle it back. This only changes what is displayed, nothing else.
 
 ## Your Balance
 
-The **My Balance** panel on the left shows your current spendable hAlpha balance with a line chart of your balance over time.
+The **My Balance** panel on the left shows your spendable hAlpha with a chart of your balance over time.
 
-Use the time range selector (**THIS WEEK / LAST 30 DAYS / LAST 60 DAYS / 1 YEAR / MAX**) to change the chart window. Hover over any point on the chart to see the exact balance at that moment.
+Use the range selector (**THIS WEEK / LAST 30 DAYS / LAST 60 DAYS / 1 YEAR / MAX**) to change the window. Hover any point on the chart to see the exact balance at that moment.
 
-:::note What "spendable" excludes
-Your transferable balance leaves out anything staking is holding: staked, unstaking, and redeemable amounts. See [Staking](/use/console/staking) for what those states mean.
-:::
-
-### Sending hAlpha
-
-<Ordered>
-  <li>Click <BgStyledText>Send</BgStyledText> below the balance chart.</li>
-  <li>Enter the <strong>recipient address</strong>, or click <BgStyledText>Address Book</BgStyledText> to pick a saved contact.</li>
-  <li>Enter the <strong>amount</strong>. Click <BgStyledText>MAX</BgStyledText> to send your full transferable balance minus the gas fee.</li>
-  <li>Review the summary: amount, estimated fee, and recipient.</li>
-  <li>Click <BgStyledText>Send</BgStyledText>. Your wallet extension opens for signature approval.</li>
-  <li>Approve in the extension. A toast confirms when the transaction is finalized, with a link to the block explorer.</li>
-</Ordered>
-
-![Send dialog](/img/console/wallet/send.png)
-
-:::note
-The **MAX** button subtracts the estimated gas fee so the transaction won't fail.
+:::note What spendable leaves out
+Your spendable balance excludes anything staking is holding: staked, unstaking, and redeemable amounts. See [Staking](/use/console/staking) for what each of those states means.
 :::
 
 ### Receiving hAlpha
 
 <Ordered>
   <li>Click <BgStyledText>Receive</BgStyledText> below the balance chart.</li>
-  <li>The dialog shows your deposit address as a QR code and plain text.</li>
+  <li>We show your deposit address as a QR code and as plain text.</li>
   <li>Share the QR code with the sender, or click the copy icon to grab the address.</li>
-  <li>The new balance appears within a block or two after the transfer confirms.</li>
+  <li>The new balance appears within a block or two of the transfer confirming.</li>
 </Ordered>
 
 ![Receive dialog](/img/console/wallet/receive.png)
+
+### Sending hAlpha
+
+<Ordered>
+  <li>Click <BgStyledText>Send</BgStyledText> below the balance chart.</li>
+  <li>Enter the recipient address, or pick a saved contact from your address book.</li>
+  <li>Enter the amount. We validate it against your available balance as you type.</li>
+  <li>Review the summary: amount, estimated fee, and recipient.</li>
+  <li>Click <BgStyledText>Send hALPHA</BgStyledText>. Your extension opens for approval.</li>
+  <li>Approve it. We confirm with a toast once the transaction finalizes, including a link to the explorer.</li>
+</Ordered>
+
+![Send dialog](/img/console/wallet/send.png)
+
+We block a few things before they reach the chain, so you may see one of these:
+
+<Unordered>
+  <li><em>"Invalid address format"</em>: the address is not a valid Substrate address.</li>
+  <li><em>"Cannot send to your own address"</em>: pick a different recipient.</li>
+  <li><em>"Amount exceeds your available balance"</em>: remember that staked and unstaking hAlpha is not spendable.</li>
+</Unordered>
 
 ## Transaction History
 
@@ -116,43 +126,45 @@ The **Transaction History** tab shows every incoming and outgoing hAlpha transfe
 
 | Column | What it shows |
 |---|---|
-| **Block** | The block number. Click to open it on hipstats. |
-| **Amount (hALPHA)** | The transfer amount. |
-| **From / To** | Sender and recipient addresses (truncated, with copy icons). |
-| **Transaction Type** | Sent or Received, relative to your active wallet. |
-| **Date** | Local time timestamp. |
+| **BLOCK** | The block number. Click to open it on hipstats. |
+| **AMOUNT (hALPHA)** | The transfer amount. |
+| **FROM / TO** | Sender and recipient addresses, truncated, with copy icons. |
+| **TRANSACTION TYPE** | Sent or Received, relative to your active wallet. |
+| **TRANSACTION DATE** | Timestamp in your local time. |
 
-Use the search box to filter by address, click any column header to sort, and use pagination to move between pages.
+Use the search box to filter by address, click a column header to sort, and page through with the pagination controls.
 
 ![Transaction history tab](/img/console/wallet/tx-history.png)
 
-Bridge operations are not listed here. They have their own **Bridge Transactions** tab, covered in the [Bridge guide](/use/console/bridge).
+Bridge operations are not listed here. We keep those in their own **Bridge Transactions** tab, covered in the [Bridge guide](/use/console/bridge).
 
 ## Address Book
 
-The **Address Book** tab lets you save frequently used wallet addresses with friendly names, so you can pick them from a list when sending instead of pasting long addresses every time.
+The **Address Book** tab lets you save addresses under friendly names, so you can pick one from a list when sending instead of pasting a long address every time.
+
+The table lists **NAME**, **WALLET ADDRESS** and **DATE ADDED**.
 
 ### Adding an Address
 
 <Ordered>
   <li>Click <BgStyledText>+ New Address</BgStyledText>.</li>
-  <li>Enter a <strong>name</strong> (e.g. <em>"Alice's wallet"</em>) and the <strong>wallet address</strong>.</li>
-  <li>Click <BgStyledText>Save</BgStyledText>. The dialog validates the address format before saving.</li>
+  <li>Enter a name (for example <em>"Alice's wallet"</em>) and the wallet address.</li>
+  <li>Click <BgStyledText>Save</BgStyledText>. We validate the address format before saving it.</li>
 </Ordered>
 
 ![Add new address dialog](/img/console/wallet/add-address.png)
 
 ### Editing or Removing
 
-Click the action menu on any address row to **Edit** the details or **Delete** the entry (with a confirmation dialog).
+Click the action menu on any row to **Edit** the entry or **Delete** it. We ask you to confirm before deleting.
 
-:::warning Stored in this browser only
-The address book lives in your local browser storage. It is not synced across devices, and clearing your browser data removes it.
+:::warning We store this in your browser, not on our servers
+Your address book lives in local browser storage. We do not sync it across devices, and clearing your browser data removes it. Keep your own copy of any address you cannot afford to lose.
 :::
 
 ### Using a Saved Address When Sending
 
-When you open the Send dialog, click <BgStyledText>Address Book</BgStyledText> in the recipient field to open a quick pick list of your saved contacts. Click one to fill the address in automatically.
+In the Send dialog, open the address book from the recipient field to see your saved contacts. Click one and we fill the address in for you.
 
 ## Where to next
 

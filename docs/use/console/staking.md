@@ -14,17 +14,17 @@ import BgStyledText from '@site/src/components/BgStyledText';
 
 Staking locks your hAlpha to help secure the Hippius network, and pays you rewards for doing it. hAlpha sitting in your balance earns nothing, so staking is how you put it to work.
 
-You stake from the **Stake hAlpha** panel on the [Wallet](/use/console/wallet) page. Everything here is signed by your wallet extension, and your tokens never leave your account.
+You stake from the **Stake hAlpha** panel on the [Wallet](/use/console/wallet) page. Every transaction is signed by your own extension, and we never take custody of your tokens.
 
-:::info You do not pick a validator
-The console stakes on your behalf. There is no validator list to choose from, so staking is a single amount-and-confirm step.
+:::info We choose the validator for you
+Some networks ask you to pick a validator and manage your nomination. We do not. Staking here is a single amount-and-confirm step, and we handle the nomination behind it.
 :::
 
 ## Reading the Stake Panel
 
-The panel leads with the number that matters most, the amount you currently have staked, followed by your total position.
+We lead with the number that matters most, the amount you currently have staked, followed by your total position.
 
-Underneath, a coloured bar shows how much of your hAlpha is actually working. Each state gets a segment sized to its share, and only states you actually hold appear.
+Underneath it, a coloured bar shows how much of your hAlpha is actually working. Each state gets a segment sized to its share, and we only show states you actually hold.
 
 | State | Colour | What it means |
 |---|---|---|
@@ -34,56 +34,56 @@ Underneath, a coloured bar shows how much of your hAlpha is actually working. Ea
 | **Unstaked** | Grey | Held but not put to work. This is what you can stake right now. |
 
 :::tip Unstaked is your headroom
-If you have been paid as a miner, your rewards land in your free balance and show up as **Unstaked**. That figure is the same one the Stake dialog offers as **MAX**, so the panel and the dialog can never disagree.
+If you are paid as a miner, your rewards land in your free balance and show up as **Unstaked**. We calculate that figure the same way the Stake dialog calculates **MAX**, so the panel and the dialog can never disagree with each other.
 :::
 
-Hover the clock icon next to **Unstaking** to open **Unbonding Details**, which lists each unbonding chunk separately with its own amount and remaining time. That matters if you unstaked on different days, because each chunk unlocks on its own schedule.
+Hover the clock icon next to **Unstaking** and we show you **Unbonding Details**: every unbonding chunk listed separately with its own amount and remaining time. That matters if you unstaked on different days, because each chunk unlocks on its own schedule rather than all at once.
 
 ### The hAlpha Coefficient
 
-Below the balances, the panel shows the **hAlpha Coef.** as a percentage, followed by *(network average, varies)* and a **View on Hipstats** link.
+Below the balances we show the **hAlpha Coef.** as a percentage, followed by *(network average, varies)* and a **View on Hipstats** link.
 
-This is a network-wide average, not a promise about your account. It moves with network activity, so treat it as an indication of what staking is currently returning rather than a fixed rate. Click **View on Hipstats** for the full staking breakdown on [hipstats.com](https://hipstats.com).
+This is a network-wide average, not a promise about your account. It moves with network activity, so please treat it as an indication of what staking is currently returning rather than a fixed rate we are offering you. Click **View on Hipstats** for the full staking breakdown on [hipstats.com](https://hipstats.com).
 
 ## Staking hAlpha
 
 <Ordered>
-  <li>Open the <a href="/use/console/wallet">Wallet</a> page and confirm the correct account is selected in <strong>Active Wallet</strong>.</li>
+  <li>Open the <a href="/use/console/wallet">Wallet</a> page and check that the right account is selected.</li>
   <li>Click <BgStyledText>Stake hALPHA</BgStyledText> in the top right of the Stake panel.</li>
   <li>Enter the amount to stake, or click <BgStyledText>MAX</BgStyledText> to stake everything available.</li>
   <li>Click <BgStyledText>Stake</BgStyledText> and review the confirmation showing the amount and estimated gas fee.</li>
   <li>Click <BgStyledText>Confirm Staking</BgStyledText> and approve the signature in your extension.</li>
-  <li>A success screen confirms once the transaction finalizes.</li>
+  <li>We show a success screen once the transaction finalizes.</li>
 </Ordered>
 
 ![Stake dialog](/img/console/wallet/stake-dialog.png)
 
-:::note MAX leaves room for gas
-**MAX** holds back a small amount so you can still pay the transaction fee. Staking your entire balance to the last token would leave you unable to sign anything afterwards, including the unstake.
+:::note Why MAX is not your whole balance
+We hold back a small amount for gas. If you staked every last token you would have nothing left to pay for the unstake later, so we leave you the headroom deliberately.
 :::
 
 ## Unstaking
 
-The **Unstake** button appears only when you have a staked balance.
+The **Unstake** button only appears once you have something staked.
 
 <Ordered>
   <li>Click <BgStyledText>Unstake</BgStyledText>.</li>
   <li>Enter the amount to unstake, or click <BgStyledText>MAX</BgStyledText>.</li>
-  <li>Click <BgStyledText>Unstake</BgStyledText>, review the confirmation, then click <BgStyledText>Confirm Unstake</BgStyledText>.</li>
+  <li>Click <BgStyledText>Unstake</BgStyledText>, review the confirmation, then click <BgStyledText>Confirm Unstaking</BgStyledText>.</li>
   <li>Approve the signature in your extension.</li>
 </Ordered>
 
 ![Unstake dialog](/img/console/wallet/unstake-dialog.png)
 
-The amount moves into **Unstaking** and stops earning rewards immediately. Once the unbonding period ends it becomes **Redeemable**.
+The amount moves into **Unstaking** and stops earning rewards straight away. Once the unbonding period ends we move it to **Redeemable**.
 
 :::warning Unstaking is not instant
-Unbonded tokens are locked for the full unbonding period before you can withdraw them. Plan ahead if you need the tokens for something else.
+Unbonded tokens stay locked for the full unbonding period before you can withdraw them. We cannot shorten it, so plan ahead if you need the tokens for something else.
 :::
 
 ## Withdrawing
 
-The **Withdraw** button appears once you have a redeemable balance. While tokens are still unbonding the button stays disabled, and hovering it tells you roughly how long is left.
+The **Withdraw** button becomes available once you have a redeemable balance. While tokens are still unbonding we keep the button disabled and tell you roughly how long is left when you hover it.
 
 <Ordered>
   <li>Click <BgStyledText>Withdraw</BgStyledText>.</li>
@@ -95,11 +95,13 @@ The **Withdraw** button appears once you have a redeemable balance. While tokens
 
 ## Troubleshooting
 
-**The panel shows "Couldn't load staking info".** The console could not reach the chain, which usually happens on a fresh page reload before the connection is established. Click retry on the panel.
+**"Couldn't load staking info".** We could not reach the chain, which usually happens on a fresh page reload before the connection is established. Click retry on the panel.
 
-**My rewards are not showing.** Rewards are paid per era, and a newly bonded stake does not earn for the era already in progress. Give it at least one full era before comparing figures.
+**"Amount exceeds your available balance".** Staked and unstaking hAlpha is not available to stake again. Check the **Unstaked** figure in the panel, which is the real ceiling.
 
-**MAX stakes less than my full balance.** That is deliberate, see the note above about leaving room for gas.
+**"Amount exceeds your staked balance".** You are trying to unstake more than you have bonded. Unstaking does not include amounts already unbonding or redeemable.
+
+**My rewards have not appeared.** Rewards are paid per era, and a stake bonded partway through an era does not earn for that era. Give it at least one full era before comparing figures.
 
 ## Where to next
 

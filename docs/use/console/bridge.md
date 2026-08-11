@@ -3,7 +3,7 @@ id: bridge
 title: Bridge
 sidebar_label: Bridge
 slug: /use/console/bridge
-description: Move tokens between Bittensor and Hippius from the console. Covers both bridge directions, the wallet signatures involved, and how to track a bridge in progress.
+description: Move tokens between Bittensor and Hippius from the console. Covers both directions, the Move Stake step, the wallet signatures involved, and how to track a bridge.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -18,80 +18,138 @@ You bridge from the **Bridge Tokens** panel at the bottom of the Stake card on t
 
 ![Bridge dialog](/img/console/wallet/bridge-dialog.png)
 
-## Choosing a Direction
+Before you start, here is what we ask of every bridge:
 
-The dialog handles both directions:
+| | |
+|---|---|
+| **Minimum amount** | 15 Alpha, or 15 hAlpha |
+| **Estimated time** | Around 120 seconds |
+| **Fee** | Around 0.1% |
+| **Signatures (Alpha to hAlpha)** | 3, or 4 if a stake move is needed first |
+| **Signatures (hAlpha to Alpha)** | 1 |
+
+## Choosing a Direction
 
 <Unordered>
   <li><strong>Bridge Alpha to hAlpha</strong>: brings tokens from Bittensor into Hippius, so you can stake them or pay for storage.</li>
   <li><strong>Bridge hAlpha to Alpha</strong>: sends tokens back out to Bittensor.</li>
 </Unordered>
 
-Before you confirm, the dialog shows the estimated time and the gas fees involved.
+Enter an amount and we show you the estimated time and fee before you commit to anything.
 
 ## Bridging Alpha to hAlpha
 
-This direction is the more involved one, because the work happens on Bittensor and needs several signatures.
+This is the more involved direction, because the work happens on Bittensor and needs several signatures.
 
 <Ordered>
   <li>Click <BgStyledText>Bridge Tokens</BgStyledText> on the Wallet page.</li>
   <li>Choose <strong>Bridge Alpha to hAlpha</strong>.</li>
-  <li>Enter the amount to bridge.</li>
-  <li>Read the <strong>Before you bridge</strong> panel and tick <BgStyledText>I understand and accept these risks</BgStyledText>.</li>
+  <li>Enter the amount. It must be at least 15 Alpha.</li>
+  <li>Click <BgStyledText>Bridge</BgStyledText>.</li>
+  <li>Read the <strong>Before you bridge</strong> panel and tick <BgStyledText>I understand and accept these risks</BgStyledText>. We ask for this on every single bridge, not just the first.</li>
   <li>Click <BgStyledText>Confirm Bridge</BgStyledText>.</li>
-  <li>Approve each signature in your wallet extension as it is requested.</li>
+  <li>Approve each signature in your extension as we request it.</li>
 </Ordered>
 
-### The signatures you will be asked for
+### The Move Stake step
 
-This is not a single approval. The dialog warns you up front that **multiple wallet confirmations** are required on Bittensor, normally three:
+Your Alpha has to be staked on the **Hippius validator** before we can deposit it into the bridge. If some of it is staked elsewhere, we have to consolidate it first.
+
+We check this the moment you confirm, using fresh chain state rather than a cached figure. If the amount you asked to bridge is larger than the Alpha you already hold on the Hippius validator, we add a **Move Stake to Validator** step at the front of the flow, and the confirmation tells you it needs **four** signatures instead of three.
+
+The step names the validator or validators we are moving your Alpha from, so you can see exactly what is about to change. For example:
+
+> *Move your Alpha from `5F3s...7Kd2` and 2 other validators onto the Hippius validator so the bridge can deposit it*
+
+If everything you are bridging already sits on the Hippius validator, we skip this step entirely and you sign three times.
+
+:::note This moves your stake, it does not unstake it
+A stake move keeps your Alpha staked throughout. It changes which validator holds it, so the bridge can reach it.
+:::
+
+### The signatures we ask for
+
+We tell you up front that **multiple wallet confirmations** are required on Bittensor. In order:
 
 | Step | What it does |
 |---|---|
+| **Move Stake to Validator** | Only when needed. Consolidates your Alpha onto the Hippius validator. |
 | **Add Proxy** | Authorizes the escrow contract on Bittensor. |
 | **Deposit Alpha** | Deposits your staked Alpha into the bridge contract. |
 | **Remove Proxy** | Revokes the bridge's access again once the deposit is done. |
 
-If your Alpha is staked with a validator the bridge cannot deposit from, a fourth step, **Move Stake to Validator**, is added at the front and the dialog tells you it needs four signatures instead of three.
+We also run an automatic **Dry Run Deposit** validation between these. You never act on it and we do not count it in the **Step X/Y** progress, so the deposit flow reads as three steps even though more is happening underneath.
 
 :::warning Do not close the tab mid-bridge
-Each signature has to be approved in order. If you try to navigate away while a bridge is running, the console asks whether to **Stay on this page** or **Leave anyway**. Staying is almost always the right answer. You can use <BgStyledText>Minimize</BgStyledText> to keep the progress visible while you work elsewhere in the console.
+Each signature has to be approved in order. If you try to navigate away while a bridge is running, we ask whether you want to **Stay on this page** or **Leave anyway**. Staying is almost always the right answer. Use <BgStyledText>Minimize</BgStyledText> if you want to keep the progress visible while you work elsewhere in the console.
 :::
 
 :::warning You need TAO for gas
-The Bittensor side of the bridge is paid for in TAO. If you see *"Failed to add escrow proxy. Please ensure you have enough TAO for gas fees"*, top up TAO in your source wallet and try again.
+The Bittensor side is paid for in TAO, not Alpha. If you see *"Failed to add escrow proxy. Please ensure you have enough TAO for gas fees"*, top up TAO in your source wallet and try again.
 :::
 
 ## Bridging hAlpha to Alpha
 
+This direction is a single signature.
+
 <Ordered>
   <li>Click <BgStyledText>Bridge Tokens</BgStyledText> and choose <strong>Bridge hAlpha to Alpha</strong>.</li>
-  <li>Enter the amount and review the estimated time and fees.</li>
-  <li>Click <BgStyledText>Confirm Bridge</BgStyledText> and approve the signature.</li>
-  <li>The dialog tracks progress and confirms when the destination chain settles.</li>
+  <li>Enter the amount. It must be at least 15 hAlpha.</li>
+  <li>Click <BgStyledText>Bridge</BgStyledText>, accept the risk disclaimer, then click <BgStyledText>Confirm Bridge</BgStyledText>.</li>
+  <li>Approve the signature. We track progress and confirm when the destination chain settles.</li>
 </Ordered>
+
+:::info Where your Alpha lands
+We burn your hAlpha on Hippius and release the equivalent Alpha to your **staked** balance on Bittensor, not your free balance. If you were expecting it to be immediately transferable, this is why it is not.
+:::
 
 :::note Staked hAlpha cannot be bridged
 Only your transferable balance can leave the network. Unstake first, wait out the unbonding period, and withdraw before bridging. See [Staking](/use/console/staking).
 :::
 
+## What we accept
+
+We check these before anything reaches the chain:
+
+<Unordered>
+  <li><strong>Minimum</strong>: 15 Alpha or 15 hAlpha. Below that we show <em>"Minimum bridge amount is 15.00 ..."</em>.</li>
+  <li><strong>Maximum</strong>: 1,000,000 tokens per bridge.</li>
+  <li><strong>Your balance</strong>: we reject an amount larger than the source balance.</li>
+</Unordered>
+
 ## Tracking a Bridge
 
-While a bridge runs, the dialog shows each step as it completes. You can minimize it and keep working.
+While a bridge runs we show each step as it completes, with a **Step X/Y** counter. You can minimize the dialog and keep working.
 
-Once it finishes, every bridge operation is listed in the **Bridge Transactions** tab at the bottom of the Wallet page. Each row shows the direction, amount, status (Pending, Completed or Failed), the source and destination transaction hashes with explorer links, and the date it was started.
+Once it finishes, every bridge operation appears in the **Bridge Transactions** tab at the bottom of the Wallet page. Filter it with **All**, **Deposit** or **Withdrawal**, each showing a count.
+
+| Column | What it shows |
+|---|---|
+| **AMOUNT** | The amount bridged. |
+| **DIRECTION** | Deposit or withdrawal. Only shown on the All tab, since the other tabs already imply it. |
+| **BITTENSOR CHAIN** | Status on the Bittensor side. |
+| **BITTENSOR BLOCK** | Block number on Bittensor. |
+| **BITTENSOR EXTRINSIC** | The Bittensor extrinsic hash. |
+| **VOTES** | Guardian confirmations, shown as a fraction. It turns green once it reaches 3. |
+| **HIPPIUS CHAIN** | Status on the Hippius side. |
+| **HIPPIUS BLOCK** | Block number on Hippius. |
+| **HIPPIUS EXTRINSIC** | The Hippius extrinsic hash. |
 
 ![Bridge transactions tab](/img/console/wallet/bridge-tx.png)
+
+:::tip Read the VOTES column when a bridge looks stuck
+A bridge is not complete until our guardians have confirmed it. If the Bittensor side is settled but VOTES has not reached 3 yet, nothing is wrong, the confirmations are still coming in.
+:::
 
 Regular hAlpha transfers are not shown here. Those live in the **Transaction History** tab, covered in the [Wallet guide](/use/console/wallet).
 
 ## Troubleshooting
 
-**The bridge failed partway through.** The dialog reports which step failed. Because **Add Proxy** and **Remove Proxy** are separate transactions, a failure between them can leave the proxy in place. Retrying the bridge is safe and the flow re-runs from the start.
+**The bridge failed partway through.** We report which step failed. Because **Add Proxy** and **Remove Proxy** are separate transactions, a failure between them can leave the proxy in place. Retrying is safe, we re-run the flow from the start.
 
-**Nothing arrived after the estimated time.** Check the **Bridge Transactions** tab for the status and open the source transaction hash in the explorer to confirm it settled on the origin chain.
+**Nothing arrived after the estimated time.** Check the **Bridge Transactions** tab. If the Bittensor side settled but VOTES is below 3, guardians are still confirming. If the Bittensor side never settled, the deposit did not go through and nothing was taken.
 
-**"Please enter a valid amount to bridge".** A minimum amount applies. Raise the amount and try again.
+**My Alpha is not where I expected it.** Bridging hAlpha out returns Alpha to your staked balance on Bittensor, not your free balance.
 
 ## Where to next
 
