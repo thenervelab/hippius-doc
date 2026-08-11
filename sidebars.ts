@@ -133,10 +133,9 @@ const sidebars: SidebarsConfig = {
             "use/console/s3",
             "use/console/uploads",
             "use/console/virtual-machines",
-            // ⚠️ "Wallet" page is hidden until the feature is live. The page
-            // is also marked `draft: true` in wallet.md to block direct access.
-            // Re-enable both together when ready to publish.
-            // "use/console/wallet",
+            "use/console/wallet",
+            "use/console/staking",
+            "use/console/bridge",
             "use/console/billing",
             // ⚠️ "Referrals" page is hidden until the feature is live. The page is
             // also marked `draft: true` in use/console/referrals.md to block direct

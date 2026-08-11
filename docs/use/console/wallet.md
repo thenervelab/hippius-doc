@@ -3,16 +3,8 @@ id: wallet
 title: Wallet
 sidebar_label: Wallet
 slug: /use/console/wallet
-description: 8
-draft: true
+description: Manage your hAlpha balance in the Hippius Console. Connect a wallet extension, send and receive tokens, review your transaction history, and save addresses.
 ---
-
-{/*
-  ⚠️ This page is hidden. `draft: true` excludes it from the production
-  build (no direct link works) and it is commented out of sidebars.ts.
-  The full content below is preserved. To publish: remove `draft: true`
-  above and re-enable the sidebar entry in sidebars.ts.
-*/}
 
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
@@ -21,13 +13,20 @@ import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 
 ## Introduction
 
-The **Wallet** page is where you manage your **hAlpha**, the native token of the Hippius network. From here you can check your balance, send and receive tokens, stake to earn rewards, bridge between Hippius and Bittensor, and view your full transaction history.
+The **Wallet** page is where you manage your **hAlpha**, the native token of the Hippius network. From here you can check your balance, send and receive tokens, and keep a record of everything that has moved in or out of your account.
 
 Every action on this page is signed on chain by your connected wallet extension. **We never hold or move your funds.**
 
 Reach Wallet from the sidebar at <BgStyledIconWithText text="Wallet" icon="WalletMinimal" />.
 
 ![Wallet page overview](/img/console/wallet/overview.png)
+
+Staking and bridging live on this same page but have their own guides, because there is more to explain than fits here:
+
+<Unordered>
+  <li><a href="/use/console/staking">Staking</a>: stake hAlpha, unstake it, and withdraw once it unlocks.</li>
+  <li><a href="/use/console/bridge">Bridge</a>: move tokens between Hippius and Bittensor.</li>
+</Unordered>
 
 ## Connecting Your Wallet
 
@@ -79,6 +78,10 @@ The **My Balance** panel on the left shows your current spendable hAlpha balance
 
 Use the time range selector (**THIS WEEK / LAST 30 DAYS / LAST 60 DAYS / 1 YEAR / MAX**) to change the chart window. Hover over any point on the chart to see the exact balance at that moment.
 
+:::note What "spendable" excludes
+Your transferable balance leaves out anything staking is holding: staked, unstaking, and redeemable amounts. See [Staking](/use/console/staking) for what those states mean.
+:::
+
 ### Sending hAlpha
 
 <Ordered>
@@ -93,7 +96,7 @@ Use the time range selector (**THIS WEEK / LAST 30 DAYS / LAST 60 DAYS / 1 YEAR 
 ![Send dialog](/img/console/wallet/send.png)
 
 :::note
-The **Max** button subtracts the estimated gas fee so the transaction won't fail. Your transferable balance excludes any staked, unstaking, or redeemable amounts.
+The **MAX** button subtracts the estimated gas fee so the transaction won't fail.
 :::
 
 ### Receiving hAlpha
@@ -106,86 +109,6 @@ The **Max** button subtracts the estimated gas fee so the transaction won't fail
 </Ordered>
 
 ![Receive dialog](/img/console/wallet/receive.png)
-
-## Staking hAlpha
-
-The **Stake hAlpha** panel shows your current staking position. Depending on what's active, you'll see up to three entries:
-
-| Entry | What it means |
-|---|---|
-| **Staked** | Bonded to validators. Earns staking rewards. |
-| **Redeemable** | Unbonded and ready to withdraw to your free balance. |
-| **Unstaking** | In the unbonding period. The clock icon shows the time remaining. |
-
-When all three entries are showing at once, the values use a smaller font to keep everything on one line.
-
-
-### Staking
-
-<Ordered>
-  <li>Click <BgStyledText>Stake hALPHA</BgStyledText> in the top right of the Stake panel.</li>
-  <li>Enter the amount to stake (or click <BgStyledText>MAX</BgStyledText>).</li>
-  <li>Click <BgStyledText>Stake</BgStyledText>, then review the confirmation screen showing the amount and estimated gas fee.</li>
-  <li>Click <BgStyledText>Confirm Staking</BgStyledText> and approve the signature in your extension.</li>
-  <li>A success screen confirms once the transaction finalizes.</li>
-</Ordered>
-
-![Stake dialog](/img/console/wallet/stake-dialog.png)
-
-### Unstaking
-
-The Unstake button appears only when you have a staked balance.
-
-<Ordered>
-  <li>Click <BgStyledText>Unstake</BgStyledText>.</li>
-  <li>Enter the amount to unstake (or click <BgStyledText>MAX</BgStyledText>).</li>
-  <li>Click <BgStyledText>Unstake</BgStyledText>, review the confirmation, then click <BgStyledText>Confirm Unstake</BgStyledText>.</li>
-  <li>Approve the signature in your extension.</li>
-</Ordered>
-
-The unstaked amount enters the **Unstaking** state. After the unbonding period ends (shown by the clock icon), it moves to **Redeemable**.
-
-![Unstake dialog](/img/console/wallet/unstake-dialog.png)
-
-### Withdrawing
-
-The Withdraw button appears only when you have a redeemable balance.
-
-<Ordered>
-  <li>Click <BgStyledText>Withdraw</BgStyledText>.</li>
-  <li>Confirm the amount (your full redeemable balance) and click <BgStyledText>Confirm Withdraw</BgStyledText>.</li>
-  <li>Approve the signature. The amount moves into your free balance.</li>
-</Ordered>
-
-![Withdraw dialog](/img/console/wallet/withdraw-dialog.png)
-
-:::tip Hover the clock icon
-The clock next to <em>Unstaking</em> shows a tooltip with each unbonding chunk listed separately, including the remaining time and amount for each. Useful if you've unstaked at different times and the chunks have different unlock dates.
-:::
-
-## Bridging Tokens
-
-The **Bridge Tokens** button lets you move tokens between the **Hippius** and **Bittensor** networks. hAlpha and Bittensor Alpha are pegged 1:1.
-
-<Ordered>
-  <li>Click <BgStyledText>Bridge Tokens</BgStyledText> in the Stake panel.</li>
-  <li>Choose the direction: <strong>Bridge Alpha to hAlpha</strong> or <strong>Bridge hAlpha to Alpha</strong>.</li>
-  <li>Enter the amount to bridge.</li>
-  <li>Review the estimated time, bridge fee, and destination address.</li>
-  <li>Click <BgStyledText>Bridge</BgStyledText>, then <BgStyledText>Confirm Bridge</BgStyledText> on the confirmation screen.</li>
-  <li>Approve the signature in your extension.</li>
-  <li>The dialog tracks progress and shows a success screen when the destination chain confirms.</li>
-</Ordered>
-
-![Bridge dialog](/img/console/wallet/bridge-dialog.png)
-
-You can track in flight bridge operations in the **Bridge Transactions** tab at the bottom of the page.
-
-:::warning Gas fees for Alpha → hAlpha
-You need a small amount of TAO on the source side to cover gas. If you see <em>"Failed to add escrow proxy. Please ensure you have enough TAO for gas fees"</em>, top up TAO in your source wallet and try again.
-:::
-
-For more on the bridge, see [Bridge Tokens](/use/bridge).
 
 ## Transaction History
 
@@ -203,11 +126,7 @@ Use the search box to filter by address, click any column header to sort, and us
 
 ![Transaction history tab](/img/console/wallet/tx-history.png)
 
-## Bridge Transactions
-
-The **Bridge Transactions** tab lists every bridge operation. Each row shows the direction, amount, status (Pending / Completed / Failed), source and destination transaction hashes with explorer links, and the date the bridge was initiated.
-
-![Bridge transactions tab](/img/console/wallet/bridge-tx.png)
+Bridge operations are not listed here. They have their own **Bridge Transactions** tab, covered in the [Bridge guide](/use/console/bridge).
 
 ## Address Book
 
@@ -227,7 +146,9 @@ The **Address Book** tab lets you save frequently used wallet addresses with fri
 
 Click the action menu on any address row to **Edit** the details or **Delete** the entry (with a confirmation dialog).
 
-The address book is stored in your local browser. It is not synced across devices.
+:::warning Stored in this browser only
+The address book lives in your local browser storage. It is not synced across devices, and clearing your browser data removes it.
+:::
 
 ### Using a Saved Address When Sending
 
@@ -236,7 +157,7 @@ When you open the Send dialog, click <BgStyledText>Address Book</BgStyledText> i
 ## Where to next
 
 <Unordered>
+  <li><a href="/use/console/staking">Staking</a>: put your hAlpha to work and earn rewards.</li>
+  <li><a href="/use/console/bridge">Bridge</a>: move tokens between Hippius and Bittensor.</li>
   <li><a href="/use/console/billing">Billing</a>: convert hAlpha or fiat into platform credits.</li>
-  <li><a href="/use/bridge">Bridge Tokens</a>: full bridge guide with troubleshooting.</li>
-  <li><a href="/learn/substrate-staking">Substrate Staking</a>: how the staking mechanism works at the protocol level.</li>
 </Unordered>
