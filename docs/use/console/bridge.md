@@ -99,8 +99,10 @@ This direction is a single signature.
   <li>Approve the signature. We track progress and confirm when the destination chain settles.</li>
 </Ordered>
 
-:::info Where your Alpha lands
-We burn your hAlpha on Hippius and release the equivalent Alpha to your **staked** balance on Bittensor, not your free balance. If you were expecting it to be immediately transferable, this is why it is not.
+:::info Your Alpha arrives as stake, because that is the only form it takes
+We burn your hAlpha on Hippius and release the equivalent Alpha on Bittensor. It arrives as **stake held against a hotkey**, not as a spendable balance.
+
+This is not a choice we made. On Bittensor, subnet Alpha only ever exists as stake, recorded per hotkey, coldkey and subnet. The spendable balance on Bittensor is TAO, and there is no free Alpha balance for it to land in. If you want liquid value out of it, unstake the Alpha on Bittensor.
 :::
 
 :::note Staked hAlpha cannot be bridged
@@ -149,7 +151,7 @@ Regular hAlpha transfers are not shown here. Those live in the **Transaction His
 
 **Nothing arrived after the estimated time.** Check the **Bridge Transactions** tab. If the Bittensor side settled but VOTES is below 3, guardians are still confirming. If the Bittensor side never settled, the deposit did not go through and nothing was taken.
 
-**My Alpha is not where I expected it.** Bridging hAlpha out returns Alpha to your staked balance on Bittensor, not your free balance.
+**My Alpha is not where I expected it.** Bridging hAlpha out returns Alpha as stake on Bittensor. There is no free Alpha balance on Bittensor, so unstake it there if you need it liquid.
 
 ## Where to next
 
