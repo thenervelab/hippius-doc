@@ -24,9 +24,11 @@ Before you start, here is what we ask of every bridge:
 |---|---|
 | **Minimum amount** | 15 Alpha, or 15 hAlpha |
 | **Estimated time** | Around 120 seconds |
-| **Fee** | Around 0.1% |
+| **What you pay** | Network gas only. TAO on the Bittensor side, hAlpha on ours |
 | **Signatures (Alpha to hAlpha)** | 3, or 4 if a stake move is needed first |
 | **Signatures (hAlpha to Alpha)** | 1 |
+
+The bridge does not take a cut. Tokens are pegged 1:1, so what you send is what you receive, and the only cost is the network gas for the transactions you sign.
 
 ## Choosing a Direction
 
@@ -35,7 +37,7 @@ Before you start, here is what we ask of every bridge:
   <li><strong>Bridge hAlpha to Alpha</strong>: sends tokens back out to Bittensor.</li>
 </Unordered>
 
-Enter an amount and we show you the estimated time and fee before you commit to anything.
+Enter an amount and we show you the estimated time and gas before you commit to anything.
 
 ## Bridging Alpha to hAlpha
 
