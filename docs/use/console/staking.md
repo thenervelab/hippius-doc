@@ -25,14 +25,14 @@ Some networks ask you to pick a validator and manage your nomination. We do not.
 
 We lead with the number that matters most, the amount you currently have staked, followed by your total position.
 
-Underneath it, a coloured bar shows how much of your hAlpha is actually working. Each state gets a segment sized to its share, and we only show states you actually hold.
+Underneath it, a coloured bar shows how much of your hAlpha is actually working, with a segment for each state you hold:
 
-| State | Colour | What it means |
-|---|---|---|
-| **Staked** | Blue | Bonded and earning rewards. |
-| **Unstaking** | Amber | In the unbonding period, not yet withdrawable. |
-| **Redeemable** | Green | Finished unbonding, ready to withdraw. |
-| **Unstaked** | Grey | Held but not put to work. This is what you can stake right now. |
+| State | What it means |
+|---|---|
+| **Staked** | Bonded and earning rewards. |
+| **Unstaking** | In the unbonding period, not yet withdrawable. |
+| **Redeemable** | Finished unbonding, ready to withdraw. |
+| **Unstaked** | Held but not put to work. This is what you can stake right now. |
 
 :::tip Unstaked is your headroom
 If you are paid as a miner, your rewards land in your free balance and show up as **Unstaked**. We calculate that figure the same way the Stake dialog calculates **MAX**, so the panel and the dialog can never disagree with each other.

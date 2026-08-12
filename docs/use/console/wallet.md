@@ -125,15 +125,9 @@ We block a few things before they reach the chain, so you may see one of these:
 
 The **Transaction History** tab shows every incoming and outgoing hAlpha transfer for your active wallet.
 
-| Column | What it shows |
-|---|---|
-| **BLOCK** | The block number. Click to open it on hipstats. |
-| **AMOUNT (hALPHA)** | The transfer amount. |
-| **FROM / TO** | Sender and recipient addresses, truncated, with copy icons. |
-| **TRANSACTION TYPE** | Sent or Received, relative to your active wallet. |
-| **TRANSACTION DATE** | Timestamp in your local time. |
+Each row gives you the block, amount, sender and recipient, type and date. **Sent** or **Received** is relative to whichever wallet is active, and the block number opens that block on hipstats.
 
-Use the search box to filter by address, click a column header to sort, and page through with the pagination controls.
+Search by address to narrow it down, sort by any column, and page through with the controls at the bottom.
 
 <Screenshot src="/img/console/wallet/tx-history.png" alt="Transaction history tab" dark />
 
