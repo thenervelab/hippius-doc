@@ -9,6 +9,7 @@ description: Move tokens between Bittensor and Hippius from the console. Covers 
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -16,7 +17,7 @@ The bridge moves tokens between the **Bittensor** network (Alpha) and the **Hipp
 
 You bridge from the **Bridge Tokens** panel at the bottom of the Stake card on the [Wallet](/use/console/wallet) page.
 
-![Bridge dialog](/img/console/wallet/bridge-dialog.png)
+<Screenshot src="/img/console/wallet/bridge-dialog.png" alt="Bridge dialog" dark />
 
 Before you start, here is what we ask of every bridge:
 
@@ -24,9 +25,11 @@ Before you start, here is what we ask of every bridge:
 |---|---|
 | **Minimum amount** | 15 Alpha, or 15 hAlpha |
 | **Estimated time** | Around 120 seconds |
-| **Fee** | Around 0.1% |
+| **What you pay** | Network gas only. TAO on the Bittensor side, hAlpha on ours |
 | **Signatures (Alpha to hAlpha)** | 3, or 4 if a stake move is needed first |
 | **Signatures (hAlpha to Alpha)** | 1 |
+
+The bridge does not take a cut. Tokens are pegged 1:1, so what you send is what you receive, and the only cost is the network gas for the transactions you sign.
 
 ## Choosing a Direction
 
@@ -35,7 +38,7 @@ Before you start, here is what we ask of every bridge:
   <li><strong>Bridge hAlpha to Alpha</strong>: sends tokens back out to Bittensor.</li>
 </Unordered>
 
-Enter an amount and we show you the estimated time and fee before you commit to anything.
+Enter an amount and we show you the estimated time and gas before you commit to anything.
 
 ## Bridging Alpha to hAlpha
 
@@ -77,8 +80,6 @@ We tell you up front that **multiple wallet confirmations** are required on Bitt
 | **Add Proxy** | Authorizes the escrow contract on Bittensor. |
 | **Deposit Alpha** | Deposits your staked Alpha into the bridge contract. |
 | **Remove Proxy** | Revokes the bridge's access again once the deposit is done. |
-
-We also run an automatic **Dry Run Deposit** validation between these. You never act on it and we do not count it in the **Step X/Y** progress, so the deposit flow reads as three steps even though more is happening underneath.
 
 :::warning Do not close the tab mid-bridge
 Each signature has to be approved in order. If you try to navigate away while a bridge is running, we ask whether you want to **Stay on this page** or **Leave anyway**. Staying is almost always the right answer. Use <BgStyledText>Minimize</BgStyledText> if you want to keep the progress visible while you work elsewhere in the console.
@@ -125,23 +126,23 @@ While a bridge runs we show each step as it completes, with a **Step X/Y** count
 
 Once it finishes, every bridge operation appears in the **Bridge Transactions** tab at the bottom of the Wallet page. Filter it with **All**, **Deposit** or **Withdrawal**, each showing a count.
 
-| Column | What it shows |
-|---|---|
-| **AMOUNT** | The amount bridged. |
-| **DIRECTION** | Deposit or withdrawal. Only shown on the All tab, since the other tabs already imply it. |
-| **BITTENSOR CHAIN** | Status on the Bittensor side. |
-| **BITTENSOR BLOCK** | Block number on Bittensor. |
-| **BITTENSOR EXTRINSIC** | The Bittensor extrinsic hash. |
-| **VOTES** | Guardian confirmations, shown as a fraction. It turns green once it reaches 3. |
-| **HIPPIUS CHAIN** | Status on the Hippius side. |
-| **HIPPIUS BLOCK** | Block number on Hippius. |
-| **HIPPIUS EXTRINSIC** | The Hippius extrinsic hash. |
+A bridge touches two chains, so each row carries a status, block and extrinsic for **both** Bittensor and Hippius, alongside the amount, direction and date. A bridge is only done when both sides have settled.
 
-![Bridge transactions tab](/img/console/wallet/bridge-tx.png)
+The column to watch is **VOTES**. It counts how many of our guardians have confirmed the transfer, and turns green once it reaches three. Until then the bridge is still in flight, however settled the source chain looks.
 
-:::tip Read the VOTES column when a bridge looks stuck
-A bridge is not complete until our guardians have confirmed it. If the Bittensor side is settled but VOTES has not reached 3 yet, nothing is wrong, the confirmations are still coming in.
-:::
+<Screenshot src="/img/console/wallet/bridge-tx.png" alt="Bridge transactions tab" dark />
+
+### Following a bridge on the explorer
+
+Everything here is public, so you never have to take our word for a bridge having settled. [hipstats.com](https://hipstats.com) publishes the same data straight from the chain:
+
+<Unordered>
+  <li><a href="https://hipstats.com/bridge">Bridge</a>: every bridge on the network, filterable by deposit or withdrawal, with the guardian votes and both chains' blocks and extrinsics. The same columns you see here, for everyone.</li>
+  <li><a href="https://hipstats.com/accounts">Accounts</a>: search your own address and open the <strong>Bridge</strong> tab to see only your bridges, and the <strong>Stake</strong> tab for your staking history.</li>
+  <li><a href="https://hipstats.com/analytics">Analytics</a>: the <strong>Alphanomics</strong> tab charts bridge flows across the network over time, including how much Alpha is locked and how it moves between the two chains.</li>
+</Unordered>
+
+Both extrinsic columns in the table link out too: the Bittensor one to taostats, the Hippius one to hipstats.
 
 Regular hAlpha transfers are not shown here. Those live in the **Transaction History** tab, covered in the [Wallet guide](/use/console/wallet).
 
