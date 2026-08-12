@@ -9,6 +9,7 @@ description: Stake hAlpha from the Hippius Console to earn rewards. Understand t
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -41,9 +42,17 @@ Hover the clock icon next to **Unstaking** and we show you **Unbonding Details**
 
 ### The hAlpha Coefficient
 
-Below the balances we show the **hAlpha Coef.** as a percentage, followed by *(network average, varies)* and a **View on Hipstats** link.
+Next to the staked figure we show the **hAlpha Coef.** as a multiplier, for example `2.002x`. Hover the info icon beside it for a short explanation.
 
-This is a network-wide average, not a promise about your account. It moves with network activity, so please treat it as an indication of what staking is currently returning rather than a fixed rate we are offering you. Click **View on Hipstats** for the full staking breakdown on [hipstats.com](https://hipstats.com).
+It is how much more your hAlpha earns staked with us than it would if you staked natively on Bittensor. The Alpha we hold in the bridge is always earning, and those rewards go to the hAlpha people have staked, so your stake earns on more Alpha than you staked yourself.
+
+:::note It is a multiplier, not a rate
+`2.002x` means roughly twice the return of native Bittensor staking. It is not a percentage and not an APY, so do not read `2x` as "2%".
+
+It is also a network-wide figure rather than a promise about your account, and it moves as more hAlpha is staked and more Alpha is bridged. We hide it entirely if it ever drops to `1x` or below, because at that point staking with us is no better than staking natively and the number would not be worth showing.
+:::
+
+You can see the figures behind it on the [Staking page](https://hipstats.com/staking) at hipstats.com, which publishes the total staked across the network, the number of stakers, and how the total has grown over time.
 
 ## Staking hAlpha
 
@@ -56,7 +65,7 @@ This is a network-wide average, not a promise about your account. It moves with 
   <li>We show a success screen once the transaction finalizes.</li>
 </Ordered>
 
-![Stake dialog](/img/console/wallet/stake-dialog.png)
+<Screenshot src="/img/console/wallet/stake-dialog.png" alt="Stake dialog" dark />
 
 :::note Why MAX is not your whole balance
 We hold back a small amount for gas. If you staked every last token you would have nothing left to pay for the unstake later, so we leave you the headroom deliberately.
@@ -73,7 +82,7 @@ The **Unstake** button only appears once you have something staked.
   <li>Approve the signature in your extension.</li>
 </Ordered>
 
-![Unstake dialog](/img/console/wallet/unstake-dialog.png)
+<Screenshot src="/img/console/wallet/unstake-dialog.png" alt="Unstake dialog" dark />
 
 The amount moves into **Unstaking** and stops earning rewards straight away. Once the unbonding period ends we move it to **Redeemable**.
 
@@ -91,7 +100,17 @@ The **Withdraw** button becomes available once you have a redeemable balance. Wh
   <li>Approve the signature. The amount moves into your free balance and shows as <strong>Unstaked</strong>.</li>
 </Ordered>
 
-![Withdraw dialog](/img/console/wallet/withdraw-dialog.png)
+<Screenshot src="/img/console/wallet/withdraw-dialog.png" alt="Withdraw dialog" dark />
+
+## Checking your rewards on the explorer
+
+Staking rewards are paid on chain, so you can verify them yourself rather than relying on what the console shows:
+
+<Unordered>
+  <li><a href="https://hipstats.com/staking">Staking</a>: the whole network's staking picture. Total staked, how many accounts are staking, how the total has grown, and a table of every staking account with what it has earned.</li>
+  <li><a href="https://hipstats.com/accounts">Accounts</a>: search your address and open the <strong>Stake</strong> tab for your own bonding, unbonding and reward history.</li>
+  <li><a href="https://hipstats.com/hippocampus">Hippocampus</a>: if you also run a miner, this is where storage reward payments are listed, one row per payment with its block and extrinsic.</li>
+</Unordered>
 
 ## Troubleshooting
 

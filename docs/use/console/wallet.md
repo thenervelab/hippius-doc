@@ -10,6 +10,7 @@ import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -19,7 +20,7 @@ We want to be clear about one thing up front: every action on this page is signe
 
 Reach Wallet from the sidebar at <BgStyledIconWithText text="Wallet" icon="WalletMinimal" />. The page header reads **Your Balance**, with your active account on the right.
 
-![Wallet page overview](/img/console/wallet/overview.png)
+<Screenshot src="/img/console/wallet/overview.png" alt="Wallet page overview" dark />
 
 Staking and bridging live on this same page, but we have given them their own guides because there is more to explain than fits here:
 
@@ -55,7 +56,7 @@ If we cannot detect an extension, the button in the top right shows <BgStyledTex
   <li>Your accounts now appear in the wallet dropdown.</li>
 </Ordered>
 
-![Install extension panel](/img/console/wallet/install-extension.png)
+<Screenshot src="/img/console/wallet/install-extension.png" alt="Install extension panel" dark />
 
 ### Selecting Your Active Wallet
 
@@ -68,7 +69,7 @@ The selector in the top right shows your connected account. Click it to open the
 
 Hover a truncated address to see it in full. Click the copy icon to copy it, or the link icon to open it on [hipstats.com](https://hipstats.com). We remember your choice across sessions.
 
-![Active wallet dropdown](/img/console/wallet/active-wallet.png)
+<Screenshot src="/img/console/wallet/active-wallet.png" alt="Active wallet dropdown" dark />
 
 ### Disconnecting
 
@@ -97,7 +98,7 @@ Your spendable balance excludes anything staking is holding: staked, unstaking, 
   <li>The new balance appears within a block or two of the transfer confirming.</li>
 </Ordered>
 
-![Receive dialog](/img/console/wallet/receive.png)
+<Screenshot src="/img/console/wallet/receive.png" alt="Receive dialog" dark />
 
 ### Sending hAlpha
 
@@ -110,7 +111,7 @@ Your spendable balance excludes anything staking is holding: staked, unstaking, 
   <li>Approve it. We confirm with a toast once the transaction finalizes, including a link to the explorer.</li>
 </Ordered>
 
-![Send dialog](/img/console/wallet/send.png)
+<Screenshot src="/img/console/wallet/send.png" alt="Send dialog" dark />
 
 We block a few things before they reach the chain, so you may see one of these:
 
@@ -134,9 +135,13 @@ The **Transaction History** tab shows every incoming and outgoing hAlpha transfe
 
 Use the search box to filter by address, click a column header to sort, and page through with the pagination controls.
 
-![Transaction history tab](/img/console/wallet/tx-history.png)
+<Screenshot src="/img/console/wallet/tx-history.png" alt="Transaction history tab" dark />
 
 Bridge operations are not listed here. We keep those in their own **Bridge Transactions** tab, covered in the [Bridge guide](/use/console/bridge).
+
+:::tip Everything here is public
+Your balance and every transfer are recorded on chain, so you can check them independently. Search your address on [hipstats.com](https://hipstats.com/accounts) to see your transfers, staking and bridge activity in one place, without connecting a wallet.
+:::
 
 ## Address Book
 
@@ -152,7 +157,7 @@ The table lists **NAME**, **WALLET ADDRESS** and **DATE ADDED**.
   <li>Click <BgStyledText>Save</BgStyledText>. We validate the address format before saving it.</li>
 </Ordered>
 
-![Add new address dialog](/img/console/wallet/add-address.png)
+<Screenshot src="/img/console/wallet/add-address.png" alt="Add new address dialog" dark />
 
 ### Editing or Removing
 

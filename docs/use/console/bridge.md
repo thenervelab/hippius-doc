@@ -9,6 +9,7 @@ description: Move tokens between Bittensor and Hippius from the console. Covers 
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
@@ -16,7 +17,7 @@ The bridge moves tokens between the **Bittensor** network (Alpha) and the **Hipp
 
 You bridge from the **Bridge Tokens** panel at the bottom of the Stake card on the [Wallet](/use/console/wallet) page.
 
-![Bridge dialog](/img/console/wallet/bridge-dialog.png)
+<Screenshot src="/img/console/wallet/bridge-dialog.png" alt="Bridge dialog" dark />
 
 Before you start, here is what we ask of every bridge:
 
@@ -138,8 +139,21 @@ Once it finishes, every bridge operation appears in the **Bridge Transactions** 
 | **HIPPIUS CHAIN** | Status on the Hippius side. |
 | **HIPPIUS BLOCK** | Block number on Hippius. |
 | **HIPPIUS EXTRINSIC** | The Hippius extrinsic hash. |
+| **DATE** | When the bridge happened, in your local time. |
 
-![Bridge transactions tab](/img/console/wallet/bridge-tx.png)
+<Screenshot src="/img/console/wallet/bridge-tx.png" alt="Bridge transactions tab" dark />
+
+### Following a bridge on the explorer
+
+Everything here is public, so you never have to take our word for a bridge having settled. [hipstats.com](https://hipstats.com) publishes the same data straight from the chain:
+
+<Unordered>
+  <li><a href="https://hipstats.com/bridge">Bridge</a>: every bridge on the network, filterable by deposit or withdrawal, with the guardian votes and both chains' blocks and extrinsics. The same columns you see here, for everyone.</li>
+  <li><a href="https://hipstats.com/accounts">Accounts</a>: search your own address and open the <strong>Bridge</strong> tab to see only your bridges, and the <strong>Stake</strong> tab for your staking history.</li>
+  <li><a href="https://hipstats.com/analytics">Analytics</a>: the <strong>Alphanomics</strong> tab charts bridge flows across the network over time, including how much Alpha is locked and how it moves between the two chains.</li>
+</Unordered>
+
+Both extrinsic columns in the table link out too: the Bittensor one to taostats, the Hippius one to hipstats.
 
 :::tip Read the VOTES column when a bridge looks stuck
 A bridge is not complete until our guardians have confirmed it. If the Bittensor side is settled but VOTES has not reached 3 yet, nothing is wrong, the confirmations are still coming in.
