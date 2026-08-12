@@ -49,7 +49,7 @@ It is how much more your hAlpha earns staked with us than it would if you staked
 :::note It is a multiplier, not a rate
 `2.002x` means roughly twice the return of native Bittensor staking. It is not a percentage and not an APY, so do not read `2x` as "2%".
 
-It is also a network-wide figure rather than a promise about your account, and it moves as more hAlpha is staked and more Alpha is bridged. We hide it entirely if it ever drops to `1x` or below, because at that point staking with us is no better than staking natively and the number would not be worth showing.
+It is also a network-wide figure rather than a promise about your account, and it moves as more hAlpha is staked and more Alpha is bridged.
 :::
 
 You can see the figures behind it on the [Staking page](https://hipstats.com/staking) at hipstats.com, which publishes the total staked across the network, the number of stakers, and how the total has grown over time.

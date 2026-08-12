@@ -81,8 +81,6 @@ We tell you up front that **multiple wallet confirmations** are required on Bitt
 | **Deposit Alpha** | Deposits your staked Alpha into the bridge contract. |
 | **Remove Proxy** | Revokes the bridge's access again once the deposit is done. |
 
-We also run an automatic **Dry Run Deposit** validation between these. You never act on it and we do not count it in the **Step X/Y** progress, so the deposit flow reads as three steps even though more is happening underneath.
-
 :::warning Do not close the tab mid-bridge
 Each signature has to be approved in order. If you try to navigate away while a bridge is running, we ask whether you want to **Stay on this page** or **Leave anyway**. Staying is almost always the right answer. Use <BgStyledText>Minimize</BgStyledText> if you want to keep the progress visible while you work elsewhere in the console.
 :::
