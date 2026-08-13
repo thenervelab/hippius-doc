@@ -107,7 +107,7 @@ This is not a choice we made. On Bittensor, subnet Alpha only ever exists as sta
 :::
 
 :::note Staked hAlpha cannot be bridged
-Only your transferable balance can leave the network. Unstake first, wait out the unbonding period, and withdraw before bridging. See [Staking](/use/console/staking).
+Only your transferable balance can leave the network. Unstake first, wait out the unbonding period, and redeem before bridging. See [Staking](/use/console/staking).
 :::
 
 ## What we accept
