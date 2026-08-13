@@ -268,7 +268,7 @@ const config: Config = {
             },
             {
               label: "X",
-              href: "https://x.com/hippius_subnet",
+              href: "https://x.com/Hippius_cloud",
             },
             {
               label: "GitHub",
