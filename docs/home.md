@@ -18,4 +18,4 @@ Hippius is a **transparent, distributed, anonymous cloud storage platform** buil
 
 ## Join the Community
 
-Connect with us on [Discord](https://discord.hippius.com) or follow us on [X](https://x.com/hippius_subnet) to stay updated and get support.
+Connect with us on [Discord](https://discord.hippius.com) or follow us on [X](https://x.com/Hippius_cloud) to stay updated and get support.

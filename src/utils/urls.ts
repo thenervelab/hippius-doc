@@ -5,10 +5,10 @@ export const URLS = {
   WHY_HIPPIUS: "https://hippius.com/why-hippius",
   DASHBOARD: "https://console.hippius.com",
   GITHUB_ORG: "https://github.com/thenervelab",
-  TWITTER: "https://x.com/hippius_subnet",
+  TWITTER: "https://x.com/Hippius_cloud",
   DISCORD: "https://discord.hippius.com",
   LEARN: "/learn/intro",
   USE: "/use/quickstart",
   API: "https://api.hippius.com/",
-  X: "https://x.com/hippius_subnet",
+  X: "https://x.com/Hippius_cloud",
 };
