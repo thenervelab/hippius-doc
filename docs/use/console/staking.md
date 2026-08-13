@@ -100,7 +100,7 @@ The **Redeem** button becomes available once you have a redeemable balance. Whil
   <li>Approve the signature. The amount moves into your free balance and shows as <strong>Unstaked</strong>.</li>
 </Ordered>
 
-<Screenshot src="/img/console/wallet/withdraw-dialog.png" alt="Redeem dialog" dark />
+<Screenshot src="/img/console/wallet/redeem-dialog.png" alt="Redeem dialog" dark />
 
 ## Checking your rewards on the explorer
 
