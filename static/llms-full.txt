@@ -447,4 +447,4 @@ Billing:
 - Pricing: https://hippius.com/pricing
 - GitHub: https://github.com/thenervelab
 - Discord: https://discord.com/channels/1298001698874327131/1442875352484548609
-- X/Twitter: https://x.com/hippius_subnet
+- X/Twitter: https://x.com/Hippius_cloud

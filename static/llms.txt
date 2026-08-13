@@ -226,4 +226,4 @@ https://hippius.com/pricing
 - Console: https://console.hippius.com
 - Documentation: https://docs.hippius.com
 - API: https://api.hippius.com
-- X/Twitter: https://x.com/hippius_subnet
+- X/Twitter: https://x.com/Hippius_cloud
