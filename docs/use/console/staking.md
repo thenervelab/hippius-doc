@@ -3,7 +3,7 @@ id: staking
 title: Staking
 sidebar_label: Staking
 slug: /use/console/staking
-description: Stake hAlpha from the Hippius Console to earn rewards. Understand the staked, unstaked, unstaking and redeemable states, and how to unstake and withdraw.
+description: Stake hAlpha from the Hippius Console to earn rewards. Understand the staked, unstaked, unstaking and redeemable states, and how to unstake and redeem.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -30,8 +30,8 @@ Underneath it, a coloured bar shows how much of your hAlpha is actually working,
 | State | What it means |
 |---|---|
 | **Staked** | Bonded and earning rewards. |
-| **Unstaking** | In the unbonding period, not yet withdrawable. |
-| **Redeemable** | Finished unbonding, ready to withdraw. |
+| **Unstaking** | In the unbonding period, not yet redeemable. |
+| **Redeemable** | Finished unbonding, ready to redeem. |
 | **Unstaked** | Held but not put to work. This is what you can stake right now. |
 
 :::tip Unstaked is your headroom
@@ -87,20 +87,20 @@ The **Unstake** button only appears once you have something staked.
 The amount moves into **Unstaking** and stops earning rewards straight away. Once the unbonding period ends we move it to **Redeemable**.
 
 :::warning Unstaking is not instant
-Unbonded tokens stay locked for the full unbonding period before you can withdraw them. We cannot shorten it, so plan ahead if you need the tokens for something else.
+Unbonded tokens stay locked for the full unbonding period before you can redeem them. We cannot shorten it, so plan ahead if you need the tokens for something else.
 :::
 
-## Withdrawing
+## Redeeming
 
-The **Withdraw** button becomes available once you have a redeemable balance. While tokens are still unbonding we keep the button disabled and tell you roughly how long is left when you hover it.
+The **Redeem** button becomes available once you have a redeemable balance. While tokens are still unbonding we keep the button disabled and tell you roughly how long is left when you hover it.
 
 <Ordered>
-  <li>Click <BgStyledText>Withdraw</BgStyledText>.</li>
-  <li>Confirm the amount, which is your full redeemable balance, and click <BgStyledText>Confirm Withdraw</BgStyledText>.</li>
+  <li>Click <BgStyledText>Redeem</BgStyledText>.</li>
+  <li>Confirm the amount, which is your full redeemable balance, and click <BgStyledText>Confirm Redeem</BgStyledText>.</li>
   <li>Approve the signature. The amount moves into your free balance and shows as <strong>Unstaked</strong>.</li>
 </Ordered>
 
-<Screenshot src="/img/console/wallet/withdraw-dialog.png" alt="Withdraw dialog" dark />
+<Screenshot src="/img/console/wallet/withdraw-dialog.png" alt="Redeem dialog" dark />
 
 ## Checking your rewards on the explorer
 

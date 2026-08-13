@@ -25,7 +25,7 @@ Reach Wallet from the sidebar at <BgStyledIconWithText text="Wallet" icon="Walle
 Staking and bridging live on this same page, but we have given them their own guides because there is more to explain than fits here:
 
 <Unordered>
-  <li><a href="/use/console/staking">Staking</a>: stake hAlpha, unstake it, and withdraw once it unlocks.</li>
+  <li><a href="/use/console/staking">Staking</a>: stake hAlpha, unstake it, and redeem once it unlocks.</li>
   <li><a href="/use/console/bridge">Bridge</a>: move tokens between Hippius and Bittensor.</li>
 </Unordered>
 
