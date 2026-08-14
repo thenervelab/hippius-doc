@@ -87,9 +87,7 @@ The **Unstake** button only appears once you have something staked.
 The amount moves into **Unstaking** and stops earning rewards straight away. Once the unbonding period ends we move it to **Redeemable**.
 
 :::warning Unstaking takes two days
-The unbonding period is **48 hours**. Your tokens stay locked for that whole time before you can redeem them, and they earn nothing while they wait. We cannot shorten it, so plan ahead if you need the tokens for something else.
-
-That figure comes from the chain rather than from us: unbonding runs for 8 eras, and an era is 6 hours.
+The unbonding period is **48 hours**. Your tokens stay locked for that whole time before you can redeem them, and they earn nothing while they wait. Once you have started unstaking there is no way to speed it up, so plan ahead if you need the tokens for something else.
 :::
 
 ## Redeeming
