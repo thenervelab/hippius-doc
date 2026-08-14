@@ -30,7 +30,7 @@ Underneath it, a coloured bar shows how much of your hAlpha is actually working,
 | State | What it means |
 |---|---|
 | **Staked** | Bonded and earning rewards. |
-| **Unstaking** | In the unbonding period, not yet redeemable. |
+| **Unstaking** | In the 48 hour unbonding period, not yet redeemable. |
 | **Redeemable** | Finished unbonding, ready to redeem. |
 | **Unstaked** | Held but not put to work. This is what you can stake right now. |
 
@@ -86,8 +86,10 @@ The **Unstake** button only appears once you have something staked.
 
 The amount moves into **Unstaking** and stops earning rewards straight away. Once the unbonding period ends we move it to **Redeemable**.
 
-:::warning Unstaking is not instant
-Unbonded tokens stay locked for the full unbonding period before you can redeem them. We cannot shorten it, so plan ahead if you need the tokens for something else.
+:::warning Unstaking takes two days
+The unbonding period is **48 hours**. Your tokens stay locked for that whole time before you can redeem them, and they earn nothing while they wait. We cannot shorten it, so plan ahead if you need the tokens for something else.
+
+That figure comes from the chain rather than from us: unbonding runs for 8 eras, and an era is 6 hours.
 :::
 
 ## Redeeming
