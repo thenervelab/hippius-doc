@@ -106,6 +106,10 @@ We burn your hAlpha on Hippius and release the equivalent Alpha on Bittensor. It
 This is not a choice we made. On Bittensor, subnet Alpha only ever exists as stake, recorded per hotkey, coldkey and subnet. The spendable balance on Bittensor is TAO, and there is no free Alpha balance for it to land in. If you want liquid value out of it, unstake the Alpha on Bittensor.
 :::
 
+:::warning Leave yourself some hAlpha for gas
+This direction is signed on Hippius, so the fee comes out of your hAlpha. If you bridge every last token you will have nothing left to pay it with. Keep a little back.
+:::
+
 :::note Staked hAlpha cannot be bridged
 Only your transferable balance can leave the network. Unstake first, wait out the unbonding period, and redeem before bridging. See [Staking](/use/console/staking).
 :::
