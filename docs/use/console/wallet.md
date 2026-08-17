@@ -58,6 +58,32 @@ If we cannot detect an extension, the button in the top right shows <BgStyledTex
 
 <Screenshot src="/img/console/wallet/install-extension.png" alt="Install extension panel" dark />
 
+### Adding the Hippius Network to Your Wallet
+
+You do not need to add Hippius as a network to use the console. When you connect your extension here, we talk to the chain for you and your wallet only has to sign. That is true of staking and bridging too.
+
+What adding the network does give you is Hippius showing up inside the extension itself, so you can see your hAlpha balance without opening the console.
+
+Talisman is the one that usually needs this, because it does not ship Hippius in its built-in network list. Open its settings, find the section for managing networks, and add one using our RPC endpoint. Most extensions read everything else straight off the chain once they have the endpoint, so the URL is often the only thing you have to type.
+
+| | |
+|---|---|
+| **RPC endpoint** | `wss://rpc.hippius.network` |
+| **Network name** | Hippius Mainnet |
+| **Token symbol** | hALPHA |
+| **Token decimals** | 18 |
+| **Address prefix** | 42 |
+
+:::tip Your address is the same either way
+Hippius uses address prefix 42, the generic Substrate format, so the address you already see in the console is the one the extension will show. You do not get a separate Hippius address by adding the network.
+:::
+
+If the extension asks for a genesis hash, ours is:
+
+```
+0x28a6b54823f786c5dd8520ef7bdb0ee2639173815bfbb7719bcf58ef9eb5e1f9
+```
+
 ### Selecting Your Active Wallet
 
 The selector in the top right shows your connected account. Click it to open the list of every account we found.
