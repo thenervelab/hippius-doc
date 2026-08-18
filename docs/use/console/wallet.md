@@ -74,6 +74,12 @@ Talisman is the one that usually needs this, because it does not ship Hippius in
 | **Token decimals** | 18 |
 | **Address prefix** | 42 |
 
+:::warning Leave the metadata hash option switched off
+Talisman offers a setting called **This network supports CheckMetadataHash sign extension**. Leave it unticked.
+
+With it on, Talisman will happily let you sign a transaction and the transaction then fails afterwards, which looks like the transaction was rejected when it was really the signature. We do not support that extension yet. With it off, signing works normally.
+:::
+
 :::tip Your address is the same either way
 Hippius uses address prefix 42, the generic Substrate format, so the address you already see in the console is the one the extension will show. You do not get a separate Hippius address by adding the network.
 :::
