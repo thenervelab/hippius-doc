@@ -20,11 +20,7 @@ Because it settles on our chain, you can verify what you have been paid without 
 
 Find it in the sidebar at <BgStyledIconWithText text="Referrals" icon="User" />.
 
-{/* Screenshot placeholder. Capture the Referrals page (light + dark) and save as
-    static/img/console/referrals/overview.png and overview-dark.png, commit both,
-    then uncomment. Images must be committed or the deployed site shows a broken frame.
-<Screenshot src="/img/console/referrals/overview.png" alt="Referrals page overview" dark />
-*/}
+<Screenshot src="/img/console/referrals/overview.png" alt="The Referrals page, showing your link, your earnings and your referral links" dark />
 
 ## Sharing your link
 
@@ -45,6 +41,8 @@ You can create as many links as you like, each labelled with where you plan to s
   <li>Choose the platform you are sharing on: X, Discord, LinkedIn, Instagram, Telegram, YouTube or Reddit. Pick <strong>Other</strong> to type your own label for anywhere else, like a newsletter or a conference talk.</li>
   <li>Select <strong>Create</strong>. The new link appears in the table below, ready to copy or share.</li>
 </Ordered>
+
+<Screenshot src="/img/console/referrals/new-link.png" alt="The New Referral Link dialog with the platform list" dark />
 
 Each link carries the platform label, so a signup that arrives through your YouTube link is counted separately from one that arrives through Discord.
 
