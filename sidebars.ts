@@ -131,6 +131,7 @@ const sidebars: SidebarsConfig = {
             "use/console/drive",
             "use/console/shared-links",
             "use/console/s3",
+            "use/console/migrations",
             "use/console/uploads",
             "use/console/virtual-machines",
             "use/console/wallet",
