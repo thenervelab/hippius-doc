@@ -68,5 +68,6 @@ At the bottom of the page:
   <li><a href="/use/console/wallet">Wallet</a>: check your hAlpha balance, send and receive tokens.</li>
   <li><a href="/use/console/staking">Staking</a>: stake hAlpha to earn rewards.</li>
   <li><a href="/use/console/billing">Billing</a>: top up credits to keep your services running.</li>
+  <li><a href="/use/console/referrals">Referrals</a>: invite people to Hippius and earn commission on what they spend.</li>
   <li><a href="/use/console/settings">Settings</a>: switch between Normal and Pro view.</li>
 </Unordered>

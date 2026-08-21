@@ -3,129 +3,90 @@ id: referrals
 title: Referrals
 sidebar_label: Referrals
 slug: /use/console/referrals
-description: 5
-draft: true
+description: Invite people to Hippius and earn 5% commission on what they spend. Create a referral link for each platform you share on, then track signups and commission from the Referrals page in the Hippius Console.
 ---
 
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
-
-## Coming soon
-
-Referrals on the Hippius Console are **coming soon**. This page will be updated with the full guide once the feature is live.
-
-{/*
-  ───────────────────────────────────────────────────────────────────────
-  ORIGINAL DOCUMENTATION — preserved for future release.
-  To publish: delete the "Coming soon" section above and this comment
-  wrapper (the opening `{/*` line and the closing line at the very bottom).
-  ───────────────────────────────────────────────────────────────────────
+import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-The **Referrals** page is where you generate referral links and track everything they earn you. **You earn 5% of every purchase your referrals make on Hippius, for life.** Earnings are paid directly to your wallet on every qualifying purchase, with no manual claim required.
+Invite someone to Hippius and you earn **5% of what they spend, for as long as their account keeps spending**. It is not a one time bonus for the signup. Commission is paid in hAlpha, automatically, and there is nothing to claim.
 
-Reach Referrals from the sidebar at <BgStyledIconWithText text="Referrals" icon="ReferralGrip" />.
+Because it settles on our chain, you can verify what you have been paid without taking our word for it. More on that in [Checking your commission](#checking-your-commission).
 
-![Referrals page](/img/console/referrals/overview.png)
+Find it in the sidebar at <BgStyledIconWithText text="Referrals" icon="User" />.
 
-## Your Referral Link
+<Screenshot src="/img/console/referrals/overview.png" alt="The Referrals page, showing your link, your earnings and your referral links" dark />
 
-At the top of the page you'll find your latest referral link in a copy friendly box, along with share buttons for X, Telegram, and Discord.
+## Sharing your link
 
-### Copying the Link
+Your referral link sits at the top of the page. Select it, or the copy icon beside it, to copy the whole URL.
 
-Click anywhere on the link box (or the copy icon next to it) to copy the full URL to your clipboard. A toast confirms it was copied.
-
-### Sharing on Social
-
-| Button | What happens |
-|---|---|
-| **X&nbsp;(Twitter)** | Opens X's tweet composer in a new tab with a pre filled message: an intro, the Hippius pitch, your link, and relevant hashtags. |
-| **Telegram** | Opens Telegram's share dialog with a pre filled caption and your link. |
-| **Discord** | Copies a formatted Discord message to your clipboard. A toast tells you it's ready to paste into any channel or DM. |
-
+Next to it are buttons for X, Telegram and Discord. Each one opens that platform with a message already written for it, so you are not composing a post from scratch every time. The Discord button copies a formatted message to your clipboard instead, ready to paste into any channel.
 
 :::tip
-On larger screens the share buttons sit to the right of the link box. On smaller screens they wrap below it.
+Anyone can use your link. They do not need a Hippius account first, and there is nothing they have to enter for you to be credited.
 :::
 
-### Refreshing
+## Creating a link for each platform
 
-The refresh button reloads your referral links and history. Useful right after someone signs up via your link and you want to see it appear immediately.
+You can create as many links as you like, each labelled with where you plan to share it. They all pay into the same referral code, so this changes nothing about what you earn. What it gives you is a breakdown of which platforms actually bring people in.
 
-## Your Stats
+<Ordered>
+  <li>Select <strong>+ New Link</strong> on the Referrals page.</li>
+  <li>Choose the platform you are sharing on: X, Discord, LinkedIn, Instagram, Telegram, YouTube or Reddit. Pick <strong>Other</strong> to type your own label for anywhere else, like a newsletter or a conference talk.</li>
+  <li>Select <strong>Create</strong>. The new link appears in the table below, ready to copy or share.</li>
+</Ordered>
 
-Three stat cards below the link box show your referral performance:
+<Screenshot src="/img/console/referrals/new-link.png" alt="The New Referral Link dialog with the platform list" dark />
 
-| Card | What it tracks |
-|---|---|
-| **Total Referrals** | How many people have signed up using your link. |
-| **Total Usage** | Aggregate clicks and conversions. |
-| **Total hAlpha Earned** | Total commission credited to your wallet. |
+Each link carries the platform label, so a signup that arrives through your YouTube link is counted separately from one that arrives through Discord.
 
-Each card has its own date range selector (**THIS WEEK / LAST 30 DAYS / LAST 60 DAYS / 1 YEAR / MAX**) and a mini bar chart showing daily activity. Hover any bar to see the per day value.
+:::note
+There is no limit, so a fresh link per video, post or community is fine. They all credit the same referral code.
+:::
 
+## Tracking how your links perform
 
-## Referral Links Table
-
-Below the stat cards is a table of every referral code you've generated:
-
-| Column | Description |
-|---|---|
-| **Code** | The code suffix added to the base URL. |
-| **Reward** | Cumulative reward earned through that specific code. |
-| **Actions** | Copy the code or the full URL to your clipboard. |
-
-You can have multiple codes active at the same time. One per marketing channel makes it easy to compare which sources convert best in the table.
-
-The referral link shown at the top of the page always uses your most recently generated code.
-
-
-If you haven't generated any links yet, the table shows an empty state: _"No referral links yet. Your referral links will appear here once generated."_
-
-## Referral History Table
-
-The **Referral History** table lists every signup that came through your link:
-
-| Column | Description |
-|---|---|
-| **User ID** | The referred user's wallet address (truncated, with a copy icon for the full address). |
-| **Date** | When they signed up. |
-| **Status** | Active means this referral is still earning you commission. |
-| **Reward** | Your total commission from that specific user so far. |
-
-Use the search box to find a specific address, click any column header to sort, and use pagination to navigate.
-
-
-## How Earnings Work
-
-Your 5% commission is calculated on the gross purchase value and paid automatically to your wallet on every qualifying transaction:
-
-| Purchase type | Earns commission? |
-|---|---|
-| **Card top up** (Stripe) | ✅ Yes |
-| **TAO top up** | ✅ Yes |
-| **Subscription plan payment** | ✅ Yes |
-| **Usage credits consumed** | ❌ No (the original top up already paid out) |
-
-There is no minimum threshold or manual claim. The chain pays out automatically.
-
-## Best Practices
+Three figures sit across the top of the page.
 
 <Unordered>
-  <li><strong>Generate one code per channel.</strong> Separate codes for Twitter, your blog, Discord, etc. let you see which sources bring in the most referrals in the Referral Links table.</li>
-  <li><strong>Use the share buttons</strong> instead of pasting the raw URL. The pre filled messages are written for engagement on each platform.</li>
-  <li><strong>Refresh the page</strong> after sharing if you're watching for a specific person to sign up and the table hasn't updated yet.</li>
+  <li><strong>Referred Signups:</strong> everyone who created an account through one of your links. The chart beneath it breaks this down over time, and you can change the range.</li>
+  <li><strong>Active Referrals:</strong> how many of those went on to spend, with your conversion rate beside it. This is the number that turns into commission.</li>
+  <li><strong>Commission Earned:</strong> what the referral pallet has paid you so far, in hAlpha.</li>
 </Unordered>
+
+Below that, **Signups by Platform** shows which of your links people arrived through, and **Recent Referrals** lists your most recent signups with the platform they came from and the date they joined.
+
+Email addresses in that list are masked. You can see that someone signed up and whether they are active, not who they are.
+
+## How commission works
+
+You earn **5%**, and the rate is set on chain rather than in the console.
+
+Attribution happens the moment someone signs up through your link. It is recorded then and does not change afterwards, so it stays credited to you no matter which of your links they used or how long they stay.
+
+Commission is paid in **hAlpha** and lands in your balance on its own. There is no threshold to reach and nothing to claim.
+
+:::info
+Commission follows what your referrals actually pay, so it appears after they spend, not when they sign up. Someone who creates an account and never buys anything will show under Referred Signups but not under Active Referrals.
+:::
+
+## Checking your commission
+
+Every payment is recorded on our chain, so you can check it rather than rely on a number in a dashboard.
+
+The [Referrals page on Hippius Explorer](https://hipstats.com/referrals) lists every referrer on the network with the codes they created, how many of their referrals went on to subscribe, and the commission each has been paid. Search your own address there to see your row, or open your account page and select the **Referrals** tab.
+
+The figures there come from the chain itself, which is why they match what the console shows you.
 
 ## Where to next
 
 <Unordered>
-  <li><a href="/use/console/billing">Billing</a>: referral credits and top ups both appear in your transaction history.</li>
+  <li><a href="/use/console/billing">Billing</a>: top ups, plans and your transaction history.</li>
+  <li><a href="/use/console/wallet">Wallet</a>: where your hAlpha balance lives.</li>
 </Unordered>
-
-  ───────────────────────────────────────────────────────────────────────
-*/}
