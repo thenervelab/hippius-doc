@@ -44,7 +44,13 @@ You can create as many links as you like, each labelled with where you plan to s
 
 <Screenshot src="/img/console/referrals/new-link.png" alt="The New Referral Link dialog with the platform list" dark />
 
-Each link carries the platform label, so a signup that arrives through your YouTube link is counted separately from one that arrives through Discord.
+Each link carries the platform label, so a signup that arrives through your YouTube link is counted separately from one that arrives through Discord. You can see it in the link itself: `ref` is your referral code, which is the same on every link you make, and `src` is the platform label.
+
+```text
+https://console.hippius.com/login?ref=HIPPIUS1234567890&src=youtube-7f705551
+```
+
+The `src` tag exists only so we can show you the breakdown. It changes nothing about who gets credited or what you earn, so a link with it stripped off still pays you.
 
 :::note
 There is no limit, so a fresh link per video, post or community is fine. They all credit the same referral code.
