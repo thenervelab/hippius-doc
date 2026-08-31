@@ -32,8 +32,8 @@ hippius-hub registry provision my-models --docker-login
 
 `provision --docker-login` does three things in one shot: creates your namespace, mints docker credentials, and runs `docker login registry.hippius.com` for you. The hippius-hub CLI's own `upload` / `download` commands also start working immediately because the credentials are cached at `~/.cache/hippius/hub/token`.
 
-:::tip Save the robot secret
-The robot secret prints **once** at the bottom of `registry provision`. If you lose it, rotate with `hippius-hub registry rotate-token` — it issues a new secret and updates the local cache.
+:::tip Save the registry secret
+The registry secret prints **once** at the bottom of `registry provision`. If you lose it, rotate with `hippius-hub registry rotate-token` — it issues a new secret and updates the local cache.
 :::
 
 ---
@@ -56,7 +56,7 @@ upload_folder(
 )
 ```
 
-Drop-in for [`upload_folder`](https://huggingface.co/docs/huggingface_hub/guides/upload#upload-a-folder). Re-running it merges into the existing manifest at that revision — individual files get added or replaced without wiping the rest.
+Drop-in for [`upload_folder`](https://huggingface.co/docs/huggingface_hub/guides/upload#upload-a-folder). Re-running it merges into the existing revision — individual files get added or replaced without wiping the rest.
 
 For a single file, use `upload_file(path_or_fileobj, path_in_repo, repo_id, revision)`.
 
@@ -74,7 +74,7 @@ hippius-hub upload my-models/qwen-7b ./README.md --revision v1
 hippius-hub upload my-models/qwen-7b ./qwen-7b
 ```
 
-Folder uploads **merge** into the existing manifest — re-running adds or replaces individual files without wiping the rest. The indexer picks up format / architecture / parameter count / quantization within a few seconds of the push completing.
+Folder uploads **merge** into the existing revision — re-running adds or replaces individual files without wiping the rest. The indexer picks up format / architecture / parameter count / quantization within a few seconds of the push completing.
 
 </TabItem>
 <TabItem value="docker" label="Docker">
@@ -94,7 +94,7 @@ oras push registry.hippius.com/my-models/my-artifact:v1 \
   ./weights.safetensors ./config.json
 ```
 
-[`oras`](https://oras.land) pushes arbitrary files as OCI artifacts. This is how the Model Registry stores model weights under the hood — but you can use it directly for datasets, configs, or anything else you want to address by name and digest.
+[`oras`](https://oras.land) pushes arbitrary files as content-addressed artifacts — useful for datasets, configs, or anything else you want to address by name and digest.
 
 </TabItem>
 </Tabs>
@@ -152,7 +152,7 @@ If `docker push` loops with `500 Cannot find server.`, check `docker info | grep
 ---
 
 :::note Hugging Face features not supported
-Inference Endpoints, Spaces, Webhooks, Collections, and Discussions raise `NotImplementedError` — they have no OCI equivalent. Everything required for `from_pretrained` works.
+Inference Endpoints, Spaces, Webhooks, Collections, and Discussions raise `NotImplementedError` — they have no Hippius equivalent. Everything required for `from_pretrained` works.
 :::
 
 ---

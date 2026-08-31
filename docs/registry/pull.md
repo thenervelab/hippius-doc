@@ -65,7 +65,7 @@ Public images pull without `docker login`. The same reference works anywhere an 
 oras pull registry.hippius.com/my-models/my-artifact:v1
 ```
 
-[`oras`](https://oras.land) pulls arbitrary OCI artifacts — model weights, datasets, anything you previously pushed with `oras push`. The Model Registry stores model files this way under the hood.
+[`oras`](https://oras.land) pulls arbitrary content-addressed artifacts — datasets, configs, anything you previously pushed with `oras push`.
 
 </TabItem>
 </Tabs>
@@ -110,7 +110,7 @@ A Docker image is one manifest — `docker pull <image>:<tag>` already pulls eve
 
 ## Tag vs digest
 
-Tags (`:v1`, `:main`) are **mutable** — re-pushing to the same revision moves the tag onto a new manifest. Digests (`@sha256:…`) are **immutable** — the same bytes forever.
+Tags (`:v1`, `:main`) are **mutable** — re-pushing to the same revision moves the tag onto the new content. Digests (`@sha256:…`) are **immutable** — the same bytes forever.
 
 - Pin to a **digest** for CI/CD, Kubernetes manifests, and anywhere reproducibility matters.
 - Use a **tag** for interactive development and the "give me the latest" case.
