@@ -121,11 +121,20 @@ Hippius S3 is served through regional caches. Pick the endpoint closest to the c
 - Tags: PutObjectTagging, GetObjectTagging, DeleteObjectTagging, PutBucketTagging, GetBucketTagging
 - ACL: PutBucketAcl, GetBucketAcl, PutObjectAcl, GetObjectAcl
 - Policy: PutBucketPolicy, GetBucketPolicy, DeleteBucketPolicy
+- Versioning: PutBucketVersioning (Enabled only), GetBucketVersioning, ListObjectVersions, GET/DELETE ?versionId
+- Object Lock (WORM): PutObjectLockConfiguration, GetObjectLockConfiguration, PutObjectRetention,
+  GetObjectRetention, PutObjectLegalHold, GetObjectLegalHold; GOVERNANCE and COMPLIANCE modes;
+  bucket default retention (Days or Years); x-amz-object-lock-* headers on PutObject,
+  CreateMultipartUpload and CopyObject. Requires versioning. Docs: /storage/s3/object-lock
 - Other: PutBucketLifecycle, range requests (video streaming)
 
 ## Not Supported
 
-- Bucket versioning
+- Suspending versioning (PutBucketVersioning Status=Suspended returns 501)
+- Object Lock headers on CompleteMultipartUpload (set them on CreateMultipartUpload) or on
+  GetObject responses (use HeadObject)
+- S3 Batch Operations, replication of Object Lock state
+- POST Object (browser form uploads)
 - Cross-region replication
 - S3 Select
 
