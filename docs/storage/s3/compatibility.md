@@ -47,8 +47,10 @@ All regions serve the same data — just swap the endpoint in your client config
 | `DeleteBucketTagging` | ✅ Supported | |
 | `PutBucketLifecycleConfiguration` | ⚠️ Partial | Basic expiration rules only |
 | `GetBucketLifecycleConfiguration` | ⚠️ Partial | |
-| `PutBucketVersioning` | ❌ Not supported | |
-| `GetBucketVersioning` | ❌ Not supported | |
+| `PutBucketVersioning` | ⚠️ Partial | `Enabled` only — `Suspended` returns 501 |
+| `GetBucketVersioning` | ✅ Supported | Omits `Status` when versioning was never enabled |
+| `PutObjectLockConfiguration` | ✅ Supported | Bucket default retention, `Days` or `Years`. Requires versioning — see [Object Lock](/storage/s3/object-lock) |
+| `GetObjectLockConfiguration` | ✅ Supported | `404 ObjectLockConfigurationNotFoundError` when unset |
 | `PutBucketCors` | ❌ Not supported | CORS is handled at the gateway level |
 | `PutBucketNotificationConfiguration` | ❌ Not supported | |
 | `PutBucketReplication` | ❌ Not supported | Data is replicated by the network automatically |
@@ -71,15 +73,38 @@ All regions serve the same data — just swap the endpoint in your client config
 | `PutObjectTagging` | ✅ Supported | |
 | `GetObjectTagging` | ✅ Supported | |
 | `DeleteObjectTagging` | ✅ Supported | |
+| `ListObjectVersions` | ✅ Supported | Versions and delete markers; prefix, delimiter, paging |
+| `PutObjectRetention` | ✅ Supported | Per version. Extend allowed, shorten refused — see [Object Lock](/storage/s3/object-lock) |
+| `GetObjectRetention` | ✅ Supported | |
+| `PutObjectLegalHold` | ✅ Supported | Indefinite lock, independent of retention |
+| `GetObjectLegalHold` | ✅ Supported | |
 | `SelectObjectContent` | ❌ Not supported | S3 Select |
-| `PutObjectLockConfiguration` | ❌ Not supported | Object Lock / WORM |
-| `PutObjectRetention` | ❌ Not supported | |
+| `PostObject` | ❌ Not supported | Browser form uploads — use a presigned `PutObject` |
+
+## Versioning and Object Lock
+
+Both are supported. Object Lock gives you write-once-read-many (WORM) retention with `GOVERNANCE` and `COMPLIANCE` modes, legal holds, and bucket-wide default retention — enforced below the API, so a locked version cannot be permanently deleted by anyone until it expires.
+
+| Capability | Status | Notes |
+|------------|--------|-------|
+| Bucket versioning | ✅ Supported | `Enabled` only; `Suspended` returns 501 |
+| Object Lock — `GOVERNANCE` | ✅ Supported | Bucket owner can bypass with an explicit header |
+| Object Lock — `COMPLIANCE` | ✅ Supported | Cannot be shortened, cleared, or bypassed by anyone |
+| Legal holds | ✅ Supported | Indefinite; independent of retention |
+| Bucket default retention | ✅ Supported | `Days` or `Years`; applies to PUT, multipart and copy |
+| Enable Object Lock on an existing bucket | ✅ Supported | Requires versioning first; no `x-amz-bucket-object-lock-token` needed |
+| Lock headers on `CompleteMultipartUpload` | ❌ Not supported | Set them on `CreateMultipartUpload` instead |
+| Lock headers on `GetObject` responses | ❌ Not supported | Use `HeadObject` |
+| S3 Batch Operations | ❌ Not supported | Apply locks per object |
+| Replicating lock state | ❌ Not supported | Set the lock on the destination |
+
+**→ Full guide with examples: [Object Lock (WORM)](/storage/s3/object-lock)**
 
 ## Multipart Upload
 
 | Operation | Status | Notes |
 |-----------|--------|-------|
-| `CreateMultipartUpload` | ✅ Supported | |
+| `CreateMultipartUpload` | ✅ Supported | Accepts `x-amz-object-lock-*` headers |
 | `UploadPart` | ✅ Supported | |
 | `CompleteMultipartUpload` | ✅ Supported | |
 | `AbortMultipartUpload` | ✅ Supported | |
@@ -100,7 +125,8 @@ Hippius S3 is S3-compatible but not an AWS clone. Here's what to keep in mind:
 
 - **Path-style only.** Virtual-hosted style (`bucket.s3.hippius.com`) is not supported. Always use `forcePathStyle: true` or `addressing_style: "path"`.
 - **Single region.** There's no multi-region setup. The region is always `decentralized`.
-- **No versioning.** Objects are overwritten in place. If you need version history, manage it in your application.
+- **Versioning cannot be suspended.** You can enable it, but `Suspended` returns 501. Enable it deliberately — on a bucket with Object Lock, AWS does not allow suspending it either.
+- **Object Lock bypass is owner-only.** AWS gates `BypassGovernanceRetention` on IAM; Hippius has no IAM, so the bucket owner is the only identity that can bypass a GOVERNANCE retention.
 - **No S3 Select.** You can't query inside objects. Download the object and process it locally.
 - **No event notifications.** There's no equivalent of S3 Event Notifications or Lambda triggers.
 - **Replication is automatic.** The Hippius network handles data replication across miners. You don't need to configure cross-region replication.
