@@ -60,6 +60,16 @@ At the bottom of the page:
 
 <Screenshot src="/img/console/overview/pro.png" alt="Pro view" dark />
 
+## Service Status Banners
+
+When one of our products is degraded or undergoing maintenance, a banner appears at the top of that product's own page rather than across the whole console. Drive problems show on Drive, S3 problems on S3, and so on, and the banner follows into that product's sub-pages.
+
+This means the absence of a banner on a page is itself information: that product is fine, even if another one is not.
+
+A banner can be dismissed once you have read it. It comes back if the situation changes.
+
+<Screenshot src="/img/console/overview/service-status-banner.png" alt="A service status banner on a product page" dark />
+
 ## Where to next
 
 <Unordered>

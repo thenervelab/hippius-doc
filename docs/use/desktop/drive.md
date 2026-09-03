@@ -154,6 +154,25 @@ When you have more than one sync folder, switch between them from the **Local** 
 
 <Screenshot src="/img/desktop/switching-between-sync-folders.png" alt="The Local view showing the synced folder cards used to switch between folders" dark />
 
+### Folders From Your Other Devices
+
+Folders you sync on another computer appear under **Sync from Other Devices**, in the Local view and in Settings. If you have never synced from another device, that section says so and stays empty.
+
+Click one to open it like any other folder. You can:
+
+<Unordered>
+  <li>Navigate through its subfolders, with the breadcrumb tracking where you are.</li>
+  <li>See real file sizes.</li>
+  <li>Preview and download individual files.</li>
+  <li>Share a file or the folder itself via link.</li>
+</Unordered>
+
+All of this reads straight from the server, so **nothing is downloaded to this computer** just because you opened the folder. Only the files you explicitly download land on disk. That is the point of the section: you can get at a file from your work laptop without syncing the whole folder onto your personal one.
+
+Contents load a page at a time as you scroll, so a folder holding a large camera roll opens immediately rather than waiting for the whole listing. The app also reopens wherever you left off.
+
+<Screenshot src="/img/desktop/drive/sync-from-other-devices.png" alt="Sync from Other Devices in the Local view" dark />
+
 ### File Actions (Context Menu)
 
 Right click any file or folder (or click the <BgStyledIconWithText icon="More" paddingClassName="px-1 py-1" /> menu) to access the full set of actions:

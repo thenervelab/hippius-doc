@@ -42,6 +42,18 @@ Files are displayed in a table showing the name, size, type, and upload date.
 
 <Screenshot src="/img/console/drive/browse.png" alt="Browsing files in Drive" dark />
 
+### Creating a Folder
+
+Click <BgStyledText>+ New Folder</BgStyledText> in the page header to create a folder. If you are already inside a folder, the new one is created there; from the Drive root it is created at the top level.
+
+Folder names must be unique among their siblings, so the dialog will tell you if the name is already taken before you create it.
+
+<Screenshot src="/img/console/drive/create-folder.png" alt="Create folder dialog" dark />
+
+### Renaming Files and Folders
+
+Open the action menu (three dots) on any row and choose <BgStyledText>Rename</BgStyledText> for a file, or <BgStyledText>Rename Folder</BgStyledText> for a folder. The name changes in place; nothing is re-uploaded and no link you have already shared is affected.
+
 ### Sorting
 
 Click any column header to sort by that column. Click it again to reverse the order.
@@ -84,15 +96,32 @@ For a complete reference of the upload queue, progress widget, and error handlin
 
 Click any file name or the eye icon in its row to preview it directly in the browser. The first time you preview in a session, the console asks for your unlock password to decrypt the file.
 
-Supported preview types:
+Everything below is decrypted and rendered on your own device. The file is never sent anywhere in readable form, and no outside viewing service is involved.
 
 | Type | What you see |
 |---|---|
-| **Images** (JPG, PNG, WebP, GIF) | Inline image viewer with zoom and pan. |
+| **Images** (JPG, PNG, WebP, GIF, AVIF, BMP, HEIC) | Inline image viewer with zoom and pan. HEIC images from an iPhone preview without conversion. |
+| **Hippius Live photos** | The still image, with the motion clip playable in place. |
 | **PDFs** | Multi page reader with page navigation. |
-| **Video** (MP4, WebM) | Inline player with playback controls. |
+| **Video** (MP4, MOV, WebM) | Inline player with playback controls. |
+| **Word documents** (DOCX) | The document laid out as real pages. |
+| **Spreadsheets** (XLSX, CSV) | A spreadsheet grid with sheet tabs. |
+| **Presentations** (PPTX) | Slides you can click through. |
+| **Markdown, plain text, JSON** | Formatted in the viewer. |
+| **HTML** | Rendered in an isolated frame, so a page cannot reach your session. |
+| **SVG** | Rendered as an image. |
 
-For any other file type, use the action menu to **Download** it and open it locally.
+Larger files fall back to a download rather than opening slowly, and the viewer says why. The cut-off depends on how much work the format takes to render:
+
+| Format | Previews up to |
+|---|---|
+| PowerPoint | 40 MB |
+| Word, HTML | 25 MB |
+| Excel, CSV | 20 MB |
+| JSON | 2 MB |
+| Markdown, plain text | 1 MB |
+
+For any file type not listed above, use the action menu to **Download** it and open it locally.
 
 The preview toolbar has buttons to **Download**, open **Details**, or **Close** the preview.
 
