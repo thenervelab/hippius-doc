@@ -7,7 +7,11 @@ COPY package*.json ./
 COPY pnpm-lock.yaml ./
 
 # Install dependencies
-RUN npm install -g pnpm
+# Pinned to the version package.json declares in "packageManager". Unpinned,
+# npm resolves pnpm to latest (11.x), which refuses to run at all because its
+# own native binary is absent from this lockfileVersion 9.0 lockfile:
+# ERR_PNPM_PNPM_ENGINE_IDENTITY_UNVERIFIABLE.
+RUN npm install -g pnpm@9.12.3
 RUN pnpm install
 
 # Copy the rest of the application
