@@ -49,7 +49,7 @@ All regions serve the same data — just swap the endpoint in your client config
 | `GetBucketLifecycleConfiguration` | ⚠️ Partial | |
 | `PutBucketVersioning` | ⚠️ Partial | `Enabled` only — `Suspended` returns 501 |
 | `GetBucketVersioning` | ✅ Supported | Omits `Status` when versioning was never enabled |
-| `PutObjectLockConfiguration` | ✅ Supported | Bucket default retention, `Days` or `Years`. Requires versioning — see [Object Lock](/storage/s3/object-lock) |
+| `PutObjectLockConfiguration` | ✅ Supported | Bucket default retention, `Days` or `Years`. Requires versioning — see [Object Lock](/storage/s3/integration#object-lock-worm) |
 | `GetObjectLockConfiguration` | ✅ Supported | `404 ObjectLockConfigurationNotFoundError` when unset |
 | `PutBucketCors` | ❌ Not supported | CORS is handled at the gateway level |
 | `PutBucketNotificationConfiguration` | ❌ Not supported | |
@@ -74,7 +74,7 @@ All regions serve the same data — just swap the endpoint in your client config
 | `GetObjectTagging` | ✅ Supported | |
 | `DeleteObjectTagging` | ✅ Supported | |
 | `ListObjectVersions` | ✅ Supported | Versions and delete markers; prefix, delimiter, paging |
-| `PutObjectRetention` | ✅ Supported | Per version. Extend allowed, shorten refused — see [Object Lock](/storage/s3/object-lock) |
+| `PutObjectRetention` | ✅ Supported | Per version. Extend allowed, shorten refused — see [Object Lock](/storage/s3/integration#object-lock-worm) |
 | `GetObjectRetention` | ✅ Supported | |
 | `PutObjectLegalHold` | ✅ Supported | Indefinite lock, independent of retention |
 | `GetObjectLegalHold` | ✅ Supported | |
@@ -98,7 +98,7 @@ Both are supported. Object Lock gives you write-once-read-many (WORM) retention 
 | S3 Batch Operations | ❌ Not supported | Apply locks per object |
 | Replicating lock state | ❌ Not supported | Set the lock on the destination |
 
-**→ Full guide with examples: [Object Lock (WORM)](/storage/s3/object-lock)**
+**→ Full guide with examples: [Object Lock (WORM)](/storage/s3/integration#object-lock-worm)**
 
 ## Multipart Upload
 
