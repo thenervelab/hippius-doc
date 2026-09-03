@@ -125,7 +125,8 @@ Hippius S3 is served through regional caches. Pick the endpoint closest to the c
 - Object Lock (WORM): PutObjectLockConfiguration, GetObjectLockConfiguration, PutObjectRetention,
   GetObjectRetention, PutObjectLegalHold, GetObjectLegalHold; GOVERNANCE and COMPLIANCE modes;
   bucket default retention (Days or Years); x-amz-object-lock-* headers on PutObject,
-  CreateMultipartUpload and CopyObject. Requires versioning. Docs: /storage/s3/object-lock
+  CreateMultipartUpload and CopyObject. Requires versioning.
+  Docs: /storage/s3/integration#object-lock-worm
 - Other: PutBucketLifecycle, range requests (video streaming)
 
 ## Not Supported

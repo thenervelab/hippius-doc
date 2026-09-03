@@ -65,7 +65,6 @@ const sidebars: SidebarsConfig = {
               collapsed: true,
               items: [
                 "storage/s3/compatibility",
-                "storage/s3/object-lock",
                 "storage/s3/integration",
                 "use/hippius-api",
                 "use/troubleshooting",
