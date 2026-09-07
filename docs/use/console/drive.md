@@ -3,7 +3,7 @@ id: drive
 title: Drive
 sidebar_label: Drive
 slug: /use/console/drive
-description: Browse, upload, preview, and download your end-to-end encrypted Drive files from the Hippius Console, and manage them in bulk.
+description: Browse, upload, preview, and download your end-to-end encrypted Drive files and folders from the Hippius Console, and manage them in bulk.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -149,6 +149,48 @@ To download a file:
 Hippius decrypts the file in your browser and saves it to your local downloads folder. A toast confirms when it's ready.
 
 
+## Downloading a Folder
+
+You can download a whole folder at once. Hippius fetches every file inside it, decrypts each one in your browser, and packs them into a single **.zip** archive.
+
+Open the action menu (three dots) on any folder row and choose <BgStyledText>Download Folder</BgStyledText>. The option is on every folder row in Drive: a top level drive at the root, a folder you've opened, and a subfolder expanded inline.
+
+The archive keeps the folder structure. A folder containing `report.pdf` and `images/logo.png` unzips to exactly those two paths, relative to the folder you downloaded. Nested subfolders are included, however deep they go.
+
+### Watching the Progress
+
+A folder of a few thousand files takes minutes, so a **floating progress card** appears in the bottom right corner of the screen, stacked with the upload widget. It stays visible no matter which page you navigate to.
+
+The heading on the card tells you which stage the download is in:
+
+| Stage | What's happening |
+|---|---|
+| **Preparing folder** | Listing the files inside the folder. |
+| **Downloading folder** | Fetching and decrypting the file bodies. This is the long phase. |
+| **Zipping folder** | Closing the archive and handing it to your browser. |
+
+Below the heading you'll see a live count, for example _3 of 120 files_, and a percentage ring. Click <BgStyledText>Cancel</BgStyledText> to stop the download. The card stays up and reads **Cancelling** until the browser has actually stopped writing, then disappears.
+
+The file is written straight to your downloads folder as the archive is packed, so your browser never has to hold the whole thing in memory. A toast confirms when it's done.
+
+### Things to Know
+
+<Unordered>
+  <li><strong>One folder at a time.</strong> While a folder download is running, the <BgStyledText>Download Folder</BgStyledText> option on other rows is greyed out with a tooltip explaining why. Wait for it to finish, or cancel it.</li>
+  <li><strong>Your session must be unlocked.</strong> The files are decrypted with your folder key, so the console asks for your unlock password if you haven't entered it yet this session.</li>
+  <li><strong>Empty folders can't be downloaded.</strong> If a folder has no files in it, the console says so instead of producing an empty archive.</li>
+  <li><strong>Files deleted mid download are skipped.</strong> If a file disappears between the listing and the packing, it's left out of the archive rather than failing the whole download.</li>
+  <li><strong>Duplicate names are made unique.</strong> If two files would land on the same name inside the archive, the second becomes <code>name (2).ext</code>, so nothing is silently overwritten when you unzip.</li>
+</Unordered>
+
+:::warning Keep the tab open
+The archive is packed by your browser, not on a server. Closing the tab or navigating away from the console cancels a folder download in progress.
+:::
+
+:::info If your browser can't stream the download
+On a first visit, before the console's background worker has started, your browser may not be able to write the archive as it's packed. In that case the whole archive has to be held in memory, and folders over **500 MB** are refused with a "too large to download as a zip in this browser" message. Reload the page and try again, which lets the worker take over and removes the limit.
+:::
+
 ## Selecting and Deleting Multiple Files
 
 Tick the checkbox at the start of any row to enter selection mode. The header checkbox selects everything on the current page.
@@ -185,8 +227,12 @@ After topping up, start the upload again from the same dialog or click <BgStyled
 | **Max file size (via console)** | **100 MB** |
 | **Max files per upload batch** | 1000 |
 | **Folder depth** | Unlimited |
+| **Max files in a folder download** | 65,535 |
+| **Max size of any one file in a folder download** | 4 GB |
 
 For files larger than 100 MB, use the [Hippius Desktop App](/use/desktop/getting-started), which syncs files incrementally without a browser size cap.
+
+The two folder download limits come from the zip format itself, not from Hippius. They only matter for drives synced from the desktop app, since nothing uploaded through the console can exceed 100 MB.
 
 ## Where to next
 
