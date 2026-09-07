@@ -134,20 +134,12 @@ const sidebars: SidebarsConfig = {
             // sidebar and marked `draft: true` in shared-drives.md to block
             // direct access. Re-enable both together when the feature ships.
             // "use/console/shared-drives",
-            // ⚠️ "Unlock Password" documents console-side setup and recovery,
-            // which is not in production yet. Marked `draft: true` in
-            // unlock-password.md. Re-enable both together when it ships, and
-            // update the "created in the desktop app" note in drive.md at the
-            // same time.
-            // "use/console/unlock-password",
+            "use/console/unlock-password",
             "use/console/shared-links",
             "use/console/s3",
             "use/console/migrations",
             "use/console/uploads",
             "use/console/virtual-machines",
-            // ⚠️ "Databases" is not in production yet — hidden from the sidebar
-            // and marked `draft: true` in databases.md. Re-enable both together.
-            // "use/console/databases",
             "use/console/wallet",
             "use/console/staking",
             "use/console/bridge",

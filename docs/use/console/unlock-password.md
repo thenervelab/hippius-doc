@@ -4,7 +4,6 @@ title: Unlock Password
 sidebar_label: Unlock Password
 slug: /use/console/unlock-password
 description: Set up your unlock password directly in the console, and restore access with your recovery seed if you forget it.
-draft: true
 ---
 
 import Ordered from '@site/src/components/Ordered';

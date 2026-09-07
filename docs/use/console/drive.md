@@ -24,7 +24,7 @@ Reach Drive from the sidebar at <BgStyledIconWithText text="Storage" icon="Sideb
 
 Drive encrypts every file using a key tied to your **unlock password**. The console will ask for this password the first time you upload, preview, or download a file in each session. After you enter it, the key stays in memory until you close the tab. You won't be asked again during the same session.
 
-**Setting up for the first time?** Your unlock password is created when you first sign into the [Hippius Desktop App](/use/desktop/getting-started). If you haven't installed the desktop app yet, you'll need to do that first to generate your unlock password. Once created, the same password works in the console.
+**Setting up for the first time?** The console sets your unlock password up for you the first time you upload a file or create a folder. You do not need the desktop app for it. See [Unlock Password](/use/console/unlock-password) for the full flow, including how to restore access with your recovery seed. If you already set one in the [Hippius Desktop App](/use/desktop/getting-started), the same password works here.
 
 :::danger Your unlock password cannot be recovered
 If you forget it, you'll need your 12-word recovery phrase to restore access to your encrypted files. Keep both somewhere safe. We cannot recover either for you.
