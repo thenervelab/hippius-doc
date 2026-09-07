@@ -18,8 +18,10 @@ export default function MobileSidebarToggle(): ReactNode {
       className=" size-8 flex lg:hidden flex-col gap-y-2 justify-center" 
       type="button"
     >
-      <div className="h-0.5 bg-[#1c1e21] rounded-full w-full"></div>
-      <div className="h-0.5 bg-[#1c1e21] rounded-full w-[60%]"></div>
+      {/* Bars are painted with an explicit color, so give them a dark-mode
+          value too - the light-mode near-black is invisible on the dark navbar. */}
+      <div className="h-0.5 bg-[#1c1e21] dark:bg-grey-10 rounded-full w-full"></div>
+      <div className="h-0.5 bg-[#1c1e21] dark:bg-grey-10 rounded-full w-[60%]"></div>
     </button>
   );
 }
