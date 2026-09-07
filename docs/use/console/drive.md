@@ -24,7 +24,7 @@ Reach Drive from the sidebar at <BgStyledIconWithText text="Storage" icon="Sideb
 
 Drive encrypts every file using a key tied to your **unlock password**. The console will ask for this password the first time you upload, preview, or download a file in each session. After you enter it, the key stays in memory until you close the tab. You won't be asked again during the same session.
 
-**Setting up for the first time?** Your unlock password is created when you first sign into the [Hippius Desktop App](/use/desktop/getting-started). If you haven't installed the desktop app yet, you'll need to do that first to generate your unlock password. Once created, the same password works in the console.
+**Setting up for the first time?** The console sets your unlock password up for you the first time you upload a file or create a folder. You do not need the desktop app for it. See [Unlock Password](/use/console/unlock-password) for the full flow, including how to restore access with your recovery seed. If you already set one in the [Hippius Desktop App](/use/desktop/getting-started), the same password works here.
 
 :::danger Your unlock password cannot be recovered
 If you forget it, you'll need your 12-word recovery phrase to restore access to your encrypted files. Keep both somewhere safe. We cannot recover either for you.
@@ -41,6 +41,18 @@ The **breadcrumb** at the top of the file browser shows where you are: for examp
 Files are displayed in a table showing the name, size, type, and upload date.
 
 <Screenshot src="/img/console/drive/browse.png" alt="Browsing files in Drive" dark />
+
+### Creating a Folder
+
+Click <BgStyledText>+ New Folder</BgStyledText> in the page header to create a folder. If you are already inside a folder, the new one is created there; from the Drive root it is created at the top level.
+
+Folder names must be unique among their siblings, so the dialog will tell you if the name is already taken before you create it.
+
+<Screenshot src="/img/console/drive/create-folder.png" alt="Create folder dialog" dark />
+
+### Renaming Files and Folders
+
+Open the action menu (three dots) on any row and choose <BgStyledText>Rename</BgStyledText> for a file, or <BgStyledText>Rename Folder</BgStyledText> for a folder. The name changes in place; nothing is re-uploaded and no link you have already shared is affected.
 
 ### Sorting
 
@@ -84,11 +96,12 @@ For a complete reference of the upload queue, progress widget, and error handlin
 
 Click any file name or the eye icon in its row to preview it directly in the browser. The first time you preview in a session, the console asks for your unlock password to decrypt the file.
 
-Supported preview types:
+Everything below is decrypted and rendered on your own device. The file is never sent anywhere in readable form, and no outside viewing service is involved.
 
 | Type | Formats | What you see |
 |---|---|---|
 | **Images** | JPG, PNG, GIF, WebP, AVIF, BMP, ICO, HEIC/HEIF, SVG | Inline image viewer. |
+| **Hippius Live photos** | HEIC + motion | The still image, with the motion clip playable in place. |
 | **Videos** | MP4, WebM, MOV | Inline player with playback controls. |
 | **PDFs** | PDF | Multi page reader with page navigation. |
 | **Word documents** | DOCX | Page by page document reader. |
@@ -101,7 +114,17 @@ Supported preview types:
 
 Very large files can't be previewed. The console shows a toast asking you to download the file instead. Older Office formats (DOC, XLS, PPT) don't preview either. Save them as DOCX, XLSX, or PPTX to make them previewable.
 
-For any other file type, use the action menu to **Download** it and open it locally.
+Larger files fall back to a download rather than opening slowly, and the viewer says why. The cut-off depends on how much work the format takes to render:
+
+| Format | Previews up to |
+|---|---|
+| PowerPoint | 40 MB |
+| Word, HTML | 25 MB |
+| Excel, CSV | 20 MB |
+| JSON | 2 MB |
+| Markdown, plain text | 1 MB |
+
+For any file type not listed above, use the action menu to **Download** it and open it locally.
 
 The preview toolbar has buttons to **Download** or **Close** the preview, plus **Share** and **Delete** when those actions are available for the file.
 

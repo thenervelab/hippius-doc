@@ -108,6 +108,7 @@ const sidebars: SidebarsConfig = {
             "use/desktop/share-from-finder",
             "use/desktop/virtual-machines",
             "use/desktop/settings",
+            "use/desktop/beta-channel",
             "use/desktop/billing",
             // ⚠️ "Referral System" is coming soon — hidden from the sidebar and
             // marked `draft: true` in referral-system.md to block direct access.
@@ -129,6 +130,11 @@ const sidebars: SidebarsConfig = {
             "use/console/getting-started",
             "use/console/overview",
             "use/console/drive",
+            // ⚠️ "Shared Drives" is not in production yet — hidden from the
+            // sidebar and marked `draft: true` in shared-drives.md to block
+            // direct access. Re-enable both together when the feature ships.
+            // "use/console/shared-drives",
+            "use/console/unlock-password",
             "use/console/shared-links",
             "use/console/s3",
             "use/console/migrations",

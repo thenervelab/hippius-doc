@@ -76,14 +76,66 @@ You create share links from within the Drive file browser, not from the Shared L
 <Ordered>
   <li>Go to <a href="/use/console/drive">Drive</a> and navigate to the file you want to share.</li>
   <li>Click the three dot action menu on the file row and choose <BgStyledText>Share via link</BgStyledText>.</li>
-  <li>The share dialog opens and runs the download, decrypt, encrypt, and upload steps automatically. A progress bar shows the current step.</li>
+  <li>Choose when the link should expire, and optionally require a password. Both are described below.</li>
+  <li>The share dialog runs the download, decrypt, encrypt, and upload steps automatically. A progress bar shows the current step.</li>
   <li>When complete, the share URL is shown and copied to your clipboard automatically.</li>
   <li>Click <BgStyledText>Copy link</BgStyledText> if you need to copy it again, then close the dialog.</li>
 </Ordered>
 
-The link is live immediately. Anyone you send it to can download the file right away.
+The link is live immediately. Anyone you send it to can open it right away.
+
+### Choosing an expiry
+
+Every link gets an expiry, chosen before you create it:
+
+| Option | The link stops working |
+|---|---|
+| **24 hours** | One day after you create it. |
+| **7 days** | One week after you create it. |
+| **30 days** | One month after you create it. |
+| **Until I revoke it** | Never on its own. It stays live until you revoke it. |
+
+There is no silent default. The dialog asks, because a link that quietly expired in a day was the behaviour people found surprising.
+
+### Requiring a password
+
+Tick <BgStyledText>Require a password</BgStyledText> to lock the link. Recipients are asked for the password before they see anything, and it must be at least 8 characters.
+
+The password is shown in plain text while you set it, on purpose. It is a password you have to read off the screen and pass on, not one you are typing in, so hiding it would only make it harder to do the one thing it is for.
+
+:::warning Send the password separately
+Send it through a different channel to the link itself. It cannot be recovered or changed later. If you lose it, revoke the share and create a new one.
+:::
 
 <Screenshot src="/img/console/drive/shared-links-dialog.png" alt="Share dialog with URL ready" dark />
+
+## Sharing a Folder
+
+You can share an entire folder, not just one file. Open the action menu on a **folder** row and choose <BgStyledText>Share via link</BgStyledText>. The expiry and password options are the same as for a file.
+
+A folder share behaves differently to a file share in one important way:
+
+:::info A folder link is live, not a snapshot
+Recipients always see the folder's **current** contents. Add a file to the folder tomorrow and everyone holding the link can see it. Remove one and it disappears for them too. If you want to share a fixed set of files, share them individually instead.
+:::
+
+### What the recipient gets
+
+Someone opening a folder link can:
+
+<Unordered>
+  <li>Browse the folder and its subfolders, with a breadcrumb to move back up.</li>
+  <li>Search the folder by file name.</li>
+  <li>Preview individual files, with the same formats listed on the <a href="/use/console/drive">Drive</a> page.</li>
+  <li>Download any single file.</li>
+  <li>Download the whole folder as a zip, using <BgStyledText>Download folder</BgStyledText>.</li>
+</Unordered>
+
+The zip is built in the recipient's own browser, so nothing is assembled on our servers. It can be cancelled while it runs, and browsing stays usable while it packs.
+
+They do not need a Hippius account for any of this.
+
+<Screenshot src="/img/console/drive/folder-share-recipient.png" alt="Recipient view of a shared folder" dark />
 
 ## Active Shares
 
@@ -198,26 +250,30 @@ The desktop app also has a Shared Links page with a few extra capabilities:
 | Feature | Console | Desktop App |
 |---|---|---|
 | **Create a share** | ✅ Yes | ✅ Yes |
+| **Share a folder** | ✅ Yes | ✅ Yes |
 | **Share from Finder** | ❌ Not available | ✅ macOS only |
-| **Password-protected link** | ❌ Public links only | ✅ From Finder |
+| **Choose an expiry** | ✅ 24h, 7d, 30d, or until revoked | ✅ Same options |
+| **Password-protected link** | ✅ Yes | ✅ Yes, in the app and from Finder |
+| **Change the expiry later** | ✅ Folder shares, from the session that created them | Uses Reshare instead |
 | **How it reads the file** | Downloads and decrypts the Drive copy | Reads the local plaintext file directly from disk |
 | **Copy link (same session)** | ✅ Yes | ✅ Yes |
 | **Copy link after reload** | ❌ No, key is lost when you close or reload the tab | ✅ Yes, key is saved to a local database |
-| **Reshare (extend expiry)** | ❌ Not available | ✅ Available on the creating device |
 | **Revoke** | ✅ Works from any device | ✅ Works from any device |
 | **History** | ✅ Yes | ✅ Yes |
 
 **Why the desktop app can copy links after a reload:** The desktop app saves each share's key to a local SQLite database. The console holds the key only in memory, so when you close or reload the tab it's gone.
 
-**What is Reshare?** There is currently no way to extend the expiry of an existing share since the server doesn't support it. The desktop app works around this by revoking the old share and immediately creating a fresh one for the same file, with a new key and a fresh expiry. The new link is copied automatically. This is only possible on the device that created the original share, because the desktop needs access to the original local file to read and encrypt it again. The console does not support Reshare.
+**Changing an expiry.** For a **folder** share, open its action menu on the Shared Links page and choose <BgStyledText>Change expiry</BgStyledText>. This works only in the session that created the share, because changing it needs the share token, which is held in memory there and nowhere else. A share created on another device shows the option greyed out, with a tooltip saying where to go.
+
+For a **file** share there is no expiry change. The desktop app's **Reshare** covers that case by revoking the old share and creating a fresh one for the same file, with a new key, a new link and a fresh expiry. That needs the original local file, so it only works on the device that created the share.
 
 ## Limits
 
 | Limit | Value |
 |---|---|
 | **Max shareable file size** | 5 GB |
-| **Link expiry** | Set by the server, shown in the share dialog after creation |
-| **History** | ✅ Yes |
+| **Link expiry** | Your choice of 24 hours, 7 days, 30 days, or until you revoke it |
+| **Share password** | Optional, at least 8 characters |
 
 ## Where to next
 
