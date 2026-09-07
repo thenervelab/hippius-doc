@@ -3,7 +3,7 @@ id: drive
 title: Drive
 sidebar_label: Drive
 slug: /use/console/drive
-description: 6
+description: Browse, upload, preview, and download your end-to-end encrypted Drive files from the Hippius Console, and manage them in bulk.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -98,18 +98,21 @@ Click any file name or the eye icon in its row to preview it directly in the bro
 
 Everything below is decrypted and rendered on your own device. The file is never sent anywhere in readable form, and no outside viewing service is involved.
 
-| Type | What you see |
-|---|---|
-| **Images** (JPG, PNG, WebP, GIF, AVIF, BMP, HEIC) | Inline image viewer with zoom and pan. HEIC images from an iPhone preview without conversion. |
-| **Hippius Live photos** | The still image, with the motion clip playable in place. |
-| **PDFs** | Multi page reader with page navigation. |
-| **Video** (MP4, MOV, WebM) | Inline player with playback controls. |
-| **Word documents** (DOCX) | The document laid out as real pages. |
-| **Spreadsheets** (XLSX, CSV) | A spreadsheet grid with sheet tabs. |
-| **Presentations** (PPTX) | Slides you can click through. |
-| **Markdown, plain text, JSON** | Formatted in the viewer. |
-| **HTML** | Rendered in an isolated frame, so a page cannot reach your session. |
-| **SVG** | Rendered as an image. |
+| Type | Formats | What you see |
+|---|---|---|
+| **Images** | JPG, PNG, GIF, WebP, AVIF, BMP, ICO, HEIC/HEIF, SVG | Inline image viewer. |
+| **Hippius Live photos** | HEIC + motion | The still image, with the motion clip playable in place. |
+| **Videos** | MP4, WebM, MOV | Inline player with playback controls. |
+| **PDFs** | PDF | Multi page reader with page navigation. |
+| **Word documents** | DOCX | Page by page document reader. |
+| **Spreadsheets** | XLSX, CSV | Spreadsheet grid with a tab for each sheet. |
+| **Presentations** | PPTX | Slide viewer with a thumbnail strip and slide navigation. |
+| **Markdown** | MD, MARKDOWN | Rendered Markdown. Raw HTML inside the file is shown as text, not rendered. |
+| **HTML** | HTML, HTM | The rendered page, shown in an isolated frame. |
+| **Plain text** | TXT | Monospaced text. |
+| **JSON** | JSON | Pretty printed with syntax highlighting. |
+
+Very large files can't be previewed. The console shows a toast asking you to download the file instead. Older Office formats (DOC, XLS, PPT) don't preview either. Save them as DOCX, XLSX, or PPTX to make them previewable.
 
 Larger files fall back to a download rather than opening slowly, and the viewer says why. The cut-off depends on how much work the format takes to render:
 
@@ -123,7 +126,7 @@ Larger files fall back to a download rather than opening slowly, and the viewer 
 
 For any file type not listed above, use the action menu to **Download** it and open it locally.
 
-The preview toolbar has buttons to **Download**, open **Details**, or **Close** the preview.
+The preview toolbar has buttons to **Download** or **Close** the preview, plus **Share** and **Delete** when those actions are available for the file.
 
 <Screenshot src="/img/console/drive/preview-image.png" alt="Image preview" dark />
 

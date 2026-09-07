@@ -230,7 +230,8 @@ When someone opens your share link, they land on a simple page in their browser.
 
 <Unordered>
   <li><strong>Images, videos, and PDFs</strong> up to 100 MB preview inline, full-page.</li>
-  <li>Everything else, and any file over 100 MB, shows a download card with the filename, size, and a <strong>Download</strong> button. Shared folders arrive as a <code>.zip</code>, so they always download rather than preview.</li>
+  <li><strong>Documents</strong> preview inline too: Word documents (DOCX), presentations (PPTX), spreadsheets (XLSX, CSV), HTML, plain text, JSON, and Markdown.</li>
+  <li>Everything else, and any file too large to preview, shows a download card with the filename, size, and a <strong>Download</strong> button. Shared folders arrive as a <code>.zip</code>, so they always download rather than preview.</li>
 </Unordered>
 
 {/* TODO screenshot: the recipient share page previewing a file inline (an image or PDF) with the Download button.

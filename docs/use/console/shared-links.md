@@ -215,7 +215,8 @@ When someone opens your share link, they land on a simple page in their browser 
 
 <Unordered>
   <li><strong>Images, videos, and PDFs</strong> up to 100 MB preview inline, full-page, so the recipient can view the file without downloading it.</li>
-  <li>Everything else, and any file over 100 MB, shows a download card with the filename, the file size, and how much time is left before the link expires.</li>
+  <li><strong>Documents</strong> preview inline too: Word documents (DOCX), presentations (PPTX), spreadsheets (XLSX, CSV), HTML, plain text, JSON, and Markdown.</li>
+  <li>Everything else, and any file too large to preview, shows a download card with the filename, the file size, and how much time is left before the link expires.</li>
 </Unordered>
 
 {/* TODO screenshot: the recipient share page previewing a file inline (an image or PDF) with the Download button.

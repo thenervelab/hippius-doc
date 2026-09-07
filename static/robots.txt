@@ -1,0 +1,10 @@
+# robots.txt for docs.hippius.com
+# Allow all crawlers to access the site
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://docs.hippius.com/sitemap.xml
+
+# LLM-friendly summary file for AI crawlers
+# Available at: https://docs.hippius.com/llms.txt
