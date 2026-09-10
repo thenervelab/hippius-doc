@@ -13,17 +13,32 @@
   display: block;
 }
 
-/* The dark-mode panel: a darker take on the light Figma grid background.
-   `container-type: inline-size` lets the grid scale with the panel width
-   (1cqw = 1% of panel width), so cells stay proportional at any size. */
+/* Shared panel geometry. The panel is always 668:350 — the Figma artboard
+   ratio — so both backgrounds below scale uniformly and never distort.
+   `container-type: inline-size` lets the dark CSS grid scale with the panel
+   width (1cqw = 1% of panel width), so its cells stay proportional. */
 .frame {
   container-type: inline-size;
   position: relative;
   aspect-ratio: 668 / 350;
   width: 100%;
-  border-radius: 14px;
   overflow: hidden;
   margin: 1.5rem 0;
+}
+
+/* Light panel: the exact Figma grid export. Scaled to 100% 100% of a panel
+   that already has the SVG's own 668×350 ratio, so it is a pure uniform
+   scale. The SVG paints its own rx="8" rounded corners with transparency
+   outside them, so the panel needs no border-radius of its own. */
+.lightFrame {
+  background-image: url("/img/screenshot-grid-light.svg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* Dark panel: a darker take on the same grid, drawn in CSS. */
+.darkFrame {
+  border-radius: 14px;
   background-color: #0d121d;
   background-image:
     /* fine grid */
@@ -40,10 +55,11 @@
 }
 
 /* Inner screenshot, absolutely centered and contained within a 482×303 region
-   of the 668×350 panel: 482/668 ≈ 72.16% wide, 303/350 ≈ 86.57% tall. width and
-   height stay auto so the image keeps its own aspect ratio inside those caps —
-   never squashed or cropped. The `.frame` prefix raises specificity above the
-   global `.markdown img` rule so these caps actually win. */
+   of the 668×350 panel: 482/668 ≈ 72.16% wide, 303/350 ≈ 86.57% tall — the
+   same inset Figma bakes into the light exports. width and height stay auto so
+   the image keeps its own aspect ratio inside those caps — never squashed or
+   cropped. The `.frame` prefix raises specificity above the global
+   `.markdown img` rule so these caps actually win. */
 .frame .frameImg {
   position: absolute;
   top: 50%;
@@ -55,5 +71,14 @@
   max-height: 86.57%;
   object-fit: contain;
   border-radius: 6px;
+}
+
+/* Soft light-mode drop shadow, matching the one baked into the Figma exports:
+   wide, low-opacity, barely darkening the grid around the screenshot. */
+.lightFrame .frameImg {
+  box-shadow: 0 2px 20px rgba(15, 30, 70, 0.12);
+}
+
+.darkFrame .frameImg {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
 }
