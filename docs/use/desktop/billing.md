@@ -23,13 +23,7 @@ Open it from the account avatar in the top bar, choose <BgStyledIconWithText tex
 Your **plan** grants storage. **Credits** are a dollar balance on your account (1 credit = $1) that can pay for a plan and for other Hippius services such as virtual machines. Adding credits on its own does not give you more Drive space. Only a bigger plan does that.
 :::
 
-{/* SCREENSHOT NEEDED: billing-settings.png + billing-settings-dark.png
-    Settings -> Billing, the WHOLE page in one shot: Total Credits and
-    TAO Deposit Address side by side on top, and the full Subscription
-    plans row below with all five cards readable. This is the only shot
-    covering the plan catalogue, so the plans must be in frame.
-    Capture in light and dark mode.
-<Screenshot src="/img/desktop/billing-settings.png" alt="The Billing page in Settings" dark /> */}
+<Screenshot src="/img/desktop/billing-settings.png" alt="The Billing page in Settings" dark />
 
 Every prompt in the app that asks you to spend money lands here. The <BgStyledText>Upgrade</BgStyledText> and <BgStyledText>Top up</BgStyledText> buttons in the page header, the "not enough storage" dialog, and the banners on Drive all open this same page, so there is only ever one screen to learn.
 
@@ -111,11 +105,7 @@ If you signed in with an **access key (a seed phrase)**, there is no included al
   <li>Click <BgStyledText>Make Payment</BgStyledText>.</li>
 </Ordered>
 
-{/* SCREENSHOT NEEDED: billing-subscribe.png + billing-subscribe-dark.png
-    The subscribe confirmation with the "Pay with" chooser: the Card tile
-    (Stripe mark + card brand marks) and the Credits tile (coin icon +
-    balance chip) side by side, one of them selected.
-<Screenshot src="/img/desktop/billing-subscribe.png" alt="Choosing how to pay for a plan" dark /> */}
+<Screenshot src="/img/desktop/billing-subscribe.png" alt="Choosing how to pay for a plan" dark />
 
 ### Paying by card
 
@@ -137,10 +127,7 @@ After you confirm, the app shows **Processing**, then waits for the chain to agr
 
 If the chain is slow, the app stops waiting after a minute and tells you it will catch up shortly rather than spinning forever. Your payment is not lost, and the plan shows up once the network confirms it.
 
-{/* SCREENSHOT NEEDED: billing-subscribed.png + billing-subscribed-dark.png
-    The success screen: "You're subscribed to <Plan> Plan" with the
-    storage and Access & Sync perks and the Continue button.
-<Screenshot src="/img/desktop/billing-subscribed.png" alt="Plan subscribed confirmation" dark /> */}
+<Screenshot src="/img/desktop/billing-subscribed.png" alt="Plan subscribed confirmation" dark />
 
 ## Changing plan
 
@@ -169,10 +156,7 @@ What happens next depends on your account:
 
 Your credits are untouched either way, and you can subscribe again at any time.
 
-{/* SCREENSHOT NEEDED: billing-cancel.png + billing-cancel-dark.png
-    The Cancel subscription confirmation dialog showing the "back to the
-    Free plan" wording, with the Cancel subscription / Keep my plan buttons.
-<Screenshot src="/img/desktop/billing-cancel.png" alt="Cancel subscription confirmation" dark /> */}
+<Screenshot src="/img/desktop/billing-cancel.png" alt="Cancel subscription confirmation" dark />
 
 ## Plans bought somewhere else
 
@@ -198,11 +182,6 @@ Beside it, one button appears only when there is something worth doing:
 
 A healthy plan with room to spare shows no button at all.
 
-{/* SCREENSHOT NEEDED: billing-plan-chip.png + billing-plan-chip-dark.png
-    The header plan card in the "Low credits" state: plan name, amber
-    warning note, usage bar, and the Top up button beside it.
-<Screenshot src="/img/desktop/billing-plan-chip.png" alt="The plan card in the page header" dark /> */}
-
 ## When something is wrong with your plan
 
 ### Not enough credits to renew
@@ -216,6 +195,8 @@ There is no button on the notice, because <BgStyledText>Add Credits</BgStyledTex
 
 Only plans that renew **from credits** get this. A card-funded plan charges the card at Stripe, so there is nothing to top up.
 
+<Screenshot src="/img/desktop/billing-renewal-notice.png" alt="The low-credits renewal notice on the Billing page" dark />
+
 ### Banners on Drive
 
 Drive shows a banner for the states worth interrupting you over. A plan that is simply working says nothing.
@@ -227,10 +208,7 @@ Drive shows a banner for the states worth interrupting you over. A plan that is 
 | **Your Drive plan could not be renewed** | The renewal payment failed. Top up your credits, or fix the payment where the plan is managed.                        |
 | **Your Drive plan has been cancelled**   | Your files are still here, but you need an active plan to upload again. This one can be dismissed.                    |
 
-{/* SCREENSHOT NEEDED: billing-no-plan-banner.png + billing-no-plan-banner-dark.png
-    The red "You don't have a subscription plan" banner above the Drive
-    page content, with its "See storage plans" button.
-<Screenshot src="/img/desktop/billing-no-plan-banner.png" alt="No storage plan banner" dark /> */}
+<Screenshot src="/img/desktop/billing-no-plan-banner.png" alt="No storage plan banner" dark />
 
 ## Running out of room or credits
 
