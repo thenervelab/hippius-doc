@@ -197,7 +197,7 @@ Beside it, one button appears only when there is something worth doing:
 
 <Unordered>
   <li><BgStyledText>Upgrade</BgStyledText> when you have no plan, or your plan is 80% full or more. More space always means a bigger plan, so we never point you at credits here.</li>
-  <li><BgStyledText>Top up</BgStyledText> when your plan renews from credits and your balance will not cover the next renewal. The note beside it says how many days you have.</li>
+  <li><BgStyledText>Top up</BgStyledText> when your plan renews from credits and your balance will not cover the next renewal. The note beside it says how many days you have, and Billing itself carries the <a href="#not-enough-credits-to-renew">fuller warning</a>.</li>
 </Unordered>
 
 A healthy plan with room to spare shows no button at all.
@@ -208,6 +208,19 @@ A healthy plan with room to spare shows no button at all.
 <Screenshot src="/img/desktop/billing-plan-chip.png" alt="The plan card in the page header" dark /> */}
 
 ## When something is wrong with your plan
+
+### Not enough credits to renew
+
+If your plan renews from credits and your balance will not cover the next charge, a red notice sits at the very top of the Billing page, directly above **Total Credits**. It names your plan, what it costs, what you actually have, and how long you have left, for example:
+
+> **Not enough credits to renew your plan**
+> Your Max plan costs $22 a month and you have 9 credits. Top up before it renews in 6 days, or it will not renew.
+
+There is no button on the notice, because <BgStyledText>Add Credits</BgStyledText> is already the next thing on the page. It cannot be dismissed either: putting it away would not buy credits, and the renewal would still fail.
+
+Only plans that renew **from credits** get this. A card-funded plan charges the card at Stripe, so there is nothing to top up.
+
+### Banners on Drive
 
 Drive shows a banner for the states worth interrupting you over. A plan that is simply working says nothing.
 
