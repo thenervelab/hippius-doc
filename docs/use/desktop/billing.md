@@ -24,8 +24,10 @@ Your **plan** grants storage. **Credits** are a dollar balance on your account (
 :::
 
 {/* SCREENSHOT NEEDED: billing-settings.png + billing-settings-dark.png
-    Settings -> Billing, the whole page in one shot: Total Credits and
-    TAO Deposit Address side by side on top, Subscription plans below.
+    Settings -> Billing, the WHOLE page in one shot: Total Credits and
+    TAO Deposit Address side by side on top, and the full Subscription
+    plans row below with all five cards readable. This is the only shot
+    covering the plan catalogue, so the plans must be in frame.
     Capture in light and dark mode.
 <Screenshot src="/img/desktop/billing-settings.png" alt="The Billing page in Settings" dark /> */}
 
@@ -75,12 +77,6 @@ The **Subscription plans** section is the plan catalogue. Plans are loaded live 
 | **Scale**           | 25 TB   | $50 / month |
 
 The desktop app bills **monthly**. Annual billing is offered in the [Hippius console](https://console.hippius.com/dashboard/storage/drive/plans).
-
-{/* SCREENSHOT NEEDED: billing-plans.png + billing-plans-dark.png
-    The Subscription plans grid on its own, wide enough to show all five
-    cards with one of them in the subscribed state (Cancel subscription on
-    the active card, Upgrade / Downgrade on the others).
-<Screenshot src="/img/desktop/billing-plans.png" alt="Storage plan cards" dark /> */}
 
 ### What a plan card shows
 
