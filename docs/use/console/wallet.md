@@ -78,6 +78,8 @@ Talisman is the one that usually needs this, because it does not ship Hippius in
 Talisman offers a setting called **This network supports CheckMetadataHash sign extension**. Leave it unticked.
 
 With it on, Talisman will happily let you sign a transaction and the transaction then fails afterwards, which looks like the transaction was rejected when it was really the signature. We do not support that extension yet. With it off, signing works normally.
+
+Hardware wallets like Ledger are not supported yet.
 :::
 
 :::tip Your address is the same either way
