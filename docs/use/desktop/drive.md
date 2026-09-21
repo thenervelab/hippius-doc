@@ -154,27 +154,67 @@ When you have more than one sync folder, switch between them from the **Local** 
 
 <Screenshot src="/img/desktop/switching-between-sync-folders.png" alt="The Local view showing the synced folder cards used to switch between folders" dark />
 
+### Folders From Your Other Devices
+
+Folders you sync on another computer appear under **Sync from Other Devices**, in the Local view and in Settings. If you have never synced from another device, that section says so and stays empty.
+
+Click one to open it like any other folder. You can:
+
+<Unordered>
+  <li>Navigate through its subfolders, with the breadcrumb tracking where you are.</li>
+  <li>See real file sizes.</li>
+  <li>Preview and download individual files.</li>
+  <li>Share a file or the folder itself via link.</li>
+</Unordered>
+
+All of this reads straight from the server, so **nothing is downloaded to this computer** just because you opened the folder. Only the files you explicitly download land on disk. That is the point of the section: you can get at a file from your work laptop without syncing the whole folder onto your personal one.
+
+Contents load a page at a time as you scroll, so a folder holding a large camera roll opens immediately rather than waiting for the whole listing. The app also reopens wherever you left off.
+
+<Screenshot src="/img/desktop/drive/sync-from-other-devices.png" alt="Sync from Other Devices in the Local view" dark />
+
 ### File Actions (Context Menu)
 
 Right click any file or folder (or click the <BgStyledIconWithText icon="More" paddingClassName="px-1 py-1" /> menu) to access the full set of actions:
 
-| Action                            | Applies To           | Description                                                     |
-| --------------------------------- | -------------------- | --------------------------------------------------------------- |
-| **Open**                          | Folders              | Navigate into the folder                                        |
-| **Download**                      | Files & Folders      | Download the item to your local device                          |
-| **View**                          | Images, Videos, PDFs | Open in the built-in media viewer                               |
-| **Retry sync**                    | Failed files         | Re-attempt syncing a file that failed to sync                   |
-| **Reveal in Finder**              | Files & Folders      | Show the item in your operating system's file manager           |
-| **File Details / Folder Details** | Files & Folders      | View detailed metadata (size, type, modified date, sync status) |
-| **View on Explorer**              | Uploaded files       | Open the file's Arion Hash tracker on hipstats.com              |
-| **Share via link**                | Synced files         | Create a shareable link to the file                             |
-| **Rename**                        | Files & Folders      | Rename the item on this device; the change syncs to the network |
-| **Delete**                        | Files & Folders      | Remove the item (disabled while syncing)                        |
+| Action                            | Applies To        | Description                                                            |
+| --------------------------------- | ----------------- | ---------------------------------------------------------------------- |
+| **Open**                          | Folders           | Navigate into the folder                                               |
+| **Download**                      | Files & Folders   | Download the item to your local device                                 |
+| **View**                          | Previewable files | Open in the built-in viewer, see [Previewing Files](#previewing-files) |
+| **Retry sync**                    | Failed files      | Re-attempt syncing a file that failed to sync                          |
+| **Reveal in Finder**              | Files & Folders   | Show the item in your operating system's file manager                  |
+| **File Details / Folder Details** | Files & Folders   | View detailed metadata (size, type, modified date, sync status)        |
+| **View on Explorer**              | Uploaded files    | Open the file's Arion Hash tracker on hipstats.com                     |
+| **Share via link**                | Synced files      | Create a shareable link to the file                                    |
+| **Rename**                        | Files & Folders   | Rename the item on this device; the change syncs to the network        |
+| **Delete**                        | Files & Folders   | Remove the item (disabled while syncing)                               |
 
 <Screenshot src="/img/desktop/file-context-menu.png" alt="File context menu" dark />
 
-:::tip
-Pictures, videos, and PDFs open directly in the desktop app's built-in viewer. Other file types will open in your default system application.
+### Previewing Files
+
+Choose <BgStyledText>View</BgStyledText> from the context menu to open a file in the built-in viewer without leaving the app. Cloud-only files that aren't synced to this device are fetched and decrypted first.
+
+| Type               | Formats                                             |
+| ------------------ | --------------------------------------------------- |
+| **Images**         | JPG, PNG, GIF, WebP, AVIF, BMP, ICO, HEIC/HEIF, SVG |
+| **Videos**         | MP4, WebM, MOV                                      |
+| **PDFs**           | PDF                                                 |
+| **Word documents** | DOCX                                                |
+| **Spreadsheets**   | XLSX, CSV                                           |
+| **Presentations**  | PPTX                                                |
+| **Markdown**       | MD, MDX                                             |
+| **HTML**           | HTML, HTM                                           |
+| **Plain text**     | TXT, LOG                                            |
+| **JSON**           | JSON                                                |
+
+Very large files can't be previewed. Download them instead. Older Office formats (DOC, XLS, PPT) and OpenDocument files don't preview either. Save them as DOCX, XLSX, or PPTX to make them previewable.
+
+Other file types have no <BgStyledText>View</BgStyledText> action. Download them, or use <BgStyledText>Reveal in Finder</BgStyledText> and open them from your file manager.
+
+:::note
+The built-in viewer relies on the media support of your system's web view. If a video's format or codec can't be played there, such as MKV or HEVC video, the viewer offers <BgStyledText>Open with System Player</BgStyledText> for files on this device, along with <BgStyledText>Download File</BgStyledText>. On Linux, the web view has no PDF viewer, so PDFs offer <BgStyledText>Open with System Viewer</BgStyledText> instead.
 :::
 
 ### Renaming Files and Folders

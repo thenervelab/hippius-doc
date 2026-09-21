@@ -75,14 +75,46 @@ The desktop reads your local file directly with no download required. For most f
 <Ordered>
   <li>In the <BgStyledIconWithText text="Drive" icon="Category" /> view, find the file you want to share. The file must be fully synced.</li>
   <li>Right click the file (or click the <BgStyledText>⋮</BgStyledText> menu on its row) and choose <BgStyledText>Share via link</BgStyledText>.</li>
-  <li>The share dialog opens and runs the encrypt and upload steps automatically, showing <em>Encrypting and uploading…</em> while it works. You can press <BgStyledText>Cancel</BgStyledText> to stop before it finishes.</li>
+  <li>Choose when the link should expire, and optionally require a password. Both are described below.</li>
+  <li>The share dialog runs the encrypt and upload steps automatically, showing <em>Encrypting and uploading…</em> while it works. You can press <BgStyledText>Cancel</BgStyledText> to stop before it finishes.</li>
   <li>When complete, the share URL is shown in the modal and copied to your clipboard automatically, along with when the link expires.</li>
   <li>Use the copy icon next to the URL to copy it again, <BgStyledText>Open in browser</BgStyledText> to preview the recipient page, or <BgStyledText>Revoke share</BgStyledText> to cancel the link right away. Click <BgStyledText>Done</BgStyledText> to close the dialog.</li>
 </Ordered>
 
 The link is live immediately. Anyone you send it to can download the file right away.
 
-Sharing from the Drive view creates a **public** link. If you want a **password-protected** link, or you want to share a file that isn't in a synced folder, use [Share from Finder](/use/desktop/share-from-finder) on macOS.
+### Choosing an expiry
+
+Every link gets an expiry, chosen before you create it:
+
+| Option | The link stops working |
+|---|---|
+| **24 hours** | One day after you create it. |
+| **7 days** | One week after you create it. |
+| **30 days** | One month after you create it. |
+| **Until I revoke it** | Never on its own. It stays live until you revoke it. |
+
+### Requiring a password
+
+Tick <BgStyledText>Require a password</BgStyledText> to lock the link. Recipients are asked for it before they see anything, and it must be at least 8 characters.
+
+:::warning Send the password separately
+Send it through a different channel to the link itself. It cannot be recovered or changed later. If you lose it, revoke the share and create a new one.
+:::
+
+Both options are also available when you [share from Finder](/use/desktop/share-from-finder) on macOS.
+
+### Sharing a folder
+
+Right click a **folder** instead of a file and choose <BgStyledText>Share via link</BgStyledText> to share the whole thing. Expiry and password work the same way.
+
+:::info A folder link is live, not a snapshot
+Recipients always see the folder's **current** contents, so anything you add later becomes visible to everyone holding the link. Share files individually if you want a fixed set.
+:::
+
+Recipients can browse subfolders, search by name, preview files, download any single file, or download the whole folder as a zip. They do not need a Hippius account.
+
+To share a file that isn't in a synced folder, use [Share from Finder](/use/desktop/share-from-finder) on macOS.
 
 ## Active Shares
 
@@ -136,7 +168,7 @@ You can always revoke a share from any device, even if you didn't create it here
 
 ## Reshare Mechanics {#reshare-mechanics}
 
-There is no server endpoint to extend the expiry of an existing share. **Reshare** is the desktop app's workaround: it replaces the old share with a fresh one.
+**Reshare** replaces an existing file share with a fresh one, which is how you give a file share more time. It is still the route for a file share; a **folder** share can have its expiry changed directly from the Shared Links page in the console, without a new link.
 
 When you click Reshare:
 
@@ -152,6 +184,8 @@ If the old token has already expired by the time you click Reshare, the revoke s
 
 :::info Reshare is not available on the console
 The console doesn't have access to your local files. It would need to download and decrypt the Drive copy to create a new share, which is a heavier operation. The desktop app can do this fast because the file is already on disk. Reshare is a desktop only feature.
+
+The console can still change a **folder** share's expiry directly, which needs no local file and mints no new link.
 :::
 
 ## Share History
@@ -196,7 +230,8 @@ When someone opens your share link, they land on a simple page in their browser.
 
 <Unordered>
   <li><strong>Images, videos, and PDFs</strong> up to 100 MB preview inline, full-page.</li>
-  <li>Everything else, and any file over 100 MB, shows a download card with the filename, size, and a <strong>Download</strong> button. Shared folders arrive as a <code>.zip</code>, so they always download rather than preview.</li>
+  <li><strong>Documents</strong> preview inline too: Word documents (DOCX), presentations (PPTX), spreadsheets (XLSX, CSV), HTML, plain text, JSON, and Markdown.</li>
+  <li>Everything else, and any file too large to preview, shows a download card with the filename, size, and a <strong>Download</strong> button. Shared folders arrive as a <code>.zip</code>, so they always download rather than preview.</li>
 </Unordered>
 
 {/* TODO screenshot: the recipient share page previewing a file inline (an image or PDF) with the Download button.
@@ -228,12 +263,15 @@ Each active share uses storage quota. Revoke temporary shares when you're done w
 | Feature                      | Desktop App                                          | Console                                                      |
 | ---------------------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
 | **Create a share**           | ✅ Yes                                               | ✅ Yes                                                       |
+| **Share a folder**           | ✅ Yes                                               | ✅ Yes                                                       |
 | **Share from Finder**        | ✅ macOS only                                        | ❌ Not available                                            |
-| **Password-protected link**  | ✅ From Finder                                       | ❌ Public links only                                        |
+| **Choose an expiry**         | ✅ 24h, 7d, 30d, or until revoked                    | ✅ Same options                                              |
+| **Password-protected link**  | ✅ In the app and from Finder                        | ✅ Yes                                                       |
 | **How it reads the file**    | Local plaintext from sync folder, no download needed | Downloads and decrypts the Drive copy                        |
 | **Copy link (same session)** | ✅ Yes                                               | ✅ Yes                                                       |
 | **Copy link after restart**  | ✅ Yes, key saved in local database                  | ❌ No, key is in memory only and lost on tab close or reload |
-| **Reshare**                  | ✅ On creating device                                | ❌ Not available                                             |
+| **Reshare** (file shares)    | ✅ On creating device                                | ❌ Not available                                             |
+| **Change expiry** (folders)  | ❌ Use Reshare                                       | ✅ From the session that created the share                   |
 | **Revoke**                   | ✅ Any device                                        | ✅ Any device                                                |
 | **History**                  | ✅ Yes                                               | ✅ Yes                                                       |
 
