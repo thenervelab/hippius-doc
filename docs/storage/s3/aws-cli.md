@@ -5,14 +5,18 @@ sidebar_label: AWS CLI
 slug: /storage/s3/aws-cli
 ---
 
+import Unordered from '@site/src/components/Unordered';
+
 # Using AWS CLI with Hippius S3
 
 The AWS CLI works out of the box with Hippius S3. All standard `aws s3` and `aws s3api` commands are supported.
 
 ## Prerequisites
 
-- AWS CLI installed: [docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
-- Hippius S3 credentials from [console.hippius.com](https://console.hippius.com)
+<Unordered>
+  <li>AWS CLI installed: <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html">docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html</a></li>
+  <li>Hippius S3 credentials from <a href="https://console.hippius.com">console.hippius.com</a></li>
+</Unordered>
 
 ## Configuration
 
@@ -23,10 +27,13 @@ aws configure --profile hippius
 ```
 
 Enter when prompted:
-- **AWS Access Key ID**: your access key
-- **AWS Secret Access Key**: your secret key
-- **Default region**: `decentralized`
-- **Default output format**: `json` (or leave blank)
+
+<Unordered>
+  <li><strong>AWS Access Key ID</strong>: your access key</li>
+  <li><strong>AWS Secret Access Key</strong>: your secret key</li>
+  <li><strong>Default region</strong>: <code>decentralized</code></li>
+  <li><strong>Default output format</strong>: <code>json</code> (or leave blank)</li>
+</Unordered>
 
 Or set environment variables for one-off commands:
 
@@ -42,13 +49,7 @@ export AWS_DEFAULT_REGION="decentralized"
 You **must** pass `--endpoint-url https://s3.hippius.com` to every command. Without it, the AWS CLI sends requests to Amazon's servers and they will fail.
 :::
 
-:::tip Pick the closest region for best performance
-Hippius S3 is served through regional caches. For lower latency, replace `s3.hippius.com` in `--endpoint-url` with the region closest to you:
-- **Europe:** `https://eu-central-1.hippius.com` (also `https://s3.hippius.com`)
-- **US:** `https://us-east-1.hippius.com`
-
-All regions serve the same data.
-:::
+Connection details: [Getting Started](/use/quickstart#connection-details). Always use `https://s3.hippius.com`. ACLs and presigned URLs: [Advanced Usage](/storage/s3/advanced).
 
 :::tip Pro Tip: Create a Shell Alias
 Typing the endpoint URL and profile flag every time is tedious. Add these aliases to your `~/.bashrc` or `~/.zshrc`:
@@ -151,4 +152,4 @@ aws s3api put-bucket-acl \
   --endpoint-url https://s3.hippius.com
 ```
 
-See the [S3 API Reference](/storage/s3/integration#access-control-lists-acls) for full ACL options.
+See [Advanced Usage](/storage/s3/advanced#make-a-bucket-or-object-public) for full ACL options. Presigned URLs, sub-tokens, and public buckets are on that page too.

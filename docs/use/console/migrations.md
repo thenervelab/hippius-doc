@@ -94,5 +94,6 @@ Your original provider is untouched, so keep it or close the account in your own
 
 <Unordered>
   <li><a href="/use/console/s3">S3 Buckets</a>: browse your buckets and manage access keys.</li>
-  <li><a href="/storage/s3/integration">Connect to Hippius S3</a>: endpoints, SDKs and code examples.</li>
+  <li><a href="/use/quickstart">S3 Quickstart</a>: endpoints, SDKs and first upload.</li>
+  <li><a href="/storage/s3/advanced">Advanced Usage</a>: presigned URLs, ACLs, and public buckets.</li>
 </Unordered>

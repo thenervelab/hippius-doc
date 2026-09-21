@@ -9,13 +9,7 @@ slug: /storage/s3/javascript
 
 Use the [AWS SDK v3](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/) or the [MinIO SDK](https://min.io/docs/minio/linux/developers/javascript/minio-javascript.html) to interact with Hippius S3 from Node.js or the browser.
 
-:::tip Pick the closest region for best performance
-Hippius S3 is served through regional caches. For lower latency, point your client at the endpoint closest to you:
-- **Europe:** `https://eu-central-1.hippius.com` (the default `https://s3.hippius.com` also resolves here)
-- **US:** `https://us-east-1.hippius.com`
-
-All regions serve the same data — just swap the `endpoint` / `endPoint` in the snippets below.
-:::
+Connection details: [Getting Started](/use/quickstart#connection-details). Presigned PUT, ACLs, public buckets, and sub-tokens: [Advanced Usage](/storage/s3/advanced).
 
 ## AWS SDK v3
 
@@ -180,7 +174,7 @@ console.log(url);
 
 ## Browser uploads with presigned URLs
 
-For browser-side uploads, generate a presigned `PUT` URL on your server and use it client-side — no credentials needed in the browser:
+For browser-side uploads, generate a presigned `PUT` URL on your server and use it client-side — no credentials needed in the browser. Same pattern, with more sharing options, is in [Advanced Usage](/storage/s3/advanced#let-a-browser-upload-without-keys):
 
 **Server (Node.js):**
 
@@ -283,3 +277,5 @@ async function main() {
 
 main().catch(console.error);
 ```
+
+Sharing, public buckets, ACLs, and large uploads: [Advanced Usage](/storage/s3/advanced).

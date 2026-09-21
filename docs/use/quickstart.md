@@ -1,35 +1,35 @@
 import Screenshot from '@site/src/components/Screenshot';
-
-# Quickstart: Store Your First File on Hippius
-
 import BgStyledText from '@site/src/components/BgStyledText';
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Quickstart: Store Your First File on Hippius
 
 Hippius S3 is a distributed, S3-compatible storage service. This guide takes you from zero to your first file upload in under 5 minutes.
 
-## Step 1: Create an Account
+## Create an Account
 
 <Ordered>
   <li>Go to <a href="https://console.hippius.com">console.hippius.com</a></li>
   <li>Sign up with <BgStyledText>Google</BgStyledText> or <BgStyledText>GitHub</BgStyledText> OAuth</li>
 </Ordered>
 
-That's it ✅ — no wallet, seed phrase, or browser extension required.
+No wallet, seed phrase, or browser extension required.
 
-## Step 2: Add Credits
+## Add Credits
 
 <Ordered>
   <li>In the console, go to <BgStyledText>Billing</BgStyledText></li>
   <li>Add credits using <strong>credit card</strong> (Stripe) or <strong>TAO</strong></li>
 </Ordered>
 
-Credits are consumed as you store and retrieve files. See [pricing](https://hippius.com/pricing) for details.
-
+Credits are consumed as you store and retrieve files. See [pricing](https://hippius.com/pricing).
 
 <Screenshot src="/img/desktop/billing-overview.png" alt="Billing screen" dark />
 
-## Step 3: Create S3 Credentials
+## Create S3 Credentials
 
 <Ordered>
   <li>In the console, go to <BgStyledText>S3 Storage</BgStyledText></li>
@@ -41,15 +41,22 @@ Credits are consumed as you store and retrieve files. See [pricing](https://hipp
 Store your secret key securely — it cannot be retrieved after creation.
 :::
 
-
 <Screenshot src="/img/getting-started/master-token.png" alt="Master Token Created screen" dark />
 
-You can create multiple tokens with different access levels. See [Token Management](/use/s3-token-management) for details. Tokens can also be managed programmatically via the [Management API](https://api.hippius.com/).
+A master token can do everything on your account. Scoped sub-tokens, rotation, and ACLs are in [Advanced Usage](/storage/s3/advanced#give-an-app-scoped-credentials).
 
-## Step 4: Upload a File
+## Connection Details {#connection-details}
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+| Setting | Value |
+|---|---|
+| **Endpoint** | `https://s3.hippius.com` |
+| **Region** | `decentralized` |
+| **Signature** | AWS Signature V4 |
+| **Addressing** | Path-style |
+
+Always use `https://s3.hippius.com`. ETH wallets, TAO wallets, and Polkadot extensions are not used for S3 auth. TAO is only for paying credits.
+
+## Upload a File
 
 <Tabs>
 <TabItem value="python" label="Python (minio)">
@@ -70,10 +77,8 @@ client = Minio(
     region="decentralized",
 )
 
-# Create a bucket
 client.make_bucket("my-first-bucket")
 
-# Upload a file
 content = b"Hello from Hippius!"
 client.put_object(
     "my-first-bucket",
@@ -105,10 +110,8 @@ const client = new Minio.Client({
   region: "decentralized",
 });
 
-// Create a bucket
 await client.makeBucket("my-first-bucket", "decentralized");
 
-// Upload a file
 const content = Buffer.from("Hello from Hippius!");
 await client.putObject("my-first-bucket", "hello.txt", content, {
   "Content-Type": "text/plain",
@@ -121,15 +124,12 @@ console.log("Uploaded successfully!");
 <TabItem value="cli" label="AWS CLI">
 
 ```bash
-# Configure credentials
 export AWS_ACCESS_KEY_ID="YOUR_ACCESS_KEY"
 export AWS_SECRET_ACCESS_KEY="YOUR_SECRET_KEY"
 export AWS_DEFAULT_REGION="decentralized"
 
-# Create a bucket
 aws s3 mb s3://my-first-bucket --endpoint-url https://s3.hippius.com
 
-# Upload a file
 echo "Hello from Hippius!" > hello.txt
 aws s3 cp hello.txt s3://my-first-bucket/hello.txt --endpoint-url https://s3.hippius.com
 ```
@@ -137,7 +137,7 @@ aws s3 cp hello.txt s3://my-first-bucket/hello.txt --endpoint-url https://s3.hip
 </TabItem>
 </Tabs>
 
-## Step 5: Download and Verify
+## Download and Verify
 
 <Tabs>
 <TabItem value="python" label="Python (minio)">
@@ -171,27 +171,12 @@ aws s3 cp s3://my-first-bucket/hello.txt - --endpoint-url https://s3.hippius.com
 </TabItem>
 </Tabs>
 
-## Connection Details
-
-| Setting | Value |
-|---|---|
-| **Endpoint** | `https://s3.hippius.com` |
-| **Region** | `decentralized` |
-| **Signature** | AWS Signature V4 |
-| **Addressing** | Path-style |
-
-:::tip Pick the closest region for best performance
-Hippius S3 is served through regional caches. For lower latency, point your client at the endpoint closest to you:
-- **Europe:** `https://eu-central-1.hippius.com` (the default `https://s3.hippius.com` also resolves here)
-- **US:** `https://us-east-1.hippius.com`
-
-All regions serve the same data — just swap the endpoint in your client config.
-:::
-
 ## Next Steps
 
 <Unordered>
-  <li><a href="/storage/s3/integration">S3 API Reference</a> — Full list of operations, presigned URLs, ACLs, public buckets, and more</li>
-  <li><a href="/use/s3-token-management">Token Management</a> — Create sub-tokens, manage access levels</li>
-  <li><a href="https://hippius.com/pricing">Pricing</a> — Storage costs</li>
+  <li><a href="/storage/s3/advanced">Advanced Usage</a> — presigned URLs, public buckets, ACLs, sub-tokens, large files</li>
+  <li><a href="/storage/s3/python">Python</a>, <a href="/storage/s3/javascript">JavaScript</a>, <a href="/storage/s3/aws-cli">AWS CLI</a>, <a href="/storage/s3/rclone">rclone</a></li>
+  <li><a href="/storage/s3/compatibility">Compatibility matrix</a> — every supported S3 operation</li>
+  <li><a href="/use/troubleshooting">Troubleshooting</a></li>
+  <li><a href="https://hippius.com/pricing">Pricing</a></li>
 </Unordered>

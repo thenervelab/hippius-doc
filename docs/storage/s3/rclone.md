@@ -5,14 +5,18 @@ sidebar_label: rclone
 slug: /storage/s3/rclone
 ---
 
+import Unordered from '@site/src/components/Unordered';
+
 # Using rclone with Hippius S3
 
 [rclone](https://rclone.org/) is a command-line tool for managing files across cloud storage. Use it to sync folders, copy files, or mount Hippius S3 as a local drive.
 
 ## Prerequisites
 
-- rclone installed: `brew install rclone` / `apt install rclone` / [rclone.org/install](https://rclone.org/install/)
-- Hippius S3 credentials from [console.hippius.com](https://console.hippius.com)
+<Unordered>
+  <li>rclone installed: <code>brew install rclone</code> / <code>apt install rclone</code> / <a href="https://rclone.org/install">rclone.org/install</a></li>
+  <li>Hippius S3 credentials from <a href="https://console.hippius.com">console.hippius.com</a></li>
+</Unordered>
 
 ## Configuration
 
@@ -36,13 +40,7 @@ Verify it works:
 rclone ls hippius:
 ```
 
-:::tip Pick the closest region for best performance
-Hippius S3 is served through regional caches. For lower latency, set `endpoint` to the region closest to you:
-- **Europe:** `https://eu-central-1.hippius.com` (the default `https://s3.hippius.com` also resolves here)
-- **US:** `https://us-east-1.hippius.com`
-
-All regions serve the same data.
-:::
+Connection details: [Getting Started](/use/quickstart#connection-details). Always use `https://s3.hippius.com`.
 
 ## Common operations
 
@@ -112,9 +110,11 @@ Mount requires FUSE. On macOS: `brew install --cask macfuse`. On Linux: `apt ins
 
 ## Speed tips
 
-- Use `--transfers 8` to run 8 parallel transfers
-- Use `--s3-upload-concurrency 8` for faster large file uploads
-- Use `--progress` to see transfer progress
+<Unordered>
+  <li>Use <code>--transfers 8</code> to run 8 parallel transfers</li>
+  <li>Use <code>--s3-upload-concurrency 8</code> for faster large file uploads</li>
+  <li>Use <code>--progress</code> to see transfer progress</li>
+</Unordered>
 
 ```bash
 rclone copy ./large-folder hippius:my-bucket --transfers 8 --progress
