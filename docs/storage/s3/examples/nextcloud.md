@@ -4,13 +4,13 @@ sidebar_label: Nextcloud
 slug: /storage/s3/examples/nextcloud
 ---
 
+import Unordered from '@site/src/components/Unordered';
+
 # Nextcloud with Hippius S3
 
 Use Hippius S3 as the primary storage backend for [Nextcloud](https://nextcloud.com/).
 
-:::tip Pick the closest region for best performance
-Swap `s3.hippius.com` for `eu-central-1.hippius.com` (Europe) or `us-east-1.hippius.com` (US) to use the regional cache closest to you. See the [S3 API Reference](/storage/s3/integration) for details.
-:::
+Connection details: [Getting Started](/use/quickstart#connection-details). Always use `https://s3.hippius.com`.
 
 ## Prerequisites
 
@@ -71,10 +71,15 @@ Nextcloud stores objects with `urn:oid:` prefixes rather than original filenames
 The same pattern works with any self-hosted app that supports S3-compatible storage. Change the endpoint to `s3.hippius.com`, set `path_style = true`, and use your Hippius credentials.
 
 Examples:
-- **[Mastodon](https://docs.joinmastodon.org/admin/config/#cdn)** — media attachments via S3
-- **[GitLab](https://docs.gitlab.com/administration/object_storage/)** — LFS objects, artifacts, uploads
-- **[Mattermost](https://docs.mattermost.com/configure/file-storage-configuration-settings.html)** — file attachments
+
+<Unordered>
+  <li><strong><a href="https://docs.joinmastodon.org/admin/config/#cdn">Mastodon</a></strong> — media attachments via S3</li>
+  <li><strong><a href="https://docs.gitlab.com/administration/object_storage/">GitLab</a></strong> — LFS objects, artifacts, uploads</li>
+  <li><strong><a href="https://docs.mattermost.com/configure/file-storage-configuration-settings.html">Mattermost</a></strong> — file attachments</li>
+</Unordered>
 
 ## References
 
-- [Nextcloud S3 Primary Storage docs](https://docs.nextcloud.com/server/latest/admin_manual/configuration_files/primary_storage.html)
+<Unordered>
+  <li><a href="https://docs.nextcloud.com/server/latest/admin_manual/configuration_files/primary_storage.html">Nextcloud S3 Primary Storage docs</a></li>
+</Unordered>

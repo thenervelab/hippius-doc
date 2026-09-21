@@ -5,6 +5,8 @@ sidebar_label: Hippius API
 slug: /use/api
 ---
 
+import Unordered from '@site/src/components/Unordered';
+
 # Hippius Management API
 
 The [Hippius Management API](https://api.hippius.com/) is a REST API for managing your account, S3 tokens, and billing programmatically. Use it to automate token rotation, monitor credit balances, or build integrations that provision storage on demand.
@@ -19,7 +21,7 @@ The Management API handles everything outside of the S3 data plane:
 | **Billing & credits** | Check credit balance, view usage, add credits via TAO |
 | **Account** | Manage account settings and access keys |
 
-For storing and retrieving files, use the [S3-compatible API](/storage/s3/integration) with any standard S3 client. The Management API is for the control plane — managing *who* can access storage and *how much* they can use.
+For storing and retrieving files, start with [Getting Started](/use/quickstart) and [Advanced Usage](/storage/s3/advanced). The Management API is the control plane — managing *who* can access storage and *how much* they can use.
 
 ## Interactive Docs
 
@@ -29,13 +31,15 @@ The full API specification with request/response examples is available as an int
 
 ## Use Cases
 
-- **CI/CD pipelines** — Create short-lived sub tokens scoped to a single bucket for deployments, then revoke them automatically
-- **Multi-tenant apps** — Provision a bucket and scoped token per customer from your backend
-- **Billing automation** — Monitor credit balance and top up via TAO before running out
-- **AI agents & LLMs** — Automate storage operations end-to-end without manual console interaction
+<Unordered>
+  <li><strong>CI/CD pipelines</strong> — Create short-lived sub tokens scoped to a single bucket for deployments, then revoke them automatically</li>
+  <li><strong>Multi-tenant apps</strong> — Provision a bucket and scoped token per customer from your backend</li>
+  <li><strong>Billing automation</strong> — Monitor credit balance and top up via TAO before running out</li>
+  <li><strong>AI agents &amp; LLMs</strong> — Automate storage operations end-to-end without manual console interaction</li>
+</Unordered>
 
 :::tip For AI agents and LLMs
-A machine-readable summary of the entire Hippius documentation is available at [docs.hippius.com/llms.txt](https://docs.hippius.com/llms.txt). Point your agent at this URL for full context on S3 operations, authentication, and API capabilities.
+A machine-readable summary is at [docs.hippius.com/llms.txt](https://docs.hippius.com/llms.txt) (index + recipes) and [docs.hippius.com/llms-full.txt](https://docs.hippius.com/llms-full.txt) (full ingest).
 :::
 
 ## Authentication
@@ -44,6 +48,8 @@ All Management API requests require an access token. Generate one in the [Hippiu
 
 ## Related
 
-- [S3 Token Management](/use/s3-token-management) — How master and sub tokens work
-- [S3 API Reference](/storage/s3/integration) — Data plane operations (upload, download, ACLs)
-- [S3 Compatibility Matrix](/storage/s3/compatibility) — Supported S3 operations
+<Unordered>
+  <li><a href="/use/quickstart">Getting Started</a> — First upload</li>
+  <li><a href="/storage/s3/advanced">Advanced Usage</a> — Presigned URLs, ACLs, public buckets, sub-tokens</li>
+  <li><a href="/storage/s3/compatibility">S3 Compatibility Matrix</a> — Supported S3 operations</li>
+</Unordered>

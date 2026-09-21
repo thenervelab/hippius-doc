@@ -2,6 +2,8 @@
 
 > Hippius is a distributed cloud storage platform backed by Arion distributed storage and a custom Substrate blockchain. It provides a fully S3-compatible API, a desktop app, a web console, and confidential compute. Any S3 client works out of the box.
 
+Full ingest: https://docs.hippius.com/llms-full.txt
+
 ## Products
 
 - **S3 Storage** — S3-compatible API at s3.hippius.com. Store anything. Standard clients (boto3, AWS CLI, rclone) work without modification.
@@ -10,6 +12,52 @@
 - **Virtual Machines** — Distributed compute (beta access).
 - **Confidential Compute** — VMs inside AMD SEV-SNP encrypted enclaves.
 - **Hippius Hub** - Drop-in replacement for `huggingface_hub` backed by Hippius S3 storage (https://github.com/thenervelab/hippius-hub/blob/main/llms.txt)
+
+## S3 documentation map
+
+Canonical pages. Prefer these URLs when linking or fetching.
+
+- Getting Started (first upload): https://docs.hippius.com/use/quickstart
+- Advanced Usage (presigned URLs, public buckets, ACLs, sub-tokens, multipart): https://docs.hippius.com/storage/s3/advanced
+- Compatibility matrix (every S3 operation): https://docs.hippius.com/storage/s3/compatibility
+- Object Lock / WORM: https://docs.hippius.com/storage/s3/object-lock
+- Python (boto3 & minio): https://docs.hippius.com/storage/s3/python
+- JavaScript (AWS SDK v3 & minio): https://docs.hippius.com/storage/s3/javascript
+- AWS CLI: https://docs.hippius.com/storage/s3/aws-cli
+- rclone: https://docs.hippius.com/storage/s3/rclone
+- Troubleshooting: https://docs.hippius.com/use/troubleshooting
+- Nextcloud: https://docs.hippius.com/storage/s3/examples/nextcloud
+- Duplicati: https://docs.hippius.com/storage/s3/examples/duplicati
+- Management API (tokens, billing): https://docs.hippius.com/use/api
+- Console — S3 Buckets (UI, master/sub tokens): https://docs.hippius.com/use/console/s3
+- Console — S3 Migrations: https://docs.hippius.com/use/console/migrations
+- Console — Uploads: https://docs.hippius.com/use/console/uploads
+- OpenAPI (interactive): https://api.hippius.com/
+- OpenAPI spec: https://api.hippius.com/?format=openapi
+- Pricing: https://hippius.com/pricing
+- Benchmarks: https://s3.hippius.com/veggies/s3/benchmark.html
+
+### Advanced Usage section anchors
+
+- Presigned GET (share a download): https://docs.hippius.com/storage/s3/advanced#share-a-time-limited-download
+- Presigned PUT (browser upload): https://docs.hippius.com/storage/s3/advanced#let-a-browser-upload-without-keys
+- Public buckets / objects: https://docs.hippius.com/storage/s3/advanced#make-a-bucket-or-object-public
+- Share with another account (ACL): https://docs.hippius.com/storage/s3/advanced#share-with-another-account
+- Grant one access key: https://docs.hippius.com/storage/s3/advanced#grant-one-access-key
+- Sub-tokens (scoped credentials): https://docs.hippius.com/storage/s3/advanced#give-an-app-scoped-credentials
+- Large / multipart uploads: https://docs.hippius.com/storage/s3/advanced#upload-large-files
+- Tagging: https://docs.hippius.com/storage/s3/advanced#tag-buckets-and-objects
+- Static site / video: https://docs.hippius.com/storage/s3/advanced#host-a-static-site-or-stream-video
+- Object Lock pointer: https://docs.hippius.com/storage/s3/advanced#stop-a-version-being-deleted
+
+### Old URLs (still resolve; do not use for new links)
+
+- https://docs.hippius.com/storage/s3/integration → Advanced Usage
+- https://docs.hippius.com/use/s3-token-management → Advanced Usage#give-an-app-scoped-credentials
+- https://docs.hippius.com/storage/s3/examples/file-sharing → Advanced Usage#share-a-time-limited-download
+- https://docs.hippius.com/storage/s3/examples/video-hosting → Advanced Usage#host-a-static-site-or-stream-video
+- https://docs.hippius.com/storage/s3/examples/image-gallery → Advanced Usage#make-a-bucket-or-object-public
+- https://docs.hippius.com/storage/s3/examples/static-site → Advanced Usage#host-a-static-site-or-stream-video
 
 ## Quick Start (S3)
 
@@ -28,21 +76,16 @@ TAO can only be used to pay for credits, not for authentication.
 - Endpoint: https://s3.hippius.com
 - Region: decentralized
 - Signature: AWS Signature V4
-- Addressing style: path-style
+- Addressing style: path-style (required; virtual-hosted style is not supported)
 
-### Regional endpoints (for best performance)
-
-Hippius S3 is served through regional caches. Pick the endpoint closest to the client for lower latency. All regions serve the same data — only the endpoint changes.
-
-- Europe: https://eu-central-1.hippius.com (the default https://s3.hippius.com also resolves here)
-- US: https://us-central-1.hippius.com
+Always use https://s3.hippius.com. Do not point clients at other hostnames.
 
 ## Client Configurations
 
 ### AWS CLI
 
-    export AWS_ACCESS_KEY_ID="hip_your_key"
-    export AWS_SECRET_ACCESS_KEY="your_secret"
+    export AWS_ACCESS_KEY_ID="YOUR_ACCESS_KEY"
+    export AWS_SECRET_ACCESS_KEY="YOUR_SECRET_KEY"
     export AWS_DEFAULT_REGION="decentralized"
 
     aws s3 mb s3://my-bucket --endpoint-url https://s3.hippius.com
@@ -58,8 +101,8 @@ Hippius S3 is served through regional caches. Pick the endpoint closest to the c
     s3 = boto3.client(
         "s3",
         endpoint_url="https://s3.hippius.com",
-        aws_access_key_id="hip_your_key",
-        aws_secret_access_key="your_secret",
+        aws_access_key_id="YOUR_ACCESS_KEY",
+        aws_secret_access_key="YOUR_SECRET_KEY",
         region_name="decentralized",
         config=Config(signature_version="s3v4", s3={"addressing_style": "path"}),
     )
@@ -69,8 +112,8 @@ Hippius S3 is served through regional caches. Pick the endpoint closest to the c
     from minio import Minio
     client = Minio(
         "s3.hippius.com",
-        access_key="hip_your_key",
-        secret_key="your_secret",
+        access_key="YOUR_ACCESS_KEY",
+        secret_key="YOUR_SECRET_KEY",
         secure=True,
         region="decentralized",
     )
@@ -81,7 +124,7 @@ Hippius S3 is served through regional caches. Pick the endpoint closest to the c
     const s3 = new S3Client({
         endpoint: "https://s3.hippius.com",
         region: "decentralized",
-        credentials: { accessKeyId: "hip_your_key", secretAccessKey: "your_secret" },
+        credentials: { accessKeyId: "YOUR_ACCESS_KEY", secretAccessKey: "YOUR_SECRET_KEY" },
         forcePathStyle: true,
     });
 
@@ -92,8 +135,8 @@ Hippius S3 is served through regional caches. Pick the endpoint closest to the c
         endPoint: "s3.hippius.com",
         port: 443,
         useSSL: true,
-        accessKey: "hip_your_key",
-        secretKey: "your_secret",
+        accessKey: "YOUR_ACCESS_KEY",
+        secretKey: "YOUR_SECRET_KEY",
         region: "decentralized",
     });
 
@@ -103,10 +146,11 @@ Hippius S3 is served through regional caches. Pick the endpoint closest to the c
     [hippius]
     type = s3
     provider = Other
-    access_key_id = hip_your_key
-    secret_access_key = your_secret
+    access_key_id = YOUR_ACCESS_KEY
+    secret_access_key = YOUR_SECRET_KEY
     endpoint = https://s3.hippius.com
     region = decentralized
+    force_path_style = true
 
     rclone ls hippius:
     rclone sync ./folder hippius:my-bucket/folder
@@ -117,7 +161,7 @@ Hippius S3 is served through regional caches. Pick the endpoint closest to the c
 - Object: PutObject, GetObject, HeadObject, DeleteObject, CopyObject
 - List: ListObjects, ListObjectsV2
 - Multipart: InitiateMultipartUpload, UploadPart, CompleteMultipartUpload, AbortMultipartUpload (up to ~5 TiB)
-- Presigned: PresignedGetObject, PresignedPutObject (max 7 days)
+- Presigned: PresignedGetObject, PresignedPutObject, PresignedDelete (max 7 days)
 - Tags: PutObjectTagging, GetObjectTagging, DeleteObjectTagging, PutBucketTagging, GetBucketTagging
 - ACL: PutBucketAcl, GetBucketAcl, PutObjectAcl, GetObjectAcl
 - Policy: PutBucketPolicy, GetBucketPolicy, DeleteBucketPolicy
@@ -125,8 +169,8 @@ Hippius S3 is served through regional caches. Pick the endpoint closest to the c
 - Object Lock (WORM): PutObjectLockConfiguration, GetObjectLockConfiguration, PutObjectRetention,
   GetObjectRetention, PutObjectLegalHold, GetObjectLegalHold; GOVERNANCE and COMPLIANCE modes;
   bucket default retention (Days or Years); x-amz-object-lock-* headers on PutObject,
-  CreateMultipartUpload and CopyObject. Requires versioning. Docs: /storage/s3/object-lock
-- Other: PutBucketLifecycle, range requests (video streaming)
+  CreateMultipartUpload and CopyObject. Requires versioning. Docs: https://docs.hippius.com/storage/s3/object-lock
+- Other: PutBucketLifecycle (expiration rules only), range requests (video streaming)
 
 ## Not Supported
 
@@ -134,14 +178,40 @@ Hippius S3 is served through regional caches. Pick the endpoint closest to the c
 - Object Lock headers on CompleteMultipartUpload (set them on CreateMultipartUpload) or on
   GetObject responses (use HeadObject)
 - S3 Batch Operations, replication of Object Lock state
-- POST Object (browser form uploads)
-- Cross-region replication
+- POST Object (browser form uploads — use a presigned PutObject)
+- Cross-region replication (the network replicates automatically)
 - S3 Select
+- Virtual-hosted style addressing (bucket.s3.hippius.com)
+
+## Advanced recipes
+
+Public object URL: https://s3.hippius.com/{bucket}/{key}
+
+    # Make bucket publicly readable
+    aws s3api put-bucket-acl --bucket my-bucket --acl public-read \
+      --endpoint-url https://s3.hippius.com
+
+    # Presigned GET (max 7 days)
+    aws s3 presign s3://my-bucket/file.txt --expires-in 86400 \
+      --endpoint-url https://s3.hippius.com
+
+Do not append extra query parameters to a presigned URL — they invalidate the signature.
+
+Master tokens have full access and bypass ACLs. Sub-tokens are scoped to buckets and permissions
+(read-only or read/write) and should be used for apps. Create/rotate/revoke in the console
+(https://docs.hippius.com/use/console/s3) or via the Management API.
+
+Console uploads are capped at 100 MB per file. Larger files need multipart (AWS CLI / SDKs).
+
+HCFS "S3-compatible gateway" (https://docs.hippius.com/hcfs/api/s3-gateway) is NOT s3.hippius.com.
+It is a plaintext Drive/HCFS upload path. Do not use it for the public S3 API.
 
 ## Management API (api.hippius.com)
 
+Docs: https://docs.hippius.com/use/api
 Full OpenAPI spec: https://api.hippius.com/?format=openapi
 Authenticate: POST /auth/exchange/ with OAuth token → returns bearer token
+Console Settings also shows an API token used as: Authorization: Bearer <token>
 
 ### Token management
 
@@ -208,22 +278,6 @@ Required flags: `--chain-ws-url wss://rpc.hippius.network --family-mnemonic-file
 
 100 requests per minute per account
 
-## Pricing
-
-https://hippius.com/pricing
-
-## Documentation
-
-- Quickstart: https://docs.hippius.com/use/quickstart
-- S3 API Reference: https://docs.hippius.com/storage/s3/integration
-- Python guide: https://docs.hippius.com/storage/s3/python
-- JavaScript guide: https://docs.hippius.com/storage/s3/javascript
-- AWS CLI guide: https://docs.hippius.com/storage/s3/aws-cli
-- rclone guide: https://docs.hippius.com/storage/s3/rclone
-- Token management: https://docs.hippius.com/use/s3-token-management
-- Miner setup: https://docs.hippius.com/earn/arion/running-blockchain-node
-- S3 Benchmarks: https://s3.hippius.com/veggies/s3/benchmark.html
-
 ## Support
 
 - Discord: https://discord.com/channels/1298001698874327131/1442875352484548609
@@ -234,5 +288,7 @@ https://hippius.com/pricing
 - Website: https://hippius.com
 - Console: https://console.hippius.com
 - Documentation: https://docs.hippius.com
+- Docs for agents: https://docs.hippius.com/llms.txt
+- Full docs for agents: https://docs.hippius.com/llms-full.txt
 - API: https://api.hippius.com
 - X/Twitter: https://x.com/Hippius_cloud

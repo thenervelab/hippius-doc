@@ -4,13 +4,13 @@ sidebar_label: Duplicati
 slug: /storage/s3/examples/duplicati
 ---
 
+import Unordered from '@site/src/components/Unordered';
+
 # Duplicati with Hippius S3
 
 Use Hippius S3 as the backup destination for [Duplicati](https://github.com/duplicati/duplicati), an open-source backup tool with encryption, compression, and scheduling built in. Unlike file sync tools like rclone, Duplicati creates deduplicated, optionally encrypted backup archives — ideal for automated, set-and-forget backups.
 
-:::tip Pick the closest region for best performance
-Swap `s3.hippius.com` for `eu-central-1.hippius.com` (Europe) or `us-east-1.hippius.com` (US) to use the regional cache closest to you. See the [S3 API Reference](/storage/s3/integration) for details.
-:::
+Connection details: [Getting Started](/use/quickstart#connection-details). Always use `https://s3.hippius.com`.
 
 ## Prerequisites
 
@@ -121,5 +121,7 @@ docker run --rm \
 
 ## References
 
-- [Duplicati S3-compatible destination docs](https://docs.duplicati.com/backup-destinations/standard-based-destinations/s3-compatible-destination)
-- [Using Duplicati from Docker](https://docs.duplicati.com/platform-specific-guides/using-duplicati-from-docker)
+<Unordered>
+  <li><a href="https://docs.duplicati.com/backup-destinations/standard-based-destinations/s3-compatible-destination">Duplicati S3-compatible destination docs</a></li>
+  <li><a href="https://docs.duplicati.com/platform-specific-guides/using-duplicati-from-docker">Using Duplicati from Docker</a></li>
+</Unordered>

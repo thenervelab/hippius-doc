@@ -7,19 +7,50 @@ For the condensed version, see https://docs.hippius.com/llms.txt
 
 ## Table of Contents
 
+- [S3 documentation map](#s3-documentation-map)
 - [What is Hippius?](#what-is-hippius)
 - [S3 Storage — Quickstart](#s3-storage--quickstart)
-- [S3 Storage — Token Management](#s3-storage--token-management)
+- [S3 Storage — Advanced Usage](#s3-storage--advanced-usage)
 - [S3 Storage — Python](#s3-storage--python)
 - [S3 Storage — JavaScript](#s3-storage--javascript)
 - [S3 Storage — AWS CLI](#s3-storage--aws-cli)
 - [S3 Storage — rclone](#s3-storage--rclone)
-- [S3 Storage — API Reference](#s3-storage--api-reference)
+- [S3 Storage — Compatibility](#s3-storage--compatibility)
 - [Storage Architecture](#storage-architecture)
 - [Run a Miner](#run-a-miner)
 - [Miner CLI](#miner-cli)
 - [Staking](#staking)
 - [Management API](#management-api)
+
+---
+
+## S3 documentation map
+
+Canonical docs URLs. Prefer these when linking or fetching.
+
+- Getting Started: https://docs.hippius.com/use/quickstart
+- Advanced Usage: https://docs.hippius.com/storage/s3/advanced
+- Compatibility matrix: https://docs.hippius.com/storage/s3/compatibility
+- Object Lock: https://docs.hippius.com/storage/s3/object-lock
+- Python: https://docs.hippius.com/storage/s3/python
+- JavaScript: https://docs.hippius.com/storage/s3/javascript
+- AWS CLI: https://docs.hippius.com/storage/s3/aws-cli
+- rclone: https://docs.hippius.com/storage/s3/rclone
+- Troubleshooting: https://docs.hippius.com/use/troubleshooting
+- Nextcloud: https://docs.hippius.com/storage/s3/examples/nextcloud
+- Duplicati: https://docs.hippius.com/storage/s3/examples/duplicati
+- Management API: https://docs.hippius.com/use/api
+- Console S3 Buckets: https://docs.hippius.com/use/console/s3
+- Console S3 Migrations: https://docs.hippius.com/use/console/migrations
+- Condensed agent file: https://docs.hippius.com/llms.txt
+
+Old URLs that still resolve:
+- /storage/s3/integration → /storage/s3/advanced
+- /use/s3-token-management → /storage/s3/advanced#give-an-app-scoped-credentials
+- /storage/s3/examples/file-sharing → /storage/s3/advanced#share-a-time-limited-download
+- /storage/s3/examples/video-hosting → /storage/s3/advanced#host-a-static-site-or-stream-video
+- /storage/s3/examples/image-gallery → /storage/s3/advanced#make-a-bucket-or-object-public
+- /storage/s3/examples/static-site → /storage/s3/advanced#host-a-static-site-or-stream-video
 
 ---
 
@@ -54,12 +85,7 @@ Region: decentralized
 Signature: AWS Signature V4
 Addressing style: path-style
 
-### Regional endpoints (for best performance)
-
-Hippius S3 is served through regional caches. Pick the endpoint closest to the client for lower latency. All regions serve the same data — only the endpoint URL changes.
-
-- Europe: https://eu-central-1.hippius.com (the default https://s3.hippius.com also resolves here)
-- US: https://us-central-1.hippius.com
+Always use https://s3.hippius.com. Do not point clients at other hostnames.
 
 Step 1: Create account at https://console.hippius.com (Google or GitHub OAuth)
 Step 2: Add credits — Console > Billing (credit card via Stripe, or TAO)
@@ -88,35 +114,69 @@ IMPORTANT: ETH wallets, TAO wallets, and Polkadot browser extensions are NOT use
 
 ---
 
-## S3 Storage — Token Management
+## S3 Storage — Advanced Usage
 
-Master tokens have full access to your account. Sub-tokens can be scoped to specific buckets with specific permissions.
+Docs: https://docs.hippius.com/storage/s3/advanced
 
-### Create a master token
+Always use https://s3.hippius.com. Region is always `decentralized`.
 
-Console > S3 Storage > Create Master Token. Save both the Access Key ID and Secret Key.
+### Presigned GET (share a download, max 7 days)
 
-### Create a sub-token (via API)
+    url = s3.generate_presigned_url("get_object", Params={"Bucket": "my-bucket", "Key": "file.txt"}, ExpiresIn=86400)
+
+Do not append extra query parameters to a presigned URL — they invalidate the signature.
+
+### Presigned PUT (browser upload without exposing keys)
+
+    const uploadUrl = await getSignedUrl(s3, new PutObjectCommand({ Bucket: "my-bucket", Key: "upload.jpg" }), { expiresIn: 300 });
+    await fetch(uploadUrl, { method: "PUT", body: file, headers: { "Content-Type": file.type } });
+
+### Public buckets
+
+    aws s3api put-bucket-acl --bucket my-bucket --acl public-read --endpoint-url https://s3.hippius.com
+
+Public URL: https://s3.hippius.com/{bucket}/{key}
+
+### ACLs
+
+Permission types: READ, WRITE, READ_ACP, WRITE_ACP, FULL_CONTROL.
+Always include --grant-full-control for yourself when sharing.
+
+    aws s3api put-bucket-acl --bucket my-bucket \
+      --grant-read 'id="their_canonical_id"' \
+      --grant-full-control 'id="your_canonical_id"' \
+      --endpoint-url https://s3.hippius.com
+
+Hippius extension: grant a single access key with accessKey="hip_...".
+Master keys bypass ACLs. Sub-tokens need an explicit grant unless scoped to that bucket at creation.
+
+### Sub-tokens
+
+Scoped credentials: per-bucket, read-only or read/write, optional expiry.
+Create in Console > S3 Buckets (https://docs.hippius.com/use/console/s3) or via Management API.
+Rotate keeps the Access Key ID and issues a new secret. Revoke is immediate.
 
     curl -X POST https://api.hippius.com/objectstore/sub-tokens/ \
       -H "Authorization: Token YOUR_BEARER_TOKEN" \
       -H "Content-Type: application/json" \
       -d '{"name": "read-only-backup", "permissions": ["read"]}'
 
-### Revoke a token
-
     curl -X POST https://api.hippius.com/objectstore/master-tokens/{id}/revoke/ \
       -H "Authorization: Token YOUR_BEARER_TOKEN"
-
-### Rotate a token secret
 
     curl -X POST https://api.hippius.com/objectstore/master-tokens/{id}/rotate/ \
       -H "Authorization: Token YOUR_BEARER_TOKEN"
 
-### Access key types
+### Large files
 
-- Main keys: Full access to all your buckets (bypass ACLs)
-- Sub keys: Require explicit ACL grants for access to specific buckets
+Console upload cap is 100 MB. Use multipart via AWS CLI / SDKs for larger objects (up to ~5 TiB).
+
+### Object Lock
+
+WORM retention (GOVERNANCE / COMPLIANCE) and legal holds. COMPLIANCE cannot be bypassed.
+Docs: https://docs.hippius.com/storage/s3/object-lock
+
+HCFS S3-compatible gateway (https://docs.hippius.com/hcfs/api/s3-gateway) is NOT s3.hippius.com.
 
 ---
 
@@ -263,20 +323,24 @@ Server generates presigned PUT URL, browser uses it — no credentials in the br
 
 ---
 
-## S3 Storage — API Reference
+## S3 Storage — Compatibility
+
+Docs: https://docs.hippius.com/storage/s3/compatibility
 
 Supported operations:
-- Bucket: CreateBucket, DeleteBucket, ListBuckets, HeadBucket
+- Bucket: CreateBucket, DeleteBucket, ListBuckets, HeadBucket, GetBucketLocation
 - Object: PutObject, GetObject, HeadObject, DeleteObject, CopyObject
 - List: ListObjects, ListObjectsV2
 - Multipart: InitiateMultipartUpload, UploadPart, CompleteMultipartUpload, AbortMultipartUpload (up to ~5 TiB)
 - Tags: PutObjectTagging, GetObjectTagging, DeleteObjectTagging, PutBucketTagging, GetBucketTagging
 - ACL: PutBucketAcl, GetBucketAcl, PutObjectAcl, GetObjectAcl
 - Policy: PutBucketPolicy, GetBucketPolicy, DeleteBucketPolicy
-- Presigned URLs (max 7 days), range requests, video streaming
-- Lifecycle policies
+- Versioning: PutBucketVersioning (Enabled only; Suspended returns 501), GetBucketVersioning, ListObjectVersions
+- Object Lock: Put/Get ObjectLockConfiguration, Retention, LegalHold (GOVERNANCE and COMPLIANCE)
+- Presigned URLs GET/PUT/DELETE (max 7 days), range requests, video streaming
+- Lifecycle: basic expiration rules only
 
-Not supported: bucket versioning, cross-region replication, S3 Select
+Not supported: S3 Select, POST Object, virtual-hosted style, event notifications, S3 Batch Operations, cross-region replication (network replicates automatically)
 
 ### Public buckets
 
@@ -414,6 +478,7 @@ Token types:
 
 ## Management API
 
+Docs: https://docs.hippius.com/use/api
 Full OpenAPI spec: https://api.hippius.com/?format=openapi
 
 Auth: POST /auth/exchange/ with OAuth token → bearer token for API calls
@@ -443,6 +508,12 @@ Billing:
 - Website: https://hippius.com
 - Console: https://console.hippius.com
 - Documentation: https://docs.hippius.com
+- Docs for agents: https://docs.hippius.com/llms.txt
+- Full docs for agents: https://docs.hippius.com/llms-full.txt
+- Getting Started: https://docs.hippius.com/use/quickstart
+- Advanced Usage: https://docs.hippius.com/storage/s3/advanced
+- Compatibility: https://docs.hippius.com/storage/s3/compatibility
+- Management API docs: https://docs.hippius.com/use/api
 - API: https://api.hippius.com
 - Pricing: https://hippius.com/pricing
 - GitHub: https://github.com/thenervelab

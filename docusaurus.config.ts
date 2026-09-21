@@ -166,7 +166,7 @@ const config: Config = {
           activeBasePath: "/earn",
         },
         {
-          to: "/storage/s3/integration",
+          to: "/storage/s3/advanced",
           label: "Develop",
           position: "left",
           activeBaseRegex: "^/(blockchain|cli|pallets|storage)(/|$)",
@@ -218,6 +218,10 @@ const config: Config = {
             {
               label: "Quickstart",
               to: "/use/quickstart",
+            },
+            {
+              label: "S3 Advanced Usage",
+              to: "/storage/s3/advanced",
             },
             {
               label: "Hipstats",
