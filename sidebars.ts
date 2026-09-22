@@ -58,7 +58,7 @@ const sidebars: SidebarsConfig = {
         "use/hippius-api",
         {
           type: "category",
-          label: "Container Registry",
+          label: "Hub",
           collapsed: true,
           items: [
             "registry/quickstart",
@@ -120,6 +120,7 @@ const sidebars: SidebarsConfig = {
             "use/console/unlock-password",
             "use/console/shared-links",
             "use/console/s3",
+            "use/console/hub",
             "use/console/migrations",
             "use/console/uploads",
             "use/console/virtual-machines",

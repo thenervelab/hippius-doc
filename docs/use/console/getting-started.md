@@ -19,7 +19,8 @@ The **Hippius Console** is the web dashboard for the Hippius distributed network
 <Unordered>
   <li>Store, browse, and manage personal encrypted files with <strong>Drive</strong>.</li>
   <li>Create S3 compatible <strong>buckets</strong> and connect any S3 client.</li>
-  <li>Top up <strong>credits</strong> with a card or with TAO to pay for storage.</li>
+  <li>Push container images and AI models to your <strong>Hub</strong>.</li>
+  <li>Choose a <strong>plan</strong> for each product, and top up your <strong>balance</strong> by card or with TAO.</li>
 </Unordered>
 
 ## Signing In
@@ -57,7 +58,8 @@ The **sidebar on the left** is how you move between sections. It's organised int
 
 <Unordered>
   <li><strong>Storage</strong>: Drive (personal encrypted files) and S3 Buckets.</li>
-  <li><strong>Billing</strong>: credits, top ups, and subscription plans.</li>
+  <li><strong>Hub</strong>: your container images and AI models.</li>
+  <li><strong>Billing</strong>: your balance, top ups, and the plan for each product.</li>
   <li><strong>Help & Support</strong>: open a ticket with our team.</li>
 </Unordered>
 
@@ -72,7 +74,7 @@ The console automatically follows your system's dark or light mode. If you'd pre
 
 <Unordered>
   <li><a href="/use/console/overview">Overview</a>: a tour of your dashboard home page.</li>
-  <li><a href="/use/console/billing">Billing</a>: top up credits first. You'll need a balance to upload files or run VMs.</li>
+  <li><a href="/use/console/billing">Billing</a>: pick a plan and top up your balance. Accounts signed in with an access key need a Drive plan before they can upload.</li>
   <li><a href="/use/console/drive">Drive</a>: upload and manage your personal encrypted files.</li>
   <li><a href="/use/console/s3">S3 Buckets</a>: set up S3 compatible storage and manage access tokens.</li>
 </Unordered>

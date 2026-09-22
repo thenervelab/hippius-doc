@@ -65,7 +65,7 @@ A few things need to be in place before you can create a share:
 
 <Unordered>
   <li><strong>Your session must be unlocked.</strong> Sharing requires your folder key, which is only available after you've entered your unlock password in the current session. If the console asks for your password, enter it and then retry.</li>
-  <li><strong>You need enough credits.</strong> Creating a share uploads a new encrypted copy, which costs storage. The console checks your balance before starting and shows an <strong>Insufficient Credits</strong> dialog if you need to top up first.</li>
+  <li><strong>You need room in your Drive plan.</strong> Creating a share uploads a new encrypted copy of the file, so it needs storage like any other upload.</li>
   <li><strong>The file must be in Drive.</strong> Shared Links only works for files stored in your Hippius Drive.</li>
 </Unordered>
 
@@ -280,5 +280,5 @@ For a **file** share there is no expiry change. The desktop app's **Reshare** co
 <Unordered>
   <li><a href="/use/console/drive">Drive</a>: browse, upload, and manage your encrypted files. This is where you create share links.</li>
   <li><a href="/use/desktop/shared-links">Desktop Shared Links</a>: the desktop version with reshare support and persistent link copying.</li>
-  <li><a href="/use/console/billing">Billing</a>: manage your storage credits and top up before sharing large files.</li>
+  <li><a href="/use/console/billing">Billing</a>: check your Drive plan has room before sharing large files.</li>
 </Unordered>

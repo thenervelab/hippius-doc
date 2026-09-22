@@ -119,13 +119,18 @@ Common failure reasons:
 | **Network error**         | Check your connection and add the file again.                             |
 | **413 Too Large** (Drive) | The file is over 100 MB. Use the desktop app.                             |
 | **Auth error** (S3)       | Your master or sub token has expired or been revoked. Generate a new one. |
-| **Insufficient credits**  | The dialog catches this before the upload starts (see below).             |
+| **Out of storage**        | Your plan is full. The console catches this before the upload starts (see below). |
 
-## Insufficient Credits
+## Out of Storage
 
-If your balance can't cover the upload, an **Insufficient Credits** dialog appears before the queue starts. It shows your current balance, the estimated cost, and a <BgStyledText>Top Up</BgStyledText> button that takes you to Billing.
+Uploads are limited by your plan, not by your balance.
 
-After topping up, start the upload again.
+<Unordered>
+  <li><strong>Drive</strong>: if the upload would go over your Drive plan, <strong>You're out of storage</strong> appears before the queue starts. Click <BgStyledText>View plans</BgStyledText> to upgrade.</li>
+  <li><strong>S3 on a plan</strong>: an upload that would go past your plan's cap is stopped before it starts, with an <BgStyledText>Upgrade</BgStyledText> button. On pay as you go there is no cap.</li>
+</Unordered>
+
+After upgrading, start the upload again. See [Billing](/use/console/billing) for the plans.
 
 ## Limits
 
@@ -142,5 +147,5 @@ After topping up, start the upload again.
   <li><a href="/use/console/drive">Drive</a>: your personal encrypted file storage.</li>
   <li><a href="/use/console/s3">S3 Buckets</a>: S3 compatible bucket storage.</li>
   <li><a href="/use/desktop/getting-started">Hippius Desktop App</a>: uploads beyond the 100 MB console limit.</li>
-  <li><a href="/use/console/billing">Billing</a>: top up credits to keep uploading.</li>
+  <li><a href="/use/console/billing">Billing</a>: move to a bigger plan when you need more space.</li>
 </Unordered>

@@ -213,11 +213,16 @@ The toolbar shows your total **storage used** and **file count** next to the bre
 
 The file list refreshes automatically after uploads and deletes. To manually refresh, for example after another device has synced new files, click the **refresh** icon in the page header.
 
-## Insufficient Credits
+## Storage Plans and Upload Limits
 
-If your credit balance can't cover a planned upload, an **Insufficient Credits** dialog appears before anything starts. It shows your current balance, the estimated cost, and a <BgStyledText>Top Up</BgStyledText> shortcut to the Billing page.
+How much you can upload depends on your **Drive plan**, not on your balance.
 
-After topping up, start the upload again from the same dialog or click <BgStyledText>+ New File</BgStyledText> again.
+<Unordered>
+  <li>If an upload would go over your plan, <strong>You're out of storage</strong> appears. Click <BgStyledText>View plans</BgStyledText> to move to a bigger plan, or free up space and try again.</li>
+  <li>If your account has no plan at all, <BgStyledText>+ New File</BgStyledText> asks you to pick one first, and a banner warns that existing files are deleted after 30 days without a plan.</li>
+</Unordered>
+
+See [Billing → Drive plans](/use/console/billing#drive-plans) for the plans and what happens without one.
 
 
 ## Limits
