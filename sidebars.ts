@@ -95,6 +95,18 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "category",
+          label: "Mobile App",
+          collapsed: true,
+          items: [
+            "use/mobile/mobile-app",
+            "use/mobile/drive",
+            "use/mobile/shared-links",
+            "use/mobile/camera-uploads",
+            "use/mobile/settings",
+          ],
+        },
+        {
+          type: "category",
           label: "Console",
           collapsed: true,
           items: [
