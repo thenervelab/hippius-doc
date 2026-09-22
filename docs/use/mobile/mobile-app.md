@@ -21,7 +21,7 @@ Everything is encrypted on your phone before it leaves it, so what travels to th
 
 ## Installing the app
 
-Hippius is on **Google Play** now (Android). The **App Store** build for iPhone and iPad is coming soon.
+Hippius is on **Google Play** now (Android). The **App Store** build for iPhone is coming soon.
 
 On Android, search for Hippius in Google Play, or open [hippius.com](https://hippius.com) on your phone and use the Google Play download link there.
 
