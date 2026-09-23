@@ -14,7 +14,7 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-The **Settings** page is where you personalise the console and manage your account preferences. You can grab your API token, control which emails Hippius sends you, switch between light and dark mode, change your dashboard layout, adjust table density, and manage your subscription plan.
+The **Settings** page is where you personalise the console and manage your account preferences. You can grab your API token, control which emails Hippius sends you, switch between light and dark mode, change your dashboard layout, adjust table density, and see your Drive plan.
 
 To reach Settings, click the **Hippius** dropdown in the top left of the sidebar, then click **Settings** from the menu that appears.
 
@@ -47,8 +47,8 @@ When the master switch is **off**, no emails are sent regardless of the individu
 | Notification                       | What it sends                                                            |
 | ---------------------------------- | ------------------------------------------------------------------------ |
 | **File processing status updates** | Emails when your uploads finish processing through the Hippius pipeline. |
-| **Low credit balance alerts**      | An email when your balance drops below a set threshold.                  |
-| **Zero balance alerts**            | An email when you run out of credits and uploads are paused.             |
+| **Low balance alerts**             | An email when your balance drops below a set threshold.                  |
+| **Zero balance alerts**            | An email when your balance runs out and plans can no longer renew.       |
 | **Marketing emails & newsletter**  | Product updates, announcements, and occasional offers.                   |
 
 Click any toggle to flip it. The change saves immediately.
@@ -79,13 +79,11 @@ Choose how rows look across all tables in the console. Drive, S3, and Billing ta
 
 A preview row at the top of this section updates live as you switch options, so you can see the difference before committing.
 
-## Current Plan
+## Drive Plan
 
-If you have an active subscription, this section shows your plan name, monthly credit allocation, next billing date, and an action menu (three dots) with options to **Change Plan** or **Cancel Subscription**.
+The **Drive Plan** card shows your Drive plan's name, its price (or **Included** for the free plan), and when it renews.
 
-If you don't have a plan yet, a shortcut card points you to the Billing page where you can subscribe.
-
-You can also cancel directly from the Billing page by finding your active plan card and clicking **Cancel Subscription** there. For a full comparison of plans and instructions for switching or cancelling, see [Billing → Subscription Plans](/use/console/billing#subscription-plans).
+Click <BgStyledText>Change Plan</BgStyledText>, or <BgStyledText>Subscribe to a Plan</BgStyledText> if you don't have one, to open [Billing](/use/console/billing), where every product's plan is managed. For how Drive plans work, see [Billing → Drive plans](/use/console/billing#drive-plans).
 
 ## Delete Account
 
@@ -105,15 +103,15 @@ The first screen of the dialog is not a warning, it is an **inventory**. It read
 | ------------------------ | --------------------------------------------------------------- |
 | **Storage**              | Everything in Drive and in your S3 buckets.                     |
 | **Compute**              | Virtual machines and managed databases.                         |
-| **Registry and network** | Container registry projects and images, and your network peers. |
-| **Subscriptions**        | Any active Drive, S3 or Registry plan, which is cancelled.      |
+| **Hub and network**      | Hub projects and images, and your network peers.                 |
+| **Subscriptions**        | Any active Drive, S3 or Hub plan, which is cancelled.           |
 | **Credits**              | Your remaining balance, which is forfeited, and any saved card. |
 | **Access and account**   | API tokens, S3 keys, SSH keys and every way of signing in.      |
 
 Only groups that hold something get a checkbox to tick. A group that is empty collapses to a single grey line, so you are only asked to confirm what you actually have.
 
 :::note Compute and networking are still in beta
-Confidential Computing — virtual machines and managed databases — and the network rail are not generally available yet. If your account doesn't have them, the **Compute** group simply reads "No VMs or databases" and the network half of **Registry and network** is empty. Nothing to tick, and nothing that can hold your deletion up. Container registry is live and does appear.
+Confidential Computing (virtual machines and managed databases) and the network rail are not generally available yet. If your account doesn't have them, the **Compute** group simply reads "No VMs or databases" and the network half of **Hub and network** is empty. Nothing to tick, and nothing that can hold your deletion up. Hub is live and does appear.
 :::
 
 If you _are_ on the beta and have a **running** VM or managed database, that blocks the request until it is decommissioned. The dialog says so and links straight to the pages where you can shut them down.
@@ -176,7 +174,7 @@ Some deletions are final from the moment they are confirmed. When that is the ca
 ## Where to next
 
 <Unordered>
-  <li><a href="/use/console/billing">Billing</a>: manage credits and subscriptions in detail.</li>
+  <li><a href="/use/console/billing">Billing</a>: your balance and the plan for each product.</li>
   <li><a href="/use/console/support">Help & Support</a>: open a ticket if something isn't working as expected.</li>
   <li><a href="/use/console/getting-started">Getting Started</a>: a refresher on signing in and navigating the console.</li>
 </Unordered>

@@ -1,17 +1,20 @@
 ---
 id: quickstart
-title: Hippius Hub Registry — Quickstart
+title: Hippius Hub Quickstart
 sidebar_label: Quickstart
 slug: /registry
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import Screenshot from '@site/src/components/Screenshot';
 
-# Hippius Hub Registry
+# Hippius Hub
 
-**The AI model registry built for distributed compute.** Hippius Hub is a public registry for AI models and OCI artifacts — pull anything anonymously, push with an account.
+**The AI model registry built for distributed compute.** Hippius Hub is a registry for AI models and OCI artifacts. Pull public repositories anonymously, and push with an account.
+
+:::info Formerly the Container Registry
+In the console this product is now called **Hub**. The endpoint (`registry.hippius.com`) and the `hippius-hub registry …` CLI commands keep their names, so nothing in your scripts needs to change.
+:::
 
 It has two faces:
 
@@ -99,19 +102,16 @@ The Model Registry is a drop-in for [`huggingface_hub`](https://huggingface.co/d
 
 ---
 
-## Hub access from the Console
+## Hub in the Console
 
-Browse, manage, and inspect Hub repos directly from [console.hippius.com](https://console.hippius.com).
+Everything the CLI does to your namespace, you can also see and do in [console.hippius.com](https://console.hippius.com), under **Hub** in the sidebar:
 
-**[Repositories](https://console.hippius.com/dashboard/registry)** — see every container and model you've pushed, with pull counts and last-modified timestamps.
+- **Set up** a namespace without the CLI.
+- **Browse** every container and model you have pushed, with artifact and pull counts, and delete what you no longer need.
+- **Manage** your namespace: switch between public and private, and rotate docker credentials for CI/CD.
+- **Pick a plan** and pay for it from your account balance.
 
-<Screenshot src="/img/registry/registry-repositories.png" alt="Registry repositories view in the Hippius console" dark />
-
-**[Manage](https://console.hippius.com/dashboard/registry/manage)** — pick a subscription plan, toggle namespace public/private access, and rotate docker credentials for CI/CD.
-
-<Screenshot src="/img/registry/manage-registry.png" alt="Manage registry namespace, access level, and docker credentials" dark />
-
-Pricing details are available at [hippius.com/hippius-hub](https://hippius.com/hippius-hub).
+The full walkthrough is on the [Hub console page](/use/console/hub). Pricing is also listed at [hippius.com/hippius-hub](https://hippius.com/hippius-hub).
 
 ---
 

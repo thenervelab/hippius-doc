@@ -204,5 +204,5 @@ In the Send dialog, open the address book from the recipient field to see your s
 <Unordered>
   <li><a href="/use/console/staking">Staking</a>: put your hAlpha to work and earn rewards.</li>
   <li><a href="/use/console/bridge">Bridge</a>: move tokens between Hippius and Bittensor.</li>
-  <li><a href="/use/console/billing">Billing</a>: convert hAlpha or fiat into platform credits.</li>
+  <li><a href="/use/console/billing">Billing</a>: top up your balance and pay for plans.</li>
 </Unordered>

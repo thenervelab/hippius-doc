@@ -14,7 +14,7 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-The **Overview** is your console home page. Every time you sign in, this is where you land. It gives you a live snapshot of your credits, storage, and recent activity. Depending on your view, it also lets you take action on any of your services without navigating away.
+The **Overview** is your console home page. Every time you sign in, this is where you land. It shows the plan behind each product, how full each one is, your balance, and your latest files, so you can see at a glance whether anything needs attention.
 
 You can switch between **Normal** and **Pro** view at any time from [Settings](/use/console/settings).
 
@@ -22,7 +22,9 @@ You can switch between **Normal** and **Pro** view at any time from [Settings](/
 
 ## Normal View
 
-Normal is a clean, focused home base. It shows you the essentials at a glance without overwhelming you.
+Normal is the simpler view, built around your Drive: your latest uploads, your balance and how much storage you use.
+
+Two shortcut buttons sit in the top right: <BgStyledText>+ Top up</BgStyledText>, which opens [Billing](/use/console/billing), and <BgStyledText>+ New File</BgStyledText>, which starts an upload.
 
 Three panels sit across the top of the page:
 
@@ -38,27 +40,31 @@ Below the panels, the **Files** section shows all your Drive folders in a search
 
 ## Pro View
 
-Pro turns the overview into a full control center. You can upload files, create S3 buckets, and top up credits, all without leaving the home page.
+Pro view is for when you use more than one product. It puts everything on one page: what plan you're on for each product, how full your storage is, and what's in each one.
 
-Two shortcut buttons sit in the top right: <BgStyledText>+ Top up Credits</BgStyledText> and <BgStyledText>+ New File</BgStyledText>.
+<Screenshot src="/img/console/overview/pro.png" alt="Pro view" dark raw />
 
-The three panels across the top work the same as Normal, but the credit usage chart is always expanded and visible rather than hidden behind the graph icon.
+### Your plans
 
-Below the panels, a **Storage Overview** shows your Drive and S3 Buckets side by side:
+The top row shows your plan for Drive, S3 and Hub, plus your balance. When there's a better plan for you, for example because you're on a free plan or paying for S3 by the hour, you'll see an <BgStyledText>Upgrade</BgStyledText> button next to it. Click any product to open its plans, or <BgStyledText>+ Top up</BgStyledText> to add to your balance. [Billing](/use/console/billing) explains how plans and your balance fit together.
 
-<Unordered>
-  <li><strong>Files</strong>: your total Drive storage size and file count, a table of your folders, and a <BgStyledText>+ New File</BgStyledText> button to start an upload right away.</li>
-  <li><strong>S3 Buckets</strong>: your total bucket count and object count, a table of your buckets, and a <BgStyledText>+ Create Bucket</BgStyledText> button.</li>
-</Unordered>
+### How full your storage is
 
-At the bottom of the page:
+Drive and S3 each get a storage card showing how much you've stored against the size of your plan. The bar turns amber when you pass 80% and red at 95%, which is a good time to upgrade or tidy up. S3 on pay as you go has no limit, so its card just shows what you've used.
 
-<Unordered>
-  <li><strong>File Storage Usage</strong>: a bar chart breaking down your Drive storage by file type: Images, Videos, Docs, and Others. Useful for seeing what's taking up the most space.</li>
-  <li><strong>Last Uploads</strong>: your most recently uploaded files with timestamps.</li>
-</Unordered>
+When moving to an S3 plan would save you money, the card tells you how much, for example **Save 22%**. See [S3 plans](/use/console/billing#s3-plans-and-pay-as-you-go).
 
-<Screenshot src="/img/console/overview/pro.png" alt="Pro view" dark />
+:::warning No Drive plan means no uploads
+Without a Drive plan you can't upload anything new, and files already in your Drive are permanently deleted after **30 days**. The Drive card will say so and offer a plan. See [Drive plans](/use/console/billing#drive-plans).
+:::
+
+Shared drives that someone else owns don't count towards your Drive storage. Their owner pays for them.
+
+### What's in each product
+
+Below the storage cards, your Drive folders and S3 buckets sit side by side, so you can jump into either or start an upload. The search bar above them searches everything at once, or just one product.
+
+Hub and Virtual Machines get the last row: how much you've stored in Hub and how many repositories you have, and how many virtual machines you're running. Virtual machines aren't generally available yet, so for most accounts that card says they're coming soon.
 
 ## Service Status Banners
 
@@ -75,9 +81,10 @@ A banner can be dismissed once you have read it. It comes back if the situation 
 <Unordered>
   <li><a href="/use/console/drive">Drive</a>: upload and manage your personal encrypted files.</li>
   <li><a href="/use/console/s3">S3 Buckets</a>: manage your S3 compatible buckets and access tokens.</li>
+  <li><a href="/use/console/hub">Hub</a>: your container images and AI models.</li>
   <li><a href="/use/console/wallet">Wallet</a>: check your hAlpha balance, send and receive tokens.</li>
   <li><a href="/use/console/staking">Staking</a>: stake hAlpha to earn rewards.</li>
-  <li><a href="/use/console/billing">Billing</a>: top up credits to keep your services running.</li>
+  <li><a href="/use/console/billing">Billing</a>: your plans, your balance, and how to top it up.</li>
   <li><a href="/use/console/referrals">Referrals</a>: invite people to Hippius and earn commission on what they spend.</li>
   <li><a href="/use/console/settings">Settings</a>: switch between Normal and Pro view.</li>
 </Unordered>

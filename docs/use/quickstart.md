@@ -18,16 +18,16 @@ Hippius S3 is a distributed, S3-compatible storage service. This guide takes you
 
 No wallet, seed phrase, or browser extension required.
 
-## Add Credits
+## Top Up Your Balance
+
+S3 starts on **pay as you go**: $6 per TB per month, charged hourly from your account balance on what you store. So before you upload, add some money to your balance.
 
 <Ordered>
-  <li>In the console, go to <BgStyledText>Billing</BgStyledText></li>
-  <li>Add credits using <strong>credit card</strong> (Stripe) or <strong>TAO</strong></li>
+  <li>In the console, go to <BgStyledText>Billing</BgStyledText>.</li>
+  <li>Click <BgStyledText>+ Top up</BgStyledText> and pay by <strong>card</strong> (Stripe) or with <strong>TAO</strong>.</li>
 </Ordered>
 
-Credits are consumed as you store and retrieve files. See [pricing](https://hippius.com/pricing).
-
-<Screenshot src="/img/desktop/billing-overview.png" alt="Billing screen" dark />
+Storing a lot? A monthly S3 plan covers a block of storage for a flat price, up to 22% cheaper per TB. See [S3 plans and pay as you go](/use/console/billing#s3-plans-and-pay-as-you-go).
 
 ## Create S3 Credentials
 
