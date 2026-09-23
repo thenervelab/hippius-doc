@@ -42,10 +42,7 @@ Below the panels, the **Files** section shows all your Drive folders in a search
 
 Pro turns the Overview into a control center for every product: one row for your plans, one for your storage, then each product with its own figures and a table of what is in it.
 
-{/* Screenshot needed: the current Pro view (header plan cells, Drive and S3
-    storage cards, Hub and VM row). Replace /img/console/overview/pro.png and
-    pro-dark.png, which show the retired credits chart. */}
-<Screenshot src="/img/console/overview/pro.png" alt="Pro view" dark />
+<Screenshot src="/img/console/overview/pro.png" alt="Pro view" dark raw />
 
 ### Your plans and balance
 

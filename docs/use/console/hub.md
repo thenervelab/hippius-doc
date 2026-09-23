@@ -24,10 +24,7 @@ The console renamed the Container Registry to **Hub**. Nothing about how you pus
 
 This page covers the console side. For pushing and pulling from your terminal, see the [Hub Quickstart](/registry), [Push](/registry/push) and [Pull](/registry/pull).
 
-{/* Screenshot needed: static/img/console/hub/overview.png (+ overview-dark.png).
-    Capture /dashboard/registry with at least one repository.
-<Screenshot src="/img/console/hub/overview.png" alt="The Hub page in the Hippius Console" dark />
-*/}
+<Screenshot src="/img/console/hub/overview.png" alt="The Hub page in the Hippius Console" dark raw />
 
 ## Set up your Hub
 
@@ -53,8 +50,9 @@ If the console says a name is taken and you think it is yours (for example, you 
 You can also create a namespace from your terminal with `hippius-hub registry provision <namespace> --docker-login`. See [Push](/registry/push#provision-a-namespace).
 
 {/* Screenshot needed: static/img/console/hub/setup.png (+ setup-dark.png).
-    Capture the "Get started with the Hub" screen with a name typed and "is available." showing.
-<Screenshot src="/img/console/hub/setup.png" alt="Setting up a Hub namespace" dark />
+    Capture the "Get started with the Hub" screen with a name typed and "is available." showing
+    on an account that has no namespace yet.
+<Screenshot src="/img/console/hub/setup.png" alt="Setting up a Hub namespace" dark raw />
 */}
 
 ## The Hub page
@@ -99,10 +97,7 @@ A deleted repository or artifact cannot be restored. Anything that pulls it by n
 
 Click <BgStyledText>Manage</BgStyledText> beside the Repositories table to open **Manage Hub**. It has four sections.
 
-{/* Screenshot needed: static/img/console/hub/manage.png (+ manage-dark.png).
-    Capture /dashboard/registry/manage.
-<Screenshot src="/img/console/hub/manage.png" alt="Manage Hub" dark />
-*/}
+<Screenshot src="/img/console/hub/manage.png" alt="Manage Hub" dark raw />
 
 ### Subscription plan
 
@@ -167,10 +162,7 @@ Each plan card shows:
 
 Plans are loaded live, so the names, sizes and prices in the console are always the current ones. Pricing is also listed at [hippius.com/hippius-hub](https://hippius.com/hippius-hub).
 
-{/* Screenshot needed: static/img/console/hub/plans.png (+ plans-dark.png).
-    Capture /dashboard/registry/plans.
-<Screenshot src="/img/console/hub/plans.png" alt="Hub plans" dark />
-*/}
+<Screenshot src="/img/console/hub/plans.png" alt="Hub plans" dark raw />
 
 ### Subscribing
 

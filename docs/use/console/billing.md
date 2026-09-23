@@ -22,9 +22,7 @@ Reach it from the sidebar at <BgStyledIconWithText text="Billing" icon="Billing"
 Your **balance** is money on your account, in dollars (1 credit = $1). A **plan** is what gives a product its storage. Topping up does not give you more space on its own. Your balance pays for plans when they renew, and for anything you use by the hour, such as S3 on pay as you go.
 :::
 
-{/* Screenshot needed: static/img/console/billing/overview.png (+ overview-dark.png).
-    Capture /dashboard/billing on an account with a Drive plan and S3 on pay as you go.
-    The current overview.png shows the retired credits page. */}
+<Screenshot src="/img/console/billing/overview.png" alt="Billing page with balance, services and plans" dark raw />
 
 ## What is on the page
 
@@ -145,8 +143,7 @@ Plans are loaded live, so the console always shows the current catalogue. At the
 
 Plus, Max and Scale will also include a **shared team drive**. It is marked as coming soon on the plan cards.
 
-{/* Screenshot needed: static/img/console/billing/drive-plans.png (+ drive-plans-dark.png).
-    Capture /dashboard/storage/drive/plans. */}
+<Screenshot src="/img/console/billing/drive-plans.png" alt="Drive storage plans" dark raw />
 
 ### Who gets the free plan
 
@@ -209,8 +206,7 @@ A plan bought through the **App Store** or **Google Play** shows on Billing like
 
 S3 works two ways: **pay as you go**, where you pay for what you store by the hour, or a **plan**, where you pay a flat monthly price for a block of storage. Open the plans from the **S3** card on Billing, or from <BgStyledText>Upgrade</BgStyledText> on the S3 page.
 
-{/* Screenshot needed: static/img/console/billing/s3-plans.png (+ s3-plans-dark.png).
-    Capture /dashboard/storage/s3/plans on a pay as you go account. */}
+<Screenshot src="/img/console/billing/s3-plans.png" alt="S3 storage plans and pay as you go" dark raw />
 
 ### Pay as you go
 
@@ -275,8 +271,7 @@ Free plans are not listed, because there is nothing to charge.
 
 The **Transaction history** tab lists every top up, plan charge and renewal, newest first. Plan charges are labelled **Drive ·** or **S3 ·** so you can tell them apart, and each row shows how it was paid: **Credit Card**, **TAO** or **Balance**.
 
-{/* Screenshot needed: static/img/console/billing/tx-history.png (+ -dark).
-    The current one shows the retired table. Capture the Transaction history tab. */}
+<Screenshot src="/img/console/billing/tx-history.png" alt="Billing transaction history" dark raw />
 
 ## When your balance runs out
 
