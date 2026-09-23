@@ -49,11 +49,7 @@ If the console says a name is taken and you think it is yours (for example, you 
 
 You can also create a namespace from your terminal with `hippius-hub registry provision <namespace> --docker-login`. See [Push](/registry/push#provision-a-namespace).
 
-{/* Screenshot needed: static/img/console/hub/setup.png (+ setup-dark.png).
-    Capture the "Get started with the Hub" screen with a name typed and "is available." showing
-    on an account that has no namespace yet.
 <Screenshot src="/img/console/hub/setup.png" alt="Setting up a Hub namespace" dark raw />
-*/}
 
 ## The Hub page
 
