@@ -22,7 +22,7 @@ You can switch between **Normal** and **Pro** view at any time from [Settings](/
 
 ## Normal View
 
-Normal is a clean, focused home base. It shows you the essentials at a glance without overwhelming you.
+Normal is the simpler view, built around your Drive: your latest uploads, your balance and how much storage you use.
 
 Two shortcut buttons sit in the top right: <BgStyledText>+ Top up</BgStyledText>, which opens [Billing](/use/console/billing), and <BgStyledText>+ New File</BgStyledText>, which starts an upload.
 
@@ -40,69 +40,31 @@ Below the panels, the **Files** section shows all your Drive folders in a search
 
 ## Pro View
 
-Pro turns the Overview into a control center for every product: one row for your plans, one for your storage, then each product with its own figures and a table of what is in it.
+Pro view is for when you use more than one product. It puts everything on one page: what plan you're on for each product, how full your storage is, and what's in each one.
 
 <Screenshot src="/img/console/overview/pro.png" alt="Pro view" dark raw />
 
-### Your plans and balance
+### Your plans
 
-The row at the top has one cell per product and one for your balance:
+The top row shows your plan for Drive, S3 and Hub, plus your balance. When there's a better plan for you, for example because you're on a free plan or paying for S3 by the hour, you'll see an <BgStyledText>Upgrade</BgStyledText> button next to it. Click any product to open its plans, or <BgStyledText>+ Top up</BgStyledText> to add to your balance. [Billing](/use/console/billing) explains how plans and your balance fit together.
 
-| Cell        | What it shows                                                                                                 |
-| ----------- | ------------------------------------------------------------------------------------------------------------- |
-| **Drive**   | Your Drive plan and its storage, for example **Starter · 500 GB**.                                             |
-| **S3**      | Your S3 plan, or **Pay as you go** if you pay for S3 by the hour.                                              |
-| **Hub**     | Your Hub plan and its storage, for example **Free · 25 GB**.                                                   |
-| **Balance** | Your credit balance in dollars, with a <BgStyledText>+ Top up</BgStyledText> button that opens [Billing](/use/console/billing). |
+### How full your storage is
 
-A cell shows an <BgStyledText>Upgrade</BgStyledText> button when there is a better plan to move to, such as when you are on a free plan or paying for S3 by the hour. Click any cell to open that product's plans.
+Drive and S3 each get a storage card showing how much you've stored against the size of your plan. The bar turns amber when you pass 80% and red at 95%, which is a good time to upgrade or tidy up. S3 on pay as you go has no limit, so its card just shows what you've used.
 
-### Storage cards
-
-Below the plans, **Drive storage** and **S3 storage** each get a card that answers three questions: how full it is, against what, and what to do about it.
-
-<Unordered>
-  <li><strong>How much you have stored</strong>, and the size of your plan, for example <strong>266.08 GB of 500 GB used</strong>.</li>
-  <li>A <strong>bar</strong> and a <strong>percentage</strong>. The bar turns amber at 80% and red at 95%. S3 on pay as you go has no ceiling, so it shows only what you have used, with an <strong>Hourly, no commitment</strong> tag.</li>
-  <li>Your <strong>plan name</strong> and how much space is <strong>free</strong>.</li>
-  <li>One button, which changes with your situation:</li>
-</Unordered>
-
-| Button                           | When you see it                                                                                   |
-| -------------------------------- | ------------------------------------------------------------------------------------------------- |
-| <BgStyledText>Subscribe</BgStyledText> | You have no plan for this product.                                                           |
-| <BgStyledText>Upgrade</BgStyledText>   | You are 80% full or more, on S3 pay as you go, or a cheaper plan per TB exists.              |
-| <BgStyledText>Manage</BgStyledText>    | Your plan has room and there is nothing better to move to.                                   |
-
-When upgrading would save you money, the S3 button carries a green badge with the saving, such as **Save 22%**. That figure compares what you pay per TB today with the cheapest plan per TB. See [Billing](/use/console/billing#s3-plans-and-pay-as-you-go).
+When moving to an S3 plan would save you money, the card tells you how much, for example **Save 22%**. See [S3 plans](/use/console/billing#s3-plans-and-pay-as-you-go).
 
 :::warning No Drive plan means no uploads
-Without a Drive plan the Drive card reads **You don't have a subscription plan**. Nothing new can be uploaded, and files already in your Drive are permanently deleted after **30 days** without a plan. The card shows how much you have uploaded and a <BgStyledText>Subscribe</BgStyledText> button. See [Billing](/use/console/billing#drive-plans).
+Without a Drive plan you can't upload anything new, and files already in your Drive are permanently deleted after **30 days**. The Drive card will say so and offer a plan. See [Drive plans](/use/console/billing#drive-plans).
 :::
 
-Drive storage counts only your own Drive. Storage in a shared drive someone else owns is paid for by its owner, so it never fills your bar.
+Shared drives that someone else owns don't count towards your Drive storage. Their owner pays for them.
 
-### Storage Overview
+### What's in each product
 
-The **Storage Overview** shows your Drive and S3 Buckets side by side:
+Below the storage cards, your Drive folders and S3 buckets sit side by side, so you can jump into either or start an upload. The search bar above them searches everything at once, or just one product.
 
-<Unordered>
-  <li><strong>Drive</strong>: your storage used and file count, a table of your folders, and <BgStyledText>+ New Folder</BgStyledText> and <BgStyledText>+ New File</BgStyledText> buttons.</li>
-  <li><strong>S3 Buckets</strong>: your storage used and object count, a table of your buckets, and a <BgStyledText>+ Create Bucket</BgStyledText> button.</li>
-</Unordered>
-
-Use the search bar and the **Global / Drive / S3 / VMs** switch above it to search across everything or one product.
-
-### Hub and Virtual Machines
-
-The last row gives Hub and Virtual Machines the same treatment:
-
-<Unordered>
-  <li><strong>Hub</strong>: your <strong>Storage Used</strong> and number of <strong>Repositories</strong>, and your most recent repositories. Before you have a namespace it shows <BgStyledText>Set up Hub</BgStyledText>. See <a href="/use/console/hub">Hub</a>.</li>
-  <li><strong>Virtual Machines</strong>: how many <strong>VMs</strong> you have and how many are <strong>Running</strong>. Virtual machines are not generally available yet, so for most accounts this reads <strong>0</strong> and says they are coming soon.</li>
-</Unordered>
-
-Both show **0** rather than disappearing when you have nothing there yet.
+Hub and Virtual Machines get the last row: how much you've stored in Hub and how many repositories you have, and how many virtual machines you're running. Virtual machines aren't generally available yet, so for most accounts that card says they're coming soon.
 
 ## Service Status Banners
 
