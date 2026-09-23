@@ -42,7 +42,13 @@ So if the console finds existing data, it does not create a seed. It asks for yo
 
 ## If You Forget Your Password
 
-Choose <BgStyledText>Restore access</BgStyledText> and enter your 12 word recovery seed. The console verifies it against your existing files and then lets you set a new unlock password.
+<Ordered>
+  <li>In the unlock prompt, click <BgStyledText>Forgot your password?</BgStyledText></li>
+  <li>Click <BgStyledText>Use your mnemonic seed</BgStyledText>. The <strong>Restore Access</strong> dialog opens.</li>
+  <li>Enter your 12 word recovery seed and choose a new unlock password.</li>
+</Ordered>
+
+The console verifies the seed against your existing files before it saves the new password.
 
 <Screenshot src="/img/console/unlock-password/restore.png" alt="Restoring access with a recovery seed" dark />
 
