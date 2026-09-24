@@ -82,3 +82,35 @@
 .darkFrame .frameImg {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
 }
+
+/* Phone screenshots (`phone`, the mobile app docs). Desktop keeps the
+   landscape panel above. Below Docusaurus's mobile breakpoint that panel
+   would shrink a portrait screenshot to a thumbnail, so here the panel wraps
+   the screenshot instead: slim side padding, and a height set by the image
+   and capped to the viewport. */
+@media (max-width: 996px) {
+  .frame.phoneFrame {
+    aspect-ratio: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6% 5%;
+  }
+
+  .frame.phoneFrame .frameImg {
+    position: static;
+    transform: none;
+    max-width: 100%;
+    max-height: 60vh;
+    max-height: 60svh;
+  }
+
+  /* The panel is no longer 668:350, so stretching the grid SVG to 100% 100%
+     would distort it. `cover` scales it uniformly instead; its own rounded
+     corners get cropped away, so the panel rounds itself. */
+  .lightFrame.phoneFrame {
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+  }
+}
