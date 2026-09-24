@@ -105,6 +105,7 @@ const sidebars: SidebarsConfig = {
             "use/mobile/permissions",
             "use/mobile/plans",
             "use/mobile/settings",
+            "use/mobile/troubleshooting",
           ],
         },
         {
