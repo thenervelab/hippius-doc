@@ -102,6 +102,7 @@ const sidebars: SidebarsConfig = {
             "use/mobile/drive",
             "use/mobile/shared-links",
             "use/mobile/camera-uploads",
+            "use/mobile/permissions",
             "use/mobile/settings",
           ],
         },
