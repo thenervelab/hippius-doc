@@ -3,7 +3,7 @@ id: settings
 title: Settings
 sidebar_label: Settings
 slug: /use/mobile/settings
-description: Back up your mnemonic seed, set or change your unlock password, lock the app behind your fingerprint, control when uploads run, switch between light and dark, and delete your account.
+description: Every setting in the Hippius mobile app. Camera Uploads, biometric lock, your mnemonic seed and unlock password, Wi-Fi only uploads, delete confirmation, backup notifications, appearance, updates, cache, your account, and deleting it.
 ---
 
 import Unordered from '@site/src/components/Unordered';
@@ -13,13 +13,78 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-Everything you can change about how the app behaves on this phone.
+Everything you can change about how the app behaves on this phone. Open it with the **gear** button at the top right of Overview or Drive.
 
-<Screenshot src="/img/mobile/settings.png" alt="The Settings screen" dark raw />
+<Screenshot src="/img/mobile/settings.png" alt="The Settings screen" dark raw phone />
+
+## What's on the Settings screen {#settings-at-a-glance}
+
+The screen opens with two cards, followed by your preferences, then help and app information, and finally two buttons at the bottom.
+
+| Setting                     | What it does                                                            | Default |
+| --------------------------- | ----------------------------------------------------------------------- | ------- |
+| **Account** card            | Opens your [Account](#your-account) screen.                             |         |
+| **Storage** card            | Opens the [Storage](#storage) breakdown.                                |         |
+| **Camera Uploads**          | Opens the Camera Uploads settings. The row shows **On** or **Off**.     | Off     |
+| **Biometric lock**          | Asks for your fingerprint or face before the app opens.                 | Off     |
+| **Security**                | Back up your mnemonic seed, and set or change your unlock password.     |         |
+| **Upload on Wi-Fi only**    | Pauses all uploads, including Camera Uploads, on mobile data.           | Off     |
+| **Confirm before deleting** | Asks every time before something is deleted.                            | On      |
+| **Backup notifications**    | Tells you when a Camera Uploads backup finishes.                        | On      |
+| **Appearance**              | Light, dark, or following your phone. The row shows your choice.        | System  |
+| **Contact support**         | Opens Hippius support in the console.                                   |         |
+| **App version**             | The version installed on this phone.                                    |         |
+| **Check for Updates**       | Checks whether a newer version of the app is available.                 |         |
+| **Terms of Service**        | Opens our terms in your browser.                                        |         |
+| **Privacy Policy**          | Opens our privacy policy in your browser.                               |         |
+| **Clear cache data**        | Frees the space used by files you have opened.                          |         |
+| **Logout**                  | Signs you out of this phone.                                            |         |
+
+Settings apply to this phone only. Your files, your plan and your unlock password belong to your account and are the same everywhere you sign in.
+
+## Camera Uploads {#camera-uploads}
+
+The **Camera Uploads** row opens the screen where you choose which photos are backed up, the Drive folder they go to, whether videos are included, and where you turn backup on or off. The row reads **On** or **Off** so you can see at a glance whether backup is running.
+
+Everything on that screen is covered in [Camera Uploads](/use/mobile/camera-uploads#changing-settings-later).
 
 ## Biometric lock
 
 **Biometric lock** asks for your fingerprint or face before the app opens. It protects the app on this phone, which is worth having if other people handle it.
+
+<Ordered>
+  <li>Turn on <strong>Biometric lock</strong>.</li>
+  <li>Your phone asks you to confirm it is you. The lock only turns on once that check passes, so you can't lock yourself out with a sensor that isn't working.</li>
+</Ordered>
+
+From then on, the app asks for your fingerprint or face every time it starts. It also locks whenever you leave it: when you come back, it shows **Hippius is locked**. Tap <BgStyledText>Unlock</BgStyledText> and confirm to carry on. Turning the lock off never asks for anything.
+
+Backups and uploads keep going while the app is locked. The lock only covers what is on screen.
+
+The lock is separate from your [unlock password](#unlock-password). It only decides who can open the app on this phone, and it has nothing to do with how your files are encrypted.
+
+### On Android {#biometric-lock-android}
+
+The line under the switch names what your phone uses, usually **Use fingerprint to open Hippius app**. The lock works with the fingerprint or face unlock you have set up in your phone's security settings.
+
+If turning it on doesn't work, the app tells you why:
+
+<Unordered>
+  <li><strong>Nothing is set up yet.</strong> Add a fingerprint in your phone's settings first. The message offers <BgStyledText>Open Settings</BgStyledText>.</li>
+  <li><strong>Too many failed attempts.</strong> Your phone has locked the sensor for a while. Choose <BgStyledText>Use passcode</BgStyledText> and confirm your phone's PIN, pattern or password to unlock it.</li>
+</Unordered>
+
+{/* iOS START: hidden until the App Store release. To show it again, close this comment at the end of this line and reopen it at the start of the iOS END line.
+
+### On iPhone {#biometric-lock-iphone}
+
+The line under the switch reads **Use Face ID to open Hippius app**.
+
+The first time you turn it on, iOS asks whether Hippius may use Face ID. Tap **OK**. If you chose **Don't Allow**, the app says **Face ID unavailable** and offers <BgStyledText>Open Settings</BgStyledText>. Turn on **Face ID** under **Settings → Hippius**, then try again.
+
+After too many failed attempts, iOS locks Face ID for a while. Choose <BgStyledText>Use passcode</BgStyledText> and enter your iPhone passcode to unlock it.
+
+iOS END */}
 
 ## Security
 
@@ -30,7 +95,7 @@ Open <BgStyledText>Settings</BgStyledText> → <BgStyledText>Security</BgStyledT
   <li>Your <strong>unlock password</strong>, which lets you open your files on a new phone without typing the seed.</li>
 </Unordered>
 
-<Screenshot src="/img/mobile/settings/security.png" alt="The Security screen" dark raw />
+<Screenshot src="/img/mobile/settings/security.png" alt="The Security screen" dark raw phone />
 
 ### Mnemonic Seed {#mnemonic-seed}
 
@@ -49,7 +114,7 @@ Every file you upload is encrypted on your phone before it leaves it. The key th
   <li>When you are done, tap <BgStyledText>I Have Written It Down</BgStyledText>.</li>
 </Ordered>
 
-<Screenshot src="/img/mobile/settings/mnemonic-backup-tips.png" alt="Secure Your Mnemonic Seed step with handling tips" dark raw />
+<Screenshot src="/img/mobile/settings/mnemonic-backup-tips.png" alt="Secure Your Mnemonic Seed step with handling tips" dark raw phone />
 
 Two more options on the same screen:
 
@@ -83,6 +148,10 @@ When you are asked for it:
 | Web console | Asked whenever you preview, download, or upload a file. |
 | Desktop app | Asked when you sign in on a new computer. |
 
+:::tip Camera Uploads doesn't wait for it
+Camera Uploads backs up your photos without asking for an unlock password. Set one anyway, so you can open those photos in the web console and the desktop app too.
+:::
+
 #### Setting Your Unlock Password {#setting-your-unlock-password}
 
 If your account has no unlock password yet, the app asks you to create one the first time you upload a file. You can also do it any time from Security, where the row reads <BgStyledText>Set Unlock Password</BgStyledText>.
@@ -100,7 +169,7 @@ Before saving, the app checks whether your account already has an unlock passwor
 
 After you sign in on a phone that has not seen your account before, the app shows <strong>Unlock Your Account</strong>. Enter your unlock password and tap <BgStyledText>Unlock</BgStyledText>. The app fetches your encrypted seed copy, opens it, and you land on your files. You are not asked again on this phone until you sign out.
 
-<Screenshot src="/img/mobile/unlock-your-account.png" alt="Unlock Your Account sheet" dark raw />
+<Screenshot src="/img/mobile/unlock-your-account.png" alt="Unlock Your Account sheet" dark raw phone />
 
 #### Changing Your Unlock Password {#changing-your-unlock-password}
 
@@ -111,7 +180,7 @@ After you sign in on a phone that has not seen your account before, the app show
   <li>Tap <BgStyledText>Change Password</BgStyledText>.</li>
 </Ordered>
 
-<Screenshot src="/img/mobile/settings/change-unlock-password.png" alt="Change Unlock Password sheet" dark raw />
+<Screenshot src="/img/mobile/settings/change-unlock-password.png" alt="Change Unlock Password sheet" dark raw phone />
 
 The app opens your encrypted seed copy with the current password, re-encrypts the same seed with the new password, and replaces the copy. Your seed does not change and your files are not re-encrypted, so nothing is re-uploaded. Use the new password from now on, on every device.
 
@@ -134,7 +203,7 @@ The <strong>Restore Access</strong> sheet asks for your seed and a new password:
   <li>Tap <BgStyledText>Restore and Set Password</BgStyledText>.</li>
 </Ordered>
 
-<Screenshot src="/img/mobile/restore-access.png" alt="Restore Access sheet" dark raw />
+<Screenshot src="/img/mobile/restore-access.png" alt="Restore Access sheet" dark raw phone />
 
 The app checks that the seed belongs to the account you are signed in to before anything is replaced. A seed for a different account is rejected and your existing backup is not touched. If it matches, the app creates a new encrypted copy of the same seed, protected by your new password. Your files are not re-encrypted, and the seed never leaves your phone.
 
@@ -146,37 +215,92 @@ Hippius never sees the password or the seed, so neither can be recovered for you
 
 ## Uploads
 
-<Unordered>
-  <li><strong>Upload on Wi-Fi only</strong> pauses uploads and Camera Uploads on mobile data.</li>
-  <li><strong>Backup notifications</strong> tells you when a camera backup finishes.</li>
-  <li><strong>Confirm before deleting</strong> asks every time before a file goes. On by default, since deleting is permanent.</li>
-</Unordered>
+Three switches control how uploads and deletes behave on this phone.
+
+### Upload on Wi-Fi only {#wi-fi-only}
+
+Off by default, so uploads use Wi-Fi or mobile data, whichever you are on.
+
+Turn it on and everything that uploads waits for Wi-Fi: files you upload yourself and Camera Uploads. On mobile data they pause, and they carry on by themselves once you are back on Wi-Fi.
+
+If you try to upload, turn on Camera Uploads, resume or retry while you are on mobile data, the app stops and tells you why, for example **Uploads need Wi-Fi** or **Camera Backup needs Wi-Fi**. Connect to Wi-Fi, or tap <BgStyledText>Open Settings</BgStyledText> and turn the switch off.
+
+### Confirm before deleting {#confirm-before-deleting}
+
+On by default. Before anything is deleted, the app asks, for example, **Are you sure you want to delete "Holiday.jpg"?**, and reminds you that it can't be undone. Tap <BgStyledText>Delete</BgStyledText> to go ahead or <BgStyledText>Cancel</BgStyledText> to keep it.
+
+Turn it off if you would rather delete without the extra step. Deleting is permanent either way. There is no bin to restore from.
+
+### Backup notifications {#backup-notifications}
+
+On by default. When a Camera Uploads backup finishes, the app tells you, both in the app's notifications and on your phone. Turn it off if you would rather check on backups yourself.
+
+This switch doesn't affect the quiet notification Android shows while a backup is running in the background. That one is required by Android and goes away when the backup is done.
+
+Your phone also has to allow Hippius to send notifications. The app asks after you first sign in, and on Android asks again when you turn on Camera Uploads if you haven't allowed it yet. See [Permissions](/use/mobile/permissions#notifications).
 
 ## Appearance
 
-Open <BgStyledText>Settings</BgStyledText> → <BgStyledText>Appearance</BgStyledText> to follow your phone's theme, or pin the app to light or dark.
+Open <BgStyledText>Settings</BgStyledText> → <BgStyledText>Appearance</BgStyledText> and choose a **Theme**:
+
+<Unordered>
+  <li><strong>System</strong> follows your phone's light or dark setting. This is the default.</li>
+  <li><strong>Light</strong> keeps the app light.</li>
+  <li><strong>Dark</strong> keeps the app dark.</li>
+</Unordered>
+
+The change applies straight away, and the Appearance row shows which one you picked.
+
+## Help and app information {#help-and-app-information}
+
+<Unordered>
+  <li><strong>Contact support</strong> opens Hippius support in the console, in your browser. Sign in there with the same account to open a ticket. See <a href="/use/console/support">Help &amp; Support</a>.</li>
+  <li><strong>App version</strong> shows the version installed on this phone. Support may ask you for it.</li>
+  <li><strong>Check for Updates</strong> checks for a newer version straight away. If there is one, you can install it from there. Otherwise it says <strong>You're up to date</strong>. The app also checks by itself when it opens, but only this button tells you when you are already on the latest version. See <a href="/use/mobile/getting-started#updates">Keeping the app up to date</a>.</li>
+  <li><strong>Terms of Service</strong> and <strong>Privacy Policy</strong> open in your browser.</li>
+</Unordered>
+
+## Clearing the cache {#clear-cache}
+
+When you open a photo, video or PDF, the app keeps a decrypted copy on your phone so it opens instantly next time. The <BgStyledText>Clear cache data</BgStyledText> button at the bottom of Settings shows how much space those copies use.
+
+Tap it, then <BgStyledText>Clear</BgStyledText> to confirm. This frees the space on your phone. Your files in Drive are not touched, and anything you open again is simply downloaded again. Uploads in progress are not affected.
 
 ## Storage
 
-From Overview, tap the **Storage** card (or open Storage from navigation) to see what is using your space, broken down by kind of file, against what your plan gives you. A quick way to see whether it is photos or videos filling it up.
+From Overview, tap the **Storage** card, or the same card at the top of Settings, to see what is using your space. The **Storage** screen shows:
+
+<Unordered>
+  <li>How much you have used out of your plan's total.</li>
+  <li>How much of it goes to <strong>Videos</strong>, <strong>Images</strong>, <strong>Files</strong> and <strong>Others</strong>. Tap a row to highlight it in the chart.</li>
+  <li><strong>Upload sources</strong>: how many of your files were added from the <strong>Desktop</strong> app, the <strong>Console</strong> and <strong>Mobile</strong>.</li>
+  <li>A <strong>Notice</strong> once you pass 80% of your storage, with how much space is left.</li>
+</Unordered>
 
 ## Your account
 
-Open **Account** from the Overview plan card (or the account entry in the app). It shows the email or identity you signed in with, your account address, and your current plan (read-only).
+Open **Account** from the **Account** card at the top of Settings, or from the **Plan** card on Overview. It shows:
+
+<Unordered>
+  <li><strong>Who you are signed in as.</strong> If you signed in with Google, Github or Apple, you see your name and email. Your <strong>wallet address</strong> is shown too, with a button to copy it.</li>
+  <li><strong>Your current plan</strong> and how much storage it gives you. This is read only.</li>
+</Unordered>
 
 Your mnemonic seed is not shown here. It lives in your phone's secure storage, and the only place the app reveals it is the deliberate backup flow under [Security](#mnemonic-seed).
 
-Signing out clears the session from this phone. Your files are untouched, and signing back in brings everything back.
-
 :::info
-Managing subscriptions is not available in the mobile app. Buy or change a plan on the [console](https://console.hippius.com). The app shows which plan you are on and picks up changes on its own.
+Managing subscriptions isn't available in the Hippius mobile app. The Account screen only shows which plan you are on.
 :::
 
-Also under Settings: **Check for Updates**, contact support, Terms, Privacy, and **Clear cache**.
+### Logging out {#logging-out}
+
+Tap <BgStyledText>Logout</BgStyledText> on the Account screen or at the bottom of Settings, then confirm. Logging out removes your session and your seed from this phone. Your files are untouched, and signing back in brings everything back.
+
+Before you log out, make sure you can sign back in: with the same Google, Github or Apple account, or with your access key. If this phone was the only place your seed lived, [back it up](#backing-up-your-mnemonic-seed) first.
 
 ## Delete account
 
-At the bottom of the **Account** screen, below **Log out**, is **Delete my account**. It deletes your whole Hippius account — not just the app on this phone — and everything in it.
+At the bottom of the **Account** screen, below **Logout**, is **Delete my account**. It deletes your whole Hippius account — not just the app on this phone — and everything in it.
 
 Deleting is not instant. Your account is **locked the moment you confirm**, and permanently deleted **7 days later**. Those 7 days are a grace period: until the deletion runs you can still stop it and get everything back.
 
@@ -240,3 +364,11 @@ Some deletions are final from the moment they are confirmed. When that is the ca
 :::info One account, two places
 The app and the [console](https://console.hippius.com) act on the same account. A deletion started on your phone can be cancelled from the console, and one started on the console shows up here.
 :::
+
+## Where to next
+
+<Unordered>
+  <li><a href="/use/mobile/camera-uploads">Camera Uploads</a>: back up your photos automatically.</li>
+  <li><a href="/use/mobile/permissions">Permissions and Background Backups</a>: what the app asks your phone for, and why.</li>
+  <li><a href="/use/mobile/troubleshooting">Troubleshooting</a>: fixes for the most common problems.</li>
+</Unordered>
