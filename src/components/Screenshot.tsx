@@ -28,6 +28,13 @@ interface ScreenshotProps {
    * which are rendered untouched.
    */
   raw?: boolean;
+  /**
+   * A portrait phone screenshot (the mobile app docs). Desktop is unchanged;
+   * on narrow viewports the panel stops being a fixed landscape box and
+   * wraps the screenshot instead, with slim side padding, so it isn't shrunk
+   * to a thumbnail. Only affects `raw` light images and the dark panel.
+   */
+  phone?: boolean;
   className?: string;
 }
 
@@ -43,6 +50,7 @@ export default function Screenshot({
   alt,
   dark,
   raw,
+  phone,
   className,
 }: ScreenshotProps): ReactNode {
   const lightUrl = useBaseUrl(src);
@@ -55,7 +63,14 @@ export default function Screenshot({
   // The light half: the baked export as-is, or — with `raw` — the bare
   // screenshot centered on the light grid panel.
   const lightNode = raw ? (
-    <div className={clsx(styles.frame, styles.lightFrame, className)}>
+    <div
+      className={clsx(
+        styles.frame,
+        styles.lightFrame,
+        phone && styles.phoneFrame,
+        className,
+      )}
+    >
       <img
         className={styles.frameImg}
         src={lightUrl}
@@ -80,7 +95,13 @@ export default function Screenshot({
     <>
       <span className={styles.light}>{lightNode}</span>
       <div
-        className={clsx(styles.dark, styles.frame, styles.darkFrame, className)}
+        className={clsx(
+          styles.dark,
+          styles.frame,
+          styles.darkFrame,
+          phone && styles.phoneFrame,
+          className,
+        )}
       >
         <img
           className={styles.frameImg}
