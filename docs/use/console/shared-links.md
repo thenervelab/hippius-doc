@@ -23,7 +23,7 @@ After sharing, all your active links are tracked on the **Shared Links** page, r
 <Screenshot src="/img/console/drive/shared-links-overview.png" alt="Shared Links page overview" dark />
 
 :::tip Links or a shared drive?
-A shared link is a read only copy for anyone, no account needed. If you want people to sign in and keep working in the same files with you, with Viewer, Editor or Manager access, that is a shared drive. See [Shared Drives](/use/console/shared-drives).
+A shared link is a read only copy for anyone, no account needed. If you want people to sign in and keep working in the same files with you, with Viewer, Editor or Manager access, that is a Hippius shared drive. See [Shared Drives](/use/console/shared-drives).
 :::
 
 ## How Sharing Works

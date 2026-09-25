@@ -27,7 +27,7 @@ You can share from the **Drive view** inside the app, or, on macOS, right from *
 <Screenshot src="/img/desktop/shared-links-overview.png" alt="Shared Links page overview" dark />
 
 :::tip Links or a shared drive?
-A share link is a read only copy for anyone, no account needed. If you want people to sign in and keep working in the same files with you, with Viewer, Editor or Manager access, that is a shared drive. See [Shared Drives](/use/desktop/shared-drives).
+A share link is a read only copy for anyone, no account needed. If you want people to sign in and keep working in the same files with you, with Viewer, Editor or Manager access, that is a Hippius shared drive. See [Shared Drives](/use/desktop/shared-drives).
 :::
 
 ## How Sharing Works

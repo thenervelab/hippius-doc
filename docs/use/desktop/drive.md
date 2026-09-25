@@ -263,7 +263,7 @@ There are two ways to give someone your files, and they suit different jobs:
 
 <Unordered>
   <li><strong>A share link</strong> hands one file or folder to anyone, with no Hippius account needed. It is read only. See <a href="/use/desktop/shared-links">Shared Links</a>.</li>
-  <li><strong>A shared drive</strong> invites people into one of your drives with their own Hippius account and a role, so they can keep working in it with you. Choose <BgStyledText>Share drive…</BgStyledText> in a drive's menu. See <a href="/use/desktop/shared-drives">Shared Drives</a>.</li>
+  <li><strong>A Hippius shared drive</strong> invites people into one of your drives with their own Hippius account and a role, so they can keep working in it with you. Choose <BgStyledText>Share drive…</BgStyledText> in a drive's menu. See <a href="/use/desktop/shared-drives">Shared Drives</a>.</li>
 </Unordered>
 
 Drives other people have shared with you are listed under <strong>Shared with Me</strong>, below your own drives. You can open them from there, or sync them to this computer.

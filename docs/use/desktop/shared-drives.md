@@ -14,7 +14,7 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-A shared drive lets a group of people work in the same encrypted files, each signed in to their own Hippius account. You can share a drive straight from the desktop app, and drives other people share with you can be opened, or synced to your computer like any other folder.
+A Hippius shared drive lets a group of people work in the same encrypted files, each signed in to their own Hippius account. You can share a drive straight from the desktop app, and drives other people share with you can be opened, or synced to your computer like any other folder.
 
 Every drive belongs to one person, its owner. The owner pays for its storage and decides who gets in and what each person can do. Each folder you sync with the app is a drive you can share.
 

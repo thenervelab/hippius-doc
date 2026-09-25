@@ -13,7 +13,7 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-A shared drive lets a group of people work in the same encrypted files, each signed in to their own Hippius account. Your team can keep a project in one place, a family can keep its photos together, and nobody has to email files back and forth.
+A Hippius shared drive lets a group of people work in the same encrypted files, each signed in to their own Hippius account. Your team can keep a project in one place, a family can keep its photos together, and nobody has to email files back and forth.
 
 Every drive belongs to one person, its owner. The owner pays for its storage and decides who gets in and what each person can do. You can let someone into a whole drive, or into just one folder of it.
 
