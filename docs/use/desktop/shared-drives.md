@@ -41,15 +41,11 @@ A Manager helps you run the drive, but it stays yours. Nobody can change their o
   <li>Press <BgStyledText>Done</BgStyledText> when you're finished. Everything you did has already taken effect.</li>
 </Ordered>
 
-{/* TODO screenshot: the Drive page with a synced drive's row menu open, showing "Share drive…".
-    Add static/img/desktop/shared-drives/share-drive-menu.png AND share-drive-menu-dark.png, then uncomment:
-    <Screenshot src="/img/desktop/shared-drives/share-drive-menu.png" alt="A drive's menu in the desktop app, with Share drive" dark /> */}
+<Screenshot src="/img/desktop/shared-drives/share-drive-menu.png" alt="A drive's menu in the desktop app, with Share drive" dark />
 
 The Share dialog has three parts, the same as in the console. **Invite people** sends someone their own invite by email. **People with access** lists everyone who can get in, and is where you change a role or remove someone. **General access** creates an invite link.
 
-{/* TODO screenshot: the Share dialog for a drive, with two or three people in "People with access", one email invite marked Opened with its Approve button, and the General access link controls.
-    Add static/img/desktop/shared-drives/share-dialog.png AND share-dialog-dark.png, then uncomment:
-    <Screenshot src="/img/desktop/shared-drives/share-dialog.png" alt="The Share dialog in the desktop app" dark /> */}
+<Screenshot src="/img/desktop/shared-drives/share-dialog.png" alt="The Share dialog in the desktop app" dark />
 
 Once people have joined, the drive's row shows **Shared with** and the number of people, with a <BgStyledText>Manage access</BgStyledText> button beside it.
 
@@ -97,9 +93,7 @@ You can share one folder inside a drive you own, so someone sees that folder and
   <li>Copy the link and send it to the one person it is for.</li>
 </Ordered>
 
-{/* TODO screenshot: the Share dialog for a single folder: title "Share “<folder>”", the "<folder> in <drive>" subline, and "Invite link for one person" under General access.
-    Add static/img/desktop/shared-drives/share-folder-dialog.png AND share-folder-dialog-dark.png, then uncomment:
-    <Screenshot src="/img/desktop/shared-drives/share-folder-dialog.png" alt="Sharing a single folder from the desktop app" dark /> */}
+<Screenshot src="/img/desktop/shared-drives/share-folder-dialog.png" alt="Sharing a single folder from the desktop app" dark />
 
 In the desktop app, a folder link gives **Viewer** access and works once, for the first person who opens it. For anything more, use the [console](/use/console/shared-drives#sharing-a-single-folder), where you can also give someone **Editor** access to a single folder.
 
@@ -109,9 +103,7 @@ A folder shared on its own shows its own **Shared with** mark and its own <BgSty
 
 Press <BgStyledText>Manage access</BgStyledText> beside a shared drive, or open it from the Share dialog. The panel lists the people in the drive, invites still waiting, and the links that are still active.
 
-{/* TODO screenshot: the Manage access side panel for a shared drive, showing People (owner plus two or three members with role menus), one pending email invite, and one active link with its usage bar.
-    Add static/img/desktop/shared-drives/manage-access.png AND manage-access-dark.png, then uncomment:
-    <Screenshot src="/img/desktop/shared-drives/manage-access.png" alt="The Manage access panel in the desktop app" dark /> */}
+<Screenshot src="/img/desktop/shared-drives/manage-access.png" alt="The Manage access panel in the desktop app" dark />
 
 If you own the drive or are one of its Managers, you can:
 
@@ -141,9 +133,7 @@ Joining is free on every plan, because the owner pays for the storage. Once you'
 
 Drives you've joined are listed under **Shared with Me**, below your own drives on the Drive page and in <BgStyledIconWithText text="Settings" icon="Settings" /> → **Sync & Storage**. The section appears once you have joined something.
 
-{/* TODO screenshot: the "Shared with Me" card on the Drive page with two shared drives, each showing its role chip, "Shared by <owner>", size and file count, and one marked "Synced here".
-    Add static/img/desktop/shared-drives/shared-with-me.png AND shared-with-me-dark.png, then uncomment:
-    <Screenshot src="/img/desktop/shared-drives/shared-with-me.png" alt="Shared with Me in the desktop app" dark /> */}
+<Screenshot src="/img/desktop/shared-drives/shared-with-me.png" alt="Shared with Me in the desktop app" dark />
 
 Each row shows the drive's name, your role, who shared it and how big it is. From there you can:
 
