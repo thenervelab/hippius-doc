@@ -116,10 +116,7 @@ const sidebars: SidebarsConfig = {
             "use/console/getting-started",
             "use/console/overview",
             "use/console/drive",
-            // ⚠️ "Shared Drives" is not in production yet — hidden from the
-            // sidebar and marked `draft: true` in shared-drives.md to block
-            // direct access. Re-enable both together when the feature ships.
-            // "use/console/shared-drives",
+            "use/console/shared-drives",
             "use/console/unlock-password",
             "use/console/shared-links",
             "use/console/uploads",

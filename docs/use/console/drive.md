@@ -225,6 +225,17 @@ How much you can upload depends on your **Drive plan**, not on your balance.
 See [Billing → Drive plans](/use/console/billing#drive-plans) for the plans and what happens without one.
 
 
+## Sharing With Other People
+
+There are two ways to give someone your files, and they suit different jobs:
+
+<Unordered>
+  <li><strong>A public link</strong> hands one file or folder to anyone, with no Hippius account needed. It is read only. See <a href="/use/console/shared-links">Shared Links</a>.</li>
+  <li><strong>A shared drive</strong> invites people into a drive with their own Hippius account and a role, so they can keep working in it with you. See <a href="/use/console/shared-drives">Shared Drives</a>.</li>
+</Unordered>
+
+A drive of yours that other people can get into shows a **Shared** mark beside its name. Drives other people have shared with you are under **Shared Drives**, not here, and they don't use up your storage.
+
 ## Limits
 
 | Limit | Value |
@@ -243,6 +254,7 @@ The two folder download limits come from the zip format itself, not from Hippius
 
 <Unordered>
   <li><a href="/use/console/shared-links">Shared Links</a>: share any Drive file as a public download link — no account required for recipients.</li>
+  <li><a href="/use/console/shared-drives">Shared Drives</a>: work in drives other people have shared with you, and manage who has access to yours.</li>
   <li><a href="/use/console/uploads">Console Uploads</a>: full reference for the upload queue, progress widget, and error handling.</li>
   <li><a href="/use/console/s3">S3 Buckets</a>: S3 compatible storage for use with any S3 client.</li>
   <li><a href="/use/desktop/getting-started">Hippius Desktop App</a>: real time folder sync and uploads beyond the 100 MB cap.</li>

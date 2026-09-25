@@ -58,7 +58,7 @@ When moving to an S3 plan would save you money, the card tells you how much, for
 Without a Drive plan you can't upload anything new, and files already in your Drive are permanently deleted after **30 days**. The Drive card will say so and offer a plan. See [Drive plans](/use/console/billing#drive-plans).
 :::
 
-Shared drives that someone else owns don't count towards your Drive storage. Their owner pays for them.
+[Shared drives](/use/console/shared-drives) that someone else owns don't count towards your Drive storage. Their owner pays for them.
 
 ### What's in each product
 
