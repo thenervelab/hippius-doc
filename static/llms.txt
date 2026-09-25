@@ -8,18 +8,25 @@ Open only the file for the product you need. The long S3 ingest is still https:/
 
 | Want to | Open |
 |---|---|
-| Store or fetch files from code, rclone, or a backup tool | https://github.com/thenervelab/hippius-s3/blob/staging/llms.txt |
-| Publish or pull a model or a container image | https://github.com/thenervelab/hippius-hub/blob/main/llms.txt |
-| Sync folders on a computer | https://github.com/thenervelab/hippius-desktop/blob/main/llms.txt |
-| Give a coding agent shared memory | https://github.com/thenervelab/hippius-mem/blob/main/llms.txt |
+| Store or fetch files from code, rclone, or a backup tool | https://raw.githubusercontent.com/thenervelab/hippius-s3/staging/llms.txt |
+| Publish or pull a model or a container image | https://raw.githubusercontent.com/thenervelab/hippius-hub/main/llms.txt |
+| Sync folders on a computer | https://raw.githubusercontent.com/thenervelab/hippius-desktop/main/llms.txt |
+| Give a coding agent shared memory | https://raw.githubusercontent.com/thenervelab/hippius-mem/main/llms.txt |
+| Script Drive with encryption on the client | https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt |
 | Sign up, pay, get an API token, or manage Drive and S3 keys in the browser | https://docs.hippius.com/use/console/getting-started |
 | Use Drive on an Android phone | https://docs.hippius.com/use/mobile/getting-started |
-| Run a storage miner | https://docs.hippius.com/earn/arion/running-miner |
+| Run a storage miner | https://docs.hippius.com/earn/arion/running-miner and https://raw.githubusercontent.com/thenervelab/arion/main/llms.txt |
+| Run a validator | https://docs.hippius.com/earn/installing-validator and https://raw.githubusercontent.com/thenervelab/hippius-validator/main/llms.txt |
 
-The miner Ansible repo and the old `hipc` CLI are public and have their own `llms.txt`, and both say not to use them for a new setup:
+These public repos have an `llms.txt` whose job is to stop an agent using them:
 
-- https://github.com/thenervelab/hippius-cli/blob/main/llms.txt
-- https://github.com/thenervelab/hippius-storage-miner/blob/main/llms.txt
+- https://raw.githubusercontent.com/thenervelab/hippius-cli/main/llms.txt (`hipc`, deprecated)
+- https://raw.githubusercontent.com/thenervelab/homebrew-tap/main/llms.txt (`brew install hipc`, deprecated)
+- https://raw.githubusercontent.com/thenervelab/hippius-storage-miner/main/llms.txt (IPFS-era miner Ansible)
+- https://raw.githubusercontent.com/thenervelab/hippius-sdk/main/llms.txt (Python package, IPFS storage commands)
+- https://raw.githubusercontent.com/thenervelab/hippius-rust-sdk/main/llms.txt
+- https://raw.githubusercontent.com/thenervelab/hippius-sync-engine/main/llms.txt
+- https://raw.githubusercontent.com/thenervelab/hippius-cvm/main/llms.txt (VMs are not self-serve)
 
 ## Account, sign-in, and paying
 
@@ -28,7 +35,7 @@ Billing: https://docs.hippius.com/use/console/billing
 
 - One account covers the console, the desktop app, and the mobile app. Sign-in is Google, GitHub, Apple, or an existing 12-word access key. There is no email and password sign-in.
 - An agent cannot create the account or sign in. That happens in the user's browser or app.
-- S3 keys (access key id starts with `hip_`) are created on the console S3 page: https://docs.hippius.com/use/console/s3
+- S3 endpoint is https://s3.hippius.com only. Keys (the access key id starts with `hip_`) are created on the console S3 page: https://docs.hippius.com/use/console/s3
 - The API token for Hub and the account API is on console Settings: https://console.hippius.com/dashboard/settings
 - Hub has a second credential, the registry robot login, created when the namespace is provisioned.
 - Drive encryption uses an unlock password and a 12-word recovery seed. Never ask the user to paste either into chat.
