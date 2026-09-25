@@ -185,7 +185,9 @@ def run_task(task: dict) -> list[str]:
             else:
                 code, page = curl(url)
                 fetched.append(url)
-                allowed |= urls_in(page)
+                for seen in urls_in(page):
+                    allowed.add(seen)
+                    allowed.add(seen.split("#", 1)[0])
                 body = page[:12000] if code == 200 else f"HTTP {code}"
             messages.append({
                 "role": "tool",
