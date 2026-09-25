@@ -16,7 +16,7 @@ import Screenshot from '@site/src/components/Screenshot';
 
 **Drive** is your personal encrypted file storage on the Hippius network. Every file you upload is encrypted in your browser before it leaves your device. Only you can decrypt and read it.
 
-Reach Drive from the sidebar at <BgStyledIconWithText text="Storage" icon="SidebarStorage" /> → <BgStyledIconWithText text="Drive" icon="FolderOpen" />.
+Reach Drive from the sidebar at <BgStyledIconWithText text="Drive" icon="FolderOpen" /> → <BgStyledText>My Drives</BgStyledText>.
 
 <Screenshot src="/img/console/drive/overview.png" alt="Drive page overview" dark />
 
