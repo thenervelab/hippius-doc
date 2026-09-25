@@ -163,9 +163,7 @@ Sharing a drive, sending email invites, creating invite links and approving emai
 
 On **Free** and **Starter**, the Share dialog still opens, but an upgrade prompt stands in for the controls that add people. Anyone who already has access keeps it, and you can still see and remove them. <BgStyledText>Upgrade plan</BgStyledText> takes you to the plans in Settings.
 
-{/* TODO screenshot: the Share dialog on a Starter plan, with the "Sharing is available on Plus, Max and Scale plans." card and its Upgrade plan button.
-    Add static/img/desktop/shared-drives/upgrade-card.png AND upgrade-card-dark.png, then uncomment:
-    <Screenshot src="/img/desktop/shared-drives/upgrade-card.png" alt="The sharing upgrade prompt in the desktop app" dark raw /> */}
+<Screenshot src="/img/desktop/shared-drives/upgrade-card.png" alt="The sharing upgrade prompt in the desktop app" dark raw />
 
 On a drive you manage for someone else, the owner's plan is the one that counts, not yours.
 
