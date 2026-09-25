@@ -41,11 +41,11 @@ A Manager helps you run the drive, but it stays yours. Nobody can change their o
   <li>Press <BgStyledText>Done</BgStyledText> when you're finished. Everything you did has already taken effect.</li>
 </Ordered>
 
-<Screenshot src="/img/desktop/shared-drives/share-drive-menu.png" alt="A drive's menu in the desktop app, with Share drive" dark />
+<Screenshot src="/img/desktop/shared-drives/share-drive-menu.png" alt="A drive's menu in the desktop app, with Share drive" dark raw />
 
 The Share dialog has three parts, the same as in the console. **Invite people** sends someone their own invite by email. **People with access** lists everyone who can get in, and is where you change a role or remove someone. **General access** creates an invite link.
 
-<Screenshot src="/img/desktop/shared-drives/share-dialog.png" alt="The Share dialog in the desktop app" dark />
+<Screenshot src="/img/desktop/shared-drives/share-dialog.png" alt="The Share dialog in the desktop app" dark raw />
 
 Once people have joined, the drive's row shows **Shared with** and the number of people, with a <BgStyledText>Manage access</BgStyledText> button beside it.
 
@@ -93,7 +93,7 @@ You can share one folder inside a drive you own, so someone sees that folder and
   <li>Copy the link and send it to the one person it is for.</li>
 </Ordered>
 
-<Screenshot src="/img/desktop/shared-drives/share-folder-dialog.png" alt="Sharing a single folder from the desktop app" dark />
+<Screenshot src="/img/desktop/shared-drives/share-folder-dialog.png" alt="Sharing a single folder from the desktop app" dark raw />
 
 In the desktop app, a folder link gives **Viewer** access and works once, for the first person who opens it. For anything more, use the [console](/use/console/shared-drives#sharing-a-single-folder), where you can also give someone **Editor** access to a single folder.
 
@@ -103,7 +103,7 @@ A folder shared on its own shows its own **Shared with** mark and its own <BgSty
 
 Press <BgStyledText>Manage access</BgStyledText> beside a shared drive, or open it from the Share dialog. The panel lists the people in the drive, invites still waiting, and the links that are still active.
 
-<Screenshot src="/img/desktop/shared-drives/manage-access.png" alt="The Manage access panel in the desktop app" dark />
+<Screenshot src="/img/desktop/shared-drives/manage-access.png" alt="The Manage access panel in the desktop app" dark raw />
 
 If you own the drive or are one of its Managers, you can:
 
@@ -133,7 +133,7 @@ Joining is free on every plan, because the owner pays for the storage. Once you'
 
 Drives you've joined are listed under **Shared with Me**, below your own drives on the Drive page and in <BgStyledIconWithText text="Settings" icon="Settings" /> → **Sync & Storage**. The section appears once you have joined something.
 
-<Screenshot src="/img/desktop/shared-drives/shared-with-me.png" alt="Shared with Me in the desktop app" dark />
+<Screenshot src="/img/desktop/shared-drives/shared-with-me.png" alt="Shared with Me in the desktop app" dark raw />
 
 Each row shows the drive's name, your role, who shared it and how big it is. From there you can:
 
@@ -165,7 +165,7 @@ On **Free** and **Starter**, the Share dialog still opens, but an upgrade prompt
 
 {/* TODO screenshot: the Share dialog on a Starter plan, with the "Sharing is available on Plus, Max and Scale plans." card and its Upgrade plan button.
     Add static/img/desktop/shared-drives/upgrade-card.png AND upgrade-card-dark.png, then uncomment:
-    <Screenshot src="/img/desktop/shared-drives/upgrade-card.png" alt="The sharing upgrade prompt in the desktop app" dark /> */}
+    <Screenshot src="/img/desktop/shared-drives/upgrade-card.png" alt="The sharing upgrade prompt in the desktop app" dark raw /> */}
 
 On a drive you manage for someone else, the owner's plan is the one that counts, not yours.
 
