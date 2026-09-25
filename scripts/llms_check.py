@@ -91,6 +91,10 @@ def urls_in(text: str) -> list[str]:
     return found
 
 
+def host_of(url: str) -> str:
+    return url.split("://", 1)[1].split("/", 1)[0].split(":", 1)[0]
+
+
 def repo_of(url: str) -> str | None:
     marker = "https://raw.githubusercontent.com/thenervelab/"
     if not url.startswith(marker) or not url.endswith("/llms.txt"):
@@ -121,6 +125,10 @@ def main() -> None:
         code, content_type, body = curl(url)
         repo = repo_of(url)
         leaf = repo is not None
+        # Anonymous GET of the S3 API root is refused. 403 means the host answered.
+        if code == 403 and host_of(url) == "s3.hippius.com":
+            print(f"ok 403 {url}")
+            continue
         if code != 200:
             message = f"{code} {url}"
             if leaf and mode == "lenient":
