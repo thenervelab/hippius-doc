@@ -23,9 +23,7 @@ Here is what the console does with shared drives today:
   <li><strong>Starting to share a drive or a folder from the console is coming soon.</strong> Until then, a drive's first invite comes from the Hippius desktop app on the beta channel. See <a href="#starting-a-shared-drive">Starting a shared drive</a>.</li>
 </Unordered>
 
-{/* Screenshot placeholder: the Shared Drives list with a whole drive and a "Folder in a drive" row.
-    Add static/img/console/shared-drives/list.png AND list-dark.png, then uncomment:
-    <Screenshot src="/img/console/shared-drives/list.png" alt="The Shared Drives page" dark /> */}
+<Screenshot src="/img/console/shared-drives/list.png" alt="The Shared Drives page, with two whole drives and a folder shared on its own" dark raw />
 
 ## Who Can Do What
 
@@ -49,6 +47,8 @@ An invite reaches you in one of two ways, and they work a little differently.
 
 Someone copies an invite link and sends it to you. Open it, sign in to Hippius (or create an account, which is free), and you join straight away.
 
+<Screenshot src="/img/console/shared-drives/invite-join.png" alt="An invite ready to join" dark raw />
+
 Your files in Hippius are encrypted with your unlock password, and joining seals your access to the drive under it. If your account doesn't have an unlock password yet, the console asks you to set one first. See [Unlock Password](/use/console/unlock-password).
 
 :::warning Treat an invite link like a password
@@ -64,6 +64,8 @@ An email invite is addressed to one person. The link in the email carries no key
   <li>Sign in with the <strong>same email address the invite was sent to</strong>. If you sign in with a different one, the console tells you the invite was sent to a different address, and the invite stays waiting for the right account.</li>
   <li>Wait for the key. The owner's (or a Manager's) console delivers it automatically while it is open and unlocked on their side. Keep the page open and you join as soon as it arrives, or come back to the same link later.</li>
 </Ordered>
+
+<Screenshot src="/img/console/shared-drives/invite-waiting.png" alt="An email invite waiting for its key" dark raw />
 
 If nobody on the other side has the console open, the invite waits. They can also approve it by hand from their **Manage access** panel.
 
@@ -85,9 +87,7 @@ Anything you upload to a shared drive is stored in the owner's drive and counts 
 If the owner's billing limits the drive, it becomes read only for everyone, the owner included. You can still open and download files, but nobody can upload until the owner sorts out their billing.
 :::
 
-{/* Screenshot placeholder: browsing inside a shared drive, showing the Shared Drives breadcrumb and the role chip.
-    Add static/img/console/shared-drives/inside-drive.png AND inside-drive-dark.png, then uncomment:
-    <Screenshot src="/img/console/shared-drives/inside-drive.png" alt="Browsing inside a shared drive" dark /> */}
+<Screenshot src="/img/console/shared-drives/inside-drive.png" alt="Browsing inside a shared drive" dark raw />
 
 ## Folders Shared With You
 
@@ -107,6 +107,8 @@ The owner or a Manager can also remove you. The drive then disappears from your 
 
 If you own a drive that is already shared, or you are a Manager of one, you can look after its people from the console. Open the drive's menu, or the button next to its name, and choose <BgStyledText>Manage access</BgStyledText>.
 
+<Screenshot src="/img/console/shared-drives/manage-access.png" alt="The Manage access panel" dark raw />
+
 The panel lists everyone who can get in: the people in the drive, pending invites, and the links that are still active. To let someone new in, press <BgStyledText>Share</BgStyledText>. The Share dialog has three parts, the way you might know from other drive apps:
 
 <Unordered>
@@ -117,9 +119,7 @@ The panel lists everyone who can get in: the people in the drive, pending invite
 
 Removing someone, cancelling an invite or revoking a link asks you to confirm right there in the row, and takes effect straight away. Viewers and Editors can open the same panel to see who else is in the drive, but can't change anything.
 
-{/* Screenshot placeholder: the Share dialog on a whole drive, with the email field, People with access and General access.
-    Add static/img/console/shared-drives/share-dialog.png AND share-dialog-dark.png, then uncomment:
-    <Screenshot src="/img/console/shared-drives/share-dialog.png" alt="The Share dialog for a drive" dark /> */}
+<Screenshot src="/img/console/shared-drives/share-dialog.png" alt="The Share dialog for a drive" dark raw />
 
 ### How invite links work
 
@@ -163,6 +163,8 @@ There is no way to change someone's role on a single folder in place. To give th
 Adding people to a drive (email invites, invite links, and approving email invites) is included with the **Plus**, **Max** and **Scale** Drive plans. See [Drive plans](/use/console/billing#drive-plans).
 
 On **Free** and **Starter**, the Share dialog shows an upgrade prompt in place of the controls that add people. Anyone who already has access keeps it, and you can still see and remove them, so moving to a smaller plan never locks you out of your own drive.
+
+<Screenshot src="/img/console/shared-drives/upgrade-card.png" alt="The upgrade prompt in the Share dialog" dark raw />
 
 On a drive you manage for someone else, the owner's plan is the one that counts. If it doesn't include sharing, the console tells you no new invites can be made for now, and it's up to the owner to upgrade.
 
