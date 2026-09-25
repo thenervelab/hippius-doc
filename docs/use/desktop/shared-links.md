@@ -26,6 +26,10 @@ You can share from the **Drive view** inside the app, or, on macOS, right from *
 
 <Screenshot src="/img/desktop/shared-links-overview.png" alt="Shared Links page overview" dark />
 
+:::tip Links or a shared drive?
+A share link is a read only copy for anyone, no account needed. If you want people to sign in and keep working in the same files with you, with Viewer, Editor or Manager access, that is a Hippius shared drive. See [Shared Drives](/use/desktop/shared-drives).
+:::
+
 ## How Sharing Works
 
 ### Every file on Hippius is encrypted
@@ -279,6 +283,7 @@ Each active share uses storage quota. Revoke temporary shares when you're done w
 
 <Unordered>
   <li><a href="/use/desktop/drive">Drive</a>: manage your sync folders and uploads.</li>
+  <li><a href="/use/desktop/shared-drives">Shared Drives</a>: invite people with a Hippius account into a drive, with a role.</li>
   <li><a href="/use/console/shared-links">Console Shared Links</a>: the console version, where you can create shares from the web interface.</li>
   <li><a href="/use/desktop/billing">Billing</a>: manage credits before sharing large files.</li>
 </Unordered>
