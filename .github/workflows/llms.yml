@@ -1,0 +1,80 @@
+name: llms
+
+# Link check runs on docs pull requests in lenient mode, so a leaf llms.txt
+# that is not merged yet does not fail this PR.
+# Strict mode is the Monday run and a manual run. It fails until every leaf
+# pull request below is on the default branch:
+#   hippius-s3 (staging), hippius-hub, hippius-desktop, hippius-mem, arion,
+#   hippius-drive-sdk, hippius-sdk, hippius-cli, hippius-storage-miner,
+#   hippius-rust-sdk, hippius-sync-engine, hippius-validator, hippius-cvm,
+#   homebrew-tap, and this file on main.
+# The agent eval and the live smoke also wait for that, and they no-op with a
+# warning when their secrets are absent.
+#
+# Secrets, all optional until you want that job to do real work:
+#   LLM_API_KEY          model key. LLM_MODEL overrides grok-4-fast.
+#   HIPPIUS_ACCESS_KEY   same names as the S3 doc examples
+#   HIPPIUS_SECRET_KEY
+#   HIPPIUS_S3_BUCKET    existing bucket for the put/get/delete smoke
+#   HIPPIUS_HUB_API_TOKEN  console API token for GET /api/registry/me/
+
+on:
+  pull_request:
+    paths:
+      - "static/llms.txt"
+      - "static/llms-full.txt"
+      - "docs/**"
+      - "scripts/llms_check.py"
+      - "scripts/llms_agent_eval.py"
+      - "scripts/llms_live_smoke.py"
+      - ".github/workflows/llms.yml"
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check links (lenient on pull requests)
+        if: github.event_name == 'pull_request'
+        run: python scripts/llms_check.py --mode lenient
+      - name: Check links (strict once the leaves are merged)
+        if: github.event_name != 'pull_request'
+        run: python scripts/llms_check.py --mode strict
+
+  agent:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Ask a fresh agent to follow llms.txt
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_MODEL: grok-4-fast
+        run: python scripts/llms_agent_eval.py
+
+  smoke:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install boto3
+        run: pip install boto3
+      - name: S3 put/get/delete and Hub /me
+        env:
+          HIPPIUS_ACCESS_KEY: ${{ secrets.HIPPIUS_ACCESS_KEY }}
+          HIPPIUS_SECRET_KEY: ${{ secrets.HIPPIUS_SECRET_KEY }}
+          HIPPIUS_S3_BUCKET: ${{ secrets.HIPPIUS_S3_BUCKET }}
+          HIPPIUS_HUB_API_TOKEN: ${{ secrets.HIPPIUS_HUB_API_TOKEN }}
+        run: python scripts/llms_live_smoke.py
