@@ -75,6 +75,7 @@ const sidebars: SidebarsConfig = {
             "use/desktop/desktop-app",
             "use/desktop/using-the-app",
             "use/desktop/drive",
+            "use/desktop/shared-drives",
             "use/desktop/shared-links",
             "use/desktop/share-from-finder",
             "use/desktop/virtual-machines",

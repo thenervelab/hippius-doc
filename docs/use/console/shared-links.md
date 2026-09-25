@@ -283,7 +283,7 @@ For a **file** share there is no expiry change. The desktop app's **Reshare** co
 
 <Unordered>
   <li><a href="/use/console/drive">Drive</a>: browse, upload, and manage your encrypted files. This is where you create share links.</li>
-  <li><a href="/use/console/shared-drives">Shared Drives</a>: invite people with a Hippius account into a drive, with a role.</li>
+  <li><a href="/use/console/shared-drives">Shared Drives</a>: invite people with a Hippius account into a drive or a folder, with a role.</li>
   <li><a href="/use/desktop/shared-links">Desktop Shared Links</a>: the desktop version with reshare support and persistent link copying.</li>
   <li><a href="/use/console/billing">Billing</a>: check your Drive plan has room before sharing large files.</li>
 </Unordered>
