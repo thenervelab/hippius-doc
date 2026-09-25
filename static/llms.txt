@@ -1,294 +1,57 @@
-# Hippius - Distributed Cloud Storage
+# Hippius
 
-> Hippius is a distributed cloud storage platform backed by Arion distributed storage and a custom Substrate blockchain. It provides a fully S3-compatible API, a desktop app, a web console, and confidential compute. Any S3 client works out of the box.
+> Hippius is a decentralized cloud: encrypted file storage (Drive), S3-compatible object storage, and a registry for AI models and containers (Hub). One account pays for all of them. This file says what each product is and which file to open next.
 
-Full ingest: https://docs.hippius.com/llms-full.txt
+Open only the file for the product you need. The long S3 ingest is still https://docs.hippius.com/llms-full.txt
 
-## Products
+## Which file to open
 
-- **S3 Storage** — S3-compatible API at s3.hippius.com. Store anything. Standard clients (boto3, AWS CLI, rclone) work without modification.
-- **Desktop App** — Native app (macOS, Windows, Linux) for file sync, wallet, and storage management.
-- **Web Console** — Browser dashboard at console.hippius.com for storage, VMs, staking, and tokens.
-- **Virtual Machines** — Distributed compute (beta access).
-- **Confidential Compute** — VMs inside AMD SEV-SNP encrypted enclaves.
-- **Hippius Hub** - Drop-in replacement for `huggingface_hub` backed by Hippius S3 storage (https://github.com/thenervelab/hippius-hub/blob/main/llms.txt)
+| Want to | Open |
+|---|---|
+| Store or fetch files from code, rclone, or a backup tool | https://github.com/thenervelab/hippius-s3/blob/staging/llms.txt |
+| Publish or pull a model or a container image | https://github.com/thenervelab/hippius-hub/blob/main/llms.txt |
+| Sync folders on a computer | https://github.com/thenervelab/hippius-desktop/blob/main/llms.txt |
+| Give a coding agent shared memory | https://github.com/thenervelab/hippius-mem/blob/main/llms.txt |
+| Sign up, pay, get an API token, or manage Drive and S3 keys in the browser | https://docs.hippius.com/use/console/getting-started |
+| Use Drive on an Android phone | https://docs.hippius.com/use/mobile/getting-started |
+| Run a storage miner | https://docs.hippius.com/earn/arion/running-miner |
 
-## S3 documentation map
+The miner Ansible repo and the old `hipc` CLI are public and have their own `llms.txt`, and both say not to use them for a new setup:
 
-Canonical pages. Prefer these URLs when linking or fetching.
+- https://github.com/thenervelab/hippius-cli/blob/main/llms.txt
+- https://github.com/thenervelab/hippius-storage-miner/blob/main/llms.txt
 
-- Getting Started (first upload): https://docs.hippius.com/use/quickstart
-- Advanced Usage (presigned URLs, public buckets, ACLs, sub-tokens, multipart): https://docs.hippius.com/storage/s3/advanced
-- Compatibility matrix (every S3 operation): https://docs.hippius.com/storage/s3/compatibility
-- Object Lock / WORM: https://docs.hippius.com/storage/s3/object-lock
-- Python (boto3 & minio): https://docs.hippius.com/storage/s3/python
-- JavaScript (AWS SDK v3 & minio): https://docs.hippius.com/storage/s3/javascript
-- AWS CLI: https://docs.hippius.com/storage/s3/aws-cli
-- rclone: https://docs.hippius.com/storage/s3/rclone
-- Troubleshooting: https://docs.hippius.com/use/troubleshooting
-- Nextcloud: https://docs.hippius.com/storage/s3/examples/nextcloud
-- Duplicati: https://docs.hippius.com/storage/s3/examples/duplicati
-- Management API (tokens, billing): https://docs.hippius.com/use/api
-- Console — S3 Buckets (UI, master/sub tokens): https://docs.hippius.com/use/console/s3
-- Console — S3 Migrations: https://docs.hippius.com/use/console/migrations
-- Console — Uploads: https://docs.hippius.com/use/console/uploads
-- OpenAPI (interactive): https://api.hippius.com/
-- OpenAPI spec: https://api.hippius.com/?format=openapi
+## Account, sign-in, and paying
+
+Full console guide: https://docs.hippius.com/use/console/getting-started
+Billing: https://docs.hippius.com/use/console/billing
+
+- One account covers the console, the desktop app, and the mobile app. Sign-in is Google, GitHub, Apple, or an existing 12-word access key. There is no email and password sign-in.
+- An agent cannot create the account or sign in. That happens in the user's browser or app.
+- S3 keys (access key id starts with `hip_`) are created on the console S3 page: https://docs.hippius.com/use/console/s3
+- The API token for Hub and the account API is on console Settings: https://console.hippius.com/dashboard/settings
+- Hub has a second credential, the registry robot login, created when the namespace is provisioned.
+- Drive encryption uses an unlock password and a 12-word recovery seed. Never ask the user to paste either into chat.
+- The balance is in credits (1 credit = 1 USD). Card and TAO top-ups are on the Billing page.
+
+Hub Free plan: creating a namespace requires at least 10 credits on the account (`REGISTRY_MIN_CREDITS`, a spam check). A zero balance is refused. The plan price stays zero. Top up, then provision. https://docs.hippius.com/use/console/hub
+
+## Do not use
+
+- `hipc` and `brew install hipc`. The IPFS CLI is deprecated: https://docs.hippius.com/cli/usage
+- `hippius-sdk` (Python) for uploads and downloads. Its IPFS storage path is gone. S3 is the storage API.
+- `hippius-sdk-ts`, `hippius-sdk-rust`, `hippius-rust-sdk`, `hippius-sync-engine`. Old IPFS-era clients.
+- The IPFS Ansible miner in `hippius-storage-miner` for a new machine. Current miners run Arion.
+- IPFS pinning. Hippius storage no longer runs on IPFS.
+- Virtual machines as a product a user can launch today. The console shows them as coming soon.
+
+## Documentation
+
+- Home: https://docs.hippius.com
+- S3 quickstart: https://docs.hippius.com/use/quickstart
+- Hub quickstart: https://docs.hippius.com/registry
+- Desktop: https://docs.hippius.com/use/desktop/getting-started
+- Mobile (Android on Google Play, iPhone not released): https://docs.hippius.com/use/mobile/getting-started
+- Console: https://docs.hippius.com/use/console/getting-started
 - Pricing: https://hippius.com/pricing
-- Benchmarks: https://s3.hippius.com/veggies/s3/benchmark.html
-
-### Advanced Usage section anchors
-
-- Presigned GET (share a download): https://docs.hippius.com/storage/s3/advanced#share-a-time-limited-download
-- Presigned PUT (browser upload): https://docs.hippius.com/storage/s3/advanced#let-a-browser-upload-without-keys
-- Public buckets / objects: https://docs.hippius.com/storage/s3/advanced#make-a-bucket-or-object-public
-- Share with another account (ACL): https://docs.hippius.com/storage/s3/advanced#share-with-another-account
-- Grant one access key: https://docs.hippius.com/storage/s3/advanced#grant-one-access-key
-- Sub-tokens (scoped credentials): https://docs.hippius.com/storage/s3/advanced#give-an-app-scoped-credentials
-- Large / multipart uploads: https://docs.hippius.com/storage/s3/advanced#upload-large-files
-- Tagging: https://docs.hippius.com/storage/s3/advanced#tag-buckets-and-objects
-- Static site / video: https://docs.hippius.com/storage/s3/advanced#host-a-static-site-or-stream-video
-- Object Lock pointer: https://docs.hippius.com/storage/s3/advanced#stop-a-version-being-deleted
-
-### Old URLs (still resolve; do not use for new links)
-
-- https://docs.hippius.com/storage/s3/integration → Advanced Usage
-- https://docs.hippius.com/use/s3-token-management → Advanced Usage#give-an-app-scoped-credentials
-- https://docs.hippius.com/storage/s3/examples/file-sharing → Advanced Usage#share-a-time-limited-download
-- https://docs.hippius.com/storage/s3/examples/video-hosting → Advanced Usage#host-a-static-site-or-stream-video
-- https://docs.hippius.com/storage/s3/examples/image-gallery → Advanced Usage#make-a-bucket-or-object-public
-- https://docs.hippius.com/storage/s3/examples/static-site → Advanced Usage#host-a-static-site-or-stream-video
-
-## Quick Start (S3)
-
-1. Create account at https://console.hippius.com (Google or GitHub OAuth — no wallet needed)
-2. Add credits: Console > Billing (credit card via Stripe, or TAO)
-3. Create S3 credentials: Console > S3 Storage > Create Master Token
-4. Save your Access Key ID (starts with `hip_`) and Secret Key
-5. Connect with any S3 client using the details below
-
-IMPORTANT: Hippius S3 uses its own credential system. ETH wallets, TAO wallets,
-and Polkadot browser extensions are NOT used for S3 access.
-TAO can only be used to pay for credits, not for authentication.
-
-## S3 Connection Details
-
-- Endpoint: https://s3.hippius.com
-- Region: decentralized
-- Signature: AWS Signature V4
-- Addressing style: path-style (required; virtual-hosted style is not supported)
-
-Always use https://s3.hippius.com. Do not point clients at other hostnames.
-
-## Client Configurations
-
-### AWS CLI
-
-    export AWS_ACCESS_KEY_ID="YOUR_ACCESS_KEY"
-    export AWS_SECRET_ACCESS_KEY="YOUR_SECRET_KEY"
-    export AWS_DEFAULT_REGION="decentralized"
-
-    aws s3 mb s3://my-bucket --endpoint-url https://s3.hippius.com
-    aws s3 cp file.txt s3://my-bucket/ --endpoint-url https://s3.hippius.com
-    aws s3 cp s3://my-bucket/file.txt . --endpoint-url https://s3.hippius.com
-    aws s3 ls s3://my-bucket/ --endpoint-url https://s3.hippius.com
-    aws s3 presign s3://my-bucket/file.txt --endpoint-url https://s3.hippius.com --expires-in 3600
-
-### Python (boto3)
-
-    import boto3
-    from botocore.config import Config
-    s3 = boto3.client(
-        "s3",
-        endpoint_url="https://s3.hippius.com",
-        aws_access_key_id="YOUR_ACCESS_KEY",
-        aws_secret_access_key="YOUR_SECRET_KEY",
-        region_name="decentralized",
-        config=Config(signature_version="s3v4", s3={"addressing_style": "path"}),
-    )
-
-### Python (minio)
-
-    from minio import Minio
-    client = Minio(
-        "s3.hippius.com",
-        access_key="YOUR_ACCESS_KEY",
-        secret_key="YOUR_SECRET_KEY",
-        secure=True,
-        region="decentralized",
-    )
-
-### JavaScript (AWS SDK v3)
-
-    import { S3Client } from "@aws-sdk/client-s3";
-    const s3 = new S3Client({
-        endpoint: "https://s3.hippius.com",
-        region: "decentralized",
-        credentials: { accessKeyId: "YOUR_ACCESS_KEY", secretAccessKey: "YOUR_SECRET_KEY" },
-        forcePathStyle: true,
-    });
-
-### JavaScript (minio)
-
-    const { Client } = require("minio");
-    const client = new Client({
-        endPoint: "s3.hippius.com",
-        port: 443,
-        useSSL: true,
-        accessKey: "YOUR_ACCESS_KEY",
-        secretKey: "YOUR_SECRET_KEY",
-        region: "decentralized",
-    });
-
-### rclone
-
-    # ~/.config/rclone/rclone.conf
-    [hippius]
-    type = s3
-    provider = Other
-    access_key_id = YOUR_ACCESS_KEY
-    secret_access_key = YOUR_SECRET_KEY
-    endpoint = https://s3.hippius.com
-    region = decentralized
-    force_path_style = true
-
-    rclone ls hippius:
-    rclone sync ./folder hippius:my-bucket/folder
-
-## Supported S3 Operations
-
-- Bucket: CreateBucket, DeleteBucket, ListBuckets, HeadBucket, GetBucketLocation
-- Object: PutObject, GetObject, HeadObject, DeleteObject, CopyObject
-- List: ListObjects, ListObjectsV2
-- Multipart: InitiateMultipartUpload, UploadPart, CompleteMultipartUpload, AbortMultipartUpload (up to ~5 TiB)
-- Presigned: PresignedGetObject, PresignedPutObject, PresignedDelete (max 7 days)
-- Tags: PutObjectTagging, GetObjectTagging, DeleteObjectTagging, PutBucketTagging, GetBucketTagging
-- ACL: PutBucketAcl, GetBucketAcl, PutObjectAcl, GetObjectAcl
-- Policy: PutBucketPolicy, GetBucketPolicy, DeleteBucketPolicy
-- Versioning: PutBucketVersioning (Enabled only), GetBucketVersioning, ListObjectVersions, GET/DELETE ?versionId
-- Object Lock (WORM): PutObjectLockConfiguration, GetObjectLockConfiguration, PutObjectRetention,
-  GetObjectRetention, PutObjectLegalHold, GetObjectLegalHold; GOVERNANCE and COMPLIANCE modes;
-  bucket default retention (Days or Years); x-amz-object-lock-* headers on PutObject,
-  CreateMultipartUpload and CopyObject. Requires versioning. Docs: https://docs.hippius.com/storage/s3/object-lock
-- Other: PutBucketLifecycle (expiration rules only), range requests (video streaming)
-
-## Not Supported
-
-- Suspending versioning (PutBucketVersioning Status=Suspended returns 501)
-- Object Lock headers on CompleteMultipartUpload (set them on CreateMultipartUpload) or on
-  GetObject responses (use HeadObject)
-- S3 Batch Operations, replication of Object Lock state
-- POST Object (browser form uploads — use a presigned PutObject)
-- Cross-region replication (the network replicates automatically)
-- S3 Select
-- Virtual-hosted style addressing (bucket.s3.hippius.com)
-
-## Advanced recipes
-
-Public object URL: https://s3.hippius.com/{bucket}/{key}
-
-    # Make bucket publicly readable
-    aws s3api put-bucket-acl --bucket my-bucket --acl public-read \
-      --endpoint-url https://s3.hippius.com
-
-    # Presigned GET (max 7 days)
-    aws s3 presign s3://my-bucket/file.txt --expires-in 86400 \
-      --endpoint-url https://s3.hippius.com
-
-Do not append extra query parameters to a presigned URL — they invalidate the signature.
-
-Master tokens have full access and bypass ACLs. Sub-tokens are scoped to buckets and permissions
-(read-only or read/write) and should be used for apps. Create/rotate/revoke in the console
-(https://docs.hippius.com/use/console/s3) or via the Management API.
-
-Console uploads are capped at 100 MB per file. Larger files need multipart (AWS CLI / SDKs).
-
-HCFS "S3-compatible gateway" (https://docs.hippius.com/hcfs/api/s3-gateway) is NOT s3.hippius.com.
-It is a plaintext Drive/HCFS upload path. Do not use it for the public S3 API.
-
-## Management API (api.hippius.com)
-
-Docs: https://docs.hippius.com/use/api
-Full OpenAPI spec: https://api.hippius.com/?format=openapi
-Authenticate: POST /auth/exchange/ with OAuth token → returns bearer token
-Console Settings also shows an API token used as: Authorization: Bearer <token>
-
-### Token management
-
-    GET  /objectstore/master-tokens/              List master tokens
-    POST /objectstore/master-tokens/              Create master token
-    POST /objectstore/master-tokens/{id}/revoke/  Revoke token
-    POST /objectstore/master-tokens/{id}/rotate/  Rotate secret
-    # Same endpoints at /objectstore/sub-tokens/ for sub-tokens
-
-### Billing & credits
-
-    GET  /billing/credits/balance/                     Check balance
-    GET  /billing/latest-tao-price/                    TAO/USD price (no auth)
-    POST /billing/stripe/create-checkout-session/      Stripe payment ($20–$10,000)
-    POST /billing/stripe/create-subscription/          Recurring subscription
-    GET  /billing/stripe/subscription-plans/           List plans
-
-### Pay with TAO (programmatic)
-
-    # Step 1: Create transaction
-    curl -X POST https://api.hippius.com/billing/transactions/ \
-      -H "Authorization: Token YOUR_TOKEN" \
-      -H "Content-Type: application/json" \
-      -d '{"payment_type": "crypto", "amount": "50.00", "currency": "TAO"}'
-    # Response includes payment_address — send TAO there on Bittensor
-
-    # Step 2: Poll for confirmation
-    curl https://api.hippius.com/billing/transactions/{id}/ \
-      -H "Authorization: Token YOUR_TOKEN"
-    # Look for "status": "completed" and "substrate_success": true
-
-    # Step 3: Verify credits
-    curl https://api.hippius.com/billing/credits/balance/ \
-      -H "Authorization: Token YOUR_TOKEN"
-
-## Storage Architecture (Arion)
-
-Arion is Hippius's purpose-built distributed storage engine. Key properties:
-- Reed-Solomon erasure coding: k=10 data shards + m=20 parity shards per file (any 10 reconstruct the file)
-- CRUSH placement algorithm: deterministic, topology-aware shard placement across miners
-- QUIC-based P2P networking via Iroh
-- Warden service provides proof-of-storage audits
-- Automatic recovery: validator detects offline miners and rebuilds missing shards
-
-Upload flow: Client → Gateway (HTTP) → Validator (RS encode + CRUSH place) → Miners (P2P QUIC)
-Download flow: Gateway fetches k=10 shards from miners → reconstructs → returns to client
-
-## Miner CLI
-
-`miner-cli` manages on-chain miner registration. Build from source:
-
-    git clone https://github.com/thenervelab/arion.git && cd arion
-    cargo build --release --bin miner-cli
-
-Commands:
-- `show-node-id` — display miner's P2P identity
-- `register-child --child-ss58 <addr>` — register miner under family account
-- `deregister-child --child-ss58 <addr>` — begin unbonding
-- `claim-unbonded --child-ss58 <addr>` — reclaim deposit after unbonding period
-
-Required flags: `--chain-ws-url wss://rpc.hippius.network --family-mnemonic-file /path/to/mnemonic.txt`
-
-## Rate Limits
-
-100 requests per minute per account
-
-## Support
-
-- Discord: https://discord.com/channels/1298001698874327131/1442875352484548609
-- Bittensor Discord (Subnet 75): https://discord.com/channels/799672011265015819/1349124437752152075
-
-## Links
-
-- Website: https://hippius.com
-- Console: https://console.hippius.com
-- Documentation: https://docs.hippius.com
-- Docs for agents: https://docs.hippius.com/llms.txt
-- Full docs for agents: https://docs.hippius.com/llms-full.txt
-- API: https://api.hippius.com
-- X/Twitter: https://x.com/Hippius_cloud
+- Status: https://status.hippius.com

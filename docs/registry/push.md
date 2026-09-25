@@ -32,6 +32,8 @@ hippius-hub registry provision my-models --docker-login
 
 `provision --docker-login` does three things in one shot: creates your namespace, mints docker credentials, and runs `docker login registry.hippius.com` for you. The hippius-hub CLI's own `upload` / `download` commands also start working immediately because the credentials are cached at `~/.cache/hippius/hub/token`.
 
+The Free plan refuses namespace creation until the account holds at least **10 credits** (`REGISTRY_MIN_CREDITS`, a spam check). Top up on [Billing](/use/console/billing) first if the balance is zero.
+
 :::tip Save the robot secret
 The robot secret prints **once** at the bottom of `registry provision`. If you lose it, rotate with `hippius-hub registry rotate-token` — it issues a new secret and updates the local cache.
 :::

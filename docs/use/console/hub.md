@@ -42,7 +42,7 @@ A name can use lowercase letters, numbers and dashes, up to 63 characters, and c
 You can't rename or delete a namespace from the console, and it appears in every image path you push.
 :::
 
-Every account starts on the free Hub plan, so you don't need to buy anything to get going.
+Every account starts on the free Hub plan, so you do not subscribe before creating the first namespace. Creating it still requires at least **10 credits** on the account (`REGISTRY_MIN_CREDITS`, a spam check). A zero balance is refused. Top up on [Billing](/use/console/billing) first.
 
 If you already created a namespace from the CLI and the console says the name is taken, submit it anyway. The console recognises that it's yours and picks it up.
 
