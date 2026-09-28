@@ -16,7 +16,7 @@ Open only the file for the product you need. The long S3 ingest is still https:/
 | Sign up, pay, get an API token, or manage Drive and S3 keys in the browser | https://docs.hippius.com/use/console/getting-started |
 | Use Drive on an Android phone | https://docs.hippius.com/use/mobile/getting-started |
 | Run a storage miner | https://docs.hippius.com/earn/arion/running-miner and https://raw.githubusercontent.com/thenervelab/arion/main/llms.txt |
-| Run a validator | https://docs.hippius.com/earn/installing-validator and https://raw.githubusercontent.com/thenervelab/hippius-validator/main/llms.txt |
+| Run a validator | https://docs.hippius.com/earn/installing-validator |
 
 ## Account, sign-in, and paying
 
