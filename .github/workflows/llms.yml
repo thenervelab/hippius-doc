@@ -9,8 +9,10 @@ name: llms
 # hippius-validator has no agent file. The index points at the
 # installing-validator guide.
 # Deprecated public repos are named in static/llms.txt and have no llms.txt:
-#   hippius-cli, homebrew-tap, hippius-storage-miner, hippius-sdk,
-#   hippius-rust-sdk, hippius-sync-engine, hippius-cvm.
+#   hipc, hippius-cli, homebrew-tap, hippius-storage-miner, the hippius SDKs
+#   (Python, TypeScript, Rust), hippius-sync-engine, and other IPFS-era tools.
+# Hippius VMs are listed under Coming soon. hippius-cvm is not client-facing
+# and is not in the index.
 # The agent eval and the live smoke also wait for that, and they no-op with a
 # warning when their secrets are absent.
 #

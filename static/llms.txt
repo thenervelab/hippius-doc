@@ -33,17 +33,15 @@ Billing: https://docs.hippius.com/use/console/billing
 
 Hub Free plan: creating a namespace requires at least 10 credits on the account (`REGISTRY_MIN_CREDITS`, a spam check). A zero balance is refused. The plan price stays zero. Top up, then provision. https://docs.hippius.com/use/console/hub
 
-## Do not use
+## Deprecated
 
-These public repos have no agent file. Do not look for `llms.txt` in them.
+`hipc`, `hippius-cli`, `homebrew-tap`, `hippius-sdk`, `hippius-sdk-ts`, `hippius-sdk-rust`, `hippius-rust-sdk`, `hippius-sync-engine`, `hippius-storage-miner`, and anything else IPFS-related, are deprecated. Hippius switched from IPFS to Arion. https://docs.hippius.com/cli/usage
 
-- `hipc` and `brew install hipc` (`hippius-cli`, `homebrew-tap`). The IPFS CLI is deprecated: https://docs.hippius.com/cli/usage
-- `hippius-sdk` (Python package `hippius`) for uploads and downloads. Its IPFS storage path is gone. S3 is the storage API. Chain registration still installs that package: https://docs.hippius.com/earn/register-in-blockchain
-- `hippius-sdk-ts`, `hippius-sdk-rust`, `hippius-rust-sdk`, `hippius-sync-engine`. Old IPFS-era clients.
-- The IPFS Ansible miner in `hippius-storage-miner` for a new machine. Current miners run Arion: https://docs.hippius.com/earn/arion/running-miner
-- IPFS pinning. Hippius storage no longer runs on IPFS.
-- Virtual machines as a product a user can launch today. The console shows them as coming soon: https://docs.hippius.com/use/console/virtual-machines
-- `hippius-cvm` is the confidential-VM control plane. There is no console flow that launches one.
+Chain registration still installs the Python package `hippius`: https://docs.hippius.com/earn/register-in-blockchain
+
+## Coming soon
+
+Hippius VMs: https://docs.hippius.com/use/console/virtual-machines
 
 ## Documentation
 
