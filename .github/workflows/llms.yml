@@ -5,9 +5,10 @@ name: llms
 # Strict mode is the Monday run and a manual run. It fails until every leaf
 # pull request below is on the default branch:
 #   hippius-s3 (staging), hippius-hub, hippius-desktop, hippius-mem, arion,
-#   hippius-drive-sdk, hippius-sdk, hippius-cli, hippius-storage-miner,
-#   hippius-rust-sdk, hippius-sync-engine, hippius-validator, hippius-cvm,
-#   homebrew-tap, and this file on main.
+#   hippius-drive-sdk, hippius-validator, and this file on main.
+# Deprecated public repos are named in static/llms.txt and have no llms.txt:
+#   hippius-cli, homebrew-tap, hippius-storage-miner, hippius-sdk,
+#   hippius-rust-sdk, hippius-sync-engine, hippius-cvm.
 # The agent eval and the live smoke also wait for that, and they no-op with a
 # warning when their secrets are absent.
 #

@@ -42,16 +42,9 @@ LEAF_FACTS = {
     "hippius-hub": (["REGISTRY_MIN_CREDITS", "10"], []),
     "hippius-desktop": (["desktop-app", "unlock password"], []),
     "hippius-mem": (["FOR-AGENTS.md"], []),
-    "hippius-cli": (["Do not install", "deprecated"], []),
-    "hippius-storage-miner": (["Arion", "Do not"], []),
     "arion": (["running-miner"], []),
     "hippius-drive-sdk": (["recovery", "ciphertext"], []),
-    "hippius-sdk": (["Do not", "s3.hippius.com"], []),
-    "hippius-rust-sdk": (["Do not"], []),
-    "hippius-sync-engine": (["Do not"], []),
     "hippius-validator": (["installing-validator"], []),
-    "hippius-cvm": (["coming soon"], []),
-    "homebrew-tap": (["Do not"], []),
 }
 
 

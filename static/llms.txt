@@ -18,16 +18,6 @@ Open only the file for the product you need. The long S3 ingest is still https:/
 | Run a storage miner | https://docs.hippius.com/earn/arion/running-miner and https://raw.githubusercontent.com/thenervelab/arion/main/llms.txt |
 | Run a validator | https://docs.hippius.com/earn/installing-validator and https://raw.githubusercontent.com/thenervelab/hippius-validator/main/llms.txt |
 
-These public repos have an `llms.txt` whose job is to stop an agent using them:
-
-- https://raw.githubusercontent.com/thenervelab/hippius-cli/main/llms.txt (`hipc`, deprecated)
-- https://raw.githubusercontent.com/thenervelab/homebrew-tap/main/llms.txt (`brew install hipc`, deprecated)
-- https://raw.githubusercontent.com/thenervelab/hippius-storage-miner/main/llms.txt (IPFS-era miner Ansible)
-- https://raw.githubusercontent.com/thenervelab/hippius-sdk/main/llms.txt (Python package, IPFS storage commands)
-- https://raw.githubusercontent.com/thenervelab/hippius-rust-sdk/main/llms.txt
-- https://raw.githubusercontent.com/thenervelab/hippius-sync-engine/main/llms.txt
-- https://raw.githubusercontent.com/thenervelab/hippius-cvm/main/llms.txt (VMs are not self-serve)
-
 ## Account, sign-in, and paying
 
 Full console guide: https://docs.hippius.com/use/console/getting-started
@@ -45,12 +35,15 @@ Hub Free plan: creating a namespace requires at least 10 credits on the account 
 
 ## Do not use
 
-- `hipc` and `brew install hipc`. The IPFS CLI is deprecated: https://docs.hippius.com/cli/usage
-- `hippius-sdk` (Python) for uploads and downloads. Its IPFS storage path is gone. S3 is the storage API.
+These public repos have no agent file. Do not look for `llms.txt` in them.
+
+- `hipc` and `brew install hipc` (`hippius-cli`, `homebrew-tap`). The IPFS CLI is deprecated: https://docs.hippius.com/cli/usage
+- `hippius-sdk` (Python package `hippius`) for uploads and downloads. Its IPFS storage path is gone. S3 is the storage API. Chain registration still installs that package: https://docs.hippius.com/earn/register-in-blockchain
 - `hippius-sdk-ts`, `hippius-sdk-rust`, `hippius-rust-sdk`, `hippius-sync-engine`. Old IPFS-era clients.
-- The IPFS Ansible miner in `hippius-storage-miner` for a new machine. Current miners run Arion.
+- The IPFS Ansible miner in `hippius-storage-miner` for a new machine. Current miners run Arion: https://docs.hippius.com/earn/arion/running-miner
 - IPFS pinning. Hippius storage no longer runs on IPFS.
-- Virtual machines as a product a user can launch today. The console shows them as coming soon.
+- Virtual machines as a product a user can launch today. The console shows them as coming soon: https://docs.hippius.com/use/console/virtual-machines
+- `hippius-cvm` is the confidential-VM control plane. There is no console flow that launches one.
 
 ## Documentation
 
