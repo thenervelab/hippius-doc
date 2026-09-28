@@ -26,6 +26,7 @@ import type { Props } from "@theme/DocSidebarItem/Category";
 import Graphsheet from "@site/src/components/graphsheet";
 import { ChevronDown } from "@site/src/components/ui/icons";
 import cn from "@site/src/utils/cn";
+import { sidebarRowSize } from "@site/src/utils/sidebar";
 
 // If we navigate to a category and it becomes active, it should automatically
 // expand itself
@@ -171,7 +172,7 @@ export default function DocSidebarItemCategory({
       )}
     >
       <div
-        className={clsx("menu__list-item-collapsible relative text-base", {
+        className={clsx("menu__list-item-collapsible relative", {
           "menu__list-item-collapsible--active": isCurrentPage,
         })}
       >
@@ -202,7 +203,8 @@ export default function DocSidebarItemCategory({
 
         <Link
           className={clsx(
-            "menu__link relative py-3 w-full flex justify-between",
+            "menu__link relative w-full flex justify-between",
+            sidebarRowSize(level),
             {
               "menu__link--sublist": collapsible,
               // "menu__link--sublist-caret": !href && collapsible,

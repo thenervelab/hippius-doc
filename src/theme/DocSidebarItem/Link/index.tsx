@@ -6,6 +6,7 @@ import Link from "@docusaurus/Link";
 import isInternalUrl from "@docusaurus/isInternalUrl";
 import IconExternalLink from "@theme/Icon/ExternalLink";
 import type { Props } from "@theme/DocSidebarItem/Link";
+import { sidebarRowSize } from "@site/src/utils/sidebar";
 
 import styles from "./styles.module.css";
 
@@ -32,7 +33,8 @@ export default function DocSidebarItemLink({
     >
       <Link
         className={clsx(
-          "menu__link relative text-sm",
+          "menu__link relative",
+          sidebarRowSize(level),
           !isInternalLink && styles.menuExternalLink,
           {
             "text-primary-50": isActive,

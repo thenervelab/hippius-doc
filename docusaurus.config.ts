@@ -41,7 +41,6 @@ const config: Config = {
         },
       };
     },
-    require.resolve("./plugins/inline-critical-css.cjs"),
   ],
 
   // Add custom scripts
@@ -277,6 +276,10 @@ const config: Config = {
             {
               label: "GitHub",
               href: "https://github.com/thenervelab/hippius-doc",
+            },
+            {
+              label: "LinkedIn",
+              href: "https://www.linkedin.com/company/hippius",
             },
           ],
         },

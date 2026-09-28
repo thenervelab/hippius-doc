@@ -37,6 +37,15 @@ const sidebars: SidebarsConfig = {
       label: "Use",
       collapsed: false,
       items: [
+        // Product-level entry point for Drive. The per-app Drive guides stay
+        // under Desktop App, Mobile App and Console and are linked from these
+        // pages, not listed here, so only one sidebar section is active at a time.
+        {
+          type: "category",
+          label: "Drive",
+          collapsed: true,
+          items: ["use/drive/quickstart", "use/drive/choose-your-app"],
+        },
         {
           type: "category",
           label: "S3 Storage",
