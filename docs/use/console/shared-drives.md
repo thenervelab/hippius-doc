@@ -38,15 +38,19 @@ A single folder can be shared as **Viewer** or **Editor**. Nobody manages a fold
 <Ordered>
   <li>Go to <strong>Drive</strong> → <strong>My Drives</strong>.</li>
   <li>Open the menu (three dots) on the drive's row and choose <BgStyledText>Share drive</BgStyledText>.</li>
-  <li>In the Share dialog, add people by email, or create an invite link and send it yourself. You can do both, as often as you like.</li>
+  <li>In the Share dialog, pick <strong>By email</strong> to invite someone by their address, or <strong>By link</strong> to create an invite link and send it yourself. You can use both, as often as you like.</li>
   <li>Press <BgStyledText>Done</BgStyledText> when you're finished. Everything you did has already taken effect.</li>
 </Ordered>
 
 <Screenshot src="/img/console/shared-drives/owner-share-drive-menu.png" alt="The row menu of a drive in My Drives, with Share drive" dark raw />
 
-The Share dialog works the way you might know from other drive apps. **Invite people** sends someone their own invite by email. **People with access** lists everyone who can get in, and is where you change a role or remove someone. **General access** creates an invite link.
+You can also start from **Drive** → **Shared Drives**: press <BgStyledText>Share a drive</BgStyledText>, pick one of your drives, and press <BgStyledText>Continue</BgStyledText>. The list tells you which of your drives are already shared, and with how many people. It opens the same Share dialog.
 
-<Screenshot src="/img/console/shared-drives/share-dialog.png" alt="The Share dialog for a drive, with people, a pending email invite and the invite link controls" dark raw />
+<Screenshot src="/img/console/shared-drives/share-a-drive-picker.png" alt="The Share a drive picker, listing your drives and whether each one is shared" dark raw />
+
+The Share dialog works the way you might know from other drive apps. At the top are two tabs. **By email** sends someone their own invite. **By link** creates an invite link you can send however you like. The console remembers which tab you used last. Below them, **People with access** lists everyone who can get in, and is where you change a role or remove someone.
+
+<Screenshot src="/img/console/shared-drives/share-dialog.png" alt="The Share dialog for a drive on the By email tab, with the people who have access and an email invite that is waiting" dark raw />
 
 "Share drive" is different from **Share via public link** in the same menu. A public link hands out a read only copy to anyone, with no account needed. See [Shared Links](/use/console/shared-links) for that.
 
@@ -59,8 +63,7 @@ Sometimes you only want someone to see one folder, like the files for one client
 <Ordered>
   <li>Open the drive and find the folder.</li>
   <li>Open the folder's menu and choose <BgStyledText>Share folder</BgStyledText>.</li>
-  <li>Under <strong>General access</strong>, pick <strong>Viewer</strong> or <strong>Editor</strong> and how long the link lasts, then press <BgStyledText>Create link</BgStyledText>.</li>
-  <li>Send the link to the one person it is for.</li>
+  <li>On <strong>By email</strong>, type their address, pick <strong>Viewer</strong> or <strong>Editor</strong> and press <BgStyledText>Send invite</BgStyledText>. Or on <strong>By link</strong>, pick the role and how long the link lasts, press <BgStyledText>Create link</BgStyledText>, and send the link to the one person it is for.</li>
 </Ordered>
 
 <Screenshot src="/img/console/shared-drives/share-folder-dialog.png" alt="The Share dialog for a single folder, offering Viewer and Editor" dark raw />
@@ -70,8 +73,7 @@ The person you invite sees that folder and everything inside it, and nothing els
 A few things work differently for a folder:
 
 <Unordered>
-  <li><strong>A folder is shared by link, not by email.</strong> Our server doesn't send email invites for a single folder yet, so create a link and send it yourself.</li>
-  <li><strong>Each folder link is for one person.</strong> It works once, for the first person who opens it, and lasts up to 30 days. Make one link per person.</li>
+  <li><strong>Each folder invite is for one person.</strong> An email invite goes to one address, and a folder link works once, for the first person who opens it, and lasts up to 30 days. Make one link per person.</li>
   <li><strong>People who have the whole drive can open the folder too.</strong> They appear in the folder's list, but you manage their access on the drive.</li>
 </Unordered>
 
@@ -83,25 +85,28 @@ There is no way to change someone's role on a single folder in place. To give th
 
 ## Inviting People by Email
 
-An email invite is for one person and works once. It lasts 7 days when you send it from the console. Type an address under **Invite people**, pick **Viewer** or **Editor**, and press <BgStyledText>Send invite</BgStyledText>.
+An email invite is for one person and works once. It lasts 7 days when you send it from the console. In the Share dialog, stay on **By email**, type an address, pick **Viewer** or **Editor**, and press <BgStyledText>Send invite</BgStyledText>. You can invite to a whole drive or to a single folder this way.
 
-The email carries no key, so a forwarded invite is useless to anyone else. Here is what happens next:
+If your files are locked, the console asks for your [unlock password](/use/console/unlock-password) first, then sends the invite. That's because the drive's key is packed into the invite for the person you're inviting, and only you can open that key. Cancel, and nothing is sent: the address stays in the box.
 
-<Ordered>
-  <li>They open the link in the email and sign in with the <strong>same address the invite was sent to</strong>.</li>
-  <li>Their row in your Share dialog changes to <strong>Opened</strong>.</li>
-  <li>While your console is open and unlocked, it delivers the drive key for you, and they join a few seconds later. The <a href="/use/desktop/shared-drives">Hippius desktop app</a> does the same while you're signed in to it. A Manager's console or app can deliver it too.</li>
-</Ordered>
+The email itself carries no key, so a forwarded invite is useless to anyone else. What happens next depends on whether the person already uses Hippius:
 
-If nobody on your side has the console or the desktop app open, the invite waits. You can also let them in straight away: open the invite in the Share dialog or in **Manage access** and press <BgStyledText>Approve</BgStyledText>. You'll need to be unlocked to do it.
+<Unordered>
+  <li><strong>They already have a Hippius account.</strong> They open the link in the email, sign in with the <strong>same address the invite was sent to</strong>, and join straight away. Nobody on your side needs to be online.</li>
+  <li><strong>They're new to Hippius.</strong> They create an account with that address, then wait a moment on the invite page. The drive key is delivered the next time your console is open and unlocked, or the <a href="/use/desktop/shared-drives">Hippius desktop app</a> is signed in. A Manager's console or app can deliver it too.</li>
+</Unordered>
+
+Once they have opened the invite, their row in your Share dialog says <strong>Opened</strong>. If it's waiting and you want to let them in right now, open it in the Share dialog or in **Manage access** and press <BgStyledText>Approve</BgStyledText>.
 
 To add a **Manager**, invite them as an Editor, then change their role once they have joined. Email invites can't make someone a Manager.
 
-If you send a lot of invites in a short time, the console asks you to wait a few minutes before sending more.
+To keep invites from being used for spam, there's a limit on how many you can send in an hour and in a day, and on how often you can invite the same address in one day. If you reach it, the console tells you how long to wait.
 
 ## Sharing With an Invite Link
 
-An invite link lets in whoever opens it, until it expires or is used up. When you press <BgStyledText>Create link</BgStyledText>, the console copies the link for you. You can copy it again from the dialog, or from **Manage access** later on.
+An invite link lets in whoever opens it, until it expires or is used up. On the **By link** tab, pick the role and how long the link lasts, then press <BgStyledText>Create link</BgStyledText>. The console copies the link for you. You can copy it again from the dialog, or from **Manage access** later on, and <BgStyledText>Create another link</BgStyledText> makes a fresh one.
+
+<Screenshot src="/img/console/shared-drives/share-dialog-link.png" alt="The By link tab of the Share dialog, with a new invite link ready to copy" dark raw />
 
 | Link | Who it lets in | How long it lasts |
 |---|---|---|
@@ -133,9 +138,11 @@ Your files in Hippius are protected by your unlock password, and joining keeps y
 
 Open the link in the email and sign in with the address it was sent to. If you sign in with a different one, the console tells you the invite was sent to a different address, and the invite stays waiting for the right account.
 
-<Screenshot src="/img/console/shared-drives/invite-waiting.png" alt="An email invite waiting for the drive key" dark raw />
+The console then asks for your unlock password, and in most cases you join straight away: the person who invited you already packed the drive key into the invite for you.
 
-The page then says **Waiting to join**. Keep it open and you join as soon as the owner's (or a Manager's) console or desktop app delivers the drive key. You can also close it and come back to the same link later.
+If you only just created your account, the page may say **Waiting to join** instead. Keep it open and you join as soon as the owner's (or a Manager's) console or desktop app delivers the drive key. You can also close it and come back to the same link later.
+
+<Screenshot src="/img/console/shared-drives/invite-waiting.png" alt="An email invite waiting for the drive key" dark raw />
 
 :::note Signed in with an access key?
 Accounts that sign in with an access key have no email address on file, so they can't accept an email invite. Ask the person who invited you for an invite link instead.
@@ -143,17 +150,23 @@ Accounts that sign in with an access key have no email address on file, so they 
 
 ## Working in a Shared Drive
 
-Drives and folders shared with you live under **Drive** → **Shared Drives** in the sidebar. The entry appears once you have joined something, so if nobody has shared with you yet, you won't see it.
+Drives and folders shared with you live under **Drive** → **Shared Drives** in the sidebar. The page is always there. Until someone shares with you, it explains what shared drives are and offers <BgStyledText>Share a drive</BgStyledText> so you can start one yourself.
+
+<Screenshot src="/img/console/shared-drives/shared-drives-empty.png" alt="The Shared Drives page before anything has been shared, with the Share a drive button" dark raw />
 
 <Screenshot src="/img/console/shared-drives/list.png" alt="The Shared Drives page, with two whole drives and a folder shared on its own" dark raw />
 
-Each row shows who owns it and your role there. Two people can both have a drive called "Design", so the owner is part of how you tell them apart. Your role is shown on the drive, not on every folder inside it, because it covers the whole drive.
+Each row shows who owns it, how many people are in it, its size and your role there. Two people can both have a drive called "Design", so the owner is part of how you tell them apart. Your role is shown on the drive, not on every folder inside it, because it covers the whole drive.
 
-A folder shared with you on its own shows up in the same list, marked **Folder in a drive**. You see that folder and what's inside it, and nothing else.
+A folder shared with you on its own shows up in the same list, marked **Folder in a drive**. You see that folder and what's inside it, and nothing else. Its size is the size of that folder, and its **Members** column shows a dash.
 
 Open a shared drive and you get the same file browser as your own Drive, with search, previews and downloads. Uploads, renames and deletes are there if your role allows them. The breadcrumb starts at **Shared Drives**, so going up takes you back to the list.
 
-<Screenshot src="/img/console/shared-drives/inside-drive.png" alt="Browsing inside a shared drive as a Manager" dark raw />
+<Screenshot src="/img/console/shared-drives/inside-drive.png" alt="Browsing inside a shared drive as a Manager, with who added each file" dark raw />
+
+The **Added by** column tells you who put each file there, by name. Files added before we started recording this show as **Owner**. To see only one person's files, use the **Added by** filter above the list: it lists the owner, the members by name, and **Not recorded (shown as Owner)** for those older files.
+
+<Screenshot src="/img/console/shared-drives/added-by-filter.png" alt="The Added by filter open, listing the owner and members by name" dark raw />
 
 Anything you upload to a shared drive is stored in the owner's drive and counts towards their storage, not yours.
 
@@ -174,7 +187,7 @@ If you own the drive or are one of its Managers, you can:
   <li><strong>Remove someone.</strong> They lose access at once, and the drive disappears from their list.</li>
   <li><strong>Cancel an invite</strong> that hasn't been accepted, or <strong>approve</strong> one that is waiting for its key.</li>
   <li><strong>Revoke a link</strong> so nobody new can join with it.</li>
-  <li><strong>Invite more people</strong> with <BgStyledText>Share</BgStyledText>.</li>
+  <li><strong>Invite more people</strong> with <BgStyledText>Invite</BgStyledText>, or make a new link with <BgStyledText>New link</BgStyledText>. Each opens the Share dialog on the matching tab.</li>
 </Unordered>
 
 Removing someone, cancelling an invite and revoking a link each ask you to confirm right there in the row, so you never lose your place.
@@ -195,7 +208,7 @@ If the owner or a Manager removes you, the drive disappears from your Shared Dri
 
 Sharing a drive or a folder, sending email invites, creating invite links and approving email invites are included with the **Plus**, **Max** and **Scale** Drive plans. See [Drive plans](/use/console/billing#drive-plans).
 
-On **Free** and **Starter**, the Share dialog shows an upgrade prompt in place of the controls that add people. Anyone who already has access keeps it, and you can still see and remove them, so moving to a smaller plan never locks you out of your own drive.
+On **Free** and **Starter**, the Share dialog shows an upgrade prompt in place of the tabs that add people, and so does **Share a drive** on the Shared Drives page. Anyone who already has access keeps it, and you can still see and remove them, so moving to a smaller plan never locks you out of your own drive.
 
 <Screenshot src="/img/console/shared-drives/upgrade-card.png" alt="The upgrade prompt in the Share dialog on a plan without sharing" dark raw />
 

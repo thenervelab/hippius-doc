@@ -39,13 +39,17 @@ A single folder can be shared as **Viewer** or **Editor**. Nobody manages a fold
 <Ordered>
   <li>Open <BgStyledIconWithText text="Drive" icon="Category" /> and find the drive in your list of folders.</li>
   <li>Open its menu (three dots) and choose <BgStyledText>Share drive…</BgStyledText>.</li>
-  <li>In the Share dialog, add people by email, or create an invite link and send it yourself.</li>
+  <li>In the Share dialog, pick <strong>By email</strong> to invite someone by their address, or <strong>By link</strong> to create an invite link and send it yourself.</li>
   <li>Press <BgStyledText>Done</BgStyledText> when you're finished. Everything you did has already taken effect.</li>
 </Ordered>
 
 <Screenshot src="/img/desktop/shared-drives/share-drive-menu.png" alt="A drive's menu in the desktop app, with Share drive" dark raw />
 
-The Share dialog has three parts, the same as in the console. **Invite people** sends someone their own invite by email. **People with access** lists everyone who can get in, and is where you change a role or remove someone. **General access** creates an invite link.
+You can also press <BgStyledText>Share a drive</BgStyledText> under **Shared with Me** on the Drive page, pick one of your drives and press <BgStyledText>Continue</BgStyledText>. The list tells you which of your drives are already shared, and with how many people. It opens the same Share dialog.
+
+{/* Screenshot to add: static/img/desktop/shared-drives/share-a-drive-picker.png and share-a-drive-picker-dark.png, the Share a drive picker with three or four drives, one selected. */}
+
+The Share dialog works the same as in the console. At the top are two tabs. **By email** sends someone their own invite. **By link** creates an invite link. The app remembers which tab you used last. Below them, **People with access** lists everyone who can get in, and is where you change a role or remove someone.
 
 <Screenshot src="/img/desktop/shared-drives/share-dialog.png" alt="The Share dialog in the desktop app" dark raw />
 
@@ -55,15 +59,17 @@ Once people have joined, the drive's row shows **Shared with** and the number of
 
 ### Inviting people by email
 
-Type an address under **Invite people**, pick **Viewer** or **Editor**, and press <BgStyledText>Send invite</BgStyledText>. The invite is for that one person, works once and lasts 7 days. The email carries no key, so a forwarded invite is useless to anyone else.
+On **By email**, type an address, pick **Viewer** or **Editor**, and press <BgStyledText>Send invite</BgStyledText>. The invite is for that one person, works once and lasts 7 days. The email carries no key, so a forwarded invite is useless to anyone else.
 
-The person opens the link in the email and signs in to the console with the address it was sent to. Then the app takes it from there: see [Keys are delivered for you](#keys-are-delivered-for-you).
+If the app is locked, it asks for your unlock password first, then sends the invite. That's because the drive's key is packed into the invite for the person you're inviting. Cancel, and nothing is sent: the address stays in the box.
+
+The person opens the link in the email and signs in to the console with the address it was sent to. If they already use Hippius, they join straight away, even if your app is closed. If they're new, see [Keys are delivered for you](#keys-are-delivered-for-you).
 
 To add a **Manager**, invite them as an Editor, then change their role once they have joined. Email invites can't make someone a Manager.
 
 ### Sharing with an invite link
 
-Under **General access**, pick the role the link gives and how long it lasts, then press <BgStyledText>Create link</BgStyledText>. Press <BgStyledText>Copy</BgStyledText> and send the link yourself.
+On **By link**, pick the role the link gives and how long it lasts, then press <BgStyledText>Create link</BgStyledText>. Press <BgStyledText>Copy</BgStyledText> and send the link yourself.
 
 | Link | Who it lets in | How long it lasts |
 |---|---|---|
@@ -78,7 +84,9 @@ Anyone holding the full link can join. The part after the `#` carries the drive'
 
 ## Keys Are Delivered for You {#keys-are-delivered-for-you}
 
-When someone opens an email invite and signs in with the right address, they still need the drive's key. You don't have to do anything for that: while you're signed in to the desktop app and it is unlocked, it delivers the key in the background, and the person joins shortly after. The app lets you know with a message such as "priya@example.com can join Team Files."
+Most of the time there's nothing to deliver: when you send an email invite to someone who already uses Hippius, the drive's key goes into the invite, and they join as soon as they open it.
+
+Someone who is new to Hippius needs the key delivered after they create their account. You don't have to do anything for that either: while you're signed in to the desktop app and it is unlocked, it delivers the key in the background, and the person joins shortly after. The app lets you know with a message such as "priya@example.com can join Team Files." If the key couldn't go into the invite when you sent it, the app says they may need approving when they open it.
 
 Your Managers' apps do the same, and so does the console while it is open and unlocked. Whoever gets there first lets them in. This works the same for an invite to a single folder as for a whole drive.
 
@@ -91,8 +99,7 @@ Sometimes you only want someone to see one folder, like the files for one client
 <Ordered>
   <li>Open the drive and find the folder.</li>
   <li>Open the folder's menu and choose <BgStyledText>Share folder</BgStyledText>.</li>
-  <li>Under <strong>General access</strong>, pick <strong>Viewer</strong> or <strong>Editor</strong> and how long the link lasts (24 hours, 7 days or 30 days), then press <BgStyledText>Create link</BgStyledText>.</li>
-  <li>Copy the link and send it to the one person it is for.</li>
+  <li>On <strong>By email</strong>, type their address, pick <strong>Viewer</strong> or <strong>Editor</strong> and press <BgStyledText>Send invite</BgStyledText>. Or on <strong>By link</strong>, pick the role and how long the link lasts (24 hours, 7 days or 30 days), press <BgStyledText>Create link</BgStyledText>, and send the link to the one person it is for.</li>
 </Ordered>
 
 <Screenshot src="/img/desktop/shared-drives/share-folder-dialog.png" alt="Sharing a single folder from the desktop app" dark raw />
@@ -102,8 +109,7 @@ A Viewer can open and download what's in the folder. An Editor can also upload, 
 A few things work differently for a folder, the same as in the [console](/use/console/shared-drives#sharing-a-single-folder):
 
 <Unordered>
-  <li><strong>A folder is shared by link, not by email.</strong> Our server doesn't send email invites for a single folder yet. If you type an address, the app tells you so, and you can create a link and send it yourself instead.</li>
-  <li><strong>Each folder link is for one person.</strong> It works once, for the first person who opens it, and lasts up to 30 days. Make one link per person.</li>
+  <li><strong>Each folder invite is for one person.</strong> An email invite goes to one address, and a folder link works once, for the first person who opens it, and lasts up to 30 days. Make one link per person.</li>
   <li><strong>People who have the whole drive can open the folder too.</strong> They appear in the folder's list, but you manage their access on the drive.</li>
 </Unordered>
 
@@ -123,7 +129,7 @@ If you own the drive or are one of its Managers, you can:
   <li><strong>Change which folders someone has</strong>, for a person you gave single folders to. Choose <BgStyledText>Change folders</BgStyledText> in the menu beside their name, then untick a folder to take it away, or type the path of another folder in the drive and pick Viewer or Editor to add it. Folders they already have keep their access. They must keep at least one folder; to take everything away, remove them instead.</li>
   <li><strong>Cancel an invite</strong> that hasn't been accepted, or <strong>approve</strong> one that is waiting for its key.</li>
   <li><strong>Copy or revoke a link.</strong> A revoked link lets nobody new in, and people who already joined keep their access.</li>
-  <li><strong>Invite more people</strong> with <BgStyledText>Share</BgStyledText>.</li>
+  <li><strong>Invite more people</strong> with <BgStyledText>Invite</BgStyledText>, or make a new link with <BgStyledText>New link</BgStyledText>. Each opens the Share dialog on the matching tab.</li>
 </Unordered>
 
 Removing someone, cancelling an invite, revoking a link and lowering someone's role each ask you to confirm right there in the row. When you move a Manager to another role, the invite links they created stop working too, so a spare link can't give them their old access back.
@@ -142,9 +148,11 @@ Joining is free on every plan, because the owner pays for the storage. Once you'
 
 ## Drives Shared With You
 
-Drives you've joined are listed under **Shared with Me**, below your own drives on the Drive page and in <BgStyledIconWithText text="Settings" icon="Settings" /> → **Sync & Storage**. The section appears once you have joined something.
+Drives you've joined are listed under **Shared with Me**, below your own drives on the Drive page, and also in <BgStyledIconWithText text="Settings" icon="Settings" /> → **Sync & Storage**. On the Drive page the section is always there: until someone shares with you, it explains what shared drives are and offers <BgStyledText>Share a drive</BgStyledText> so you can start one yourself.
 
 <Screenshot src="/img/desktop/shared-drives/shared-with-me.png" alt="Shared with Me in the desktop app" dark raw />
+
+{/* Screenshot to add: static/img/desktop/shared-drives/shared-with-me-empty.png and shared-with-me-empty-dark.png, the Drive page's Shared with Me section before anything is shared ("A place for teamwork" with Share a drive). */}
 
 Each row shows the drive's name, your role, who shared it and how big it is. From there you can:
 
@@ -155,9 +163,11 @@ Each row shows the drive's name, your role, who shared it and how big it is. Fro
 
 What you can change depends on your role. A Viewer who tries to add files is told they have Viewer access and can ask for Editor access. Anything you upload counts towards the owner's storage, not yours.
 
+When you browse a shared drive, the **Added by** column tells you who put each file there, by name. Files added before we started recording this show as **Owner**. To see only one person's files, use the **Added by** filter: it lists the owner, the members by name, and **Not recorded (shown as Owner)** for those older files.
+
 If the owner's account runs into a billing limit, the drive is marked **Frozen**. You can still open and download files, but nobody can change anything until the owner sorts out their billing.
 
-A folder someone shared with you on its own gets its own row in **Shared with Me**, next to the drives. It shows the folder's name, the drive it lives in, who shared it and your role. Click it on the Drive page to open the folder. You see that folder and what's inside it, and nothing else. A single folder can't be synced to your computer, so you always open it from the network, here or under **Shared Drives** in the [console](/use/console/shared-drives#working-in-a-shared-drive).
+A folder someone shared with you on its own gets its own row in **Shared with Me**, next to the drives. It shows the folder's name, the drive it lives in, who shared it, your role and the size of that folder. Click it on the Drive page to open the folder. You see that folder and what's inside it, and nothing else. A single folder can't be synced to your computer, so you always open it from the network, here or under **Shared Drives** in the [console](/use/console/shared-drives#working-in-a-shared-drive).
 
 ## Leaving a Shared Drive
 
@@ -173,7 +183,7 @@ You lose access to its files and the drive stops syncing. Anything already on yo
 
 Sharing a drive or a folder, sending email invites, creating invite links and approving email invites are included with the **Plus**, **Max** and **Scale** Drive plans. See [Billing](/use/desktop/billing).
 
-On **Free** and **Starter**, the Share dialog still opens, but an upgrade prompt stands in for the controls that add people. Anyone who already has access keeps it, and you can still see and remove them. <BgStyledText>Upgrade plan</BgStyledText> takes you to the plans in Settings.
+On **Free** and **Starter**, the Share dialog still opens, but an upgrade prompt stands in for the tabs that add people, and so does **Share a drive**. Anyone who already has access keeps it, and you can still see and remove them. <BgStyledText>Upgrade plan</BgStyledText> takes you to the plans in Settings.
 
 <Screenshot src="/img/desktop/shared-drives/upgrade-card.png" alt="The sharing upgrade prompt in the desktop app" dark raw />
 
