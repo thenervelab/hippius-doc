@@ -28,7 +28,7 @@ ROOT_FACTS = (
     "https://docs.hippius.com/use/mobile/getting-started",
     "https://raw.githubusercontent.com/thenervelab/hippius-s3/staging/llms.txt",
     "https://raw.githubusercontent.com/thenervelab/hippius-hub/main/llms.txt",
-    "https://raw.githubusercontent.com/thenervelab/hippius-desktop/main/llms.txt",
+    "https://raw.githubusercontent.com/thenervelab/hippius-desktop/staging/llms.txt",
     "https://raw.githubusercontent.com/thenervelab/hippius-mem/main/llms.txt",
     "https://raw.githubusercontent.com/thenervelab/arion/main/llms.txt",
     "https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt",

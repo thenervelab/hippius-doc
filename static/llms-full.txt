@@ -156,15 +156,15 @@ Scoped credentials: per-bucket, read-only or read/write, optional expiry.
 Create in Console > S3 Buckets (https://docs.hippius.com/use/console/s3) or via Management API.
 Rotate keeps the Access Key ID and issues a new secret. Revoke is immediate.
 
-    curl -X POST https://api.hippius.com/objectstore/sub-tokens/ \
+    curl -X POST https://api.hippius.com/api/objectstore/sub-tokens/ \
       -H "Authorization: Token YOUR_BEARER_TOKEN" \
       -H "Content-Type: application/json" \
       -d '{"name": "read-only-backup", "permissions": ["read"]}'
 
-    curl -X POST https://api.hippius.com/objectstore/master-tokens/{id}/revoke/ \
+    curl -X POST https://api.hippius.com/api/objectstore/master-tokens/{id}/revoke/ \
       -H "Authorization: Token YOUR_BEARER_TOKEN"
 
-    curl -X POST https://api.hippius.com/objectstore/master-tokens/{id}/rotate/ \
+    curl -X POST https://api.hippius.com/api/objectstore/master-tokens/{id}/rotate/ \
       -H "Authorization: Token YOUR_BEARER_TOKEN"
 
 ### Large files
@@ -486,10 +486,10 @@ Auth: POST /auth/exchange/ with OAuth token → bearer token for API calls
 ### Endpoints
 
 Token management:
-    GET/POST /objectstore/master-tokens/
-    POST /objectstore/master-tokens/{id}/revoke/
-    POST /objectstore/master-tokens/{id}/rotate/
-    GET/POST /objectstore/sub-tokens/
+    GET/POST https://api.hippius.com/api/objectstore/master-tokens/
+    POST https://api.hippius.com/api/objectstore/master-tokens/{id}/revoke/
+    POST https://api.hippius.com/api/objectstore/master-tokens/{id}/rotate/
+    GET/POST https://api.hippius.com/api/objectstore/sub-tokens/
 
 Billing:
     GET  /billing/credits/balance/

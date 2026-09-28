@@ -33,7 +33,15 @@ This guide walks you through installation, sync, sharing, and everything in betw
 
 ## Installing the Desktop App
 
-To install the desktop app, click on one of the suitable download link below. Once downloaded, follow the steps below.
+To install the desktop app, use the download page or the release marked Latest.
+
+- Download page: https://hippius.com/desktop-app
+- Latest release: https://github.com/thenervelab/hippius-desktop/releases/latest
+  - macOS: `Hippius_universal.dmg`
+  - Windows: `Hippius_<version>_x64-setup.exe` or the `.msi`
+  - Linux (Debian and Ubuntu, x86_64): `Hippius_<version>_amd64.deb`
+
+The buttons below open that same release.
 
 <DownloadLinks/>
 
@@ -41,7 +49,7 @@ To install the desktop app, click on one of the suitable download link below. On
 
 <Ordered>
 <li> Download the installation file.</li>
-<li>Open <BgStyledText>HippiusSetup.exe</BgStyledText> on Windows, <BgStyledText>Hippius.dmg</BgStyledText> on Mac, or <BgStyledText>Hippius.deb</BgStyledText> on Linux.</li>
+<li>Open <BgStyledText>Hippius_&lt;version&gt;_x64-setup.exe</BgStyledText> on Windows, <BgStyledText>Hippius_universal.dmg</BgStyledText> on Mac, or <BgStyledText>Hippius_&lt;version&gt;_amd64.deb</BgStyledText> on Linux.</li>
 
 <li> Follow the instructions on screen.</li>
 <li>After installation is complete, find the <Icon /> icon to open the app.</li>

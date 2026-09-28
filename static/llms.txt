@@ -10,7 +10,7 @@ Open only the file for the product you need. The long S3 ingest is still https:/
 |---|---|
 | Store or fetch files from code, rclone, or a backup tool | https://raw.githubusercontent.com/thenervelab/hippius-s3/staging/llms.txt |
 | Publish or pull a model or a container image | https://raw.githubusercontent.com/thenervelab/hippius-hub/main/llms.txt |
-| Sync folders on a computer | https://raw.githubusercontent.com/thenervelab/hippius-desktop/main/llms.txt |
+| Sync folders on a computer | https://raw.githubusercontent.com/thenervelab/hippius-desktop/staging/llms.txt |
 | Give a coding agent shared memory | https://raw.githubusercontent.com/thenervelab/hippius-mem/main/llms.txt |
 | Script Drive with encryption on the client | https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt |
 | Sign up, pay, get an API token, or manage Drive and S3 keys in the browser | https://docs.hippius.com/use/console/getting-started |

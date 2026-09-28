@@ -89,7 +89,7 @@ Ordered by impact on your rewards:
 
 For the complete specification — formulas, code references, worked examples, and configuration parameters — see the detailed weight calculation documentation:
 
-**[Hippius Subnet Weight Calculation — Full Technical Reference](https://github.com/thenervelab/thebrain/blob/main/readme_weights.md)**
+**[Hippius Subnet Weight Calculation — Full Technical Reference](https://raw.githubusercontent.com/thenervelab/thebrain/main/readme_weights.md)**
 
 ## Ready to Start?
 
