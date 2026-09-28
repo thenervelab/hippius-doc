@@ -48,7 +48,7 @@ hippius-hub login --username <you> --password <secret>   # docker creds, manual 
 | --- | --- |
 | `registry plans` | List pricing tiers and quotas |
 | `registry check <name>` | Is a namespace available? |
-| `registry provision <ns> [--docker-login]` | Create your namespace; new projects are public by default |
+| `registry provision <ns> [--docker-login]` | Create your namespace; new projects are public by default. The Free plan requires at least 10 credits on the account first (`REGISTRY_MIN_CREDITS`) |
 | `registry me` | Plan, quota, status, and robot login of your active project |
 | `registry repos [--page N --page-size M]` | List your repositories |
 | `registry artifacts <repo>` | List artifacts in one repo |

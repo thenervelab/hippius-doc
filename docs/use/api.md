@@ -39,7 +39,7 @@ The full API specification with request/response examples is available as an int
 </Unordered>
 
 :::tip For AI agents and LLMs
-A machine-readable summary is at [docs.hippius.com/llms.txt](https://docs.hippius.com/llms.txt) (index + recipes) and [docs.hippius.com/llms-full.txt](https://docs.hippius.com/llms-full.txt) (full ingest).
+A machine-readable index is at [docs.hippius.com/llms.txt](https://docs.hippius.com/llms.txt). It points at each product's own `llms.txt`. The long S3 ingest is [docs.hippius.com/llms-full.txt](https://docs.hippius.com/llms-full.txt).
 :::
 
 ## Authentication

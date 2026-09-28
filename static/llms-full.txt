@@ -2,8 +2,8 @@
 
 > Hippius is a distributed cloud storage platform backed by Arion distributed storage and a custom Substrate blockchain. It provides a fully S3-compatible API, a desktop app, a web console, and confidential compute. Any S3 client works out of the box.
 
-This file contains the full documentation for Hippius products, intended for LLM ingestion.
-For the condensed version, see https://docs.hippius.com/llms.txt
+This file is the long S3 ingest for agents.
+The product index is https://docs.hippius.com/llms.txt
 
 ## Table of Contents
 
@@ -42,7 +42,7 @@ Canonical docs URLs. Prefer these when linking or fetching.
 - Management API: https://docs.hippius.com/use/api
 - Console S3 Buckets: https://docs.hippius.com/use/console/s3
 - Console S3 Migrations: https://docs.hippius.com/use/console/migrations
-- Condensed agent file: https://docs.hippius.com/llms.txt
+- Product index: https://docs.hippius.com/llms.txt
 
 Old URLs that still resolve:
 - /storage/s3/integration → /storage/s3/advanced
