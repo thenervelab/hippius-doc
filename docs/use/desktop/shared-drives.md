@@ -3,7 +3,7 @@ id: shared-drives
 title: Shared Drives
 sidebar_label: Shared Drives
 slug: /use/desktop/shared-drives
-description: Share a drive from the Hippius desktop app, invite people by email or with a link, let the app deliver keys for you, and open or sync drives other people have shared with you.
+description: Share a drive or a single folder from the Hippius desktop app, invite people by email or with a link, let the app deliver keys for you, and open or sync drives other people have shared with you.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -16,7 +16,7 @@ import Screenshot from '@site/src/components/Screenshot';
 
 A Hippius shared drive lets a group of people work in the same encrypted files, each signed in to their own Hippius account. You can share a drive straight from the desktop app, and drives other people share with you can be opened, or synced to your computer like any other folder.
 
-Every drive belongs to one person, its owner. The owner pays for its storage and decides who gets in and what each person can do. Each folder you sync with the app is a drive you can share.
+Every drive belongs to one person, its owner. The owner pays for its storage and decides who gets in and what each person can do. Each folder you sync with the app is a drive you can share. You can also share just one folder inside a drive.
 
 Shared drives work the same way in the desktop app and in the [Hippius Console](/use/console/shared-drives), and you can use both. A drive you share from the app can be managed from the console, and the other way round.
 
@@ -31,6 +31,8 @@ When you let someone into a drive, you give them one of three roles:
 | **Manager** | Everything an Editor can do, plus invite people, change other people's roles, remove people, revoke links and approve email invites. |
 
 A Manager helps you run the drive, but it stays yours. Nobody can change their own role (a member leaves instead), and nobody can change or remove the owner.
+
+A single folder can be shared as **Viewer** or **Editor**. Nobody manages a folder on its own: the drive's owner and its Managers look after who has it.
 
 ## Sharing a Drive
 
@@ -78,26 +80,34 @@ Anyone holding the full link can join. The part after the `#` carries the drive'
 
 When someone opens an email invite and signs in with the right address, they still need the drive's key. You don't have to do anything for that: while you're signed in to the desktop app and it is unlocked, it delivers the key in the background, and the person joins shortly after. The app lets you know with a message such as "priya@example.com can join Team Files."
 
-Your Managers' apps do the same, and so does the console while it is open and unlocked. Whoever gets there first lets them in.
+Your Managers' apps do the same, and so does the console while it is open and unlocked. Whoever gets there first lets them in. This works the same for an invite to a single folder as for a whole drive.
 
 If nobody on your side has the app or the console open, the invite waits. You can let them in yourself: find the invite under **People with access** or in **Manage access** and press <BgStyledText>Approve</BgStyledText>. The invite shows as **Opened** while it waits for you.
 
 ## Sharing a Single Folder
 
-You can share one folder inside a drive you own, so someone sees that folder and nothing else.
+Sometimes you only want someone to see one folder, like the files for one client. You can share any folder inside a drive you own or manage, and the person sees that folder and everything in it, and nothing else. They don't see the rest of the drive, or even its name.
 
 <Ordered>
   <li>Open the drive and find the folder.</li>
   <li>Open the folder's menu and choose <BgStyledText>Share folder</BgStyledText>.</li>
-  <li>Under <strong>General access</strong>, choose how long the link lasts (24 hours, 7 days or 30 days) and press <BgStyledText>Create link</BgStyledText>.</li>
+  <li>Under <strong>General access</strong>, pick <strong>Viewer</strong> or <strong>Editor</strong> and how long the link lasts (24 hours, 7 days or 30 days), then press <BgStyledText>Create link</BgStyledText>.</li>
   <li>Copy the link and send it to the one person it is for.</li>
 </Ordered>
 
 <Screenshot src="/img/desktop/shared-drives/share-folder-dialog.png" alt="Sharing a single folder from the desktop app" dark raw />
 
-In the desktop app, a folder link gives **Viewer** access and works once, for the first person who opens it. For anything more, use the [console](/use/console/shared-drives#sharing-a-single-folder), where you can also give someone **Editor** access to a single folder.
+A Viewer can open and download what's in the folder. An Editor can also upload, rename and delete files inside it, but can't touch anything outside it.
 
-A folder shared on its own shows its own **Shared with** mark and its own <BgStyledText>Manage access</BgStyledText>, which lists only the people who have that folder. To change what someone can do in a folder, remove them and invite them again.
+A few things work differently for a folder, the same as in the [console](/use/console/shared-drives#sharing-a-single-folder):
+
+<Unordered>
+  <li><strong>A folder is shared by link, not by email.</strong> Our server doesn't send email invites for a single folder yet. If you type an address, the app tells you so, and you can create a link and send it yourself instead.</li>
+  <li><strong>Each folder link is for one person.</strong> It works once, for the first person who opens it, and lasts up to 30 days. Make one link per person.</li>
+  <li><strong>People who have the whole drive can open the folder too.</strong> They appear in the folder's list, but you manage their access on the drive.</li>
+</Unordered>
+
+A folder shared on its own shows its own **Shared with** mark and its own <BgStyledText>Manage access</BgStyledText>, which lists only the people who have that folder. From there you can change which folders someone has, or remove them. You can't change someone's role on a folder they already have: to give them different access, remove them and invite them again.
 
 ## Managing Who Has Access
 
@@ -110,6 +120,7 @@ If you own the drive or are one of its Managers, you can:
 <Unordered>
   <li><strong>Change someone's role</strong> from the menu beside their name. Changes apply right away.</li>
   <li><strong>Remove someone</strong> with <BgStyledText>Remove access</BgStyledText> in the same menu. They lose access at once.</li>
+  <li><strong>Change which folders someone has</strong>, for a person you gave single folders to. Choose <BgStyledText>Change folders</BgStyledText> in the menu beside their name, then untick a folder to take it away, or type the path of another folder in the drive and pick Viewer or Editor to add it. Folders they already have keep their access. They must keep at least one folder; to take everything away, remove them instead.</li>
   <li><strong>Cancel an invite</strong> that hasn't been accepted, or <strong>approve</strong> one that is waiting for its key.</li>
   <li><strong>Copy or revoke a link.</strong> A revoked link lets nobody new in, and people who already joined keep their access.</li>
   <li><strong>Invite more people</strong> with <BgStyledText>Share</BgStyledText>.</li>
@@ -146,20 +157,21 @@ What you can change depends on your role. A Viewer who tries to add files is tol
 
 If the owner's account runs into a billing limit, the drive is marked **Frozen**. You can still open and download files, but nobody can change anything until the owner sorts out their billing.
 
-A single folder that someone shared with you on its own isn't listed in the desktop app. Open it from **Shared Drives** in the [console](/use/console/shared-drives#working-in-a-shared-drive).
+A folder someone shared with you on its own gets its own row in **Shared with Me**, next to the drives. It shows the folder's name, the drive it lives in, who shared it and your role. Click it on the Drive page to open the folder. You see that folder and what's inside it, and nothing else. A single folder can't be synced to your computer, so you always open it from the network, here or under **Shared Drives** in the [console](/use/console/shared-drives#working-in-a-shared-drive).
 
 ## Leaving a Shared Drive
 
 <Unordered>
   <li>In <strong>Shared with Me</strong>, open the drive's menu and choose <BgStyledText>Leave drive</BgStyledText>.</li>
   <li>If you sync the drive, you can also choose <BgStyledText>Leave shared drive</BgStyledText> from its menu in your drive list.</li>
+  <li>For a folder shared with you on its own, choose <BgStyledText>Leave folder</BgStyledText> in its menu. You also lose any other folders of the same drive that were shared with you.</li>
 </Unordered>
 
 You lose access to its files and the drive stops syncing. Anything already on your computer stays there, and the owner can invite you again. You can also leave from the bottom of the <strong>Manage access</strong> or <strong>Who has access</strong> panel.
 
 ## Sharing and Your Plan
 
-Sharing a drive, sending email invites, creating invite links and approving email invites are included with the **Plus**, **Max** and **Scale** Drive plans. See [Billing](/use/desktop/billing).
+Sharing a drive or a folder, sending email invites, creating invite links and approving email invites are included with the **Plus**, **Max** and **Scale** Drive plans. See [Billing](/use/desktop/billing).
 
 On **Free** and **Starter**, the Share dialog still opens, but an upgrade prompt stands in for the controls that add people. Anyone who already has access keeps it, and you can still see and remove them. <BgStyledText>Upgrade plan</BgStyledText> takes you to the plans in Settings.
 
@@ -170,7 +182,7 @@ On a drive you manage for someone else, the owner's plan is the one that counts,
 ## Where to next
 
 <Unordered>
-  <li><a href="/use/console/shared-drives">Shared Drives in the console</a>: join invites, share single folders as Editor, and manage access from the browser.</li>
+  <li><a href="/use/console/shared-drives">Shared Drives in the console</a>: join invites and manage who has your drives and folders from the browser.</li>
   <li><a href="/use/desktop/drive">Drive</a>: your sync folders and files.</li>
   <li><a href="/use/desktop/shared-links">Shared Links</a>: share a file or folder with someone who has no Hippius account.</li>
   <li><a href="/use/desktop/billing">Billing</a>: the Drive plans that include sharing.</li>

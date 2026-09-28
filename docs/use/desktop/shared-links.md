@@ -283,7 +283,7 @@ Each active share uses storage quota. Revoke temporary shares when you're done w
 
 <Unordered>
   <li><a href="/use/desktop/drive">Drive</a>: manage your sync folders and uploads.</li>
-  <li><a href="/use/desktop/shared-drives">Shared Drives</a>: invite people with a Hippius account into a drive, with a role.</li>
+  <li><a href="/use/desktop/shared-drives">Shared Drives</a>: invite people with a Hippius account into a drive or a folder, with a role.</li>
   <li><a href="/use/console/shared-links">Console Shared Links</a>: the console version, where you can create shares from the web interface.</li>
   <li><a href="/use/desktop/billing">Billing</a>: manage credits before sharing large files.</li>
 </Unordered>
