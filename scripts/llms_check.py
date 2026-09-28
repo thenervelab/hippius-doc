@@ -44,7 +44,6 @@ LEAF_FACTS = {
     "hippius-mem": (["FOR-AGENTS.md"], []),
     "arion": (["running-miner"], []),
     "hippius-drive-sdk": (["recovery", "ciphertext"], []),
-    "hippius-validator": (["installing-validator"], []),
 }
 
 
