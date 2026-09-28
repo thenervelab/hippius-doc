@@ -18,12 +18,12 @@ export interface DownloadLinks {
 // Fallback URLs in case the GitHub API fails
 export const FALLBACK_DOWNLOAD_URLS: DownloadLinks = {
   windows:
-    "https://github.com/thenervelab/hippius-desktop/releases/download/v0.0.1/Hippius_0.0.1_x64-setup.exe",
+    "https://github.com/thenervelab/hippius-desktop/releases/download/v0.6.4/Hippius_0.6.4_x64-setup.exe",
   macos:
-    "https://github.com/thenervelab/hippius-desktop/releases/download/v0.0.1/Hippius_0.0.1_universal.dmg",
+    "https://github.com/thenervelab/hippius-desktop/releases/download/v0.6.4/Hippius_universal.dmg",
   linux:
-    "https://github.com/thenervelab/hippius-desktop/releases/download/v0.0.1/Hippius_0.0.1_amd64.deb",
-  version: "0.0.1",
+    "https://github.com/thenervelab/hippius-desktop/releases/download/v0.6.4/Hippius_0.6.4_amd64.deb",
+  version: "0.6.4",
 };
 
 export async function getLatestReleaseUrls(): Promise<DownloadLinks> {

@@ -4,7 +4,8 @@ name: llms
 # that is not merged yet does not fail this PR.
 # Strict mode is the Monday run and a manual run. It fails until every leaf
 # pull request below is on the default branch:
-#   hippius-s3 (staging), hippius-hub, hippius-desktop, hippius-mem, arion,
+#   hippius-s3 (staging), hippius-hub, hippius-desktop (staging until it
+#   promotes to main), hippius-mem, arion,
 #   hippius-drive-sdk, and this file on main.
 # hippius-validator has no agent file. The index points at the
 # installing-validator guide.

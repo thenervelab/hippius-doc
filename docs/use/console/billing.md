@@ -82,7 +82,7 @@ A Drive plan sets how much encrypted storage your Drive has. These are the plans
 
 <Screenshot src="/img/console/billing/drive-plans.png" alt="Drive storage plans" dark raw />
 
-**Who gets the free plan.** If you sign in with email, Google, GitHub or Apple, your account comes with the Free Drive Plan, and you fall back to it if you ever cancel a paid plan. Accounts that sign in with an **access key** do not include free storage, so you'll need to pick a plan before your first upload.
+**Who gets the free plan.** If you sign in with Google, GitHub, or Apple, your account comes with the Free Drive Plan, and you fall back to it if you ever cancel a paid plan. Accounts that sign in with an **access key** do not include free storage, so you'll need to pick a plan before your first upload.
 
 **Subscribing** takes a minute. Pick a plan, choose how to pay and confirm. After a card payment the console shows the plan activating. That usually finishes in under a minute, and you can leave the page while it does. In the rare case a card payment goes through but the plan does not activate, the money stays on your balance and you can subscribe from there.
 
