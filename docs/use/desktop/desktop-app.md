@@ -49,7 +49,7 @@ The buttons below open that same release.
 
 <Ordered>
 <li> Download the installation file.</li>
-<li>Open <BgStyledText>Hippius_&lt;version&gt;_x64-setup.exe</BgStyledText> on Windows, <BgStyledText>Hippius_universal.dmg</BgStyledText> on Mac, or <BgStyledText>Hippius_&lt;version&gt;_amd64.deb</BgStyledText> on Linux.</li>
+<li>Open <BgStyledText>{"Hippius_<version>_x64-setup.exe"}</BgStyledText> on Windows, <BgStyledText>{"Hippius_universal.dmg"}</BgStyledText> on Mac, or <BgStyledText>{"Hippius_<version>_amd64.deb"}</BgStyledText> on Linux.</li>
 
 <li> Follow the instructions on screen.</li>
 <li>After installation is complete, find the <Icon /> icon to open the app.</li>
