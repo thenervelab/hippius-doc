@@ -3,7 +3,7 @@ id: overview
 title: Overview
 sidebar_label: Overview
 slug: /use/console/overview
-description: 3
+description: What the console home page shows in Normal and Pro mode. Your latest uploads, your balance, storage per product, and shortcuts into Drive, S3, Hub and Billing.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -30,7 +30,7 @@ Three panels sit across the top of the page:
 
 <Unordered>
   <li><strong>Last Uploads</strong>: your most recently uploaded files with their file type and upload time.</li>
-  <li><strong>Available Credits</strong>: your current credit balance. Click the graph icon to expand your credit usage chart and see how your spending has changed over time.</li>
+  <li><strong>Account Balance</strong>: your current balance. Click the graph icon to expand the spending chart and see how your spending has changed over time.</li>
   <li><strong>Storage Usage</strong>: how much Drive storage you're using. Click the graph icon to expand your usage chart over time.</li>
 </Unordered>
 
@@ -55,7 +55,7 @@ Drive and S3 each get a storage card showing how much you've stored against the 
 When moving to an S3 plan would save you money, the card tells you how much, for example **Save 22%**. See [S3 plans](/use/console/billing#s3-plans-and-pay-as-you-go).
 
 :::warning No Drive plan means no uploads
-Without a Drive plan you can't upload anything new, and files already in your Drive are permanently deleted after **30 days**. The Drive card will say so and offer a plan. See [Drive plans](/use/console/billing#drive-plans).
+Without a Drive plan you can't upload anything new. Your files stay readable. The Drive card says so and offers a plan. See [Drive plans](/use/console/billing#drive-plans).
 :::
 
 [Shared drives](/use/console/shared-drives) that someone else owns don't count towards your Drive storage. Their owner pays for them.
