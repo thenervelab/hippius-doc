@@ -24,7 +24,7 @@ Hippius is a distributed cloud. It gives you **Drive**, encrypted file storage f
 | Surface | What it's for | Guide |
 |---|---|---|
 | **Web console** | Everything: Drive, S3 keys and buckets, migrations, Hub, your balance and plans, referrals, staking and the token bridge, support tickets. | [Console guide](/use/console/getting-started) |
-| **Desktop app** | Drive on Mac, Windows and Linux: sync folders, share from Finder, notifications, wallet. | [Desktop guide](/use/desktop/getting-started) |
+| **Desktop app** | Drive on Mac, Windows and Linux: sync folders, share from Finder, notifications. | [Desktop guide](/use/desktop/getting-started) |
 | **Mobile app** | Drive on your phone: photo and video backup, browse, preview and share. Android today, iPhone coming soon. | [Mobile guide](/use/mobile/getting-started) |
 | **Command line and code** | Any S3 client for S3 Storage, `hippius-hub` for the Hub, the Management API for your account, the HCFS API for Drive. | [API reference](/use/api) |
 
@@ -32,7 +32,7 @@ Hippius is a distributed cloud. It gives you **Drive**, encrypted file storage f
 
 Sign in with Google, GitHub or Apple at [console.hippius.com](https://console.hippius.com). A 12-word access key also signs in; an account created that way has no email address and no free Drive plan, so it needs a plan before its first upload. There is no email and password sign-in.
 
-Everything is paid from one balance in credits, 1 credit = 1 USD. Top up by card, TAO, Bitcoin or USDC, then pick a plan per product. [How paying works](/use/console/billing).
+Everything is paid from one balance in dollars. Top up by card, TAO, Bitcoin or USDC, then pick a plan per product. [How paying works](/use/console/billing).
 
 ## How your data is stored
 
@@ -43,11 +43,11 @@ S3:     you → S3 API → gateway → validator → 30 pieces → miners
 Drive:  you → encrypted on your device → chunks → same network
 ```
 
-What each product encrypts: Drive encrypts on your device and only you hold the key. S3 encrypts at rest, every chunk under its own key. Hub private repositories are private by access control; the Hub reads what you push in order to index it.
+What each product encrypts: Drive encrypts on your device and only you hold the key. S3 encrypts at rest, every chunk under its own key. Hub private repositories are private by access control: only you and the keys you issue can pull them. To index a model, the Hub reads the header of the files you push, never the weights themselves.
 
 ## Running the network
 
-Anyone can run a [storage miner](/earn/storage-miner) and be paid for the space and bandwidth they provide, or run a [validator](/earn/installing-validator). No GPU is needed for storage mining. Holders can also [stake](/use/console/staking) from the console.
+Anyone can run a [storage miner](/earn/storage-miner) and be paid for the space and bandwidth they provide, or run a [validator](/earn/installing-validator). No GPU is needed for storage mining. When Confidential Computing opens, [compute miners](/learn/vm-computing) will host the virtual machines on AMD EPYC servers. Holders can also [stake](/use/console/staking) from the console.
 
 ## Next steps
 
