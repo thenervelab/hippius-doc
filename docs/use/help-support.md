@@ -29,11 +29,11 @@ Use the left sidebar to open <BgStyledText>Help & Support</BgStyledText>. This o
 <Ordered>
   <li>Click <BgStyledText>+ New Ticket</BgStyledText> to open the <strong>Create a Ticket</strong> dialog.</li>
   <li>Enter a <strong>Ticket Subject</strong>.</li>
-  <li>Select a <strong>Ticket Category</strong>: <BgStyledText>Account & Billing</BgStyledText>, <BgStyledText>Storage (Arion & S3)</BgStyledText>, or <BgStyledText>General</BgStyledText>.</li>
-  <li>Choose a <strong>Ticket Severity</strong> — <BgStyledText>Low</BgStyledText>, <BgStyledText>Normal</BgStyledText>, <BgStyledText>High</BgStyledText>, or <BgStyledText>Urgent</BgStyledText>.</li>
+  <li>Select a <strong>Ticket Category</strong>: <BgStyledText>Drive & sync</BgStyledText>, <BgStyledText>Shared drives</BgStyledText>, <BgStyledText>Credits & payments</BgStyledText>, <BgStyledText>Subscription</BgStyledText>, <BgStyledText>Account & sign in</BgStyledText>, <BgStyledText>Feedback</BgStyledText>, or <BgStyledText>Other</BgStyledText>.</li>
+  <li>Choose a <strong>Ticket Severity</strong>: <BgStyledText>Low</BgStyledText>, <BgStyledText>Normal</BgStyledText>, <BgStyledText>High</BgStyledText>, or <BgStyledText>Urgent</BgStyledText>.</li>
   <li>Add a clear <strong>Ticket Description</strong> so our team can reproduce the issue.</li>
   <li>(Optional) Click <BgStyledText>Attach an Image</BgStyledText> to include a screenshot.</li>
-  <li>(Optional) Leave <strong>Include application logs</strong> ticked to send recent diagnostics with your ticket. It is on by default and secrets are removed before the logs are sent — untick it to keep your logs local.</li>
+  <li>(Optional) Leave <strong>Include application logs</strong> ticked to send recent diagnostics with your ticket. It is on by default and secrets are removed before the logs are sent. Untick it to keep your logs local.</li>
   <li>Click <BgStyledText>Submit Ticket</BgStyledText>.</li>
 </Ordered>
 
