@@ -220,8 +220,8 @@ Sync & Storage
 
     <p>The <strong>Email Notification</strong> card depends on how you signed in:</p>
     <Unordered>
-      <li>If you signed in with an access key (and haven't linked an email login), it reads "Sign in with Google, GitHub, or Email to manage email notifications."</li>
-      <li>If you signed in with Google, GitHub, or Email, a <strong>Receive Email Notifications</strong> toggle appears with sub-options: <strong>Low credit balance alerts</strong>, <strong>Zero balance alerts</strong>, and <strong>Marketing emails &amp; newsletter</strong>.</li>
+      <li>If you signed in with an access key, the card reads "Sign in with Google, GitHub, or Email to manage email notifications." There is no email sign-in; the card means Google, GitHub or Apple.</li>
+      <li>If you signed in with Google, GitHub or Apple, a <strong>Receive Email Notifications</strong> toggle appears with sub-options: <strong>Low credit balance alerts</strong>, <strong>Zero balance alerts</strong>, and <strong>Marketing emails &amp; newsletter</strong>.</li>
     </Unordered>
 
     <p>After changing anything, click <BgStyledText>Save Changes</BgStyledText> (or <BgStyledText>Cancel</BgStyledText> to discard). These buttons stay disabled until you have unsaved changes.</p>
