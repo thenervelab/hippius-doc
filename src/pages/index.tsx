@@ -225,7 +225,7 @@ function HomepageFeatures() {
           <h2 className="text-3xl lg:text-4xl font-medium font-grotesk mt-4 text-grey-10 max-w-screen-sm text-center">
             Find your way around Hippius
           </h2>
-          <div className="flex gap-8 mt-8 items-center flex-wrap justify-center max-w-screen-xl w-full mx-auto">
+          <div className="flex gap-8 mt-8 items-start flex-wrap justify-center max-w-screen-xl w-full mx-auto">
             {CATEGORIES.map((offering, i) => (
               <div
                 className="flex flex-col items-center font-medium max-w-[300px] md:max-w-[250px] border rounded-lg py-4 px-12 border-grey-80 bg-grey-100 md:px-0 md:py-0 md:border-none md:bg-transparent"
