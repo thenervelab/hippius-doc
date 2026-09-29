@@ -32,7 +32,7 @@ Hippius is a distributed cloud. It gives you **Drive**, encrypted file storage f
 
 Sign in with Google, GitHub or Apple at [console.hippius.com](https://console.hippius.com). A 12-word access key also signs in; an account created that way has no email address and no free Drive plan, so it needs a plan before its first upload. There is no email and password sign-in.
 
-Everything is paid from one balance in dollars. Top up by card, TAO, Bitcoin or USDC, then pick a plan per product. [How paying works](/use/console/billing).
+Everything is paid from one balance. Top up by card, TAO, Bitcoin or USDC, then pick a plan per product. [How paying works](/use/console/billing).
 
 ## How your data is stored
 
