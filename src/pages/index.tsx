@@ -119,7 +119,7 @@ export const ALSO_USEFUL: { label: string; href: string }[] = [
   { label: "Referrals", href: "/use/console/referrals" },
   { label: "Community", href: "https://community.hippius.com/" },
   { label: "Alphanomics", href: "https://hippius.com/alphanomics" },
-  { label: "llms.txt for agents", href: "/llms.txt" },
+  { label: "llms.txt for agents", href: "https://docs.hippius.com/llms.txt" },
 ];
 
 function HomepageHeader() {
