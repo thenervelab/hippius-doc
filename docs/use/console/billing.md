@@ -3,7 +3,7 @@ id: billing
 title: Billing
 sidebar_label: Billing
 slug: /use/console/billing
-description: How paying for Hippius works. Add money to your balance by card or TAO, choose a plan for Drive, S3 and Hub, and keep track of what you are charged.
+description: How paying for Hippius works. Add money to your balance by card, Bitcoin, USDC, or TAO, choose a plan for Drive, S3 and Hub, and keep track of what you are charged.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -30,13 +30,21 @@ You may still see the word "credits" in a few places. One credit is one US dolla
 
 ## Add money to your balance
 
-You can top up by card or with TAO. Either way, the money lands on your balance and stays there until a plan or S3 usage draws on it.
+You can top up by card, with Bitcoin, with USDC, or with TAO. Whichever you pick, the money lands on your balance and stays there until a plan or S3 usage draws on it.
 
 ### By card
 
 Open Billing and click <BgStyledText>+ Top up</BgStyledText>. You can add money once, anywhere from $10 to $10,000, or choose **Auto reload** to add a fixed amount every month. Payment goes through Stripe, so we never see your card details. If you close the Stripe page without paying, nothing is charged.
 
 Auto reload is the easiest way to make sure your plans never lapse. You can change or stop it at any time from the same dialog, through Stripe. Anything it has already added stays on your balance.
+
+### With Bitcoin
+
+In the same Top up dialog, choose <BgStyledText>Bitcoin</BgStyledText>. You can pay on-chain or over Lightning, from $20 to $10,000. The invoice is priced in dollars and opens on pay.hippius.com. Lightning is credited in seconds. An on-chain payment is credited after one confirmation, usually 10 to 60 minutes.
+
+### With USDC
+
+Choose <BgStyledText>USDC</BgStyledText> to pay with USDC on Base from a browser wallet, from $5 to $10,000. One USDC is one credit. You sign one authorization for that amount, and the network fee is paid for you. MetaMask, Rabby, Coinbase Wallet, and other browser wallets work. The balance updates once the payment is on Base, usually within a minute or two.
 
 ### With TAO
 
@@ -82,7 +90,7 @@ A Drive plan sets how much encrypted storage your Drive has. These are the plans
 
 <Screenshot src="/img/console/billing/drive-plans.png" alt="Drive storage plans" dark raw />
 
-**Who gets the free plan.** If you sign in with Google, GitHub, or Apple, your account comes with the Free Drive Plan, and you fall back to it if you ever cancel a paid plan. Accounts that sign in with an **access key** do not include free storage, so you'll need to pick a plan before your first upload.
+**Who gets the free plan.** If you sign in with Google, GitHub, or Apple, your account comes with the Free Drive Plan, and you fall back to it if you ever cancel a paid plan. An **access key** creates a wallet-only account. It has no real email address, so it gets no lifecycle mail, and it does not include free storage, so you'll need to pick a Drive plan before your first upload. S3 and Hub work the same as on any other account.
 
 **Subscribing** takes a minute. Pick a plan, choose how to pay and confirm. After a card payment the console shows the plan activating. That usually finishes in under a minute, and you can leave the page while it does. In the rare case a card payment goes through but the plan does not activate, the money stays on your balance and you can subscribe from there.
 
