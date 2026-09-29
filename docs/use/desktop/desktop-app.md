@@ -3,7 +3,7 @@ id: desktop-app
 title: Hippius Desktop App
 sidebar_label: Getting Started
 slug: /use/desktop/getting-started
-description: 3
+description: Install the Hippius desktop app on macOS, Windows or Linux, sign in, and set up your first sync folder.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -59,6 +59,6 @@ The buttons below open that same release.
 
 Hippius continuously monitors your synced folders and automatically synchronizes changes with the Hippius network. You can sync **multiple folders** at the same time, each with its own status and controls.
 
-On first launch, you will choose a sync folder and set an encryption password. After that, adding files to your synced folders is all you need to do. The rest happens automatically. See the [Using the App](using-the-app) guide for detailed setup instructions.
+On first launch, you will set your unlock password and choose a sync folder. After that, adding files to your synced folders is all you need to do. The rest happens automatically. See the [Using the App](using-the-app) guide for detailed setup instructions.
 
 
