@@ -24,7 +24,7 @@ The console offers this the first time you do something that needs your encrypti
 <Ordered>
   <li>The console checks whether your account already uses an encryption seed.</li>
   <li>If it does not, you are shown a new 12 word recovery seed. Write it down before continuing.</li>
-  <li>Choose an unlock password.</li>
+  <li>Choose an unlock password of at least 10 characters. The strength meter must read <strong>Strong</strong> before <BgStyledText>Save Password</BgStyledText> turns on.</li>
   <li>The console encrypts your seed with that password and saves it.</li>
 </Ordered>
 
@@ -48,7 +48,7 @@ So if the console finds existing data, it does not create a seed. It asks for yo
   <li>Enter your 12 word recovery seed and choose a new unlock password.</li>
 </Ordered>
 
-The console verifies the seed against your existing files before it saves the new password.
+The console verifies the seed against your existing files before it saves the new password. The same <BgStyledText>Forgot current password?</BgStyledText> link is on the <BgStyledText>Change Password</BgStyledText> dialog in Settings.
 
 <Screenshot src="/img/console/unlock-password/restore.png" alt="Restoring access with a recovery seed" dark />
 
@@ -72,5 +72,5 @@ This is the trade for files nobody but you can read. Keep the seed somewhere you
 
 <Unordered>
   <li><a href="/use/console/drive">Drive</a>: where the password is used.</li>
-  <li><a href="/learn/encryption">How encryption works</a>: what the password actually protects.</li>
+  <li><a href="/hcfs/integration-guide">How Drive encryption works</a>: what the password actually protects.</li>
 </Unordered>

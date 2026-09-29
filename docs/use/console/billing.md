@@ -74,7 +74,7 @@ When you subscribe, you choose how to pay:
   <li><strong>Account balance.</strong> The plan is paid straight from what you already have. If it is not enough, the console tells you and offers a top up.</li>
 </Unordered>
 
-All plans are monthly. Hub plans can only be paid from your balance for now.
+All plans are monthly. Hub plans are paid from your balance; paying them by card is marked coming soon.
 
 ### Drive plans
 
@@ -96,15 +96,15 @@ A Drive plan sets how much encrypted storage your Drive has. These are the plans
 
 **Moving to a bigger or smaller plan** is paid from your balance and takes effect straight away. You can't move to a plan smaller than what you already store, so free up some space first.
 
+**Shared drives.** Plus, Max and Scale can share a drive with other people. Anyone on any plan, including Free, can be invited.
+
 **Cancelling** puts you back on the Free Drive Plan, or, for access key accounts, leaves you with no storage at all.
 
-:::danger Without a plan, your files are deleted after 30 days
-If your Drive has no plan, you can't upload anything new, and the files already there are **permanently deleted after 30 days**. Subscribing to any plan stops the clock. After 30 days the files cannot be recovered.
+:::warning Without a plan, or over your cap, uploads stop
+If your Drive has no plan, or holds more than its plan allows, you get a notice, a reminder after 7 days, and after 14 days Drive becomes **read only**: you can still open, download and delete, but nothing new can be uploaded. Nothing is deleted. Subscribing to a plan, or getting back under your cap, lifts it at the next daily check.
 :::
 
 When your Drive is full, uploads stop and the console offers a bigger plan. You can also delete something and try again.
-
-If you bought your plan in the mobile app, through the App Store or Google Play, you'll see it on Billing like any other, but you change or cancel it in the store you bought it from.
 
 ### S3 plans {#s3-plans-and-pay-as-you-go}
 
@@ -149,7 +149,7 @@ Your balance pays for renewals and for S3 pay as you go, so running dry affects 
 
 <Unordered>
   <li>A plan that can't renew is marked <strong>past due</strong>, and the console asks you to top up.</li>
-  <li>S3 on pay as you go becomes <strong>read only</strong>. You can still download, but nothing new can be written. If the balance stays empty, S3 is <strong>suspended</strong> and your buckets can't be reached.</li>
+  <li>S3 on pay as you go becomes <strong>read only</strong> after 7 days. You can still download, but nothing new can be written. 7 days later S3 is <strong>suspended</strong> and your buckets can't be reached. 23 days after that, 37 days from the start, the data is <strong>deleted</strong>, with a final notice a week before. Any top up that covers your usage puts everything back.</li>
 </Unordered>
 
 Topping up puts everything back. To avoid it altogether, turn on **Low balance alerts** in [Settings](/use/console/settings), or set up [auto reload](#by-card).

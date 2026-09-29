@@ -3,7 +3,7 @@ id: uploads
 title: Uploads
 sidebar_label: Uploads
 slug: /use/console/uploads
-description: 6
+description: How uploads to Drive and S3 work in the console. The 100 MB limit, the shared queue, the progress widget, and what to do when a file fails.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -36,17 +36,17 @@ If you need to upload larger files:
 | Where you are           | How to open the upload dialog                                      |
 | ----------------------- | ------------------------------------------------------------------ |
 | **Drive**               | Click <BgStyledText>+ New File</BgStyledText> in the page header.  |
-| **Inside an S3 bucket** | Click <BgStyledText>+ Upload</BgStyledText> in the bucket toolbar. |
+| **Inside an S3 bucket** | Click <BgStyledText>+ Upload Object</BgStyledText> in the bucket toolbar. |
 
 You can also drag files from your file manager (Finder, Explorer) directly onto the Drive page or inside an open S3 bucket. A full page drop zone appears and the dialog opens with your files already loaded.
 
 ### The Drive Upload Dialog
 
 <Ordered>
-  <li><strong>Destination folder</strong>: the folder you're currently in is pre selected. If you're at the Drive root with no folder open, you'll need to pick one from the dropdown first.</li>
+  <li><strong>Upload to folder</strong>: the folder you're currently in is pre selected. If you're at the Drive root with no folder open, you'll need to pick one from the dropdown first.</li>
   <li><strong>Drop zone</strong>: drag files onto it or click to open your file picker.</li>
   <li><strong>File list</strong>: every picked file appears with its name and size. Files over 100 MB are flagged and excluded from the upload.</li>
-  <li>Click <BgStyledText>Upload</BgStyledText> to start.</li>
+  <li>Click <BgStyledText>Upload File</BgStyledText> to start.</li>
 </Ordered>
 
 <Screenshot src="/img/console/uploads/drive-dialog.png" alt="Drive upload dialog" dark />
@@ -54,10 +54,10 @@ You can also drag files from your file manager (Finder, Explorer) directly onto 
 ### The S3 Upload Dialog
 
 <Ordered>
-  <li><strong>Folder location</strong>: pre filled with the folder you navigated to inside the bucket. Click to pick a different sub folder.</li>
+  <li><strong>Save Location</strong>: pre filled with the folder you navigated to inside the bucket. Click to pick a different sub folder.</li>
   <li><strong>Drop zone</strong>: drag or click to pick files.</li>
   <li><strong>File list</strong>: same as Drive, with a 100 MB warning for oversized files.</li>
-  <li>Click <BgStyledText>Upload</BgStyledText> to start.</li>
+  <li>Click <BgStyledText>Continue With 1 File</BgStyledText> (the count follows your selection) to start.</li>
 </Ordered>
 
 <Screenshot src="/img/console/uploads/s3-dialog.png" alt="S3 upload dialog" dark />
@@ -79,14 +79,16 @@ Every Drive upload is encrypted in your browser **before any bytes leave your de
 
 Your S3 buckets are **private by default**. Files are only accessible using your master or sub tokens, so nobody else can read, list, or download your objects. Use sub tokens to grant scoped, time limited access to specific buckets without sharing your master credentials. See [S3 Buckets → Sub Tokens](/use/console/s3#sub-tokens).
 
+S3 objects are encrypted at rest on the server, with keys that Hippius holds. Only Drive is encrypted on your device before upload.
+
 ## Watching Your Upload Progress
 
-As soon as you click <BgStyledText>Upload</BgStyledText>, the dialog closes and a **floating progress widget** appears in the bottom right corner of the screen. It stays there regardless of which page you navigate to, so you can browse the console while uploads run in the background.
+As soon as you confirm the upload, the dialog closes and a **floating progress widget** appears in the bottom right corner of the screen. It stays there regardless of which page you navigate to, so you can browse the console while uploads run in the background.
 
 The widget shows:
 
 <Unordered>
-  <li>An overall summary like <em>"1/3 files — 23% complete"</em> showing how many files have finished and the total percentage across the batch.</li>
+  <li>An overall summary like <em>"1/3 files - 23% complete"</em> showing how many files have finished and the total percentage across the batch.</li>
   <li>The name and percentage of the file currently uploading.</li>
 </Unordered>
 
@@ -94,7 +96,7 @@ Files upload **one at a time** to avoid saturating your connection or the in-bro
 
 Progress is based on **actual bytes uploaded** via `XMLHttpRequest` progress events, not an estimate or a timer.
 
-<Screenshot src="/img/console/uploads/upload-widget.png" alt="Upload progress widget — expanded" dark/>
+<Screenshot src="/img/console/uploads/upload-widget.png" alt="Upload progress widget, expanded" dark/>
 
 Once every file in the batch finishes, the widget collapses to a small pill you can dismiss. While any file is still in flight, you can collapse the widget but not close it.
 
