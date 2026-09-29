@@ -91,13 +91,13 @@ Both happen on the console's **Storage Plans** page. Open **Billing**. While you
 
 <Unordered>
   <li><strong>Moving to a bigger or smaller plan.</strong> Click <BgStyledText>Upgrade</BgStyledText> or <BgStyledText>Downgrade</BgStyledText> on the plan you want and confirm. The change is paid from your account balance and takes effect straight away. You can't move to a plan smaller than what you already store, so free up space first.</li>
-  <li><strong>Cancelling.</strong> Click <BgStyledText>Cancel subscription</BgStyledText> on your current plan, then <BgStyledText>Cancel plan</BgStyledText> to confirm. Accounts that sign in with email, Google, GitHub or Apple go back to the Free Drive Plan. Access key accounts are left with no storage.</li>
+  <li><strong>Cancelling.</strong> Click <BgStyledText>Cancel subscription</BgStyledText> on your current plan, then <BgStyledText>Cancel plan</BgStyledText> to confirm. Accounts that sign in with Google, GitHub or Apple go back to the Free Drive Plan. Access key accounts are left with no storage.</li>
 </Unordered>
 
 The app picks up either change the next time you open it.
 
-:::danger Access key accounts without a plan lose their files after 30 days
-Only access key accounts can end up with no plan, because every other account falls back to the Free Drive Plan. Without a plan, the account can't upload anything new, and after 30 days the files already in its Drive are **permanently deleted**. Subscribing to any plan stops the clock.
+:::warning Access key accounts without a plan cannot upload
+Only access key accounts can end up with no plan, because every other account falls back to the Free Drive Plan. Without a plan, the account can't upload anything new. The files already in its Drive stay readable and are not deleted. Subscribe to any plan to upload again.
 :::
 
 ## When your storage is full {#when-your-storage-is-full}
