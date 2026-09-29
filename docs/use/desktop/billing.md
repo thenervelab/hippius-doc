@@ -81,7 +81,7 @@ The desktop app bills **monthly**. Annual billing is offered in the [Hippius con
   <li>One <strong>button</strong>, which changes with your situation: <BgStyledText>Subscribe</BgStyledText>, <BgStyledText>Upgrade</BgStyledText>, <BgStyledText>Downgrade</BgStyledText>, or <BgStyledText>Cancel subscription</BgStyledText> on the plan you are on.</li>
 </Unordered>
 
-The **Shared team drive** line is greyed out with a "Coming soon" note. Those plans do include it, we have just not switched the feature on yet.
+The **Shared team drive** line means you can share your drives with other people. See [Shared Drives](/use/desktop/shared-drives).
 
 While you hold a paid plan, the Free card reads **Default Plan**. That is the plan you fall back to if you cancel, not a second plan you are on.
 
