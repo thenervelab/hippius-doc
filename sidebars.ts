@@ -64,7 +64,6 @@ const sidebars: SidebarsConfig = {
             "storage/s3/examples/duplicati",
           ],
         },
-        "use/hippius-api",
         {
           type: "category",
           label: "Hub",
@@ -74,6 +73,34 @@ const sidebars: SidebarsConfig = {
             "registry/pull",
             "registry/push",
             "registry/cli",
+          ],
+        },
+        {
+          type: "category",
+          label: "Console",
+          collapsed: true,
+          items: [
+            "use/console/getting-started",
+            "use/console/overview",
+            "use/console/drive",
+            // ⚠️ "Shared Drives" is not in production yet — hidden from the
+            // sidebar and marked `draft: true` in shared-drives.md to block
+            // direct access. Re-enable both together when the feature ships.
+            // "use/console/shared-drives",
+            "use/console/unlock-password",
+            "use/console/shared-links",
+            "use/console/uploads",
+            "use/console/s3",
+            "use/console/migrations",
+            "use/console/virtual-machines",
+            "use/console/hub",
+            "use/console/billing",
+            "use/console/wallet",
+            "use/console/staking",
+            "use/console/bridge",
+            "use/console/referrals",
+            "use/console/settings",
+            "use/console/support",
           ],
         },
         {
@@ -117,40 +144,12 @@ const sidebars: SidebarsConfig = {
             "use/mobile/troubleshooting",
           ],
         },
-        {
-          type: "category",
-          label: "Console",
-          collapsed: true,
-          items: [
-            "use/console/getting-started",
-            "use/console/overview",
-            "use/console/drive",
-            // ⚠️ "Shared Drives" is not in production yet — hidden from the
-            // sidebar and marked `draft: true` in shared-drives.md to block
-            // direct access. Re-enable both together when the feature ships.
-            // "use/console/shared-drives",
-            "use/console/unlock-password",
-            "use/console/shared-links",
-            "use/console/uploads",
-            "use/console/s3",
-            "use/console/migrations",
-            "use/console/virtual-machines",
-            "use/console/hub",
-            "use/console/billing",
-            "use/console/wallet",
-            "use/console/staking",
-            "use/console/bridge",
-            "use/console/referrals",
-            "use/console/settings",
-            "use/console/support",
-          ],
-        },
+        "use/hippius-api",
         {
           type: "link",
           label: "Pricing",
           href: "https://hippius.com/pricing",
-        },
-      ],
+        },],
     },
 
     // ══ EARN ═══════════════════════════════════════════════════════
