@@ -131,6 +131,11 @@ def main() -> None:
         if code == 401 and url.startswith("https://api.hippius.com/api/support/tickets"):
             print(f"ok 401 {url}")
             continue
+        # LinkedIn rate-limits datacenter clients. 429 and 999 mean the company
+        # page refused the runner. A missing page still fails.
+        if code in (429, 999) and host_of(url) == "www.linkedin.com":
+            print(f"ok {code} {url}")
+            continue
         if code != 200:
             message = f"{code} {url}"
             if leaf and mode == "lenient":
