@@ -41,7 +41,7 @@ The **Total Credits** card shows your balance. A new or unfunded account reads a
 
 <Unordered>
   <li>Click the <strong>refresh</strong> icon to pull the balance again. The "Last updated" line tells you how recent the number is.</li>
-  <li>Click <BgStyledText>Add Credits</BgStyledText> to top up. This opens the Hippius console in your browser, where you can pay with TAO or by card.</li>
+  <li>Click <BgStyledText>Add Credits</BgStyledText> to top up. This opens the Hippius console in your browser, where you can pay by card, Bitcoin, USDC, or TAO.</li>
 </Unordered>
 
 :::info Buying credits happens in the console
@@ -225,7 +225,7 @@ Creating a share link uploads a re-encrypted copy of the file, and that copy cou
 ## Where to next
 
 <Unordered>
-  <li><a href="/use/console/billing">Console Billing</a>: buying credits with TAO or a card, and your full transaction history.</li>
+  <li><a href="/use/console/billing">Console Billing</a>: buying credits by card, Bitcoin, USDC, or TAO, and your full transaction history.</li>
   <li><a href="/use/desktop/drive">Drive</a>: start uploading once you have a plan.</li>
   <li><a href="/use/desktop/shared-links">Shared Links</a>: sharing a file uses your plan's storage.</li>
   <li><a href="/use/desktop/settings">Settings</a>: the rest of what lives alongside Billing.</li>

@@ -1,9 +1,10 @@
 # Hippius - Distributed Cloud Storage
 
-> Hippius is a distributed cloud storage platform backed by Arion distributed storage and a custom Substrate blockchain. It provides a fully S3-compatible API, a desktop app, a web console, and confidential compute. Any S3 client works out of the box.
+> Hippius is a distributed cloud: encrypted file storage (Drive), S3-compatible object storage, and a registry for AI models and containers (Hub). One account pays for all of them.
 
-This file is the long S3 ingest for agents.
-The product index is https://docs.hippius.com/llms.txt
+This file is the long reference for the whole product.
+The short index is https://docs.hippius.com/llms.txt
+S3 is written out in full below. Drive, Hub, desktop, mobile, and shared drives are in Products, with the page to open.
 
 ## Table of Contents
 
@@ -56,25 +57,47 @@ Old URLs that still resolve:
 
 ## What is Hippius?
 
-Hippius is a distributed cloud storage platform. Store files, host websites, run VMs — without relying on AWS, Google Cloud, or any single company.
-
-Architecture: custom Substrate blockchain + Arion storage (Reed-Solomon erasure coding + CRUSH placement) + S3-compatible API.
+Hippius is a distributed cloud. Store encrypted files, serve objects over S3, and publish models and containers. Storage is Arion (Reed-Solomon erasure coding and CRUSH placement) plus a Substrate chain.
 
 ### Products
 
-| Product | Description |
-|---|---|
-| S3 Storage | S3-compatible API backed by Arion. Any S3 client works. |
-| Desktop App | Native app (macOS, Windows, Linux) with sync, file manager, wallet |
-| Web Console | Browser dashboard for storage, VMs, staking, tokens |
-| Confidential Compute | VMs inside AMD SEV-SNP encrypted enclaves |
-| Token Bridge | Move Alpha ↔ hAlpha between native chain and EVM |
+| Product | What an agent needs | Open |
+|---|---|---|
+| Drive | Encrypted files in the browser. Not S3. Files do not cross between them. | https://docs.hippius.com/use/drive |
+| Shared drives | A Drive someone else owns and invited you into. They pay for the storage. It appears in the console under Storage after the invite. There is no published guide yet. | |
+| S3 | S3-compatible API. Endpoint https://s3.hippius.com only. Region `decentralized`. Path-style. Access key ids start with `hip_`. | https://docs.hippius.com/use/quickstart |
+| Hub | Models and container images. Creating a namespace needs at least 10 credits (`REGISTRY_MIN_CREDITS`). The plan price stays zero. | https://docs.hippius.com/registry |
+| Desktop | Sync folders on macOS, Windows, and Linux. The agent file is on the staging branch. | https://raw.githubusercontent.com/thenervelab/hippius-desktop/staging/llms.txt |
+| Mobile | Drive on Android, on Google Play. The iPhone app is not released. | https://docs.hippius.com/use/mobile/getting-started |
+| Console | Sign up, pay, API token, Drive and S3 keys. | https://docs.hippius.com/use/console/getting-started |
+| Drive SDK | Script Drive with encryption on the client. Install from git, not PyPI. | https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt |
+
+Hippius VMs are not offered yet: https://docs.hippius.com/use/console/virtual-machines
 
 ### Authentication
 
-New users sign in with Google or GitHub OAuth at console.hippius.com. No wallet, no seed phrase, no browser extension required.
+Sign in at https://console.hippius.com with Google, GitHub, Apple, or an existing 12-word access key. There is no email and password sign-in. An agent cannot create the account. That happens in the browser or the app.
 
-S3 access keys (hip_*) are created in the console and used with any S3 client.
+A 12-word access key creates a wallet-only account. It has no real email address, so it gets no lifecycle mail. Drive has no free plan: subscribe before the first upload. S3 and Hub work the same as on any other account.
+
+S3 access keys (`hip_*`) are created in the console and used with any S3 client. The account API token is on console Settings: https://console.hippius.com/dashboard/settings
+
+### Paying
+
+Top up the balance, then subscribe to a plan. A top-up does not add storage. 1 credit = 1 USD. https://docs.hippius.com/use/console/billing
+
+Four top-up methods, on Billing:
+
+- Card, through Stripe, from $10 to $10,000, or a monthly auto reload.
+- Bitcoin, on-chain or Lightning, from $20 to $10,000. Lightning is credited in seconds. On-chain waits for one confirmation.
+- USDC on Base, from a browser wallet, from $5 to $10,000. 1 USDC is 1 credit.
+- TAO, from a connected wallet or by sending to the deposit address. Minimum $20. A transfer cannot be reversed.
+
+Subscribe from that product's plans page. A card payment lands on the balance and the plan is paid from it. A plan can also be paid from the balance already there. Hub plans are paid from the balance only.
+
+Google, GitHub, and Apple accounts include the Free Drive Plan (10 GB). S3 starts on pay as you go at $6 per TB per month. A plan is optional.
+
+Open a support ticket with the account API token: POST https://api.hippius.com/api/support/tickets/ with subject, priority, category, and description.
 
 ---
 
@@ -87,12 +110,12 @@ Addressing style: path-style
 
 Always use https://s3.hippius.com. Do not point clients at other hostnames.
 
-Step 1: Create account at https://console.hippius.com (Google or GitHub OAuth)
-Step 2: Add credits — Console > Billing (credit card via Stripe, or TAO)
+Step 1: Create an account at https://console.hippius.com (Google, GitHub, Apple, or a 12-word access key)
+Step 2: Top up on Billing by card, Bitcoin, USDC, or TAO, then subscribe if the product needs a plan. https://docs.hippius.com/use/console/billing
 Step 3: Create credentials — Console > S3 Storage > Create Master Token
 Step 4: Save Access Key ID (hip_...) and Secret Key — the secret cannot be retrieved after creation
 
-IMPORTANT: ETH wallets, TAO wallets, and Polkadot browser extensions are NOT used for S3 access. TAO is only for paying credits.
+IMPORTANT: ETH wallets, TAO wallets, and Polkadot browser extensions are NOT used for S3 access. Card, Bitcoin, USDC, and TAO pay for credits. They do not authenticate S3 requests.
 
 ### First upload (Python)
 
@@ -497,9 +520,14 @@ Billing:
     POST /billing/stripe/create-checkout-session/
     POST /billing/stripe/create-subscription/
     GET  /billing/stripe/subscription-plans/
+    POST /api/billing/btcpay/create-invoice/
+    POST /api/billing/x402/topup/
     POST /billing/transactions/
     GET  /billing/transactions/
     GET  /billing/transactions/{id}/
+
+Support:
+    POST https://api.hippius.com/api/support/tickets/
 
 ---
 
@@ -516,6 +544,8 @@ Billing:
 - Management API docs: https://docs.hippius.com/use/api
 - API: https://api.hippius.com
 - Pricing: https://hippius.com/pricing
+- Drive: https://docs.hippius.com/use/drive
 - GitHub: https://github.com/thenervelab
 - Discord: https://discord.com/channels/1298001698874327131/1442875352484548609
 - X/Twitter: https://x.com/Hippius_cloud
+- LinkedIn: https://www.linkedin.com/company/hippius

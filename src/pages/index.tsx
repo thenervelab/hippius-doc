@@ -72,7 +72,7 @@ export const SMARTER_CLOUD: SmallCardInfo[] = [
   {
     title: "Anonymous & Secure",
     description:
-      "Per-object NaCl encryption before storage. Miners only see encrypted bytes. Sign up with Google or GitHub — no KYC, no wallet required.",
+      "Per-object NaCl encryption before storage. Miners only see encrypted bytes. Sign up with Google, GitHub, or Apple. No KYC, and no wallet is required for that.",
     icon: <Icons.DollarSquare className="text-primary-50 relative size-7" />,
   },
 ];
