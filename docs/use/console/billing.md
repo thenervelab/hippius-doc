@@ -24,8 +24,8 @@ You'll find all of this under <BgStyledIconWithText text="Billing" icon="Billing
 
 <Screenshot src="/img/console/billing/overview.png" alt="Billing page with balance, services and plans" dark raw />
 
-:::info Credits are dollars
-You may still see the word "credits" in a few places. One credit is one US dollar.
+:::info Your balance is in dollars
+You may still see the word "credits" in a few places in the console. It means the same thing: one credit is one US dollar of balance.
 :::
 
 ## Add money to your balance
@@ -42,9 +42,13 @@ Auto reload is the easiest way to make sure your plans never lapse. You can chan
 
 In the same Top up dialog, choose <BgStyledText>Bitcoin</BgStyledText>. You can pay on-chain or over Lightning, from $20 to $10,000. The invoice is priced in dollars and opens on pay.hippius.com. Lightning is credited in seconds. An on-chain payment is credited after one confirmation, usually 10 to 60 minutes.
 
+<Screenshot src="/img/console/billing/bitcoin.png" alt="Top up with Bitcoin" dark raw />
+
 ### With USDC
 
-Choose <BgStyledText>USDC</BgStyledText> to pay with USDC on Base from a browser wallet, from $5 to $10,000. One USDC is one credit. You sign one authorization for that amount, and the network fee is paid for you. MetaMask, Rabby, Coinbase Wallet, and other browser wallets work. The balance updates once the payment is on Base, usually within a minute or two.
+Choose <BgStyledText>USDC</BgStyledText> to pay with USDC on Base from a browser wallet, from $5 to $10,000. One USDC adds one dollar to your balance. You sign one authorization for that amount, and the network fee is paid for you. MetaMask, Rabby, Coinbase Wallet, and other browser wallets work. The balance updates once the payment is on Base, usually within a minute or two.
+
+<Screenshot src="/img/console/billing/usdc.png" alt="Top up with USDC on Base" dark raw />
 
 ### With TAO
 
@@ -52,7 +56,7 @@ If you hold TAO, you can pay with it in two ways:
 
 <Unordered>
   <li><strong>From a browser wallet.</strong> If your TAO is in Talisman or Polkadot.js, pick the wallet in the Top up dialog, enter an amount in dollars and approve the transfer. The dialog shows how much TAO that is at today's price.</li>
-  <li><strong>By sending it yourself.</strong> If your TAO is on an exchange or in another wallet, copy your deposit address from the <strong>Manually</strong> tab and send TAO to it. We credit it in dollars at the market rate once the transfer confirms.</li>
+  <li><strong>By sending it yourself.</strong> If your TAO is on an exchange or in another wallet, copy your deposit address from the <strong>Manually</strong> tab and send TAO to it. We add it to your balance in dollars at the market rate once the transfer confirms.</li>
 </Unordered>
 
 Either way, your balance usually updates within a few minutes.
@@ -60,7 +64,7 @@ Either way, your balance usually updates within a few minutes.
 <Screenshot src="/img/console/billing/tao-wallet.png" alt="Top up with a Bittensor wallet" dark />
 
 :::warning The minimum is $20 of TAO, and transfers cannot be undone
-Anything under $20 is not credited and cannot be refunded. Double check the address before you send: TAO transfers are final, and we have no way to recover funds sent to the wrong place.
+Anything under $20 is not added to your balance and cannot be refunded. Double check the address before you send: TAO transfers are final, and we have no way to recover funds sent to the wrong place.
 :::
 
 ## Choose a plan
