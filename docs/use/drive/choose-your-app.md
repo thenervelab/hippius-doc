@@ -12,7 +12,7 @@ Drive is one account and one set of files in three apps. Sign in to any of them 
 
 | | Console | Desktop App | Mobile App |
 |---|---|---|---|
-| **Runs on** | Any web browser | Windows, macOS and Linux | Android |
+| **Runs on** | Any web browser | Windows, macOS and Linux | Android (iPhone coming soon) |
 | **Get it** | [console.hippius.com](https://console.hippius.com) | [Download](/use/desktop/getting-started#installing-the-desktop-app) | [Google Play](/use/mobile/getting-started#install-android) |
 | **Best for** | Getting to your files from any computer | Keeping folders on your computer in sync | Your phone's photos and videos |
 
