@@ -3,7 +3,7 @@ id: getting-started
 title: Getting Started
 sidebar_label: Getting Started
 slug: /use/console/getting-started
-description: 3
+description: Sign in to the Hippius Console with Google, GitHub, Apple or an access key, choose your mode, and find Drive, S3, Hub and Billing in the sidebar.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -40,13 +40,13 @@ Your console account and desktop app account are the same. Sign in with the same
 
 <Screenshot src="/img/console/getting-started/login.png" alt="Console login screen" dark />
 
-## Choose Your View
+## Choose Your Mode
 
-The first time you sign in, you'll be asked to pick a view for your dashboard.
+The first time you sign in, a screen titled **Choose your mode** asks you to pick one of two cards. Settings calls them Normal and Pro.
 
-**Normal** gives you a clean, focused dashboard. You'll see your most recent file uploads, your current credit balance, and your storage usage. It's ideal if you're just getting started or mainly use Hippius for personal file storage.
+**I just want the basics.** (Normal) gives you a clean, focused dashboard. You'll see your most recent file uploads, your current balance, and your storage usage. It's ideal if you're just getting started or mainly use Hippius for personal file storage.
 
-**Pro** expands the dashboard to show your Drive and S3 sections side by side, along with detailed storage and credit charts. It's the better choice if you're actively managing multiple services and want everything at a glance.
+**I'm a pro.** (Pro) expands the dashboard to show your Drive and S3 sections side by side, along with detailed storage and balance charts. It's the better choice if you're actively managing multiple services and want everything at a glance.
 
 You can switch between Normal and Pro at any time from [Settings](/use/console/settings).
 
@@ -57,10 +57,12 @@ You can switch between Normal and Pro at any time from [Settings](/use/console/s
 The **sidebar on the left** is how you move between sections. It's organised into groups:
 
 <Unordered>
-  <li><strong>Storage</strong>: Drive (personal encrypted files) and S3 Buckets.</li>
+  <li><strong>Drive</strong>: My Drives (your encrypted files) and Shared Drives.</li>
+  <li><strong>S3</strong>: S3 Buckets and S3 Migrations.</li>
+  <li><strong>Confidential Computing</strong>: Virtual Machines, marked coming soon.</li>
   <li><strong>Hub</strong>: your container images and AI models.</li>
-  <li><strong>Billing</strong>: your balance, top ups, and the plan for each product.</li>
-  <li><strong>Help & Support</strong>: open a ticket with our team.</li>
+  <li><strong>Account</strong>: Billing, Wallet and Referrals.</li>
+  <li><strong>Support</strong>: Documentation and Help & Support, to open a ticket with our team.</li>
 </Unordered>
 
 
