@@ -4,12 +4,13 @@
 
 This file is the long reference for the whole product.
 The short index is https://docs.hippius.com/llms.txt
-S3 is written out in full below. Drive, Hub, desktop, mobile, and shared drives are in Products, with the page to open.
+The commands an agent can run are in Tools an agent can run. S3 is written out in full after that.
 
 ## Table of Contents
 
 - [S3 documentation map](#s3-documentation-map)
 - [What is Hippius?](#what-is-hippius)
+- [Tools an agent can run](#tools-an-agent-can-run)
 - [S3 Storage — Quickstart](#s3-storage--quickstart)
 - [S3 Storage — Advanced Usage](#s3-storage--advanced-usage)
 - [S3 Storage — Python](#s3-storage--python)
@@ -66,13 +67,13 @@ Hippius is a distributed cloud. Store encrypted files, serve objects over S3, an
 | Drive | Encrypted files in the browser. Not S3. Files do not cross between them. | https://docs.hippius.com/use/drive |
 | Shared drives | A Drive someone else owns and invited you into. They pay for the storage. It appears in the console under Storage after the invite. There is no published guide yet. | |
 | S3 | S3-compatible API. Endpoint https://s3.hippius.com only. Region `decentralized`. Path-style. Access key ids start with `hip_`. | https://docs.hippius.com/use/quickstart |
-| Hub | Models and container images. Creating a namespace needs at least 10 credits (`REGISTRY_MIN_CREDITS`). The plan price stays zero. | https://docs.hippius.com/registry |
-| Desktop | Sync folders on macOS, Windows, and Linux. The agent file is on the staging branch. | https://raw.githubusercontent.com/thenervelab/hippius-desktop/staging/llms.txt |
-| Mobile | Drive on Android, on Google Play. The iPhone app is not released. | https://docs.hippius.com/use/mobile/getting-started |
-| Console | Sign up, pay, API token, Drive and S3 keys. | https://docs.hippius.com/use/console/getting-started |
-| Drive SDK | Script Drive with encryption on the client. Install from git, not PyPI. | https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt |
-
-Hippius VMs are not offered yet: https://docs.hippius.com/use/console/virtual-machines
+| Hub | Models and container images. Command: `hippius-hub`. Creating a namespace needs at least 10 credits (`REGISTRY_MIN_CREDITS`). The plan price stays zero. | https://docs.hippius.com/registry |
+| Desktop | Sync folders on macOS, Windows, and Linux. There is no CLI. The agent file is on the staging branch. | https://raw.githubusercontent.com/thenervelab/hippius-desktop/staging/llms.txt |
+| Mobile | Drive on Android, on Google Play. The iPhone app is not released. There is no CLI. | https://docs.hippius.com/use/mobile/getting-started |
+| Console | Sign up, pay, API token, Drive and S3 keys. There is no CLI. The agent calls https://api.hippius.com with the account token. | https://docs.hippius.com/use/console/getting-started |
+| Drive SDK | Script Drive with encryption on the client. Command: `hippius-drive`. Install from git, not PyPI. | https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt |
+| Bridge | No CLI. The user signs each step in a browser wallet. Alpha and hAlpha are pegged 1:1. Minimum 15. | https://docs.hippius.com/use/console/bridge |
+| Compute | No CLI and no public API. Not offered yet. | https://docs.hippius.com/use/console/virtual-machines |
 
 ### Authentication
 
@@ -98,6 +99,100 @@ Subscribe from that product's plans page. A card payment lands on the balance an
 Google, GitHub, and Apple accounts include the Free Drive Plan (10 GB). S3 starts on pay as you go at $6 per TB per month. A plan is optional.
 
 Open a support ticket with the account API token: POST https://api.hippius.com/api/support/tickets/ with subject, priority, category, and description.
+
+---
+
+## Tools an agent can run
+
+`hipc` and the storage commands in `pip install hippius` are deprecated. Do not use them. Chain registration still uses `hippius`. S3 uses any S3 client, and that manual starts at S3 Storage — Quickstart. The tools below are the other products.
+
+An agent cannot create the account or approve a browser login. The user does that at https://console.hippius.com. The API token is on https://console.hippius.com/dashboard/settings
+
+### Hub
+
+`hippius-hub` publishes models and container images. Full cheat sheet: https://raw.githubusercontent.com/thenervelab/hippius-hub/main/llms.txt
+
+```bash
+pip install hippius_hub
+hippius-hub login --hippius-token "$HIPPIUS_TOKEN"
+hippius-hub registry check my-models
+hippius-hub registry provision my-models --docker-login
+hippius-hub upload my-models/qwen-7b ./qwen-7b --revision v1
+```
+
+Creating a namespace needs at least 10 credits on the account. A zero balance is refused. The plan price stays zero. Top up, then provision.
+
+Two logins. `hippius-hub registry` and `hippius-hub models` use the API token saved by `login --hippius-token`. `upload`, `download`, `docker`, and `oras` use the registry robot secret that `provision` prints once. Lost that secret: `hippius-hub registry rotate-token --docker-login`. The old secret stops working immediately.
+
+Namespace names are lowercase letters, digits, and dashes, 1 to 63 characters. Artifacts live at `registry.hippius.com/<namespace>/<repo>:<tag>`. Public images pull with no login. Hub plans are paid from the balance only.
+
+### Drive
+
+`hippius-drive` reads and writes the same encrypted Drive as the console, the desktop app, and the Android app. It is alpha. It is not S3: a file put here does not appear in a bucket. Full command list: https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/docs/cli.md
+
+The package name `hippius-drive` is not on PyPI. Python 3.10 to 3.13.
+
+```bash
+pip install "git+https://github.com/thenervelab/hippius-drive-sdk"
+export HIPPIUS_TOKEN=...            # console Settings
+export HIPPIUS_ACCOUNT_SS58=...     # the account that token belongs to
+export HIPPIUS_PASSWORD=...         # unlock password. Prompted on a terminal. Required when there is no terminal.
+hippius-drive init --mnemonic "$RECOVERY_PHRASE"
+hippius-drive whoami
+hippius-drive register
+hippius-drive put report.pdf work/report.pdf
+hippius-drive ls --all
+hippius-drive get work/report.pdf out.pdf
+```
+
+`init` with no `--mnemonic` generates a new 24-word phrase and prints it once. That phrase does not decrypt files already in the account. Import the account's existing recovery phrase. Do not ask the user to paste the phrase or the unlock password into chat.
+
+A token and an address that do not belong together fail `whoami` with 403. Leave the server unset: the CLI probes and uses the first Drive region that answers. Set `HIPPIUS_SERVER_URL` only for a specific server.
+
+`share` and `folder-share` create links. `invite` and `drives` are the shared-drive commands. There is no published console guide for shared drives. The CLI page above is the reference.
+
+### Console
+
+There is no console CLI. Sign-in, plan checkout in the browser, and anything that needs a wallet signature stay in https://console.hippius.com. After the user copies the API token, call https://api.hippius.com with `Authorization: Token <token>`.
+
+```bash
+curl -sS -H "Authorization: Token $HIPPIUS_TOKEN" https://api.hippius.com/api/billing/credits/balance/
+curl -sS -H "Authorization: Token $HIPPIUS_TOKEN" https://api.hippius.com/api/registry/me/
+curl -sS https://api.hippius.com/api/drive/plans/
+curl -sS https://api.hippius.com/api/s3/plans/
+curl -sS https://api.hippius.com/api/registry/plans/
+curl -sS https://api.hippius.com/api/billing/latest-tao-price/
+```
+
+The plan lists and the TAO price answer without a token. Balance and `registry/me` need one. S3 key create, rotate, and revoke are in Management API. The OpenAPI spec is https://api.hippius.com/?format=openapi
+
+### Desktop
+
+There is no desktop CLI. The agent cannot click the app, sign in, or read files. The user installs it and signs in themselves.
+
+- https://hippius.com/desktop-app
+- Latest release: https://github.com/thenervelab/hippius-desktop/releases/latest
+  - macOS: `Hippius_universal.dmg`
+  - Windows: `Hippius_<version>_x64-setup.exe` or the `.msi`
+  - Linux (Debian and Ubuntu, x86_64): `Hippius_<version>_amd64.deb`
+- Point at the release marked Latest. Pre-releases titled `[BETA]` and `[STAGING]` are not the stable build.
+
+Sign-in is Google, GitHub, Apple, or an existing 12-word access key. Guide: https://docs.hippius.com/use/desktop/getting-started
+Agent file: https://raw.githubusercontent.com/thenervelab/hippius-desktop/staging/llms.txt
+
+### Bridge
+
+There is no bridge CLI. The user opens Wallet in the console and uses Bridge Tokens. Guide: https://docs.hippius.com/use/console/bridge
+
+The bridge moves Alpha on Bittensor and hAlpha on Hippius. They are pegged 1:1. The minimum is 15 Alpha or 15 hAlpha. It takes about 120 seconds. The only cost is network gas: TAO on the Bittensor side, hAlpha on Hippius.
+
+Alpha to hAlpha needs 3 signatures, or 4 when the Alpha must first be moved onto the Hippius validator. hAlpha to Alpha needs 1 signature. The user approves each signature in a browser wallet extension. An agent cannot approve those signatures.
+
+### Compute
+
+There is no compute CLI and no public VM API. Hippius VMs are not offered yet: https://docs.hippius.com/use/console/virtual-machines
+
+Prices and launch steps are not published. Hub stores images. It does not run them.
 
 ---
 
@@ -504,7 +599,9 @@ Token types:
 Docs: https://docs.hippius.com/use/api
 Full OpenAPI spec: https://api.hippius.com/?format=openapi
 
-Auth: POST /auth/exchange/ with OAuth token → bearer token for API calls
+Auth: account API token from https://console.hippius.com/dashboard/settings
+Header: Authorization: Token <token>
+Browser OAuth handoff, not the agent path: POST https://api.hippius.com/api/auth/exchange/ with JSON {"code": "..."}
 
 ### Endpoints
 
@@ -515,16 +612,16 @@ Token management:
     GET/POST https://api.hippius.com/api/objectstore/sub-tokens/
 
 Billing:
-    GET  /billing/credits/balance/
-    GET  /billing/latest-tao-price/
-    POST /billing/stripe/create-checkout-session/
-    POST /billing/stripe/create-subscription/
-    GET  /billing/stripe/subscription-plans/
-    POST /api/billing/btcpay/create-invoice/
-    POST /api/billing/x402/topup/
-    POST /billing/transactions/
-    GET  /billing/transactions/
-    GET  /billing/transactions/{id}/
+    GET  https://api.hippius.com/api/billing/credits/balance/
+    GET  https://api.hippius.com/api/billing/latest-tao-price/
+    POST https://api.hippius.com/api/billing/stripe/create-checkout-session/
+    POST https://api.hippius.com/api/billing/stripe/create-subscription/
+    GET  https://api.hippius.com/api/billing/stripe/subscription-plans/
+    POST https://api.hippius.com/api/billing/btcpay/create-invoice/
+    POST https://api.hippius.com/api/billing/x402/topup/
+    POST https://api.hippius.com/api/billing/transactions/
+    GET  https://api.hippius.com/api/billing/transactions/
+    GET  https://api.hippius.com/api/billing/transactions/{id}/
 
 Support:
     POST https://api.hippius.com/api/support/tickets/
