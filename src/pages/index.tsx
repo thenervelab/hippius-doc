@@ -72,7 +72,7 @@ export const SMARTER_CLOUD: SmallCardInfo[] = [
   {
     title: "Encrypted",
     description:
-      "Drive encrypts on your device; nobody else holds the key. S3 encrypts at rest, every chunk under its own key. Hub private repositories are access-controlled.",
+      "Drive encrypts on your device, only you hold the key. S3 encrypts at rest, every chunk under its own key. Hub keeps private repositories private.",
     icon: <Icons.SheildTick className="text-primary-50 relative size-7" />,
   },
 ];
@@ -105,7 +105,7 @@ export const PRODUCTS: (SmallCardInfo & {
   {
     title: "Confidential Computing",
     description:
-      "Virtual machines and managed databases in hardware-encrypted memory. The host can't read them, and you can verify it.",
+      "Virtual machines and databases in hardware-encrypted memory. The host can't read them, and you can verify it.",
     icon: <Icons.SheildTick className="text-primary-50 relative size-7" />,
     cta: { label: "How it works", href: "/learn/confidential-computing" },
     badge: "Coming soon",
@@ -228,7 +228,7 @@ function HomepageFeatures() {
           <div className="flex gap-8 mt-8 items-start flex-wrap justify-center max-w-screen-xl w-full mx-auto">
             {CATEGORIES.map((offering, i) => (
               <div
-                className="flex flex-col items-center font-medium max-w-[300px] md:max-w-[250px] border rounded-lg py-4 px-12 border-grey-80 bg-grey-100 md:px-0 md:py-0 md:border-none md:bg-transparent"
+                className="flex flex-col items-center font-medium max-w-[300px] md:max-w-[250px] md:min-h-[230px] border rounded-lg py-4 px-12 border-grey-80 bg-grey-100 md:px-0 md:py-0 md:border-none md:bg-transparent"
                 key={i}
               >
                 <AbstractIconWrapper className="size-10 ">
@@ -241,7 +241,7 @@ function HomepageFeatures() {
                   {offering.description}
                 </P>
                 <Link
-                  className="flex gap-x-2 mt-4 items-center font-semibold text-primary-50"
+                  className="flex gap-x-2 mt-auto pt-4 items-center font-semibold text-primary-50"
                   href={offering.cta.href}
                 >
                   {offering.cta.label}
@@ -268,7 +268,7 @@ function HomepageFeatures() {
                 key={i}
               >
                 {product.badge && (
-                  <span className="absolute top-2 right-2 text-xs rounded-full px-2 py-0.5 bg-primary-50 text-white">
+                  <span className="absolute top-3 right-3 text-xs rounded-full px-2 py-0.5 bg-primary-50 text-white">
                     {product.badge}
                   </span>
                 )}

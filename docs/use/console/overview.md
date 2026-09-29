@@ -58,7 +58,7 @@ When moving to an S3 plan would save you money, the card tells you how much, for
 Without a Drive plan you can't upload anything new. Your files stay readable. The Drive card says so and offers a plan. See [Drive plans](/use/console/billing#drive-plans).
 :::
 
-[Shared drives](/use/console/shared-drives) that someone else owns don't count towards your Drive storage. Their owner pays for them.
+Shared drives that someone else owns don't count towards your Drive storage. Their owner pays for them.
 
 ### What's in each product
 

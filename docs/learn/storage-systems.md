@@ -9,16 +9,16 @@ import Unordered from '@site/src/components/Unordered';
 
 # How Arion stores your data
 
-Hippius stores your data on **Arion**, a storage network built for it. Drive and S3 Storage write to Arion today. This page explains how a file is split, placed, checked and repaired across the network, and what is encrypted at each step.
+Drive, S3 Storage and Hub are what you see. Underneath, your data lives on **Arion** — a storage network built for it — and Confidential Computing (coming soon) keeps its encrypted backups there too. This page explains how a file is split, placed, checked and repaired across the network, and what is encrypted at each step.
 
 ## The short version
 
 When you upload a file:
 
 <Ordered>
-  <li>It is split into <strong>30 pieces</strong>, 10 data and 20 parity, with Reed-Solomon erasure coding</li>
+  <li>It is split into <strong>30 pieces</strong> (10 data + 20 parity) with Reed-Solomon erasure coding</li>
   <li>Each piece is placed on a different miner by the <strong>CRUSH algorithm</strong></li>
-  <li>To download, only <strong>10 of the 30 pieces</strong> are needed; the other 20 are redundancy</li>
+  <li>To download, only <strong>10 of the 30 pieces</strong> are needed — the other 20 are redundancy</li>
 </Ordered>
 
 Up to 20 miners can fail at the same time and your file is still fully recoverable.
@@ -60,9 +60,9 @@ Files are encoded with Reed-Solomon, **k=10, m=20**, in 2 MiB stripes:
 Instead of a central index that answers "which miner has piece 7?", CRUSH computes the answer from a cluster map. This means:
 
 <Unordered>
-  <li><strong>No central lookup.</strong> Any node can compute where a piece lives on its own</li>
-  <li><strong>Deterministic.</strong> The same input always gives the same placement</li>
-  <li><strong>Topology-aware.</strong> Pieces are spread across different miners to reduce correlated failures</li>
+  <li><strong>No central lookup</strong> — any node can compute where a piece lives on its own</li>
+  <li><strong>Deterministic</strong> — the same input always gives the same placement</li>
+  <li><strong>Topology-aware</strong> — pieces are spread across different miners to reduce correlated failures</li>
 </Unordered>
 
 The cluster map is published to the Hippius chain by the chain submitter, so placement is verifiable and tamper-resistant.
@@ -73,7 +73,7 @@ Pieces travel over **QUIC** connections using [Iroh](https://iroh.computer/):
 
 <Unordered>
   <li>Encrypted and authenticated by default</li>
-  <li>Multiplexed: several pieces transfer in parallel over one connection</li>
+  <li>Multiplexed — several pieces transfer in parallel over one connection</li>
   <li>Direct UDP paths between nodes with hole-punching, relay fallback when needed</li>
   <li>Each miner's identity is its Ed25519 public key</li>
 </Unordered>
@@ -110,6 +110,7 @@ Arion moves and stores bytes; it does not decide what they mean. Encryption happ
 <Unordered>
   <li><strong>Drive</strong> encrypts on your device. Only you hold the key, and the recovery seed restores it. Nobody at Hippius can read your files.</li>
   <li><strong>S3 Storage</strong> encrypts at rest with AES-256-GCM, every chunk under its own key, and those keys are wrapped by a key management service. The S3 gateway decrypts when you download.</li>
+  <li><strong>Confidential Computing</strong> (coming soon): a virtual machine's disk lives on the miner's own machine, encrypted with a key held only inside the VM — the host cannot read it. Its backups are encrypted before they reach Hippius S3.</li>
 </Unordered>
 
 In both cases, miners only ever hold encrypted pieces. A miner cannot read your data, and a single miner never holds enough pieces to rebuild a file.
