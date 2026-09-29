@@ -1,26 +1,27 @@
 ---
 sidebar_position: 5
-description: How Hippius stores your data across a distributed network using Arion, Reed-Solomon erasure coding, and the CRUSH algorithm.
+title: How Arion stores your data
+description: How Hippius stores your data on Arion, its distributed storage network. Erasure coding, CRUSH placement, proof of storage, repair, and what is encrypted where.
 ---
 
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 
-# How Storage Works
+# How Arion stores your data
 
-We store your data on **Arion** — a purpose-built distributed storage engine. This page explains the architecture: how files are split, placed, and recovered across the network.
+Hippius stores your data on **Arion**, a storage network built for it. Drive and S3 Storage write to Arion today. This page explains how a file is split, placed, checked and repaired across the network, and what is encrypted at each step.
 
 ## The short version
 
 When you upload a file:
 
 <Ordered>
-  <li>It's split into <strong>30 shards</strong> (10 data + 20 parity) using Reed-Solomon erasure coding</li>
-  <li>Each shard is placed on a different miner using the <strong>CRUSH algorithm</strong></li>
-  <li>To download, only <strong>10 of 30 shards</strong> are needed — the other 20 are redundancy</li>
+  <li>It is split into <strong>30 pieces</strong>, 10 data and 20 parity, with Reed-Solomon erasure coding</li>
+  <li>Each piece is placed on a different miner by the <strong>CRUSH algorithm</strong></li>
+  <li>To download, only <strong>10 of the 30 pieces</strong> are needed; the other 20 are redundancy</li>
 </Ordered>
 
-This means up to 20 miners can fail simultaneously and your file is still fully recoverable.
+Up to 20 miners can fail at the same time and your file is still fully recoverable.
 
 ## Architecture
 
@@ -28,85 +29,95 @@ This means up to 20 miners can fail simultaneously and your file is still fully 
 You
  │ HTTPS
  ▼
-Gateway (:3000)          ← HTTP ingress, handles auth + chunking
+Gateway (:3000)          ← HTTP ingress, handles auth and chunking
  │ P2P
  ▼
 Validator (:3002)        ← encodes with Reed-Solomon, runs CRUSH placement
  │ QUIC (Iroh)
- ├──► Miner A  ← shard 1
- ├──► Miner B  ← shard 2
- ├──► Miner C  ← shard 3
+ ├──► Miner A  ← piece 1
+ ├──► Miner B  ← piece 2
+ ├──► Miner C  ← piece 3
  │    ...
- └──► Miner N  ← shard 30
+ └──► Miner N  ← piece 30
 
 Warden (:3003)           ← audits miners with proof-of-storage challenges
-Chain Submitter (:3004)  ← publishes cluster maps to the blockchain
+Chain Submitter (:3004)  ← publishes cluster maps to the Hippius chain
 ```
 
 ## Reed-Solomon erasure coding
 
-Files are encoded using Reed-Solomon with **k=10, m=20** (2 MiB stripes):
+Files are encoded with Reed-Solomon, **k=10, m=20**, in 2 MiB stripes:
 
 <Unordered>
-  <li>10 data shards contain the original content</li>
-  <li>20 parity shards allow reconstruction if any data shards are lost</li>
-  <li>Any 10 of the 30 shards reconstruct the original file</li>
-  <li>Tolerates up to <strong>20 simultaneous miner failures</strong></li>
+  <li>10 data pieces carry the original content</li>
+  <li>20 parity pieces allow reconstruction when data pieces are lost</li>
+  <li>Any 10 of the 30 pieces rebuild the original file</li>
+  <li>Tolerates up to <strong>20 miners failing at once</strong></li>
 </Unordered>
-
-This is the same technique used in RAID storage and data center infrastructure.
 
 ## CRUSH placement
 
-Instead of a central index ("which miner has shard 7?"), CRUSH computes the answer mathematically from a cluster map. This means:
+Instead of a central index that answers "which miner has piece 7?", CRUSH computes the answer from a cluster map. This means:
 
 <Unordered>
-  <li><strong>No central lookup</strong> — any node can compute shard locations independently</li>
-  <li><strong>Deterministic</strong> — same input always produces the same placement</li>
-  <li><strong>Topology-aware</strong> — shards spread across different miners/regions to reduce correlated failures</li>
+  <li><strong>No central lookup.</strong> Any node can compute where a piece lives on its own</li>
+  <li><strong>Deterministic.</strong> The same input always gives the same placement</li>
+  <li><strong>Topology-aware.</strong> Pieces are spread across different miners to reduce correlated failures</li>
 </Unordered>
 
-The cluster map is published to the Hippius blockchain by the chain submitter, making it verifiable and tamper-resistant.
+The cluster map is published to the Hippius chain by the chain submitter, so placement is verifiable and tamper-resistant.
 
-## Network layer (Iroh + QUIC)
+## Network layer (Iroh and QUIC)
 
-Shard transfers happen over **QUIC** connections using [Iroh](https://iroh.computer/):
+Pieces travel over **QUIC** connections using [Iroh](https://iroh.computer/):
 
 <Unordered>
   <li>Encrypted and authenticated by default</li>
-  <li>Multiplexed — multiple shards transfer in parallel over a single connection</li>
-  <li>Direct UDP paths between nodes (hole-punching), relay fallback when needed</li>
-  <li>Each miner's identity is its Ed25519 public key (node ID)</li>
+  <li>Multiplexed: several pieces transfer in parallel over one connection</li>
+  <li>Direct UDP paths between nodes with hole-punching, relay fallback when needed</li>
+  <li>Each miner's identity is its Ed25519 public key</li>
 </Unordered>
+
+## Proof of storage
+
+A miner does not just claim to hold your pieces; it has to prove it, continuously.
+
+<Ordered>
+  <li>When a piece is stored, it is split into chunks, each chunk is hashed, and the hashes form a Merkle tree. The root of that tree is the piece's commitment.</li>
+  <li>The <strong>Warden</strong> picks pieces to audit and, every 30 seconds, challenges miners on 4 random chunks of a piece.</li>
+  <li>The miner answers with a zero-knowledge proof, built with Plonky3, that it holds exactly those chunks. It has 60 seconds.</li>
+  <li>The Warden verifies the proof against the commitment. A failed proof or a timeout counts against the miner's reputation, which feeds its on-chain score and rewards.</li>
+</Ordered>
+
+The audited set is re-sampled every hour, so a miner cannot predict which pieces will be checked.
 
 ## Automatic repair
 
 The **Validator** runs a rebuild agent that:
 
 <Ordered>
-  <li>Monitors miner health via heartbeats</li>
+  <li>Monitors miner health through heartbeats</li>
   <li>Detects when a miner goes offline</li>
-  <li>Fetches k=10 shards from remaining miners</li>
-  <li>Reconstructs the missing shards</li>
-  <li>Places them on new miners using CRUSH</li>
+  <li>Fetches 10 pieces from the remaining miners</li>
+  <li>Reconstructs the missing pieces</li>
+  <li>Places them on new miners with CRUSH</li>
 </Ordered>
 
-The **Warden** audits miners with cryptographic proof-of-storage challenges (Plonky3 ZK circuits) to verify they're actually storing the data they claim to store.
+## What is encrypted, and where
 
-## Encryption
+Arion moves and stores bytes; it does not decide what they mean. Encryption happens in the product above it, before anything reaches the network:
 
-Objects are encrypted with per-object NaCl keys before storage. Key management uses envelope encryption (KMS in production). Miners store only encrypted bytes — they cannot read your data.
+<Unordered>
+  <li><strong>Drive</strong> encrypts on your device. Only you hold the key, and the recovery seed restores it. Nobody at Hippius can read your files.</li>
+  <li><strong>S3 Storage</strong> encrypts at rest with AES-256-GCM, every chunk under its own key, and those keys are wrapped by a key management service. The S3 gateway decrypts when you download.</li>
+</Unordered>
 
-## S3 compatibility
+In both cases, miners only ever hold encrypted pieces. A miner cannot read your data, and a single miner never holds enough pieces to rebuild a file.
 
-All of this happens transparently behind a standard S3 API. You use `aws s3 cp`, boto3, rclone — Arion handles the rest.
+## Using it
 
-See the [Quickstart guide](/use/quickstart) or pick a [client guide](/storage/s3/python) to get started.
+You never talk to Arion directly. Drive does it for you in the console and the apps, and S3 Storage does it behind a standard S3 API: `aws s3 cp`, boto3, rclone all work as they do anywhere.
 
-## Storage economics
-
-| Recipient | Share | Role |
-|---|---|---|
-| Miners | 60% | Store and serve shards |
-| Validators | 30% | Encode, place, audit, repair |
-| Treasury | 10% | Protocol development |
+- [Store your first file in Drive](/use/drive)
+- [Create your first S3 bucket](/use/quickstart)
+- [Run a storage miner](/earn/storage-miner)
