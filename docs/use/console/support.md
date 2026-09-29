@@ -16,6 +16,8 @@ import Screenshot from '@site/src/components/Screenshot';
 
 The **Help & Support** page is your direct line to our team. If you hit a bug, have a billing question, or run into something the docs don't cover, open a ticket here. We'll reply inside the ticket and you'll see our messages the next time you load the page.
 
+An agent with the account API token can open a ticket directly: `POST https://api.hippius.com/api/support/tickets/` with `subject`, `priority`, `category`, and `description`.
+
 Reach Help & Support from the sidebar at <BgStyledIconWithText text="Help & Support" icon="HelpCircle" /> (in the Support section).
 
 <Screenshot src="/img/console/support/overview.png" alt="Support page" dark />

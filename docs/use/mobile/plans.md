@@ -23,10 +23,10 @@ That depends on how you sign in:
 
 | How you sign in | What you get |
 | --- | --- |
-| Email, Google, GitHub or Apple | The **Free Drive Plan**: 10 GB of encrypted storage, with no payment details needed. You can upload, back up your photos and share links straight away. |
+| Google, GitHub or Apple | The **Free Drive Plan**: 10 GB of encrypted storage, with no payment details needed. You can upload, back up your photos and share links straight away. |
 | Access key (your 12-word recovery phrase) | No free storage. Subscribe to a plan in the console before your first upload. |
 
-When you need more space, paid plans go up to many terabytes and are billed monthly. Plans and prices change from time to time, so the console always has the current list. [Drive plans](/use/console/billing#drive-plans) in the console guide explains how paying works, including topping up your balance by card or with TAO.
+When you need more space, paid plans go up to many terabytes and are billed monthly. Plans and prices change from time to time, so the console always has the current list. [Drive plans](/use/console/billing#drive-plans) in the console guide explains how paying works, including topping up your balance by card, Bitcoin, USDC, or TAO.
 
 ## What the app shows {#what-the-app-shows}
 

@@ -20,7 +20,7 @@ The **Hippius Console** is the web dashboard for the Hippius distributed network
   <li>Store, browse, and manage personal encrypted files with <strong>Drive</strong>.</li>
   <li>Create S3 compatible <strong>buckets</strong> and connect any S3 client.</li>
   <li>Push container images and AI models to your <strong>Hub</strong>.</li>
-  <li>Choose a <strong>plan</strong> for each product, and top up your <strong>balance</strong> by card or with TAO.</li>
+  <li>Choose a <strong>plan</strong> for each product, and top up your <strong>balance</strong> by card, Bitcoin, USDC, or TAO.</li>
 </Unordered>
 
 ## Signing In
@@ -29,7 +29,7 @@ Go to [console.hippius.com](https://console.hippius.com) and choose how you want
 
 <Unordered>
   <li><strong>Google, GitHub, or Apple</strong>: click the button and you'll be taken to that provider's login page, then brought back to the console automatically.</li>
-  <li><strong>Access Key</strong>: enter your <strong>12-word recovery phrase</strong> and click <BgStyledText>Log In</BgStyledText>. Use the eye icon to show or hide the words as you type.</li>
+  <li><strong>Access Key</strong>: enter your <strong>12-word recovery phrase</strong> and click <BgStyledText>Log In</BgStyledText>. Use the eye icon to show or hide the words as you type. This creates a wallet-only account. It has no real email address, so it gets no lifecycle mail. Drive has no free plan on that account: subscribe before the first upload. S3 and Hub work the same as on any other account.</li>
 </Unordered>
 
 If this is your first time signing in, your account is created automatically. There is no separate sign up step.

@@ -32,6 +32,12 @@ ROOT_FACTS = (
     "https://raw.githubusercontent.com/thenervelab/hippius-mem/main/llms.txt",
     "https://raw.githubusercontent.com/thenervelab/arion/main/llms.txt",
     "https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt",
+    "distributed cloud",
+    "Bitcoin",
+    "USDC",
+    "https://docs.hippius.com/use/drive",
+    "https://api.hippius.com/api/support/tickets/",
+    "https://www.linkedin.com/company/hippius",
 )
 
 ROOT_FORBIDDEN = ("eu-central-1", "us-east-1.hippius.com")
@@ -120,6 +126,15 @@ def main() -> None:
         # Anonymous GET of the S3 API root is refused. 403 means the host answered.
         if code == 403 and host_of(url) == "s3.hippius.com":
             print(f"ok 403 {url}")
+            continue
+        # The ticket route exists and requires an account token. 401 means it answered.
+        if code == 401 and url.startswith("https://api.hippius.com/api/support/tickets"):
+            print(f"ok 401 {url}")
+            continue
+        # LinkedIn rate-limits datacenter clients. 429 and 999 mean the company
+        # page refused the runner. A missing page still fails.
+        if code in (429, 999) and host_of(url) == "www.linkedin.com":
+            print(f"ok {code} {url}")
             continue
         if code != 200:
             message = f"{code} {url}"
