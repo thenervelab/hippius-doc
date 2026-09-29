@@ -19,7 +19,7 @@ const inlineFont = (family: string, file: string, weight: string) => {
 
 const config: Config = {
   title: "Hippius Docs - Learn, use, earn and develop with Hippius",
-  tagline: "Encrypted storage, S3 and an AI model Hub. One account.",
+  tagline: "Encrypted storage, S3 and an AI model Hub",
   favicon: "img/favicon.ico",
 
   url: "https://docs.hippius.io",
