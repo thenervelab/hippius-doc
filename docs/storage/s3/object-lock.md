@@ -9,9 +9,9 @@ import Unordered from '@site/src/components/Unordered';
 
 # Object Lock (WORM)
 
-Object Lock makes a **version** immutable until a date, or until you release a legal hold. Nobody can permanently delete it before then — not you, not an admin, not Hippius. Use it for backups, audit logs, and compliance (S3 WORM).
+Object Lock makes a **version** immutable until a date, or until you release a legal hold. Nobody can permanently delete it before then: not you, not an admin, not Hippius. Use it for backups, audit logs, and compliance (S3 WORM).
 
-The API matches AWS. Enforcement is in the storage layer, so it holds against internal cleanup too.
+The API matches the standard S3 Object Lock API. Enforcement is in the storage layer, so it holds against internal cleanup too.
 
 :::tip Versioning is required
 Object Lock protects versions, not keys. `--object-lock-enabled-for-bucket` turns versioning on for you.
@@ -41,7 +41,7 @@ A versioned delete of that object returns `AccessDenied` until the date.
 You can always **extend** a retention. You cannot shorten a live one.
 
 :::warning COMPLIANCE cannot be undone
-A ten-year COMPLIANCE object occupies storage — and bills — for ten years. There is no support path to remove it early. Test with a short window first. Prefer GOVERNANCE unless a regulator requires otherwise.
+A ten-year COMPLIANCE object occupies storage, and bills, for ten years. There is no support path to remove it early. Test with a short window first. Prefer GOVERNANCE unless a regulator requires otherwise.
 :::
 
 ## Set retention
@@ -66,7 +66,7 @@ Retain-until dates beyond 10 years (3650 days) are rejected.
 
 ## Legal holds
 
-An indefinite lock with no expiry. Independent of retention — either one blocks deletion.
+An indefinite lock with no expiry. Independent of retention: either one blocks deletion.
 
 ```bash
 aws s3api put-object-legal-hold --bucket my-vault --key evidence.zip \
@@ -93,9 +93,9 @@ aws s3api put-object-lock-configuration --bucket my-vault \
 | Request | On a locked version |
 |---------|---------------------|
 | `DELETE key?versionId=…` | **403 AccessDenied** |
-| `DELETE key` (no version) | Succeeds — writes a delete marker; the locked version stays |
+| `DELETE key` (no version) | Succeeds. Writes a delete marker; the locked version stays |
 
-Overwrite is allowed: it creates a new version. Bulk `DeleteObjects` is per-key — a locked key returns `AccessDenied` and the rest of the batch continues.
+Overwrite is allowed: it creates a new version. Bulk `DeleteObjects` is per-key: a locked key returns `AccessDenied` and the rest of the batch continues.
 
 ## Bypass GOVERNANCE
 
@@ -107,11 +107,11 @@ aws s3api delete-object --bucket my-vault --key report.pdf --version-id "$VID" \
   --endpoint-url https://s3.hippius.com
 ```
 
-AWS gates this on IAM. Hippius has no IAM, so only the bucket owner can bypass.
+Standard S3 gates this on IAM. Hippius has no IAM, so only the bucket owner can bypass.
 
 ## Enable on an existing bucket
 
-Versioning first, then Object Lock. No `x-amz-bucket-object-lock-token` required. Future versions only — existing objects are not locked retroactively.
+Versioning first, then Object Lock. No `x-amz-bucket-object-lock-token` required. Future versions only. Existing objects are not locked retroactively.
 
 ```bash
 aws s3api put-bucket-versioning --bucket existing-bucket \
@@ -132,7 +132,7 @@ Set lock headers on `CreateMultipartUpload`, not `CompleteMultipartUpload`. Read
 |---------------|------------|
 | Lock headers on `CompleteMultipartUpload` | Set them on `CreateMultipartUpload` |
 | Lock headers on `GetObject` responses | Use `HeadObject` |
-| Suspending versioning on a lock-enabled bucket | Not possible in AWS either |
+| Suspending versioning on a lock-enabled bucket | Standard S3 does not allow it either |
 | S3 Batch Operations | Apply per object |
 | Replicating lock state | Set the lock on the destination |
 | `POST Object` | Presigned `PutObject` |
@@ -142,5 +142,5 @@ Set lock headers on `CreateMultipartUpload`, not `CompleteMultipartUpload`. Read
 <Unordered>
   <li><a href="/storage/s3/advanced">Advanced Usage</a></li>
   <li><a href="/storage/s3/compatibility">S3 Compatibility Matrix</a></li>
-  <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html">AWS Object Lock documentation</a></li>
+  <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html">S3 Object Lock reference</a></li>
 </Unordered>
