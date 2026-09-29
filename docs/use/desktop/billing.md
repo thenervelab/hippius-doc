@@ -3,7 +3,7 @@ id: billing
 title: Billing
 sidebar_label: Billing
 slug: /use/desktop/billing
-description: Pick a storage plan, pay by card or credits, top up your balance, and manage renewals from the Billing page in the Hippius desktop app.
+description: Pick a storage plan, pay by card or from your balance, top it up, and manage renewals from the Billing page in the Hippius desktop app.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -15,13 +15,11 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-**Billing** is the one place in the desktop app where you manage the money side of your account: the **storage plan** that decides how much Drive space you have, and the **credit balance** that can pay for it.
+**Billing** is the one place in the desktop app where you manage the money side of your account: the **storage plan** that decides how much Drive space you have, and the **balance** that can pay for it.
 
 Open it from the account avatar in the top bar, choose <BgStyledIconWithText text="Settings" icon="Settings" />, then <BgStyledIconWithText text="Billing" icon="Billing" /> in the settings sidebar.
 
-:::info A plan and credits are two different things
-Your **plan** grants storage. **Credits** are a dollar balance on your account (1 credit = $1) that can pay for a plan and for other Hippius services such as S3 and Hub. Adding credits on its own does not give you more Drive space. Only a bigger plan does that.
-:::
+Your plan gives you storage. Your balance pays for it. Topping up does not add space; a bigger plan does.
 
 <Screenshot src="/img/desktop/billing-settings.png" alt="The Billing page in Settings" dark />
 
@@ -31,7 +29,7 @@ Every prompt in the app that asks you to spend money lands here. The <BgStyledTe
 
 | Section                 | What it is for                                                                                          |
 | ----------------------- | ------------------------------------------------------------------------------------------------------- |
-| **Total Credits**       | Your current credit balance, when it was last refreshed, and a button to add more.                       |
+| **Total Credits**       | Your current balance, when it was last refreshed, and a button to add more.                              |
 | **TAO Deposit Address** | Your Bittensor address for funding the account with TAO.                                                 |
 | **Subscription plans**  | The storage plans you can be on, which one you are on now, and the buttons to subscribe, change or cancel. |
 
@@ -44,13 +42,13 @@ The **Total Credits** card shows your balance. A new or unfunded account reads a
   <li>Click <BgStyledText>Add Credits</BgStyledText> to top up. This opens the Hippius console in your browser, where you can pay by card, Bitcoin, USDC, or TAO.</li>
 </Unordered>
 
-:::info Buying credits happens in the console
-The desktop app does not sell credits directly. <BgStyledText>Add Credits</BgStyledText> hands you to the console's top-up flow, and your balance here updates the next time it refreshes. See [Console Billing](/use/console/billing) for that flow in full.
+:::info Topping up happens in the console
+The desktop app does not take payments directly. <BgStyledText>Add Credits</BgStyledText> hands you to the console's top-up flow, and your balance here updates the next time it refreshes. See [Console Billing](/use/console/billing) for that flow in full.
 :::
 
 ## TAO Deposit Address
 
-The **TAO Deposit Address** card shows your **SS58 Bittensor Chain** address. Send TAO to it from any Bittensor wallet or exchange and your credit balance grows at the rate of **$1 = 1 credit** once the transfer confirms on chain.
+The **TAO Deposit Address** card shows your **SS58 Bittensor Chain** address. Send TAO to it from any Bittensor wallet or exchange and your balance grows by the dollar value of the transfer once it confirms on chain.
 
 Click the **copy** button beside the address to copy the whole value. The address is shortened in the middle to fit the card, so copy it rather than typing what you see.
 
@@ -111,13 +109,13 @@ If you signed in with an **access key (a seed phrase)**, there is no included al
 
 Card is selected by default, because it works whatever your balance is.
 
-Choosing it opens **Stripe Checkout in your browser**. The app shows a "Finish your payment in the browser" card while you are away, which you can close at any time: the payment is not tied to that dialog. Once Stripe takes the payment, the credits are minted, the plan is bought with them, and your subscription appears in the app on its own.
+Choosing it opens **Stripe Checkout in your browser**. The app shows a "Finish your payment in the browser" card while you are away, which you can close at any time: the payment is not tied to that dialog. Once Stripe takes the payment, the amount lands on your balance, the plan is bought with it, and your subscription appears in the app on its own.
 
 Your card is kept at Stripe and funds future renewals.
 
-### Paying from credits
+### Paying from your balance
 
-Choosing **Credits** charges the plan straight to your Hippius balance at **1 credit = $1**. The tile shows what you have available.
+Choosing **Credits** charges the plan straight to your Hippius balance. The tile shows what you have available.
 
 If your balance will not cover the plan, the balance chip turns red, a <BgStyledText>Top up</BgStyledText> link appears beside it, and <BgStyledText>Make Payment</BgStyledText> stays disabled until you either top up or switch to Card. We deliberately leave the option selectable so you can see how far short you are and fix it from the same place.
 
@@ -133,7 +131,7 @@ If the chain is slow, the app stops waiting after a minute and tells you it will
 
 To move to a different size, click <BgStyledText>Upgrade</BgStyledText> or <BgStyledText>Downgrade</BgStyledText> on the plan you want and confirm.
 
-A change is made against the subscription you already have, so there is no payment chooser: it settles from your credit balance on the existing plan's rail.
+A change is made against the subscription you already have, so there is no payment chooser: it settles from your balance, the same way the existing plan is paid.
 
 :::warning A downgrade has to fit
 We refuse a downgrade if you are already storing more than the smaller plan holds. Remove enough files to get under the new limit first, then downgrade.
@@ -154,7 +152,7 @@ What happens next depends on your account:
   <li><strong>Access key accounts</strong> are left with no storage plan at all. Uploads stop. Files already stored stay readable and are not deleted.</li>
 </Unordered>
 
-Your credits are untouched either way, and you can subscribe again at any time.
+Your balance is untouched either way, and you can subscribe again at any time.
 
 <Screenshot src="/img/desktop/billing-cancel.png" alt="Cancel subscription confirmation" dark />
 
@@ -176,26 +174,26 @@ You do not have to open Billing to see how you are doing. The header on Overview
 Beside it, one button appears only when there is something worth doing:
 
 <Unordered>
-  <li><BgStyledText>Upgrade</BgStyledText> when you have no plan, or your plan is 80% full or more. More space always means a bigger plan, so we never point you at credits here.</li>
-  <li><BgStyledText>Top up</BgStyledText> when your plan renews from credits and your balance will not cover the next renewal. The note beside it says how many days you have, and Billing itself carries the <a href="#not-enough-credits-to-renew">fuller warning</a>.</li>
+  <li><BgStyledText>Upgrade</BgStyledText> when you have no plan, or your plan is 80% full or more. More space always means a bigger plan, so we never point you at a top up here.</li>
+  <li><BgStyledText>Top up</BgStyledText> when your plan renews from your balance and it will not cover the next renewal. The note beside it says how many days you have, and Billing itself carries the <a href="#not-enough-balance-to-renew">fuller warning</a>.</li>
 </Unordered>
 
 A healthy plan with room to spare shows no button at all.
 
 ## When something is wrong with your plan
 
-### Not enough credits to renew
+### Not enough balance to renew
 
-If your plan renews from credits and your balance will not cover the next charge, a red notice sits at the very top of the Billing page, directly above **Total Credits**. It names your plan, what it costs, what you actually have, and how long you have left, for example:
+If your plan renews from your balance and it will not cover the next charge, a red notice sits at the very top of the Billing page, directly above **Total Credits**. It names your plan, what it costs, what you actually have, and how long you have left, for example:
 
 > **Not enough credits to renew your plan**
 > Your Max plan costs $22 a month and you have 9 credits. Top up before it renews in 6 days, or it will not renew.
 
-There is no button on the notice, because <BgStyledText>Add Credits</BgStyledText> is already the next thing on the page. It cannot be dismissed either: putting it away would not buy credits, and the renewal would still fail.
+There is no button on the notice, because <BgStyledText>Add Credits</BgStyledText> is already the next thing on the page. It cannot be dismissed either: putting it away would not top up your balance, and the renewal would still fail.
 
-Only plans that renew **from credits** get this. A card-funded plan charges the card at Stripe, so there is nothing to top up.
+Only plans that renew **from your balance** get this. A card-funded plan charges the card at Stripe, so there is nothing to top up.
 
-<Screenshot src="/img/desktop/billing-renewal-notice.png" alt="The low-credits renewal notice on the Billing page" dark />
+<Screenshot src="/img/desktop/billing-renewal-notice.png" alt="The low-balance renewal notice on the Billing page" dark />
 
 ### Banners on Drive
 
@@ -205,27 +203,27 @@ Drive shows a banner for the states worth interrupting you over. A plan that is 
 | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **You don't have a subscription plan**   | Your account has no storage at all. Nothing can be uploaded until you subscribe. Your stored files stay readable. |
 | **Setting up your Drive plan**           | Your payment went through and the plan is being provisioned on chain. This normally takes two to three minutes.       |
-| **Your Drive plan could not be renewed** | The renewal payment failed. Top up your credits, or fix the payment where the plan is managed.                        |
+| **Your Drive plan could not be renewed** | The renewal payment failed. Top up your balance, or fix the payment where the plan is managed.                        |
 | **Your Drive plan has been cancelled**   | Your files are still here, but you need an active plan to upload again. This one can be dismissed.                    |
 
 <Screenshot src="/img/desktop/billing-no-plan-banner.png" alt="No storage plan banner" dark />
 
-## Running out of room or credits
+## Running out of room or balance
 
 Two different things can stop an upload, and the app says which:
 
-**Not enough storage.** Uploading a file or folder, syncing a folder, or creating a share link can push you past what your plan holds. A dialog says so and offers <BgStyledText>View plans</BgStyledText>, which opens Billing. Credits cannot help here. The answer is a bigger plan, or freeing space.
+**Not enough storage.** Uploading a file or folder, syncing a folder, or creating a share link can push you past what your plan holds. A dialog says so and offers <BgStyledText>View plans</BgStyledText>, which opens Billing. Topping up cannot help here. The answer is a bigger plan, or freeing space.
 
 :::note Sharing uses your storage
 Creating a share link uploads a re-encrypted copy of the file, and that copy counts against your plan just like any other upload. See [Shared Links](/use/desktop/shared-links).
 :::
 
-**Out of credits.** If the sync engine is refused for want of credits, a banner appears at the top of the page saying what was needed, what you have, and how many files are paused, with a <BgStyledText>Top up</BgStyledText> button. You can dismiss it, and it comes back if it happens again.
+**Out of balance.** If the sync engine is refused because your balance is empty, a banner appears at the top of the page saying what was needed, what you have, and how many files are paused, with a <BgStyledText>Top up</BgStyledText> button. You can dismiss it, and it comes back if it happens again.
 
 ## Where to next
 
 <Unordered>
-  <li><a href="/use/console/billing">Console Billing</a>: buying credits by card, Bitcoin, USDC, or TAO, and your full transaction history.</li>
+  <li><a href="/use/console/billing">Console Billing</a>: topping up by card, Bitcoin, USDC, or TAO, and your full transaction history.</li>
   <li><a href="/use/desktop/drive">Drive</a>: start uploading once you have a plan.</li>
   <li><a href="/use/desktop/shared-links">Shared Links</a>: sharing a file uses your plan's storage.</li>
   <li><a href="/use/desktop/settings">Settings</a>: the rest of what lives alongside Billing.</li>

@@ -74,7 +74,7 @@ To add your first folder:
 
 <Screenshot src="/img/desktop/set-up-your-first-sync-folder.png" alt="The FilesOnboarding screen showing the Local Sync Folders section with the Add Folder button and Sync from Other Devices section" dark />
 
-Any files you add to this folder will be encrypted on your device and synced to the Hippius network. Setting up sync here is optional. You can add folders later from Settings or by returning to this screen at any time.
+Any files you add to this folder will be encrypted on your device and synced to the Hippius network. Setting up sync here is optional — you can add folders later from Settings or by returning to this screen at any time.
 
 :::info Encryption is automatic
 Your unlock password was set during first login, so file encryption is configured automatically. No additional password setup is needed when adding a sync folder.
@@ -88,7 +88,7 @@ From the **Local** view you can add more sync folders, sync folders from your ot
 
 ## Adding More Sync Folders
 
-We support syncing **multiple folders** simultaneously. You can add additional folders at any time from either the **Drive** page or the **Settings** page. Both open the same **Add Local Folder** dialog:
+We support syncing **multiple folders** simultaneously. You can add additional folders at any time from either the **Drive** page or the **Settings** page — both open the same **Add Local Folder** dialog:
 
 <Unordered>
   <li><strong>From the Drive page</strong>: click <BgStyledText>Local</BgStyledText> in the breadcrumb to open the Local view, then click <BgStyledText>Add Folder</BgStyledText> under <strong>Local Sync Folders</strong>.</li>
@@ -141,7 +141,7 @@ If syncing is stopped for a folder, you will see an alert prompting you to resum
 
 The **Sync Queue** widget lives in the **sidebar footer**, at the bottom-left of the app. It appears automatically whenever files are being synced and shows real-time progress.
 
-Its header always displays the **overall progress**: a percentage and progress bar with a live status, such as the current transfer speed while syncing or **Complete** when finished. Hover the progress bar for more detail, including the estimated time remaining and a count of files synced.
+Its header always displays the **overall progress** — a percentage and progress bar with a live status, such as the current transfer speed while syncing or **Complete** when finished. Hover the progress bar for more detail, including the estimated time remaining and a count of files synced.
 
 The widget has three forms:
 
@@ -154,7 +154,7 @@ The widget has three forms:
 <Screenshot src="/img/desktop/syncing-progress-widget.png" alt="The Sync Queue widget expanded, showing the per-file list with status badges" dark />
 
 :::tip
-Dismissing the widget with **✕** does not stop syncing. It only minimizes the widget to the progress ring. The ring also appears whenever the sidebar is collapsed, and the full card reopens automatically when a new sync starts.
+Dismissing the widget with **✕** does not stop syncing — it only minimizes the widget to the progress ring. The ring also appears whenever the sidebar is collapsed, and the full card reopens automatically when a new sync starts.
 :::
 
 ## Drag and Drop
@@ -207,12 +207,12 @@ To narrow down the files within the folder you are viewing, use the **File Type*
 Hippius Desktop keeps a compact **menu bar window** in your system tray (the menu bar on macOS, the notification area on Windows). Click the Hippius tray icon to open it for a quick glance at your account without bringing the full app to the front.
 
 
-<Screenshot src="/img/desktop/menu-bar-window.png" alt="The Hippius menu bar window showing credits, the notification bell, file search, and recent uploads" dark />
+<Screenshot src="/img/desktop/menu-bar-window.png" alt="The Hippius menu bar window showing your balance, the notification bell, file search, and recent uploads" dark />
 
 The window has four parts:
 
 <Unordered>
-  <li><strong>Credits</strong>: your current credit balance, shown in the top left so you can keep an eye on it at any time.</li>
+  <li><strong>Credits</strong>: your current balance, shown in the top left so you can keep an eye on it at any time.</li>
   <li><strong>Notification bell</strong>: in the top right, with a badge for the number of unread notifications.</li>
   <li><strong>Search Files</strong>: a search box with the <BgStyledText>⌘F</BgStyledText> shortcut.</li>
   <li><strong>Your Uploads</strong>: your most recently uploaded files, grouped by when they were added (for example <strong>Today</strong>, <strong>Yesterday</strong>, <strong>Last 7 Days</strong>, and <strong>Older</strong>). Each row shows the file name, size, and upload date.</li>

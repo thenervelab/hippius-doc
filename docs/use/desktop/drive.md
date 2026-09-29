@@ -3,7 +3,7 @@ id: drive
 title: Drive
 sidebar_label: Drive
 slug: /use/desktop/drive
-description: Manage your Drive in Hippius Desktop. Sync folders across your devices, upload and browse files, search your whole account, and keep everything end-to-end encrypted.
+description: Manage your Drive in Hippius Desktop — sync folders across your devices, upload and browse files, search your whole account, and keep everything end-to-end encrypted.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -254,7 +254,7 @@ To add a folder to a sync folder, you can:
 
 <Unordered>
   <li>Upload an existing folder with <BgStyledText>+ New Folder</BgStyledText> (see <a href="#uploading-folders">Uploading Folders</a> above).</li>
-  <li>Create the folder inside your synced folder using your operating system's file manager, then add files to it. They sync to the Hippius network automatically on the next sync cycle.</li>
+  <li>Create the folder inside your synced folder using your operating system's file manager, then add files to it — they sync to the Hippius network automatically on the next sync cycle.</li>
 </Unordered>
 
 ## Searching Your Files
@@ -263,7 +263,7 @@ Hippius Desktop offers two ways to find files, depending on whether you want to 
 
 ### Search within a folder
 
-The **Search file** box at the top of the Drive page searches the sync folder you are currently viewing, including all of its nested subfolders, not just the rows currently on screen.
+The **Search file** box at the top of the Drive page searches the sync folder you are currently viewing, including all of its nested subfolders — not just the rows currently on screen.
 
 <Ordered>
   <li>Open the sync folder you want to search.</li>
@@ -275,7 +275,7 @@ The **Search file** box at the top of the Drive page searches the sync folder yo
 
 ### Search across everything
 
-The **Search Files** box at the top of the sidebar opens a global search palette that queries the Hippius server directly. It searches your **entire account**, every sync folder and files uploaded from any device, so it can find files even when they aren't synced to this computer.
+The **Search Files** box at the top of the sidebar opens a global search palette that queries the Hippius server directly. It searches your **entire account** — every sync folder and files uploaded from any device — so it can find files even when they aren't synced to this computer.
 
 <Ordered>
   <li>Click <BgStyledText>Search Files</BgStyledText> in the sidebar, or press <strong>Ctrl + F</strong> (<strong>⌘ + F</strong> on macOS) from anywhere in the app.</li>
@@ -286,14 +286,14 @@ The **Search Files** box at the top of the sidebar opens a global search palette
 <Screenshot src="/img/desktop/drive-search-global.png" alt="Global search palette opened from the sidebar" dark />
 
 :::tip
-Use the in-folder **Search file** box when you know which folder a file lives in, and the global **Search Files** palette (Ctrl / ⌘ + F) to find a file anywhere in your account, including files uploaded from your other devices.
+Use the in-folder **Search file** box when you know which folder a file lives in, and the global **Search Files** palette (Ctrl / ⌘ + F) to find a file anywhere in your account — including files uploaded from your other devices.
 :::
 
 ## Sync Progress
 
 Whenever files are syncing, the **Sync Queue** widget appears in the **sidebar footer**, at the bottom-left of the app. It provides real-time feedback on sync operations.
 
-The widget header always shows the **overall progress**: a percentage and progress bar with a live status, such as the current transfer speed while syncing or **Complete** when finished. By default the widget is collapsed, showing only this header. Hover the progress bar for more detail, including the estimated time remaining and a count of files synced.
+The widget header always shows the **overall progress** — a percentage and progress bar with a live status, such as the current transfer speed while syncing or **Complete** when finished. By default the widget is collapsed, showing only this header. Hover the progress bar for more detail, including the estimated time remaining and a count of files synced.
 
 ### Expanded View
 
@@ -301,8 +301,8 @@ Click the **Sync Queue** header (or the chevron) to reveal the file list. Each r
 
 <Unordered>
   <li><strong>File name and icon</strong></li>
-  <li><strong>Size or transfer progress</strong>, for example, <code>1.2 MB / 4.5 MB</code> while a file is transferring</li>
-  <li><strong>Status badge</strong>: <strong>Pending</strong>, <strong>Encrypting</strong>, a live percentage, <strong>Synced</strong>, <strong>Downloaded</strong>, <strong>Deleted</strong>, or <strong>Error</strong></li>
+  <li><strong>Size or transfer progress</strong> — for example, <code>1.2 MB / 4.5 MB</code> while a file is transferring</li>
+  <li><strong>Status badge</strong> — <strong>Pending</strong>, <strong>Encrypting</strong>, a live percentage, <strong>Synced</strong>, <strong>Downloaded</strong>, <strong>Deleted</strong>, or <strong>Error</strong></li>
 </Unordered>
 
 <Screenshot src="/img/desktop/syncing-progress-widget.png" alt="Sync Queue widget expanded" dark />
@@ -322,7 +322,7 @@ Click the ring to restore the full widget. The ring also appears whenever the si
 <Screenshot src="/img/desktop/sync-progress-minified.png" alt="Sync Queue minified progress ring" dark />
 
 :::tip
-Dismissing the widget with **✕** does not stop syncing. It only minimizes the widget to the progress ring. The full card reopens automatically when a new sync starts.
+Dismissing the widget with **✕** does not stop syncing — it only minimizes the widget to the progress ring. The full card reopens automatically when a new sync starts.
 :::
 
 ## Conflict Resolution
@@ -342,11 +342,11 @@ Click <BgStyledText>Review & Resolve</BgStyledText> to open the Staged Changes d
 The **Staged Changes** dialog organizes pending sync operations into clear sections:
 
 <Ordered>
-  <li><strong>Upload</strong>: Files that will be uploaded to the server</li>
-  <li><strong>Download</strong>: Files that will be downloaded from the server</li>
-  <li><strong>Delete Locally</strong>: Files that will be removed from your device</li>
-  <li><strong>Delete from Server</strong>: Files that will be removed remotely</li>
-  <li><strong>Conflicts</strong>: Files with conflicting changes that require your decision</li>
+  <li><strong>Upload</strong> — Files that will be uploaded to the server</li>
+  <li><strong>Download</strong> — Files that will be downloaded from the server</li>
+  <li><strong>Delete Locally</strong> — Files that will be removed from your device</li>
+  <li><strong>Delete from Server</strong> — Files that will be removed remotely</li>
+  <li><strong>Conflicts</strong> — Files with conflicting changes that require your decision</li>
 </Ordered>
 
 ### Resolving Conflicts
@@ -384,7 +384,7 @@ You can pause syncing for individual folders at any time. When a folder's sync i
   <li>You can resume syncing at any time.</li>
 </Unordered>
 
-You can manage this from either the **Drive** page's **Local** view or **Settings → Sync & Storage**. Both surfaces list your sync folders and share the same actions.
+You can manage this from either the **Drive** page's **Local** view or **Settings → Sync & Storage** — both surfaces list your sync folders and share the same actions.
 
 ### Pausing Sync
 

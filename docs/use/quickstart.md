@@ -38,7 +38,7 @@ Storing a lot? A monthly S3 plan covers a block of storage for a flat price, up 
 </Ordered>
 
 :::warning
-Store your secret key securely. It cannot be retrieved after creation.
+Store your secret key securely — it cannot be retrieved after creation.
 :::
 
 <Screenshot src="/img/getting-started/master-token.png" alt="Master Token Created screen" dark />
@@ -174,9 +174,9 @@ aws s3 cp s3://my-first-bucket/hello.txt - --endpoint-url https://s3.hippius.com
 ## Next Steps
 
 <Unordered>
-  <li><a href="/storage/s3/advanced">Advanced Usage</a>: presigned URLs, public buckets, ACLs, sub-tokens, large files</li>
+  <li><a href="/storage/s3/advanced">Advanced Usage</a> — presigned URLs, public buckets, ACLs, sub-tokens, large files</li>
   <li><a href="/storage/s3/python">Python</a>, <a href="/storage/s3/javascript">JavaScript</a>, <a href="/storage/s3/aws-cli">AWS CLI</a>, <a href="/storage/s3/rclone">rclone</a></li>
-  <li><a href="/storage/s3/compatibility">Compatibility matrix</a>: every supported S3 operation</li>
+  <li><a href="/storage/s3/compatibility">Compatibility matrix</a> — every supported S3 operation</li>
   <li><a href="/use/troubleshooting">Troubleshooting</a></li>
   <li><a href="https://hippius.com/pricing">Pricing</a></li>
 </Unordered>

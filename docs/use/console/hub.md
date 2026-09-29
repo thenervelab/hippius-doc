@@ -94,10 +94,6 @@ Your namespace is either public or private, and you can switch at any time from 
 
 Pushing always needs your credentials, whichever you choose.
 
-:::info Private is access control, not end-to-end encryption
-Hippius reads what you push to Hub: the indexer parses the first 16 MiB of every model file to record its format, architecture, parameter count and quantization, on public and private namespaces alike. It never reads the weights themselves, and Hub is not zero-knowledge. If you need files that nobody but you can read, use [Drive](/use/console/drive).
-:::
-
 <Screenshot src="/img/console/hub/manage.png" alt="Manage Hub" dark raw />
 
 :::info Switching changes how much you can store
