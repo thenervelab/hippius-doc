@@ -9,9 +9,9 @@ import Unordered from '@site/src/components/Unordered';
 
 # Object Lock (WORM)
 
-Object Lock makes a **version** immutable until a date, or until you release a legal hold. Nobody can permanently delete it before then: not you, not an admin, not Hippius. Use it for backups, audit logs, and compliance (S3 WORM).
+Object Lock makes a **version** immutable until a date, or until you release a legal hold. Nobody can permanently delete it before then — not you, not an admin, not Hippius. Use it for backups, audit logs, and compliance (S3 WORM).
 
-The API matches the standard S3 Object Lock API. Enforcement is in the storage layer, so it holds against internal cleanup too.
+The API matches the standard S3 Object Lock API. The lock is applied in the storage layer itself, so a locked version cannot be removed by any path before its time.
 
 :::tip Versioning is required
 Object Lock protects versions, not keys. `--object-lock-enabled-for-bucket` turns versioning on for you.
@@ -41,7 +41,7 @@ A versioned delete of that object returns `AccessDenied` until the date.
 You can always **extend** a retention. You cannot shorten a live one.
 
 :::warning COMPLIANCE cannot be undone
-A ten-year COMPLIANCE object occupies storage, and bills, for ten years. There is no support path to remove it early. Test with a short window first. Prefer GOVERNANCE unless a regulator requires otherwise.
+A ten-year COMPLIANCE object occupies storage — and bills — for ten years. There is no support path to remove it early. Test with a short window first. Prefer GOVERNANCE unless a regulator requires otherwise.
 :::
 
 ## Set retention
@@ -66,7 +66,7 @@ Retain-until dates beyond 10 years (3650 days) are rejected.
 
 ## Legal holds
 
-An indefinite lock with no expiry. Independent of retention: either one blocks deletion.
+An indefinite lock with no expiry. Independent of retention — either one blocks deletion.
 
 ```bash
 aws s3api put-object-legal-hold --bucket my-vault --key evidence.zip \
@@ -93,9 +93,9 @@ aws s3api put-object-lock-configuration --bucket my-vault \
 | Request | On a locked version |
 |---------|---------------------|
 | `DELETE key?versionId=…` | **403 AccessDenied** |
-| `DELETE key` (no version) | Succeeds. Writes a delete marker; the locked version stays |
+| `DELETE key` (no version) | Succeeds — writes a delete marker; the locked version stays |
 
-Overwrite is allowed: it creates a new version. Bulk `DeleteObjects` is per-key: a locked key returns `AccessDenied` and the rest of the batch continues.
+Overwrite is allowed: it creates a new version. Bulk `DeleteObjects` is per-key — a locked key returns `AccessDenied` and the rest of the batch continues.
 
 ## Bypass GOVERNANCE
 
@@ -111,7 +111,7 @@ Standard S3 gates this on IAM. Hippius has no IAM, so only the bucket owner can 
 
 ## Enable on an existing bucket
 
-Versioning first, then Object Lock. No `x-amz-bucket-object-lock-token` required. Future versions only. Existing objects are not locked retroactively.
+Versioning first, then Object Lock. No `x-amz-bucket-object-lock-token` required. Future versions only — existing objects are not locked retroactively.
 
 ```bash
 aws s3api put-bucket-versioning --bucket existing-bucket \

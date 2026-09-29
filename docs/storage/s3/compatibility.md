@@ -43,9 +43,9 @@ Same values as the [S3 Quickstart](/use/quickstart#connection-details). Always u
 | `DeleteBucketTagging` | ✅ Supported | |
 | `PutBucketLifecycleConfiguration` | ⚠️ Accepted, not applied | The configuration is acknowledged but not stored. No objects expire |
 | `GetBucketLifecycleConfiguration` | ⚠️ Partial | Always `404 NoSuchLifecycleConfiguration` |
-| `PutBucketVersioning` | ⚠️ Partial | `Enabled` only. `Suspended` returns 501 |
+| `PutBucketVersioning` | ⚠️ Partial | `Enabled` only — `Suspended` returns 501 |
 | `GetBucketVersioning` | ✅ Supported | Omits `Status` when versioning was never enabled |
-| `PutObjectLockConfiguration` | ✅ Supported | Bucket default retention, `Days` or `Years`. Requires versioning. See [Object Lock](/storage/s3/object-lock) |
+| `PutObjectLockConfiguration` | ✅ Supported | Bucket default retention, `Days` or `Years`. Requires versioning — see [Object Lock](/storage/s3/object-lock) |
 | `GetObjectLockConfiguration` | ✅ Supported | `404 ObjectLockConfigurationNotFoundError` when unset |
 | `PutBucketCors` | ❌ Not supported | Returns 200 and ignores the configuration. CORS is handled at the gateway level |
 | `PutBucketNotificationConfiguration` | ❌ Not supported | |
@@ -63,29 +63,29 @@ Same values as the [S3 Quickstart](/use/quickstart#connection-details). Always u
 | `DeleteObjects` | ✅ Supported | Bulk delete |
 | `CopyObject` | ✅ Supported | |
 | `ListObjectsV2` | ✅ Supported | Pagination, prefix, delimiter |
-| `ListObjects` | ✅ Supported | V1. Prefer `ListObjectsV2` |
+| `ListObjects` | ✅ Supported | V1 — prefer `ListObjectsV2` |
 | `PutObjectAcl` | ✅ Supported | Per-object ACLs |
 | `GetObjectAcl` | ✅ Supported | |
 | `PutObjectTagging` | ✅ Supported | |
 | `GetObjectTagging` | ✅ Supported | |
 | `DeleteObjectTagging` | ✅ Supported | |
 | `ListObjectVersions` | ✅ Supported | Versions and delete markers; prefix, delimiter, paging |
-| `PutObjectRetention` | ✅ Supported | Per version. Extend allowed, shorten refused. See [Object Lock](/storage/s3/object-lock) |
+| `PutObjectRetention` | ✅ Supported | Per version. Extend allowed, shorten refused — see [Object Lock](/storage/s3/object-lock) |
 | `GetObjectRetention` | ✅ Supported | |
 | `PutObjectLegalHold` | ✅ Supported | Indefinite lock, independent of retention |
 | `GetObjectLegalHold` | ✅ Supported | |
 | `SelectObjectContent` | ❌ Not supported | S3 Select |
-| `PostObject` | ❌ Not supported | Browser form uploads. Use a presigned `PutObject` |
+| `PostObject` | ❌ Not supported | Browser form uploads — use a presigned `PutObject` |
 
 ## Versioning and Object Lock
 
-Both are supported. Object Lock gives you write-once-read-many (WORM) retention with `GOVERNANCE` and `COMPLIANCE` modes, legal holds, and bucket-wide default retention, enforced below the API, so a locked version cannot be permanently deleted by anyone until it expires.
+Both are supported. Object Lock gives you write-once-read-many (WORM) retention with `GOVERNANCE` and `COMPLIANCE` modes, legal holds, and bucket-wide default retention — enforced below the API, so a locked version cannot be permanently deleted by anyone until it expires.
 
 | Capability | Status | Notes |
 |------------|--------|-------|
 | Bucket versioning | ✅ Supported | `Enabled` only; `Suspended` returns 501 |
-| Object Lock, `GOVERNANCE` | ✅ Supported | Bucket owner can bypass with an explicit header |
-| Object Lock, `COMPLIANCE` | ✅ Supported | Cannot be shortened, cleared, or bypassed by anyone |
+| Object Lock — `GOVERNANCE` | ✅ Supported | Bucket owner can bypass with an explicit header |
+| Object Lock — `COMPLIANCE` | ✅ Supported | Cannot be shortened, cleared, or bypassed by anyone |
 | Legal holds | ✅ Supported | Indefinite; independent of retention |
 | Bucket default retention | ✅ Supported | `Days` or `Years`; applies to PUT, multipart and copy |
 | Enable Object Lock on an existing bucket | ✅ Supported | Requires versioning first; no `x-amz-bucket-object-lock-token` needed |
@@ -148,10 +148,10 @@ These S3 clients are tested and confirmed to work with Hippius S3:
 
 <Unordered>
   <li><a href="/use/quickstart">S3 Quickstart</a>: first upload</li>
-  <li><a href="/storage/s3/advanced">Advanced Usage</a>: presigned URLs, ACLs, public buckets, sub-tokens</li>
-  <li><a href="/storage/s3/object-lock">Object Lock (WORM)</a>: retention and legal holds</li>
-  <li><a href="https://s3.hippius.com/veggies/s3/benchmark.html">Hippius S3 Benchmarks</a>: live performance benchmarks</li>
-  <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html">S3 API reference</a>: any operation marked "Supported" above works identically</li>
-  <li><a href="https://github.com/thenervelab/hippius-s3">hippius-s3 on GitHub</a>: report issues or request features</li>
-  <li><a href="https://docs.hippius.com/llms.txt">llms.txt</a>: machine-readable docs for AI agents</li>
+  <li><a href="/storage/s3/advanced">Advanced Usage</a> — presigned URLs, ACLs, public buckets, sub-tokens</li>
+  <li><a href="/storage/s3/object-lock">Object Lock (WORM)</a> — retention and legal holds</li>
+  <li><a href="https://s3.hippius.com/veggies/s3/benchmark.html">Hippius S3 Benchmarks</a> — live performance benchmarks</li>
+  <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html">S3 API reference</a> — any operation marked "Supported" above works identically</li>
+  <li><a href="https://github.com/thenervelab/hippius-s3">hippius-s3 on GitHub</a> — report issues or request features</li>
+  <li><a href="https://docs.hippius.com/llms.txt">llms.txt</a> — machine-readable docs for AI agents</li>
 </Unordered>

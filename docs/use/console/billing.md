@@ -24,10 +24,6 @@ You'll find all of this under <BgStyledIconWithText text="Billing" icon="Billing
 
 <Screenshot src="/img/console/billing/overview.png" alt="Billing page with balance, services and plans" dark raw />
 
-:::info Your balance is in dollars
-You may still see the word "credits" in a few places in the console. It means the same thing: one credit is one US dollar of balance.
-:::
-
 ## Add money to your balance
 
 You can top up by card, with Bitcoin, with USDC, or with TAO. Whichever you pick, the money lands on your balance and stays there until a plan or S3 usage draws on it.
@@ -160,7 +156,7 @@ Topping up puts everything back. To avoid it altogether, turn on **Low balance a
 
 ## Older credit subscriptions
 
-Before plans existed, we sold monthly credit subscriptions called Personal, Professional, Business and Enterprise. They are no longer on sale. If you still have one, it keeps adding credits every month and shows on Billing as **Your top-up subscription**. You can cancel it through Stripe, and doing so doesn't affect any of your plans.
+Before plans existed, we sold monthly credit subscriptions called Personal, Professional, Business and Enterprise. They are no longer on sale. If you still have one, it keeps adding to your balance every month and shows on Billing as **Your top-up subscription**. You can cancel it through Stripe, and doing so doesn't affect any of your plans.
 
 ## Where to next
 

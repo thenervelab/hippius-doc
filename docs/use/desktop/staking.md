@@ -7,10 +7,7 @@ description: Stake, unstake and withdraw hAlpha from the Wallet page of the Hipp
 draft: true
 ---
 
-{/*
-  Hidden: the desktop app has no Wallet page yet (WALLET_FEATURE_ENABLED = false
-  in app/lib/featureFlags.ts), same as wallet.md. Remove `draft: true` when it ships.
-*/}
+{/* Hidden until the desktop Wallet page ships. Remove `draft: true` then. */}
 
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';

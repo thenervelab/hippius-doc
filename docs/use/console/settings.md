@@ -91,12 +91,12 @@ Click <BgStyledText>Change Plan</BgStyledText>, or <BgStyledText>Subscribe to a 
 
 ## Delete Account
 
-The last row on the page deletes your account and everything in it. You do the whole thing yourself, in the console. There is no support ticket to raise and no form to fill in, whichever way you sign in.
+The last row on the page deletes your account and everything in it. You do the whole thing yourself, in the console — there is no support ticket to raise and no form to fill in, whichever way you sign in.
 
 Deleting is not instant. Your account is **locked the moment you confirm**, and permanently deleted **7 days later**. Those 7 days are a grace period: until the deletion runs you can still stop it and get everything back.
 
 :::danger This deletes everything
-Your files, buckets, container images, subscriptions and remaining credits all go. After the 7 days there is nothing left to restore, and no copy on our side to restore it from.
+Your files, buckets, container images, subscriptions and remaining balance all go. After the 7 days there is nothing left to restore, and no copy on our side to restore it from.
 :::
 
 ### What gets deleted
@@ -128,25 +128,25 @@ Everyone finishes by typing the confirmation phrase. The only thing that differs
 
 | How you sign in                                   | Steps                                   |
 | ------------------------------------------------- | --------------------------------------- |
-| **Social login** (Google, GitHub, Apple) | **3**: inventory, emailed code, phrase |
-| **Recovery seed or access key**                   | **2**: inventory, phrase               |
+| **Social login** (Google, GitHub, Apple) | **3** — inventory, emailed code, phrase |
+| **Recovery seed or access key**                   | **2** — inventory, phrase               |
 
 A wallet-only account is deleted in exactly the same way, on exactly the same 7 day schedule. It simply has no mailbox to send a code to, so that one screen does not exist and the counter reads "of 2" instead of "of 3". Nothing else changes, and you do not need to contact anyone.
 
-**Step 1, What will be deleted.** Read the inventory and tick each group's checkbox. **Continue** stays disabled until every group that holds something is ticked.
+**Step 1 — What will be deleted.** Read the inventory and tick each group's checkbox. **Continue** stays disabled until every group that holds something is ticked.
 
-**Step 2, Prove it's you.** _Social logins only._ Hippius emails you a **6-digit code** as soon as this screen opens; you don't have to ask for it. The code expires in 15 minutes. If it doesn't arrive, use **Resend** at the bottom, which becomes available again 60 seconds after each send.
+**Step 2 — Prove it's you.** _Social logins only._ Hippius emails you a **6-digit code** as soon as this screen opens; you don't have to ask for it. The code expires in 15 minutes. If it doesn't arrive, use **Resend** at the bottom, which becomes available again 60 seconds after each send.
 
-**Last step, Type to confirm.** Type <BgStyledText>delete my account</BgStyledText> exactly, then click **Delete my account and everything in it**. This screen is shown to everyone: it is step 3 of 3 with an email address on the account, and step 2 of 2 without one.
+**Last step — Type to confirm.** Type <BgStyledText>delete my account</BgStyledText> exactly, then click **Delete my account and everything in it**. This screen is shown to everyone: it is step 3 of 3 with an email address on the account, and step 2 of 2 without one.
 
 ### What happens right after
 
-You are not dropped back at a login form. The console takes you to a page headed **Your account is locked**, which gives the exact date the account will be deleted, says how to keep it, and offers a **Back to Hippius** button. That page is public, so you can leave it open, bookmark it, or come back to it. It does not need a session.
+You are not dropped back at a login form. The console takes you to a page headed **Your account is locked**, which gives the exact date the account will be deleted, says how to keep it, and offers a **Back to Hippius** button. That page is public, so you can leave it open, bookmark it, or come back to it — it does not need a session.
 
 Behind that, three things have happened at once:
 
 <Ordered>
-  <li>Your account is <strong>locked</strong>. Drive and S3 are suspended, and every API token and session is revoked, including the one you were just using, which is why you are signed out. Scripts and integrations stop working straight away.</li>
+  <li>Your account is <strong>locked</strong>. Drive and S3 are suspended, and every API token and session is revoked — including the one you were just using, which is why you are signed out. Scripts and integrations stop working straight away.</li>
   <li>The deletion is scheduled for 7 days later.</li>
   <li>If the account has an email address, the cancel link is sent to it.</li>
 </Ordered>

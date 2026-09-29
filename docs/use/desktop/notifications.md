@@ -3,7 +3,7 @@ id: notifications
 title: Notifications
 sidebar_label: Notifications
 slug: /use/desktop/notifications
-description: Stay on top of activity in Hippius Desktop. Review drive and credit notifications from the header bell or the Notifications Hub, open a notification for full details, and choose which updates you receive.
+description: Stay on top of activity in Hippius Desktop — review drive and balance notifications from the header bell or the Notifications Hub, open a notification for full details, and choose which updates you receive.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -13,22 +13,22 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-Notifications keep you informed about what's happening in your account: files syncing to the Hippius network and changes to your credits. Every notification is stored locally on your device so you can review it at any time.
+Notifications keep you informed about what's happening in your account — files syncing to the Hippius network and changes to your balance. Every notification is stored locally on your device so you can review it at any time.
 
 Notifications are grouped into two categories:
 
 <Unordered>
-  <li><strong>Drive</strong>: file activity such as uploads, downloads, and deletions across your sync folders.</li>
-  <li><strong>Credits</strong>: changes to your account credits and balance.</li>
+  <li><strong>Drive</strong> — file activity such as uploads, downloads, and deletions across your sync folders.</li>
+  <li><strong>Credits</strong> — changes to your balance.</li>
 </Unordered>
 
-You decide which of these categories you want to receive. See [Notification Settings](#notification-settings).
+You decide which of these categories you want to receive — see [Notification Settings](#notification-settings).
 
 
 
 ## Open Notifications
 
-All notifications are accessed from the **bell icon** in the top right of the app. There is no Notifications entry in the left sidebar.
+All notifications are accessed from the **bell icon** in the top right of the app — there is no Notifications entry in the left sidebar.
 
 ### The notifications dropdown
 
@@ -53,11 +53,11 @@ Click <BgStyledText>View More</BgStyledText> at the bottom of the dropdown to op
 The toolbar at the top of the Notifications Hub gives you several controls:
 
 <Unordered>
-  <li><strong>Category tabs</strong>: switch between <BgStyledText>All</BgStyledText> and each enabled category (Drive, Credits).</li>
-  <li><strong>All / Unread toggle</strong>: show every notification or only the ones you haven't read yet.</li>
-  <li><strong>Mark all as read</strong>: clear the unread state for everything in the current view.</li>
-  <li><strong>Clear all</strong>: permanently delete every notification after a confirmation prompt.</li>
-  <li><strong>Notifications Settings</strong>: open the settings dialog to choose which categories you receive.</li>
+  <li><strong>Category tabs</strong> — switch between <BgStyledText>All</BgStyledText> and each enabled category (Drive, Credits).</li>
+  <li><strong>All / Unread toggle</strong> — show every notification or only the ones you haven't read yet.</li>
+  <li><strong>Mark all as read</strong> — clear the unread state for everything in the current view.</li>
+  <li><strong>Clear all</strong> — permanently delete every notification after a confirmation prompt.</li>
+  <li><strong>Notifications Settings</strong> — open the settings dialog to choose which categories you receive.</li>
 </Unordered>
 
 ## View Notification Details
@@ -78,7 +78,7 @@ Select a notification from the list to open it in the details panel on the right
 You choose which notifications reach your inbox. On the Notifications Hub, click the <BgStyledText>Notifications Settings</BgStyledText> button (top right) to open the settings dialog:
 
 <Ordered>
-  <li>Tick the categories you want to receive: <BgStyledText>Drive</BgStyledText> and <BgStyledText>Credits</BgStyledText>.</li>
+  <li>Tick the categories you want to receive — <BgStyledText>Drive</BgStyledText> and <BgStyledText>Credits</BgStyledText>.</li>
   <li>Untick any category you'd like to mute.</li>
   <li>Click <BgStyledText>Save Changes</BgStyledText>.</li>
 </Ordered>

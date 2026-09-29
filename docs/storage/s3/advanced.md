@@ -88,7 +88,7 @@ await fetch(uploadUrl, {
 });
 ```
 
-Do not append extra query parameters to a presigned URL. They invalidate the signature.
+Do not append extra query parameters to a presigned URL — they invalidate the signature.
 
 ## Make a bucket or object public {#make-a-bucket-or-object-public}
 
@@ -264,10 +264,10 @@ Full guide: [Object Lock (WORM)](/storage/s3/object-lock).
 ## More
 
 <Unordered>
-  <li><a href="/storage/s3/compatibility">Compatibility matrix</a>: every operation and its status</li>
-  <li><a href="/use/troubleshooting">Troubleshooting</a>: auth, endpoint, and upload errors</li>
-  <li><a href="/storage/s3/examples/nextcloud">Nextcloud</a> and <a href="/storage/s3/examples/duplicati">Duplicati</a>: product-specific setups</li>
-  <li><a href="/use/console/s3">Console S3 Buckets</a>: manage buckets and tokens in the browser</li>
+  <li><a href="/storage/s3/compatibility">Compatibility matrix</a> — every operation and its status</li>
+  <li><a href="/use/troubleshooting">Troubleshooting</a> — auth, endpoint, and upload errors</li>
+  <li><a href="/storage/s3/examples/nextcloud">Nextcloud</a> and <a href="/storage/s3/examples/duplicati">Duplicati</a> — product-specific setups</li>
+  <li><a href="/use/console/s3">Console S3 Buckets</a> — manage buckets and tokens in the browser</li>
   <li><a href="/use/console/migrations">S3 Migrations</a>: copy from any S3-compatible provider</li>
-  <li><a href="/use/api">Management API</a>: tokens and billing from your backend</li>
+  <li><a href="/use/api">Management API</a> — tokens and billing from your backend</li>
 </Unordered>

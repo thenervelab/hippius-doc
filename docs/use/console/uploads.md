@@ -88,7 +88,7 @@ As soon as you confirm the upload, the dialog closes and a **floating progress w
 The widget shows:
 
 <Unordered>
-  <li>An overall summary like <em>"1/3 files - 23% complete"</em> showing how many files have finished and the total percentage across the batch.</li>
+  <li>An overall summary like <em>"1/3 files — 23% complete"</em> showing how many files have finished and the total percentage across the batch.</li>
   <li>The name and percentage of the file currently uploading.</li>
 </Unordered>
 
@@ -96,7 +96,7 @@ Files upload **one at a time** to avoid saturating your connection or the in-bro
 
 Progress is based on **actual bytes uploaded** via `XMLHttpRequest` progress events, not an estimate or a timer.
 
-<Screenshot src="/img/console/uploads/upload-widget.png" alt="Upload progress widget, expanded" dark/>
+<Screenshot src="/img/console/uploads/upload-widget.png" alt="Upload progress widget — expanded" dark/>
 
 Once every file in the batch finishes, the widget collapses to a small pill you can dismiss. While any file is still in flight, you can collapse the widget but not close it.
 

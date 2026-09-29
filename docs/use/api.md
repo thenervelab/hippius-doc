@@ -32,10 +32,10 @@ The full API specification with request/response examples is available as an int
 ## Use Cases
 
 <Unordered>
-  <li><strong>CI/CD pipelines</strong>: create short-lived sub tokens scoped to a single bucket for deployments, then revoke them automatically</li>
-  <li><strong>Multi-tenant apps</strong>: provision a bucket and scoped token per customer from your backend</li>
+  <li><strong>CI/CD pipelines</strong> — Create short-lived sub tokens scoped to a single bucket for deployments, then revoke them automatically</li>
+  <li><strong>Multi-tenant apps</strong> — Provision a bucket and scoped token per customer from your backend</li>
   <li><strong>Billing automation</strong>: monitor your balance and start a top up before running out</li>
-  <li><strong>AI agents &amp; LLMs</strong>: automate storage operations end-to-end without manual console interaction</li>
+  <li><strong>AI agents &amp; LLMs</strong> — Automate storage operations end-to-end without manual console interaction</li>
 </Unordered>
 
 :::tip For AI agents and LLMs
@@ -50,6 +50,6 @@ All Management API requests require an access token. Generate one in the [Hippiu
 
 <Unordered>
   <li><a href="/use/quickstart">S3 Quickstart</a>: first upload</li>
-  <li><a href="/storage/s3/advanced">Advanced Usage</a>: presigned URLs, ACLs, public buckets, sub-tokens</li>
-  <li><a href="/storage/s3/compatibility">S3 Compatibility Matrix</a>: supported S3 operations</li>
+  <li><a href="/storage/s3/advanced">Advanced Usage</a> — Presigned URLs, ACLs, public buckets, sub-tokens</li>
+  <li><a href="/storage/s3/compatibility">S3 Compatibility Matrix</a> — Supported S3 operations</li>
 </Unordered>

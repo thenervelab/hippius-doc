@@ -7,7 +7,7 @@ slug: /registry/cli
 
 # The `hippius-hub` CLI
 
-`hippius-hub` is the unified CLI for namespace provisioning, credential management, registry search, and parallel uploads / downloads. It's the same package that ships the Python library. Install it once and use either surface.
+`hippius-hub` is the unified CLI for namespace provisioning, credential management, registry search, and parallel uploads / downloads. It's the same package that ships the Python library — install it once and use either surface.
 
 Full reference and source: [`github.com/thenervelab/hippius-hub`](https://github.com/thenervelab/hippius-hub). For AI agents and coding assistants there's a self-contained reference at [`llms.txt`](https://github.com/thenervelab/hippius-hub/blob/main/llms.txt).
 
@@ -22,7 +22,7 @@ hippius-hub --version
 hippius-hub --help
 ```
 
-Published wheels include the pre-built Rust core, so no toolchain is needed. Building from source requires Rust via [rustup](https://rustup.rs). See the [README](https://github.com/thenervelab/hippius-hub#install) for the source path.
+Published wheels include the pre-built Rust core, so no toolchain is needed. Building from source requires Rust via [rustup](https://rustup.rs) — see the [README](https://github.com/thenervelab/hippius-hub#install) for the source path.
 
 ---
 
@@ -33,7 +33,7 @@ Published wheels include the pre-built Rust core, so no toolchain is needed. Bui
 | `registry` and `models` commands | **API token** from [console.hippius.com/dashboard/settings](https://console.hippius.com/dashboard/settings) | `~/.cache/hippius/hub/api_token` |
 | `upload` / `download` (raw OCI registry IO) | Docker registry credentials | `~/.cache/hippius/hub/token` |
 
-In practice the API token is all you save by hand: `hippius-hub registry provision <namespace>` mints the docker credentials and writes them into the second cache for you. Pass `--docker-login` to also run `docker login` so `docker push` / `docker pull` work.
+In practice the API token is all you save by hand — `hippius-hub registry provision <namespace>` mints the docker credentials and writes them into the second cache for you. Pass `--docker-login` to also run `docker login` so `docker push` / `docker pull` work.
 
 ```bash
 hippius-hub login --hippius-token <token>
@@ -109,6 +109,6 @@ Pricing details: [hippius.com/hippius-hub](https://hippius.com/hippius-hub).
 
 ## Where to next
 
-- [**Quickstart**](/registry): the five-minute path from zero to push or pull.
-- [**Pull**](/registry/pull): download a file, a whole repo, or pull by digest.
-- [**Push**](/registry/push): provision a namespace and ship your first artifact.
+- [**Quickstart**](/registry) — the five-minute path from zero to push or pull.
+- [**Pull**](/registry/pull) — download a file, a whole repo, or pull by digest.
+- [**Push**](/registry/push) — provision a namespace and ship your first artifact.

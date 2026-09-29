@@ -29,7 +29,7 @@ If an upload fails to start or gets interrupted:
 <Unordered>
   <li><strong>Empty balance:</strong> your account balance must cover what you store. Check <BgStyledText>Billing</BgStyledText> in the console.</li>
   <li><strong>Invalid bucket name:</strong> names must be 3–63 characters, lowercase letters, numbers, and hyphens only, and must not look like an IP address.</li>
-  <li><strong>File size:</strong> use multipart uploads for files larger than 5 GB. The console itself caps uploads at 100 MB. Use a client for anything larger. See <a href="/storage/s3/advanced#upload-large-files">Upload large files</a>.</li>
+  <li><strong>File size:</strong> use multipart uploads for files larger than 5 GB. The console itself caps uploads at 100 MB — use a client for anything larger. See <a href="/storage/s3/advanced#upload-large-files">Upload large files</a>.</li>
 </Unordered>
 
 ## Access denied

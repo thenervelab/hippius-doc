@@ -300,12 +300,12 @@ Before you log out, make sure you can sign back in: with the same Google, GitHub
 
 ## Delete account
 
-At the bottom of the **Account** screen, below **Logout**, is **Delete my account**. It deletes your whole Hippius account, not just the app on this phone, and everything in it.
+At the bottom of the **Account** screen, below **Logout**, is **Delete my account**. It deletes your whole Hippius account — not just the app on this phone — and everything in it.
 
 Deleting is not instant. Your account is **locked the moment you confirm**, and permanently deleted **7 days later**. Those 7 days are a grace period: until the deletion runs you can still stop it and get everything back.
 
 :::danger This deletes everything
-Your files, buckets, container images, subscriptions and remaining credits all go, on every device and on the console too. After the 7 days there is nothing left to restore, and no copy on our side to restore it from.
+Your files, buckets, container images, subscriptions and remaining balance all go, on every device and on the console too. After the 7 days there is nothing left to restore, and no copy on our side to restore it from.
 :::
 
 ### What gets deleted
@@ -322,8 +322,8 @@ Tap <BgStyledText>Delete my account</BgStyledText> to open the sheet. Everyone f
 
 | How you sign in                                   | Steps                                   |
 | ------------------------------------------------- | --------------------------------------- |
-| **Social login** (Google, GitHub, Apple) | **3**: inventory, emailed code, phrase |
-| **Recovery seed or access key**                   | **2**: inventory, phrase               |
+| **Social login** (Google, GitHub, Apple) | **3** — inventory, emailed code, phrase |
+| **Recovery seed or access key**                   | **2** — inventory, phrase               |
 
 A wallet-only account is deleted in exactly the same way, on exactly the same 7 day schedule. It simply has no mailbox to send a code to, so that one step does not exist and the counter reads "OF 2" instead of "OF 3".
 
