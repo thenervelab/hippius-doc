@@ -101,7 +101,7 @@ Open <BgStyledText>Settings</BgStyledText> → <BgStyledText>Security</BgStyledT
 
 Every file you upload is encrypted on your phone before it leaves it. The key that does the encrypting is a 12-word **mnemonic seed** that belongs to your account. Hippius never has this seed in a readable form, which is why nobody but you can open your files, and also why nobody at Hippius can get them back for you if the seed is lost.
 
-**If you signed in with Google, Github, or Apple**, the seed was created for you and lives in your phone's secure storage. You should back it up once, so that you can still reach your files if you lose this phone. The <strong>Mnemonic Seed</strong> row on the Security screen is where you do that.
+**If you signed in with Google, GitHub, or Apple**, the seed was created for you and lives in your phone's secure storage. You should back it up once, so that you can still reach your files if you lose this phone. The <strong>Mnemonic Seed</strong> row on the Security screen is where you do that.
 
 **If you signed in with an access key**, that key is your mnemonic seed. You already have it, so the Security screen does not show the backup row. Keep your access key with the same care described below.
 
@@ -158,7 +158,7 @@ If your account has no unlock password yet, the app asks you to create one the f
 
 <Ordered>
   <li>Tap <BgStyledText>Set Unlock Password</BgStyledText>. The <strong>Protect Your Account</strong> sheet opens.</li>
-  <li>Under <strong>Create Unlock Password</strong>, enter a password of at least 8 characters. The strength meter must read <strong>OK</strong> or <strong>Strong</strong>. A phrase of several unrelated words works well.</li>
+  <li>Under <strong>Create Unlock Password</strong>, enter a password of at least 8 characters. The strength meter must read <strong>OK</strong> or <strong>Strong</strong>. A phrase of several unrelated words works well. The console and the desktop app ask for at least 10 characters and Strong when you set it there, so a longer password saves you trouble later.</li>
   <li>Repeat it under <strong>Confirm Password</strong>.</li>
   <li>Tap <BgStyledText>Create Password</BgStyledText>.</li>
 </Ordered>
@@ -282,7 +282,7 @@ From Overview, tap the **Storage** card, or the same card at the top of Settings
 Open **Account** from the **Account** card at the top of Settings, or from the **Plan** card on Overview. It shows:
 
 <Unordered>
-  <li><strong>Who you are signed in as.</strong> If you signed in with Google, Github or Apple, you see your name and email. Your <strong>wallet address</strong> is shown too, with a button to copy it.</li>
+  <li><strong>Who you are signed in as.</strong> If you signed in with Google, GitHub or Apple, you see your name and email. Your <strong>wallet address</strong> is shown too, with a button to copy it.</li>
   <li><strong>Your current plan</strong> and how much storage it gives you. This is read only.</li>
 </Unordered>
 
@@ -296,11 +296,11 @@ Managing subscriptions isn't available in the Hippius mobile app. The Account sc
 
 Tap <BgStyledText>Logout</BgStyledText> on the Account screen or at the bottom of Settings, then confirm. Logging out removes your session and your seed from this phone. Your files are untouched, and signing back in brings everything back.
 
-Before you log out, make sure you can sign back in: with the same Google, Github or Apple account, or with your access key. If this phone was the only place your seed lived, [back it up](#backing-up-your-mnemonic-seed) first.
+Before you log out, make sure you can sign back in: with the same Google, GitHub or Apple account, or with your access key. If this phone was the only place your seed lived, [back it up](#backing-up-your-mnemonic-seed) first.
 
 ## Delete account
 
-At the bottom of the **Account** screen, below **Logout**, is **Delete my account**. It deletes your whole Hippius account — not just the app on this phone — and everything in it.
+At the bottom of the **Account** screen, below **Logout**, is **Delete my account**. It deletes your whole Hippius account, not just the app on this phone, and everything in it.
 
 Deleting is not instant. Your account is **locked the moment you confirm**, and permanently deleted **7 days later**. Those 7 days are a grace period: until the deletion runs you can still stop it and get everything back.
 
@@ -322,14 +322,14 @@ Tap <BgStyledText>Delete my account</BgStyledText> to open the sheet. Everyone f
 
 | How you sign in                                   | Steps                                   |
 | ------------------------------------------------- | --------------------------------------- |
-| **Email or social login** (Google, GitHub, Apple) | **3** — inventory, emailed code, phrase |
-| **Recovery seed or access key**                   | **2** — inventory, phrase               |
+| **Social login** (Google, GitHub, Apple) | **3**: inventory, emailed code, phrase |
+| **Recovery seed or access key**                   | **2**: inventory, phrase               |
 
 A wallet-only account is deleted in exactly the same way, on exactly the same 7 day schedule. It simply has no mailbox to send a code to, so that one step does not exist and the counter reads "OF 2" instead of "OF 3".
 
 <Ordered>
   <li><strong>What will be deleted.</strong> Read the inventory and tick each group's checkbox. <strong>Continue</strong> stays disabled until every group that holds something is ticked.</li>
-  <li><strong>Prove it's you.</strong> Email and social logins only. A <strong>6-digit code</strong> is sent the moment this step opens, so you never have to ask for it. It expires in 15 minutes, and <strong>Resend</strong> becomes available again 60 seconds after each send.</li>
+  <li><strong>Prove it's you.</strong> Social logins only. A <strong>6-digit code</strong> is sent the moment this step opens, so you never have to ask for it. It expires in 15 minutes, and <strong>Resend</strong> becomes available again 60 seconds after each send.</li>
   <li><strong>Type to confirm.</strong> Type <BgStyledText>delete my account</BgStyledText> exactly, then tap the red <strong>Delete my account</strong> button.</li>
 </Ordered>
 
