@@ -20,7 +20,7 @@ import Screenshot from '@site/src/components/Screenshot';
 Open it from the account avatar in the top bar, choose <BgStyledIconWithText text="Settings" icon="Settings" />, then <BgStyledIconWithText text="Billing" icon="Billing" /> in the settings sidebar.
 
 :::info A plan and credits are two different things
-Your **plan** grants storage. **Credits** are a dollar balance on your account (1 credit = $1) that can pay for a plan and for other Hippius services such as virtual machines. Adding credits on its own does not give you more Drive space. Only a bigger plan does that.
+Your **plan** grants storage. **Credits** are a dollar balance on your account (1 credit = $1) that can pay for a plan and for other Hippius services such as S3 and Hub. Adding credits on its own does not give you more Drive space. Only a bigger plan does that.
 :::
 
 <Screenshot src="/img/desktop/billing-settings.png" alt="The Billing page in Settings" dark />
@@ -70,7 +70,7 @@ The **Subscription plans** section is the plan catalogue. Plans are loaded live 
 | **Max**             | 10 TB   | $22 / month |
 | **Scale**           | 25 TB   | $50 / month |
 
-The desktop app bills **monthly**. Annual billing is offered in the [Hippius console](https://console.hippius.com/dashboard/storage/drive/plans).
+The desktop app bills **monthly**, like the [Hippius console](https://console.hippius.com/dashboard/storage/drive/plans).
 
 ### What a plan card shows
 
@@ -93,7 +93,7 @@ If you signed in with an **access key (a seed phrase)**, there is no included al
 
 <Unordered>
   <li>An empty Drive says "You do not have a storage plan yet" instead of "You are on the Free plan".</li>
-  <li>A red banner on the Overview and Drive pages warns that your account has no storage, that nothing can be uploaded until you subscribe, and that files already uploaded are permanently deleted after <strong>30 days</strong> without a plan.</li>
+  <li>A red banner on the Overview and Drive pages warns that your account has no storage and that nothing can be uploaded until you subscribe. The banner also mentions a 30 day deletion; in practice the server never deletes Drive files for want of a plan, it stops uploads and, after 14 days, makes Drive read only. See <a href="/use/console/billing#drive-plans">Drive plans</a>.</li>
   <li>Cancelling warns that you will be left without a storage plan, rather than promising a fallback that does not exist.</li>
 </Unordered>
 
@@ -151,7 +151,7 @@ What happens next depends on your account:
 
 <Unordered>
   <li><strong>Accounts with the free tier</strong> (signed in with Google, GitHub or Apple) go back to the Free Drive Plan and its 10 GB. If you are storing more than that, uploads pause until you are back under the limit. Nothing is deleted.</li>
-  <li><strong>Access key accounts</strong> are left with no storage plan at all. Uploads stop, and files already stored are removed after 30 days without a plan.</li>
+  <li><strong>Access key accounts</strong> are left with no storage plan at all. Uploads stop. Files already stored stay readable and are not deleted.</li>
 </Unordered>
 
 Your credits are untouched either way, and you can subscribe again at any time.
@@ -160,7 +160,7 @@ Your credits are untouched either way, and you can subscribe again at any time.
 
 ## Plans bought somewhere else
 
-If you bought your plan through the App Store, Google Play, or a Stripe billing portal, the desktop app cannot change it. The plan buttons are disabled and hovering one tells you where to manage it instead, for example "Managed in the App Store".
+If your plan is managed somewhere else, such as a Stripe billing portal, the desktop app cannot change it. The plan buttons are disabled and hovering one tells you where to manage it instead, for example "Managed in the Stripe billing portal".
 
 Cancel or change the plan wherever you bought it, and the desktop app picks up the new state.
 
@@ -203,7 +203,7 @@ Drive shows a banner for the states worth interrupting you over. A plan that is 
 
 | Banner                                   | What it means                                                                                                       |
 | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **You don't have a subscription plan**   | Your account has no storage at all. Nothing can be uploaded, and stored files are deleted after 30 days. Subscribe to clear it. |
+| **You don't have a subscription plan**   | Your account has no storage at all. Nothing can be uploaded until you subscribe. Your stored files stay readable. |
 | **Setting up your Drive plan**           | Your payment went through and the plan is being provisioned on chain. This normally takes two to three minutes.       |
 | **Your Drive plan could not be renewed** | The renewal payment failed. Top up your credits, or fix the payment where the plan is managed.                        |
 | **Your Drive plan has been cancelled**   | Your files are still here, but you need an active plan to upload again. This one can be dismissed.                    |
