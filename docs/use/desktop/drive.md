@@ -142,21 +142,23 @@ The Drive page shows the files and folders in your active sync folder. You can n
 
 ### Switching Between Sync Folders
 
-Hippius Desktop shows one sync folder at a time. The folder you are currently viewing appears in the breadcrumb (for example, **Local › my-folder**), and your selection is remembered the next time you open the app.
+Hippius Desktop shows one sync folder at a time. The folder you are currently viewing appears in the breadcrumb (for example, **Drive › my-folder**), and your selection is remembered the next time you open the app.
 
-When you have more than one sync folder, switch between them from the **Local** view:
+Every folder on your account is in one list, **Your Folders**. To switch to another one:
 
 <Ordered>
-  <li>Click <BgStyledText>Local</BgStyledText> in the breadcrumb to open the Local view.</li>
-  <li>Under <strong>Local Sync Folders</strong>, click the folder you want to view.</li>
+  <li>Click <BgStyledText>Drive</BgStyledText> at the start of the breadcrumb to go back to the list.</li>
+  <li>Click the folder you want to view.</li>
   <li>The Drive page opens that folder, and the breadcrumb updates to show your location.</li>
 </Ordered>
 
-<Screenshot src="/img/desktop/switching-between-sync-folders.png" alt="The Local view showing the synced folder cards used to switch between folders" dark />
+The line under each folder's name tells you where it lives: its path on this computer, the name of another computer that syncs it, or **Not synced here**. A cloud next to the name means the folder isn't on this computer.
+
+<Screenshot src="/img/desktop/switching-between-sync-folders.png" alt="The Your Folders list on the Drive page, used to switch between folders" dark />
 
 ### Folders From Your Other Devices
 
-Folders you sync on another computer appear under **Sync from Other Devices**, in the Local view and in Settings. If you have never synced from another device, that section says so and stays empty.
+Folders you sync on another computer are in the same list, with a cloud next to the name and the computer that syncs them underneath (for example, **On work-laptop**).
 
 Click one to open it like any other folder. You can:
 
@@ -167,11 +169,13 @@ Click one to open it like any other folder. You can:
   <li>Share a file or the folder itself via link.</li>
 </Unordered>
 
-All of this reads straight from the server, so **nothing is downloaded to this computer** just because you opened the folder. Only the files you explicitly download land on disk. That is the point of the section: you can get at a file from your work laptop without syncing the whole folder onto your personal one.
+All of this reads straight from the server, so **nothing is downloaded to this computer** just because you opened the folder. Only the files you explicitly download land on disk. That is the point: you can get at a file from your work laptop without syncing the whole folder onto your personal one.
 
 Contents load a page at a time as you scroll, so a folder holding a large camera roll opens immediately rather than waiting for the whole listing. The app also reopens wherever you left off.
 
-<Screenshot src="/img/desktop/drive/sync-from-other-devices.png" alt="Sync from Other Devices in the Local view" dark />
+To keep a copy on this computer as well, open the folder's menu and choose <BgStyledText>Sync to this computer</BgStyledText>.
+
+<Screenshot src="/img/desktop/drive/sync-from-other-devices.png" alt="A folder from another computer, opened on the Drive page" dark />
 
 ### File Actions (Context Menu)
 

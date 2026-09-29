@@ -53,7 +53,7 @@ The Share dialog works the same as in the console. At the top are two tabs. **By
 
 <Screenshot src="/img/desktop/shared-drives/share-dialog.png" alt="The Share dialog in the desktop app" dark raw />
 
-Once people have joined, the drive's row shows **Shared with** and the number of people, with a <BgStyledText>Manage access</BgStyledText> button beside it.
+Once people have joined, the drive's row shows **Shared with** and the number of people, with a <BgStyledText>Manage access</BgStyledText> button beside it. Before anyone has joined, the row says **Invite sent**, or **Link expired** once your invite links have run out.
 
 "Share drive" is different from **Share via link** on files and folders. A share link hands out a read only copy to anyone, no account needed. See [Shared Links](/use/desktop/shared-links) for that.
 
@@ -154,7 +154,7 @@ Drives you've joined are listed under **Shared with Me**, below your own drives 
 
 {/* Screenshot to add: static/img/desktop/shared-drives/shared-with-me-empty.png and shared-with-me-empty-dark.png, the Drive page's Shared with Me section before anything is shared ("A place for teamwork" with Share a drive). */}
 
-Each row shows the drive's name, your role, who shared it and how big it is. From there you can:
+Each row shows the drive's name, your role, who shared it, how many people are in it and how big it is. If you're a Manager, the row also has its own <BgStyledText>Manage access</BgStyledText> button. From there you can:
 
 <Unordered>
   <li><strong>Open it.</strong> Click the row to browse the drive straight from the network. Nothing is downloaded to your computer until you download a file.</li>
