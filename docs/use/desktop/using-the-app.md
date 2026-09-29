@@ -33,7 +33,7 @@ After signing in for the first time, you will be guided through a **5-step onboa
 
 <Ordered>
   <li><strong>Welcome to Hippius</strong>: Overview of your personal cloud, with files encrypted on your device before upload and distributed across a global network of independent nodes.</li>
-  <li><strong>Credits &amp; Billing</strong>: Learn how pay-as-you-go billing works, including top-ups via Stripe or TAO, subscription plans, and how sync simply pauses if you run out of credits.</li>
+  <li><strong>Credits &amp; Billing</strong>: How your balance and Drive plans work, and how sync simply pauses if you run out of storage. The wizard mentions Stripe and TAO; the console also takes Bitcoin and USDC, see <a href="/use/console/billing">Billing</a>.</li>
   <li><strong>Files &amp; Actions</strong>: Browse, preview, and manage files from one place, with right-click actions to download, reveal in Finder, view details, rename, or track files on the Hipstats explorer.</li>
   <li><strong>Unlock Password</strong>: Understand how one unlock password encrypts your files locally and gives you access across all your devices and the web console.</li>
   <li><strong>Mnemonic Seed</strong>: Understand the importance of your mnemonic seed and how to back it up securely. Tips include writing it on paper, storing it safely, never sharing it, and keeping copies in multiple places.</li>
@@ -48,9 +48,9 @@ You can click <BgStyledText>Skip</BgStyledText> at any time to bypass the remain
 After your first sign-in, the app will prompt you to set an **unlock password**. This password protects your account and encrypts your files.
 
 <Ordered>
-  <li>Enter a strong password (minimum 8 characters).</li>
+  <li>Enter a strong password: at least 10 characters, and the strength meter must read <strong>Strong</strong>.</li>
   <li>Confirm the password.</li>
-  <li>Click <BgStyledText>Save password</BgStyledText>.</li>
+  <li>Click <BgStyledText>Save Password</BgStyledText>.</li>
 </Ordered>
 
 Once set, the app handles file encryption automatically. You can start adding sync folders without any additional setup. See [Unlock Password](/use/desktop/drive#unlock-password) for more details.
@@ -74,7 +74,7 @@ To add your first folder:
 
 <Screenshot src="/img/desktop/set-up-your-first-sync-folder.png" alt="The FilesOnboarding screen showing the Local Sync Folders section with the Add Folder button and Sync from Other Devices section" dark />
 
-Any files you add to this folder will be encrypted on your device and synced to the Hippius network. Setting up sync here is optional — you can add folders later from Settings or by returning to this screen at any time.
+Any files you add to this folder will be encrypted on your device and synced to the Hippius network. Setting up sync here is optional. You can add folders later from Settings or by returning to this screen at any time.
 
 :::info Encryption is automatic
 Your unlock password was set during first login, so file encryption is configured automatically. No additional password setup is needed when adding a sync folder.
@@ -84,11 +84,11 @@ Once a folder begins syncing, the **Drive** page opens directly into that folder
 
 <Screenshot src="/img/desktop/folder-contents.png" alt="Folder Contents" dark />
 
-From the **Local** view you can add more sync folders, sync folders from your other devices, and manage existing ones — the same actions available under **Settings → Sync & Storage**. You can therefore manage syncing in whichever way is more convenient: directly from the Drive page, or from Settings.
+From the **Local** view you can add more sync folders, sync folders from your other devices, and manage existing ones. These are the same actions available under **Settings → Sync & Storage**. You can therefore manage syncing in whichever way is more convenient: directly from the Drive page, or from Settings.
 
 ## Adding More Sync Folders
 
-We support syncing **multiple folders** simultaneously. You can add additional folders at any time from either the **Drive** page or the **Settings** page — both open the same **Add Local Folder** dialog:
+We support syncing **multiple folders** simultaneously. You can add additional folders at any time from either the **Drive** page or the **Settings** page. Both open the same **Add Local Folder** dialog:
 
 <Unordered>
   <li><strong>From the Drive page</strong>: click <BgStyledText>Local</BgStyledText> in the breadcrumb to open the Local view, then click <BgStyledText>Add Folder</BgStyledText> under <strong>Local Sync Folders</strong>.</li>
@@ -141,7 +141,7 @@ If syncing is stopped for a folder, you will see an alert prompting you to resum
 
 The **Sync Queue** widget lives in the **sidebar footer**, at the bottom-left of the app. It appears automatically whenever files are being synced and shows real-time progress.
 
-Its header always displays the **overall progress** — a percentage and progress bar with a live status, such as the current transfer speed while syncing or **Complete** when finished. Hover the progress bar for more detail, including the estimated time remaining and a count of files synced.
+Its header always displays the **overall progress**: a percentage and progress bar with a live status, such as the current transfer speed while syncing or **Complete** when finished. Hover the progress bar for more detail, including the estimated time remaining and a count of files synced.
 
 The widget has three forms:
 
@@ -154,7 +154,7 @@ The widget has three forms:
 <Screenshot src="/img/desktop/syncing-progress-widget.png" alt="The Sync Queue widget expanded, showing the per-file list with status badges" dark />
 
 :::tip
-Dismissing the widget with **✕** does not stop syncing — it only minimizes the widget to the progress ring. The ring also appears whenever the sidebar is collapsed, and the full card reopens automatically when a new sync starts.
+Dismissing the widget with **✕** does not stop syncing. It only minimizes the widget to the progress ring. The ring also appears whenever the sidebar is collapsed, and the full card reopens automatically when a new sync starts.
 :::
 
 ## Drag and Drop
