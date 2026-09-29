@@ -8,14 +8,15 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "Geist";
-  src: url("../../static/fonts/Geist-VariableFont.ttf") format("woff2");
-  font-display: swap;
-}
+/* Geist's @font-face lives in docusaurus.config.ts headTags, next to its
+   preload, so both point at the same unhashed /fonts URL (webpack would
+   rename the file if it were declared here, and the preload would miss). */
 
 :root {
-  --font-geist-sans: Geist;
+  /* Tailwind's preflight applies this to <html>, so without the fallbacks
+     every page painted in the browser's default serif until Geist loaded. */
+  --font-geist-sans: "Geist", system-ui, -apple-system, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
 
   /* Primary Shades */
   --primary-100: 233 239 251;

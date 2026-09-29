@@ -83,6 +83,23 @@ const config: Config = {
         title: "LLM-friendly summary",
       },
     },
+    // Fetch Geist alongside the CSS instead of after it, so first paint
+    // already has the font rather than swapping in from the fallback.
+    {
+      tagName: "link",
+      attributes: {
+        rel: "preload",
+        href: "/fonts/Geist-Variable.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossorigin: "anonymous",
+      },
+    },
+    {
+      tagName: "style",
+      attributes: {},
+      innerHTML: `@font-face{font-family:"Geist";src:url("/fonts/Geist-Variable.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}`,
+    },
   ],
   themeConfig: {
     image: "img/meta-image.png",
