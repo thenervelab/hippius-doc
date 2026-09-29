@@ -1,7 +1,19 @@
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
+import { readFileSync } from "fs";
+import path from "path";
 const { version } = require("./package.json");
+
+// Fonts ship inside each page's <head> as data URIs rather than as files the
+// browser fetches. A fetched font, even preloaded, lets the first frame paint
+// in the fallback and then swaps in, shifting the text. Inlined, the font is
+// there before first paint. The files are subset to Latin to keep the HTML
+// small; any glyph outside the subset falls back to the system font.
+const inlineFont = (family: string, file: string, weight: string) => {
+  const data = readFileSync(path.join(__dirname, "static/fonts", file));
+  return `@font-face{font-family:"${family}";src:url(data:font/woff2;base64,${data.toString("base64")}) format("woff2");font-weight:${weight};font-style:normal;font-display:block}`;
+};
 
 // Node.js environment - no browser APIs/JSX
 
@@ -83,22 +95,12 @@ const config: Config = {
         title: "LLM-friendly summary",
       },
     },
-    // Fetch Geist alongside the CSS instead of after it, so first paint
-    // already has the font rather than swapping in from the fallback.
-    {
-      tagName: "link",
-      attributes: {
-        rel: "preload",
-        href: "/fonts/Geist-Variable.woff2",
-        as: "font",
-        type: "font/woff2",
-        crossorigin: "anonymous",
-      },
-    },
     {
       tagName: "style",
       attributes: {},
-      innerHTML: `@font-face{font-family:"Geist";src:url("/fonts/Geist-Variable.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}`,
+      innerHTML:
+        inlineFont("Geist", "Geist-Latin.woff2", "100 900") +
+        inlineFont("DigitalFonts", "DigitalNumbers-Regular.woff2", "400"),
     },
   ],
   themeConfig: {
