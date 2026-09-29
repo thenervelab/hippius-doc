@@ -48,14 +48,14 @@ iOS END */}
 
 ## Signing in
 
-You do not need an account before you start. Signing in with Google, Github, or Apple creates one for you if you do not have one already.
+You do not need an account before you start. Signing in with Google, GitHub, or Apple creates one for you if you do not have one already.
 
 If you have used Hippius before, sign in with the same details you use everywhere else and your files are there waiting.
 
 <Ordered>
   <li>Open the app and go through the short introduction. Tap <BgStyledText>Continue</BgStyledText>, then <BgStyledText>Proceed to log in</BgStyledText>.</li>
   <li>On <strong>Log In to Hippius</strong>, choose how you want to continue: <BgStyledText>Continue with Google</BgStyledText>, <BgStyledText>Continue with Github</BgStyledText>, <BgStyledText>Continue with Apple</BgStyledText>, or <BgStyledText>Continue with Access Key</BgStyledText>. All four work on Android.</li>
-  <li>Google, Github, and Apple open a browser sheet where you approve the sign-in and come straight back to the app.</li>
+  <li>Google, GitHub, and Apple open a browser sheet where you approve the sign-in and come straight back to the app.</li>
   <li>For an access key, type or paste your recovery phrase from an existing Hippius account under <strong>Access Key</strong> and tap <BgStyledText>Log In</BgStyledText>. Use this if you already have one.</li>
 </Ordered>
 
@@ -65,16 +65,16 @@ If you have used Hippius before, sign in with the same details you use everywher
 Your access key is the key to your files, not just a password. Anyone who has it can read everything you have stored. Keep it somewhere only you can reach, and never send it to anyone, including us.
 :::
 
-How you sign in also decides whether your account includes free storage. Google, Github and Apple accounts come with the 10 GB **Free Drive Plan**. Access key accounts need a plan before their first upload. See [Plans and Storage](/use/mobile/plans).
+How you sign in also decides whether your account includes free storage. Google, GitHub and Apple accounts come with the 10 GB **Free Drive Plan**. Access key accounts need a plan before their first upload. See [Plans and Storage](/use/mobile/plans).
 
 ## Your unlock password
 
-An **unlock password** protects an encrypted copy of your mnemonic seed that we store for your account. It is the same password used in the console and the desktop app. It is not your Google, Apple, or Github password.
+An **unlock password** protects an encrypted copy of your mnemonic seed that we store for your account. It is the same password used in the console and the desktop app. It is not your Google, Apple, or GitHub password.
 
 When you are asked for it depends on the situation:
 
 <Unordered>
-  <li><strong>New account, first upload.</strong> The app asks you to create an unlock password before that first upload is encrypted. For a Google, Github or Apple account, this is also when your recovery phrase is created. Afterwards, a <strong>Save your recovery phrase</strong> card appears on Overview. Tap <BgStyledText>View phrase</BgStyledText> and <a href="/use/mobile/settings#backing-up-your-mnemonic-seed">write it down</a>.</li>
+  <li><strong>New account, first upload.</strong> The app asks you to create an unlock password before that first upload is encrypted. For a Google, GitHub or Apple account, this is also when your recovery phrase is created. Afterwards, a <strong>Save your recovery phrase</strong> card appears on Overview. Tap <BgStyledText>View phrase</BgStyledText> and <a href="/use/mobile/settings#backing-up-your-mnemonic-seed">write it down</a>.</li>
   <li><strong>Existing unlock password, new phone.</strong> After you sign in, the app asks you to enter the password once so it can open your seed on this device.</li>
   <li><strong>Any time from Settings.</strong> You can set, change, or restore the password under <a href="/use/mobile/settings#unlock-password">Settings → Security</a>.</li>
 </Unordered>
@@ -92,7 +92,7 @@ The app has two main screens, **Overview** and **Drive**. Switch between them wi
 **At the top** of both screens:
 
 <Unordered>
-  <li><strong>Your account</strong>: your picture and your email, Github name or wallet address. Under it, a line shows what is uploading, such as <strong>Backing up 120 of 340</strong>, or <strong>Upload activity</strong> when nothing is. Tap the line to open your uploads.</li>
+  <li><strong>Your account</strong>: your picture and your email, GitHub name or wallet address. Under it, a line shows what is uploading, such as <strong>Backing up 120 of 340</strong>, or <strong>Upload activity</strong> when nothing is. Tap the line to open your uploads.</li>
   <li>The <strong>upload</strong> button opens <strong>Your Uploads</strong>, where you can follow, pause or cancel anything that is uploading or backing up. Its icon shows a progress ring while something is uploading.</li>
   <li>The <strong>bell</strong> opens your <a href="#notifications">notifications</a>. A badge counts the ones you have not read.</li>
   <li>The <strong>gear</strong> opens <a href="/use/mobile/settings">Settings</a>.</li>
@@ -113,7 +113,7 @@ Overview shows, from top to bottom:
 <Unordered>
   <li><strong>Recents</strong>: the files you added most recently. Tap the arrow to go to Drive.</li>
   <li>The <strong>Storage</strong> and <strong>Plan</strong> cards: how full your Drive is, and which plan you are on. See <a href="/use/mobile/plans#what-the-app-shows">Plans and Storage</a>.</li>
-  <li><strong>Save your recovery phrase</strong>, only for a new Google, Github or Apple account after its first upload. Tap <BgStyledText>View phrase</BgStyledText> to back the phrase up. <BgStyledText>Later</BgStyledText> hides the card for good, so only tap it once the phrase is safe.</li>
+  <li><strong>Save your recovery phrase</strong>, only for a new Google, GitHub or Apple account after its first upload. Tap <BgStyledText>View phrase</BgStyledText> to back the phrase up. <BgStyledText>Later</BgStyledText> hides the card for good, so only tap it once the phrase is safe.</li>
   <li>A card to set up <a href="/use/mobile/camera-uploads">Camera Uploads</a>. Once you have set it up, it is replaced by <strong>Storage Distribution</strong>, a breakdown of what is using your storage.</li>
 </Unordered>
 
