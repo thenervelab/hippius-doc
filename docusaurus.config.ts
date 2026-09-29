@@ -19,7 +19,7 @@ const inlineFont = (family: string, file: string, weight: string) => {
 
 const config: Config = {
   title: "Hippius Docs - Learn, use, earn and develop with Hippius",
-  tagline: "Transparent, Distributed, Anonymous Cloud Storage",
+  tagline: "Encrypted storage, S3 and an AI model Hub. One account.",
   favicon: "img/favicon.ico",
 
   url: "https://docs.hippius.io",
@@ -184,7 +184,7 @@ const config: Config = {
           activeBasePath: "/earn",
         },
         {
-          to: "/storage/s3/advanced",
+          to: "/use/api",
           label: "Develop",
           position: "left",
           activeBaseRegex: "^/(blockchain|cli|pallets|storage)(/|$)",
@@ -264,7 +264,7 @@ const config: Config = {
             },
             {
               label: "Alphanomics",
-              href: "https://community.hippius.com/",
+              href: "https://hippius.com/alphanomics",
             },
           ],
         },
