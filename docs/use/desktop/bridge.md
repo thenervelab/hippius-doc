@@ -3,8 +3,14 @@ id: bridge
 title: Bridge
 sidebar_label: Bridge
 slug: /use/desktop/bridge
-description: 7
+description: Move Alpha from Bittensor to hAlpha on Hippius and back, from the Wallet page of the Hippius desktop app.
+draft: true
 ---
+
+{/*
+  Hidden: the desktop app has no Wallet page yet (WALLET_FEATURE_ENABLED = false
+  in app/lib/featureFlags.ts), same as wallet.md. Remove `draft: true` when it ships.
+*/}
 
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
