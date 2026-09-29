@@ -21,7 +21,7 @@ export const CATEGORIES: (SmallCardInfo & {
   {
     title: "Learn",
     description: "What Hippius is, how your data is stored, and how the chain works.",
-    icon: <Icons.Book className="text-primary-50 relative size-7" />,
+    icon: <Icons.Book className="text-primary-50 relative size-6" />,
     cta: {
       label: "Learn",
       href: "/learn/intro",
@@ -30,7 +30,7 @@ export const CATEGORIES: (SmallCardInfo & {
   {
     title: "Use",
     description: "Drive, S3 Storage and Hub, from the console, desktop and mobile apps.",
-    icon: <Icons.Cursor className="text-primary-50 relative size-5" />,
+    icon: <Icons.Cursor className="text-primary-50 relative size-6" />,
     cta: {
       label: "Use",
       href: "/use/drive",
@@ -39,7 +39,7 @@ export const CATEGORIES: (SmallCardInfo & {
   {
     title: "Earn",
     description: "Run a storage miner or a validator, or stake on the network.",
-    icon: <Icons.DollarSquare className="text-primary-50 relative size-7" />,
+    icon: <Icons.DollarSquare className="text-primary-50 relative size-6" />,
     cta: {
       label: "Earn",
       href: "/earn/storage-miner",
@@ -48,7 +48,7 @@ export const CATEGORIES: (SmallCardInfo & {
   {
     title: "Develop",
     description: "Management API, HCFS API, SDKs, and docs written for agents.",
-    icon: <Icons.Code className="text-primary-50 relative size-7" />,
+    icon: <Icons.Code className="text-primary-50 relative size-6" />,
     cta: {
       label: "Develop",
       href: "/use/api",
@@ -117,7 +117,6 @@ export const ALSO_USEFUL: { label: string; href: string }[] = [
   { label: "Status", href: "https://status.hippius.com" },
   { label: "Help & Support", href: "/use/help-support" },
   { label: "Referrals", href: "/use/console/referrals" },
-  { label: "Community", href: "https://community.hippius.com/" },
   { label: "Alphanomics", href: "https://hippius.com/alphanomics" },
   { label: "llms.txt for agents", href: "https://docs.hippius.com/llms.txt" },
 ];
