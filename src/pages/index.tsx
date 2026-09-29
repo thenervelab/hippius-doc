@@ -92,14 +92,14 @@ export const PRODUCTS: (SmallCardInfo & {
     title: "S3 Storage",
     description:
       "Any S3 client, endpoint s3.hippius.com, no egress fees. Migrate from any S3 provider in one click.",
-    icon: <Icons.Box className="text-primary-50 relative size-7" />,
+    icon: <Icons.Strongbox className="text-primary-50 relative size-7" />,
     cta: { label: "Create your first bucket", href: "/use/quickstart" },
   },
   {
     title: "Hub",
     description:
       "Push and pull AI models and container images. A drop-in for the Hugging Face Hub, docker and oras.",
-    icon: <Icons.FormatSquare className="text-primary-50 relative size-7" />,
+    icon: <Icons.Global className="text-primary-50 relative size-7" />,
     cta: { label: "Publish your first model", href: "/registry" },
   },
   {
@@ -176,10 +176,10 @@ function HomepageHeader() {
           </Link>
         </div>
         <H1 className="text-center mt-4 max-w-[1050px]">
-          Encrypted storage, S3 and an AI model Hub. One account.
+          Encrypted storage, S3 and an AI model Hub
         </H1>
         <P className="text-center mt-4 max-w-[760px] text-white/90" size="lg">
-          Drive for your files, S3 Storage for your apps, Hub for your AI models and containers, and Confidential Computing on the way. Same balance, same console.
+          Drive for your files, S3 Storage for your apps, Hub for your AI models and containers, and Confidential Computing on the way.
         </P>
 
         <div className="flex gap-y-5  flex-wrap relative items-center justify-center mt-8">
@@ -265,7 +265,7 @@ function HomepageFeatures() {
           <div className="flex gap-8 mt-8 items-start flex-wrap justify-center max-w-screen-xl w-full mx-auto">
             {PRODUCTS.map((product, i) => (
               <div
-                className="relative flex flex-col items-center font-medium max-w-[300px] md:max-w-[250px] border rounded-lg py-4 px-6 border-grey-80 bg-grey-100"
+                className="relative flex flex-col items-center font-medium w-[280px] min-h-[300px] border rounded-lg py-6 px-6 border-grey-80 bg-grey-100"
                 key={i}
               >
                 {product.badge && (
@@ -279,7 +279,7 @@ function HomepageFeatures() {
                 <P className="mt-4" size="lg">
                   {product.title}
                 </P>
-                <P className="mt-2 text-grey-50 text-center" size="sm">
+                <P className="mt-2 text-grey-50 text-center flex-1" size="sm">
                   {product.description}
                 </P>
                 <Link
