@@ -105,7 +105,7 @@ export const PRODUCTS: (SmallCardInfo & {
   {
     title: "Confidential Computing",
     description:
-      "Virtual machines and managed databases in hardware-encrypted memory. The host can't read them, and you can verify it.",
+      "Virtual machines and databases in hardware-encrypted memory. The host can't read them, and you can verify it.",
     icon: <Icons.SheildTick className="text-primary-50 relative size-7" />,
     cta: { label: "How it works", href: "/learn/confidential-computing" },
     badge: "Coming soon",
@@ -268,7 +268,7 @@ function HomepageFeatures() {
                 key={i}
               >
                 {product.badge && (
-                  <span className="absolute top-2 right-2 text-xs rounded-full px-2 py-0.5 bg-primary-50 text-white">
+                  <span className="absolute top-3 right-3 text-xs rounded-full px-2 py-0.5 bg-primary-50 text-white">
                     {product.badge}
                   </span>
                 )}
