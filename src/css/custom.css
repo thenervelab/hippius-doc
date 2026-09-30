@@ -450,9 +450,10 @@ article .theme-doc-breadcrumbs {
   max-width: 100%;
   aspect-ratio: auto;
   height: auto;
-  image-rendering: -webkit-optimize-contrast; /* For Webkit browsers */
-  image-rendering: crisp-edges; /* For Firefox */
-  -ms-interpolation-mode: nearest-neighbor; /* For IE */
+  /* Screenshots are larger than the column and always drawn scaled down.
+     Leave the browser's smooth scaling on: crisp-edges / optimize-contrast
+     pick nearest neighbour, which drops whole rows of pixels and makes text
+     jagged on 1x monitors. */
 }
 
 .screenshot-container {
@@ -466,13 +467,6 @@ article .theme-doc-breadcrumbs {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   max-width: 80%;
   width: 80%;
-}
-
-/* For retina displays */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .markdown img {
-    image-rendering: auto;
-  }
 }
 
 .footer__bottom {
