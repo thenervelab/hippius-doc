@@ -22,6 +22,10 @@ After sharing, all your active links are tracked on the **Shared Links** page, r
 
 <Screenshot src="/img/console/drive/shared-links-overview.png" alt="Shared Links page overview" dark />
 
+:::tip Links or a shared drive?
+A shared link is a read only copy for anyone, no account needed. If you want people to sign in and keep working in the same files with you, with Viewer, Editor or Manager access, that is a Hippius shared drive. See [Shared Drives](/use/console/shared-drives).
+:::
+
 ## How Sharing Works
 
 Understanding the sharing process will help explain a few things you'll notice, like why sharing takes a moment and why you can only copy a link on the device where you created it.
@@ -279,6 +283,7 @@ For a **file** share there is no expiry change. The desktop app's **Reshare** co
 
 <Unordered>
   <li><a href="/use/console/drive">Drive</a>: browse, upload, and manage your encrypted files. This is where you create share links.</li>
+  <li><a href="/use/console/shared-drives">Shared Drives</a>: invite people with a Hippius account into a drive or a folder, with a role.</li>
   <li><a href="/use/desktop/shared-links">Desktop Shared Links</a>: the desktop version with reshare support and persistent link copying.</li>
   <li><a href="/use/console/billing">Billing</a>: check your Drive plan has room before sharing large files.</li>
 </Unordered>
