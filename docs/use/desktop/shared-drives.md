@@ -47,13 +47,13 @@ A single folder can be shared as **Viewer** or **Editor**. Nobody manages a fold
 
 You can also press <BgStyledText>Share a drive</BgStyledText> under **Shared with Me** on the Drive page, pick one of your drives and press <BgStyledText>Continue</BgStyledText>. The list tells you which of your drives are already shared, and with how many people. It opens the same Share dialog.
 
-{/* Screenshot to add: static/img/desktop/shared-drives/share-a-drive-picker.png and share-a-drive-picker-dark.png, the Share a drive picker with three or four drives, one selected. */}
+<Screenshot src="/img/desktop/shared-drives/share-a-drive-picker.png" alt="The Share a drive picker, choosing which drive to share" dark raw />
 
 The Share dialog works the same as in the console. At the top are two tabs. **By email** sends someone their own invite. **By link** creates an invite link. The app remembers which tab you used last. Below them, **People with access** lists everyone who can get in, and is where you change a role or remove someone.
 
 <Screenshot src="/img/desktop/shared-drives/share-dialog.png" alt="The Share dialog in the desktop app" dark raw />
 
-Once people have joined, the drive's row shows **Shared with** and the number of people, with a <BgStyledText>Manage access</BgStyledText> button beside it.
+Once people have joined, the drive's row shows **Shared with** and the number of people, with a <BgStyledText>Manage access</BgStyledText> button beside it. Before anyone has joined, the row says **Invite sent**, or **Link expired** once your invite links have run out.
 
 "Share drive" is different from **Share via link** on files and folders. A share link hands out a read only copy to anyone, no account needed. See [Shared Links](/use/desktop/shared-links) for that.
 
@@ -70,6 +70,8 @@ To add a **Manager**, invite them as an Editor, then change their role once they
 ### Sharing with an invite link
 
 On **By link**, pick the role the link gives and how long it lasts, then press <BgStyledText>Create link</BgStyledText>. Press <BgStyledText>Copy</BgStyledText> and send the link yourself.
+
+<Screenshot src="/img/desktop/shared-drives/share-dialog-link.png" alt="An invite link created on the By link tab" dark raw />
 
 | Link | Who it lets in | How long it lasts |
 |---|---|---|
@@ -152,9 +154,11 @@ Drives you've joined are listed under **Shared with Me**, below your own drives 
 
 <Screenshot src="/img/desktop/shared-drives/shared-with-me.png" alt="Shared with Me in the desktop app" dark raw />
 
-{/* Screenshot to add: static/img/desktop/shared-drives/shared-with-me-empty.png and shared-with-me-empty-dark.png, the Drive page's Shared with Me section before anything is shared ("A place for teamwork" with Share a drive). */}
+Before anything has been shared with you, the section looks like this:
 
-Each row shows the drive's name, your role, who shared it and how big it is. From there you can:
+<Screenshot src="/img/desktop/shared-drives/shared-with-me-empty.png" alt="Shared with Me before anything is shared, with Share a drive" dark raw />
+
+Each row shows the drive's name, your role, who shared it, how many people are in it and how big it is. If you're a Manager, the row also has its own <BgStyledText>Manage access</BgStyledText> button. From there you can:
 
 <Unordered>
   <li><strong>Open it.</strong> Click the row to browse the drive straight from the network. Nothing is downloaded to your computer until you download a file.</li>
