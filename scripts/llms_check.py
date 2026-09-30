@@ -22,7 +22,10 @@ ROOT_FACTS = (
     "https://s3.hippius.com",
     "hip_",
     "REGISTRY_MIN_CREDITS",
-    "10 credits",
+    "balance of at least $10",
+    "/api/drive/subscription/",
+    "/api/s3/subscription/",
+    "/api/registry/subscribe/",
     "https://docs.hippius.com/cli/usage",
     "https://docs.hippius.com/use/console/getting-started",
     "https://docs.hippius.com/use/mobile/getting-started",
@@ -127,8 +130,8 @@ def main() -> None:
         if code == 403 and host_of(url) == "s3.hippius.com":
             print(f"ok 403 {url}")
             continue
-        # The ticket route exists and requires an account token. 401 means it answered.
-        if code == 401 and url.startswith("https://api.hippius.com/api/support/tickets"):
+        # Account API routes exist and require a token. 401 means the host answered.
+        if code == 401 and host_of(url) == "api.hippius.com":
             print(f"ok 401 {url}")
             continue
         # LinkedIn rate-limits datacenter clients. 429 and 999 mean the company
