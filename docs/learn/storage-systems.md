@@ -29,7 +29,7 @@ Up to 20 miners can fail at the same time and your file is still fully recoverab
 You
  │ HTTPS
  ▼
-Gateway (:3000)          ← HTTP ingress, handles auth and chunking
+Gateway          ← HTTP ingress, handles auth and chunking
  │ P2P
  ▼
 Validator (:3002)        ← encodes with Reed-Solomon, runs CRUSH placement
@@ -40,8 +40,8 @@ Validator (:3002)        ← encodes with Reed-Solomon, runs CRUSH placement
  │    ...
  └──► Miner N  ← piece 30
 
-Warden (:3003)           ← audits miners with proof-of-storage challenges
-Chain Submitter (:3004)  ← publishes cluster maps to the Hippius chain
+Warden           ← audits miners with proof-of-storage challenges
+Chain Submitter  ← publishes cluster maps to the Hippius chain
 ```
 
 ## Reed-Solomon erasure coding
