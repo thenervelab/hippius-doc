@@ -162,7 +162,7 @@ When your Drive is full, uploads and backups stop. Delete files you no longer ne
 
 <Unordered>
   <li>Switch away from the app and back again. It checks your plan whenever it comes back to the screen.</li>
-  <li>Make sure you subscribed on the <strong>same account</strong> you use in the app: the same Google, Github or Apple account, or the same access key. A different one is a different Hippius account.</li>
+  <li>Make sure you subscribed on the <strong>same account</strong> you use in the app: the same Google, GitHub or Apple account, or the same access key. A different one is a different Hippius account.</li>
   <li>After a card payment the plan can take up to a minute to activate. Check that it shows as active on <strong>Billing</strong> in the console.</li>
 </Unordered>
 
@@ -178,7 +178,7 @@ Your mnemonic seed can set a new one. See [Restore Access](/use/mobile/settings#
 
 ### My files are gone after signing in {#files-gone}
 
-You are probably signed in to a different account. Signing in with a different Google, Github or Apple account, or with a different access key, opens a different Hippius account. Log out and sign in exactly the way you did before.
+You are probably signed in to a different account. Signing in with a different Google, GitHub or Apple account, or with a different access key, opens a different Hippius account. Log out and sign in exactly the way you did before.
 
 ## Still stuck? {#still-stuck}
 

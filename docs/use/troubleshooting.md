@@ -27,7 +27,7 @@ If you receive an `InvalidAccessKeyId`, `SignatureDoesNotMatch`, or `AccessDenie
 If an upload fails to start or gets interrupted:
 
 <Unordered>
-  <li><strong>Insufficient credits:</strong> your account must have a positive credit balance. Check <BgStyledText>Billing</BgStyledText> in the console.</li>
+  <li><strong>Empty balance:</strong> your account balance must cover what you store. Check <BgStyledText>Billing</BgStyledText> in the console.</li>
   <li><strong>Invalid bucket name:</strong> names must be 3–63 characters, lowercase letters, numbers, and hyphens only, and must not look like an IP address.</li>
   <li><strong>File size:</strong> use multipart uploads for files larger than 5 GB. The console itself caps uploads at 100 MB — use a client for anything larger. See <a href="/storage/s3/advanced#upload-large-files">Upload large files</a>.</li>
 </Unordered>
@@ -37,7 +37,8 @@ If an upload fails to start or gets interrupted:
 If you can connect but cannot read or write objects:
 
 <Unordered>
-  <li><strong>Sub-token permissions:</strong> confirm the token is Read Only vs Read &amp; Write, matching the operation you are trying.</li>
+  <li><strong>Sub-token permissions:</strong> confirm the token is Object Read Only or Object Read &amp; Write, matching the operation you are trying.</li>
+  <li><strong>Account read only or suspended:</strong> on pay as you go, an unpaid balance turns S3 read only after 7 days and suspends it after 14. Top up in <BgStyledText>Billing</BgStyledText>. See <a href="/use/console/billing#s3-plans-and-pay-as-you-go">S3 plans and pay as you go</a>.</li>
   <li><strong>Bucket scope:</strong> confirm the sub-token was granted access to this specific bucket. See <a href="/storage/s3/advanced#give-an-app-scoped-credentials">Give an app scoped credentials</a>.</li>
 </Unordered>
 
@@ -56,7 +57,7 @@ For rclone, combining `--transfers 8 --s3-upload-concurrency 8 --progress` gives
 
 ## Endpoint errors
 
-If your client talks to Amazon S3 instead of Hippius, or reports a DNS error:
+If your client talks to the default S3 endpoint instead of Hippius, or reports a DNS error:
 
 <Unordered>
   <li><strong>Missing endpoint URL:</strong> set the endpoint to <code>https://s3.hippius.com</code>. In the AWS CLI that is the <code>--endpoint-url</code> flag.</li>
@@ -64,7 +65,7 @@ If your client talks to Amazon S3 instead of Hippius, or reports a DNS error:
   <li><strong>Addressing style:</strong> use <strong>path-style</strong> addressing (<code>forcePathStyle: true</code> or equivalent). Virtual-hosted style is not supported.</li>
 </Unordered>
 
-Connection details are in [Getting Started](/use/quickstart#connection-details).
+Connection details are in the [S3 Quickstart](/use/quickstart#connection-details).
 
 ## Deleting a bucket and all its contents
 
@@ -75,15 +76,13 @@ aws s3 rb s3://my-bucket --force \
   --endpoint-url https://s3.hippius.com
 ```
 
-:::tip Interactive script
-For a guided, interactive experience, use [delete-bucket.sh](https://github.com/thenervelab/hippius-s3/blob/main/scripts/delete-bucket.sh). It handles credential setup and confirmation prompts.
-:::
+A bucket with Object Lock keeps its locked versions: see [Object Lock](/storage/s3/object-lock).
 
 ## Getting help
 
 Still stuck?
 
 <Unordered>
-  <li>Join the discussion on our <a href="https://discord.gg/hippius">Discord server</a>.</li>
+  <li>Join the discussion on our <a href="https://discord.hippius.com">Discord server</a>.</li>
   <li>See <a href="/use/help-support">Help &amp; Support</a> for more resources.</li>
 </Unordered>

@@ -21,7 +21,7 @@ The Management API handles everything outside of the S3 data plane:
 | **Billing** | Check the balance, top up, subscribe to Drive / S3 / Hub plans from the existing balance |
 | **Account** | Manage account settings and access keys |
 
-For storing and retrieving files, start with [Getting Started](/use/quickstart) and [Advanced Usage](/storage/s3/advanced). The Management API is the control plane — managing *who* can access storage and *how much* they can use.
+For storing and retrieving files, start with [Getting Started](/use/quickstart) and [Advanced Usage](/storage/s3/advanced). The Management API is the control plane: it manages *who* can access storage and *how much* they can use.
 
 ## Interactive Docs
 
@@ -49,7 +49,7 @@ All Management API requests require an access token. Generate one in the [Hippiu
 ## Related
 
 <Unordered>
-  <li><a href="/use/quickstart">Getting Started</a> — First upload</li>
+  <li><a href="/use/quickstart">S3 Quickstart</a>: first upload</li>
   <li><a href="/storage/s3/advanced">Advanced Usage</a> — Presigned URLs, ACLs, public buckets, sub-tokens</li>
   <li><a href="/storage/s3/compatibility">S3 Compatibility Matrix</a> — Supported S3 operations</li>
 </Unordered>

@@ -24,10 +24,6 @@ You'll find all of this under <BgStyledIconWithText text="Billing" icon="Billing
 
 <Screenshot src="/img/console/billing/overview.png" alt="Billing page with balance, services and plans" dark raw />
 
-:::info Credits are dollars
-You may still see the word "credits" in a few places. One credit is one US dollar.
-:::
-
 ## Add money to your balance
 
 You can top up by card, with Bitcoin, with USDC, or with TAO. Whichever you pick, the money lands on your balance and stays there until a plan or S3 usage draws on it.
@@ -42,9 +38,13 @@ Auto reload is the easiest way to make sure your plans never lapse. You can chan
 
 In the same Top up dialog, choose <BgStyledText>Bitcoin</BgStyledText>. You can pay on-chain or over Lightning, from $20 to $10,000. The invoice is priced in dollars and opens on pay.hippius.com. Lightning is credited in seconds. An on-chain payment is credited after one confirmation, usually 10 to 60 minutes.
 
+<Screenshot src="/img/console/billing/bitcoin.png" alt="Top up with Bitcoin" dark raw />
+
 ### With USDC
 
-Choose <BgStyledText>USDC</BgStyledText> to pay with USDC on Base from a browser wallet, from $5 to $10,000. One USDC is one credit. You sign one authorization for that amount, and the network fee is paid for you. MetaMask, Rabby, Coinbase Wallet, and other browser wallets work. The balance updates once the payment is on Base, usually within a minute or two.
+Choose <BgStyledText>USDC</BgStyledText> to pay with USDC on Base from a browser wallet, from $5 to $10,000. One USDC adds one dollar to your balance. You sign one authorization for that amount, and the network fee is paid for you. MetaMask, Rabby, Coinbase Wallet, and other browser wallets work. The balance updates once the payment is on Base, usually within a minute or two.
+
+<Screenshot src="/img/console/billing/usdc.png" alt="Top up with USDC on Base" dark raw />
 
 ### With TAO
 
@@ -52,7 +52,7 @@ If you hold TAO, you can pay with it in two ways:
 
 <Unordered>
   <li><strong>From a browser wallet.</strong> If your TAO is in Talisman or Polkadot.js, pick the wallet in the Top up dialog, enter an amount in dollars and approve the transfer. The dialog shows how much TAO that is at today's price.</li>
-  <li><strong>By sending it yourself.</strong> If your TAO is on an exchange or in another wallet, copy your deposit address from the <strong>Manually</strong> tab and send TAO to it. We credit it in dollars at the market rate once the transfer confirms.</li>
+  <li><strong>By sending it yourself.</strong> If your TAO is on an exchange or in another wallet, copy your deposit address from the <strong>Manually</strong> tab and send TAO to it. We add it to your balance in dollars at the market rate once the transfer confirms.</li>
 </Unordered>
 
 Either way, your balance usually updates within a few minutes.
@@ -60,7 +60,7 @@ Either way, your balance usually updates within a few minutes.
 <Screenshot src="/img/console/billing/tao-wallet.png" alt="Top up with a Bittensor wallet" dark />
 
 :::warning The minimum is $20 of TAO, and transfers cannot be undone
-Anything under $20 is not credited and cannot be refunded. Double check the address before you send: TAO transfers are final, and we have no way to recover funds sent to the wrong place.
+Anything under $20 is not added to your balance and cannot be refunded. Double check the address before you send: TAO transfers are final, and we have no way to recover funds sent to the wrong place.
 :::
 
 ## Choose a plan
@@ -74,7 +74,7 @@ When you subscribe, you choose how to pay:
   <li><strong>Account balance.</strong> The plan is paid straight from what you already have. If it is not enough, the console tells you and offers a top up.</li>
 </Unordered>
 
-All plans are monthly. Hub plans can only be paid from your balance for now.
+All plans are monthly. Hub plans are paid from your balance; paying them by card is marked coming soon.
 
 ### Drive plans
 
@@ -96,15 +96,15 @@ A Drive plan sets how much encrypted storage your Drive has. These are the plans
 
 **Moving to a bigger or smaller plan** is paid from your balance and takes effect straight away. You can't move to a plan smaller than what you already store, so free up some space first.
 
+**Shared drives.** Plus, Max and Scale can share a drive with other people. Anyone on any plan, including Free, can be invited.
+
 **Cancelling** puts you back on the Free Drive Plan, or, for access key accounts, leaves you with no storage at all.
 
-:::danger Without a plan, your files are deleted after 30 days
-If your Drive has no plan, you can't upload anything new, and the files already there are **permanently deleted after 30 days**. Subscribing to any plan stops the clock. After 30 days the files cannot be recovered.
+:::warning Without a plan, or over your cap, uploads stop
+If your Drive has no plan, or holds more than its plan allows, you get a notice, a reminder after 7 days, and after 14 days Drive becomes **read only**: you can still open, download and delete, but nothing new can be uploaded. Nothing is deleted. Subscribing to a plan, or getting back under your cap, lifts it at the next daily check.
 :::
 
 When your Drive is full, uploads stop and the console offers a bigger plan. You can also delete something and try again.
-
-If you bought your plan in the mobile app, through the App Store or Google Play, you'll see it on Billing like any other, but you change or cancel it in the store you bought it from.
 
 ### S3 plans {#s3-plans-and-pay-as-you-go}
 
@@ -149,14 +149,14 @@ Your balance pays for renewals and for S3 pay as you go, so running dry affects 
 
 <Unordered>
   <li>A plan that can't renew is marked <strong>past due</strong>, and the console asks you to top up.</li>
-  <li>S3 on pay as you go becomes <strong>read only</strong>. You can still download, but nothing new can be written. If the balance stays empty, S3 is <strong>suspended</strong> and your buckets can't be reached.</li>
+  <li>S3 on pay as you go becomes <strong>read only</strong> after 7 days. You can still download, but nothing new can be written. 7 days later S3 is <strong>suspended</strong> and your buckets can't be reached. 23 days after that, 37 days from the start, the data is <strong>deleted</strong>, with a final notice a week before. Any top up that covers your usage puts everything back.</li>
 </Unordered>
 
 Topping up puts everything back. To avoid it altogether, turn on **Low balance alerts** in [Settings](/use/console/settings), or set up [auto reload](#by-card).
 
-## Older credit subscriptions
+## Older subscriptions
 
-Before plans existed, we sold monthly credit subscriptions called Personal, Professional, Business and Enterprise. They are no longer on sale. If you still have one, it keeps adding credits every month and shows on Billing as **Your top-up subscription**. You can cancel it through Stripe, and doing so doesn't affect any of your plans.
+Before plans existed, we sold monthly subscriptions called Personal, Professional, Business and Enterprise that added a fixed amount to your balance. They are no longer on sale. If you still have one, it keeps adding to your balance every month and shows on Billing as **Your top-up subscription**. You can cancel it through Stripe, and doing so doesn't affect any of your plans.
 
 ## Where to next
 

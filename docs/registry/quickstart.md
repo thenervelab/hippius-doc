@@ -37,14 +37,16 @@ Both faces share the same authentication, the same backing storage, and the same
 
 Models are indexed server-side by format, architecture, parameter count, and quantization — so search on [hub.hippius.com](https://hub.hippius.com) works the way you'd expect.
 
+Private repositories: only you and the keys you issue can pull them.
+
 ---
 
 ## Five-minute path
 
 Pick the flow that matches what you're shipping. The CLI install and namespace provisioning are the same either way.
 
-:::info 10 credits before the first namespace
-The Free plan can create a namespace only when the account holds at least **10 credits** (`REGISTRY_MIN_CREDITS`, a spam check). A zero balance is refused. Top up on [Billing](/use/console/billing) before `hippius-hub registry provision`. The plan itself stays free.
+:::info A $10 balance before the first namespace
+The Free plan can create a namespace only when the account holds a balance of at least **$10**. A zero balance is refused. Top up on [Billing](/use/console/billing) before `hippius-hub registry provision`. The plan itself stays free.
 :::
 
 <Tabs groupId="registry-flow">

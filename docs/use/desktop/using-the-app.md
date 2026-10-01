@@ -33,7 +33,7 @@ After signing in for the first time, you will be guided through a **5-step onboa
 
 <Ordered>
   <li><strong>Welcome to Hippius</strong>: Overview of your personal cloud, with files encrypted on your device before upload and distributed across a global network of independent nodes.</li>
-  <li><strong>Credits &amp; Billing</strong>: Learn how pay-as-you-go billing works, including top-ups via Stripe or TAO, subscription plans, and how sync simply pauses if you run out of credits.</li>
+  <li><strong>Billing</strong>: How your balance and Drive plans work, and how sync simply pauses if you run out of storage. You can top up by card, Bitcoin, USDC or TAO, see <a href="/use/console/billing">Billing</a>.</li>
   <li><strong>Files &amp; Actions</strong>: Browse, preview, and manage files from one place, with right-click actions to download, reveal in Finder, view details, rename, or track files on the Hipstats explorer.</li>
   <li><strong>Unlock Password</strong>: Understand how one unlock password encrypts your files locally and gives you access across all your devices and the web console.</li>
   <li><strong>Mnemonic Seed</strong>: Understand the importance of your mnemonic seed and how to back it up securely. Tips include writing it on paper, storing it safely, never sharing it, and keeping copies in multiple places.</li>
@@ -48,9 +48,9 @@ You can click <BgStyledText>Skip</BgStyledText> at any time to bypass the remain
 After your first sign-in, the app will prompt you to set an **unlock password**. This password protects your account and encrypts your files.
 
 <Ordered>
-  <li>Enter a strong password (minimum 8 characters).</li>
+  <li>Enter a strong password: at least 10 characters, and the strength meter must read <strong>Strong</strong>.</li>
   <li>Confirm the password.</li>
-  <li>Click <BgStyledText>Save password</BgStyledText>.</li>
+  <li>Click <BgStyledText>Save Password</BgStyledText>.</li>
 </Ordered>
 
 Once set, the app handles file encryption automatically. You can start adding sync folders without any additional setup. See [Unlock Password](/use/desktop/drive#unlock-password) for more details.
@@ -84,7 +84,7 @@ Once a folder begins syncing, the **Drive** page opens directly into that folder
 
 <Screenshot src="/img/desktop/folder-contents.png" alt="Folder Contents" dark />
 
-From the **Local** view you can add more sync folders, sync folders from your other devices, and manage existing ones — the same actions available under **Settings → Sync & Storage**. You can therefore manage syncing in whichever way is more convenient: directly from the Drive page, or from Settings.
+From the **Local** view you can add more sync folders, sync folders from your other devices, and manage existing ones. These are the same actions available under **Settings → Sync & Storage**. You can therefore manage syncing in whichever way is more convenient: directly from the Drive page, or from Settings.
 
 ## Adding More Sync Folders
 
@@ -207,12 +207,12 @@ To narrow down the files within the folder you are viewing, use the **File Type*
 Hippius Desktop keeps a compact **menu bar window** in your system tray (the menu bar on macOS, the notification area on Windows). Click the Hippius tray icon to open it for a quick glance at your account without bringing the full app to the front.
 
 
-<Screenshot src="/img/desktop/menu-bar-window.png" alt="The Hippius menu bar window showing credits, the notification bell, file search, and recent uploads" dark />
+<Screenshot src="/img/desktop/menu-bar-window.png" alt="The Hippius menu bar window showing your balance, the notification bell, file search, and recent uploads" dark />
 
 The window has four parts:
 
 <Unordered>
-  <li><strong>Credits</strong>: your current credit balance, shown in the top left so you can keep an eye on it at any time.</li>
+  <li><strong>Credits</strong>: your current balance, shown in the top left so you can keep an eye on it at any time.</li>
   <li><strong>Notification bell</strong>: in the top right, with a badge for the number of unread notifications.</li>
   <li><strong>Search Files</strong>: a search box with the <BgStyledText>⌘F</BgStyledText> shortcut.</li>
   <li><strong>Your Uploads</strong>: your most recently uploaded files, grouped by when they were added (for example <strong>Today</strong>, <strong>Yesterday</strong>, <strong>Last 7 Days</strong>, and <strong>Older</strong>). Each row shows the file name, size, and upload date.</li>

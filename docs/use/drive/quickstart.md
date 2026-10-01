@@ -22,8 +22,8 @@ Drive is for your own files. To connect apps, scripts or backup tools over the S
 
 <Ordered>
   <li>Go to <a href="https://console.hippius.com">console.hippius.com</a>.</li>
-  <li>Click <BgStyledText>Continue with Google</BgStyledText>, <BgStyledText>Continue with GitHub</BgStyledText> or <BgStyledText>Continue with Apple</BgStyledText>, and approve the sign-in.</li>
-  <li>If the console asks you to choose a view, pick either one. You can switch later in Settings.</li>
+  <li>Click <BgStyledText>Continue with Google</BgStyledText>, <BgStyledText>Continue with GitHub</BgStyledText> or <BgStyledText>Continue with Apple</BgStyledText>, and approve the sign-in. If you already have a 12-word access key, click <BgStyledText>Continue with Access Key</BgStyledText> and type it instead.</li>
+  <li>On a new account the console shows <strong>Choose your mode</strong>. Pick <BgStyledText>I just want the basics.</BgStyledText> or <BgStyledText>I'm a pro.</BgStyledText>. You can switch later in Settings.</li>
 </Ordered>
 
 <Screenshot src="/img/console/getting-started/login.png" alt="The console login screen" dark />
@@ -36,7 +36,7 @@ Access key accounts don't include free storage. [Pick a Drive plan](/use/console
 
 ## 2. Open Drive
 
-In the sidebar, click <BgStyledIconWithText text="Storage" icon="SidebarStorage" /> → <BgStyledIconWithText text="Drive" icon="FolderOpen" />. On a new account, Drive is empty.
+In the sidebar, click <BgStyledText>Drive</BgStyledText> → <BgStyledIconWithText text="My Drives" icon="FolderOpen" />. On a new account, Drive is empty.
 
 <Screenshot src="/img/console/drive/overview.png" alt="The Drive page in the console" dark />
 
@@ -96,11 +96,11 @@ The person you send it to doesn't need a Hippius account. You can see and revoke
 
 ## 7. Add your computer and phone
 
-Sign in to the apps with the **same** Google, GitHub or Apple account, enter your unlock password when asked, and your files are already there.
+Sign in to the apps with the **same** Google, GitHub or Apple account, or the same access key, enter your unlock password when asked, and your files are already there.
 
 <Unordered>
   <li><strong>Desktop App</strong> for Windows, macOS and Linux: <a href="/use/desktop/getting-started#installing-the-desktop-app">install it</a> and sign in. Then click <BgStyledText>Add Folder</BgStyledText> to keep a folder on your computer in sync with Drive. See <a href="/use/desktop/using-the-app#set-up-your-first-sync-folder">Set Up Your First Sync Folder</a>.</li>
-  <li><strong>Mobile App</strong> for Android: <a href="/use/mobile/getting-started#install-android">install Hippius from Google Play</a> and sign in. Turn on <a href="/use/mobile/camera-uploads">Camera Uploads</a> to back up your photos and videos automatically.</li>
+  <li><strong>Mobile App</strong> for Android: <a href="/use/mobile/getting-started#install-android">install Hippius from Google Play</a> and sign in. Turn on <a href="/use/mobile/camera-uploads">Camera Uploads</a> to back up your photos and videos automatically. The iPhone version is coming soon to the App Store.</li>
 </Unordered>
 
 ## Where to next

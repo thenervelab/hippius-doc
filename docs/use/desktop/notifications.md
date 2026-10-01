@@ -3,7 +3,7 @@ id: notifications
 title: Notifications
 sidebar_label: Notifications
 slug: /use/desktop/notifications
-description: Stay on top of activity in Hippius Desktop — review drive and credit notifications from the header bell or the Notifications Hub, open a notification for full details, and choose which updates you receive.
+description: Stay on top of activity in Hippius Desktop — review drive and balance notifications from the header bell or the Notifications Hub, open a notification for full details, and choose which updates you receive.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -13,13 +13,13 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-Notifications keep you informed about what's happening in your account — files syncing to the Hippius network and changes to your credits. Every notification is stored locally on your device so you can review it at any time.
+Notifications keep you informed about what's happening in your account — files syncing to the Hippius network and changes to your balance. Every notification is stored locally on your device so you can review it at any time.
 
 Notifications are grouped into two categories:
 
 <Unordered>
   <li><strong>Drive</strong> — file activity such as uploads, downloads, and deletions across your sync folders.</li>
-  <li><strong>Credits</strong> — changes to your account credits and balance.</li>
+  <li><strong>Credits</strong> — changes to your balance.</li>
 </Unordered>
 
 You decide which of these categories you want to receive — see [Notification Settings](#notification-settings).

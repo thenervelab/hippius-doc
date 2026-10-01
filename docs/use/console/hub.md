@@ -14,7 +14,7 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## What Hub is for
 
-Hub is where you keep your container images and AI models on Hippius. If you've used Docker Hub or the Hugging Face Hub, it works the same way: you push an image or a model from your machine, and pull it wherever you need it, whether that's a server, a CI pipeline or a teammate's laptop.
+Hub is where you keep your container images and AI models on Hippius. If you've used a container registry or the Hugging Face Hub, it works the same way: you push an image or a model from your machine, and pull it wherever you need it, whether that's a server, a CI pipeline or a teammate's laptop.
 
 You push and pull from your terminal. The console is where you set Hub up, see what you've stored, decide who can pull it, and manage your plan. Find it under <BgStyledIconWithText text="Hub" icon="Box" /> in the sidebar.
 
@@ -42,7 +42,7 @@ A name can use lowercase letters, numbers and dashes, up to 63 characters, and c
 You can't rename or delete a namespace from the console, and it appears in every image path you push.
 :::
 
-Every account starts on the free Hub plan, so you do not subscribe before creating the first namespace. Creating it still requires at least **10 credits** on the account (`REGISTRY_MIN_CREDITS`, a spam check). A zero balance is refused. Top up on [Billing](/use/console/billing) first.
+Every account starts on the free Hub plan, so you do not subscribe before creating the first namespace. Creating it requires a balance of at least **$10** on the account. A zero balance is refused. Top up on [Billing](/use/console/billing) first.
 
 If you already created a namespace from the CLI and the console says the name is taken, submit it anyway. The console recognises that it's yours and picks it up.
 
@@ -133,9 +133,9 @@ Your plan sets how much you can store and how many projects you can have. These 
 
 <Screenshot src="/img/console/hub/plans.png" alt="Hub plans" dark raw />
 
-**Paying.** Hub plans are paid from your [account balance](/use/console/billing) and renew monthly. Card payments aren't available for Hub yet, so top up first if your balance is short. Subscribing takes a few seconds to confirm. If it takes longer, give it a moment and refresh rather than subscribing again. Your namespace and login stay exactly as they were.
+**Paying.** Hub plans are paid from your [account balance](/use/console/billing) and renew monthly. Paying a Hub plan by card directly is marked coming soon in the dialog, so top up your balance first if it is short. Subscribing takes a few seconds to confirm. If it takes longer, give it a moment and refresh rather than subscribing again. Your namespace and login stay exactly as they were.
 
-**Switching plans.** Hub doesn't have a one-step upgrade or downgrade yet. If you subscribe to a second plan while you're still on a paid one, **both stay active and you're charged for both**. To switch, cancel your current plan first, then subscribe to the new one.
+**Switching plans.** Hub doesn't have a one-step upgrade or downgrade yet. While you are on a paid plan, subscribing to another one is refused with "Already subscribed to a storage plan". To switch, cancel your current plan first, then subscribe to the new one.
 
 **Cancelling.** When you cancel, your namespace stays available for a **30 day grace period**, and the Hub page shows the exact date it will be deleted. Subscribe again within that time and everything stays as it was.
 

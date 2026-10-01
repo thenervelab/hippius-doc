@@ -132,7 +132,7 @@ The preview toolbar has buttons to **Download** or **Close** the preview, plus *
 
 ## File Details
 
-Click the action menu (three dots) on any file row and choose <BgStyledText>Details</BgStyledText> to see full metadata without opening a preview. The details panel shows the file name, path, size, MIME type, upload date, IPFS CID, and Hippius file hash, each with a copy icon.
+Click the action menu (three dots) on any file row and choose <BgStyledText>Details</BgStyledText> to see the file's metadata without opening a preview. The details panel shows the file name, file type, date uploaded, file size and Arion hash. The hash has a copy button and a link to the file tracker on hipstats.com.
 
 <Screenshot src="/img/console/drive/details-panel.png" alt="File details panel" dark />
 
@@ -219,7 +219,7 @@ How much you can upload depends on your **Drive plan**, not on your balance.
 
 <Unordered>
   <li>If an upload would go over your plan, <strong>You're out of storage</strong> appears. Click <BgStyledText>View plans</BgStyledText> to move to a bigger plan, or free up space and try again.</li>
-  <li>If your account has no plan at all, <BgStyledText>+ New File</BgStyledText> asks you to pick one first, and a banner warns that existing files are deleted after 30 days without a plan.</li>
+  <li>If your account has no plan at all, <BgStyledText>+ New File</BgStyledText> asks you to pick one first, and a banner says that nothing new can be uploaded until you subscribe.</li>
 </Unordered>
 
 See [Billing → Drive plans](/use/console/billing#drive-plans) for the plans and what happens without one.

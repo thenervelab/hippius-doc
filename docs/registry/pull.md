@@ -121,7 +121,7 @@ Tags (`:v1`, `:main`) are **mutable** — re-pushing to the same revision moves 
 
 ## Tuning parallel downloads
 
-The Rust downloader ships in the wheel — no compile step needed. Two knobs are worth knowing:
+The Rust downloader ships in the wheel, so there is no compile step. Two knobs are worth knowing:
 
 | Env var | Default | What it does |
 | --- | --- | --- |

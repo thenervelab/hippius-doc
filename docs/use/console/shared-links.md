@@ -18,7 +18,7 @@ Hippius lets you share any file from your Drive as a public download link. Recip
 
 To share a file, go to **Drive**, open the menu on any file, and choose **Share via link**. Hippius creates a secure encrypted copy in your browser and generates a shareable URL.
 
-After sharing, all your active links are tracked on the **Shared Links** page, reached from the Drive header breadcrumb or from the sidebar at <BgStyledIconWithText text="Storage" icon="SidebarStorage" /> → <BgStyledIconWithText text="Drive" icon="FolderOpen" /> → **Shared Links**. From there you can copy a link again, revoke access, and see a history of ended shares.
+After sharing, all your active links are tracked on the **Shared Links** page, reached from the <BgStyledText>Shared Links</BgStyledText> button in the Drive header (sidebar: <BgStyledIconWithText text="Drive" icon="FolderOpen" /> → <BgStyledText>My Drives</BgStyledText>). From there you can copy a link again, revoke access, and see a history of ended shares.
 
 <Screenshot src="/img/console/drive/shared-links-overview.png" alt="Shared Links page overview" dark />
 

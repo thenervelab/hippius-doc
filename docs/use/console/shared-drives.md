@@ -140,7 +140,7 @@ Open the link in the email and sign in with the address it was sent to. If you s
 
 The console then asks for your unlock password, and in most cases you join straight away: the person who invited you already packed the drive key into the invite for you.
 
-If you only just created your account, the page may say **Waiting to join** instead. Keep it open and you join as soon as the owner's (or a Manager's) console or desktop app delivers the drive key. You can also close it and come back to the same link later.
+If you only just created your account, the page may say **Waiting to join** instead. You join as soon as the owner or a Manager next opens Hippius, in the console or the desktop app. You don't need to keep the page open: come back to the same link later, or open Drive → Shared Drives.
 
 <Screenshot src="/img/console/shared-drives/invite-waiting.png" alt="An email invite waiting for the drive key" dark raw />
 

@@ -3,8 +3,11 @@ id: bridge
 title: Bridge
 sidebar_label: Bridge
 slug: /use/desktop/bridge
-description: 7
+description: Move Alpha from Bittensor to hAlpha on Hippius and back, from the Wallet page of the Hippius desktop app.
+draft: true
 ---
+
+{/* Hidden until the desktop Wallet page ships. Remove `draft: true` then. */}
 
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';

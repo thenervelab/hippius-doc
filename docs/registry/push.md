@@ -32,7 +32,7 @@ hippius-hub registry provision my-models --docker-login
 
 `provision --docker-login` does three things in one shot: creates your namespace, mints docker credentials, and runs `docker login registry.hippius.com` for you. The hippius-hub CLI's own `upload` / `download` commands also start working immediately because the credentials are cached at `~/.cache/hippius/hub/token`.
 
-The Free plan refuses namespace creation until the account holds at least **10 credits** (`REGISTRY_MIN_CREDITS`, a spam check). Top up on [Billing](/use/console/billing) first if the balance is zero.
+The Free plan refuses namespace creation until the account holds a balance of at least **$10**. Top up on [Billing](/use/console/billing) first if the balance is zero.
 
 :::tip Save the robot secret
 The robot secret prints **once** at the bottom of `registry provision`. If you lose it, rotate with `hippius-hub registry rotate-token` — it issues a new secret and updates the local cache.
@@ -103,9 +103,9 @@ oras push registry.hippius.com/my-models/my-artifact:v1 \
 
 ---
 
-## Mirror a HuggingFace model
+## Mirror a Hugging Face model
 
-The fastest way to put an existing HF model behind your own namespace — pull with `hf`, push with `hippius-hub`:
+The fastest way to put an existing Hugging Face model behind your own namespace — pull with `hf`, push with `hippius-hub`:
 
 ```bash
 # 1. Grab the model from HF
@@ -133,6 +133,8 @@ hippius-hub registry publicity private     # only your credentials can pull
 
 Toggling publicity also resizes your quota to the plan's public or private tier.
 
+Private repositories: only you and the keys you issue can pull them.
+
 ---
 
 ## Rotate credentials
@@ -141,7 +143,7 @@ Toggling publicity also resizes your quota to the plan's public or private tier.
 hippius-hub registry rotate-token --docker-login
 ```
 
-Issues a new docker secret and writes it to the local cache. **The old secret stops working immediately** — relevant for CI/CD pipelines that hold a copy of the secret. Re-distribute before rotating.
+Issues a new docker secret and writes it to the local cache. **The old secret stops working immediately**, which matters for CI/CD pipelines that hold a copy of the secret. Re-distribute before rotating.
 
 ---
 

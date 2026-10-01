@@ -62,7 +62,7 @@ When you start from Settings, the app backs up everything on your phone unless y
 
 Setting up takes a minute, and your phone asks for photo access along the way.
 
-You need storage available to turn Camera Uploads on. Every account that signs in with Google, Github or Apple has the 10 GB Free Drive Plan. See [Plans and Storage](/use/mobile/plans).
+You need storage available to turn Camera Uploads on. Every account that signs in with Google, GitHub or Apple has the 10 GB Free Drive Plan. See [Plans and Storage](/use/mobile/plans).
 
 :::info The first backup takes a while
 Camera Uploads starts with everything already on your phone, oldest first, so the first run can take hours if you have years of photos. After that it is only new ones, which is quick. Leaving the app open, on Wi-Fi and plugged in, is the fastest way through a big first backup.

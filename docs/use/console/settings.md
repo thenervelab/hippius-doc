@@ -3,7 +3,7 @@ id: settings
 title: Settings
 sidebar_label: Settings
 slug: /use/console/settings
-description: 4
+description: API token, email notifications, theme, Normal or Pro mode, table density, your unlock password, your Drive plan and account deletion in the Hippius Console.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -14,7 +14,7 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-The **Settings** page is where you personalise the console and manage your account preferences. You can grab your API token, control which emails Hippius sends you, switch between light and dark mode, change your dashboard layout, adjust table density, and see your Drive plan.
+The **Settings** page is where you personalise the console and manage your account preferences. You can grab your API token, control which emails Hippius sends you, switch between light and dark mode, change your dashboard layout, set or change your unlock password, adjust table density, and see your Drive plan.
 
 To reach Settings, click the **Hippius** dropdown in the top left of the sidebar, then click **Settings** from the menu that appears.
 
@@ -24,7 +24,7 @@ All changes save automatically. There is no save button anywhere on this page.
 
 ## API Token
 
-Your **API Token** lets you make direct API calls to Hippius on your behalf, for example in a script or integration.
+Your **API Token** lets you make direct API calls to Hippius on your behalf, for example in a script or integration. This section is shown when you signed in with Google, GitHub or Apple.
 
 The token is hidden by default. Click the **eye** icon to reveal it, then the **copy** icon to copy it to your clipboard. Click the eye again to hide it.
 
@@ -61,11 +61,15 @@ Pick **Light** or **Dark**. The change applies instantly and persists across all
 
 Choose between two dashboard layouts:
 
-**Normal** gives you a focused overview: your recent uploads, credit balance, and storage usage. Best if you're mainly using Hippius for personal file storage.
+**Normal** gives you a focused overview: your recent uploads, balance, and storage usage. Best if you're mainly using Hippius for personal file storage.
 
-**Pro** expands the dashboard with your Drive and S3 sections side by side, detailed storage and credit charts, and recent uploads. Best if you actively manage multiple services.
+**Pro** expands the dashboard with your Drive and S3 sections side by side, detailed storage and balance charts, and recent uploads. Best if you actively manage multiple services.
 
 The change takes effect the next time you load the Overview page (or immediately if you're already on it).
+
+## Unlock Password
+
+The **Unlock Password** row shows <BgStyledText>Set Password</BgStyledText> if you have not set one yet, and <BgStyledText>Change Password</BgStyledText> once you have. Changing asks for the current password, then a new one of at least 10 characters that the meter rates Strong. If you have forgotten the current one, <BgStyledText>Forgot current password?</BgStyledText> opens Restore Access, where your 12-word recovery seed sets a new password. See [Unlock Password](/use/console/unlock-password).
 
 ## Table Text Size
 
@@ -92,7 +96,7 @@ The last row on the page deletes your account and everything in it. You do the w
 Deleting is not instant. Your account is **locked the moment you confirm**, and permanently deleted **7 days later**. Those 7 days are a grace period: until the deletion runs you can still stop it and get everything back.
 
 :::danger This deletes everything
-Your files, buckets, container images, subscriptions and remaining credits all go. After the 7 days there is nothing left to restore, and no copy on our side to restore it from.
+Your files, buckets, container images, subscriptions and remaining balance all go. After the 7 days there is nothing left to restore, and no copy on our side to restore it from.
 :::
 
 ### What gets deleted
@@ -124,14 +128,14 @@ Everyone finishes by typing the confirmation phrase. The only thing that differs
 
 | How you sign in                                   | Steps                                   |
 | ------------------------------------------------- | --------------------------------------- |
-| **Email or social login** (Google, GitHub, Apple) | **3** — inventory, emailed code, phrase |
+| **Social login** (Google, GitHub, Apple) | **3** — inventory, emailed code, phrase |
 | **Recovery seed or access key**                   | **2** — inventory, phrase               |
 
 A wallet-only account is deleted in exactly the same way, on exactly the same 7 day schedule. It simply has no mailbox to send a code to, so that one screen does not exist and the counter reads "of 2" instead of "of 3". Nothing else changes, and you do not need to contact anyone.
 
 **Step 1 — What will be deleted.** Read the inventory and tick each group's checkbox. **Continue** stays disabled until every group that holds something is ticked.
 
-**Step 2 — Prove it's you.** _Email and social logins only._ Hippius emails you a **6-digit code** as soon as this screen opens; you don't have to ask for it. The code expires in 15 minutes. If it doesn't arrive, use **Resend** at the bottom, which becomes available again 60 seconds after each send.
+**Step 2 — Prove it's you.** _Social logins only._ Hippius emails you a **6-digit code** as soon as this screen opens; you don't have to ask for it. The code expires in 15 minutes. If it doesn't arrive, use **Resend** at the bottom, which becomes available again 60 seconds after each send.
 
 **Last step — Type to confirm.** Type <BgStyledText>delete my account</BgStyledText> exactly, then click **Delete my account and everything in it**. This screen is shown to everyone: it is step 3 of 3 with an email address on the account, and step 2 of 2 without one.
 

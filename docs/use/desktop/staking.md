@@ -3,8 +3,11 @@ id: staking
 title: Staking
 sidebar_label: Staking
 slug: /use/desktop/staking
-description: 5
+description: Stake, unstake and withdraw hAlpha from the Wallet page of the Hippius desktop app.
+draft: true
 ---
+
+{/* Hidden until the desktop Wallet page ships. Remove `draft: true` then. */}
 
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';

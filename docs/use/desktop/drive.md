@@ -77,9 +77,9 @@ The app prompts you to set your unlock password on your first sign-in. This is r
 <Screenshot src="/img/desktop/settings/set-unlock-password-dialog.png" alt="Set unlock password dialog" dark />
 
 <Ordered>
-  <li>Enter a strong password (minimum 8 characters).</li>
+  <li>Enter a strong password: at least 10 characters, and the strength meter must read <strong>Strong</strong>.</li>
   <li>Confirm the password.</li>
-  <li>Click <BgStyledText>Save password</BgStyledText>.</li>
+  <li>Click <BgStyledText>Save Password</BgStyledText>.</li>
 </Ordered>
 
 Once set, file encryption is configured automatically. You can start adding sync folders right away without any additional setup.

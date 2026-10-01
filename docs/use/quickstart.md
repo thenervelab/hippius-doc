@@ -5,7 +5,7 @@ import Unordered from '@site/src/components/Unordered';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Quickstart: Store Your First File on Hippius
+# S3 Quickstart: Store Your First Object
 
 Hippius S3 is a distributed, S3-compatible storage service. This guide takes you from zero to your first file upload in under 5 minutes.
 
@@ -13,10 +13,10 @@ Hippius S3 is a distributed, S3-compatible storage service. This guide takes you
 
 <Ordered>
   <li>Go to <a href="https://console.hippius.com">console.hippius.com</a></li>
-  <li>Sign up with <BgStyledText>Google</BgStyledText> or <BgStyledText>GitHub</BgStyledText> OAuth</li>
+  <li>Sign in with <BgStyledText>Google</BgStyledText>, <BgStyledText>GitHub</BgStyledText>, <BgStyledText>Apple</BgStyledText>, or a 12-word <BgStyledText>Access Key</BgStyledText></li>
 </Ordered>
 
-No wallet, seed phrase, or browser extension required.
+No browser extension required.
 
 ## Top Up Your Balance
 
@@ -24,7 +24,7 @@ S3 starts on **pay as you go**: $6 per TB per month, charged hourly from your ac
 
 <Ordered>
   <li>In the console, go to <BgStyledText>Billing</BgStyledText>.</li>
-  <li>Click <BgStyledText>+ Top up</BgStyledText> and pay by <strong>card</strong> (Stripe) or with <strong>TAO</strong>.</li>
+  <li>Click <BgStyledText>+ Top up</BgStyledText> and pay by <strong>card</strong> (min $10), <strong>Bitcoin</strong> (min $20), <strong>USDC</strong> on Base (min $5) or <strong>TAO</strong> (min $20).</li>
 </Ordered>
 
 Storing a lot? A monthly S3 plan covers a block of storage for a flat price, up to 22% cheaper per TB. See [S3 plans and pay as you go](/use/console/billing#s3-plans-and-pay-as-you-go).
@@ -32,8 +32,8 @@ Storing a lot? A monthly S3 plan covers a block of storage for a flat price, up 
 ## Create S3 Credentials
 
 <Ordered>
-  <li>In the console, go to <BgStyledText>S3 Storage</BgStyledText></li>
-  <li>Click <BgStyledText>Create Master Token</BgStyledText></li>
+  <li>In the console, go to <BgStyledText>S3</BgStyledText> → <BgStyledText>S3 Buckets</BgStyledText></li>
+  <li>Click <BgStyledText>+ Create Master Token</BgStyledText></li>
   <li>Save your <strong>Access Key ID</strong> (starts with <code>hip_</code>) and <strong>Secret Key</strong></li>
 </Ordered>
 
@@ -54,7 +54,7 @@ A master token can do everything on your account. Scoped sub-tokens, rotation, a
 | **Signature** | AWS Signature V4 |
 | **Addressing** | Path-style |
 
-Always use `https://s3.hippius.com`. ETH wallets, TAO wallets, and Polkadot extensions are not used for S3 auth. TAO is only for paying credits.
+Always use `https://s3.hippius.com`. Wallets and browser extensions are not used for S3 auth. Your credentials are the `hip_` access key and its secret.
 
 ## Upload a File
 

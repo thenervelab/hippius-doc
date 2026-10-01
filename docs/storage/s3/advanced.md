@@ -105,7 +105,7 @@ aws s3api put-bucket-acl --bucket my-bucket --acl public-read \
   --endpoint-url https://s3.hippius.com
 ```
 
-**Whole bucket (policy, recommended):**
+**Whole bucket (policy):**
 
 ```python
 import json
@@ -121,6 +121,8 @@ policy = {
 }
 s3.put_bucket_policy(Bucket="my-bucket", Policy=json.dumps(policy))
 ```
+
+Only this public-read policy is accepted. Any other statement is rejected with `MalformedPolicy`, and there is no `DeleteBucketPolicy`: to make the bucket private again, set its ACL back to `private`.
 
 **One object, bucket stays private:**
 
@@ -184,7 +186,7 @@ Do not hand a master token to a backup script, a CDN, or a contractor. Create a 
 | Time limited | Vendor access that expires in a week |
 | Easy revoke | Kill that integration without rotating the master |
 
-Create them in the console: [S3 Buckets → Sub Tokens](/use/console/s3#sub-tokens). Pick the buckets, **Get / List** or **Get / List / Put / Delete**, and an expiry (7 days, 30 days, 1 year, or a date). The secret is shown once.
+Create them in the console: [S3 Buckets → Sub Tokens](/use/console/s3#sub-tokens). Pick **Object Read Only** or **Object Read & Write**, all buckets or specific ones, and a lifespan (Forever, 7 days, 30 days, 1 year, or a custom date). The secret is shown once.
 
 Rotate keeps the same Access Key ID and issues a new secret. Revoke is immediate and cannot be undone.
 
@@ -192,7 +194,7 @@ Programmatic create / list / rotate / revoke: [Management API](/use/api).
 
 ## Upload large files {#upload-large-files}
 
-The console caps a single upload at **100 MB**. For anything larger, use a client that speaks multipart — AWS CLI, boto3, and the AWS SDK all do this automatically.
+The console caps a single upload at **100 MB**. For anything larger, use a client that speaks multipart. The AWS CLI, boto3, and the AWS SDK all do this automatically.
 
 ```python
 s3.upload_file("large_file.zip", "my-bucket", "large_file.zip")
@@ -232,7 +234,7 @@ s3.put_object_tagging(
 
 ## Host a static site or stream video {#host-a-static-site-or-stream-video}
 
-Make the bucket public, then upload. Files are served from the path-style URL — no extra web server.
+Make the bucket public, then upload. Files are served from the path-style URL, with no extra web server.
 
 ```bash
 aws s3api put-bucket-acl --bucket my-site --acl public-read \
@@ -266,6 +268,6 @@ Full guide: [Object Lock (WORM)](/storage/s3/object-lock).
   <li><a href="/use/troubleshooting">Troubleshooting</a> — auth, endpoint, and upload errors</li>
   <li><a href="/storage/s3/examples/nextcloud">Nextcloud</a> and <a href="/storage/s3/examples/duplicati">Duplicati</a> — product-specific setups</li>
   <li><a href="/use/console/s3">Console S3 Buckets</a> — manage buckets and tokens in the browser</li>
-  <li><a href="/use/console/migrations">S3 Migrations</a> — copy from AWS, R2, Storj, and others</li>
+  <li><a href="/use/console/migrations">S3 Migrations</a>: copy from any S3-compatible provider</li>
   <li><a href="/use/api">Management API</a> — tokens and billing from your backend</li>
 </Unordered>

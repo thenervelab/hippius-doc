@@ -3,7 +3,7 @@ id: support
 title: Help & Support
 sidebar_label: Help & Support
 slug: /use/console/support
-description: 4
+description: Open, follow and close support tickets from the Hippius Console, and where else to reach the team.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -29,7 +29,7 @@ Click <BgStyledText>+ New Ticket</BgStyledText> in the top right corner to open 
 <Ordered>
   <li>Enter a clear, one line <strong>Subject</strong>, for example <em>"Upload stuck in processing after several minutes"</em>.</li>
   <li>Pick a <strong>Ticket Category</strong> from the dropdown (see the categories below).</li>
-  <li>Pick a <strong>Ticket Severity</strong>: <strong>Low</strong> (minor issue, question, or feature request), <strong>Medium</strong> (affects you but you have a workaround), or <strong>High</strong> (blocking: you can't use the platform, data loss, or a security concern).</li>
+  <li>Pick a <strong>Ticket Severity</strong>: <strong>Low</strong> (minor issue, question, or feature request), <strong>Normal</strong> (affects you but you have a workaround), <strong>High</strong> (blocking: you can't use the platform), or <strong>Urgent</strong> (data loss or a security concern).</li>
   <li>Describe the problem in the <strong>Description</strong> field. Include what you were doing, what you expected to happen, what actually happened, any error text, and your browser, OS, and the approximate time.</li>
   <li>(Optional) Click the attachment icon to add a screenshot, log file, or other supporting file.</li>
   <li>Click <BgStyledText>Create Ticket</BgStyledText>.</li>
@@ -40,10 +40,15 @@ Click <BgStyledText>+ New Ticket</BgStyledText> in the top right corner to open 
 ### Ticket Categories
 
 <Unordered>
-  <li><strong>Account & Billing</strong>: credits, subscriptions, payments, or account access issues.</li>
-  <li><strong>Storage (My Files & S3)</strong>: uploads, downloads, encryption, S3 client errors, or sync problems.</li>
-  <li><strong>General</strong>: feature questions, feedback, and anything else not covered above.</li>
+  <li><strong>Drive</strong> and <strong>Shared drives</strong>: uploads, downloads, encryption, sync and sharing problems.</li>
+  <li><strong>S3</strong>: buckets, tokens and S3 client errors.</li>
+  <li><strong>Hub</strong>: namespaces, pushes and pulls.</li>
+  <li><strong>Credits & payments</strong> and <strong>Subscription</strong>: top ups, charges and plans.</li>
+  <li><strong>Account & sign in</strong>: access to your account.</li>
+  <li><strong>Feedback</strong> and <strong>Other</strong>: feature questions and anything else.</li>
 </Unordered>
+
+Older tickets may still show the previous categories, Account & billing, Storage and General.
 
 The new ticket appears at the top of your tickets table in the **Open** state, and our team is notified immediately.
 
@@ -101,8 +106,8 @@ Closed tickets stay visible in the table and can be filtered with the **Closed**
 For quick questions, community discussion, or contributing to open source Hippius repos:
 
 <Unordered>
-  <li><strong>Discord</strong>: the fastest way to get a reply from a human.</li>
-  <li><strong>GitHub</strong>: bug reports and pull requests for Hippius open source projects.</li>
+  <li><strong><a href="https://discord.hippius.com">Discord</a></strong>: the fastest way to get a reply from a human.</li>
+  <li><strong><a href="https://github.com/thenervelab">GitHub</a></strong>: bug reports and pull requests for Hippius open source projects.</li>
 </Unordered>
 
 ## Where to next
