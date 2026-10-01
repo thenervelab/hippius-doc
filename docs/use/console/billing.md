@@ -154,9 +154,9 @@ Your balance pays for renewals and for S3 pay as you go, so running dry affects 
 
 Topping up puts everything back. To avoid it altogether, turn on **Low balance alerts** in [Settings](/use/console/settings), or set up [auto reload](#by-card).
 
-## Older credit subscriptions
+## Older subscriptions
 
-Before plans existed, we sold monthly credit subscriptions called Personal, Professional, Business and Enterprise. They are no longer on sale. If you still have one, it keeps adding to your balance every month and shows on Billing as **Your top-up subscription**. You can cancel it through Stripe, and doing so doesn't affect any of your plans.
+Before plans existed, we sold monthly subscriptions called Personal, Professional, Business and Enterprise that added a fixed amount to your balance. They are no longer on sale. If you still have one, it keeps adding to your balance every month and shows on Billing as **Your top-up subscription**. You can cancel it through Stripe, and doing so doesn't affect any of your plans.
 
 ## Where to next
 
