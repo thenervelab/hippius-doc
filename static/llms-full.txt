@@ -65,9 +65,9 @@ Hippius is a distributed cloud. Store encrypted files, serve objects over S3, an
 | Product | What an agent needs | Open |
 |---|---|---|
 | Drive | Encrypted files in the browser. Not S3. Files do not cross between them. | https://docs.hippius.com/use/drive |
-| Shared drives | A Drive someone else owns and invited you into. They pay for the storage. It appears in the console under Storage after the invite. There is no published guide yet. | |
+| Shared drives | A Drive someone else owns and invited you into. They pay for the storage. | https://docs.hippius.com/use/console/shared-drives |
 | S3 | S3-compatible API. Endpoint https://s3.hippius.com only. Region `decentralized`. Path-style. Access key ids start with `hip_`. | https://docs.hippius.com/use/quickstart |
-| Hub | Models and container images. Command: `hippius-hub`. Creating a namespace needs at least 10 credits (`REGISTRY_MIN_CREDITS`). The plan price stays zero. | https://docs.hippius.com/registry |
+| Hub | Models and container images. Command: `hippius-hub`. Creating a namespace needs a balance of at least $10 (`REGISTRY_MIN_CREDITS`). The plan price stays zero. | https://docs.hippius.com/registry |
 | Desktop | Sync folders on macOS, Windows, and Linux. There is no CLI. The agent file is on the staging branch. | https://raw.githubusercontent.com/thenervelab/hippius-desktop/staging/llms.txt |
 | Mobile | Drive on Android, on Google Play. The iPhone app is not released. There is no CLI. | https://docs.hippius.com/use/mobile/getting-started |
 | Console | Sign up, pay, API token, Drive and S3 keys. There is no CLI. The agent calls https://api.hippius.com with the account token. | https://docs.hippius.com/use/console/getting-started |
@@ -85,18 +85,42 @@ S3 access keys (`hip_*`) are created in the console and used with any S3 client.
 
 ### Paying
 
-Top up the balance, then subscribe to a plan. A top-up does not add storage. 1 credit = 1 USD. https://docs.hippius.com/use/console/billing
+Top up the balance, then subscribe to a plan. A top-up does not add storage. 1 USDC adds one dollar to your balance. https://docs.hippius.com/use/console/billing
 
 Four top-up methods, on Billing:
 
 - Card, through Stripe, from $10 to $10,000, or a monthly auto reload.
-- Bitcoin, on-chain or Lightning, from $20 to $10,000. Lightning is credited in seconds. On-chain waits for one confirmation.
-- USDC on Base, from a browser wallet, from $5 to $10,000. 1 USDC is 1 credit.
+- Bitcoin, on-chain or Lightning, from $20 to $10,000. Lightning lands in seconds. On-chain waits for one confirmation.
+- USDC on Base, from a browser wallet, from $5 to $10,000. 1 USDC adds one dollar to your balance.
 - TAO, from a connected wallet or by sending to the deposit address. Minimum $20. A transfer cannot be reversed.
 
-Subscribe from that product's plans page. A card payment lands on the balance and the plan is paid from it. A plan can also be paid from the balance already there. Hub plans are paid from the balance only.
+An agent with enough balance subscribes without a browser. Do not send a funded agent to Stripe Checkout.
 
-Google, GitHub, and Apple accounts include the Free Drive Plan (10 GB). S3 starts on pay as you go at $6 per TB per month. A plan is optional.
+Drive (codes `solo` Starter, `duo` Plus, `max`, `scale`; Free needs no subscribe):
+
+    curl -X POST https://api.hippius.com/api/drive/subscription/ \
+      -H "Authorization: Token YOUR_TOKEN" \
+      -H "Content-Type: application/json" \
+      -d '{"plan":"solo","period":"monthly","payment":"credits"}'
+    # 201 if the balance covers the plan. `payment` JSON value `credits` means pay from the existing balance.
+
+S3 (codes `pro`, `business`, `enterprise`; otherwise pay as you go at $6/TB-month):
+
+    curl -X POST https://api.hippius.com/api/s3/subscription/ \
+      -H "Authorization: Token YOUR_TOKEN" \
+      -H "Content-Type: application/json" \
+      -d '{"plan":"pro","rail":"credits"}'
+
+Hub (names Free, Builder, Pro, Team; paid from the balance only):
+
+    curl -X POST https://api.hippius.com/api/registry/subscribe/ \
+      -H "Authorization: Token YOUR_TOKEN" \
+      -H "Content-Type: application/json" \
+      -d '{"plan":"Builder"}'
+
+Catalogs (no auth): GET https://api.hippius.com/api/drive/plans/ · GET https://api.hippius.com/api/s3/plans/ · GET https://api.hippius.com/api/registry/plans/
+
+Google, GitHub, and Apple accounts include the Free Drive Plan (10 GB). S3 starts on pay as you go at $6 per TB per month. A plan is optional. Creating a Hub namespace needs a balance of at least $10.
 
 Open a support ticket with the account API token: POST https://api.hippius.com/api/support/tickets/ with subject, priority, category, and description.
 
@@ -120,7 +144,7 @@ hippius-hub registry provision my-models --docker-login
 hippius-hub upload my-models/qwen-7b ./qwen-7b --revision v1
 ```
 
-Creating a namespace needs at least 10 credits on the account. A zero balance is refused. The plan price stays zero. Top up, then provision.
+Creating a namespace needs a balance of at least $10 on the account. A zero balance is refused. The plan price stays zero. Top up, then provision.
 
 Two logins. `hippius-hub registry` and `hippius-hub models` use the API token saved by `login --hippius-token`. `upload`, `download`, `docker`, and `oras` use the registry robot secret that `provision` prints once. Lost that secret: `hippius-hub registry rotate-token --docker-login`. The old secret stops working immediately.
 
@@ -210,7 +234,7 @@ Step 2: Top up on Billing by card, Bitcoin, USDC, or TAO, then subscribe if the 
 Step 3: Create credentials — Console > S3 Storage > Create Master Token
 Step 4: Save Access Key ID (hip_...) and Secret Key — the secret cannot be retrieved after creation
 
-IMPORTANT: ETH wallets, TAO wallets, and Polkadot browser extensions are NOT used for S3 access. Card, Bitcoin, USDC, and TAO pay for credits. They do not authenticate S3 requests.
+IMPORTANT: ETH wallets, TAO wallets, and Polkadot browser extensions are NOT used for S3 access. Card, Bitcoin, USDC, and TAO add to the balance. They do not authenticate S3 requests.
 
 ### First upload (Python)
 
@@ -611,8 +635,21 @@ Token management:
     POST https://api.hippius.com/api/objectstore/master-tokens/{id}/rotate/
     GET/POST https://api.hippius.com/api/objectstore/sub-tokens/
 
-Billing:
+Balance (path still says credits):
     GET  https://api.hippius.com/api/billing/credits/balance/
+
+Subscribe from the existing balance (201). Do not use Stripe Checkout when the balance already covers the plan:
+    POST https://api.hippius.com/api/drive/subscription/     {"plan":"solo","period":"monthly","payment":"credits"}
+                                                             Drive codes: solo, duo, max, scale
+    POST https://api.hippius.com/api/s3/subscription/        {"plan":"pro","rail":"credits"}
+                                                             S3 codes: pro, business, enterprise
+    POST https://api.hippius.com/api/registry/subscribe/     {"plan":"Builder"}
+                                                             Hub names: Free, Builder, Pro, Team
+    GET  https://api.hippius.com/api/drive/plans/
+    GET  https://api.hippius.com/api/s3/plans/
+    GET  https://api.hippius.com/api/registry/plans/
+
+Top up (browser or wallet, not subscribe):
     GET  https://api.hippius.com/api/billing/latest-tao-price/
     POST https://api.hippius.com/api/billing/stripe/create-checkout-session/
     POST https://api.hippius.com/api/billing/stripe/create-subscription/
