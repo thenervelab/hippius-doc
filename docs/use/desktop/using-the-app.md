@@ -33,7 +33,7 @@ After signing in for the first time, you will be guided through a **5-step onboa
 
 <Ordered>
   <li><strong>Welcome to Hippius</strong>: Overview of your personal cloud, with files encrypted on your device before upload and distributed across a global network of independent nodes.</li>
-  <li><strong>Credits &amp; Billing</strong>: How your balance and Drive plans work, and how sync simply pauses if you run out of storage. The wizard mentions Stripe and TAO; the console also takes Bitcoin and USDC, see <a href="/use/console/billing">Billing</a>.</li>
+  <li><strong>Billing</strong>: How your balance and Drive plans work, and how sync simply pauses if you run out of storage. You can top up by card, Bitcoin, USDC or TAO, see <a href="/use/console/billing">Billing</a>.</li>
   <li><strong>Files &amp; Actions</strong>: Browse, preview, and manage files from one place, with right-click actions to download, reveal in Finder, view details, rename, or track files on the Hipstats explorer.</li>
   <li><strong>Unlock Password</strong>: Understand how one unlock password encrypts your files locally and gives you access across all your devices and the web console.</li>
   <li><strong>Mnemonic Seed</strong>: Understand the importance of your mnemonic seed and how to back it up securely. Tips include writing it on paper, storing it safely, never sharing it, and keeping copies in multiple places.</li>
