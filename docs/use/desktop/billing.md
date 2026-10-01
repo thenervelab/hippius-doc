@@ -91,7 +91,7 @@ If you signed in with an **access key (a seed phrase)**, there is no included al
 
 <Unordered>
   <li>An empty Drive says "You do not have a storage plan yet" instead of "You are on the Free plan".</li>
-  <li>A red banner on the Overview and Drive pages warns that your account has no storage and that nothing can be uploaded until you subscribe. The banner also mentions a 30 day deletion; in practice the server never deletes Drive files for want of a plan, it stops uploads and, after 14 days, makes Drive read only. See <a href="/use/console/billing#drive-plans">Drive plans</a>.</li>
+  <li>A red banner on the Overview and Drive pages warns that your account has no storage and that nothing can be uploaded until you subscribe. After 14 days without a plan, Drive becomes read only: your files stay, but nothing new can be uploaded. See <a href="/use/console/billing#drive-plans">Drive plans</a>.</li>
   <li>Cancelling warns that you will be left without a storage plan, rather than promising a fallback that does not exist.</li>
 </Unordered>
 
