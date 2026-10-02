@@ -120,7 +120,23 @@ hippius-hub registry repos
 hippius-hub models show my-models/qwen-7b v1
 ```
 
-The [`hf download`](https://huggingface.co/docs/huggingface_hub/guides/cli#hf-download) CLI handles the HF side; `hippius-hub upload` chunks and parallelizes the push to your namespace.
+The [`hf download`](https://huggingface.co/docs/huggingface_hub/guides/cli#hf-download) CLI handles the HF side; `hippius-hub upload` chunks and parallelizes the push to your namespace. The copy is published on your namespace, public or private.
+
+### Script
+
+[`mirror-hf.sh`](https://github.com/thenervelab/hippius-hub/blob/main/docs/mirror-hf.sh) is those two commands. Pass the Hugging Face repo, your `<namespace>/<repo>`, and an optional revision (`main` if you omit it):
+
+```bash
+sh mirror-hf.sh Qwen/Qwen2.5-7B-Instruct my-models/qwen-7b v1
+```
+
+Load the copy by changing the import and the repo id:
+
+```python
+from hippius_hub import snapshot_download  # was: from huggingface_hub import snapshot_download
+
+local_dir = snapshot_download("my-models/qwen-7b", revision="v1")
+```
 
 ---
 
