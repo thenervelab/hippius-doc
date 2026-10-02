@@ -147,7 +147,7 @@ hf auth login
 sh mirror-hf-account.sh my-models
 ```
 
-Hippius visibility is the namespace, not each model. When every model is public, or every model is private, the script sets the namespace to match and copies them all. That also changes every repo already in the namespace. It does this only when `hippius-hub registry me` shows that namespace and a registry login for it is already saved. A different active project stops the script before it changes visibility or copies anything. When the account has both, name the group to copy:
+Hippius visibility is the namespace, not each model. When every model is public, or every model is private, the script sets the namespace to match and copies them all. That also changes every repo already in the namespace. It does this only when `hippius-hub registry me` shows that namespace and the saved registry login is that project's robot or one of its keys. A login name that only starts the same way is not enough. A different active project stops the script before it changes visibility or copies anything. When the account has both, name the group to copy:
 
 ```bash
 sh mirror-hf-account.sh my-models private
@@ -178,7 +178,7 @@ sh mirror-hf-namespaces.sh --public my-models --private my-models-private
 sh mirror-hf-namespaces.sh --private my-models-private
 ```
 
-Each namespace has its own registry login. The script saves those logins, swaps them while it copies, and restores the login you had when it started. It sets the private namespace to private before copying into it, and only while `hippius-hub registry me` shows that namespace. If it is not the active project, or it is not private at the moment of the copy, the script stops. A note from an earlier run is not enough.
+Each namespace has its own registry login. The script saves those logins, swaps them while it copies, and restores the login you had when it started. It sets the private namespace to private before copying into it, and only while `hippius-hub registry me` shows that namespace and the saved login is that project's robot or one of its keys. A login name that only starts the same way is not enough. If it is not the active project, or it is not private at the moment of the copy, the script stops. A note from an earlier run is not enough.
 
 ---
 
