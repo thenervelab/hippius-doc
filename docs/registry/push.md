@@ -138,6 +138,48 @@ from hippius_hub import snapshot_download  # was: from huggingface_hub import sn
 local_dir = snapshot_download("my-models/qwen-7b", revision="v1")
 ```
 
+### Copy the whole account
+
+[`mirror-hf-account.sh`](https://github.com/thenervelab/hippius-hub/blob/main/docs/mirror-hf-account.sh) lists every repo on the logged-in Hugging Face account and copies the models into your namespace. Datasets, Spaces, and buckets are skipped.
+
+```bash
+hf auth login
+sh mirror-hf-account.sh my-models
+```
+
+Hippius visibility is the namespace, not each model. When every model is public, or every model is private, the script sets the namespace to match and copies them all. That also changes every repo already in the namespace. It does this only when `hippius-hub registry me` shows that namespace and the saved registry login is that project's robot or one of its keys. A login name that only starts the same way is not enough, and neither is the right username with the wrong password. A different active project stops the script before it changes visibility or copies anything. When the account has both, name the group to copy:
+
+```bash
+sh mirror-hf-account.sh my-models private
+```
+
+The other group is listed and left on Hugging Face. Load a copy by changing the import and the repo id:
+
+```python
+from hippius_hub import snapshot_download  # was: from huggingface_hub import snapshot_download
+
+local_dir = snapshot_download("my-models/model-name")
+```
+
+### Public and private namespaces
+
+[`mirror-hf-namespaces.sh`](https://github.com/thenervelab/hippius-hub/blob/main/docs/mirror-hf-namespaces.sh) copies public models into one namespace and private models into another. A Hippius namespace is entirely public or entirely private.
+
+```bash
+hf auth login
+hippius-hub login --hippius-token <token-from-console.hippius.com>
+sh mirror-hf-namespaces.sh --public my-models
+```
+
+If the account has private models, the script asks before it creates `my-models-private` and copies them there. Answering no copies the public models only. Name the private namespace yourself to skip the question. Passing only `--private` copies the private models. Passing both copies both, including the public models again.
+
+```bash
+sh mirror-hf-namespaces.sh --public my-models --private my-models-private
+sh mirror-hf-namespaces.sh --private my-models-private
+```
+
+Each namespace has its own registry login. The script saves those logins, swaps them while it copies, and restores the login you had when it started. It sets the private namespace to private before copying into it, and only while `hippius-hub registry me` shows that namespace and the saved login is that project's robot or one of its keys. A login name that only starts the same way is not enough, and neither is the right username with the wrong password. If it is not the active project, or it is not private at the moment of the copy, the script stops. A note from an earlier run is not enough.
+
 ---
 
 ## Public vs private
