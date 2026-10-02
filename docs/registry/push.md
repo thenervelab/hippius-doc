@@ -161,6 +161,25 @@ from hippius_hub import snapshot_download  # was: from huggingface_hub import sn
 local_dir = snapshot_download("my-models/model-name")
 ```
 
+### Public and private namespaces
+
+[`mirror-hf-namespaces.sh`](https://github.com/thenervelab/hippius-hub/blob/main/docs/mirror-hf-namespaces.sh) copies public models into one namespace and private models into another. A Hippius namespace is entirely public or entirely private.
+
+```bash
+hf auth login
+hippius-hub login --hippius-token <token-from-console.hippius.com>
+sh mirror-hf-namespaces.sh --public my-models
+```
+
+If the account has private models, the script asks before it creates `my-models-private` and copies them there. Answering no copies the public models only. Name the private namespace yourself to skip the question. Passing only `--private` copies the private models. Passing both copies both, including the public models again.
+
+```bash
+sh mirror-hf-namespaces.sh --public my-models --private my-models-private
+sh mirror-hf-namespaces.sh --private my-models-private
+```
+
+Each namespace has its own registry login. The script saves those logins, swaps them while it copies, and restores the login you had when it started. It sets the private namespace to private before the upload. That applies to the active project; if the new namespace is not the active project, the script stops before copying.
+
 ---
 
 ## Public vs private
