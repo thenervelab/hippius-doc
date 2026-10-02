@@ -124,17 +124,33 @@ The [`hf download`](https://huggingface.co/docs/huggingface_hub/guides/cli#hf-do
 
 ### Script
 
-[`mirror-hf.sh`](https://github.com/thenervelab/hippius-hub/blob/main/docs/mirror-hf.sh) lists every repo on the logged-in Hugging Face account and copies the models into your namespace. Datasets, Spaces, and buckets are skipped.
+[`mirror-hf.sh`](https://github.com/thenervelab/hippius-hub/blob/main/docs/mirror-hf.sh) is those two commands. Pass the Hugging Face repo, your `<namespace>/<repo>`, and an optional revision (`main` if you omit it):
+
+```bash
+sh mirror-hf.sh Qwen/Qwen2.5-7B-Instruct my-models/qwen-7b v1
+```
+
+Load the copy by changing the import and the repo id:
+
+```python
+from hippius_hub import snapshot_download  # was: from huggingface_hub import snapshot_download
+
+local_dir = snapshot_download("my-models/qwen-7b", revision="v1")
+```
+
+### Copy the whole account
+
+[`mirror-hf-account.sh`](https://github.com/thenervelab/hippius-hub/blob/main/docs/mirror-hf-account.sh) lists every repo on the logged-in Hugging Face account and copies the models into your namespace. Datasets, Spaces, and buckets are skipped.
 
 ```bash
 hf auth login
-sh mirror-hf.sh my-models
+sh mirror-hf-account.sh my-models
 ```
 
 Hippius visibility is the namespace, not each model. When every model is public, or every model is private, the script sets the namespace to match and copies them all. That also changes every repo already in the namespace. When the account has both, name the group to copy:
 
 ```bash
-sh mirror-hf.sh my-models private
+sh mirror-hf-account.sh my-models private
 ```
 
 The other group is listed and left on Hugging Face. Load a copy by changing the import and the repo id:
