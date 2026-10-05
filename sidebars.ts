@@ -77,6 +77,39 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "category",
+          label: "Compute",
+          collapsed: true,
+          items: [
+            "use/compute/overview",
+            {
+              type: "category",
+              label: "Virtual Machines",
+              collapsed: true,
+              items: [
+                "use/compute/virtual-machines",
+                "use/compute/networking",
+                "use/compute/resize",
+                "use/compute/vm-backups",
+              ],
+            },
+            "use/compute/databases",
+            {
+              type: "category",
+              label: "Kubernetes",
+              collapsed: true,
+              items: [
+                "use/compute/kubernetes",
+                "use/compute/kubernetes-worker-pools",
+                "use/compute/kubernetes-backups",
+              ],
+            },
+            "use/compute/runners",
+            "use/compute/billing",
+            "use/compute/troubleshooting",
+          ],
+        },
+        {
+          type: "category",
           label: "Console",
           collapsed: true,
           items: [
