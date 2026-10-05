@@ -78,7 +78,7 @@ A job whose label isn't exactly `hippius-small`, `hippius-medium` or `hippius-la
 ### What's on the runner
 
 <Unordered>
-  <li>Ubuntu, x64, with the GitHub Actions runner.</li>
+  <li>Ubuntu 24.04, x64, with the GitHub Actions runner.</li>
   <li><code>git</code>, <code>curl</code>, <code>jq</code>, <code>python3</code>, <code>unzip</code> and Docker. Docker's data is on the VM's data disk.</li>
   <li>The job runs as a <code>runner</code> user that can use <code>sudo</code> without a password.</li>
 </Unordered>

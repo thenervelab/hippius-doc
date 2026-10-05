@@ -167,7 +167,7 @@ A restore can take a while for a big database. Restoring into a High availabilit
 
 ## High availability and failover
 
-A High availability database runs on three instances. One is the leader and takes the writes. The other two replicate from it. If the leader fails, one of the replicas is promoted automatically, usually within a minute.
+A High availability database runs on three instances. One is the leader and takes the writes. The other two replicate from it. If the leader fails, one of the replicas is promoted automatically, typically within about 2 minutes. Backups continue from the new leader, and when the old leader comes back, it rejoins as a replica.
 
 What your application sees:
 
