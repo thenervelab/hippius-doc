@@ -17,6 +17,7 @@ Open only the file for the product you need. The long reference for the whole pr
 | Script Drive with encryption on the client | https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt |
 | Sign up, pay, get an API token, or manage Drive and S3 keys in the browser | https://docs.hippius.com/use/console/getting-started |
 | Use Drive on an Android phone | https://docs.hippius.com/use/mobile/getting-started |
+| Run a VM, managed PostgreSQL, managed Kubernetes or GitHub Actions runners (Compute, closed beta) | https://docs.hippius.com/use/compute |
 | Run a storage miner | https://docs.hippius.com/earn/arion/running-miner and https://raw.githubusercontent.com/thenervelab/arion/main/llms.txt |
 | Run a validator | https://docs.hippius.com/earn/installing-validator |
 
@@ -46,9 +47,24 @@ Hub Free plan: creating a namespace requires a balance of at least $10, a spam c
 
 Chain registration still installs the Python package `hippius`: https://docs.hippius.com/earn/register-in-blockchain
 
-## Coming soon
+## Compute (closed beta)
 
-Hippius VMs: https://docs.hippius.com/use/console/virtual-machines
+Confidential VMs on AMD SEV-SNP, managed PostgreSQL, managed Kubernetes and GitHub Actions runners, paid from the account balance per second. Open to accounts in the beta; ask support for access. Prices are only on the console's live price list: https://console.hippius.com/dashboard/billing/compute#prices
+
+- Overview (beta access, quotas, the 24-hour balance requirement, billing): https://docs.hippius.com/use/compute
+- Create a VM and connect over SSH or from the browser: https://docs.hippius.com/use/virtual-machines
+- Public IPv4, firewall rules and published ports: https://docs.hippius.com/use/compute/networking
+- Resize a VM (vCPU and memory; the disk is kept): https://docs.hippius.com/use/compute/resize
+- VM backups and restore: https://docs.hippius.com/use/compute/vm-backups
+- Managed PostgreSQL 16/17/18 (one-time credentials, TLS, backups to your S3, restore, HA failover): https://docs.hippius.com/use/compute/databases
+- Managed Kubernetes clusters (cluster key, kubeconfig, API access): https://docs.hippius.com/use/compute/kubernetes
+- Kubernetes worker pools and signed node operations: https://docs.hippius.com/use/compute/kubernetes-worker-pools
+- Kubernetes backups (etcd snapshots, Velero, restore with rclone): https://docs.hippius.com/use/compute/kubernetes-backups
+- GitHub Actions runners (`runs-on: hippius-small|medium|large`): https://docs.hippius.com/use/compute/runners
+- Compute billing, quotas and unpaid balance: https://docs.hippius.com/use/compute/billing
+- Refusals and troubleshooting: https://docs.hippius.com/use/compute/troubleshooting
+
+An agent can't grant beta access. The Kubernetes cluster key is generated in the user's browser, and database credentials are returned once at creation; never ask the user to paste either into chat.
 
 ## Documentation
 
@@ -59,6 +75,7 @@ Hippius VMs: https://docs.hippius.com/use/console/virtual-machines
 - Mobile (Android on Google Play, iPhone not released): https://docs.hippius.com/use/mobile/getting-started
 - Console: https://docs.hippius.com/use/console/getting-started
 - Drive: https://docs.hippius.com/use/drive
+- Compute: https://docs.hippius.com/use/compute
 - Pricing: https://hippius.com/pricing
 - Status: https://status.hippius.com
 - LinkedIn: https://www.linkedin.com/company/hippius
