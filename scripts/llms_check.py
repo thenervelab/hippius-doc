@@ -21,8 +21,8 @@ URL_RE = re.compile(r"https://[^\s)>\]]+")
 ROOT_FACTS = (
     "https://s3.hippius.com",
     "hip_",
-    "REGISTRY_MIN_CREDITS",
     "balance of at least $10",
+    "plan_id",
     "/api/drive/subscription/",
     "/api/s3/subscription/",
     "/api/registry/subscribe/",

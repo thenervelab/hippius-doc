@@ -10,19 +10,19 @@ import TabItem from '@theme/TabItem';
 
 # Pushing models & images
 
-Pushing always requires a namespace. The `hippius-hub` CLI provisions one — and the docker credentials you'll need — in a single command.
+Pushing always requires a namespace. The `hippius-hub` CLI provisions one, and the docker credentials you'll need, in a single command.
 
 ---
 
 ## Namespaces
 
-Every artifact lives at `<namespace>/<repo>:<tag>`. New namespaces are **public by default** — anyone can pull, only you can push. Pricing tiers gate storage quota; see [hippius.com/hippius-hub](https://hippius.com/hippius-hub) for the plans.
+Every artifact lives at `<namespace>/<repo>:<tag>`. New namespaces are **public by default**: anyone can pull, only you can push. Publicity is per namespace, not per repository. Pricing tiers gate storage quota and a monthly pull allowance; see [hippius.com/hippius-hub](https://hippius.com/hippius-hub) and the [Hub console page](/use/console/hub) for the plans.
 
 ---
 
 ## Provision a namespace
 
-Run these three commands in order — the first time only:
+Run these three commands in order, the first time only:
 
 ```bash
 hippius-hub registry plans                       # see pricing tiers
@@ -30,12 +30,14 @@ hippius-hub registry check my-models             # is the name free?
 hippius-hub registry provision my-models --docker-login
 ```
 
-`provision --docker-login` does three things in one shot: creates your namespace, mints docker credentials, and runs `docker login registry.hippius.com` for you. The hippius-hub CLI's own `upload` / `download` commands also start working immediately because the credentials are cached at `~/.cache/hippius/hub/token`.
+`provision --docker-login` does three things in one shot: creates your namespace, mints docker credentials, and runs `docker login registry.hippius.com` for you (skipped with a message if `docker` is not on PATH). The CLI's own `upload` / `download` commands also start working immediately because the credentials are cached at `~/.cache/hippius/hub/token`.
+
+If the server answers that provisioning started in the background, the secret is not printed yet. Run `hippius-hub registry status` until it is ready.
 
 The Free plan refuses namespace creation until the account holds a balance of at least **$10**. Top up on [Billing](/use/console/billing) first if the balance is zero.
 
 :::tip Save the robot secret
-The robot secret prints **once** at the bottom of `registry provision`. If you lose it, rotate with `hippius-hub registry rotate-token` — it issues a new secret and updates the local cache.
+The robot secret prints **once** at the bottom of `registry provision`. If you lose it, rotate with `hippius-hub registry rotate-token`: it issues a new secret and updates the local cache.
 :::
 
 ---
@@ -58,7 +60,9 @@ upload_folder(
 )
 ```
 
-Drop-in for [`upload_folder`](https://huggingface.co/docs/huggingface_hub/guides/upload#upload-a-folder). Re-running it merges into the existing manifest at that revision — individual files get added or replaced without wiping the rest.
+Drop-in for [`upload_folder`](https://huggingface.co/docs/huggingface_hub/guides/upload#upload-a-folder). Re-running it merges into the existing manifest at that revision: individual files get added or replaced without wiping the rest.
+
+Parallel `upload_file` calls to the same repo and revision are guarded. The first writer wins; the others raise `ConcurrentManifestUpdateError` and can retry. A transient failure on a single-object upload resumes from the committed offset (at most one chunk is re-sent).
 
 For a single file, use `upload_file(path_or_fileobj, path_in_repo, repo_id, revision)`.
 
@@ -76,7 +80,7 @@ hippius-hub upload my-models/qwen-7b ./README.md --revision v1
 hippius-hub upload my-models/qwen-7b ./qwen-7b
 ```
 
-Folder uploads **merge** into the existing manifest — re-running adds or replaces individual files without wiping the rest. The indexer picks up format / architecture / parameter count / quantization within a few seconds of the push completing.
+Folder uploads **merge** into the existing manifest: re-running adds or replaces individual files without wiping the rest. The indexer picks up format / architecture / parameter count / quantization within a few seconds of the push completing.
 
 </TabItem>
 <TabItem value="docker" label="Docker">
@@ -96,7 +100,7 @@ oras push registry.hippius.com/my-models/my-artifact:v1 \
   ./weights.safetensors ./config.json
 ```
 
-[`oras`](https://oras.land) pushes arbitrary files as OCI artifacts. This is how the Model Registry stores model weights under the hood — but you can use it directly for datasets, configs, or anything else you want to address by name and digest.
+[`oras`](https://oras.land) pushes arbitrary files as OCI artifacts. Small model files (under 256 MiB) are plain OCI blobs you can also fetch with `oras`. Files of 256 MiB and above are stored chunked (content-defined chunks packed into content-addressed packs plus one pointer record). Read those with `hippius-hub download` or the Python client, which reassemble them. `oras pull` of a chunked repo returns packs and a pointer, not the original file. Readers must be `hippius_hub` 0.6.0 or newer.
 
 </TabItem>
 </Tabs>
@@ -105,7 +109,7 @@ oras push registry.hippius.com/my-models/my-artifact:v1 \
 
 ## Mirror a Hugging Face model
 
-The fastest way to put an existing Hugging Face model behind your own namespace — pull with `hf`, push with `hippius-hub`:
+The fastest way to put an existing Hugging Face model behind your own namespace: pull with `hf`, push with `hippius-hub`:
 
 ```bash
 # 1. Grab the model from HF
@@ -165,7 +169,7 @@ hippius-hub registry publicity private     # only your credentials can pull
 
 Toggling publicity also resizes your quota to the plan's public or private tier.
 
-Private repositories: only you and the keys you issue can pull them.
+Private namespaces: only you and the keys you issue can pull from them. Publicity is per namespace, not per repository. Issue a scoped key with `hippius-hub registry keys create` for CI or a teammate.
 
 ---
 
@@ -175,7 +179,7 @@ Private repositories: only you and the keys you issue can pull them.
 hippius-hub registry rotate-token --docker-login
 ```
 
-Issues a new docker secret and writes it to the local cache. **The old secret stops working immediately**, which matters for CI/CD pipelines that hold a copy of the secret. Re-distribute before rotating.
+Issues a new docker secret and writes it to the local cache. **The old secret stops working immediately**, which matters for CI pipelines that hold a copy. Re-distribute before rotating. For CI, prefer a scoped key (`hippius-hub registry keys create … --role push`) over the namespace robot secret.
 
 ---
 
@@ -183,17 +187,17 @@ Issues a new docker secret and writes it to the local cache. **The old secret st
 
 If `docker push` loops with `500 Cannot find server.`, check `docker info | grep -i proxy`. A daemon-level proxy (e.g. `http.docker.internal:3128`) in Docker Desktop routes the push through an unreachable proxy and the registry is never hit.
 
-**Fix:** Docker Desktop → Settings → Resources → Proxies → disable it or bypass `registry.hippius.com`, then restart Docker Desktop. `NO_PROXY` in your shell does not help — the daemon ignores it.
+**Fix:** Docker Desktop → Settings → Resources → Proxies → disable it or bypass `registry.hippius.com`, then restart Docker Desktop. `NO_PROXY` in your shell does not help: the daemon ignores it.
 
 ---
 
 :::note Hugging Face features not supported
-Inference Endpoints, Spaces, Webhooks, Collections, and Discussions raise `NotImplementedError` — they have no OCI equivalent. Everything required for `from_pretrained` works.
+Inference Endpoints, Spaces, Webhooks, Collections, and Discussions raise `NotImplementedError`. They have no OCI equivalent. HF git refs such as `refs/pr/3` are not supported (use a tag as `revision=`). Fields `pipeline_tag`, `library_name`, `tags`, `downloads`, and `likes` return `None`.
 :::
 
 ---
 
 ## Where to next
 
-- [**Pull**](/registry/pull) — download from Python, CLI, or `docker pull`.
-- [**CLI reference**](/registry/cli) — every `hippius-hub` command, grouped by goal.
+- [**Pull**](/registry/pull): download from Python, CLI, or `docker pull`.
+- [**CLI reference**](/registry/cli): every `hippius-hub` command, grouped by goal.

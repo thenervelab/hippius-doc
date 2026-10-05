@@ -67,7 +67,7 @@ Hippius is a distributed cloud. Store encrypted files, serve objects over S3, an
 | Drive | Encrypted files in the browser. Not S3. Files do not cross between them. | https://docs.hippius.com/use/drive |
 | Shared drives | A Drive someone else owns and invited you into. They pay for the storage. | https://docs.hippius.com/use/console/shared-drives |
 | S3 | S3-compatible API. Endpoint https://s3.hippius.com only. Region `decentralized`. Path-style. Access key ids start with `hip_`. | https://docs.hippius.com/use/quickstart |
-| Hub | Models and container images. Command: `hippius-hub`. Creating a namespace needs a balance of at least $10 (`REGISTRY_MIN_CREDITS`). The plan price stays zero. | https://docs.hippius.com/registry |
+| Hub | Models and container images. Command: `hippius-hub`. Creating a namespace needs a balance of at least $10, a spam check. The plan price stays zero. | https://docs.hippius.com/registry |
 | Desktop | Sync folders on macOS, Windows, and Linux. There is no CLI. The agent file is on the staging branch. | https://raw.githubusercontent.com/thenervelab/hippius-desktop/staging/llms.txt |
 | Mobile | Drive on Android, on Google Play. The iPhone app is not released. There is no CLI. | https://docs.hippius.com/use/mobile/getting-started |
 | Console | Sign up, pay, API token, Drive and S3 keys. There is no CLI. The agent calls https://api.hippius.com with the account token. | https://docs.hippius.com/use/console/getting-started |
@@ -111,12 +111,14 @@ S3 (codes `pro`, `business`, `enterprise`; otherwise pay as you go at $6/TB-mont
       -H "Content-Type: application/json" \
       -d '{"plan":"pro","rail":"credits"}'
 
-Hub (names Free, Builder, Pro, Team; paid from the balance only):
+Hub (names Free, Builder, Pro, Team; paid from the balance only; top up by card, Bitcoin, USDC or TAO first):
 
+    curl -sS https://api.hippius.com/api/registry/plans/   # id, name, quotas
     curl -X POST https://api.hippius.com/api/registry/subscribe/ \
       -H "Authorization: Token YOUR_TOKEN" \
       -H "Content-Type: application/json" \
-      -d '{"plan":"Builder"}'
+      -d '{"plan_id":2}'
+    # Requires plan_id (Builder is 2). {"plan":"Builder"} returns 400.
 
 Catalogs (no auth): GET https://api.hippius.com/api/drive/plans/ · GET https://api.hippius.com/api/s3/plans/ · GET https://api.hippius.com/api/registry/plans/
 
@@ -643,8 +645,8 @@ Subscribe from the existing balance (201). Do not use Stripe Checkout when the b
                                                              Drive codes: solo, duo, max, scale
     POST https://api.hippius.com/api/s3/subscription/        {"plan":"pro","rail":"credits"}
                                                              S3 codes: pro, business, enterprise
-    POST https://api.hippius.com/api/registry/subscribe/     {"plan":"Builder"}
-                                                             Hub names: Free, Builder, Pro, Team
+    POST https://api.hippius.com/api/registry/subscribe/     {"plan_id":2}
+                                                             Hub names: Free, Builder, Pro, Team. Requires plan_id from GET /api/registry/plans/. {"plan":"Builder"} returns 400.
     GET  https://api.hippius.com/api/drive/plans/
     GET  https://api.hippius.com/api/s3/plans/
     GET  https://api.hippius.com/api/registry/plans/

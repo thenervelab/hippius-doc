@@ -42,7 +42,7 @@ A name can use lowercase letters, numbers and dashes, up to 63 characters, and c
 You can't rename or delete a namespace from the console, and it appears in every image path you push.
 :::
 
-Every account starts on the free Hub plan, so you do not subscribe before creating the first namespace. Creating it requires a balance of at least **$10** on the account. A zero balance is refused. Top up on [Billing](/use/console/billing) first.
+Every account starts on the free Hub plan, so you do not subscribe before creating the first namespace. Creating it requires a balance of at least **$10** on the account, a spam check. A zero balance is refused. Top up on [Billing](/use/console/billing) first, by card, Bitcoin, USDC or TAO.
 
 If you already created a namespace from the CLI and the console says the name is taken, submit it anyway. The console recognises that it's yours and picks it up.
 
@@ -89,7 +89,7 @@ Your namespace is either public or private, and you can switch at any time from 
 
 <Unordered>
   <li><strong>Public</strong> means anyone can pull your images, without logging in. New namespaces start public.</li>
-  <li><strong>Private</strong> means only people or machines logged in with your credentials can pull.</li>
+  <li><strong>Private</strong> means only people or machines logged in with your credentials, or with a scoped key you created for them, can pull. Publicity is per namespace, not per repository.</li>
 </Unordered>
 
 Pushing always needs your credentials, whichever you choose.
@@ -124,18 +124,20 @@ Anything still using it, such as a CI pipeline or a server, can't push until you
 
 Your plan sets how much you can store and how many projects you can have. These are the plans at the time of writing. The console always shows the current ones.
 
-| Plan        | Private storage | Public storage | Projects | Price       |
-| ----------- | --------------- | -------------- | -------- | ----------- |
-| **Free**    | 25 GB           | 100 GB         | 1        | Free        |
-| **Builder** | 75 GB           | 200 GB         | 1        | $5 / month  |
-| **Pro**     | 250 GB          | 500 GB         | 3        | $19 / month |
-| **Team**    | 2 TB            | 5 TB           | 20       | $99 / month |
+| Plan        | Private storage | Public storage | Projects | Fair-use pulls / month | Price       |
+| ----------- | --------------- | -------------- | -------- | ---------------------- | ----------- |
+| **Free**    | 25 GB           | 100 GB         | 1        | ~100 GB                | Free        |
+| **Builder** | 75 GB           | 200 GB         | 1        | 500 GB                 | $5 / month  |
+| **Pro**     | 250 GB          | 500 GB         | 3        | 1 TB                   | $19 / month |
+| **Team**    | 2 TB            | 5 TB           | 20       | 5 TB                   | $99 / month |
 
 <Screenshot src="/img/console/hub/plans.png" alt="Hub plans" dark raw />
 
-**Paying.** Hub plans are paid from your [account balance](/use/console/billing) and renew monthly. Paying a Hub plan by card directly is marked coming soon in the dialog, so top up your balance first if it is short. Subscribing takes a few seconds to confirm. If it takes longer, give it a moment and refresh rather than subscribing again. Your namespace and login stay exactly as they were.
+**Paying.** Hub plans are paid from your [account balance](/use/console/billing) and renew monthly. Paying a Hub plan by card directly is not available yet, so top up first if your balance is short, by card, Bitcoin, USDC or TAO. Subscribing takes a few seconds to confirm. If it takes longer, give it a moment and refresh rather than subscribing again. Your namespace and login stay exactly as they were.
 
-**Switching plans.** Hub doesn't have a one-step upgrade or downgrade yet. While you are on a paid plan, subscribing to another one is refused with "Already subscribed to a storage plan". To switch, cancel your current plan first, then subscribe to the new one.
+Live extras on the catalog: multi-region edge cache (EU + US), vulnerability scanning on push, audit log API on Pro and above, priority support on paid plans. Scoped CI keys already ship (`hippius-hub registry keys`). The catalog still lists "CI/CD-scoped pull tokens" as coming soon; that is a different product line.
+
+**Switching plans.** Hub has no one-step upgrade or downgrade. The console warns that confirming a second subscribe while a paid plan is active can create a second subscription and bill you for both. Cancel the current plan first, then subscribe to the new one. Do not subscribe twice.
 
 **Cancelling.** When you cancel, your namespace stays available for a **30 day grace period**, and the Hub page shows the exact date it will be deleted. Subscribe again within that time and everything stays as it was.
 
