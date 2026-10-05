@@ -221,7 +221,7 @@ def main() -> None:
         print("Add the key, and LLM_MODEL if grok-4-fast is not the one you want.")
         return
     code, index = curl(START)
-    if code != 200 or "REGISTRY_MIN_CREDITS" not in index or "raw.githubusercontent.com/thenervelab/hippius-s3" not in index:
+    if code != 200 or "balance of at least $10" not in index or "raw.githubusercontent.com/thenervelab/hippius-s3" not in index:
         print("WARNING: live llms.txt is not the new index yet. Agent eval skipped.")
         print("Merge the leaf llms.txt pull requests and the docs pull request first.")
         return
