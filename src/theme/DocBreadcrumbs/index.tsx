@@ -91,7 +91,7 @@ export default function DocBreadcrumbs(): ReactNode {
       })}
     >
       <ul
-        className="breadcrumbs flex items-center"
+        className="breadcrumbs flex flex-wrap items-center"
         itemScope
         itemType="https://schema.org/BreadcrumbList"
       >
