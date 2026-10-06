@@ -17,7 +17,7 @@ Hippius is a distributed cloud. It gives you **Drive**, encrypted file storage f
 | **Drive** | Your files, encrypted on your device before upload. Sync folders, back up your phone's photos, share by link, and share whole drives with a team. Free plan of 10 GB. | [Drive quickstart](/use/drive) |
 | **S3 Storage** | An S3-compatible API at `s3.hippius.com`. Works with the AWS CLI, rclone, boto3 and any S3 tool. Pay as you go at $6 per TB per month, no egress fees. One-click migration from any S3 provider. | [S3 quickstart](/use/quickstart) |
 | **Hub** | Push and pull AI models and container images with `hippius-hub`, docker or oras. A drop-in for the Hugging Face Hub. | [Hub quickstart](/registry) |
-| **Confidential Computing** (closed beta) | Virtual machines, managed PostgreSQL, managed Kubernetes and GitHub Actions runners that run in hardware-encrypted memory on AMD SEV-SNP. The machine's owner can't read your data, and the console shows you the attestation report that proves it. | [Compute guide](/use/compute) |
+| **Confidential Computing** | Virtual machines, managed PostgreSQL, managed Kubernetes and GitHub Actions runners that run in hardware-encrypted memory on AMD SEV-SNP. The machine's owner can't read your data, and the console shows you the attestation report that proves it. | [Compute guide](/use/compute) |
 
 ## Where you use them
 

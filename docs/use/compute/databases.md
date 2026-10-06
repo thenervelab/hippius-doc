@@ -12,7 +12,7 @@ import BgStyledText from '@site/src/components/BgStyledText';
 
 Hippius runs PostgreSQL for you on confidential VMs: you get a database and its credentials, and we run the machines, the backups and, on the high-availability tier, the failover. There is no shell on the machines. This page covers choosing a plan, storing the credentials you only see once, connecting, backups and restore.
 
-Open it from the sidebar: **Confidential Computing** → **Databases**. Managed databases are part of the [Compute beta](/use/compute).
+Open it from the sidebar: **Confidential Computing** → **Databases**. Managed databases are part of [Hippius Compute](/use/compute).
 
 ## Plans and sizes
 
@@ -188,6 +188,6 @@ The **Cluster** panel shows each instance, its role and how far behind it is. Th
 
 ## Billing
 
-A database is billed like the VMs it runs on, per second at their hourly price: one instance on Starter and Production, three on High availability. Backups are billed as S3 storage on top. See [Billing and quotas](/use/compute/billing) and the [live price list](https://console.hippius.com/dashboard/billing/compute#prices).
+A database is billed for the VMs it runs on, per second at their hourly price, plus a management fee of 25% of that VM price: one instance on Starter and Production, three on High availability. The smallest database, Starter on Small, is $32 + $8 = $40 a month; High availability on Small is $96 + $24 = $120 a month. The create form shows the VMs, the fee and the total. Backups are billed as S3 storage in your account, at your S3 price. See [Management fees](/use/compute/billing#management-fees) and the [live price list](https://console.hippius.com/dashboard/billing/compute#prices).
 
-If your compute usage stays unpaid and Hippius stops services for it, a database is suspended as a whole: its instances are powered off and its public hostname withdrawn. It starts again by itself within an hour of payment. See [If your balance runs out](/use/compute/billing#if-your-balance-runs-out).
+If your compute usage stays unpaid, see [If your balance runs out](/use/compute/billing#if-your-balance-runs-out).

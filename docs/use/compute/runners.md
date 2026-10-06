@@ -14,10 +14,6 @@ Hippius runners run your GitHub Actions jobs on your Hippius account. Each job g
 
 Open them from the sidebar: **Confidential Computing** → **Runners**.
 
-:::info Closed beta
-Runners have their own closed beta, inside the Compute beta. The **Runners** entry only appears in the sidebar once your account has access. To ask for it, [contact support](/use/console/support).
-:::
-
 ## Connect GitHub
 
 Runners are picked up through the **Hippius Runners** GitHub App. You install it on a GitHub organisation or on your own user account, and link the installation to your Hippius account.
@@ -61,13 +57,15 @@ jobs:
       - run: docker run --rm hello-world
 ```
 
-There are three sizes. Each one is a VM of the size with the same name; the Runners page shows their current vCPUs, memory, disk and price.
+There are three sizes. A runner has the vCPUs and memory of the VM size with the same name, and a smaller disk, which is enough for a CI job and boots faster:
 
-| Label | Runs on a VM of size |
-|---|---|
-| `hippius-small` | Small |
-| `hippius-medium` | Medium |
-| `hippius-large` | Large |
+| Label | Resources | Price |
+|---|---|---|
+| `hippius-small` | 1 vCPU, 4 GB memory, 20 GB disk | $30 a month ($0.0411 an hour) |
+| `hippius-medium` | 2 vCPU, 8 GB memory, 20 GB disk | $58 a month ($0.0795 an hour) |
+| `hippius-large` | 4 vCPU, 16 GB memory, 30 GB disk | $115 a month ($0.1575 an hour) |
+
+The Runners page shows the current sizes and prices.
 
 To pin the region, add a two-letter country code: `hippius-medium-fr` runs only on servers in France. Without one, your **Default region** setting applies, or any region if it is empty.
 
@@ -141,12 +139,11 @@ Refusals show on the Runners page only. On GitHub, the job just stays queued ("W
 | Over your compute quota | Runners count against your compute quotas. Free some resources, or contact support. |
 | Balance too low for the runway | Top up: your balance must cover 24 hours of your compute, including the runner. |
 | Unpaid compute usage | Top up to settle what your account owes. |
-| No access to runners on this account | Ask support for access to the runners beta. |
 | Runners are turned off on Hippius | Runners are paused on our side. Try again later. |
 
 ## Billing
 
-A runner VM is billed per second at its size's price, like any VM, with a minimum of one minute. Billing runs from the moment the VM is running until it is torn down, so the runner's setup (installing Docker and the GitHub runner) is billed too, not only the job itself. The **Est. cost** column shows each job's billed time at today's price.
+A runner VM is billed per second at its size's price while the VM is billed, like any VM, with a minimum of one minute. That runs from the moment the VM is running until it is torn down, so the runner's setup (installing Docker and the GitHub runner) is billed too, not only the job itself. The **Est. cost** column shows each job's billed time at today's price.
 
 Runner VMs don't appear in your VM list. They count against your **GitHub Actions runners** quota (5 at once by default) and against your vCPU, memory and disk quotas. The [24-hour balance requirement](/use/compute/billing#the-24-hour-balance-requirement) is checked for each job.
 

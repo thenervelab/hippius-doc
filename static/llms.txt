@@ -1,6 +1,6 @@
 # Hippius
 
-> Hippius is a distributed cloud: encrypted file storage (Drive), S3-compatible object storage, and a registry for AI models and containers (Hub). One account pays for all of them. This file says what each product is and which file to open next.
+> Hippius is a distributed cloud: encrypted file storage (Drive), S3-compatible object storage, a registry for AI models and containers (Hub), and confidential compute (VMs, managed PostgreSQL, managed Kubernetes, GitHub Actions runners). One account pays for all of them. This file says what each product is and which file to open next.
 
 Open only the file for the product you need. The long reference for the whole product, including the S3 manual, is https://docs.hippius.com/llms-full.txt
 
@@ -17,7 +17,7 @@ Open only the file for the product you need. The long reference for the whole pr
 | Script Drive with encryption on the client | https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt |
 | Sign up, pay, get an API token, or manage Drive and S3 keys in the browser | https://docs.hippius.com/use/console/getting-started |
 | Use Drive on an Android phone | https://docs.hippius.com/use/mobile/getting-started |
-| Run a VM, managed PostgreSQL, managed Kubernetes or GitHub Actions runners (Compute, closed beta) | https://docs.hippius.com/use/compute |
+| Run a VM, managed PostgreSQL, managed Kubernetes or GitHub Actions runners (Compute) | https://docs.hippius.com/use/compute |
 | Run a storage miner | https://docs.hippius.com/earn/arion/running-miner and https://raw.githubusercontent.com/thenervelab/arion/main/llms.txt |
 | Run a validator | https://docs.hippius.com/earn/installing-validator |
 
@@ -34,7 +34,7 @@ Billing: https://docs.hippius.com/use/console/billing
 - Hub has a second credential, the registry robot login, created when the namespace is provisioned.
 - Drive encryption uses an unlock password and a 12-word recovery seed. Never ask the user to paste either into chat.
 - 1 USDC adds one dollar to your balance. Topping up fills the balance. It does not add storage. Subscribe to a plan for that. https://docs.hippius.com/use/console/billing
-- Top up on Billing in one of four ways. Card, through Stripe, from $10 to $10,000, or a monthly auto reload. Bitcoin, on-chain or Lightning, from $20 to $10,000. Lightning lands in seconds; on-chain after one confirmation. USDC on Base from a browser wallet, from $5 to $10,000; 1 USDC adds one dollar to your balance. TAO, from a connected wallet or by sending to the deposit address, minimum $20, and a transfer cannot be reversed.
+- Top up on Billing in one of five ways. Card, through Stripe, from $10 to $10,000, or a monthly auto reload. Bitcoin, on-chain or Lightning, from $20 to $10,000. Lightning lands in seconds; on-chain after one confirmation. USDC on Base from a browser wallet, from $5 to $10,000; 1 USDC adds one dollar to your balance. TAO, from a connected wallet or by sending to the deposit address, minimum $20, and a transfer cannot be reversed. hAlpha (Hippius native token), on the Hippius tab: credits = hAlpha × the on-chain hAlpha price, 1% slippage protection by default, final on chain with no refund. https://docs.hippius.com/use/console/billing
 - An agent with enough balance subscribes without a browser. Auth: `Authorization: Token YOUR_TOKEN`. Drive: POST https://api.hippius.com/api/drive/subscription/ with `{"plan":"solo","period":"monthly","payment":"credits"}`. Codes `solo` (Starter), `duo` (Plus), `max`, `scale`. S3: POST https://api.hippius.com/api/s3/subscription/ with `{"plan":"pro","rail":"credits"}`. Codes `pro`, `business`, `enterprise`. Hub: GET https://api.hippius.com/api/registry/plans/ then POST https://api.hippius.com/api/registry/subscribe/ with `{"plan_id": 2}` (Builder is id 2; names Free, Builder, Pro, Team). The API requires `plan_id`, not a name. JSON values `credits` mean pay from the existing balance. 201 if the balance covers the plan. Card checkout is a browser; do not send a funded agent there.
 - Google, GitHub, and Apple accounts include the Free Drive Plan (10 GB). S3 starts on pay as you go at $6 per TB per month, and a plan is optional.
 - Open a support ticket with the account API token: POST https://api.hippius.com/api/support/tickets/ with subject, priority, category, and description.
@@ -47,11 +47,13 @@ Hub Free plan: creating a namespace requires a balance of at least $10, a spam c
 
 Chain registration still installs the Python package `hippius`: https://docs.hippius.com/earn/register-in-blockchain
 
-## Compute (closed beta)
+## Compute
 
-Confidential VMs on AMD SEV-SNP, managed PostgreSQL, managed Kubernetes and GitHub Actions runners, paid from the account balance per second. Open to accounts in the beta; ask support for access. Prices are only on the console's live price list: https://console.hippius.com/dashboard/billing/compute#prices
+Confidential VMs on AMD SEV-SNP, managed PostgreSQL, managed Kubernetes and GitHub Actions runners, open to every account. Metered per second (one-minute minimum), charged hourly on the Hippius chain from the account balance. A VM is billed running or stopped until it is deleted. A launch needs a balance covering 24 hours of the account's compute plus the launch, and default quotas apply.
 
-- Overview (beta access, quotas, the 24-hour balance requirement, billing): https://docs.hippius.com/use/compute
+Prices per 730-hour month: vCPU $18, memory $2.50/GB, disk $0.10/GB. Small (1 vCPU, 4 GB, 40 GB) is $32 a month ($0.0438/h), Medium $64, Large $128. Public IPv4 $0.005/h. VM backups $6 per TB-month. Bandwidth is free for now. Managed databases cost their VMs plus 25%; Kubernetes costs its VMs plus $15 per cluster per month. The live price list wins: https://console.hippius.com/dashboard/billing/compute#prices
+
+- Overview (quotas, the 24-hour balance requirement, billing): https://docs.hippius.com/use/compute
 - Create a VM and connect over SSH or from the browser: https://docs.hippius.com/use/virtual-machines
 - Public IPv4, firewall rules and published ports: https://docs.hippius.com/use/compute/networking
 - Resize a VM (vCPU and memory; the disk is kept): https://docs.hippius.com/use/compute/resize
@@ -61,10 +63,10 @@ Confidential VMs on AMD SEV-SNP, managed PostgreSQL, managed Kubernetes and GitH
 - Kubernetes worker pools and signed node operations: https://docs.hippius.com/use/compute/kubernetes-worker-pools
 - Kubernetes backups (etcd snapshots, Velero, restore with rclone): https://docs.hippius.com/use/compute/kubernetes-backups
 - GitHub Actions runners (`runs-on: hippius-small|medium|large`): https://docs.hippius.com/use/compute/runners
-- Compute billing, quotas and unpaid balance: https://docs.hippius.com/use/compute/billing
+- Compute prices, management fees, quotas and unpaid balance: https://docs.hippius.com/use/compute/billing
 - Refusals and troubleshooting: https://docs.hippius.com/use/compute/troubleshooting
 
-An agent can't grant beta access. The Kubernetes cluster key is generated in the user's browser, and database credentials are returned once at creation; never ask the user to paste either into chat.
+The Kubernetes cluster key is generated in the user's browser, and database credentials are returned once at creation; never ask the user to paste either into chat.
 
 ## Documentation
 

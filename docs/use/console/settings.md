@@ -114,11 +114,7 @@ The first screen of the dialog is not a warning, it is an **inventory**. It read
 
 Only groups that hold something get a checkbox to tick. A group that is empty collapses to a single grey line, so you are only asked to confirm what you actually have.
 
-:::note Compute and networking are still in beta
-Confidential Computing (virtual machines and managed databases) and the network rail are not generally available yet. If your account doesn't have them, the **Compute** group simply reads "No VMs or databases" and the network half of **Hub and network** is empty. Nothing to tick, and nothing that can hold your deletion up. Hub is live and does appear.
-:::
-
-If you _are_ on the beta and have a **running** VM or managed database, that blocks the request until it is decommissioned. The dialog says so and links straight to the pages where you can shut them down.
+If you have a **running** VM or managed database, that blocks the request until it is decommissioned. The dialog says so and links straight to the pages where you can shut them down.
 
 ### Deleting your account
 

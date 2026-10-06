@@ -3,7 +3,7 @@ id: billing
 title: Billing
 sidebar_label: Billing
 slug: /use/console/billing
-description: How paying for Hippius works. Add money to your balance by card, Bitcoin, USDC, or TAO, choose a plan for Drive, S3 and Hub, and keep track of what you are charged.
+description: How paying for Hippius works. Add money to your balance by card, Bitcoin, USDC, TAO or Hippius tokens (hAlpha), choose a plan for Drive, S3 and Hub, and keep track of what you are charged.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -18,7 +18,7 @@ There are two things to know about: your **balance** and your **plans**.
 
 Your balance is money you keep on your account, in dollars. A plan is what gives a product its storage. Drive, S3 and Hub each have their own plan, so you can be on a free Drive plan, pay for a large S3 plan and never touch Hub at all.
 
-Your balance pays for your plans when they renew each month, and for anything you use by the hour, such as S3 on pay as you go. Topping up on its own does not give you more space. It keeps your plans paid.
+Your balance pays for your plans when they renew each month, and for anything you use by the hour, such as S3 on pay as you go and [Compute](/use/compute/billing). Topping up on its own does not give you more space. It keeps your plans paid.
 
 You'll find all of this under <BgStyledIconWithText text="Billing" icon="Billing" /> in the sidebar.
 
@@ -26,7 +26,7 @@ You'll find all of this under <BgStyledIconWithText text="Billing" icon="Billing
 
 ## Add money to your balance
 
-You can top up by card, with Bitcoin, with USDC, or with TAO. Whichever you pick, the money lands on your balance and stays there until a plan or S3 usage draws on it.
+You can top up by card, with Bitcoin, with USDC, with TAO, or with Hippius tokens (hAlpha). Whichever you pick, the money lands on your balance and stays there until a plan or S3 usage draws on it.
 
 ### By card
 
@@ -62,6 +62,33 @@ Either way, your balance usually updates within a few minutes.
 :::warning The minimum is $20 of TAO, and transfers cannot be undone
 Anything under $20 is not added to your balance and cannot be refunded. Double check the address before you send: TAO transfers are final, and we have no way to recover funds sent to the wrong place.
 :::
+
+### With Hippius tokens (hAlpha)
+
+If you hold hAlpha, the Hippius network's token, choose the <BgStyledText>Hippius</BgStyledText> tab to convert it into balance. The conversion happens on the Hippius chain, at the chain's hAlpha price: you get the amount of hAlpha times that price, in dollars.
+
+The tab shows the live price (**Price**, in dollars per hAlpha), what you receive (**You receive**), and the smallest amount you can convert (**Min**). The price is read again every few seconds while the tab is open. You can get hAlpha from Alpha on Bittensor with the [bridge](/use/console/bridge).
+
+How you convert depends on how you sign in.
+
+**With Google, GitHub or Apple.** Your account has a Hippius address that Hippius manages for you. Converting takes two steps:
+
+<Ordered>
+  <li><strong>Send from my wallet.</strong> Pick an account from a Polkadot wallet extension (Talisman, polkadot.js, SubWallet or the Taostats Wallet), enter an amount and click <BgStyledText>Send to my Hippius account</BgStyledText>. This only moves hAlpha to your Hippius address: nothing is bought yet. You can also send hAlpha from anywhere else to the address shown under <strong>Convert balance</strong>, with <strong>Copy Hippius address</strong> or the QR code.</li>
+  <li><strong>Convert balance.</strong> Enter the amount, or click <strong>Max</strong>, and click <BgStyledText>Convert to credits</BgStyledText>. We sign the purchase from your Hippius address, and the network fee is paid in hAlpha. About 0.01 hAlpha stays on the address for fees.</li>
+</Ordered>
+
+**With an access key or a wallet.** You hold your own key, so you sign the purchase yourself. Under **Sign with**, pick this session (your 12-word access key) or the wallet extension account that is your Hippius account, enter the amount and click <BgStyledText>Sign and buy</BgStyledText>. Your wallet asks you to confirm one transaction.
+
+Either way, the conversion is protected against price moves. **Slippage tolerance** is 1% by default; you can choose 0.5%, 1% or 3%. **At least** is the smallest amount you accept. If the price moves past it before the purchase lands, the chain refuses the conversion: your hAlpha isn't converted, and only the network fee is charged.
+
+Your balance updates once the purchase is final on chain, usually within a minute or two. The conversion shows in **Transaction history** as **Hippius tokens**. No invoice is issued for it.
+
+:::warning Conversions are final
+A conversion is an on-chain transaction. Once it is final it can't be reversed, and the hAlpha can't be refunded.
+:::
+
+If the Top up dialog has no **Hippius** tab, buying with hAlpha is paused for now. The other ways to pay still work.
 
 ## Choose a plan
 
@@ -165,4 +192,5 @@ Before plans existed, we sold monthly subscriptions called Personal, Professiona
   <li><a href="/use/console/s3">S3 Buckets</a>: create buckets and access keys.</li>
   <li><a href="/use/console/hub">Hub</a>: your container images and AI models.</li>
   <li><a href="/use/console/settings">Settings</a>: low balance alerts.</li>
+  <li><a href="/use/compute/billing">Compute billing</a>: what VMs, databases and clusters cost by the hour.</li>
 </Unordered>

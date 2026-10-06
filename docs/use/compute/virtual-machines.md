@@ -17,7 +17,6 @@ Open VMs from the sidebar: **Confidential Computing** → <BgStyledIconWithText 
 
 :::info Before you start
 <Unordered>
-  <li>Your account needs access to the Compute beta. See <a href="/use/compute">Compute overview</a>.</li>
   <li>Your balance must cover 24 hours of your compute, including the new VM. The create form tells you if it doesn't. See <a href="/use/compute/billing#the-24-hour-balance-requirement">the 24-hour balance requirement</a>.</li>
   <li>You need an SSH key pair. If you don't have one, generate it first (next section).</li>
 </Unordered>

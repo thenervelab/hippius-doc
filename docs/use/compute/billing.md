@@ -3,7 +3,7 @@ id: billing
 title: Compute Billing and Quotas
 sidebar_label: Billing and quotas
 slug: /use/compute/billing
-description: How Hippius Compute is metered and charged, where to find the live prices, the quotas on your account, the 24-hour balance requirement for launches, and what happens if your balance runs out.
+description: How Hippius Compute is metered and charged by the hour, its prices and management fees, the quotas on your account, the 24-hour balance requirement for launches, and what happens if your balance runs out.
 ---
 
 import Unordered from '@site/src/components/Unordered';
@@ -15,26 +15,60 @@ Your compute costs are on **Confidential Computing** → <BgStyledText>Compute U
 
 ## Prices
 
-Prices can change, so they aren't listed in this documentation. Always check:
+These are the prices in force today. Amounts are in dollars, taken from your balance. Monthly prices are estimates over 730 hours.
 
-<Unordered>
-  <li>the <strong>Prices</strong> section of <a href="https://console.hippius.com/dashboard/billing/compute#prices">Compute Usage</a>, the live price list;</li>
-  <li>the create form, which shows the hourly and monthly price of what you are about to launch.</li>
-</Unordered>
+| Resource | Price |
+|---|---|
+| vCPU | $18 per vCPU per month |
+| Memory | $2.50 per GB per month |
+| Disk | $0.10 per GB per month |
+| Public IPv4 | $0.005 per hour (about $3.65 a month), while attached |
+| VM backups | $6 per TB-month stored |
+| Public bandwidth | Free for now |
 
-Monthly prices are estimates over 730 hours. Amounts are in dollars, taken from your balance.
+A VM costs the sum of its vCPUs, memory and disk:
+
+| Size | Resources | Price |
+|---|---|---|
+| **Small** | 1 vCPU, 4 GB memory, 40 GB disk | $32 a month ($0.0438 an hour) |
+| **Medium** | 2 vCPU, 8 GB memory, 80 GB disk | $64 a month ($0.0877 an hour) |
+| **Large** | 4 vCPU, 16 GB memory, 160 GB disk | $128 a month ($0.1753 an hour) |
+
+A VM you have resized keeps its disk, so it is priced on the vCPUs and memory it has now and the disk it was launched with.
+
+Prices can change. The **Prices** section of <a href="https://console.hippius.com/dashboard/billing/compute#prices">Compute Usage</a> is always current, and every create form shows the hourly and monthly price of what you are about to launch.
+
+### Management fees
+
+Managed databases and Kubernetes clusters cost the VMs they run on, plus a fee for running them:
+
+| Service | Fee |
+|---|---|
+| **Managed database** | 25% of its VMs' price. |
+| **Managed Kubernetes** | $15 per cluster per month, whatever its size or number of workers. |
+
+The database fee is a share of the VM price only, not of public addresses or backups. A fee runs while the service's VMs are billed, stopped or not, and stops when you ask to delete the service. It shows as its own line in Compute Usage.
+
+Some examples:
+
+| What | Per month |
+|---|---|
+| Database, Starter, size Small | $32 for the VM + $8 fee = **$40** |
+| Database, High availability, size Small | $96 for 3 Small VMs + $24 fee = **$120** |
+| Kubernetes, smallest control plane | $192 for 3 Medium masters + about $11 for their 3 public IPv4 + $15 fee = **about $218**, plus your workers |
 
 ## What is billed
 
 | What | How it is billed |
 |---|---|
 | **Virtual machines** | Per second, by size: its vCPUs, memory and disk. From the first time the VM runs until you ask to delete it, **including while it is stopped**. |
-| **Public IPv4** | Per second while the address is attached. The console shows **Free of charge** when an address is free on your account. |
-| **Public bandwidth** | Per GB, at the price in the price list. |
+| **Public IPv4** | Per second while the address is attached. |
+| **Public bandwidth** | Not charged for now. |
 | **VM backups** | Per GB of backup storage per hour, $6 per TB-month. See [VM backups](/use/compute/vm-backups#what-backups-cost). |
-| **Databases and Kubernetes** | The VMs they run on, like any VM. There is no extra fee for the service. |
+| **Databases** | Their VMs, like any VM, plus the [management fee](#management-fees). |
+| **Kubernetes clusters** | Their masters, workers and the masters' public IPv4, like any VM, plus the [management fee](#management-fees). |
 | **Database and Kubernetes backups** | As S3 storage in your account, at your S3 price. |
-| **GitHub Actions runners** | Per second of each runner VM's life, like any VM. |
+| **GitHub Actions runners** | Per second while each runner VM is billed, like any VM. See [Runners billing](/use/compute/runners#billing). |
 
 **One-minute minimum.** Each VM, and each public IPv4 address, is billed for at least one minute.
 
@@ -42,11 +76,11 @@ Monthly prices are estimates over 730 hours. Amounts are in dollars, taken from 
 
 **Deleting.** Billing stops when you ask to delete a VM, database or cluster, not when the teardown finishes.
 
+**Shared accounts.** What a team member runs in your account is billed to your account and counts against its quotas. See [Shared accounts](/use/console/team#billing-and-quotas).
+
 ## How usage is charged
 
-Usage is metered in whole seconds, at the price in force at each moment, and grouped by hour (UTC). Each hour is closed shortly after it ends, then charged from your balance in one transaction, normally within 20 minutes. A closed hour is never repriced.
-
-Compute was free during the first months of the beta. We announced that compute becomes paid on **5 October 2026**, and charging is switched on account by account. While your account's usage is metered but not charged, Compute Usage says **Not charged yet**. Hours metered while your account wasn't charged are never charged later.
+Compute is charged on the Hippius chain every hour, for every account. Usage is metered in whole seconds, at the price in force at each moment, and grouped by hour (UTC). Each hour is closed shortly after it ends, then charged from your balance in one transaction, normally within 20 minutes. A closed hour is never repriced.
 
 Compute Usage shows the cost of what you run now, every hour of the month with its lines, and the month's total split by status:
 
@@ -55,7 +89,7 @@ Compute Usage shows the cost of what you run now, every hour of the month with i
 | **Charged** | Paid from your balance. |
 | **To be charged** | Closed, waiting for the next charge. |
 | **Unpaid** | Your balance couldn't cover it. It is collected automatically after you top up. |
-| **Metered, not charged** | Measured while your account wasn't charged. It will never be charged. |
+| **Metered, not charged** | Measured while compute was free, before your account was charged. It will never be charged. |
 | **Under review** | Something on our side needs checking. Nothing for you to do. |
 
 Click **Download CSV** to export a month, hour by hour. Invoices are issued for each top-up, when money comes in, not for each hour of usage.
@@ -110,24 +144,14 @@ If an hour of usage can't be paid from your balance, it is recorded as **Unpaid*
 <Unordered>
   <li><strong>You are emailed</strong> when your account first owes compute usage, and reminded if it stays unpaid.</li>
   <li><strong>Top up to settle it.</strong> What you owe is collected automatically within about 10 minutes of a top-up that covers it. The banner can take up to an hour to clear.</li>
+  <li><strong>New launches still need the 24-hour balance.</strong> Until you top up, your balance is unlikely to cover them.</li>
 </Unordered>
 
-If the amount stays unpaid, Hippius may stop your services:
-
-<Unordered>
-  <li><strong>You always get an email at least 24 hours before anything is stopped.</strong> When this applies to your account, the banner shows the earliest date.</li>
-  <li><strong>Running VMs are stopped, and their disks kept.</strong> Their public IPv4 addresses are released and their published ports withdrawn.</li>
-  <li><strong>Databases and Kubernetes clusters are suspended as a whole.</strong> Their instances are powered off and their public endpoints withdrawn. A cluster's masters keep their public addresses.</li>
-  <li><strong>While services are stopped</strong>, starting a VM and launching anything new are refused until you pay.</li>
-</Unordered>
-
-Once you pay, everything that was stopped for the unpaid balance starts again by itself, within about an hour, and you get an email. VMs get a public IPv4 back, which may be a different address. VMs you had stopped yourself stay stopped.
-
-Services are never deleted for an unpaid balance without an email that names the date, sent at least 24 hours before. If a database is deleted, its backups in your S3 account are kept.
+Services aren't stopped for an unpaid balance today. If that changes, you will always get an email at least 24 hours before anything of yours is stopped.
 
 ## Where to next
 
 <Unordered>
-  <li><a href="/use/console/billing">Billing</a>: add money to your balance by card, Bitcoin, USDC or TAO.</li>
+  <li><a href="/use/console/billing">Billing</a>: add money to your balance by card, Bitcoin, USDC, TAO or hAlpha.</li>
   <li><a href="/use/compute/troubleshooting">Troubleshooting</a>: what each refusal means.</li>
 </Unordered>
