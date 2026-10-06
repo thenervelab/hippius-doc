@@ -26,7 +26,7 @@ You'll find all of this under <BgStyledIconWithText text="Billing" icon="Billing
 
 ## Add money to your balance
 
-You can top up by card, with Bitcoin, with USDC, with TAO, or with Hippius tokens (hAlpha). Whichever you pick, the money lands on your balance and stays there until a plan or S3 usage draws on it.
+You can top up by card, with Bitcoin, with USDC, with TAO, or with Hippius tokens (hAlpha). Whichever you pick, the money lands on your balance and stays there until a plan, S3 usage or compute usage draws on it.
 
 ### By card
 
@@ -78,9 +78,9 @@ How you convert depends on how you sign in.
   <li><strong>Convert balance.</strong> Enter the amount, or click <strong>Max</strong>, and click <BgStyledText>Convert to credits</BgStyledText>. We sign the purchase from your Hippius address, and the network fee is paid in hAlpha. About 0.01 hAlpha stays on the address for fees.</li>
 </Ordered>
 
-**With an access key or a wallet.** You hold your own key, so you sign the purchase yourself. Under **Sign with**, pick this session (your 12-word access key) or the wallet extension account that is your Hippius account, enter the amount and click <BgStyledText>Sign and buy</BgStyledText>. Your wallet asks you to confirm one transaction.
+**With an access key or a wallet.** You hold your own key, so you sign the purchase yourself. Under **Sign with**, pick this session (your 12-word access key) or the wallet extension account that is your Hippius account, enter the amount and click <BgStyledText>Sign and buy</BgStyledText>. With a wallet extension, your wallet asks you to confirm one transaction.
 
-Either way, the conversion is protected against price moves. **Slippage tolerance** is 1% by default; you can choose 0.5%, 1% or 3%. **At least** is the smallest amount you accept. If the price moves past it before the purchase lands, the chain refuses the conversion: your hAlpha isn't converted, and only the network fee is charged.
+Either way, the conversion is protected against price moves. **Slippage tolerance** is 1% by default; you can choose 0.5%, 1% or 3%. **At least** is the smallest amount you accept. If the price moves past it before the purchase lands, the conversion is refused and your hAlpha isn't converted. If the chain refused it, the network fee is still charged.
 
 Your balance updates once the purchase is final on chain, usually within a minute or two. The conversion shows in **Transaction history** as **Hippius tokens**. No invoice is issued for it.
 

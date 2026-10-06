@@ -49,7 +49,7 @@ Chain registration still installs the Python package `hippius`: https://docs.hip
 
 ## Compute
 
-Confidential VMs on AMD SEV-SNP, managed PostgreSQL, managed Kubernetes and GitHub Actions runners, open to every account. Metered per second (one-minute minimum), charged hourly on the Hippius chain from the account balance. A VM is billed running or stopped until it is deleted. A launch needs a balance covering 24 hours of the account's compute plus the launch, and default quotas apply.
+Confidential VMs on AMD SEV-SNP, managed PostgreSQL, managed Kubernetes and GitHub Actions runners, open to every account. Metered per second (one-minute minimum per VM and public IPv4), charged hourly on the Hippius chain from the account balance. A VM is billed running or stopped until it is deleted. A launch needs a balance covering 24 hours of the account's compute plus the launch, and default quotas apply.
 
 Prices per 730-hour month: vCPU $18, memory $2.50/GB, disk $0.10/GB. Small (1 vCPU, 4 GB, 40 GB) is $32 a month ($0.0438/h), Medium $64, Large $128. Public IPv4 $0.005/h. VM backups $6 per TB-month. Bandwidth is free for now. Managed databases cost their VMs plus 25%; Kubernetes costs its VMs plus $15 per cluster per month. The live price list wins: https://console.hippius.com/dashboard/billing/compute#prices
 

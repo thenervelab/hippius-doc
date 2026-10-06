@@ -220,7 +220,7 @@ Alpha to hAlpha needs 3 signatures, or 4 when the Alpha must first be moved onto
 
 Compute is open to every account, in the console under Confidential Computing. There is no compute CLI. Guide: https://docs.hippius.com/use/compute
 
-Billing: metered per second (one-minute minimum), charged hourly on the Hippius chain from the balance. A VM is billed running or stopped until it is deleted. A launch needs a balance covering 24 hours of the account's compute plus the launch. Default quotas apply.
+Billing: metered per second (one-minute minimum per VM and public IPv4), charged hourly on the Hippius chain from the balance. A VM is billed running or stopped until it is deleted. A launch needs a balance covering 24 hours of the account's compute plus the launch. Default quotas apply.
 
 Prices per 730-hour month: vCPU $18, memory $2.50/GB, disk $0.10/GB. Small (1 vCPU, 4 GB, 40 GB) $32 ($0.0438/h), Medium $64, Large $128. Public IPv4 $0.005/h (~$3.65/month). VM backups $6 per TB-month. Bandwidth free for now. Managed databases: their VMs plus 25%. Kubernetes: its VMs plus $15 per cluster per month. Database and Kubernetes backups go to the user's own S3, at S3 prices. The live price list wins: https://console.hippius.com/dashboard/billing/compute#prices. Details: https://docs.hippius.com/use/compute/billing
 

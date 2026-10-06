@@ -92,7 +92,7 @@ Compute Usage shows the cost of what you run now, every hour of the month with i
 | **Metered, not charged** | Measured while compute was free, before your account was charged. It will never be charged. |
 | **Under review** | Something on our side needs checking. Nothing for you to do. |
 
-Click **Download CSV** to export a month, hour by hour. Invoices are issued for each top-up, when money comes in, not for each hour of usage.
+Click **Download CSV** to export a month, hour by hour. Invoices are issued for each top-up, when money comes in, not for each hour of usage. Top-ups with hAlpha aren't invoiced.
 
 ## Quotas
 

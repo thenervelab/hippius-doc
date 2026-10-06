@@ -14,7 +14,7 @@ import BgStyledText from '@site/src/components/BgStyledText';
 
 A shared account lets other people work in your Hippius account, each signed in with their own login. You invite them by email and choose, product by product, what each one may do: your virtual machines, databases, Kubernetes clusters, GitHub Actions runners and S3.
 
-The account stays yours. Everything a member creates belongs to your account, is paid from your balance and counts against your [compute quotas](/use/compute/billing#quotas). Members keep their own account next to yours, and switch between the two from the profile menu.
+The account stays yours. Everything a member creates belongs to your account and is paid from your balance, and the compute they launch counts against your [compute quotas](/use/compute/billing#quotas). Members keep their own account next to yours, and switch between the two from the profile menu.
 
 Open it from the sidebar: **Team** → **Members**.
 
@@ -46,7 +46,7 @@ Two permissions sit next to the levels:
 | Permission | What it allows |
 |---|---|
 | **Manage the team** | Invite, change and remove members, revoke invitations, and read the audit trail. A manager can only give access they hold themselves, can't change their own access, and can't change or remove anyone whose access goes beyond theirs. |
-| **Billing** | Read the account's balance, invoices and compute usage. Payments stay with the owner. |
+| **Billing** | Read the account's balance, invoices, compute usage and S3 plan history. Payments stay with the owner. |
 
 ### What only the owner can do
 
@@ -55,7 +55,7 @@ Some actions stay with the owner, whatever a member's level:
 <Unordered>
   <li><strong>Create a Kubernetes cluster.</strong> A cluster is bound to its creator's key file, so one created by a member couldn't be opened by the owner.</li>
   <li><strong>Open a cluster's kubeconfig and backups</strong>, and the node operations signed with the cluster's key file: adding or replacing nodes and accepting data loss. A Kubernetes admin can still scale a pool down, remove a node, cancel an operation and delete the cluster.</li>
-  <li><strong>Add money to the balance.</strong> The Top up dialog tells a member to ask the owner.</li>
+  <li><strong>Add money to the balance.</strong> A member is told to ask the owner.</li>
   <li><strong>Buy, change or cancel an S3 or Drive plan.</strong></li>
   <li><strong>Manage the team</strong>, unless the owner gives that permission to a member. Nobody can remove the owner or change the owner's access.</li>
 </Unordered>
@@ -81,17 +81,19 @@ The person gets an email with a link. The invitation:
   <li>is replaced if you invite the same address again: the earlier link stops working.</li>
 </Unordered>
 
-Pending invitations are listed under **Pending invitations**, with their access and expiry date. Click **Revoke** to cancel one. An account can have up to 50 members and pending invitations together.
+If the email couldn't be sent, the console says so: revoke the invitation and try again later.
+
+Pending invitations are listed under **Pending invitations**, with their access and expiry date. Click **Revoke** to cancel one. By default, an account can have up to 50 members and pending invitations together.
 
 ## Accept an invitation
 
 Open the link in the email. The page shows who invited you, to which account, and the access you would get. Sign in if you aren't, then click <BgStyledText>Accept invitation</BgStyledText>.
 
-The invitation is for one address. Accepting it checks that this address is one of the **verified** email addresses of the account you are signed in with. Signing in with Google, GitHub or Apple verifies your address.
+The invitation is for one address. Accepting it checks that this address is one of the **verified** email addresses of the account you are signed in with. Signing in with Google, GitHub or Apple verifies the email address of that login.
 
 <Unordered>
   <li><strong>The address doesn't match.</strong> The page says the invitation was sent to another address. Click <strong>Sign in with another account</strong> and use the one it was sent to.</li>
-  <li><strong>Your account has no verified email</strong>, for example a 12-word access key login. The page asks you to confirm that the invitation was meant for you. Click <strong>Accept anyway</strong> only if it was. The owner sees that it was accepted without an email.</li>
+  <li><strong>Your account has no verified email</strong>, for example a 12-word access key login. The page asks you to confirm that the invitation was meant for you. Click <strong>Accept anyway</strong> only if it was. The audit trail records that it was accepted without an email.</li>
 </Unordered>
 
 Once you have joined, choose **Open this account** to switch to it now, or **Stay in your own account**.
@@ -100,7 +102,7 @@ A link that was already used, withdrawn or older than 7 days no longer works. As
 
 ## Switch accounts
 
-Open the profile menu. Under **Accounts**, **Your account** comes first, then each account you belong to, with your access in it. A check mark shows where you are.
+Open the profile menu. Under **Accounts**, **Your account** comes first, then each account you belong to, with your product access in it. A check mark shows where you are.
 
 While you work in another account:
 
@@ -139,7 +141,7 @@ Only a new invitation can bring your access back.
 
 ## Audit trail
 
-The **Audit trail** section of **Team** → **Members** lists, newest first, every change a member makes in the account and every team change, with the date, who did it, the action, what it was done to, and the IP address. The owner and members with **Manage the team** can read it.
+The **Audit trail** section of **Team** → **Members** lists, newest first, every change a member makes in the account and every team change, with the date, who did it, the action and, when there is one, what it was done to and the IP address. The owner and members with **Manage the team** can read it.
 
 It records:
 
@@ -147,10 +149,10 @@ It records:
   <li>each successful change a member makes, such as stopping a VM or creating a bucket. What was sent is never recorded;</li>
   <li>a member opening a VM's browser terminal;</li>
   <li>a member creating an S3 upload link;</li>
-  <li>invitations sent and revoked, members joining, changed, removed or leaving.</li>
+  <li>invitations created and revoked, members joining, changed, removed or leaving.</li>
 </Unordered>
 
-The owner's own actions aren't recorded here.
+The owner's own product actions aren't recorded here.
 
 ## Billing and quotas
 
