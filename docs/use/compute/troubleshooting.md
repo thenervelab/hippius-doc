@@ -3,18 +3,16 @@ id: troubleshooting
 title: Compute Troubleshooting
 sidebar_label: Troubleshooting
 slug: /use/compute/troubleshooting
-description: What Hippius Compute refusals and errors mean and what to do about them, from beta access, balance and quota refusals to failed launches, unpaid usage and API error codes.
+description: What Hippius Compute refusals and errors mean and what to do about them, from shared-account access, balance and quota refusals to failed launches, unpaid usage and API error codes.
 ---
 
 import Unordered from '@site/src/components/Unordered';
 
 When the console refuses something, it says why. This page groups the messages you are most likely to meet, what they mean, and what to do. Product-specific refusals are also listed on each product's page.
 
-## I don't see Compute, or it says "Feature Not Available"
+## I don't see a Compute product, or it says "No access"
 
-Compute is in closed beta. **Feature Not Available** with **VM feature is in beta. Contact support for access.** means your account isn't in the beta yet. Kubernetes and Runners have their own betas: their entries only appear in the sidebar once your account has access.
-
-[Contact support](/use/console/support) to ask for access.
+Compute is open to every account. If you are working in someone else's account, the sidebar only shows the products you were given access to, and a page you weren't given says **No access to** followed by the product. Ask the account owner or a team manager for access, or switch back to your own account from the profile menu. An action you can see but not use needs a higher level: the page says which. See [Shared accounts](/use/console/team#what-a-member-can-do).
 
 ## "Not enough balance for this launch"
 
@@ -71,14 +69,6 @@ The VM hasn't finished provisioning, or is being deleted. Wait until it is **Run
 
 A VM can't be deleted during a resize. Wait for the resize to end, then delete it.
 
-## "Your compute usage is unpaid"
-
-Your account owes compute usage, and some of your services were stopped for it. Starting or launching anything is refused until you pay. Top up: the amount owed is collected automatically, and what was stopped starts again by itself within about an hour. See [If your balance runs out](/use/compute/billing#if-your-balance-runs-out).
-
-## "This service is suspended for unpaid compute"
-
-You have paid, and the database or cluster is waiting to start again. It restarts by itself within the hour. Nothing to do.
-
 ## "Your account is being deleted"
 
 New resources can't be created while your account deletion is pending. Cancel the deletion first if you want to keep using Compute.
@@ -103,3 +93,5 @@ If you call the API directly, refusals come with an HTTP status and, for most of
 | `resize-cooldown` | 429 | The VM was resized a moment ago. `retry_after_s` says when to retry. |
 | `job-in-flight` | 409 | Another operation is running on the VM. |
 | `no-operator` | 409 | The cluster can't run node operations. Create a new cluster to use worker pools. |
+
+In an account you are a member of, refusals of the shared account itself are a `403` with codes such as `not_a_member` or `insufficient_grant`. They are listed in [Shared accounts](/use/console/team#for-developers-the-api).

@@ -14,10 +14,6 @@ Hippius managed Kubernetes gives you an RKE2 cluster whose control plane runs on
 
 Open it from the sidebar: **Confidential Computing** → **Kubernetes**.
 
-:::info Closed beta
-Kubernetes has its own closed beta, inside the Compute beta. If the console says **Managed Kubernetes is in closed beta and not available on this account yet**, [contact support](/use/console/support) to ask for access.
-:::
-
 ## How a cluster is built
 
 <Unordered>
@@ -144,9 +140,11 @@ Backup buckets that hold backups are kept in your S3 account; see [After you del
 
 ## Billing
 
-There is no fee for the cluster itself. You pay for its VMs like any VM: the three masters at their size's price, their three public IPv4 addresses, and each worker at its size's price. Backups are billed as S3 storage on top. See the [live price list](https://console.hippius.com/dashboard/billing/compute#prices).
+A cluster costs its VMs, like any VM, plus a management fee of $15 per cluster per month, whatever its size or number of workers. The VMs are the three masters at their size's price, their three public IPv4 addresses at $0.005 an hour each, and each worker at its size's price. The smallest control plane, three Medium masters, comes to $192 + about $11 for the addresses + $15 = about $218 a month, before workers. Backups are billed as S3 storage in your account, at your S3 price. See [Management fees](/use/compute/billing#management-fees) and the [live price list](https://console.hippius.com/dashboard/billing/compute#prices).
 
-If your compute usage stays unpaid and Hippius stops services for it, a cluster is suspended as a whole: its nodes are powered off and changes to it are paused. The masters keep their public addresses, so your kubeconfig keeps working once it is back. It starts again by itself within an hour of payment. See [If your balance runs out](/use/compute/billing#if-your-balance-runs-out).
+If your compute usage stays unpaid, see [If your balance runs out](/use/compute/billing#if-your-balance-runs-out).
+
+In a [shared account](/use/console/team), only the owner can create a cluster and open its kubeconfig and backups: they need the owner's key file.
 
 ## What you trust Hippius with
 

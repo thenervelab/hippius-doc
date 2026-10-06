@@ -49,7 +49,7 @@ Bind your services to `0.0.0.0` (all interfaces), not to a specific address, so 
 
 ### What a public IPv4 costs
 
-A public IPv4 is billed per second while it is attached, with a minimum of one minute. The **Attach** dialog shows its price, or says **Free of charge** when it is free on your account. The current price is also in the [live price list](https://console.hippius.com/dashboard/billing/compute#prices). Public bandwidth is listed there too, priced per GB.
+A public IPv4 costs **$0.005 an hour** (about $3.65 a month), billed per second while it is attached, with a minimum of one minute. The **Attach** dialog shows its price. The current price is also in the [live price list](https://console.hippius.com/dashboard/billing/compute#prices). Public bandwidth is free for now.
 
 ### Detach an address
 
