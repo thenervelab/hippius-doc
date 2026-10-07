@@ -152,10 +152,11 @@ Other HTTP(S) origins will come later.
   <li><strong>Private network.</strong> Your machines join a private network built on NetBird, which encrypts traffic between them with WireGuard. Hippius runs the network's coordination server: it decides which machines can reach each other and sees their addresses, but not the traffic.</li>
   <li><strong>Public IPv4.</strong> A public address lives on a Hippius edge in the VM's region. The edge forwards packets to the VM over the private network, filters them with your firewall rules, and doesn't decrypt anything. See <a href="/use/compute/networking">Public IPv4 and firewall</a>.</li>
   <li><strong>Published ports.</strong> The edge terminates HTTPS for you, so it can read that traffic. Use a public IPv4 with your own TLS for anything only you should read.</li>
-  <li><strong>Outbound traffic is open.</strong> A VM with a public IPv4 goes out through its edge. Other VMs go out through the server they run on.</li>
+  <li><strong>Outbound traffic.</strong> A VM with a public IPv4 goes out through its edge. Other VMs go out through the server they run on.</li>
+  <li><strong>Outbound SMTP (port 25) is blocked by default.</strong> To send mail, <a href="/use/console/support">open a support ticket</a> to have it allowed on a public IPv4 address.</li>
 </Unordered>
 
-Blocking outbound port 25 by default, per-VM bandwidth caps, and a shared outbound address on the edge for VMs without a public IPv4 are being rolled out. They aren't enforced yet.
+Per-VM bandwidth caps, and a shared outbound address on the edge for VMs without a public IPv4, are being rolled out. They aren't enforced yet.
 
 :::warning Encrypt your own traffic end to end
 Whoever carries a packet sees its addresses, size and timing: the edge, and for traffic that leaves through a server, the server owner. Anything you send without TLS can also be read on the way. Use TLS (or SSH) for everything that leaves your private network.

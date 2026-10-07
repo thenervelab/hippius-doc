@@ -63,7 +63,7 @@ The firewall protects the VM's public IPv4. It works like this:
 
 <Unordered>
   <li><strong>All inbound traffic is blocked by default.</strong> Each rule allows something. There are no "deny" rules.</li>
-  <li><strong>Outbound traffic is open.</strong></li>
+  <li><strong>Outbound traffic is open, except SMTP.</strong> Outbound SMTP (port 25) is blocked by default; to send mail, <a href="/use/console/support">open a support ticket</a> to have it allowed on a public IPv4 address.</li>
   <li><strong>Ping (ICMP) and replies to connections the VM opened always get through.</strong> You don't need a rule for them.</li>
   <li><strong>IPv4 only.</strong> Sources are IPv4 addresses or ranges.</li>
 </Unordered>
