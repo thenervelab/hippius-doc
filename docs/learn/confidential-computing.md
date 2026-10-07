@@ -74,7 +74,7 @@ The KBS itself runs in an SEV-SNP confidential VM, and it has to attest to Hippi
 
 ### Attestation while the VM runs
 
-VMs on the current system image attest again every 5 minutes: they send a fresh processor report bound to a single-use challenge, and the KBS verifies and signs the result. This tells you the VM that received the disk key is still the one running. Older VMs may have no live record.
+VMs on the current system image attest again every 5 minutes: they send a fresh processor report bound to a single-use challenge, and the KBS verifies and signs the result. This tells you the VM that received the disk key is still the one running. It is a record, not a kill switch: a missed check doesn't revoke the VM's keys. Older VMs may have no live record.
 
 ### Check a VM's attestation
 
@@ -91,7 +91,7 @@ curl -H "Authorization: Token $TOKEN" \
 | `unknown` | No proof is on record. This is **not** a failure: a VM that fails attestation never gets its disk key. Evidence of the release at boot, for example, isn't kept after a KBS restart. |
 | `unavailable` | No recent live proof, and the KBS couldn't be reached. Try again later. |
 
-`attestation_state` gives the detail (`attested-live`, `attested-at-boot`, `stale`, `unavailable`, `unproven`). When the release evidence is still held, `kbs_evidence` contains the raw AMD SEV-SNP report and the AMD certificate chain, so you can check the processor's signature offline with standard tools such as [`snpguest`](https://github.com/virtee/snpguest).
+`attestation_state` gives the detail (`attested-live`, `attested-at-boot`, `stale`, `unavailable`, `unproven`). When the release evidence is still held, `kbs_evidence` contains the raw AMD SEV-SNP report and the AMD certificate chain, so you can check the processor's signature offline. Hippius doesn't provide a verification tool yet.
 
 :::warning What you can't verify yourself yet
 You can check that a report is genuine AMD SEV-SNP, with debugging disabled, and that it carries the measurement Hippius recorded. You can't yet check that this measurement is the software you expect: Hippius doesn't publish its reference measurements or reproducible image builds yet, and the API doesn't take a challenge of your own. Today you rely on Hippius's allowlist for that part.
