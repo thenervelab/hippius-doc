@@ -1,364 +1,89 @@
 ---
 sidebar_position: 5
-description: Understanding Hippius Virtual Machines - distributed compute infrastructure
+description: How Hippius virtual machines work. Confidential VMs on miner-operated AMD EPYC servers, placement, access, the private network, disk encryption, lifecycle and billing.
 ---
 
-import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 
 # VM Computing
 
-Hippius Virtual Machines provide distributed compute infrastructure that integrates seamlessly with blockchain technology and distributed storage systems.
-
-## What is VM Computing on Hippius?
-
-Hippius VM Computing enables users to deploy and manage virtual machines on a distributed network of compute miners. Unlike traditional cloud providers where resources are concentrated in centralized data centers, Hippius distributes compute workloads across a global mesh of independent miners.
-
-### Key Characteristics
-
-| Feature                          | Description                                          |
-| -------------------------------- | ---------------------------------------------------- |
-| **Distributed Infrastructure** | VMs run on a distributed network of compute miners   |
-| **Blockchain Integration**       | All VM operations are recorded and verified on-chain |
-| **Encrypted Disks**              | LUKS2 full disk encryption with secure key delivery  |
-| **Credit-Based Billing**         | Pay-as-you-go model using Hippius credits            |
-| **Secure Access**                | SSH key authentication for secure instance access    |
-| **Storage Integration**          | Native integration with Arion and S3 storage systems  |
+Hippius virtual machines are Linux VMs that run on servers operated by compute miners, not in a Hippius data centre. Every one of them is a confidential VM: its memory and disk are encrypted, so the miner hosting it can't read it. This page explains how a VM is run. To create one, follow [Virtual machines](/use/virtual-machines). For the security model in depth, see [Confidential Computing](confidential-computing).
 
 ---
 
-## Virtual Machine Capabilities
+## Key characteristics
 
-### Supported Configurations
-
-We offer flexible VM configurations to match your workload requirements:
-
-- **Operating Systems**: Linux distributions (Ubuntu, Debian, CentOS, and more)
-- **Pre-installed Applications**: Docker, development tools, and other common software
-- **Scalable Resources**: Various CPU, memory, and storage configurations
-- **Network Connectivity**: Nebula mesh networking for secure inter-VM communication
-
-### Instance Management
-
-Users can perform full lifecycle management of their VMs:
-
-```
-┌──────────────────────────────────────────────────────────────┐
-│                  VM LIFECYCLE MANAGEMENT                     │
-├──────────────────────────────────────────────────────────────┤
-│                                                              │
-│   ┌──────────┐     ┌──────────┐     ┌──────────┐             │
-│   │  Create  │────▶│ Running  │────▶│  Stop    │             │
-│   └──────────┘     └────┬─────┘     └────┬─────┘             │
-│                         │                 │                  │
-│                         │    ┌────────────┘                  │
-│                         │    │                               │
-│                         ▼    ▼                               │
-│                    ┌──────────┐                              │
-│                    │  Reboot  │                              │
-│                    └──────────┘                              │
-│                         │                                    │
-│                         ▼                                    │
-│                    ┌─────────────┐                           │
-│                    │  Terminate  │                           │
-│                    └─────────────┘                           │
-│                                                              │
-└──────────────────────────────────────────────────────────────┘
-```
-
-### Secure Access
-
-All VM access is secured through SSH key authentication:
-
-- **OpenSSH Support**: Compatible with `ssh-rsa` and `ssh-ed25519` keys
-- **Key Management**: Create, store, and manage multiple SSH keys
-- **No Password Authentication**: Enhanced security through key-only access
+| Feature | Description |
+|---|---|
+| **Confidential by default** | Every VM is an AMD SEV-SNP confidential VM on an AMD EPYC server. There is no non-confidential option. |
+| **Encrypted disks** | Each VM's disk is encrypted inside the VM, with a key released only to that VM after attestation. |
+| **Private network** | Your VMs and managed services share a private network, encrypted with WireGuard. |
+| **Per-second billing** | Paid from your account balance and charged hour by hour on the Hippius chain. |
+| **Managed services on top** | Managed PostgreSQL, managed Kubernetes and GitHub Actions runners all run on the same confidential VMs. |
 
 ---
 
-## Use Cases for Distributed Computing
+## How a VM runs
 
-### 1. Development and Testing Environments
-
-Spin up isolated development environments on-demand:
-
-- **CI/CD Pipelines**: Run automated builds and tests
-- **Staging Environments**: Test deployments before production
-- **Sandbox Testing**: Experiment with new technologies safely
-
-### 2. Web Application Hosting
-
-Deploy web applications with distributed infrastructure:
-
-- **Web Servers**: Host websites and web applications
-- **API Services**: Run backend services and APIs
-- **Microservices**: Deploy containerized applications with Docker
-
-### 3. Data Processing
-
-Leverage distributed compute for data-intensive workloads:
-
-- **Batch Processing**: Process large datasets across multiple VMs
-- **ETL Pipelines**: Extract, transform, and load data workflows
-- **Analytics**: Run analytics jobs on distributed infrastructure
-
-### 4. Distributed Applications (dApps)
-
-Build and run blockchain-integrated applications:
-
-- **Node Operations**: Run blockchain nodes and validators
-- **Smart Contract Development**: Develop and test smart contracts
-- **Backend Services**: Host dApp backend infrastructure
-
-### 5. AI/ML Workloads
-
-Train and deploy machine learning models:
-
-- **Model Training**: Train ML models on distributed compute
-- **Inference Services**: Deploy models for real-time inference
-- **Data Preparation**: Prepare and preprocess training data
+<Unordered>
+  <li><strong>Miners provide the servers.</strong> A compute miner runs AMD EPYC servers with SEV-SNP enabled and hosts VMs on them. The miner has root on the machine, but only ever handles encrypted memory and encrypted disk.</li>
+  <li><strong>Hippius places the VM.</strong> Hippius's control plane picks a verified server with room for it, in the country you chose or in any region. See <a href="/use/compute#regions">Regions</a>.</li>
+  <li><strong>The VM boots a Hippius-built image.</strong> You choose a Linux distribution or a ready-made application. The processor measures what boots, and Hippius's key broker (KBS) checks that measurement before it releases the VM's keys.</li>
+  <li><strong>The VM sets itself up at first boot.</strong> Your SSH public keys and its private network enrolment are delivered by the KBS straight into the VM's encrypted memory.</li>
+</Unordered>
 
 ---
 
-## Integration with Blockchain
+## Access and networking
 
-### On-Chain Operations
+<Unordered>
+  <li><strong>SSH keys.</strong> Login is by SSH key only. You give Hippius the public half.</li>
+  <li><strong>Browser terminal.</strong> The VM page's <strong>Console</strong> tab opens a shell without any public address. The SSH handshake runs in your browser.</li>
+  <li><strong>Private network.</strong> Every VM joins your account's private network, built on NetBird with WireGuard encryption, at first boot. Your VMs, databases and Kubernetes nodes reach each other there.</li>
+  <li><strong>Public IPv4.</strong> An optional, dedicated address for one VM, on a Hippius edge in its region, protected by your firewall rules.</li>
+  <li><strong>Published ports.</strong> An HTTPS address on a Hippius domain for one web service, without a public address.</li>
+</Unordered>
 
-VM operations are integrated with the Hippius blockchain:
-
-```
-┌──────────────────────────────────────────────────────────────┐
-│                BLOCKCHAIN INTEGRATION                        │
-├──────────────────────────────────────────────────────────────┤
-│                                                              │
-│   ┌─────────────┐         ┌─────────────────┐                │
-│   │    User     │────────▶│   Marketplace   │                │
-│   │  Dashboard  │         │     Pallet      │                │
-│   └─────────────┘         └────────┬────────┘                │
-│                                    │                         │
-│                           Credit Deduction                   │
-│                                    │                         │
-│                                    ▼                         │
-│                           ┌─────────────────┐                │
-│                           │    Hippius      │                │
-│                           │   Blockchain    │                │
-│                           └────────┬────────┘                │
-│                                    │                         │
-│                           Task Assignment                    │
-│                                    │                         │
-│                                    ▼                         │
-│                           ┌─────────────────┐                │
-│                           │  Compute Miner  │                │
-│                           │   (VM Host)     │                │
-│                           └─────────────────┘                │
-│                                                              │
-└──────────────────────────────────────────────────────────────┘
-```
-
-### Credit System
-
-VMs operate on a credit-based billing model:
-
-| Component              | Description                                |
-| ---------------------- | ------------------------------------------ |
-| **Hourly Billing**     | Credits deducted based on VM configuration |
-| **Real-time Tracking** | Monitor credit usage through the dashboard |
-| **Auto-Stop**          | VMs can be stopped to preserve credits     |
-
-### Validator and Miner Roles
-
-The compute infrastructure involves multiple blockchain participants:
-
-<Ordered>
-  <li>**Validators**: Assign VM tasks to appropriate compute miners</li>
-  <li>**Compute Miners**: Host and run virtual machine instances</li>
-  <li>**Offchain Workers**: Handle VM provisioning and management</li>
-  <li>**Ranking Pallet**: Distribute rewards based on compute provision</li>
-</Ordered>
+See [Public IPv4 and firewall](/use/compute/networking) for the details, and what the edge can see.
 
 ---
 
-<br/>
-## Integration with Storage
+## Disk encryption
 
-### Native Storage Access
+Every VM's disk is encrypted, with nothing to configure.
 
-VMs have seamless access to Hippius storage systems:
+<Unordered>
+  <li>The VM encrypts its writable disk itself, with LUKS2, at first boot. The miner only ever stores encrypted bytes.</li>
+  <li>Each VM has its own disk key. At every boot, the VM proves what it is to the KBS with a report signed by the processor, and the KBS releases the key encrypted to that VM alone.</li>
+  <li>Deleting a VM destroys its key, so once the VM has stopped, its disk and backups can no longer be decrypted.</li>
+</Unordered>
 
-#### Arion Distributed Storage
-
-- **High-Speed Access**: Deterministic data placement for fast shard retrieval
-- **Data Durability**: Erasure-coded storage across multiple miners
-- **Distributed**: No single point of failure
-
-#### S3-Compatible Storage
-
-- **Standard Interface**: Use familiar S3 APIs and tools
-- **Volume Storage**: Persistent block storage for VM data
-- **Backup Support**: Automated backup capabilities
-
-### Storage Architecture with VMs
-
-```
-┌──────────────────────────────────────────────────────────────┐
-│                 VM + STORAGE INTEGRATION                     │
-├──────────────────────────────────────────────────────────────┤
-│                                                              │
-│   ┌─────────────────────────────────────────────┐            │
-│   │              COMPUTE MINER                  │            │
-│   │  ┌─────────────────────────────────────┐    │            │
-│   │  │           Virtual Machine           │    │            │
-│   │  │  ┌─────────┐    ┌─────────────────┐ │    │            │
-│   │  │  │   App   │    │   Local Disk    │ │    │            │
-│   │  │  └────┬────┘    └────────┬────────┘ │    │            │
-│   │  └───────┼──────────────────┼──────────┘    │            │
-│   └──────────┼──────────────────┼───────────────┘            │
-│              │                  │                            │
-│              ▼                  ▼                            │
-│   ┌──────────────────┐  ┌──────────────────┐                 │
-│   │  Arion Storage   │  │   S3 Storage     │                 │
-│   │  (Distributed)   │  │   (Volumes)      │                 │
-│   └──────────────────┘  └──────────────────┘                 │
-│                                                              │
-└──────────────────────────────────────────────────────────────┘
-```
+For how keys are released and what Hippius itself can do, see [Disk encryption and key delivery](confidential-computing#disk-encryption-and-key-delivery).
 
 ---
 
-## Compute Miner Architecture
+## Lifecycle
 
-### How Compute Miners Work
-
-Compute miners are specialized nodes that host virtual machines:
-
-| Component             | Function                                             |
-| --------------------- | ---------------------------------------------------- |
-| **Blockchain Node**   | Connects to Hippius blockchain for task coordination |
-| **Offchain Worker**   | Handles VM lifecycle operations                      |
-| **VM Agent**          | Manages virtual machine instances                    |
-| **Hypervisor**        | libvirt/KVM for VM isolation and resource allocation |
-| **Container Runtime** | Docker support for containerized workloads           |
-
-### Miner Requirements
-
-Compute miners must meet specific requirements:
-
-- **Hardware**: Sufficient CPU, RAM, and storage for VM hosting
-- **Network**: Stable connection with adequate bandwidth
-- **Software**: Compatible hypervisor and management tools
-- **Registration**: On-chain registration with stake
-
-### Reward Distribution
-
-Compute miners earn rewards for providing resources:
-
-```
-Marketplace Revenue Distribution:
-├── 60% → Compute Miners (via Ranking Pallet)
-├── 30% → Validators & Stakers
-└── 10% → Treasury
-```
+<Unordered>
+  <li><strong>Create</strong> from the console, with a size, an image, a region and your SSH key.</li>
+  <li><strong>Stop, start and reboot.</strong> A stopped VM keeps its server capacity and is still billed.</li>
+  <li><strong><a href="/use/compute/resize">Resize</a></strong> its vCPUs and memory.</li>
+  <li><strong><a href="/use/compute/vm-backups">Back it up</a></strong> on a schedule, and restore it.</li>
+  <li><strong>Delete</strong> it to stop paying. Its disk is crypto-erased.</li>
+</Unordered>
 
 ---
 
-## Security Model
+## Billing
 
-### Instance Isolation
-
-Each VM is isolated from other instances:
-
-- **Hardware Virtualization**: KVM/libvirt provides strong isolation
-- **AMD SEV-SNP**: Hardware memory encryption on supported miners
-- **Network Segmentation**: Nebula mesh networking for secure communication
-- **Resource Limits**: CPU, memory, and I/O quotas enforced
-
-### Access Control
-
-Multiple layers of access security:
-
-| Layer               | Protection                             |
-| ------------------- | -------------------------------------- |
-| **SSH Keys**        | Cryptographic key-based authentication |
-| **Nebula Network**  | Encrypted mesh networking              |
-| **Firewall**        | Instance-level network rules           |
-| **Blockchain Auth** | Wallet-based ownership verification    |
-| **Disk Encryption** | LUKS2 with per-VM unique keys          |
-
-### Data Protection
-
-VM data is protected through multiple layers of encryption and secure key management.
+VMs are metered per second, from the first time they run until you ask to delete them, and paid from your account balance. Each hour is charged on the Hippius chain shortly after it ends, with a hash of its usage you can check yourself. See [Hippius Compute](/use/compute) for prices and [Billing and quotas](/use/compute/billing) for the details.
 
 ---
 
-## Disk Encryption
+## Getting started
 
-All Hippius VMs use **full disk encryption by default**. Your data is automatically encrypted at rest using LUKS2 with AES-256-XTS - you don't need to configure anything.
-
-### What This Means for You
-
-| Protection                 | Benefit                                                |
-| -------------------------- | ------------------------------------------------------ |
-| **Automatic Encryption**   | Every VM disk is encrypted without any setup required  |
-| **Per-VM Unique Keys**     | Each VM has its own encryption key                     |
-| **Miner Cannot Read Data** | Even the hardware host cannot access your files        |
-| **Seizure Protection**     | Data remains encrypted even if hardware is compromised |
-
-### How It Works (Summary)
-
-<Ordered>
-  <li>When you create a VM, a unique encryption key is generated</li>
-  <li>Your VM's disk is encrypted during image creation</li>
-  <li>At boot, the key is delivered securely via encrypted network</li>
-  <li>The key exists only in your VM's protected memory - never on the miner's storage</li>
-</Ordered>
-
-:::tip
-For the full technical details on disk encryption, key delivery, and how it integrates with hardware security (AMD SEV-SNP), see [Confidential Computing](confidential-computing#disk-encryption-and-key-delivery).
-:::
-
-For more details on hardware-level encryption and attestation, see [Confidential Computing](confidential-computing).
-
----
-
-## Getting Started
-
-### Prerequisites
-
-Before creating a VM, ensure you have:
-
-<Ordered>
-  <li>**Hippius Account**: Registered and logged in</li>
-  <li>**Credits**: Minimum 10 credits in your account</li>
-  <li>**SSH Key**: Generated and added to your account</li>
-</Ordered>
-
-<br/>
-### Quick Start
-
-<Ordered>
-  <li>Navigate to **Virtual Machines** in the dashboard</li>
-  <li>Click **Create VM**</li>
-  <li>Select a configuration model</li>
-  <li>Configure OS, image, and SSH key</li>
-  <li>Review and create the instance</li>
-  <li>Connect via SSH using the Nebula IP</li>
-</Ordered>
-
-For detailed instructions, see the [Virtual Machines User Guide](/use/virtual-machines).
-
----
-
-## Summary
-
-Hippius VM Computing brings the benefits of distribution to compute infrastructure:
-
-| Benefit           | Description                                    |
-| ----------------- | ---------------------------------------------- |
-| **Distributed** | No single point of failure or control          |
-| **Integrated**    | Native blockchain and storage integration      |
-| **Encrypted**     | LUKS2 disk encryption with secure key delivery |
-| **Secure**        | Multiple layers of security and isolation      |
-| **Flexible**      | Various configurations for different workloads |
-| **Economical**    | Credit-based pay-as-you-go billing             |
-
-By combining distributed compute with Arion storage and blockchain coordination, we provide a complete platform for building and running applications without relying on centralized cloud providers.
+<Unordered>
+  <li><a href="/use/virtual-machines">Create your first virtual machine</a> and connect to it over SSH.</li>
+  <li><a href="/use/compute/networking">Give it a public IPv4</a> or publish a web service.</li>
+  <li><a href="confidential-computing">Read how confidential computing protects it</a>, and its limits.</li>
+</Unordered>

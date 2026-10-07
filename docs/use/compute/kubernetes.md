@@ -148,9 +148,10 @@ In a [shared account](/use/console/team), only the owner can create a cluster an
 
 ## What you trust Hippius with
 
-The cluster is designed so that after launch, Hippius has no way in: no readable kubeconfig, no certificate authority, and no way to add a node or open an access without a signature from your key. Some trust remains:
+After launch, Hippius holds no readable kubeconfig and no certificate authority, and no shell on the nodes: no SSH keys are installed for it and the browser terminal is refused. Adding a node or opening an access needs a signature from your key, and the kubeconfig and backup keys are stored only sealed to your key. That holds as long as the images and boot configuration Hippius gives the nodes are honest. Some trust remains:
 
 <Unordered>
+  <li><strong>Images and boot configuration.</strong> Like every Hippius VM, the masters and workers run images that Hippius builds and approves, with a boot configuration that Hippius writes. A malicious or compromised Hippius could change them. See <a href="/learn/confidential-computing#trust-model-and-limits">Trust model and limits</a>.</li>
   <li><strong>The launch.</strong> The public halves of your key are handed to the masters when the cluster is created, and the server token passes through Hippius once at that moment.</li>
   <li><strong>The console code</strong> that generates your key and decrypts your secrets is served by Hippius.</li>
   <li><strong>Adding workers.</strong> Until node attestation ships, a worker's join token passes through Hippius on its way to the new node. The private network limits who could use it, but that network is also operated by Hippius.</li>

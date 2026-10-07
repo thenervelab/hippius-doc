@@ -72,9 +72,9 @@ Only then does the KBS encrypt the disk key and the boot configuration to the pu
 
 The KBS itself runs in an SEV-SNP confidential VM, and it has to attest to Hippius's key vault for every release.
 
-### Attestation while the VM runs
+### Keepalive while the VM runs
 
-VMs on the current system image attest again every 5 minutes: they send a fresh processor report bound to a single-use challenge, and the KBS verifies and signs the result. This tells you the VM that received the disk key is still the one running. It is a record, not a kill switch: a missed check doesn't revoke the VM's keys. Older VMs may have no live record.
+VMs on the current system image send a keepalive every 5 minutes, with a fresh processor report bound to a single-use challenge. The KBS verifies it and records the result. This shows that the VM that received the disk key is still the one running. It doesn't revoke anything: a VM that misses keepalives keeps its keys. Older VMs may have no keepalive record.
 
 ### Check a VM's attestation
 
@@ -87,7 +87,7 @@ curl -H "Authorization: Token $TOKEN" \
 
 | `verdict` | Meaning |
 |---|---|
-| `attested` | Hippius holds a KBS-signed proof for the VM's current launch: a recent live attestation, or the evidence of the disk key release. |
+| `attested` | Hippius holds a KBS-signed proof for the VM's current launch: a recent keepalive, or the evidence of the disk key release. |
 | `unknown` | No proof is on record. This is **not** a failure: a VM that fails attestation never gets its disk key. Evidence of the release at boot, for example, isn't kept after a KBS restart. |
 | `unavailable` | No recent live proof, and the KBS couldn't be reached. Try again later. |
 
