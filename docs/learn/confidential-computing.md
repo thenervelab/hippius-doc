@@ -133,7 +133,7 @@ Every compute product runs on confidential VMs. What changes is who holds which 
 
 ### Managed CDN
 
-The [Hippius CDN](/use/cdn) is open to every account and serves from France and Australia. Only Hippius S3 buckets, public or private, can be origins. It is built so that:
+The [Hippius CDN](/use/cdn) is open to every account and serves from France and Australia. Only Hippius S3 buckets, public or private, can be origins. It is designed so that:
 
 <Unordered>
   <li>cache nodes are SEV-SNP confidential VMs, so a miner can't read cached content or certificate keys;</li>
@@ -150,7 +150,7 @@ Other HTTP(S) origins will come later.
 
 <Unordered>
   <li><strong>Private network.</strong> Your machines join a private network built on NetBird, which encrypts traffic between them with WireGuard. Hippius runs the network's coordination server: it decides which machines can reach each other and sees their addresses, but not the traffic.</li>
-  <li><strong>Public IPv4.</strong> A public address lives on a Hippius edge in the VM's region. The edge forwards packets to the VM over the private network, filters them with your firewall rules, and doesn't decrypt anything. See <a href="/use/compute/networking">Public IPv4 and firewall</a>.</li>
+  <li><strong>Public IPv4.</strong> A public address lives on a Hippius edge serving the VM's region (the French edge also serves the Netherlands). The edge forwards packets to the VM over the private network, filters them with your firewall rules, and doesn't decrypt anything. See <a href="/use/compute/networking">Public IPv4 and firewall</a>.</li>
   <li><strong>Published ports.</strong> The edge terminates HTTPS for you, so it can read that traffic. Use a public IPv4 with your own TLS for anything only you should read.</li>
   <li><strong>Outbound traffic.</strong> A VM with a public IPv4 goes out through its edge. Other VMs go out through the server they run on.</li>
   <li><strong>Outbound SMTP (port 25) is blocked by default.</strong> To send mail, <a href="/use/console/support">open a support ticket</a> to have it allowed on a public IPv4 address.</li>
