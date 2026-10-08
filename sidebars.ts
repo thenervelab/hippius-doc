@@ -38,11 +38,6 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         {
-          type: "link",
-          label: "Pricing",
-          href: "https://hippius.com/pricing",
-        },
-        {
           type: "html",
           value: "<span style=\"font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;opacity:0.6\">Products</span>",
           defaultStyle: true,
@@ -190,6 +185,11 @@ const sidebars: SidebarsConfig = {
             "use/mobile/settings",
             "use/mobile/troubleshooting",
           ],
+        },
+        {
+          type: "link",
+          label: "Pricing",
+          href: "https://hippius.com/pricing",
         },
       ],
     },
