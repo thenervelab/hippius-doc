@@ -40,7 +40,7 @@ Hippius virtual machines are Linux VMs that run on servers operated by compute m
   <li><strong>SSH keys.</strong> Login is by SSH key only. You give Hippius the public half.</li>
   <li><strong>Browser terminal.</strong> The VM page's <strong>Console</strong> tab opens a shell without any public address. The SSH handshake runs in your browser.</li>
   <li><strong>Private network.</strong> Every VM joins your account's private network, built on NetBird with WireGuard encryption, at first boot. Your VMs, databases and Kubernetes nodes reach each other there.</li>
-  <li><strong>Public IPv4.</strong> An optional, dedicated address for one VM, on a Hippius edge in its region, protected by your firewall rules.</li>
+  <li><strong>Public IPv4.</strong> An optional, dedicated address for one VM, on a Hippius edge serving its region, protected by your firewall rules.</li>
   <li><strong>Published ports.</strong> An HTTPS address on a Hippius domain for one web service, without a public address.</li>
 </Unordered>
 

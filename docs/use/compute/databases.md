@@ -133,8 +133,8 @@ To close it, click <BgStyledText>Unexpose</BgStyledText> and confirm. Clients co
 Backups go to a bucket the database creates in your own Hippius S3 account, named `hippius-db-ID-backups`. They are encrypted before they leave the database, with the backup key from your credentials.
 
 <Unordered>
-  <li>A full backup every night, starting around 03:00 (UTC).</li>
-  <li>A differential backup around 09:00, 15:00 and 21:00 (UTC), so roughly one backup every six hours. Each run starts within a few minutes of its time.</li>
+  <li>A full backup every night, starting between 03:00 and 03:30 (UTC).</li>
+  <li>A differential backup around 09:00, 15:00 and 21:00 (UTC), so roughly one backup every six hours. Each run starts within 15 minutes of its time.</li>
   <li>Write-ahead logs archived continuously, at least once a minute, for point-in-time restore.</li>
   <li>The last 7 full backups are kept, and older ones are removed automatically.</li>
 </Unordered>
@@ -163,7 +163,7 @@ curl -X POST https://api.hippius.com/api/databases/DATABASE_ID/restore/ \
 Save the response, as the command above does with `-o`, and store it like any other credentials. It is the only copy of the new password, certificates and backup key.
 :::
 
-A restore can take a while for a big database. Restoring into a High availability database isn't supported yet, and a database that has been deleted can't be restored this way.
+A restore can take a while for a big database. A High availability database can't be restored yet, and a database that has been deleted can't be restored this way.
 
 ## High availability and failover
 

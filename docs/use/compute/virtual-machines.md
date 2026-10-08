@@ -43,7 +43,7 @@ cat ~/.ssh/id_ed25519.pub
 On Windows PowerShell, use `type $env:USERPROFILE\.ssh\id_ed25519.pub` instead. The line starts with `ssh-ed25519`.
 
 :::warning Use an ed25519 or RSA key
-Saved keys must be OpenSSH public keys that start with `ssh-ed25519` or `ssh-rsa`. Never paste your private key anywhere: it is the only way into your VM, and nobody, Hippius included, can recover or reissue it.
+Saved keys must be OpenSSH public keys of type `ssh-ed25519`, `ssh-rsa`, `ecdsa-sha2-nistp256` (or `-nistp384`, `-nistp521`), or a security key (`sk-ssh-ed25519@openssh.com`, `sk-ecdsa-sha2-nistp256@openssh.com`). Never paste your private key anywhere: it is the only way into your VM, and nobody, Hippius included, can recover or reissue it.
 :::
 
 ## Create a virtual machine

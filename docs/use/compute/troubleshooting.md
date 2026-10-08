@@ -55,7 +55,7 @@ If a VM ends up **Failed**, its page explains why:
 | The compute node did not answer in time. | Nothing was charged. Try again. |
 | The node could not prove it is running confidential hardware. | The launch was refused to protect you. Try again. |
 
-A VM is only billed from the first time it runs. Delete a failed VM to remove it from your list.
+A VM is only billed from the first time it runs. Delete a failed VM to remove it from your list: until then, it counts against your quotas.
 
 ## I can't connect over SSH
 
@@ -80,10 +80,10 @@ If you call the API directly, refusals come with an HTTP status and, for most of
 | Code | HTTP status | Meaning |
 |---|---|---|
 | `compute_quota` | 409 | Over a quota. The body lists `exceeded`, `limits` and `used`. |
-| (no code) | 402 | Balance below 24 hours of compute. The body has `required_credits` and `balance`, in dollars. |
+| `compute_runway` | 402 | Balance below 24 hours of compute. The body has `required_credits` and `balance`, in dollars. |
 | (no code) | 503 | The balance couldn't be read. Retry. |
-| `compute_arrears` | 402 | Unpaid compute usage; services are stopped. Top up. |
-| `compute_arrears_suspended` | 409 | Paid; the database or cluster restarts within the hour. |
+| `compute_arrears` | 402 | Unpaid compute usage; services are stopped. Top up. Only sent if services are ever stopped for unpaid usage, which isn't the case today. |
+| `compute_arrears_suspended` | 409 | Paid; the database or cluster restarts within the hour. Same as above. |
 | `account_deletion_pending` | 409 | The account is being deleted. |
 | `no-free-public-ip` | 409 | No public IPv4 is free. |
 | `public-ip-unavailable` | 503 | Public IPv4 can't be offered right now. |

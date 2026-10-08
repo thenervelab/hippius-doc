@@ -3,7 +3,7 @@ id: team
 title: Shared Accounts
 sidebar_label: Shared Accounts
 slug: /use/console/team
-description: Share your Hippius account's compute and S3 with team members. Invite people by email, give each one Viewer, Operator or Admin access per product, switch between accounts, read the audit trail, and use the X-Hippius-Account header from the API.
+description: Share your Hippius account's compute, S3 and CDN with team members. Invite people by email, give each one Viewer, Operator or Admin access per product, switch between accounts, read the audit trail, and use the X-Hippius-Account header from the API.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -12,14 +12,14 @@ import BgStyledText from '@site/src/components/BgStyledText';
 
 ## Introduction
 
-A shared account lets other people work in your Hippius account, each signed in with their own login. You invite them by email and choose, product by product, what each one may do: your virtual machines, databases, Kubernetes clusters, GitHub Actions runners and S3.
+A shared account lets other people work in your Hippius account, each signed in with their own login. You invite them by email and choose, product by product, what each one may do: your virtual machines, databases, Kubernetes clusters, GitHub Actions runners, S3 and CDN.
 
 The account stays yours. Everything a member creates belongs to your account and is paid from your balance, and the compute they launch counts against your [compute quotas](/use/compute/billing#quotas). Members keep their own account next to yours, and switch between the two from the profile menu.
 
 Open it from the sidebar: **Team** → **Members**.
 
 :::info Drive isn't part of a shared account
-A shared account covers compute and S3 only. To work on files together, use [Shared Drives](/use/console/shared-drives): they have their own invitations and roles. In another account, Drive, Hub, Wallet and Referrals are hidden.
+A shared account covers compute, S3 and CDN only. To work on files together, use [Shared Drives](/use/console/shared-drives): they have their own invitations and roles. In another account, Drive, Hub, Wallet and Referrals are hidden.
 :::
 
 ## What a member can do
@@ -32,12 +32,14 @@ Each member gets a level per product. A higher level includes the lower ones.
 | **Operator** | Act on what exists: start, stop and reboot VMs, open the browser terminal, turn VM backups on or off, restart a database, cancel or resume a Kubernetes operation, upload and delete S3 objects. |
 | **Admin** | Create, delete and resize, restore from a backup, firewall rules, public IPv4 and published ports, Kubernetes worker pools and nodes, S3 buckets, bucket access and access keys, runner settings and the GitHub link. |
 
-The products you can grant are **Virtual Machines**, **Databases**, **Kubernetes**, **Runners** and **S3**. Two groups set several at once:
+The products you can grant are **Virtual Machines**, **Databases**, **Kubernetes**, **Runners**, **S3** and **CDN**. Two groups set several at once:
 
 <Unordered>
   <li><strong>All compute</strong>: Virtual Machines, Databases, Kubernetes and Runners.</li>
   <li><strong>All storage</strong>: S3.</li>
 </Unordered>
+
+The CDN is in neither group: grant it on its own. A CDN operator can purge the cache and re-check a domain's DNS. A CDN admin can create, edit and delete zones, custom domains, rules and spend caps. A zone in front of a private bucket also needs S3 admin, because it creates a read key on the bucket.
 
 When a group and a product both apply, the higher level wins. A product left at **No access** is hidden from the member's sidebar.
 
@@ -46,7 +48,7 @@ Two permissions sit next to the levels:
 | Permission | What it allows |
 |---|---|
 | **Manage the team** | Invite, change and remove members, revoke invitations, and read the audit trail. A manager can only give access they hold themselves, can't change their own access, and can't change or remove anyone whose access goes beyond theirs. |
-| **Billing** | Read the account's balance, invoices, compute usage and S3 plan history. Payments stay with the owner. |
+| **Billing** | Read the account's balance, invoices, compute usage and billing summary, and S3 plan history. Payments stay with the owner. |
 
 ### What only the owner can do
 

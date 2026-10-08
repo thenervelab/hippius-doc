@@ -59,8 +59,10 @@ Either way, your balance usually updates within a few minutes.
 
 <Screenshot src="/img/console/billing/tao-wallet.png" alt="Top up with a Bittensor wallet" dark />
 
-:::warning The minimum is $20 of TAO, and transfers cannot be undone
-Anything under $20 is not added to your balance and cannot be refunded. Double check the address before you send: TAO transfers are final, and we have no way to recover funds sent to the wrong place.
+:::warning Send TAO only to your TAO deposit address
+Copy the address from the **Manually** tab. It is not your Hippius account address, the one shown under **Convert balance** and in your Wallet: TAO sent there is not added to your balance, and you would have to [contact support](/use/console/support) to recover it. The console asks for at least $20 of TAO in a single transaction.
+
+TAO transfers are final. TAO sent to anyone else's address can't be recovered.
 :::
 
 ### With Hippius tokens (hAlpha)
@@ -161,14 +163,19 @@ Hub plans set how much you can store in your Hub namespace. Everyone starts on t
 
 ## Keep track of what you pay
 
-Billing shows every product side by side, with the plan you're on, what it costs and when it renews. Two tabs underneath give you the detail:
+Billing shows every product side by side, with the plan you're on, what it costs and when it renews. Three tabs underneath give you the detail:
 
 <Unordered>
   <li><strong>Active subscriptions</strong> lists every paid plan with its next charge. Anything past due or about to end is flagged.</li>
   <li><strong>Transaction history</strong> lists every top up, plan charge and renewal, and how each one was paid.</li>
+  <li><strong>Invoices</strong> lists your invoices, to download as PDF.</li>
 </Unordered>
 
 <Screenshot src="/img/console/billing/tx-history.png" alt="Billing transaction history" dark raw />
+
+### Invoices
+
+An invoice is issued for each payment, a few minutes after the money comes in: card top-ups and Auto reload, plans paid or renewed by card, Bitcoin, USDC and TAO. We email you when it is ready, and you download the PDF from the **Invoices** tab. There is no monthly invoice. Conversions from hAlpha aren't invoiced. Plans paid from your balance aren't either: the payment that added the money was.
 
 ## If your balance runs out
 
@@ -183,7 +190,7 @@ Topping up puts everything back. To avoid it altogether, turn on **Low balance a
 
 ## Older subscriptions
 
-Before plans existed, we sold monthly subscriptions called Personal, Professional, Business and Enterprise that added a fixed amount to your balance. They are no longer on sale. If you still have one, it keeps adding to your balance every month and shows on Billing as **Your top-up subscription**. You can cancel it through Stripe, and doing so doesn't affect any of your plans.
+Before plans existed, the monthly top-up now called [Auto reload](#by-card) was sold as subscriptions named Personal, Professional, Business and Enterprise. If you still have one, it keeps adding to your balance every month and shows on Billing as **Your top-up subscription**. You can cancel it through Stripe, and doing so doesn't affect any of your plans.
 
 ## Where to next
 
