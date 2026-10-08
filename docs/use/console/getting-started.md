@@ -59,7 +59,7 @@ The **sidebar on the left** is how you move between sections. It's organised int
 <Unordered>
   <li><strong>Drive</strong>: My Drives (your encrypted files) and Shared Drives.</li>
   <li><strong>S3</strong>: S3 Buckets and S3 Migrations.</li>
-  <li><strong>Confidential Computing</strong>: Virtual Machines, marked coming soon.</li>
+  <li><strong>Confidential Compute</strong>: Virtual Machines, Databases, Kubernetes and Runners.</li>
   <li><strong>Hub</strong>: your container images and AI models.</li>
   <li><strong>Account</strong>: Billing, Wallet and Referrals.</li>
   <li><strong>Support</strong>: Documentation and Help & Support, to open a ticket with our team.</li>

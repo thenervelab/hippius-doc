@@ -77,7 +77,7 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "category",
-          label: "Compute",
+          label: "Confidential Compute",
           collapsed: true,
           items: [
             "use/compute/overview",

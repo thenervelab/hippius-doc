@@ -3,12 +3,12 @@ id: intro
 title: What is Hippius?
 sidebar_label: What is Hippius?
 slug: /learn/intro
-description: Hippius in one page. Drive, S3 Storage, Hub and Confidential Computing, how to sign in and pay, and how your data is stored on Arion.
+description: Hippius in one page. Drive, S3 Storage, Hub and Confidential Compute, how to sign in and pay, and how your data is stored on Arion.
 ---
 
 # What is Hippius?
 
-Hippius is a distributed cloud. It gives you **Drive**, encrypted file storage for people; **S3 Storage**, S3-compatible object storage for apps and backups; **Hub**, a registry for AI models and container images; and **Confidential Computing**, virtual machines and managed services that run in encrypted memory. One account and one balance pay for all of them.
+Hippius is a distributed cloud. It gives you **Drive**, encrypted file storage for people; **S3 Storage**, S3-compatible object storage for apps and backups; **Hub**, a registry for AI models and container images; and **Confidential Compute**, virtual machines and managed services that run in encrypted memory. One account and one balance pay for all of them.
 
 ## Products
 
@@ -17,7 +17,7 @@ Hippius is a distributed cloud. It gives you **Drive**, encrypted file storage f
 | **Drive** | Your files, encrypted on your device before upload. Sync folders, back up your phone's photos, share by link, and share whole drives with a team. Free plan of 10 GB. | [Drive quickstart](/use/drive) |
 | **S3 Storage** | An S3-compatible API at `s3.hippius.com`. Works with the AWS CLI, rclone, boto3 and any S3 tool. Pay as you go at $6 per TB per month, no egress fees. One-click migration from any S3 provider. | [S3 quickstart](/use/quickstart) |
 | **Hub** | Push and pull AI models and container images with `hippius-hub`, docker or oras. A drop-in for the Hugging Face Hub. | [Hub quickstart](/registry) |
-| **Confidential Computing** | Virtual machines, managed PostgreSQL, managed Kubernetes and GitHub Actions runners that run in hardware-encrypted memory on AMD SEV-SNP. The machine's owner can't read your data, and the console shows each VM's attestation status. | [Compute guide](/use/compute) |
+| **Confidential Compute** | Virtual machines, managed PostgreSQL, managed Kubernetes and GitHub Actions runners that run in hardware-encrypted memory on AMD SEV-SNP. The machine's owner can't read your data, and the console shows each VM's attestation status. | [Confidential Compute guide](/use/compute) |
 
 ## Where you use them
 

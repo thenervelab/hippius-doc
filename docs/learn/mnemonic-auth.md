@@ -8,7 +8,7 @@ description: Legacy authentication method for existing Hippius users
 :::warning Legacy Authentication Method
 **Mnemonic authentication is ONLY available for existing users who created accounts before November 2025.**
 
-New users cannot use mnemonic authentication. If you're a new user, please use one of our modern authentication methods: **Google**, **Apple** (coming soon), or **GitHub** OAuth.
+New users cannot use mnemonic authentication. If you're a new user, please use one of our modern authentication methods: **Google**, **Apple**, or **GitHub** OAuth.
 
 → [See Authentication Methods](#authentication-methods) for details.
 :::

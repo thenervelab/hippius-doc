@@ -9,7 +9,7 @@ import Unordered from '@site/src/components/Unordered';
 
 # How Arion stores your data
 
-Drive, S3 Storage and Hub are what you see. Underneath, your data lives on **Arion** — a storage network built for it — and Confidential Computing (coming soon) keeps its encrypted backups there too. This page explains how a file is split, placed, checked and repaired across the network, and what is encrypted at each step.
+Drive, S3 Storage and Hub are what you see. Underneath, your data lives on **Arion** — a storage network built for it — and Confidential Compute keeps its encrypted backups there too. This page explains how a file is split, placed, checked and repaired across the network, and what is encrypted at each step.
 
 ## The short version
 
@@ -110,7 +110,7 @@ Arion moves and stores bytes; it does not decide what they mean. Encryption happ
 <Unordered>
   <li><strong>Drive</strong> encrypts on your device. Only you hold the key, and the recovery seed restores it. Nobody at Hippius can read your files.</li>
   <li><strong>S3 Storage</strong> encrypts at rest with AES-256-GCM, every chunk under its own key, and those keys are wrapped by a key management service. The S3 gateway decrypts when you download.</li>
-  <li><strong>Confidential Computing</strong> (coming soon): a virtual machine's disk lives on the miner's own machine, encrypted with a key held only inside the VM — the host cannot read it. Its backups are encrypted before they reach Hippius S3.</li>
+  <li><strong>Confidential Compute</strong>: a virtual machine's disk lives on the miner's own machine, encrypted with a key held only inside the VM — the host cannot read it. Its backups are encrypted before they reach Hippius S3.</li>
 </Unordered>
 
 In both cases, miners only ever hold encrypted pieces. A miner cannot read your data, and a single miner never holds enough pieces to rebuild a file.

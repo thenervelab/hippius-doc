@@ -64,7 +64,7 @@ Without a Drive plan you can't upload anything new. Your files stay readable. Th
 
 Below the storage cards, your Drive folders and S3 buckets sit side by side, so you can jump into either or start an upload. The search bar above them searches everything at once, or just one product.
 
-Hub and Virtual Machines get the last row: how much you've stored in Hub and how many repositories you have, and how many virtual machines you're running. Virtual machines aren't generally available yet, so for most accounts that card says they're coming soon.
+Hub and Virtual Machines get the last row: how much you've stored in Hub and how many repositories you have, and how many virtual machines you're running.
 
 ## Service Status Banners
 
