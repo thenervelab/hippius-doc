@@ -35,7 +35,7 @@ You can add a public IPv4 when you create the VM (the **Public IPv4** add-on), o
 
 The address is dedicated to your VM. Inbound and outbound traffic both use it: once it is attached, the VM's outgoing connections leave from this address too. It counts against your **Public IPv4** quota, and the [24-hour balance requirement](/use/compute/billing#the-24-hour-balance-requirement) applies.
 
-If no address is free, the console says so. Try again later, or launch without one.
+Addresses come from the edge serving the VM's region: the French edge serves France and the Netherlands, the Australian edge serves Australia. An Australian VM only gets an Australian address, and a French or Dutch VM only gets one from the French edge. If no address is free, the console says so. Try again later, or launch without one.
 
 :::note The address is not on the VM's network interface
 You won't see the public address with `ip addr` inside the VM. To print it from inside the VM, run:
@@ -53,9 +53,15 @@ A public IPv4 costs **$0.005 an hour** (about $3.65 a month), billed per second 
 
 ### Detach an address
 
-Click **Detach** in **Public IP & Firewall** and confirm. The address stops reaching your VM and goes back to the pool: you may not get it back. Outbound traffic leaves from the host's address again.
+Click **Detach** in **Public IP & Firewall** and confirm. The address stops reaching your VM and goes back to the pool: you may not get it back. Outbound traffic goes out through NAT on the server the VM runs on again.
 
 Your firewall rules are kept. They apply again as soon as you attach a new address. Deleting the VM releases its address too.
+
+### Bandwidth
+
+Each VM's bandwidth is capped by its size, in both directions: 100 Mbit/s for Small, 250 Mbit/s for Medium, and 500 Mbit/s for Large and bigger. A public IPv4 is capped at 250 Mbit/s.
+
+A VM with a public IPv4 sends its traffic out through that address, on the edge. A VM without one goes out through NAT on the server it runs on. Outbound traffic is measured per VM and per region, and isn't charged today. Inbound traffic is free. See [Prices](/use/compute/billing#prices).
 
 ## Firewall rules
 
@@ -63,7 +69,7 @@ The firewall protects the VM's public IPv4. It works like this:
 
 <Unordered>
   <li><strong>All inbound traffic is blocked by default.</strong> Each rule allows something. There are no "deny" rules.</li>
-  <li><strong>Outbound traffic is open, except SMTP.</strong> Outbound SMTP (port 25) is blocked by default; to send mail, <a href="/use/console/support">open a support ticket</a> to have it allowed on a public IPv4 address.</li>
+  <li><strong>Outbound traffic is open, except SMTP.</strong> Outbound SMTP (port 25) is blocked by default, for every VM; to send mail, <a href="/use/console/support">open a support ticket</a> to have it allowed on a public IPv4 address. It can't be allowed for a VM without one.</li>
   <li><strong>Ping (ICMP) and replies to connections the VM opened always get through.</strong> You don't need a rule for them.</li>
   <li><strong>IPv4 only.</strong> Sources are IPv4 addresses or ranges.</li>
 </Unordered>

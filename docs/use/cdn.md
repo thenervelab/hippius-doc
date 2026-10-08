@@ -18,7 +18,7 @@ A **zone** is a CDN in front of one bucket, or one folder (prefix) of it. As soo
 
 <Unordered>
   <li><strong>Origins.</strong> Hippius S3 buckets, public or private. Other web servers (HTTP(S) origins) aren't supported yet.</li>
-  <li><strong>Regions.</strong> Cache nodes serve from France (FR) and Australia (AU). The <strong>shield region</strong> of a zone is the cache the other regions fill from: pick the one nearest the bucket. FR is the default.</li>
+  <li><strong>Regions.</strong> Cache nodes serve from France (FR) and Australia (AU). Visitors in Oceania are sent to AU (or to FR if AU has no node up), everyone else to FR. The <strong>shield region</strong> of a zone is the cache the other regions fill from: pick the one nearest the bucket. FR is the default.</li>
   <li><strong>Limits.</strong> 10 zones per account and 20 custom domains per zone.</li>
 </Unordered>
 
@@ -33,8 +33,18 @@ A **zone** is a CDN in front of one bucket, or one folder (prefix) of it. As soo
 
 A zone in front of a private bucket creates a read-only key on that bucket for the cache nodes, so creating one needs admin access to S3 as well as to CDN on a [shared account](/use/console/team).
 
-:::note Content type comes from the object
-The CDN serves each object with the `Content-Type` stored in S3. Upload your files with the right type: objects uploaded from the console keep the file's type, but are marked as attachments, so for a website upload them with an S3 client. See [Uploading objects](/use/console/s3#uploading-objects).
+## What visitors receive
+
+<Unordered>
+  <li><strong>HTTPS.</strong> Plain HTTP requests are redirected to HTTPS (301), unless you turn that off in the zone's settings.</li>
+  <li><strong>GET and HEAD only.</strong> Other methods get 405. Range requests work.</li>
+  <li><strong>Content type.</strong> Each object is served with the <code>Content-Type</code> stored in S3. Only when it has none, or a generic one (<code>application/octet-stream</code>), is it guessed from the extension, and only for images, audio, video, fonts, CSS, JavaScript, JSON, WebAssembly and plain text. HTML, SVG and XML are never guessed: upload them with an explicit `Content-Type`. <code>X-Content-Type-Options: nosniff</code> is always sent.</li>
+  <li><strong>HTML on the default hostname is sandboxed.</strong> On <code>ZONE_ID.c.hipcdn.net</code>, HTML, SVG and other XML get <code>Content-Security-Policy: sandbox allow-scripts</code>. On your own domains they don't, so serve a website from a custom domain.</li>
+  <li><strong>Headers passed through</strong> from the object: <code>Content-Type</code>, <code>Content-Length</code>, <code>Content-Range</code>, <code>Content-Encoding</code>, <code>Content-Language</code>, <code>Content-Disposition</code>, <code>ETag</code>, <code>Last-Modified</code> and <code>Accept-Ranges</code>.</li>
+</Unordered>
+
+:::note Uploading from the console
+Objects uploaded from the console keep the file's type, but are stored as attachments (`Content-Disposition: attachment`), so browsers download them instead of showing them. For a website, upload with an S3 client. See [Uploading objects](/use/console/s3#uploading-objects).
 :::
 
 ## Use your own domain
@@ -58,9 +68,15 @@ The domain is checked every minute for the first hour, every 10 minutes for a da
 
 ## Cache rules and purging
 
-The **Cache rules** tab holds an ordered list of up to 50 rules. Each rule matches a path prefix, a glob or a list of file extensions, and sets how long the cache keeps a file (`edge_ttl`, or the origin's own setting), how long browsers keep it (`browser_ttl`), how query strings are treated, whether to ignore `Set-Cookie`, or bypasses the cache. Click <BgStyledText>Save rules</BgStyledText> to apply the list.
+**By default**, a zone caches successful responses (200 and 206) for 1 hour and 404s for 1 minute. Redirects (3xx) and server errors (5xx) aren't cached. Visitors get `Cache-Control: public, max-age=3600`. The origin's own `Cache-Control` and `Expires` are ignored. The query string isn't part of the cache key, and isn't sent to the bucket: a file is cached once per path.
 
-The **Purge** tab invalidates what you name on every cache node: paths, folders (prefixes ending in `/`), or everything. The next request for it is fetched from the origin. You can purge up to 100 times a minute per zone, and everything once a minute.
+The **Cache rules** tab holds an ordered list of up to 50 rules. Each rule matches a path prefix, a glob or a list of file extensions, and sets one or more actions: how long the cache keeps a file (`edge_ttl`), how long browsers keep it (`browser_ttl`), which query parameters are part of the cache key, whether to bypass the cache, and whether to ignore `Set-Cookie`. Rules are evaluated top to bottom. Click <BgStyledText>Save rules</BgStyledText> to save the list.
+
+:::info Rules are being switched on
+Cache nodes don't apply cache rules yet: until they do, every zone uses the defaults above, and the console shows a banner. Rules you save now take effect once they are switched on.
+:::
+
+The **Purge** tab invalidates what you name on every cache node: paths, folders (prefixes ending in `/`), or everything. The next request for it is fetched from the origin. A purge usually reaches every node in under 30 seconds. You can purge up to 100 times a minute per zone, and everything once a minute.
 
 ## Prices
 
