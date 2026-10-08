@@ -37,6 +37,16 @@ const sidebars: SidebarsConfig = {
       label: "Use",
       collapsed: false,
       items: [
+        {
+          type: "link",
+          label: "Pricing",
+          href: "https://hippius.com/pricing",
+        },
+        {
+          type: "html",
+          value: "<span style=\"font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;opacity:0.6\">Products</span>",
+          defaultStyle: true,
+        },
         // Product-level entry point for Drive. The per-app Drive guides stay
         // under Desktop App, Mobile App and Console and are linked from these
         // pages, not listed here, so only one sidebar section is active at a time.
@@ -109,6 +119,11 @@ const sidebars: SidebarsConfig = {
           ],
         },
         {
+          type: "html",
+          value: "<span style=\"font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;opacity:0.6\">Apps</span>",
+          defaultStyle: true,
+        },
+        {
           type: "category",
           label: "Console",
           collapsed: true,
@@ -176,12 +191,7 @@ const sidebars: SidebarsConfig = {
             "use/mobile/troubleshooting",
           ],
         },
-        "use/hippius-api",
-        {
-          type: "link",
-          label: "Pricing",
-          href: "https://hippius.com/pricing",
-        },],
+      ],
     },
 
     // ══ EARN ═══════════════════════════════════════════════════════
@@ -220,6 +230,7 @@ const sidebars: SidebarsConfig = {
       label: "Develop",
       collapsed: true,
       items: [
+        "use/hippius-api",
         "blockchain/api",
         {
           type: "category",
