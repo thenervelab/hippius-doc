@@ -24,7 +24,7 @@ These are the prices in force today. Amounts are in dollars, taken from your bal
 | Disk | $0.10 per GB per month |
 | Public IPv4 | $0.005 per hour (about $3.65 a month), while attached |
 | VM backups | $6 per TB-month stored |
-| Outbound bandwidth | Not charged today. Inbound traffic is free. |
+| Outbound bandwidth | Measured per region; $0 today in France, the Netherlands and Australia (Australia: 1 TB per VM per month included). Inbound traffic is free. |
 
 A VM costs the sum of its vCPUs, memory and disk:
 

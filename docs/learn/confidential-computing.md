@@ -133,7 +133,7 @@ Every compute product runs on confidential VMs. What changes is who holds which 
 
 ### Managed CDN
 
-The [Hippius CDN](/use/cdn) is open to every account and serves from France and Australia. Only Hippius S3 buckets, public or private, can be origins. It is designed so that:
+The [Hippius CDN](/use/cdn) is open to every account and serves from France and Australia. Only Hippius S3 buckets, public or private, can be origins. It is built so that:
 
 <Unordered>
   <li>cache nodes are SEV-SNP confidential VMs, so a miner can't read cached content or certificate keys;</li>
@@ -153,10 +153,10 @@ Other HTTP(S) origins will come later.
   <li><strong>Public IPv4.</strong> A public address lives on a Hippius edge serving the VM's region (the French edge also serves the Netherlands). The edge forwards packets to the VM over the private network, filters them with your firewall rules, and doesn't decrypt anything. See <a href="/use/compute/networking">Public IPv4 and firewall</a>.</li>
   <li><strong>Published ports.</strong> The edge terminates HTTPS for you, so it can read that traffic. Use a public IPv4 with your own TLS for anything only you should read.</li>
   <li><strong>Outbound traffic.</strong> A VM with a public IPv4 goes out through its edge. Other VMs go out through the server they run on.</li>
-  <li><strong>Outbound SMTP (port 25) is blocked by default.</strong> To send mail, <a href="/use/console/support">open a support ticket</a> to have it allowed on a public IPv4 address.</li>
+  <li><strong>Outbound SMTP (port 25) is blocked by default</strong>, for every VM, with or without a public IPv4. To send mail, <a href="/use/console/support">open a support ticket</a> to have it allowed on a public IPv4 address.</li>
 </Unordered>
 
-Per-VM bandwidth caps, and a shared outbound address on the edge for VMs without a public IPv4, are being rolled out. They aren't enforced yet.
+Each VM's bandwidth is capped by its size, in both directions: 100 Mbit/s for Small, 250 Mbit/s for Medium, 500 Mbit/s for Large and above. A public IPv4 is also capped at 250 Mbit/s. A shared outbound address on the edge, for VMs without a public IPv4, isn't in use yet.
 
 :::warning Encrypt your own traffic end to end
 Whoever carries a packet sees its addresses, size and timing: the edge, and for traffic that leaves through a server, the server owner. Anything you send without TLS can also be read on the way. Use TLS (or SSH) for everything that leaves your private network.
