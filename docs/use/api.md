@@ -44,7 +44,13 @@ A machine-readable index is at [docs.hippius.com/llms.txt](https://docs.hippius.
 
 ## Authentication
 
-All Management API requests require an access token. Generate one in the [Hippius Console](https://console.hippius.com) under Settings.
+Management API requests need an access token. Generate one in the [Hippius Console](https://console.hippius.com) under Settings, and send it in the `Authorization` header:
+
+```bash
+curl -H "Authorization: Token YOUR_TOKEN" https://api.hippius.com/api/accounts/
+```
+
+A few catalogue reads need no token, for example the compute sizes and prices at `GET /api/compute/flavors/` and the plans at `GET /api/s3/plans/` and `GET /api/drive/plans/`. To act in an account shared with you, add the header `X-Hippius-Account: acct_...`. See [Shared accounts](/use/console/team).
 
 ## Related
 

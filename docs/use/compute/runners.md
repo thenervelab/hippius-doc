@@ -69,8 +69,8 @@ The Runners page shows the current sizes and prices.
 
 To pin the region, add a two-letter country code: `hippius-medium-fr` runs only on servers in France. Without one, your **Default region** setting applies, or any region if it is empty.
 
-:::warning A misspelled label is silently ignored
-A job whose label isn't exactly `hippius-small`, `hippius-medium` or `hippius-large`, with an optional two-letter country, never reaches Hippius. It doesn't show on the Runners page, and it waits on GitHub until GitHub gives up on it, after about 24 hours. Check the label if a job sits in **Queued** and nothing appears in the console.
+:::warning Check the label
+Labels are matched without regard to case. A label that starts with `hippius` but isn't one of the three sizes, with an optional two-letter country, is refused: the Runners page shows **Unknown runner label** with the labels it accepts. A label that doesn't start with `hippius` never reaches Hippius at all: the job waits on GitHub until GitHub gives up on it, after about 24 hours. Check the label if a job sits in **Queued** and nothing appears in the console.
 :::
 
 ### What's on the runner
@@ -92,7 +92,7 @@ The **Settings** card applies to every installation you have linked. Click <BgSt
 | Setting | Default | What it does |
 |---|---|---|
 | **Run jobs on Hippius** | On | Off: new `hippius-*` jobs are refused and stay queued on GitHub. |
-| **Runners at once** | 5 | How many jobs run at the same time. More jobs wait for a free slot. It can't go above your runners quota. |
+| **Runners at once** | 5 | How many jobs run at the same time. More jobs wait for a free slot. Your runners [quota](/use/compute/billing#quotas) caps it: 3 on a new account. |
 | **Allowed sizes** | All three | A job asking for another size is refused. |
 | **Default region** | Any | The country used when a label has none. A label with a country wins over it. |
 | **Allow public repositories** | Off | Whether jobs from public repositories run. |
@@ -136,16 +136,20 @@ Refusals show on the Runners page only. On GitHub, the job just stays queued ("W
 | Public repository, not allowed in your settings | See the warning above before you allow public repositories. |
 | GitHub installation suspended or unlinked | Unsuspend the App on GitHub (**Manage on GitHub**), or connect it again. |
 | Installation linked to another Hippius account | The installation was moved to another account. |
+| Unknown runner label | The label starts with `hippius` but isn't a size we serve. Fix the label in your workflow. |
 | Over your compute quota | Runners count against your compute quotas. Free some resources, or contact support. |
 | Balance too low for the runway | Top up: your balance must cover 24 hours of your compute, including the runner. |
 | Unpaid compute usage | Top up to settle what your account owes. |
 | Runners are turned off on Hippius | Runners are paused on our side. Try again later. |
+| No access to runners on this account | Your access on a shared account doesn't include runners. Ask the owner. |
+| Runners need hourly compute billing | Contact support. |
+| Your account is being deleted | Nothing runs on an account being deleted. |
 
 ## Billing
 
-A runner VM is billed per second at its size's price while the VM is billed, like any VM, with a minimum of one minute. That runs from the moment the VM is running until it is torn down, so the runner's setup (installing Docker and the GitHub runner) is billed too, not only the job itself. The **Est. cost** column shows each job's billed time at today's price.
+A runner VM is billed per second at its size's price while the VM is billed, like any VM, with a minimum of one minute. That runs from one minute before the job starts (never before the VM was created) until the VM is torn down. Most of the boot is not billed, and a runner VM that never ran a job (cancelled while booting, or its job taken by another runner) costs nothing. The **Est. cost** column shows each job's billed time at today's price.
 
-Runner VMs don't appear in your VM list. They count against your **GitHub Actions runners** quota (5 at once by default) and against your vCPU, memory and disk quotas. The [24-hour balance requirement](/use/compute/billing#the-24-hour-balance-requirement) is checked for each job.
+Runner VMs don't appear in your VM list. They count against your **GitHub Actions runners** quota (3 at once on a new account) and against your vCPU, memory and disk quotas. The [24-hour balance requirement](/use/compute/billing#the-24-hour-balance-requirement) is checked for each job.
 
 ## Disconnect GitHub
 

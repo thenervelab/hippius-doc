@@ -131,9 +131,9 @@ Every compute product runs on confidential VMs. What changes is who holds which 
   <li><a href="/use/compute/kubernetes-backups">Kubernetes backups</a> are encrypted inside the cluster, with keys sealed to your cluster key, before they reach your Hippius S3 account.</li>
 </Unordered>
 
-### Managed CDN (private beta)
+### Managed CDN
 
-The Hippius CDN is in a private beta, by invitation, and only Hippius S3 buckets can be origins. Its cache fleet isn't serving yet. It is designed so that:
+The [Hippius CDN](/use/cdn) is open to every account and serves from France and Australia. Only Hippius S3 buckets, public or private, can be origins. It is built so that:
 
 <Unordered>
   <li>cache nodes are SEV-SNP confidential VMs, so a miner can't read cached content or certificate keys;</li>

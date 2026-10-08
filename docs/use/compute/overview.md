@@ -58,7 +58,7 @@ Two checks run every time you launch something. You see both in the create form 
 
 **Quotas** cap how much your account can run at once: VMs, databases, clusters, vCPUs, memory, disk, public IPv4 addresses and runners. If a launch would go over a limit, it is refused. See [Quotas](/use/compute/billing#quotas) for the limits and how to raise them.
 
-**The 24-hour balance requirement.** Your balance must cover 24 hours of everything you already run, plus what you are launching. This check applies to new VMs, databases, clusters and worker nodes, to public IPv4 addresses, to resizes that make a VM bigger, and to runner jobs. It stops a new account from running up usage it can't pay for. See [The 24-hour balance requirement](/use/compute/billing#the-24-hour-balance-requirement).
+**The 24-hour balance requirement.** Your balance must cover 24 hours of everything you already run, plus what you are launching. This check applies to new VMs, databases, clusters and worker nodes, to public IPv4 addresses, to resizes that make a VM bigger, to turning on VM backups, and to runner jobs. It stops a new account from running up usage it can't pay for. See [The 24-hour balance requirement](/use/compute/billing#the-24-hour-balance-requirement).
 
 ## How billing works
 
@@ -74,7 +74,7 @@ Two checks run every time you launch something. You see both in the create form 
 | VM | $18 per vCPU, $2.50 per GB of memory and $0.10 per GB of disk, per month. A Small VM (1 vCPU, 4 GB, 40 GB) is $32 a month, $0.0438 an hour. |
 | Public IPv4 | $0.005 an hour, about $3.65 a month, while attached. |
 | VM backups | $6 per TB-month stored. |
-| Public bandwidth | Free for now. |
+| Outbound bandwidth | Not charged today. Inbound traffic is free. |
 | Managed database | Its VMs plus 25%. |
 | Managed Kubernetes | Its VMs plus $15 per cluster per month. |
 

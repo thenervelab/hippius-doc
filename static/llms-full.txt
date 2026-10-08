@@ -74,7 +74,7 @@ Hippius is a distributed cloud. Store encrypted files, serve objects over S3, an
 | Drive SDK | Script Drive with encryption on the client. Command: `hippius-drive`. Install from git, not PyPI. | https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt |
 | Bridge | No CLI. The user signs each step in a browser wallet. Alpha and hAlpha are pegged 1:1. Minimum 15. | https://docs.hippius.com/use/console/bridge |
 | Compute | Confidential VMs, managed PostgreSQL, managed Kubernetes and GitHub Actions runners, in the console. Open to every account, billed hourly from the balance. No CLI. | https://docs.hippius.com/use/compute |
-| Shared accounts | An owner invites members by email with Viewer, Operator or Admin access per product (VMs, databases, Kubernetes, runners, S3). The owner pays. Drive is not included. API header `X-Hippius-Account`. | https://docs.hippius.com/use/console/team |
+| Shared accounts | An owner invites members by email with Viewer, Operator or Admin access per product (VMs, databases, Kubernetes, runners, S3, CDN). The owner pays. Drive is not included. API header `X-Hippius-Account`. | https://docs.hippius.com/use/console/team |
 
 ### Authentication
 
@@ -93,7 +93,7 @@ Five top-up methods, on Billing:
 - Card, through Stripe, from $10 to $10,000, or a monthly auto reload.
 - Bitcoin, on-chain or Lightning, from $20 to $10,000. Lightning lands in seconds. On-chain waits for one confirmation.
 - USDC on Base, from a browser wallet, from $5 to $10,000. 1 USDC adds one dollar to your balance.
-- TAO, from a connected wallet or by sending to the deposit address. Minimum $20. A transfer cannot be reversed.
+- TAO, from a connected wallet or by sending to the TAO deposit address (Manually tab). At least $20 per transfer. Never send TAO to the Hippius account address (Wallet → Receive): it is not credited. A transfer cannot be reversed.
 - hAlpha, the Hippius native token, on the Hippius tab. Credits = hAlpha × the on-chain hAlpha price. Slippage protection 1% by default. Final on chain, no refund. Not invoiced.
 
 An agent with enough balance subscribes without a browser. Do not send a funded agent to Stripe Checkout.
@@ -220,9 +220,9 @@ Alpha to hAlpha needs 3 signatures, or 4 when the Alpha must first be moved onto
 
 Compute is open to every account, in the console under Confidential Computing. There is no compute CLI. Guide: https://docs.hippius.com/use/compute
 
-Billing: metered per second (one-minute minimum per VM and public IPv4), charged hourly on the Hippius chain from the balance. A VM is billed running or stopped until it is deleted. A launch needs a balance covering 24 hours of the account's compute plus the launch. Default quotas apply.
+Billing: metered per second (one-minute minimum per VM and public IPv4), charged hourly on the Hippius chain from the balance. A VM is billed running or stopped until it is deleted. A launch needs a balance covering 24 hours of the account's compute plus the launch. Quotas apply: new accounts start on the Starter tier (3 VMs, 8 vCPU) and move up automatically with their charged usage.
 
-Prices per 730-hour month: vCPU $18, memory $2.50/GB, disk $0.10/GB. Small (1 vCPU, 4 GB, 40 GB) $32 ($0.0438/h), Medium $64, Large $128. Public IPv4 $0.005/h (~$3.65/month). VM backups $6 per TB-month. Bandwidth free for now. Managed databases: their VMs plus 25%. Kubernetes: its VMs plus $15 per cluster per month. Database and Kubernetes backups go to the user's own S3, at S3 prices. The live price list wins: https://console.hippius.com/dashboard/billing/compute#prices. Details: https://docs.hippius.com/use/compute/billing
+Prices per 730-hour month: vCPU $18, memory $2.50/GB, disk $0.10/GB. Small (1 vCPU, 4 GB, 40 GB) $32 ($0.0438/h), Medium $64, Large $128, X-Large $256, 2X-Large $512, 4X-Large $1024. Public IPv4 $0.005/h (~$3.65/month). VM backups $6 per TB-month. Outbound bandwidth metered per region, not charged today; inbound free. Managed databases: their VMs plus 25%. Kubernetes: its VMs plus $15 per cluster per month. Database and Kubernetes backups go to the user's own S3, at S3 prices. The live price list wins: https://console.hippius.com/dashboard/billing/compute#prices. Details: https://docs.hippius.com/use/compute/billing
 
 Hub stores images. It does not run them.
 

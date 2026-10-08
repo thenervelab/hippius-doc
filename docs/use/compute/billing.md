@@ -24,7 +24,7 @@ These are the prices in force today. Amounts are in dollars, taken from your bal
 | Disk | $0.10 per GB per month |
 | Public IPv4 | $0.005 per hour (about $3.65 a month), while attached |
 | VM backups | $6 per TB-month stored |
-| Public bandwidth | Free for now |
+| Outbound bandwidth | Not charged today. Inbound traffic is free. |
 
 A VM costs the sum of its vCPUs, memory and disk:
 
@@ -33,6 +33,9 @@ A VM costs the sum of its vCPUs, memory and disk:
 | **Small** | 1 vCPU, 4 GB memory, 40 GB disk | $32 a month ($0.0438 an hour) |
 | **Medium** | 2 vCPU, 8 GB memory, 80 GB disk | $64 a month ($0.0877 an hour) |
 | **Large** | 4 vCPU, 16 GB memory, 160 GB disk | $128 a month ($0.1753 an hour) |
+| **X-Large** | 8 vCPU, 32 GB memory, 320 GB disk | $256 a month ($0.3507 an hour) |
+| **2X-Large** | 16 vCPU, 64 GB memory, 640 GB disk | $512 a month ($0.7014 an hour) |
+| **4X-Large** | 32 vCPU, 128 GB memory, 1280 GB disk | $1024 a month ($1.4027 an hour) |
 
 A VM you have resized keeps its disk, so it is priced on the vCPUs and memory it has now and the disk it was launched with.
 
@@ -63,7 +66,7 @@ Some examples:
 |---|---|
 | **Virtual machines** | Per second, by size: its vCPUs, memory and disk. From the first time the VM runs until you ask to delete it, **including while it is stopped**. |
 | **Public IPv4** | Per second while the address is attached. |
-| **Public bandwidth** | Not charged for now. |
+| **Bandwidth** | Outbound traffic is measured per VM and per region, and not charged today. Inbound traffic is free. |
 | **VM backups** | Per GB of backup storage per hour, $6 per TB-month. See [VM backups](/use/compute/vm-backups#what-backups-cost). |
 | **Databases** | Their VMs, like any VM, plus the [management fee](#management-fees). |
 | **Kubernetes clusters** | Their masters, workers and the masters' public IPv4, like any VM, plus the [management fee](#management-fees). |
@@ -72,7 +75,7 @@ Some examples:
 
 **One-minute minimum.** Each VM, and each public IPv4 address, is billed for at least one minute.
 
-**Stopped VMs.** A stopped VM keeps its server capacity reserved, so it is billed at its full price. Delete a VM to stop paying for it. A VM whose boot stalled, shown as failed, isn't billed for its compute time.
+**Stopped VMs.** A stopped VM keeps its server capacity reserved, so it is billed at its full price. Delete a VM to stop paying for it. A VM whose boot stalled, shown as failed, stops being billed when the stall is detected. It still counts against your quotas until you delete it.
 
 **Deleting.** Billing stops when you ask to delete a VM, database or cluster, not when the teardown finishes.
 
@@ -92,22 +95,34 @@ Compute Usage shows the cost of what you run now, every hour of the month with i
 | **Metered, not charged** | Measured while compute was free, before your account was charged. It will never be charged. |
 | **Under review** | Something on our side needs checking. Nothing for you to do. |
 
-Click **Download CSV** to export a month, hour by hour. Invoices are issued for each top-up, when money comes in, not for each hour of usage. Top-ups with hAlpha aren't invoiced.
+Click **Download CSV** to export a month, hour by hour. Invoices are issued for each payment, when money comes in, not for each hour of usage. Top-ups with hAlpha aren't invoiced. See [Invoices](/use/console/billing#invoices).
 
 ## Quotas
 
 Quotas cap what your account can run at the same time. They count everything you have, whether running or stopped.
 
-| Quota | Default limit |
-|---|---|
-| Virtual machines | 5 |
-| Databases | 2 |
-| Kubernetes clusters | 1 |
-| vCPUs | 32 |
-| Memory | 128 GB |
-| Disk | 1024 GB |
-| Public IPv4 | 6 |
-| GitHub Actions runners (at once) | 5 |
+Your limits depend on your account's tier. A new account starts on **Starter**:
+
+| Quota | Starter | Standard | Business |
+|---|---|---|---|
+| Virtual machines | 3 | 10 | 25 |
+| Databases | 1 | 3 | 5 |
+| Kubernetes clusters | 1 | 2 | 5 |
+| vCPUs | 8 | 32 | 96 |
+| Memory | 32 GB | 128 GB | 384 GB |
+| Disk | 320 GB | 1024 GB | 4096 GB |
+| Public IPv4 | 3 | 6 | 15 |
+| GitHub Actions runners (at once) | 3 | 10 | 20 |
+
+**Your limits rise on their own.** Once a day, an account moves up one tier when it qualifies:
+
+<Unordered>
+  <li><strong>Starter to Standard:</strong> at least $25 charged in Compute Usage (compute and CDN) since you opened the account, and an account at least 7 days old.</li>
+  <li><strong>Standard to Business:</strong> at least $250 charged, and an account at least 30 days old.</li>
+  <li>In both cases, nothing unpaid: no usage owed, and no failed charge in the last 48 hours.</li>
+</Unordered>
+
+Limits never go down on their own.
 
 A few things to know:
 
@@ -117,21 +132,21 @@ A few things to know:
   <li>Only what you add is checked. If your account is above a limit, you keep everything, but you can't add more until you are back under it.</li>
 </Unordered>
 
-The **Limits** section of Compute Usage shows each quota, how much you use, and your profile. If you need more, click **Need more? Contact support**, or [open a ticket](/use/console/support).
+The **Limits** section of Compute Usage shows each quota, how much you use, and your tier (**custom** once support has changed one of your limits). If you need more before your account moves up, click **Need more? Contact support**, or [open a ticket](/use/console/support).
 
-When a launch would go over a quota, it is refused with **This launch is over your compute quota**, followed by the limits it would break. Delete resources you no longer need, or ask support to raise your limits.
+When a launch would go over a quota, it is refused with **This launch is over your compute quota on the** *tier name* **tier**, followed by the limits it would break. Delete resources you no longer need, wait for your limits to rise, or ask support to raise them sooner.
 
 ## The 24-hour balance requirement
 
 To launch something, your balance must cover **24 hours** of:
 
 <Unordered>
-  <li>everything you already run, at its current hourly price, including stopped VMs, public IPv4 addresses and backup storage;</li>
+  <li>everything you already run, at its current hourly price, including stopped VMs, public IPv4 addresses, backup storage and management fees;</li>
   <li>everything that is still starting;</li>
   <li>what you are launching now.</li>
 </Unordered>
 
-It is checked when you create a VM, database or cluster, add or replace a Kubernetes worker, restore a database, attach a public IPv4, make a VM bigger, and for each runner job. Starting or rebooting a VM you already have isn't checked, and making a VM smaller is never refused.
+It is checked when you create a VM, database or cluster, add or replace a Kubernetes worker, restore a database, attach a public IPv4, make a VM bigger, turn on scheduled backups for a VM, and for each runner job. Starting or rebooting a VM you already have isn't checked, and making a VM smaller is never refused.
 
 The create forms show what your current compute needs for 24 hours, and what the launch adds. If your balance falls short, the launch is refused with **Not enough balance for this launch** and the amount to add. Top up, then launch again.
 
