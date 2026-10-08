@@ -111,7 +111,7 @@ Card is selected by default, because it works whatever your balance is.
 
 Choosing it opens **Stripe Checkout in your browser**. The app shows a "Finish your payment in the browser" card while you are away, which you can close at any time: the payment is not tied to that dialog. Once Stripe takes the payment, the amount lands on your balance, the plan is bought with it, and your subscription appears in the app on its own.
 
-Your card is kept at Stripe and funds future renewals.
+Your card is kept at Stripe and each renewal is charged to it, so your credits stay untouched. If the card can't be charged, the renewal is paid from your balance when it covers it.
 
 ### Paying from your balance
 

@@ -18,7 +18,7 @@ There are two things to know about: your **balance** and your **plans**.
 
 Your balance is money you keep on your account, in dollars. A plan is what gives a product its storage. Drive, S3 and Hub each have their own plan, so you can be on a free Drive plan, pay for a large S3 plan and never touch Hub at all.
 
-Your balance pays for your plans when they renew each month, and for anything you use by the hour, such as S3 on pay as you go and [Compute](/use/compute/billing). Topping up on its own does not give you more space. It keeps your plans paid.
+Your balance pays for plans that renew from it each month (plans paid by card are charged to the card), and for anything you use by the hour, such as S3 on pay as you go and [Compute](/use/compute/billing). Topping up on its own does not give you more space. It keeps your plans paid.
 
 You'll find all of this under <BgStyledIconWithText text="Billing" icon="Billing" /> in the sidebar.
 
@@ -97,7 +97,7 @@ Each product has its own plans page. You can get there from the product's card o
 When you subscribe, you choose how to pay:
 
 <Unordered>
-  <li><strong>Card.</strong> You pay through Stripe. The payment goes onto your balance and the plan is paid from there. Stripe keeps your card on file so it can top you up before each renewal.</li>
+  <li><strong>Card.</strong> You pay through Stripe, and each renewal is charged to your card too, so your balance is left for usage such as Compute. Stripe keeps your card on file. If the card can't be charged, the renewal is paid from your balance when it covers it, and we email you to update the card.</li>
   <li><strong>Account balance.</strong> The plan is paid straight from what you already have. If it is not enough, the console tells you and offers a top up.</li>
 </Unordered>
 
