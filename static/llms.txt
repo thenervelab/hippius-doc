@@ -18,6 +18,7 @@ Open only the file for the product you need. The long reference for the whole pr
 | Sign up, pay, get an API token, or manage Drive and S3 keys in the browser | https://docs.hippius.com/use/console/getting-started |
 | Use Drive on an Android phone | https://docs.hippius.com/use/mobile/getting-started |
 | Run a VM, managed PostgreSQL, managed Kubernetes or GitHub Actions runners (Compute) | https://docs.hippius.com/use/compute |
+| Serve an S3 bucket through the CDN (zones on <zone>.c.hipcdn.net or your own domain; FR/NL $0.010/GB, AU $0.060/GB, $0.002 per 10,000 requests, $1/month per custom domain) | https://docs.hippius.com/use/cdn |
 | Let team members use your compute, S3 and CDN, or work in an account you were invited to (shared accounts) | https://docs.hippius.com/use/console/team |
 | Run a storage miner | https://docs.hippius.com/earn/arion/running-miner and https://raw.githubusercontent.com/thenervelab/arion/main/llms.txt |
 | Run a validator | https://docs.hippius.com/earn/installing-validator |
