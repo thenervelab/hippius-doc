@@ -69,6 +69,7 @@ const sidebars: SidebarsConfig = {
             "storage/s3/examples/duplicati",
           ],
         },
+        "use/cdn",
         {
           type: "category",
           label: "Hub",
