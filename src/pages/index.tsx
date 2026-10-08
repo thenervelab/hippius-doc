@@ -29,7 +29,7 @@ export const CATEGORIES: (SmallCardInfo & {
   },
   {
     title: "Use",
-    description: "Drive, S3 Storage and Hub, from the console, desktop and mobile apps.",
+    description: "Drive, S3 Storage, Hub and Confidential Compute, from the console, desktop and mobile apps.",
     icon: <Icons.Cursor className="text-primary-50 relative size-6" />,
     cta: {
       label: "Use",
@@ -103,12 +103,11 @@ export const PRODUCTS: (SmallCardInfo & {
     cta: { label: "Publish your first model", href: "/registry" },
   },
   {
-    title: "Confidential Computing",
+    title: "Confidential Compute",
     description:
       "Virtual machines and databases in hardware-encrypted memory. The host can't read them, and you can verify it.",
     icon: <Icons.SheildTick className="text-primary-50 relative size-7" />,
-    cta: { label: "How it works", href: "/learn/confidential-computing" },
-    badge: "Coming soon",
+    cta: { label: "Launch your first VM", href: "/use/compute" },
   },
 ];
 
@@ -178,7 +177,7 @@ function HomepageHeader() {
           Encrypted storage, S3 and an AI model Hub
         </H1>
         <P className="text-center mt-4 max-w-[760px] text-white/90" size="lg">
-          Drive for your files, S3 Storage for your apps, Hub for your AI models and containers, and Confidential Computing on the way.
+          Drive for your files, S3 Storage for your apps, Hub for your AI models and containers, and Confidential Compute for virtual machines the host can't read.
         </P>
 
         <div className="flex gap-y-5  flex-wrap relative items-center justify-center mt-8">
