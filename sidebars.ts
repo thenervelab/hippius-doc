@@ -142,6 +142,19 @@ const sidebars: SidebarsConfig = {
             "use/mobile/troubleshooting",
           ],
         },
+        {
+          type: "category",
+          label: "WordPress Plugin",
+          collapsed: true,
+          items: [
+            "use/wordpress-plugin/overview",
+            "use/wordpress-plugin/installation",
+            "use/wordpress-plugin/credentials",
+            "use/wordpress-plugin/configure",
+            "use/wordpress-plugin/migrate",
+            "use/wordpress-plugin/troubleshooting",
+          ],
+        },
         "use/hippius-api",
         {
           type: "link",
