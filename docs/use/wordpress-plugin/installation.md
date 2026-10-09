@@ -53,7 +53,7 @@ There are two ways to install Hippius Media Offloader. The plugin directory is t
   <li>Click <BgStyledText>Install Now</BgStyledText>, then <BgStyledText>Activate</BgStyledText>.</li>
 </Ordered>
 
-<Screenshot src="/img/wordpress/install-plugin-search.png" alt="Find Hippius Media Offloader in the WordPress plugin directory." />
+<Screenshot src="/img/wordpress/install-plugin-search.png" alt="Find Hippius Media Offloader in the WordPress plugin directory." raw />
 
 *Find Hippius Media Offloader in the WordPress plugin directory.*
 
@@ -70,9 +70,14 @@ Use this if your site can't install from the directory, for example on a locked-
 
 ## After activation
 
-A new <BgStyledText>Hippius Media</BgStyledText> item shows up in your WordPress admin sidebar. That's the plugin's home: you configure it there, run your migrations, and check your storage and account balance.
+A new <BgStyledText>Hippius Media</BgStyledText> item shows up in your WordPress admin sidebar. That's the plugin's home. It has two entries:
 
-<Screenshot src="/img/wordpress/install-menu-item.png" alt="Hippius Media in the WordPress admin menu." />
+<Unordered>
+  <li><BgStyledText>Hippius Media</BgStyledText> is the one page where everything happens. Your account balance, settings, bucket status, logs, bulk migration and storage usage all sit on it as separate panels, so there's no hunting through submenus.</li>
+  <li><BgStyledText>Overview</BgStyledText> is a short tour of how the plugin and Hippius storage work, if you want the background.</li>
+</Unordered>
+
+<Screenshot src="/img/wordpress/install-menu-item.png" alt="Hippius Media in the WordPress admin menu." raw />
 
 *Hippius Media in the WordPress admin menu.*
 

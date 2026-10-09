@@ -19,6 +19,8 @@ Before you set up the plugin, you'll need a Hippius account, a pair of S3 access
   <li>Sign in with Google, GitHub or Apple.</li>
 </Ordered>
 
+The plugin's settings page also has a <BgStyledText>Create Account</BgStyledText> link that takes you to the same place.
+
 :::note
 No wallet, no seed phrase, no browser extension.
 :::
