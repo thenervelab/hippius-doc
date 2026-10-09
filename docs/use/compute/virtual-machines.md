@@ -101,6 +101,8 @@ Without a public IPv4, the VM can't be reached from the internet. You can still 
 
 Give the VM a **Name** of up to 64 characters, such as `web-1`.
 
+To keep VMs of the same service on different servers, give them the same **placement group** (`placement_group`), set at creation only. See [Placement groups](/use/compute/vm-failover#placement-groups).
+
 ### Review and launch
 
 Check the **Summary** panel. It lists the image, region, size, SSH keys, add-ons and the total per hour and per month. Below that it shows your quota after the launch and your balance.
@@ -224,5 +226,6 @@ You can't delete a VM while it is being resized. Wait for the resize to finish.
   <li><a href="/use/compute/networking">Public IPv4 and firewall</a>: open ports, publish a web service, restrict SSH.</li>
   <li><a href="/use/compute/resize">Resize a VM</a>: change its vCPUs and memory.</li>
   <li><a href="/use/compute/vm-backups">VM backups</a>: scheduled backups and restore.</li>
+  <li><a href="/use/compute/vm-failover">Failover and high availability</a>: what happens when a VM's server goes down.</li>
   <li><a href="/use/compute/billing">Billing and quotas</a>.</li>
 </Unordered>
