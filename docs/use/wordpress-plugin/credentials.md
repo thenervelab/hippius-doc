@@ -48,8 +48,11 @@ The plugin uses a pair of S3 access keys to upload your media, the same kind any
 <Ordered>
   <li>In the console, open <BgStyledText>S3</BgStyledText> → <BgStyledText>S3 Buckets</BgStyledText>.</li>
   <li>Click <BgStyledText>+ Create Master Token</BgStyledText>.</li>
-  <li>Save your <strong>Access Key ID</strong> (it starts with <code>hip_</code>) and your <strong>Secret Key</strong> somewhere safe.</li>
+  <li>Give the token a name you'll recognise later, such as <em>WordPress</em>, and pick how long it lasts.</li>
+  <li>Click <BgStyledText>Create Master Token</BgStyledText>, then save your <strong>Access Key ID</strong> (it starts with <code>hip_</code>) and your <strong>Secret Key</strong> somewhere safe.</li>
 </Ordered>
+
+Your website uses these keys every time it uploads, so a short expiry means uploads stop when the token runs out. Choose **1 year** or a custom date, and set yourself a reminder: when the time comes, create a new token in the console and save its keys in the plugin.
 
 :::danger Your Secret Key is shown only once
 Copy it into a password manager right away. There's no way to recover it later, so if you lose it you'll have to generate a new key pair.

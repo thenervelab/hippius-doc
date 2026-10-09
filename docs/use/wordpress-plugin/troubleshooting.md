@@ -25,8 +25,7 @@ When <BgStyledText>Save Settings</BgStyledText> can't reach your bucket, you'll 
 
 <Unordered>
   <li><strong>Invalid Access Key ID</strong> or <strong>Signature mismatch</strong> means a key is wrong. Re-check both, and watch for stray spaces at the start or end. If you've lost the Secret Access Key, create a new key pair in the console.</li>
-  <li><strong>Access denied</strong> means the keys work but aren't allowed to use that bucket. Make sure they belong to the same Hippius account as the bucket.</li>
-  <li><strong>An empty account balance.</strong> If your account balance has run out, top it up on the Billing page in the Hippius console.</li>
+  <li><strong>Access denied</strong> means the keys work but aren't allowed to use that bucket. Make sure they belong to the same Hippius account as the bucket, and that the token hasn't expired or been revoked in the console.</li>
 </Unordered>
 
 If the message says the Access Key ID and Secret Access Key are required, fill in both. On a site that already has a saved secret, an empty Secret Access Key field keeps the saved one.
@@ -41,8 +40,8 @@ Your server can't reach the Hippius endpoint.
 
 <Unordered>
   <li>Make sure your host allows outbound HTTPS traffic.</li>
-  <li>Check that <BgStyledText>S3 Endpoint</BgStyledText> is set to <code>https://s3.hippius.com</code>, with no typos or extra paths. The endpoint must start with <code>https://</code>.</li>
-  <li>Try a regional endpoint closer to your server: <code>https://eu-central-1.hippius.com</code> in Europe or <code>https://us-east-1.hippius.com</code> in the United States. They serve the same buckets and files. See <a href="/use/wordpress-plugin/configure#choosing-an-endpoint">Choosing an endpoint</a>.</li>
+  <li>Check that <BgStyledText>S3 Endpoint</BgStyledText> is set to <code>https://s3.hippius.com</code>, with no typos or extra paths. If you're not sure, clear the field and save: the plugin puts the default back.</li>
+  <li>If your host has a firewall or an outbound allow list, ask them to allow HTTPS to <code>s3.hippius.com</code>, plus <code>api.hippius.com</code> if you want the account balance to show.</li>
 </Unordered>
 
 ### Settings saved, but the bucket is private
@@ -51,16 +50,17 @@ You'll see **Settings saved and connection verified, but the current bucket is p
 
 ### Some files won't migrate
 
-Check the Error Log for the exact error on each file. The plugin already retries brief network errors on its own, so what's left there usually needs a fix. The usual suspects:
+While a bulk migration runs, the Error Log shows the reason for each file that fails. Once the run is over, look in the Debug Log instead: each failure is recorded there in a line that starts with **Failed**, such as **Failed to upload original image**, followed by the reason. The Debug Log only keeps its last 100 entries, so check it soon after the run. The plugin already retries brief network errors on its own, so what's left usually needs a fix. The usual suspects:
 
 <Unordered>
-  <li><strong>The file is too large.</strong> Hippius handles big files fine, but your PHP setup might cap uploads. Raise <code>upload_max_filesize</code> and <code>post_max_size</code> in your PHP config.</li>
+  <li><strong>The file is too large for your server.</strong> Hippius handles big files fine, but the plugin reads each file into memory and gives each upload 60 seconds. A large video can run past PHP's <code>memory_limit</code>, or time out on a slow connection. Raising <code>memory_limit</code> in your PHP config, or asking your host to, usually fixes it.</li>
   <li>The file is corrupted or can't be read off the local disk.</li>
   <li>The upload hit a network timeout. Retry just that file with <BgStyledText>Migrate to Hippius</BgStyledText> in the Media Library list view, or start the bulk migration again: only files that aren't migrated yet are picked up.</li>
   <li>The file type isn't supported. These files show as <strong>Unsupported</strong> in the Media Library and stay local. See the file types question below.</li>
+  <li>Your account balance ran out. If you pay as you go and your balance stays empty, S3 turns read only after 7 days, so uploads fail even though your settings still save. Top up on the Billing page in the Hippius console. See <a href="/use/console/billing#if-your-balance-runs-out">If your balance runs out</a>.</li>
 </Unordered>
 
-Once you've dealt with the errors, <BgStyledText>Clear Error Log</BgStyledText> empties the list so new problems are easy to spot.
+Once you've dealt with the errors, <BgStyledText>Clear Error Log</BgStyledText> empties the list so new problems are easy to spot. To find every file that's still waiting, filter the Media Library list view to <strong>Local Only</strong>.
 
 ### Bulk migration stopped partway
 
@@ -76,19 +76,22 @@ Bulk migration runs from your open browser tab, so closing the tab or losing you
 ### Account balance shows 0 or doesn't update
 
 <Unordered>
-  <li>Make sure you added your API token in the plugin settings, not just the S3 keys. The token is what lets the plugin read your account balance. Without it, the plugin tells you no API token is configured.</li>
+  <li>Make sure you added your API token in the plugin settings, not just the S3 keys. The token is what lets the plugin read your account balance. Without it, the balance shows <strong>--</strong> and the plugin tells you no API token is configured.</li>
+  <li>If you see <strong>Credit balance request failed with status 401</strong>, or another status number, the token is wrong or no longer valid. Copy it again from Settings in the Hippius console, paste it into <BgStyledText>API Token</BgStyledText> and save.</li>
   <li>Click <BgStyledText>Check balance</BgStyledText> to force a refresh.</li>
   <li>If it really is 0, add funds to your account balance on the Billing page in the <a href="https://console.hippius.com">Hippius console</a>.</li>
 </Unordered>
 
 ### Making sense of the Debug Log
 
-The Debug Log records every URL decision the plugin makes. <BgStyledText>Refresh Log</BgStyledText> shows the latest entries, <BgStyledText>Download Log</BgStyledText> saves a copy you can share when asking for help, and <BgStyledText>Clear Log</BgStyledText> starts it fresh. The entries worth knowing:
+The Debug Log keeps the plugin's last 100 entries, newest first: connection checks, uploads, failures and the media URLs it works out in the admin. It loads when you open the page. <BgStyledText>Refresh Log</BgStyledText> shows the latest entries, <BgStyledText>Download Log</BgStyledText> saves a copy you can share when asking for help, and <BgStyledText>Clear Log</BgStyledText> starts it fresh. The entries worth knowing:
 
 <Unordered>
-  <li><strong>Original file match</strong> means the plugin found a matching Hippius file for a URL.</li>
+  <li>Lines starting with <strong>Successfully</strong> or <strong>Failed</strong> tell you how each file's upload went, with the reason when it failed.</li>
+  <li><strong>Arion hash pending</strong> is normal. Hippius works out each file's hash shortly after the upload, and the file is already stored.</li>
+  <li><strong>Exact filename match</strong>, <strong>Dimension match</strong> and <strong>Original file match</strong> mean the plugin found the Hippius copy of the image size a page asked for.</li>
   <li><strong>No size match found</strong> means it couldn't find that exact image size, so it fell back to the original-size file.</li>
-  <li><strong>Fallback URL</strong> is the URL it actually served.</li>
+  <li><strong>Fallback URL</strong> is the URL it served in that case.</li>
 </Unordered>
 
 ## FAQ
@@ -135,11 +138,15 @@ Yes. Click <BgStyledText>Stop Migration</BgStyledText> and it stops. When you st
 
 **Can I go back to local storage?**
 
-If you kept local copies during migration, deactivating the plugin puts WordPress back to serving from `wp-content/uploads`. There's no automatic reverse migration that pulls your files back down from Hippius, so keep local copies if you want an easy way back.
+If you kept local copies during migration, deactivating the plugin puts WordPress back to serving from `wp-content/uploads`. There's no automatic reverse migration that pulls your files back down from Hippius, so keep local copies if you want an easy way back. Deleting the plugin also removes its settings and its record of which files were migrated. Your files stay in your Hippius bucket until you delete them there.
+
+**What happens if I delete a file from the Media Library?**
+
+The plugin deletes its copy from your Hippius bucket too, including every image size, so your bucket doesn't fill up with files your site no longer uses.
 
 **What if migration fails for some files?**
 
-The plugin logs every failure with a clear reason in the Error Log. Fix the cause, then retry. To retry one file, use <BgStyledText>Migrate to Hippius</BgStyledText> on it in the Media Library list view. To retry everything that's left, start the bulk migration again: it only picks up the files that didn't make it.
+The plugin records every failure with its reason: in the Error Log while a bulk migration runs, and in the Debug Log afterwards. Fix the cause, then retry. To retry one file, use <BgStyledText>Migrate to Hippius</BgStyledText> on it in the Media Library list view. To retry everything that's left, start the bulk migration again: it only picks up the files that didn't make it.
 
 **Does it support all WordPress file types?**
 
@@ -149,7 +156,7 @@ It supports the media types sites use day to day:
   <li><strong>Images:</strong> JPEG, PNG, GIF, WebP, HEIC, SVG, BMP and ICO.</li>
   <li><strong>Video:</strong> MP4, M4V, MOV, AVI, WMV, MPEG, OGG and 3GP.</li>
   <li><strong>Audio:</strong> MP3, M4A, OGG, WAV and WMA.</li>
-  <li><strong>Documents:</strong> PDF, Word, Excel, PowerPoint, OpenDocument text, RTF, Photoshop, plain text, CSV and calendar files.</li>
+  <li><strong>Documents:</strong> PDF, Word, Excel, PowerPoint, Keynote, OpenDocument text, RTF, Photoshop, plain text, CSV and calendar files.</li>
   <li><strong>Archives:</strong> ZIP.</li>
 </Unordered>
 

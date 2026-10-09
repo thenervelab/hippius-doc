@@ -37,9 +37,11 @@ That's safe, and nothing is lost. Come back to <BgStyledText>Hippius Media</BgSt
 
 ### Stopping and resuming a migration
 
-You can stop a migration at any time with <BgStyledText>Stop Migration</BgStyledText>. It finishes the file it's on and stops there, and everything already uploaded stays in your bucket. When you click <BgStyledText>Start Migration</BgStyledText> again, it resumes: the plugin only picks up files that aren't migrated yet, and nothing already uploaded is sent again.
+You can stop a migration at any time with <BgStyledText>Stop Migration</BgStyledText>. The upload already in progress finishes, nothing new starts, and everything already uploaded stays in your bucket. When you click <BgStyledText>Start Migration</BgStyledText> again, it resumes: the plugin only picks up files that aren't migrated yet, and nothing already uploaded is sent again.
 
 The progress counter starts over for the files that remain, so after a resume you'll see a smaller total than the first time. That's expected.
+
+When a migration finishes or stops, the page reloads and the Error Log starts empty again. To see which files are still waiting, use the **Local Only** filter in the Media Library, described in [Migrate or retry a single file](#migrate-or-retry-a-single-file).
 
 ### What happens during migration
 
@@ -47,8 +49,8 @@ The progress counter starts over for the files that remain, so after a resume yo
   <li>Each file, and for images every generated size, is uploaded to your Hippius bucket over the S3-compatible API.</li>
   <li>If an upload fails because of a brief network hiccup or a temporary server error, the plugin retries it automatically.</li>
   <li>WordPress starts serving the file from its Hippius URL, including every image size and <code>srcset</code>, and your visitors never notice the switch.</li>
-  <li>If <strong>Keep Local Files</strong> is unchecked, the local copy is removed once the upload succeeds.</li>
-  <li>Anything that still fails is listed in the <strong>Error Log</strong> with the reason, and the rest of the migration carries on.</li>
+  <li>If <strong>Keep Local Files</strong> is unchecked, the local copy is removed once the upload succeeds. For an image, that happens only when the original and every size made it.</li>
+  <li>Anything that still fails is skipped, and the rest of the migration carries on. While the migration runs, each failure shows in the <strong>Error Log</strong> with the reason, and it's also written to the <strong>Debug Log</strong>.</li>
 </Unordered>
 
 ## Auto migration for new uploads
@@ -87,7 +89,7 @@ The <BgStyledText>Hippius Media</BgStyledText> page gives you a live picture of 
 ### Statistics
 
 <Unordered>
-  <li><strong>Total Media Files</strong> is how many files are in your WordPress media library.</li>
+  <li><strong>Total Media Files</strong> is how many files in your media library are of a type the plugin can move.</li>
   <li><strong>Migrated Files</strong> is how many are safely on Hippius.</li>
   <li><strong>Not Migrated Files</strong> is what's still only local.</li>
 </Unordered>
@@ -96,14 +98,14 @@ The <BgStyledText>Hippius Media</BgStyledText> page gives you a live picture of 
 
 <Unordered>
   <li><strong>Total Hippius Storage</strong> is how much data you've stored on Hippius.</li>
-  <li><strong>Local Storage</strong> is how much local disk your media still takes up.</li>
-  <li><strong>Potential Savings</strong> is what you'd get back locally if you turned off <strong>Keep Local Files</strong>.</li>
+  <li><strong>Local Storage</strong> is how much disk space the files that aren't migrated yet take up on your server.</li>
+  <li><strong>Potential Savings</strong> is the disk space you'd free by migrating those files with <strong>Keep Local Files</strong> turned off.</li>
   <li><strong>Migration Progress</strong> is the share of your library that's been migrated.</li>
 </Unordered>
 
-Below these, **File Type Info** breaks your storage down by type. <BgStyledText>Refresh</BgStyledText> recounts everything, and <BgStyledText>Export Storage Report</BgStyledText> downloads a CSV of your migrated files.
+Below these, **File Type Info** breaks your migrated files down by type. <BgStyledText>Refresh</BgStyledText> re-reads your file sizes and reloads the figures, and <BgStyledText>Export Storage Report</BgStyledText> downloads a CSV of your migrated files.
 
-If you added an API token, the **Account Information** panel also shows your **Account balance**. Click <BgStyledText>Check balance</BgStyledText> to refresh it.
+If you added an API token, the **Account Information** panel at the top shows your **Account balance**. It loads when you open the page, and <BgStyledText>Check balance</BgStyledText> refreshes it.
 
 ### Confirm a file is really on Hippius
 
@@ -113,7 +115,7 @@ To double-check a specific file:
   <li>Open the WordPress Media Library and edit the file.</li>
   <li>Look at the file URL. It should point to your Hippius bucket, not to <code>wp-content/uploads</code>.</li>
   <li>Open that URL in a private browser window. If it loads, your visitors can see it too.</li>
-  <li>You can also check the <strong>Debug Log</strong> on the plugin page for the upload confirmation, which includes the file's Arion hash, the identifier Hippius gave it.</li>
+  <li>You can also check the <strong>Debug Log</strong> on the plugin page for the upload confirmation. It may say the file's Arion hash, the identifier Hippius gives each file, is still pending. That's normal: Hippius works out the hash shortly after the upload, and your file is already stored and served.</li>
 </Ordered>
 
 If a file didn't migrate or isn't showing up on your site, see [Troubleshooting](/use/wordpress-plugin/troubleshooting).

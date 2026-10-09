@@ -48,7 +48,7 @@ There are two ways to install Hippius Media Offloader. The plugin directory is t
 
 <Ordered>
   <li>Log in to your WordPress admin dashboard.</li>
-  <li>Go to <BgStyledText>Plugins</BgStyledText> → <BgStyledText>Add New</BgStyledText>.</li>
+  <li>Go to <BgStyledText>Plugins</BgStyledText> → <BgStyledText>Add Plugin</BgStyledText>. On older WordPress versions it's called <BgStyledText>Add New</BgStyledText>.</li>
   <li>Search for <strong>Hippius Media Offloader</strong>.</li>
   <li>Click <BgStyledText>Install Now</BgStyledText>, then <BgStyledText>Activate</BgStyledText>.</li>
 </Ordered>
@@ -63,7 +63,7 @@ Use this if your site can't install from the directory, for example on a locked-
 
 <Ordered>
   <li>Download the plugin zip from <a href="https://wordpress.org/plugins/hippius-media-offloader/">wordpress.org/plugins/hippius-media-offloader</a>.</li>
-  <li>In WordPress admin, go to <BgStyledText>Plugins</BgStyledText> → <BgStyledText>Add New</BgStyledText> → <BgStyledText>Upload Plugin</BgStyledText>.</li>
+  <li>In WordPress admin, go to <BgStyledText>Plugins</BgStyledText> → <BgStyledText>Add Plugin</BgStyledText> and click <BgStyledText>Upload Plugin</BgStyledText> at the top.</li>
   <li>Pick the zip file and click <BgStyledText>Install Now</BgStyledText>.</li>
   <li>Activate the plugin from the <BgStyledText>Plugins</BgStyledText> screen.</li>
 </Ordered>
