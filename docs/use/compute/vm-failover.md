@@ -56,7 +56,9 @@ Automatic failover needs at least one complete backup, and it may not be offered
 | Not offered in this VM's region yet. | Automatic failover isn't available in this region. Support can still fail the VM over manually. |
 | Not available yet. | Automatic failover isn't available yet. |
 
-If the toggle is already on and one of these becomes true, for example after a reboot or when you turn off backups, it stays on but shows a warning such as **On, but not effective until the next backup completes.** The VM can't be failed over automatically until the cause is gone.
+If the toggle is already on and one of these becomes true, for example after a reboot, it stays on but shows a warning such as **On, but not effective until the next backup completes.** The VM can't be failed over automatically until the cause is gone.
+
+Turning off backups also turns off automatic failover. Turning backups back on doesn't turn it back on.
 
 ### During and after a failover
 

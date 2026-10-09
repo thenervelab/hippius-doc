@@ -89,7 +89,7 @@ If the server running your VM dies, the VM can be restarted on another server in
 
 ## Turn off backups
 
-Turn off **Scheduled backups** and confirm with **Turn off**. No new backups are taken. The existing ones are kept for 7 days, then deleted.
+Turn off **Scheduled backups** and confirm with **Turn off**. No new backups are taken. The existing ones are kept for 7 days, then deleted. This also turns off [automatic failover](/use/compute/vm-failover#turn-on-automatic-failover), and turning backups back on doesn't turn it back on.
 
 ## What backups cost
 
