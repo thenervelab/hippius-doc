@@ -40,10 +40,27 @@ There are two modes:
 
 <Unordered>
   <li><strong>Manual</strong>, the default. When the server running your VM is confirmed dead, Hippius support can fail your VM over, for example after you <a href="/use/console/support">open a ticket</a>.</li>
-  <li><strong>Automatic</strong>, opt-in, per VM. In the VM's <strong>Backups</strong> panel, turn on <strong>Automatically restart on another server if this server goes down</strong>. Once the server has been proven dead for 15 minutes, the VM is restarted on another server from its latest backup.</li>
+  <li><strong>Automatic</strong>, opt-in, per VM. Once the server has been proven dead for 15 minutes, the VM is restarted on another server in the same region from its latest backup.</li>
 </Unordered>
 
-Automatic failover needs at least one complete backup, and it may not be offered in every region. When it isn't available for a VM, the console shows why. If no server in the region has room for the VM, the failover waits and retries.
+### Turn on automatic failover
+
+On the VM's page, in the **Backups** panel, the **Failover** section sits between **Scheduled backups** and **Restore points**. Turn on **Automatically restart on another server if this server goes down**. The section is hidden when failover isn't offered for the VM.
+
+Automatic failover needs at least one complete backup, and it may not be offered in every region. When it can't be turned on, the toggle is disabled and the console says why:
+
+| Message | What to do |
+|---|---|
+| Turn on backups to use automatic failover. | [Turn on scheduled backups](/use/compute/vm-backups#turn-on-backups). |
+| Available once the first backup is complete. | Wait for the first full backup to finish. |
+| Not offered in this VM's region yet. | Automatic failover isn't available in this region. Support can still fail the VM over manually. |
+| Not available yet. | Automatic failover isn't available yet. |
+
+### During and after a failover
+
+While a failover runs, a banner at the top of the VM's page says **Restarting on another server**, from which backup, and whether it was started automatically or by Hippius support. If no server in the region has room for the VM, the banner says **Waiting for a server with capacity**: the failover waits and retries until one does.
+
+Once it is done, the banner says **Restarted on another server**, with the backup used, for 7 days. The **Failover history** table in the **Backups** panel lists every failover of the VM: when it started, its type (**Automatic** or **By support**), its status, the backup used and how long it took.
 
 Whichever the mode, you get an email whenever your VM is failed over, saying when, why, and which backup was used.
 
@@ -60,9 +77,9 @@ High availability is your responsibility. A single VM runs on one server, and a 
 A placement group keeps your VMs on different servers. Two VMs of the same account in the same placement group are never placed on the same server.
 
 <Unordered>
-  <li>Set it with the optional <code>placement_group</code> field when you create a VM: 1 to 64 lowercase letters, digits and hyphens, for example <code>web</code>.</li>
+  <li>Set it when you create a VM: in the <strong>Finalize details</strong> step, open <strong>Advanced options</strong> and fill in <strong>Placement group (optional)</strong>. Through the API, it is the optional <code>placement_group</code> field. A name is 1 to 64 lowercase letters, digits and hyphens, for example <code>web-tier</code>.</li>
   <li>It is fixed at creation. You can't add a VM to a group, or move it to another, later.</li>
-  <li>If no server can take the VM without sharing one with another VM of the group, the launch fails with <code>placement-anti-affinity-unsatisfiable</code>.</li>
+  <li>If no server can take the VM apart from the other VMs of its group, the launch fails with <code>placement-anti-affinity-unsatisfiable</code>. Launch it in another group, or without one.</li>
 </Unordered>
 
 :::note A different server is not a different datacenter
