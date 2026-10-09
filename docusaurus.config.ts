@@ -22,7 +22,7 @@ const config: Config = {
   tagline: "Encrypted storage, S3 and an AI model Hub",
   favicon: "img/favicon.ico",
 
-  url: "https://docs.hippius.io",
+  url: "https://docs.hippius.com",
   baseUrl: "/",
 
   organizationName: "thenervelab",
