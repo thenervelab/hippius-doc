@@ -188,6 +188,19 @@ const sidebars: SidebarsConfig = {
           ],
         },
         {
+          type: "category",
+          label: "WordPress Plugin",
+          collapsed: true,
+          items: [
+            "use/wordpress-plugin/overview",
+            "use/wordpress-plugin/installation",
+            "use/wordpress-plugin/credentials",
+            "use/wordpress-plugin/configure",
+            "use/wordpress-plugin/migrate",
+            "use/wordpress-plugin/troubleshooting",
+          ],
+        },
+        {
           type: "link",
           label: "Pricing",
           href: "https://hippius.com/pricing",
