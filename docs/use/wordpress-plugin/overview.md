@@ -46,7 +46,7 @@ Every file you offload ends up on [Arion](/learn/storage-systems), our distribut
 <Unordered>
   <li><strong>Erasure coding.</strong> Each file is broken into 30 pieces (10 data and 20 parity) with Reed-Solomon.</li>
   <li><strong>CRUSH placement.</strong> Those pieces are spread across independent machines, so up to 20 can fail before your file is ever at risk.</li>
-  <li><strong>Encrypted at rest.</strong> Hippius uses envelope encryption: every chunk is encrypted with AES-256-GCM under its own key, and those keys are in turn wrapped by a key management service. Miners only ever see encrypted bytes.</li>
+  <li><strong>Encrypted at rest.</strong> Hippius uses envelope encryption: every chunk is encrypted under its own key, and those keys are in turn wrapped by a key management service. Miners only ever see encrypted bytes.</li>
 </Unordered>
 
 Because it's plain S3 underneath, any S3 tool works with Hippius too. The [S3 compatibility matrix](/storage/s3/compatibility) lists every supported operation.
