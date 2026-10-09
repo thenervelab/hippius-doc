@@ -64,6 +64,8 @@ Turning off backups also turns off automatic failover. Turning backups back on d
 
 While a failover runs, a banner at the top of the VM's page says **Restarting on another server**, from which backup, and whether it was started automatically or by Hippius support. If no server in the region has room for the VM, the banner says **Waiting for a server with capacity**: the failover waits and retries until one does. The VM's status shows each step, for example **Restarting on another server · Preparing**. You can't restore the VM from a backup or resize it until the failover is done.
 
+If the original server comes back before the VM has been restarted elsewhere, the failover is cancelled: nothing changes, the VM keeps running where it was, and no email is sent. The **Failover history** shows it as **Not needed, server came back**.
+
 Once it is done, the banner says **Restarted on another server**, with the backup used, for 7 days. The **Failover history** table in the **Backups** panel lists every failover of the VM: when it started, its type (**Automatic** or **By support**), its status, the backup used and how long it took.
 
 Whichever the mode, you get an email whenever your VM is failed over, saying when, why, and which backup was used.
@@ -81,7 +83,7 @@ High availability is your responsibility. A single VM runs on one server, and a 
 A placement group keeps your VMs on different servers. Two VMs of the same account in the same placement group are never placed on the same server.
 
 <Unordered>
-  <li>Set it when you create a VM: in the <strong>Finalize details</strong> step, open <strong>Advanced options</strong> and fill in <strong>Placement group (optional)</strong>. Through the API, it is the optional <code>placement_group</code> field. A name is 1 to 64 lowercase letters, digits and hyphens, for example <code>web-tier</code>.</li>
+  <li>Set it when you create a VM: in the <strong>Finalize details</strong> step, open <strong>Advanced options</strong> and fill in <strong>Placement group (optional)</strong>. Through the API, it is the optional <code>placement_group</code> field. A name is 1 to 64 lowercase letters, digits and hyphens, for example <code>web-tier</code>. Any other name is refused.</li>
   <li>It is fixed at creation. You can't add a VM to a group, or move it to another, later.</li>
   <li>The form suggests the groups you already use, with how many VMs each has. When placement groups aren't available, the form has no <strong>Advanced options</strong>, and a launch that sets one is refused with <strong>Placement groups can't be used right now</strong>: launch without a placement group, or try again later.</li>
   <li>If no server can take the VM apart from the other VMs of its group, the launch fails with <code>placement-anti-affinity-unsatisfiable</code>. Launch it in another group, or without one.</li>
