@@ -210,12 +210,12 @@ Each VM has a setting for what happens when its own operating system powers off,
 
 <Unordered>
   <li><strong>Restart it</strong> (the default): the VM is started again automatically.</li>
-  <li><strong>Leave it stopped</strong>: the VM stays stopped, exactly as if you had pressed <strong>Stop</strong>. It keeps its disk, its addresses and its server, and it is billed like any stopped VM, at its full price (see <a href="/use/compute/billing#what-is-billed">What is billed</a>). Press <strong>Start</strong> to bring it back.</li>
+  <li><strong>Leave it stopped</strong>: the VM stays stopped, exactly as if you had pressed <strong>Stop</strong>, and the console marks it <strong>Stopped by its operating system</strong>. It keeps its disk, its addresses and its server, and it is billed like any stopped VM, at its full price (see <a href="/use/compute/billing#what-is-billed">What is billed</a>). Press <strong>Start</strong> to bring it back.</li>
 </Unordered>
 
 **Leave it stopped** suits one-shot batch jobs and CI workloads that power off when they are done. If the VM's server or hypervisor crashes, the VM is always restarted, whatever the setting.
 
-Choose it when you create the VM, under **Advanced options**, or change it later in the VM's settings. A change applies to the running VM without a reboot. It may show as pending for a moment, until the server confirms it.
+Choose it when you create the VM, under **Advanced options**, or change it later in the **When the VM powers itself off** card under **VM Controls** on the VM's page. A change applies to the running VM without a reboot. It may show as pending for a moment, until the server confirms it.
 
 If the VM's server doesn't support **Leave it stopped** yet, the console says so and the VM keeps restarting for now. A new VM created with **Leave it stopped** is placed only on a server that supports it. If none can take it right now, the creation fails with a message saying so.
 
