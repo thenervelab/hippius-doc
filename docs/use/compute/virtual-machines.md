@@ -90,7 +90,7 @@ You can select up to 20 keys per VM. You must select at least one, unless you pi
 These are optional. Each one is added to the price in the summary.
 
 <Unordered>
-  <li><strong>Automatic backups</strong>: encrypted copies of the disk, kept 7 days, taken at the interval you choose. They turn on once the VM is running. See <a href="/use/compute/vm-backups">VM backups</a>.</li>
+  <li><strong>Automatic backups</strong>: encrypted copies of the disk, kept 7 days, taken at the interval you choose. They turn on once the VM is running. Without backups, the VM can't be restored, or <a href="/use/compute/vm-failover">restarted on another server</a> if its server fails. See <a href="/use/compute/vm-backups">VM backups</a>.</li>
   <li><strong>Public IPv4</strong>: a dedicated public address for this VM. Inbound traffic is blocked unless a firewall rule allows it. It is off by default.</li>
   <li><strong>Open SSH (port 22) to the internet</strong>: shown once you tick Public IPv4, and on by default. It creates a firewall rule named <code>SSH (opened at launch)</code> that lets anyone reach port 22. Ping (ICMP) is always allowed. You can restrict or delete that rule later; see <a href="/use/compute/networking#restrict-ssh-to-your-own-address">Restrict SSH to your own address</a>.</li>
 </Unordered>
@@ -100,6 +100,8 @@ Without a public IPv4, the VM can't be reached from the internet. You can still 
 ### 6. Finalize details
 
 Give the VM a **Name** of up to 64 characters, such as `web-1`.
+
+To keep VMs of the same service on different servers, open **Advanced options** under the name and give them the same **Placement group**. It can't be changed after launch. See [Placement groups](/use/compute/vm-failover#placement-groups).
 
 ### Review and launch
 
@@ -224,5 +226,6 @@ You can't delete a VM while it is being resized. Wait for the resize to finish.
   <li><a href="/use/compute/networking">Public IPv4 and firewall</a>: open ports, publish a web service, restrict SSH.</li>
   <li><a href="/use/compute/resize">Resize a VM</a>: change its vCPUs and memory.</li>
   <li><a href="/use/compute/vm-backups">VM backups</a>: scheduled backups and restore.</li>
+  <li><a href="/use/compute/vm-failover">Failover and high availability</a>: what happens when a VM's server goes down.</li>
   <li><a href="/use/compute/billing">Billing and quotas</a>.</li>
 </Unordered>

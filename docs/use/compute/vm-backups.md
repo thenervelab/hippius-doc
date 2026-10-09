@@ -83,9 +83,13 @@ Only one restore can run on a VM at a time, and you can't restore while the VM i
 
 Backups taken before the VM's last reboot are marked **Earlier boot**. Restoring them rolls the VM back across a reboot, which needs a VM created from a recent image. The console tells you if your VM can't do it. When it can, the dialog asks you to confirm the rollback, and you get an email when it is done. A VM can be rolled back at most once every 30 minutes.
 
+## Failover
+
+If the server running your VM dies, the VM can be restarted on another server in the same region from its newest backup of the current boot, manually by support or automatically if you turn on **Automatically restart on another server if this server goes down** in the **Backups** panel. Data written after that backup is lost, and a VM without backups can't be failed over. See [VM failover and high availability](/use/compute/vm-failover).
+
 ## Turn off backups
 
-Turn off **Scheduled backups** and confirm with **Turn off**. No new backups are taken. The existing ones are kept for 7 days, then deleted.
+Turn off **Scheduled backups** and confirm with **Turn off**. No new backups are taken. The existing ones are kept for 7 days, then deleted. This also turns off [automatic failover](/use/compute/vm-failover#turn-on-automatic-failover), and turning backups back on doesn't turn it back on.
 
 ## What backups cost
 
