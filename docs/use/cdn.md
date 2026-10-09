@@ -44,7 +44,7 @@ A zone in front of a private bucket creates a read-only key on that bucket for t
 </Unordered>
 
 :::note Uploading from the console
-Objects uploaded from the console keep the file's type, but are stored as attachments (`Content-Disposition: attachment`), so browsers download them instead of showing them. For a website, upload with an S3 client. See [Uploading objects](/use/console/s3#uploading-objects).
+Objects uploaded from the console keep the file's type, so they are served with it, HTML included. See [Uploading objects](/use/console/s3#uploading-objects).
 :::
 
 ## Use your own domain
