@@ -83,6 +83,19 @@ The **Shared team drive** line means you can share your drives with other people
 
 While you hold a paid plan, the Free card reads **Default Plan**. That is the plan you fall back to if you cancel, not a second plan you are on.
 
+### Screenshots and recordings on each plan
+
+Screenshots and sharing are unlimited on every plan. The Free Drive Plan has a few limits on [screen recording](/use/captures/recording):
+
+<Unordered>
+  <li>A recording stops at <strong>5 minutes</strong>. The last minute shows a countdown, and paused time does not count.</li>
+  <li>You can keep <strong>25 recordings</strong> in total. Every video in your Hippius Captures drive counts, and deleting one frees a slot.</li>
+  <li>Screenshots and recordings carry a <strong>small Hippius watermark</strong> in the bottom-right corner.</li>
+  <li>Captures count toward your <strong>10 GB</strong> like any other file.</li>
+</Unordered>
+
+Paid plans have no capture limits beyond their storage, and no watermark. See [Free and paid plans](/use/captures/plans).
+
 ### The free plan and how you signed in
 
 If you signed in with **Google, GitHub or Apple**, your account includes the Free Drive Plan and you always have 10 GB to fall back on.

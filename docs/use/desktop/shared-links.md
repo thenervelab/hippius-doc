@@ -64,6 +64,7 @@ The desktop reads your local file directly with no download required. For most f
   <li>Your original folder key stays private. Only the share key is used for the share upload.</li>
   <li>Revoking a share deletes the encrypted copy and frees the storage.</li>
   <li>Sharing the same file twice creates two independent copies, each with its own key.</li>
+  <li>Deleting a file does not end the links made from it. Each link is its own encrypted copy, so it keeps working until you revoke it or it expires. The delete confirmation reminds you of this.</li>
   <li>The server can never read the file, even while serving it to recipients. It only ever holds ciphertext.</li>
 </Unordered>
 
@@ -89,7 +90,7 @@ The link is live immediately. Anyone you send it to can download the file right 
 
 ### Choosing an expiry
 
-Every link gets an expiry, chosen before you create it:
+A link you create yourself gets an expiry, chosen before you create it:
 
 | Option | The link stops working |
 |---|---|
@@ -97,6 +98,10 @@ Every link gets an expiry, chosen before you create it:
 | **7 days** | One week after you create it. |
 | **30 days** | One month after you create it. |
 | **Until I revoke it** | Never on its own. It stays live until you revoke it. |
+
+:::info Links made for screenshots and recordings
+A [screenshot or screen recording](/use/captures) gets its share link automatically, the moment it is saved. That link is public and never expires by default, so it is ready to paste straight away. It is listed in Shared Links with your other links, and you revoke it the same way. You can stop these links being made by turning off **Copy a share link after capture** in [Settings](/use/desktop/settings#screenshots--recording). See [Share links for captures](/use/captures/share-links).
+:::
 
 ### Requiring a password
 
@@ -252,7 +257,7 @@ Every active share stores a separate encrypted copy of your file on Hippius:
 
 <Unordered>
   <li><strong>Counts against your storage quota</strong> for as long as the share is active.</li>
-  <li><strong>Is independent of your sync copy</strong>, using a different key and living in a different location on the network.</li>
+  <li><strong>Is independent of your sync copy</strong>, using a different key and living in a different location on the network. Deleting or replacing the original leaves the link showing the file as it was when you shared it.</li>
   <li><strong>Is deleted when you revoke or when it expires</strong>, so storage is freed automatically.</li>
 </Unordered>
 
