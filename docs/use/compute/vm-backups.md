@@ -86,7 +86,7 @@ Backups taken before the VM's last reboot are marked **Earlier boot**. Restoring
 
 ## Failover
 
-If the server running your VM dies, the VM can be restarted on another server in the same region from its newest backup of the current boot, manually by support or automatically if you turn on **Automatic failover** when you create the VM, or later **Automatically restart on another server if this server goes down** in the **Backups** panel. Automatic failover is offered in France only for now. Data written after that backup is lost, and a VM without backups can't be failed over. See [VM failover and high availability](/use/compute/vm-failover).
+If the server running your VM dies, the VM can be restarted on another server in the same region from its newest backup of the current boot, manually by support or automatically if you turn on **Automatic failover** when you create the VM, or later **Automatically restart on another server if this server goes down** in the **Backups** panel. Automatic failover is offered in France only for now, and no failover ever moves a VM to another region. Data written after that backup is lost, and a VM without backups can't be failed over. See [VM failover and high availability](/use/compute/vm-failover).
 
 ## Turn off backups
 
