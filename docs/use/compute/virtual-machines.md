@@ -215,7 +215,7 @@ Each VM has a setting for what happens when its own operating system powers off,
 
 **Leave it stopped** suits one-shot batch jobs and CI workloads that power off when they are done. If the VM's server or hypervisor crashes, the VM is always restarted, whatever the setting.
 
-Choose it when you create the VM, under **Advanced options**, or change it later in the **When the VM powers itself off** card under **VM Controls** on the VM's page. A change applies to the running VM without a reboot. It may show as pending for a moment, until the server confirms it.
+Choose it when you create the VM, under **Advanced options**, or change it later in the **When the VM powers itself off** card under **VM Controls** on the VM's page. The VM must be running to change it. A change applies to the running VM without a reboot. It may show as pending for a moment, until the server confirms it.
 
 If the VM's server doesn't support **Leave it stopped** yet, the console says so and the VM keeps restarting for now. A new VM created with **Leave it stopped** is placed only on a server that supports it. If none can take it right now, the creation fails with a message saying so.
 
