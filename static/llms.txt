@@ -15,6 +15,7 @@ Open only the file for the product you need. The long reference for the whole pr
 | Work in a shared drive | A Drive someone else owns and invited you into. They pay for the storage. It shows in the console under Storage after the invite. |
 | Give a coding agent shared memory | https://raw.githubusercontent.com/thenervelab/hippius-mem/main/llms.txt |
 | Script Drive with encryption on the client | https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt |
+| Take a screenshot or record the screen, with a share link | https://docs.hippius.com/use/captures (a person does this in the desktop app or the console; there is no capture API) |
 | Sign up, pay, get an API token, or manage Drive and S3 keys in the browser | https://docs.hippius.com/use/console/getting-started |
 | Use Drive on an Android phone | https://docs.hippius.com/use/mobile/getting-started |
 | Run a storage miner | https://docs.hippius.com/earn/arion/running-miner and https://raw.githubusercontent.com/thenervelab/arion/main/llms.txt |
@@ -39,6 +40,16 @@ Billing: https://docs.hippius.com/use/console/billing
 
 Hub Free plan: creating a namespace requires at least 10 credits on the account (`REGISTRY_MIN_CREDITS`, a spam check). A zero balance is refused. The plan price stays zero. Top up, then provision. https://docs.hippius.com/use/console/hub
 
+## Screenshots, recordings, and share links
+
+Guide: https://docs.hippius.com/use/captures
+
+- Screenshots and screen recordings are taken by a person in the desktop app (macOS, Linux, Windows screenshots) or the console (Chrome, Edge, Safari, Firefox on a computer). There is no capture API or CLI. The desktop `--capture` and `--record` flags only start the same interactive capture a keyboard shortcut does; a person still chooses what to capture.
+- Each capture is encrypted on the device, saved to the "Hippius Captures" drive, and gets a public share link that never expires by default. The user revokes it in Shared Links. Deleting a file does not end its share links.
+- Free plan: recordings stop at 5 minutes, 25 recordings in total, a small Hippius watermark. Screenshots and sharing are unlimited. Paid plans: storage is the only limit.
+- What an agent can do today: upload a file and create a share link with the Drive SDK. `hippius-drive put shot.png captures/shot.png` stores it in Drive. `hippius-drive share put shot.png --name shot.png --ttl 7d` encrypts the local file under a fresh key, uploads that copy, and prints one link (`--ttl` is 24h, 7d, 30d, or never; default 24h; `--password` of 8 or more characters is optional). `share ls` lists links, `share rm TOKEN` revokes one. https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/docs/cli.md
+- The printed link is the decryption key (after `#`). Hand it to the user. Do not log it or post it anywhere public.
+
 ## Deprecated
 
 `hipc`, `hippius-cli`, `homebrew-tap`, `hippius-sdk`, `hippius-sdk-ts`, `hippius-sdk-rust`, `hippius-rust-sdk`, `hippius-sync-engine`, `hippius-storage-miner`, and anything else IPFS-related, are deprecated. Hippius switched from IPFS to Arion. https://docs.hippius.com/cli/usage
@@ -58,6 +69,7 @@ Hippius VMs: https://docs.hippius.com/use/console/virtual-machines
 - Mobile (Android on Google Play, iPhone not released): https://docs.hippius.com/use/mobile/getting-started
 - Console: https://docs.hippius.com/use/console/getting-started
 - Drive: https://docs.hippius.com/use/drive
+- Screenshots and screen recording: https://docs.hippius.com/use/captures
 - Pricing: https://hippius.com/pricing
 - Status: https://status.hippius.com
 - LinkedIn: https://www.linkedin.com/company/hippius

@@ -151,6 +151,28 @@ A token and an address that do not belong together fail `whoami` with 403. Leave
 
 `share` and `folder-share` create links. `invite` and `drives` are the shared-drive commands. There is no published console guide for shared drives. The CLI page above is the reference.
 
+### Screenshots, recordings, and share links
+
+Guide: https://docs.hippius.com/use/captures
+
+A person takes screenshots and screen recordings in the desktop app (screenshots on macOS, Windows, and Linux; recording on macOS and Linux) or in the console (Chrome, Edge, Safari, Firefox on a computer). There is no capture API or CLI. The desktop `--capture` and `--record` flags only start the same interactive capture a keyboard shortcut does; a person still chooses what to capture.
+
+Each capture is encrypted on the device, saved to the "Hippius Captures" drive as "Screenshot YYYY-MM-DD at HH.MM.SS.png" or "Recording YYYY-MM-DD at HH.MM.SS.mp4" (or .webm), and gets a share link copied to the clipboard. That link is public (anyone with it can view) and never expires by default. It is managed in Shared Links like any link. Deleting a file does not end its share links: each link is its own encrypted copy. Revoke the link.
+
+Free plan: recordings stop at 5 minutes, 25 recordings in total (every video in the captures drive counts, deleting one frees a slot), a small Hippius watermark drawn in before encryption. Screenshots and sharing are unlimited. Captures count toward storage. Paid plans: no limit but storage, no watermark.
+
+What an agent can do today is upload a file and make a share link with the Drive SDK (`hippius-drive`, see Drive above):
+
+```bash
+hippius-drive put shot.png captures/shot.png                    # store it in Drive
+hippius-drive share put shot.png --name shot.png --ttl 7d       # prints one link
+hippius-drive share put demo.mp4 --name demo.mp4 --ttl never --password 'at-least-8'
+hippius-drive share ls
+hippius-drive share rm TOKEN                                    # revoke
+```
+
+`share put` encrypts the local file under a fresh key, uploads that copy, and prints a console URL. `--ttl` is `24h`, `7d`, `30d`, or `never` (default `24h`). The key is after the `#` in the URL and never reaches the server, so the URL is the secret: give it to the user and do not log it. Files shared this way carry no watermark and are not counted as recordings.
+
 ### Console
 
 There is no console CLI. Sign-in, plan checkout in the browser, and anything that needs a wallet signature stay in https://console.hippius.com. After the user copies the API token, call https://api.hippius.com with `Authorization: Token <token>`.
