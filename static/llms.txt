@@ -18,7 +18,7 @@ Open only the file for the product you need. The long reference for the whole pr
 | Sign up, pay, get an API token, or manage Drive and S3 keys in the browser | https://docs.hippius.com/use/console/getting-started |
 | Use Drive on an Android phone | https://docs.hippius.com/use/mobile/getting-started |
 | Run a VM, managed PostgreSQL, managed Kubernetes or GitHub Actions runners (Compute) | https://docs.hippius.com/use/compute |
-| Serve an S3 bucket through the CDN (zones on <zone>.c.hipcdn.net or your own domain; FR/NL $0.010/GB, AU $0.060/GB, $0.002 per 10,000 requests, $1/month per custom domain) | https://docs.hippius.com/use/cdn |
+| Serve an S3 bucket through the CDN (zones on <zone>.c.hipcdn.net or your own domain; FR $0.010/GB, AU $0.060/GB, $0.002 per 10,000 requests, $1/month per custom domain) | https://docs.hippius.com/use/cdn |
 | Let team members use your compute, S3 and CDN, or work in an account you were invited to (shared accounts) | https://docs.hippius.com/use/console/team |
 | Run a storage miner | https://docs.hippius.com/earn/arion/running-miner and https://raw.githubusercontent.com/thenervelab/arion/main/llms.txt |
 | Run a validator | https://docs.hippius.com/earn/installing-validator |
@@ -61,6 +61,9 @@ Prices per 730-hour month: vCPU $18, memory $2.50/GB, disk $0.10/GB. Small (1 vC
 - Public IPv4, firewall rules and published ports: https://docs.hippius.com/use/compute/networking
 - Resize a VM (vCPU and memory; the disk is kept): https://docs.hippius.com/use/compute/resize
 - VM backups and restore: https://docs.hippius.com/use/compute/vm-backups
+- VM failover: if a VM's server dies, the VM restarts on another server in the same region from its latest backup, keeping its IP and NetBird address; data since that backup is lost. Automatic failover is opt-in per VM, at creation (switch under Automatic backups; API `"failover_mode": "auto"` with `backup_interval_s`) or later in the Backups panel. Offered in France only today. Active after the first full backup: https://docs.hippius.com/use/compute/vm-failover
+- Placement groups: VMs of one account in the same group (`placement_group` at creation, 1 to 64 of a-z, 0-9, -) are never on the same server. A different server is not a different datacenter. Fixed at creation: https://docs.hippius.com/use/compute/vm-failover#placement-groups
+- Compute API: base https://api.hippius.com/api, header `Authorization: Token YOUR_TOKEN` (plus `X-Hippius-Account: acct_...` for a shared account). Full OpenAPI spec: https://api.hippius.com/swagger.json. Create a VM with POST /api/compute/vms/ `{"name":"web-1","flavor":"small","region":"FR","ssh_key_ids":[123]}` (keys from GET /api/ssh-keys/), then poll GET /api/compute/vms/<vm_id>/ until `netbird_ip` is set and SSH to it. `status` is the lifecycle (billed while `running`, stopped included), `power_state` is on/off. Send your own User-Agent: some default ones (Python urllib) are blocked with 403 error 1010: https://docs.hippius.com/use/api#compute-api
 - Managed PostgreSQL 16/17/18 (one-time credentials, TLS, backups to your S3, restore, HA failover): https://docs.hippius.com/use/compute/databases
 - Managed Kubernetes clusters (cluster key, kubeconfig, API access): https://docs.hippius.com/use/compute/kubernetes
 - Kubernetes worker pools and signed node operations: https://docs.hippius.com/use/compute/kubernetes-worker-pools

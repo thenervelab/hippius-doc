@@ -23,7 +23,7 @@ These are the prices in force today. Amounts are in dollars, taken from your bal
 | Memory | $2.50 per GB per month |
 | Disk | $0.10 per GB per month |
 | Public IPv4 | $0.005 per hour (about $3.65 a month), while attached |
-| VM backups | $6 per TB-month stored |
+| VM backups | $6 per TB-month stored. Each full backup stores the whole disk size. |
 | Outbound bandwidth | Measured per region; $0 today in France, the Netherlands and Australia (Australia: 1 TB per VM per month included). Inbound traffic is free. |
 
 A VM costs the sum of its vCPUs, memory and disk:
@@ -67,7 +67,7 @@ Some examples:
 | **Virtual machines** | Per second, by size: its vCPUs, memory and disk. From the first time the VM runs until you ask to delete it, **including while it is stopped**. |
 | **Public IPv4** | Per second while the address is attached. |
 | **Bandwidth** | Outbound traffic is measured per VM and per region, and not charged today. Inbound traffic is free. |
-| **VM backups** | Per GB of backup storage per hour, $6 per TB-month. See [VM backups](/use/compute/vm-backups#what-backups-cost). |
+| **VM backups** | Per GB of backup storage per hour, $6 per TB-month: each full backup at the disk's full size, each incremental at what changed, and older chains for 7 days. See [VM backups](/use/compute/vm-backups#what-backups-cost). |
 | **Databases** | Their VMs, like any VM, plus the [management fee](#management-fees). |
 | **Kubernetes clusters** | Their masters, workers and the masters' public IPv4, like any VM, plus the [management fee](#management-fees). |
 | **Database and Kubernetes backups** | As S3 storage in your account, at your S3 price. |
