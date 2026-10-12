@@ -89,7 +89,7 @@ On the zone's **Hostnames** tab, click <BgStyledText>Add domain</BgStyledText> a
 | `CNAME social.example.com` | `ZONE_ID.c.hipcdn.net` | Sends visitors to the CDN, and proves you own the name. Creating it switches live traffic to Hippius. |
 | `TXT _hippius-cdn.social.example.com` | `hippius-cdn-…` (your token) | Proves you own the name. Optional for a subdomain (the CNAME proves it too), but it lets you prove ownership, and get the certificate, before you move the CNAME. Required for a bare domain. |
 
-Either the hostname CNAME or the TXT is enough to prove ownership. Once it is proven and the certificate is issued, the domain is **Active** and billed, whether or not its traffic reaches Hippius yet.
+Either the hostname CNAME or the TXT is enough to prove ownership. Once it is proven and the certificate is issued, the domain is **Active** and served. It is billed only once its traffic points to the CDN: from the first check that sees the hostname CNAME (for a bare domain, its ALIAS flattened into Hippius CDN addresses) in place. With the TXT alone, the console shows it as verified, with billing starting when traffic points to the CDN. Such a domain is checked again every 10 minutes, so billing starts shortly after you switch the CNAME.
 | `CNAME _acme-challenge.social.example.com` | `….dcv.c.hipcdn.net` | **Required** for the HTTPS certificate: it lets Hippius complete the certificate authority's DNS check for your name. |
 
 A name can hold a CNAME and nothing else. If `social.example.com` already has an A, AAAA or CNAME record (for example a CNAME to CloudFront), edit or delete it rather than adding a second one. The same goes for an old `_acme-challenge` TXT record left by another certificate tool.
@@ -141,12 +141,12 @@ The domain is checked every minute for the first hour, every 10 minutes for a da
   <li>✓: the record is in place.</li>
   <li>✗ <strong>missing</strong>: nothing is published at that name yet.</li>
   <li>✗ <strong>wrong</strong>: something else is published there, and the console shows what it found instead, for example a CNAME pointing to <code>d4x3….cloudfront.net</code>, or address (A) records where a CNAME is expected.</li>
-  <li>For a bare domain, the ALIAS can't be checked by name (it is flattened into addresses): the TXT record proves it.</li>
+  <li>For a bare domain, the ALIAS can't be checked by name (it is flattened into addresses): the TXT record proves it. Once those addresses are all Hippius CDN addresses, the ALIAS shows as in place and billing starts.</li>
 </Unordered>
 
 **Check now** checks the domain at once: at most once every 10 seconds per domain, and 30 times a minute per user (it needs CDN operator access on a shared account). Once the DNS is proven, the certificate is issued, provided the `_acme-challenge` CNAME is in place, and the domain turns **Active**.
 
-If a domain stops proving ownership (neither the CNAME nor the TXT points at the zone any more), it stops being served. Fixing the DNS within 7 days restores it. While the TXT stays in place, moving the CNAME elsewhere is not detected: remove the domain from the zone when you stop using it.
+If a domain stops proving ownership (neither the CNAME nor the TXT points at the zone any more), it stops being served and billed. Fixing the DNS within 7 days restores it; billing starts again once its CNAME points to the CDN again. While the TXT stays in place, moving the CNAME elsewhere is not detected and the domain stays billed: remove the domain from the zone when you stop using it.
 
 ### One-click setup (Cloudflare and Route 53)
 
@@ -155,7 +155,7 @@ If your DNS is at Cloudflare or Route 53, <BgStyledText>Set up automatically</Bg
 <Unordered>
   <li>The credential is used <strong>once</strong>, during that request, to write the records, then dropped. Hippius never stores it, logs it or shows it back.</li>
   <li>Before writing anything, the existing records at those names are read. If one would be replaced, for example the hostname's CNAME still pointing at CloudFront, the console shows what is there and asks you to confirm <strong>Replace</strong>. Replacing the hostname's own record switches its live traffic to Hippius. Nothing is written until you confirm.</li>
-  <li><strong>Only the verification records</strong> writes just the TXT and <code>_acme-challenge</code> records and leaves the hostname's record alone, so the certificate is issued while traffic still goes to your current host. The TXT proves ownership, so the domain turns <strong>Active</strong> and is billed from then on, even before you switch the CNAME. No reminder tells you to switch it: do it when you are ready.</li>
+  <li><strong>Only the verification records</strong> writes just the TXT and <code>_acme-challenge</code> records and leaves the hostname's record alone, so the certificate is issued while traffic still goes to your current host. The TXT proves ownership, so the domain turns <strong>Active</strong>, but it isn't billed until you switch the CNAME and its traffic points to the CDN. No reminder tells you to switch it: do it when you are ready.</li>
   <li>Other TXT records on <code>_hippius-cdn.social.example.com</code> are kept. Old Hippius tokens there (<code>hippius-cdn-…</code>) are replaced without asking. Records that are already right are left as they are.</li>
   <li>It needs the same access as editing the zone (CDN admin on a <a href="/use/console/team">shared account</a>), and is limited to 10 times per hour per user.</li>
 </Unordered>
@@ -218,7 +218,7 @@ The CDN is billed by the hour from your balance, like [Compute](/use/compute/bil
 | Data billed in FR | $0.010 per GB |
 | Data billed in AU | $0.060 per GB |
 | Requests | $0.002 per 10,000 |
-| Custom domain | $1 per domain per month, from the first one, billed by the hour while the domain and its zone are active |
+| Custom domain | $1 per domain per month, from the first one, billed by the hour while the domain and its zone are active and its CNAME (or ALIAS) points to the CDN |
 
 The default hostname is included. Data is counted in GB of 10<sup>9</sup> bytes, headers included. Requests the CDN refuses itself, such as those of a paused zone, aren't billed.
 
