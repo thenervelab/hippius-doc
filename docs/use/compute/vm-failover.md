@@ -28,7 +28,7 @@ A [reboot starts a new backup chain](/use/compute/vm-backups#how-vm-backups-work
 <Unordered>
   <li>The same VM, with the same ID.</li>
   <li>The same size and the same region.</li>
-  <li>Its public IPv4 address, if it has one.</li>
+  <li>Its public IPv4 address, if it has one. Public addresses belong to a region, and a failover stays in the VM's region, so the address moves with the VM.</li>
   <li>Its address on your private network (NetBird).</li>
 </Unordered>
 
@@ -40,20 +40,31 @@ There are two modes:
 
 <Unordered>
   <li><strong>Manual</strong>, the default. When the server running your VM is confirmed dead, Hippius support can fail your VM over, for example after you <a href="/use/console/support">open a ticket</a>.</li>
-  <li><strong>Automatic</strong>, opt-in, per VM. Once the server has been proven dead for 15 minutes, the VM is restarted on another server in the same region from its latest backup. The server must first stop answering before it can be proven dead, so expect up to about half an hour between the outage and the start of the failover, then a few minutes for the restart.</li>
+  <li><strong>Automatic</strong>, opt-in, per VM. If the server dies, the VM is restarted on another compatible server in the same region from its latest backup. Detection takes about 30 minutes: the server must first stay silent for 15 minutes, then it takes up to 15 more minutes to prove it is dead. Only then does the restart start, and it takes a few minutes more.</li>
 </Unordered>
 
 ### Where automatic failover is offered
 
-Automatic failover needs a pair of compatible servers in the region, so that one can restart the VMs of the other. Today, it is offered in France only:
+Automatic failover needs a pair of compatible servers in the region, so that one can restart the VMs of the other, and backups stored in that region. Today, it is offered in France (FR) only:
 
 | Region | Automatic failover |
 |---|---|
-| France | Offered. |
-| Netherlands | Not offered yet: no pair of servers in this region can fail over yet. |
-| Australia | Not offered: backups there aren't stored in the region. |
+| France (FR) | Offered. |
+| Netherlands (NL) | Not offered yet: the region has no second compatible server to restart a VM on. |
+| Australia (AU) | Not offered yet: backups of Australian VMs are kept outside the region, and the region has a single server. |
 
-Where it isn't offered, support can still fail a VM over manually if it has backups.
+In a region where it isn't offered, the console explains why next to the switch. Support can still fail a VM over manually if it has backups. More regions will offer automatic failover as servers are added to them.
+
+### No cross-region failover
+
+A failover never moves a VM to another region, automatically or by support:
+
+<Unordered>
+  <li><strong>Public IPv4 addresses are regional.</strong> A VM restarted in another region couldn't keep its address.</li>
+  <li><strong>Backups stay in their region</strong>, for data residency. A VM's data isn't copied to another region to restart it there.</li>
+</Unordered>
+
+To survive the loss of a whole region, run your own redundancy across regions. See [High availability](#high-availability).
 
 ### Turn on automatic failover at creation
 
@@ -67,15 +78,16 @@ If the region can no longer offer automatic failover when you launch, the launch
 
 On the VM's page, in the **Backups** panel, the **Failover** section sits between **Scheduled backups** and **Restore points**. Turn on **Automatically restart on another server if this server goes down**. The switch is hidden when automatic failover isn't available at all.
 
-Automatic failover needs at least one complete backup, a region where it is offered, and a server that has a failover partner. When it can't be turned on, the toggle is disabled and the console says why:
+Automatic failover needs at least one complete backup, a region where it is offered, and a server that has a failover partner. When it can't be turned on, the toggle is disabled and the console says why. Through the API, the reason is the blocker code in the last column:
 
-| Message | What to do |
-|---|---|
-| Turn on backups to use automatic failover. | [Turn on scheduled backups](/use/compute/vm-backups#turn-on-backups). |
-| Available once the first backup is complete. | Wait for the first full backup to finish. |
-| Not offered in this VM's region yet. | Automatic failover isn't available in this region. Support can still fail the VM over manually. |
-| Not available on this VM's server: no compatible server in its region to restart it on. | The VM's server has no failover partner. Support can still fail the VM over manually. To get automatic failover, launch a new VM with it turned on: it is placed on a server that has a partner. |
-| Not available yet. | Automatic failover isn't available yet. |
+| Message | What it means and what to do | API code |
+|---|---|---|
+| Turn on backups to use automatic failover. | Backups are off, and a failover restores the VM from its latest backup. [Turn on scheduled backups](/use/compute/vm-backups#turn-on-backups). | `backups-off` |
+| Available once the first backup is complete. | There is no backup to restart from yet. Wait for the first full backup to finish. | `no-point` |
+| Not offered in this VM's region yet. | The region's backups aren't stored in the region, as in Australia. Support can still fail the VM over manually. | `region-backups-not-local` |
+| No pair of servers in this region can fail over yet. | The region has no two compatible servers that can restart each other's VMs, as in the Netherlands. Support can still fail the VM over manually. | `no-failover-capable-host` |
+| Not available on this VM's server: no compatible server in its region to restart it on. | The region can fail over, but the VM's own server has no failover partner. Support can still fail the VM over manually. To get automatic failover, launch a new VM with it turned on: it is placed on a server that has a partner. | `no-failover-peer` |
+| Not available yet. | Automatic failover is turned off on the platform for now. | `disabled` |
 
 Automatic failover is active only after the first full backup. Until then, and whenever one of these becomes true later, for example after a reboot, the toggle stays on but shows a warning such as **On, but not effective until the next backup completes.** The VM can't be failed over automatically until the cause is gone.
 
@@ -98,6 +110,14 @@ A failover doesn't change what you pay for the VM. It is billed once, continuous
 ## High availability
 
 High availability is your responsibility. A single VM runs on one server, and a failover means minutes of downtime plus data lost back to the last backup. To keep a service up when a server dies, run it on several VMs, with your own load balancing and data replication between them, as on any cloud provider.
+
+Failover never crosses regions (see [No cross-region failover](#no-cross-region-failover)). To survive a region outage, or to stay up while automatic failover isn't offered in your region:
+
+<Unordered>
+  <li><strong>Run several VMs</strong> across servers, with a <a href="#placement-groups">placement group</a>, and across regions.</li>
+  <li><strong>Send traffic to the healthy ones</strong> with a load balancer or DNS failover, for example health-checked DNS records pointing at each VM's public IPv4.</li>
+  <li><strong>Replicate your data</strong> between them, for example with database replication, so that losing one VM loses no data.</li>
+</Unordered>
 
 ### Placement groups
 
