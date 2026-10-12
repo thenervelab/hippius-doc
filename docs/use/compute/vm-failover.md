@@ -40,23 +40,44 @@ There are two modes:
 
 <Unordered>
   <li><strong>Manual</strong>, the default. When the server running your VM is confirmed dead, Hippius support can fail your VM over, for example after you <a href="/use/console/support">open a ticket</a>.</li>
-  <li><strong>Automatic</strong>, opt-in, per VM. Once the server has been proven dead for 15 minutes, the VM is restarted on another server in the same region from its latest backup.</li>
+  <li><strong>Automatic</strong>, opt-in, per VM. Once the server has been proven dead for 15 minutes, the VM is restarted on another server in the same region from its latest backup. Detection takes those 15 minutes, then the restart a few more.</li>
 </Unordered>
 
-### Turn on automatic failover
+### Where automatic failover is offered
+
+Automatic failover needs a pair of compatible servers in the region, so that one can restart the VMs of the other. Today, it is offered in France only:
+
+| Region | Automatic failover |
+|---|---|
+| France | Offered. |
+| Netherlands | Not offered yet: no pair of servers in this region can fail over yet. |
+| Australia | Not offered: backups there aren't stored in the region. |
+
+Where it isn't offered, support can still fail a VM over manually if it has backups.
+
+### Turn on automatic failover at creation
+
+When you [create a VM](/use/compute/virtual-machines#5-add-ons), turn on **Automatic backups**, then the **Automatic failover** switch under them. The switch is shown only once you pick a region where automatic failover is offered. In another region, the form says why instead, for example **Automatic failover isn't offered in Netherlands yet: no pair of servers in this region can fail over yet.** If you leave the region on automatic placement, it asks you to pick a region where it is offered.
+
+The summary then lists **Automatic failover: On**. A VM launched with automatic failover is placed on a server that has a failover partner. Until the VM is running, the **Failover** section of its **Backups** panel says **Automatic failover was asked for at launch: it is turned on with the backups once the VM is running.** If it can't be turned on then, the section says why, for example **Automatic failover could not be enabled: …** followed by **Backups are on; failover stays manual.**
+
+If the region can no longer offer automatic failover when you launch, the launch is refused with **Automatic failover can't be turned on for this launch**: launch without it, or pick another region.
+
+### Turn on automatic failover on an existing VM
 
 On the VM's page, in the **Backups** panel, the **Failover** section sits between **Scheduled backups** and **Restore points**. Turn on **Automatically restart on another server if this server goes down**. The section is hidden when failover isn't offered for the VM.
 
-Automatic failover needs at least one complete backup, and it may not be offered in every region. When it can't be turned on, the toggle is disabled and the console says why:
+Automatic failover needs at least one complete backup, a region where it is offered, and a server that has a failover partner. When it can't be turned on, the toggle is disabled and the console says why:
 
 | Message | What to do |
 |---|---|
 | Turn on backups to use automatic failover. | [Turn on scheduled backups](/use/compute/vm-backups#turn-on-backups). |
 | Available once the first backup is complete. | Wait for the first full backup to finish. |
 | Not offered in this VM's region yet. | Automatic failover isn't available in this region. Support can still fail the VM over manually. |
+| Not available on this VM's server: no compatible server in its region to restart it on. | The VM's server has no failover partner. Support can still fail the VM over manually. To get automatic failover, launch a new VM with it turned on: it is placed on a server that has a partner. |
 | Not available yet. | Automatic failover isn't available yet. |
 
-If the toggle is already on and one of these becomes true, for example after a reboot, it stays on but shows a warning such as **On, but not effective until the next backup completes.** The VM can't be failed over automatically until the cause is gone.
+Automatic failover is active only after the first full backup. Until then, and whenever one of these becomes true later, for example after a reboot, the toggle stays on but shows a warning such as **On, but not effective until the next backup completes.** The VM can't be failed over automatically until the cause is gone.
 
 Turning off backups also turns off automatic failover. Turning backups back on doesn't turn it back on.
 
@@ -68,7 +89,7 @@ If the original server comes back before the VM has been restarted elsewhere, th
 
 Once it is done, the banner says **Restarted on another server**, with the backup used, for 7 days. The **Failover history** table in the **Backups** panel lists every failover of the VM: when it started, its type (**Automatic** or **By support**), its status, the backup used and how long it took.
 
-Whichever the mode, you get an email whenever your VM is failed over, saying when, why, and which backup was used.
+Whichever the mode, you get an email once your VM has been failed over, saying when, why, and which backup was used. A cancelled failover sends no email.
 
 ## What failover costs
 
