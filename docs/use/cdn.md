@@ -60,12 +60,16 @@ A zone can serve a website built to static files (plain HTML, or a React, Vue or
 To publish a site:
 
 <Ordered>
-  <li>Upload the build output to a bucket (or a folder of it), keeping each file's <code>Content-Type</code>: HTML is never guessed from the extension (see <a href="#what-visitors-receive">What visitors receive</a>).</li>
+  <li>Upload the build output to a bucket (or a folder of it), keeping each file's <code>Content-Type</code>: HTML is never guessed from the extension (see <a href="#what-visitors-receive">What visitors receive</a>). A public bucket is fine as the origin of a static site.</li>
   <li>Create a zone on it, with the folder as its prefix, such as <code>build/</code>.</li>
   <li>Turn on the index document and, for a single-page app, the fallback.</li>
   <li>Add your own domain: HTML on the default hostname is sandboxed, so serve the site from a custom domain.</li>
   <li>After each deploy, purge what changed, or everything, on the <strong>Purge</strong> tab.</li>
 </Ordered>
+
+To publish a new version, purge `/index.html` (or a prefix that contains it, such as `/`), not the path `/` alone. The index document is cached under its object path, so a path purge of `/` leaves the old `/index.html` in the cache. The same goes for folders: purge the path `/docs/index.html`, or the prefix `/docs/`.
+
+Cache rules on a static-site zone match the object path that is served: the home page matches `/index.html`, not `/`.
 
 The zone's **Origin** section on the same tab changes its bucket or prefix, for example to switch to a new build folder. The whole zone is purged at once, so nothing from the previous origin is served again. Moving to a private bucket needs admin access to S3, as at creation.
 
