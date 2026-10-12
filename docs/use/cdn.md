@@ -28,10 +28,14 @@ A **zone** is a CDN in front of one bucket, or one folder (prefix) of it. As soo
   <li>Open <strong>CDN</strong> in the sidebar and click <BgStyledText>New zone</BgStyledText>.</li>
   <li>Pick the <strong>Bucket</strong>. Optionally enter a <strong>prefix</strong>, a folder such as <code>public/</code>, to serve only the objects under it.</li>
   <li>Give the zone a name, choose the shield region and the <strong>monthly spend cap</strong> ($20 by default, from $1 to $100,000).</li>
-  <li>Create it. The default hostname serves right away.</li>
+  <li>Create it. The default hostname serves within a few seconds.</li>
 </Ordered>
 
 A zone in front of a private bucket creates a read-only key on that bucket for the cache nodes, so creating one needs admin access to S3 as well as to CDN on a [shared account](/use/console/team).
+
+:::warning A zone makes a private bucket public
+With a private bucket, every object under `<bucket>/<prefix>` becomes publicly readable through the zone. Use a prefix that holds only what you want to publish.
+:::
 
 ## What visitors receive
 
@@ -40,6 +44,7 @@ A zone in front of a private bucket creates a read-only key on that bucket for t
   <li><strong>GET and HEAD only.</strong> Other methods get 405. Range requests work.</li>
   <li><strong>Content type.</strong> Each object is served with the <code>Content-Type</code> stored in S3. Only when it has none, or a generic one (<code>application/octet-stream</code>), is it guessed from the extension, and only for images, audio, video, fonts, CSS, JavaScript, JSON, WebAssembly and plain text. HTML, SVG and XML are never guessed: upload them with an explicit `Content-Type`. <code>X-Content-Type-Options: nosniff</code> is always sent.</li>
   <li><strong>HTML on the default hostname is sandboxed.</strong> On <code>ZONE_ID.c.hipcdn.net</code>, HTML, SVG and other XML get <code>Content-Security-Policy: sandbox allow-scripts</code>. On your own domains they don't, so serve a website from a custom domain.</li>
+  <li><strong>No CORS headers.</strong> The CDN adds no <code>Access-Control-*</code> headers yet, so a page served from another origin can't read the zone's files with <code>fetch</code> or XHR, or load web fonts from it. Serve the page and the files from the same custom domain of the zone. On the default hostname, HTML is sandboxed, so even same-host requests count as cross-origin.</li>
   <li><strong>Headers passed through</strong> from the object: <code>Content-Type</code>, <code>Content-Length</code>, <code>Content-Range</code>, <code>Content-Encoding</code>, <code>Content-Language</code>, <code>Content-Disposition</code>, <code>ETag</code>, <code>Last-Modified</code> and <code>Accept-Ranges</code>.</li>
 </Unordered>
 
@@ -60,18 +65,18 @@ A zone can serve a website built to static files (plain HTML, or a React, Vue or
 To publish a site:
 
 <Ordered>
-  <li>Upload the build output to a bucket (or a folder of it), keeping each file's <code>Content-Type</code>: HTML is never guessed from the extension (see <a href="#what-visitors-receive">What visitors receive</a>).</li>
+  <li>Upload the build output to a bucket (or a folder of it), keeping each file's <code>Content-Type</code>: HTML is never guessed from the extension (see <a href="#what-visitors-receive">What visitors receive</a>). A public bucket is fine as the origin of a static site.</li>
   <li>Create a zone on it, with the folder as its prefix, such as <code>build/</code>.</li>
   <li>Turn on the index document and, for a single-page app, the fallback.</li>
   <li>Add your own domain: HTML on the default hostname is sandboxed, so serve the site from a custom domain.</li>
   <li>After each deploy, purge what changed, or everything, on the <strong>Purge</strong> tab.</li>
 </Ordered>
 
-The zone's **Origin** section on the same tab changes its bucket or prefix, for example to switch to a new build folder. The whole zone is purged at once, so nothing from the previous origin is served again. Moving to a private bucket needs admin access to S3, as at creation.
+To publish a new version, purge `/index.html` (or a prefix that contains it, such as `/`), not the path `/` alone. The index document is cached under its object path, so a path purge of `/` leaves the old `/index.html` in the cache. The same goes for folders: purge the path `/docs/index.html`, or the prefix `/docs/`.
 
-:::info Rolling out
-The static website settings can be saved now. Cache nodes apply them once their update is rolled out; until then, a zone serves exactly as before.
-:::
+Cache rules on a static-site zone match the object path that is served: the home page matches `/index.html`, not `/`.
+
+The zone's **Origin** section on the same tab changes its bucket or prefix, for example to switch to a new build folder. The whole zone is purged at once, so nothing from the previous origin is served again. Moving to a private bucket needs admin access to S3, as at creation.
 
 ## Use your own domain
 
@@ -98,11 +103,9 @@ The domain is checked every minute for the first hour, every 10 minutes for a da
 
 The **Cache rules** tab holds an ordered list of up to 50 rules. Each rule matches a path prefix, a glob or a list of file extensions, and sets one or more actions: how long the cache keeps a file (`edge_ttl`), how long browsers keep it (`browser_ttl`), which query parameters are part of the cache key, whether to bypass the cache, and whether to ignore `Set-Cookie`. Rules are evaluated top to bottom. Click <BgStyledText>Save rules</BgStyledText> to save the list.
 
-:::info Rules are being switched on
-Cache nodes don't apply cache rules yet: until they do, every zone uses the defaults above, and the console shows a banner. Rules you save now take effect once they are switched on.
-:::
+The **Purge** tab invalidates what you name on every cache node: paths, folders (prefixes ending in `/`), or everything. The next request for it is fetched from the origin. A purge usually reaches every node in under a minute. You can purge up to 100 times a minute per zone, and everything once a minute.
 
-The **Purge** tab invalidates what you name on every cache node: paths, folders (prefixes ending in `/`), or everything. The next request for it is fetched from the origin. A purge usually reaches every node in under 30 seconds. You can purge up to 100 times a minute per zone, and everything once a minute.
+Through the API, send `POST /api/cdn/zones/ZONE_ID/purge/` with exactly one of `{"paths": [...]}`, `{"prefixes": [...]}` or `{"all": true}`.
 
 ## Prices
 
@@ -110,7 +113,7 @@ The CDN is billed by the hour from your balance, like [Compute](/use/compute/bil
 
 | What | Price |
 |---|---|
-| Data billed in FR or NL | $0.010 per GB |
+| Data billed in FR | $0.010 per GB |
 | Data billed in AU | $0.060 per GB |
 | Requests | $0.002 per 10,000 |
 | Custom domain | $1 per domain per month, from the first one, billed by the hour while the domain and its zone are active |
