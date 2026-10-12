@@ -190,6 +190,20 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "category",
+          label: "Screenshots & Recording",
+          collapsed: true,
+          items: [
+            "use/captures/overview",
+            "use/captures/screenshots",
+            "use/captures/recording",
+            "use/captures/share-links",
+            "use/captures/edit",
+            "use/captures/plans",
+            "use/captures/troubleshooting",
+          ],
+        },
+        {
+          type: "category",
           label: "WordPress Plugin",
           collapsed: true,
           items: [

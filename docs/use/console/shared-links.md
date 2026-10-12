@@ -61,6 +61,7 @@ The download, decrypt, encrypt, and upload steps run each time you create a shar
   <li>The recipient's browser decrypts the file locally. Nothing is decrypted on the server.</li>
   <li>Revoking a share deletes the encrypted copy and frees the storage immediately.</li>
   <li>Each share is independent. Revoking one share of a file doesn't affect any other share of the same file.</li>
+  <li>Deleting a file does not end the links made from it. Each link is its own encrypted copy, so it keeps working until you revoke it here or it expires. The delete confirmation reminds you of this.</li>
 </Unordered>
 
 ## Before You Share
@@ -90,7 +91,7 @@ The link is live immediately. Anyone you send it to can open it right away.
 
 ### Choosing an expiry
 
-Every link gets an expiry, chosen before you create it:
+A link you create yourself gets an expiry, chosen before you create it:
 
 | Option | The link stops working |
 |---|---|
@@ -99,7 +100,11 @@ Every link gets an expiry, chosen before you create it:
 | **30 days** | One month after you create it. |
 | **Until I revoke it** | Never on its own. It stays live until you revoke it. |
 
-There is no silent default. The dialog asks, because a link that quietly expired in a day was the behaviour people found surprising.
+The share dialog has no silent default. It asks, because a link that quietly expired in a day was the behaviour people found surprising.
+
+:::info Links made for screenshots and recordings
+A [screenshot or screen recording](/use/captures) gets its share link automatically, the moment it is saved. That link is public and never expires by default, so it is ready to paste straight away. It is listed here with your other links, and you revoke it the same way. See [Share links for captures](/use/captures/share-links).
+:::
 
 ### Requiring a password
 
@@ -237,7 +242,7 @@ Every active share stores a separate encrypted copy of your file on the Hippius 
 
 <Unordered>
   <li><strong>Counts against your storage quota</strong> for as long as the share is active.</li>
-  <li><strong>Is independent of your Drive copy</strong>, using a different key and living in a different location on the network, unaffected by any changes to your original file.</li>
+  <li><strong>Is independent of your Drive copy</strong>, using a different key and living in a different location on the network, unaffected by any changes to your original file. Deleting or replacing the original leaves the link showing the file as it was when you shared it.</li>
   <li><strong>Is freed automatically</strong> when you revoke it or when it expires.</li>
 </Unordered>
 
@@ -276,7 +281,7 @@ For a **file** share there is no expiry change. The desktop app's **Reshare** co
 | Limit | Value |
 |---|---|
 | **Max shareable file size** | 5 GB |
-| **Link expiry** | Your choice of 24 hours, 7 days, 30 days, or until you revoke it |
+| **Link expiry** | Your choice of 24 hours, 7 days, 30 days, or until you revoke it. Links made automatically for screenshots and recordings never expire by default. |
 | **Share password** | Optional, at least 8 characters |
 
 ## Where to next
