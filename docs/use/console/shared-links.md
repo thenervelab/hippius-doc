@@ -241,15 +241,15 @@ If the link has been revoked or has expired, recipients see: _"This link has exp
 Every active share stores a separate encrypted copy of your file on the Hippius network. This copy:
 
 <Unordered>
-  <li><strong>Counts against your storage quota</strong> for as long as the share is active.</li>
+  <li><strong>Costs nothing extra while the file is still in your Drive.</strong> Your storage already counts that file, so the link adds nothing on top. If you delete the file and keep the link, the link's copy counts against your storage quota from then on, until you revoke the link or it expires.</li>
   <li><strong>Is independent of your Drive copy</strong>, using a different key and living in a different location on the network, unaffected by any changes to your original file. Deleting or replacing the original leaves the link showing the file as it was when you shared it.</li>
   <li><strong>Is freed automatically</strong> when you revoke it or when it expires.</li>
 </Unordered>
 
-If you share the same file multiple times, each share is a separate encrypted copy with its own key and its own storage cost.
+If you share the same file multiple times, each share is a separate encrypted copy with its own key. While the file is in your Drive, none of them adds to your storage.
 
 :::tip Revoke shares you no longer need
-Each active share consumes storage quota. If you shared a file temporarily, say to send to a colleague, revoke it when you're done to reclaim the space.
+A link whose file you've deleted uses storage quota. If you shared a file temporarily, say to send to a colleague, revoke it when you're done.
 :::
 
 ## Console vs Desktop App

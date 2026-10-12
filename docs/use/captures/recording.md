@@ -30,7 +30,7 @@ Under <BgStyledText>Options</BgStyledText> you'll find a few more:
 
 <Unordered>
   <li><strong>Recording countdown</strong>: none, 3 seconds (the default) or 5 seconds, so you have a moment to get ready after pressing Record.</li>
-  <li><strong>Record system audio</strong> (desktop) or <strong>Record tab or computer sound</strong> (console): adds what your computer plays, such as a video or a call. It is off by default because with speakers your voice gets recorded twice. Headphones avoid that.</li>
+  <li><strong>Record system audio</strong> (desktop) or <strong>Record tab or system sound</strong> (console): adds what your computer plays, such as a video or a call. It is off by default because with speakers your voice gets recorded twice. Headphones avoid that.</li>
   <li><strong>Show mouse clicks</strong>, in the desktop app where your computer supports it.</li>
 </Unordered>
 

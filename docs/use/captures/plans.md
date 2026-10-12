@@ -37,7 +37,7 @@ The card after the recording has an Upgrade button if you need longer.
 
 ## 25 recordings
 
-The Free plan includes 25 recordings in total. The Captures page shows how many you've used, for example **3 of 25 free recordings used**, and in the desktop app the capture bar shows it too.
+The Free plan includes 25 recordings in total. The Captures page shows how many you've used, for example **3 of 25 free recordings used**, and the capture bar shows it too, in the desktop app and in the console.
 
 <Unordered>
   <li>Every video in your Hippius Captures drive counts, whatever it's called and whichever folder it's in, and whether you recorded it in the desktop app, in the console or on another computer.</li>
@@ -55,7 +55,7 @@ The mark is drawn into the picture on your device, before the capture is encrypt
 
 ## Storage
 
-A capture is a file, so it counts toward your storage like any other: 10 GB on the Free plan, or your paid plan's size. A share link also keeps its own encrypted copy while it is active (see [Share links for captures](/use/captures/share-links#storage)).
+A capture is a file, so it counts toward your storage like any other: 10 GB on the Free plan, or your paid plan's size. Its share link adds nothing while the capture is in your Drive; only a link whose capture you've deleted counts (see [Share links for captures](/use/captures/share-links#storage)).
 
 To see how much room you have, or to change plan, see [Billing in the console](/use/console/billing#drive-plans) or [in the desktop app](/use/desktop/billing).
 
