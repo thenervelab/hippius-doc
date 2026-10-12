@@ -60,7 +60,7 @@ Virtual machines, managed databases and Kubernetes clusters are driven through t
 <Unordered>
   <li><strong>Base URL</strong>: <code>https://api.hippius.com/api</code>. VMs are under <code>/compute/</code>, databases under <code>/databases/</code>, Kubernetes under <code>/kubernetes/</code>.</li>
   <li><strong>Authentication</strong>: <code>Authorization: Token YOUR_TOKEN</code>, as above. Add <code>X-Hippius-Account: acct_...</code> to act in a shared account.</li>
-  <li><strong>Specification</strong>: the OpenAPI (Swagger 2.0) document is at <a href="https://api.hippius.com/swagger.json">api.hippius.com/swagger.json</a>, with every field of every endpoint.</li>
+  <li><strong>Specification</strong>: the OpenAPI (Swagger 2.0) document is at <a href="https://api.hippius.com/swagger.json">api.hippius.com/swagger.json</a>, with the endpoints and their fields.</li>
 </Unordered>
 
 To create a VM and connect to it:
@@ -84,13 +84,13 @@ curl -s -H "$AUTH" -H "Content-Type: application/json" \
 curl -s -H "$AUTH" $API/compute/vms/VM_ID/
 ```
 
-`flavor` and an SSH key (`ssh_key_ids`) are required. Without `image` the size's default image is used, and without `region` one is picked for you. While the VM boots, `progress` shows the current step and `boot_phase` goes from `booting` to `kek_released` and `running`. Once `netbird_ip` is set, SSH to it from a device on your [private network](/use/virtual-machines#connect-from-your-private-network), or to `public_ip` if you launched with `"public_ip": true` and a firewall rule opens port 22.
+`flavor` and an SSH key are required: the ids of saved keys in `ssh_key_ids` (up to 20), or a key itself in `ssh_public_key`. Without `image` the size's default image is used, and without `region` one is picked for you. While the VM boots, `progress` shows the current step and `boot_phase` goes from `booting` to `kek_released` and `running`. Once `netbird_ip` is set, SSH to it from a device on your [private network](/use/virtual-machines#connect-from-your-private-network), or to `public_ip` if you launched with `"public_ip": true` and a firewall rule opens port 22.
 
 A VM has two state fields:
 
 <Unordered>
   <li><code>status</code> is its lifecycle: <code>pending</code>, <code>provisioning</code>, <code>running</code>, <code>failed</code>, <code>decommissioning</code>, <code>decommissioned</code>. A VM is billed while it is <code>running</code>, including when it is stopped.</li>
-  <li><code>power_state</code> says whether it is on: <code>running</code>, <code>stopping</code>, <code>stopped</code> or <code>starting</code>, empty until reported. A stopped VM stays <code>running</code> under <code>status</code>.</li>
+  <li><code>power_state</code> says whether it is on: <code>running</code>, <code>stopping</code>, <code>stopped</code> or <code>starting</code>, empty until reported, and <code>off</code> once the VM is deleted. A stopped VM stays <code>running</code> under <code>status</code>.</li>
 </Unordered>
 
 :::note Set a User-Agent

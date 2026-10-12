@@ -69,7 +69,7 @@ What happens next:
   <li>The backup is downloaded while the VM keeps running.</li>
   <li>The VM is then stopped for a few minutes while its disk is swapped. The dialog tells you if it will take longer.</li>
   <li>The VM boots on the restored disk and returns to the power state it was in, running or stopped.</li>
-  <li>The restore then shows <strong>Verifying</strong> for up to about 10 minutes. The VM is already usable during that time: Hippius only keeps your previous disk aside until the restored one is confirmed.</li>
+  <li>The restore then shows <strong>Verifying</strong> for about 10 minutes, sometimes longer. The VM is already usable during that time: Hippius only keeps your previous disk aside until the restored one is confirmed.</li>
 </Unordered>
 
 :::danger Everything written after the restore point is lost
@@ -97,7 +97,7 @@ Turn off **Scheduled backups** and confirm with **Turn off**. No new backups are
 Backup storage costs **$6 per TB-month**, billed on what your backups store, every full and incremental copy still kept:
 
 <Unordered>
-  <li><strong>Each full backup</strong> stores the whole disk at its full size, however much of it is used, because the disk is encrypted. A 40 GB disk makes a 40 GB full backup, even if it is nearly empty.</li>
+  <li><strong>Each full backup</strong> stores the whole disk at its full size, however much of it is used, because the disk is encrypted. A 40 GB disk makes a full backup of about 40 GB, even if it is nearly empty.</li>
   <li><strong>Each incremental backup</strong> stores only the blocks that changed since the previous one. Encryption and file-system journals add to what the guest writes, so it can be a few times larger.</li>
   <li><strong>After a reboot</strong>, a new chain starts with a new full backup. The previous chain is kept, and billed, for 7 more days.</li>
 </Unordered>
