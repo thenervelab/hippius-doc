@@ -140,7 +140,7 @@ If you want to share one web service without a public IPv4, publish its port:
 <Ordered>
   <li>On the VM's page, find <strong>Published ports</strong>.</li>
   <li>Click <BgStyledText>Publish a port</BgStyledText>, enter the port your service listens on inside the VM, for example <code>8080</code>, and click <BgStyledText>Publish</BgStyledText>.</li>
-  <li>The panel shows an address like <code>https://NAME.hpcr.io</code> that forwards to that port.</li>
+  <li>The panel shows an address like <code>https://NAME.hpcr.io</code> that forwards to that port. It is live within about 15 seconds, once the edge picks it up.</li>
 </Ordered>
 
 Your service should speak plain HTTP on that port: the Hippius edge handles HTTPS for you. Port 22 can't be published; use the browser terminal for SSH. To unpublish it, click the remove button next to the address.

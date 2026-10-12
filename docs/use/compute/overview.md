@@ -73,7 +73,7 @@ Two checks run every time you launch something. You see both in the create form 
 |---|---|
 | VM | $18 per vCPU, $2.50 per GB of memory and $0.10 per GB of disk, per month. A Small VM (1 vCPU, 4 GB, 40 GB) is $32 a month, $0.0438 an hour. |
 | Public IPv4 | $0.005 an hour, about $3.65 a month, while attached. |
-| VM backups | $6 per TB-month stored. |
+| VM backups | $6 per TB-month stored. Each full backup stores the whole disk size. |
 | Outbound bandwidth | Not charged today. Inbound traffic is free. |
 | Managed database | Its VMs plus 25%. |
 | Managed Kubernetes | Its VMs plus $15 per cluster per month. |

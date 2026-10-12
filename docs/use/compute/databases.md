@@ -28,12 +28,12 @@ Every plan comes in four sizes. On High availability, each of the three instance
 
 | Size | Usable storage | Max connections |
 |---|---|---|
-| **Small** | 30 GB | 102 |
-| **Medium** | 60 GB | 204 |
+| **Small** | 30 GB | about 92 |
+| **Medium** | 60 GB | about 200 |
 | **Large** | 120 GB | 300 |
 | **Extra large** | 240 GB | 300 |
 
-The create form shows the vCPUs and memory of each size, with its price. Usable storage is what you can fill: a quarter of the volume is held back for write-ahead logs and maintenance.
+The create form shows the vCPUs and memory of each size, with its price. Usable storage is what you can fill: a quarter of the volume is held back for write-ahead logs and maintenance. Max connections follows the instance's memory, and 3 of them are reserved for maintenance, so your applications can open 3 fewer.
 
 You choose **PostgreSQL 18**, **17** or **16** at creation. 18 is the default. A database can't be resized or upgraded to a new major version after it is created, so pick a size with room to grow.
 

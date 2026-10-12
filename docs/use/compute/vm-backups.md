@@ -69,10 +69,11 @@ What happens next:
   <li>The backup is downloaded while the VM keeps running.</li>
   <li>The VM is then stopped for a few minutes while its disk is swapped. The dialog tells you if it will take longer.</li>
   <li>The VM boots on the restored disk and returns to the power state it was in, running or stopped.</li>
+  <li>The restore then shows <strong>Verifying</strong> for up to about 10 minutes. The VM is already usable during that time: Hippius only keeps your previous disk aside until the restored one is confirmed.</li>
 </Unordered>
 
 :::danger Everything written after the restore point is lost
-The disk goes back to the time of the backup. Copy anything newer that you need off the VM before you restore.
+The disk goes back to the moment the backup started, the time shown as **Taken**. Like every backup, it is crash-consistent. Copy anything newer that you need off the VM before you restore.
 :::
 
 Your current disk is kept until the restored VM is running. If the restore fails before then, the VM is left as it was, and the panel says **Restore failed — your VM was left unchanged**. If it says **Restore failed — contact support**, [contact support](/use/console/support).
@@ -93,7 +94,15 @@ Turn off **Scheduled backups** and confirm with **Turn off**. No new backups are
 
 ## What backups cost
 
-Backup storage costs **$6 per TB-month**, billed on what your backups actually store (all the full and incremental copies still kept), not on the size of the disk. Storage is measured every few minutes and billed by the hour. The current price is always in the [live price list](https://console.hippius.com/dashboard/billing/compute#prices), and the **Backups** panel shows it too.
+Backup storage costs **$6 per TB-month**, billed on what your backups store, every full and incremental copy still kept:
+
+<Unordered>
+  <li><strong>Each full backup</strong> stores the whole disk at its full size, however much of it is used, because the disk is encrypted. A 40 GB disk makes a 40 GB full backup, even if it is nearly empty.</li>
+  <li><strong>Each incremental backup</strong> stores only the blocks that changed since the previous one. Encryption and file-system journals add to what the guest writes, so it can be a few times larger.</li>
+  <li><strong>After a reboot</strong>, a new chain starts with a new full backup. The previous chain is kept, and billed, for 7 more days.</li>
+</Unordered>
+
+Storage is measured every few minutes and billed by the hour. The current price is always in the [live price list](https://console.hippius.com/dashboard/billing/compute#prices), and the **Backups** panel shows it too.
 
 Backups that are kept after you turn them off are billed until they are deleted. When you create a VM with backups, the [24-hour balance requirement](/use/compute/billing#the-24-hour-balance-requirement) counts one full copy of its disk.
 
