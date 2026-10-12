@@ -22,7 +22,7 @@ Where the capture waits in the meantime depends on where you took it:
 
 <Unordered>
   <li><strong>Desktop app:</strong> it's kept on your computer. The card comes back with Retry the next time you capture, and also when you open Hippius again, even after a restart.</li>
-  <li><strong>Console:</strong> it's kept in your browser, encrypted with your Drive's keys, so closing the tab or reloading doesn't lose it. It waits at the top of the <strong>Captures</strong> page with <BgStyledText>Retry</BgStyledText> and <BgStyledText>Discard</BgStyledText>, and the console reminds you about it when you come back. It stays in that browser on that computer only, so retry from there.</li>
+  <li><strong>Console:</strong> it's kept in your browser, encrypted with your Drive's keys, so closing the tab or reloading doesn't lose it. The exceptions are a Drive that was locked when you captured, a private window, and a recording too large for the browser to keep; then the card asks you to keep the tab open. It waits at the top of the <strong>Captures</strong> page with <BgStyledText>Retry</BgStyledText> and <BgStyledText>Discard</BgStyledText>, and the console reminds you about it when you come back. It stays in that browser on that computer only, so retry from there.</li>
 </Unordered>
 
 Your browser has limited room for this. If a recording is too large to keep, the card says so and asks you to keep the tab open until it's saved. Don't close that tab until the card says **Link ready**.
@@ -105,7 +105,7 @@ Yes, like any other file. See [Free and paid plans](/use/captures/plans#storage)
 
 **Can a script or an AI agent take captures?**
 
-There is no capture API: screenshots and recordings are taken by a person in the desktop app or the console. A script can do the next best thing with the [Hippius Drive SDK](https://github.com/thenervelab/hippius-drive-sdk): upload a picture or a video it already has, and create a share link for it, for example with `hippius-drive share put`. Those files carry no watermark and don't count as recordings.
+There is no capture API: screenshots and recordings are taken by a person in the desktop app or the console. A script can do the next best thing with the [Hippius Drive SDK](https://github.com/thenervelab/hippius-drive-sdk): upload a picture or a video it already has, and create a share link for it, for example with `hippius-drive share put`. Those files carry no watermark. Videos uploaded into your Hippius Captures drive count toward the 25 free recordings like any other; uploads anywhere else don't.
 
 ## Still stuck?
 

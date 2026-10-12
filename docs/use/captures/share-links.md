@@ -58,7 +58,7 @@ In the desktop app you can stop links being made automatically. Turn off **Copy 
 
 ## Storage
 
-Like every share link, a capture link keeps its own encrypted copy of the file on Hippius, and that copy counts toward your storage while the link is active. Revoking the link frees it. See [Storage usage](/use/console/shared-links#storage-usage) for the details.
+Like every share link, a capture link keeps its own encrypted copy of the file on Hippius. While the capture is still in your Drive, the link adds nothing to your storage. If you delete the capture and keep the link, the link's copy counts toward your storage until you revoke it. See [Storage usage](/use/console/shared-links#storage-usage) for the details.
 
 ## Where to go next
 
