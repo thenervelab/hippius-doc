@@ -40,7 +40,7 @@ There are two modes:
 
 <Unordered>
   <li><strong>Manual</strong>, the default. When the server running your VM is confirmed dead, Hippius support can fail your VM over, for example after you <a href="/use/console/support">open a ticket</a>.</li>
-  <li><strong>Automatic</strong>, opt-in, per VM. Once the server has been proven dead for 15 minutes, the VM is restarted on another server in the same region from its latest backup. Detection takes those 15 minutes, then the restart a few more.</li>
+  <li><strong>Automatic</strong>, opt-in, per VM. Once the server has been proven dead for 15 minutes, the VM is restarted on another server in the same region from its latest backup. The server must first stop answering before it can be proven dead, so expect up to about half an hour between the outage and the start of the failover, then a few minutes for the restart.</li>
 </Unordered>
 
 ### Where automatic failover is offered
@@ -57,7 +57,7 @@ Where it isn't offered, support can still fail a VM over manually if it has back
 
 ### Turn on automatic failover at creation
 
-When you [create a VM](/use/compute/virtual-machines#5-add-ons), turn on **Automatic backups**, then the **Automatic failover** switch under them. The switch is shown only once you pick a region where automatic failover is offered. In another region, the form says why instead, for example **Automatic failover isn't offered in Netherlands yet: no pair of servers in this region can fail over yet.** If you leave the region on automatic placement, it asks you to pick a region where it is offered.
+When you [create a VM](/use/virtual-machines#5-add-ons), turn on **Automatic backups**, then the **Automatic failover** switch under them. The switch is shown only once you pick a region where automatic failover is offered. In another region, the form says why instead, for example **Automatic failover isn't offered in Netherlands yet: no pair of servers in this region can fail over yet.** If you leave the region on automatic placement, it asks you to pick a region where it is offered.
 
 The summary then lists **Automatic failover: On**. A VM launched with automatic failover is placed on a server that has a failover partner. Until the VM is running, the **Failover** section of its **Backups** panel says **Automatic failover was asked for at launch: it is turned on with the backups once the VM is running.** If it can't be turned on then, the section says why, for example **Automatic failover could not be enabled: …** followed by **Backups are on; failover stays manual.**
 
@@ -65,7 +65,7 @@ If the region can no longer offer automatic failover when you launch, the launch
 
 ### Turn on automatic failover on an existing VM
 
-On the VM's page, in the **Backups** panel, the **Failover** section sits between **Scheduled backups** and **Restore points**. Turn on **Automatically restart on another server if this server goes down**. The section is hidden when failover isn't offered for the VM.
+On the VM's page, in the **Backups** panel, the **Failover** section sits between **Scheduled backups** and **Restore points**. Turn on **Automatically restart on another server if this server goes down**. The switch is hidden when automatic failover isn't available at all.
 
 Automatic failover needs at least one complete backup, a region where it is offered, and a server that has a failover partner. When it can't be turned on, the toggle is disabled and the console says why:
 
@@ -85,9 +85,9 @@ Turning off backups also turns off automatic failover. Turning backups back on d
 
 While a failover runs, a banner at the top of the VM's page says **Restarting on another server**, from which backup, and whether it was started automatically or by Hippius support. If no server in the region has room for the VM, the banner says **Waiting for a server with capacity**: the failover waits and retries until one does. The VM's status shows each step, for example **Restarting on another server · Preparing**. You can't restore the VM from a backup or resize it until the failover is done.
 
-If the original server comes back before the VM has been restarted elsewhere, the failover is cancelled: nothing changes, the VM keeps running where it was, and no email is sent. The **Failover history** shows it as **Not needed, server came back**.
+If the original server comes back before the VM has been handed over to the new server, the failover is cancelled: nothing changes, the VM keeps running where it was, and no email is sent. The **Failover history** shows it as **Not needed, server came back**. Once the handover has started, the failover goes on even if the original server comes back.
 
-Once it is done, the banner says **Restarted on another server**, with the backup used, for 7 days. The **Failover history** table in the **Backups** panel lists every failover of the VM: when it started, its type (**Automatic** or **By support**), its status, the backup used and how long it took.
+Once it is done, the banner says **Restarted on another server**, with the backup used, for 7 days. The **Failover history** table in the **Backups** panel lists the VM's 10 most recent failovers: when it started, its type (**Automatic** or **By support**), its status, the backup used and how long it took.
 
 Whichever the mode, you get an email once your VM has been failed over, saying when, why, and which backup was used. A cancelled failover sends no email.
 
