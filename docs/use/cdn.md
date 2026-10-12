@@ -3,7 +3,7 @@ id: cdn
 title: Hippius CDN
 sidebar_label: CDN
 slug: /use/cdn
-description: Put the Hippius CDN in front of an S3 bucket. Create a zone, serve it on its default hostname or your own domain, set cache rules, purge, and understand CDN prices, billing regions and the monthly spend cap.
+description: Put the Hippius CDN in front of an S3 bucket. Create a zone, serve it on its default hostname or your own domain, host a static site or single-page app, set cache rules, purge, and understand CDN prices, billing regions and the monthly spend cap.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -26,7 +26,7 @@ A **zone** is a CDN in front of one bucket, or one folder (prefix) of it. As soo
 
 <Ordered>
   <li>Open <strong>CDN</strong> in the sidebar and click <BgStyledText>New zone</BgStyledText>.</li>
-  <li>Pick the <strong>Bucket</strong>. Optionally enter a <strong>prefix</strong>, such as <code>public/</code>, to serve only the objects under it.</li>
+  <li>Pick the <strong>Bucket</strong>. Optionally enter a <strong>prefix</strong>, a folder such as <code>public/</code>, to serve only the objects under it.</li>
   <li>Give the zone a name, choose the shield region and the <strong>monthly spend cap</strong> ($20 by default, from $1 to $100,000).</li>
   <li>Create it. The default hostname serves right away.</li>
 </Ordered>
@@ -45,6 +45,32 @@ A zone in front of a private bucket creates a read-only key on that bucket for t
 
 :::note Uploading from the console
 Objects uploaded from the console keep the file's type, so they are served with it, HTML included. See [Uploading objects](/use/console/s3#uploading-objects).
+:::
+
+## Host a static site or single-page app
+
+A zone can serve a website built to static files (plain HTML, or a React, Vue or Svelte app) straight from its bucket. Set it up in the **Static website** section of the zone's **Settings** tab:
+
+<Unordered>
+  <li><strong>Index document</strong> (<code>index.html</code> by default): <code>/</code> and every path ending in <code>/</code> serve that file from the same folder, so <code>/docs/</code> serves <code>docs/index.html</code>. It is one file name, without <code>/</code>.</li>
+  <li><strong>Single-page app: serve the index for unknown paths.</strong> A path with no object behind it answers <code>200</code> with the index document instead of a 404, so your app's router handles <code>/profile/42</code>. Server errors (5xx) are never replaced, and the bucket is never listed.</li>
+  <li><strong>Excluded prefixes</strong> (<code>/assets/</code> by default, up to 16): a missing file under them keeps its 404, so a broken script or image link never gets the HTML page back. Add your build's asset folders, such as <code>/static/</code>.</li>
+</Unordered>
+
+To publish a site:
+
+<Ordered>
+  <li>Upload the build output to a bucket (or a folder of it), keeping each file's <code>Content-Type</code>: HTML is never guessed from the extension (see <a href="#what-visitors-receive">What visitors receive</a>).</li>
+  <li>Create a zone on it, with the folder as its prefix, such as <code>build/</code>.</li>
+  <li>Turn on the index document and, for a single-page app, the fallback.</li>
+  <li>Add your own domain: HTML on the default hostname is sandboxed, so serve the site from a custom domain.</li>
+  <li>After each deploy, purge what changed, or everything, on the <strong>Purge</strong> tab.</li>
+</Ordered>
+
+The zone's **Origin** section on the same tab changes its bucket or prefix, for example to switch to a new build folder. The whole zone is purged at once, so nothing from the previous origin is served again. Moving to a private bucket needs admin access to S3, as at creation.
+
+:::info Rolling out
+The static website settings can be saved now. Cache nodes apply them once their update is rolled out; until then, a zone serves exactly as before.
 :::
 
 ## Use your own domain
