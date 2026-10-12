@@ -8,7 +8,7 @@ description: What screenshots and screen recording include on the Hippius Free p
 
 import Unordered from '@site/src/components/Unordered';
 
-Screenshots and screen recording come with every Hippius account. The Free plan has a few limits on recordings, and paid plans lift them.
+Screenshots and screen recording come with every Hippius account that has Drive storage: the free 10 GB, or a paid plan. The Free plan has a few limits on recordings, and paid plans lift them. Accounts that sign in with an access key don't include the free storage, so they need a paid plan to capture.
 
 ## At a glance
 

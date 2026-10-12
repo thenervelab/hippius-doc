@@ -41,6 +41,14 @@ Sometimes the system or the browser doesn't let Hippius use the clipboard, for e
 
 The console opens each new link in a tab of its own. If your browser blocks pop-ups, the card says so. Allow pop-ups for Hippius, or use <BgStyledText>Open</BgStyledText> on the card.
 
+### Capture says "Checking your plan..." or "We couldn't check your plan"
+
+Before each capture, Hippius checks your plan, because it decides the watermark, the 5-minute limit and the 25 free recordings. While it checks, the capture bar says **Checking your plan...** and waits. If the check fails, usually because you're offline, nothing is captured: check your connection and press <BgStyledText>Retry</BgStyledText>.
+
+### Capture says my account doesn't include free storage
+
+Accounts that sign in with an access key don't come with the free 10 GB, so there's nowhere to keep captures until you choose a plan. Press **See plans** to pick one.
+
 ### Record doesn't start
 
 On the Free plan, if you've used your 25 recordings, Hippius tells you as soon as you press Record. Delete an older recording to free a slot, or upgrade. See [Free and paid plans](/use/captures/plans).
