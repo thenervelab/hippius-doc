@@ -28,8 +28,8 @@ Every plan comes in four sizes. On High availability, each of the three instance
 
 | Size | Usable storage | Max connections |
 |---|---|---|
-| **Small** | 30 GB | about 92 |
-| **Medium** | 60 GB | about 200 |
+| **Small** | 30 GB | 102 |
+| **Medium** | 60 GB | 204 |
 | **Large** | 120 GB | 300 |
 | **Extra large** | 240 GB | 300 |
 
