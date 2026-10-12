@@ -96,6 +96,7 @@ const sidebars: SidebarsConfig = {
                 "use/compute/networking",
                 "use/compute/resize",
                 "use/compute/vm-backups",
+                "use/compute/vm-failover",
               ],
             },
             "use/compute/databases",
