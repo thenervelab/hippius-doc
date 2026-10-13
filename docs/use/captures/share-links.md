@@ -9,6 +9,7 @@ description: Every Hippius screenshot and recording gets a public share link tha
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
+import Screenshot from '@site/src/components/Screenshot';
 
 The point of a capture is usually to show it to someone, so Hippius makes the link for you. As soon as a screenshot or recording is saved, its share link is created and copied to your clipboard. Paste it anywhere.
 
@@ -20,6 +21,8 @@ The point of a capture is usually to show it to someone, so Hippius makes the li
   <li><strong>It is end to end encrypted.</strong> The key that opens the capture is in the link itself, after the <code>#</code>, and never reaches Hippius. See <a href="/use/captures#privacy-and-encryption">Privacy and encryption</a>.</li>
   <li><strong>The page shows nothing about you.</strong> No email address or account address appears on it, only the file.</li>
 </Unordered>
+
+<Screenshot src="/img/console/captures/share-page.png" alt="A capture link opened in a browser, showing the screenshot with a Download button" dark raw />
 
 Sharing is unlimited on every plan, including Free.
 
@@ -41,6 +44,8 @@ The link stops working at once for everyone who has it, and its encrypted copy i
 This one surprises people, so it's worth spelling out. A share link is **its own encrypted copy** of the file, made when the link was created. Deleting the capture from your Drive removes your copy, but the link's copy stays, and the link keeps working.
 
 The delete confirmation reminds you of this. If you want a capture gone for everyone, revoke its link in Shared Links as well as deleting the file. The order doesn't matter.
+
+<Screenshot src="/img/console/captures/delete-dialog.png" alt="The Delete File dialog noting that share links made from the file keep working" dark raw />
 
 The same goes for edits. If you [edit a screenshot](/use/captures/edit) and replace the original, a link made before the edit keeps showing the old picture.
 

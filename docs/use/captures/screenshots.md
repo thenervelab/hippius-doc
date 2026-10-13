@@ -9,6 +9,7 @@ description: Take a screenshot of your entire screen, a window or an area in the
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
+import Screenshot from '@site/src/components/Screenshot';
 
 A Hippius screenshot can be your **entire screen**, **one window**, or an **area** you drag out. Whichever you pick, it is saved to your [Hippius Captures](/use/captures#where-your-captures-go) drive and its link is copied for you. Screenshots are unlimited on every plan.
 
@@ -34,6 +35,8 @@ For a window or the whole screen, or when you want a timer, use the capture bar.
   <li><strong>Drive and Captures</strong>: the <BgStyledText>Screenshot</BgStyledText> button in the page header.</li>
   <li><strong>Inside any drive</strong>, including drives shared with you, from the same button.</li>
 </Unordered>
+
+<Screenshot src="/img/desktop/captures/capture-buttons-dark.png" alt="The Screenshot and Record buttons above Recent Files in the desktop app" dark="/img/desktop/captures/capture-buttons-dark.png" raw />
 
 The bar sits at the bottom of your screen. Pick a mode, then:
 
@@ -87,6 +90,8 @@ A small card shows how the upload is going and then says **Link ready**. From th
   <li><strong>Manage link</strong> to open it in Shared Links. See <a href="/use/captures/share-links">Share links for captures</a>. In the desktop app it is in the card's More menu.</li>
   <li><BgStyledText>Edit</BgStyledText>, in the desktop app, to open the screenshot in the editor straight away.</li>
 </Unordered>
+
+<Screenshot src="/img/console/captures/capture-ready.png" alt="The Link ready card after a capture, with Copy link, Open, Show in folder and Manage link" dark raw />
 
 Want to point at something or hide a password before you send it? Open the screenshot in the [editor](/use/captures/edit).
 

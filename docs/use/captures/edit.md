@@ -9,6 +9,7 @@ description: Mark up a screenshot or any picture in your Hippius Drive with arro
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
+import Screenshot from '@site/src/components/Screenshot';
 
 A screenshot often needs a little help: an arrow to the button that matters, a box around the error, or a blur over a name you shouldn't be sending. The Hippius editor does that without leaving the app or the console, and the edited picture stays encrypted like everything else.
 
@@ -37,6 +38,8 @@ You can only edit pictures in drives you're allowed to change. In a shared drive
 | **Highlighter** | M | Marking text the way a highlighter pen would |
 | **Numbered step** | C | Numbered dots for step-by-step instructions |
 | **Blur** and **Pixelate** | B, P | Hiding names, email addresses, passwords or anything private |
+
+<Screenshot src="/img/console/captures/editor.png" alt="The screenshot editor with a rectangle and an arrow drawn on a screenshot" dark raw />
 
 Each tool can take a colour and a thickness (thin, medium or thick). Undo and redo work as you'd expect.
 
