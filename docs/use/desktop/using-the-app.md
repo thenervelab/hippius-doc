@@ -209,10 +209,11 @@ Hippius Desktop keeps a compact **menu bar window** in your system tray (the men
 
 <Screenshot src="/img/desktop/menu-bar-window.png" alt="The Hippius menu bar window showing your balance, the notification bell, file search, and recent uploads" dark />
 
-The window has four parts:
+The window has these parts:
 
 <Unordered>
   <li><strong>Credits</strong>: your current balance, shown in the top left so you can keep an eye on it at any time.</li>
+  <li><strong>Screenshot, Record and Upload</strong>: three tiles side by side at the top. See <a href="#screenshots-and-recordings">Screenshots and recordings</a> below.</li>
   <li><strong>Notification bell</strong>: in the top right, with a badge for the number of unread notifications.</li>
   <li><strong>Search Files</strong>: a search box with the <BgStyledText>⌘F</BgStyledText> shortcut.</li>
   <li><strong>Your Uploads</strong>: your most recently uploaded files, grouped by when they were added (for example <strong>Today</strong>, <strong>Yesterday</strong>, <strong>Last 7 Days</strong>, and <strong>Older</strong>). Each row shows the file name, size, and upload date.</li>
@@ -225,3 +226,16 @@ Each control is a shortcut into the full app:
   <li>Click the <strong>notification bell</strong> to open your <a href="/use/desktop/notifications">Notifications</a> in the app.</li>
   <li>Click <BgStyledText>Open Hippius →</BgStyledText> at the bottom to bring the full Hippius Desktop window to the front.</li>
 </Unordered>
+
+## Screenshots and Recordings {#screenshots-and-recordings}
+
+Hippius can take a screenshot or record your screen, save it to your **Hippius Captures** drive, and copy a share link for it, all in one go. The full guide is [Screenshots and Screen Recording](/use/captures); here is where to find it in the app.
+
+<Unordered>
+  <li><strong>The menu bar window</strong>: click the Hippius icon, then the <BgStyledText>Screenshot</BgStyledText> or <BgStyledText>Record</BgStyledText> tile. Each starts on the mode you used last, and the small arrow in its corner lets you pick an area, a window or the entire screen, or choose where captures are kept. The Screenshot tile's arrow also has <strong>Annotate an image</strong>, which opens any picture in the editor. The third tile, <BgStyledText>Upload</BgStyledText>, opens the upload dialog, and you can drop files anywhere on the window to upload them.</li>
+  <li><strong>Drive</strong>: the <BgStyledText>Screenshot</BgStyledText> and <BgStyledText>Record</BgStyledText> buttons in the page header, and inside every drive, including drives shared with you. On a narrow window they shrink to icons.</li>
+  <li><strong>Captures</strong>: in the sidebar, the list of all your screenshots and recordings, newest first, with the same buttons at the top. On the Free plan it also shows how many of your 25 free recordings you have used.</li>
+  <li><strong>Keyboard shortcuts</strong>: <BgStyledText>⌘ Shift 2</BgStyledText> (<BgStyledText>Ctrl Shift 2</BgStyledText> on Windows and Linux) takes an area screenshot in one step from any app, and <BgStyledText>⌥ ⇧ ⌘ 2</BgStyledText> (<BgStyledText>Ctrl Alt Shift 2</BgStyledText> on Windows and Linux) opens the capture bar ready to record. Change them in <a href="/use/desktop/settings#screenshots--recording">Settings</a>.</li>
+</Unordered>
+
+Screenshots and screen recording work on macOS, Windows and Linux. Your capture shortcuts, captures folder and what happens after each capture are in [Settings, under Screenshots &amp; Recording](/use/desktop/settings#screenshots--recording).

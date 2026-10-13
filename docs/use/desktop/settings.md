@@ -3,7 +3,7 @@ id: settings
 title: App Settings
 sidebar_label: App Settings
 slug: /use/desktop/settings
-description: Manage sync folders, security, notifications, appearance, your API token, and the blockchain RPC endpoint from the Hippius desktop Settings page.
+description: Manage sync folders, screenshot and recording shortcuts, security, notifications, appearance, your API token, and the blockchain RPC endpoint from the Hippius desktop Settings page.
 ---
 
 import DocAccordion, { DocAccordionItem } from '@site/src/components/DocAccordion';
@@ -13,7 +13,7 @@ import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import BgStyledText from '@site/src/components/BgStyledText';
 import Screenshot from '@site/src/components/Screenshot';
 
-The **Settings** page is organized into sections you can open from the left sidebar: **Sync & Storage**, **Security**, **Notifications**, **Appearance**, **API Token**, and **Customize RPC**. Each section has a short description and an info (ⓘ) tooltip next to its title.
+The **Settings** page is organized into sections you can open from the left sidebar: **Sync & Storage**, **Screenshots & Recording**, **Security**, **Notifications**, **Appearance**, **API Token**, and **Customize RPC**. Each section has a short description and an info (ⓘ) tooltip next to its title.
 
 <DocAccordion defaultValue="sync-storage">
 
@@ -93,6 +93,55 @@ Sync & Storage
     <Screenshot src="/img/desktop/settings/settings-sync-destination-dialog.png" alt="Sync destination dialog" dark />
 
     <p>The remote folder ⋮ menu also offers <strong>Browse Contents</strong> and <strong>Delete from Server</strong>.</p>
+
+</>
+</DocAccordionItem>
+
+## Screenshots & Recording
+
+<DocAccordionItem value="screenshots-recording">
+  <>
+  Screenshots &amp; Recording
+  </>
+  <>
+    <p>Everything about <a href="/use/captures">screenshots and screen recording</a> lives in this one section: your keyboard shortcuts, where captures are kept, and what happens after you take one. It appears on computers where Hippius can take captures.</p>
+
+    <Ordered>
+      <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />, then open <strong>Screenshots &amp; Recording</strong>.</li>
+    </Ordered>
+
+    ### Shortcuts
+
+    <p>Two keyboard shortcuts work from any app while Hippius is running, even with its window closed:</p>
+    <Unordered>
+      <li><strong>Screenshot shortcut</strong>: <BgStyledText>⌘ Shift 2</BgStyledText> on a Mac, <BgStyledText>Ctrl Shift 2</BgStyledText> on Windows and Linux. Drag over an area and let go: the screenshot is saved and its link is copied, in one step.</li>
+      <li><strong>Recording shortcut</strong>: <BgStyledText>⌥ ⇧ ⌘ 2</BgStyledText> on a Mac, <BgStyledText>Ctrl Alt Shift 2</BgStyledText> on Linux. It opens the capture bar ready to record. Shown on computers where Hippius can record.</li>
+    </Unordered>
+    <p>Press either one during a recording to stop it. Click <BgStyledText>Change</BgStyledText> on a card and press the new keys (<BgStyledText>Esc</BgStyledText> cancels), or use <BgStyledText>Turn off</BgStyledText> and <BgStyledText>Turn on</BgStyledText>. Hippius won't let both shortcuts use the same keys, and it refuses keys your system already uses for its own screenshots, such as <BgStyledText>⌘ Shift 3</BgStyledText> to <BgStyledText>⌘ Shift 6</BgStyledText> on a Mac or the Print Screen keys.</p>
+
+    :::note On Linux with Wayland
+    Apps can't grab keys there on their own. Where your desktop supports it, Hippius asks your desktop to set up the shortcut, and your desktop may ask you to confirm. Otherwise the card shows a short command to add as a custom shortcut in your desktop's keyboard settings. The shortcut then works even when Hippius is closed.
+    :::
+
+    ### Capture folder
+
+    <p>Shows where your screenshots and recordings are kept on this computer. Your first capture asks once and suggests a <strong>Hippius Captures</strong> folder in Documents. That folder is backed up as your Hippius Captures drive, the same drive the console uses. Click <BgStyledText>Show in Finder</BgStyledText> (<BgStyledText>Show in folder</BgStyledText> on Windows and Linux) to open it, or <BgStyledText>Change</BgStyledText> to keep captures somewhere else. If you haven't taken a capture yet, <BgStyledText>Set up</BgStyledText> lets you choose now.</p>
+
+    ### After a capture
+
+    <Unordered>
+      <li><strong>Copy a share link after capture</strong>: on by default. Each screenshot and recording gets a public link that is copied once it is uploaded. Turn it off and captures are only saved to your drive; you can share them later. See <a href="/use/captures/share-links">Share links for captures</a>.</li>
+      <li><strong>Open the link in your browser</strong>: on by default, while links are being made. Opens each capture's link as soon as it is ready, so you can check it.</li>
+      <li><strong>Recording countdown</strong>: none, 3 seconds or 5 seconds between pressing Record and the recording starting.</li>
+      <li><strong>Record system audio</strong>: adds what your computer plays to recordings, where your computer supports it. Off by default; with speakers your voice may be recorded twice, and headphones avoid that.</li>
+    </Unordered>
+    <p>These are the same choices as in the capture bar's <strong>Options</strong> menu. Changing them in either place changes both.</p>
+
+    ### When saving an edited image
+
+    <p>What <strong>Save</strong> does in the <a href="/use/captures/edit">screenshot editor</a>: <strong>Ask</strong> each time, always <strong>Save a copy</strong> next to the original, or always <strong>Replace the original</strong>.</p>
+
+    <p>If this computer can take screenshots but not recordings, a note at the bottom says why. On Linux with Wayland, a note explains that screenshots go through your desktop's own screenshot tool.</p>
 
 </>
 </DocAccordionItem>
