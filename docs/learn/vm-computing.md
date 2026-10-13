@@ -68,7 +68,7 @@ For how keys are released and what Hippius itself can do, see [Disk encryption a
   <li><strong>Create</strong> from the console, with a size, an image, a region and your SSH key.</li>
   <li><strong>Stop, start and reboot.</strong> A stopped VM keeps its server capacity and is still billed.</li>
   <li><strong><a href="/use/compute/resize">Resize</a></strong> its vCPUs and memory.</li>
-  <li><strong><a href="/use/compute/vm-backups">Back it up</a></strong> on a schedule, and restore it.</li>
+  <li><strong><a href="/use/compute/vm-backups">Back it up</a></strong> on a schedule, and restore it. If its server dies, it can be <a href="/use/compute/vm-failover">failed over</a> to another server from its latest backup.</li>
   <li><strong>Delete</strong> it to stop paying. Its disk is crypto-erased.</li>
 </Unordered>
 

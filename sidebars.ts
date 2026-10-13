@@ -96,6 +96,7 @@ const sidebars: SidebarsConfig = {
                 "use/compute/networking",
                 "use/compute/resize",
                 "use/compute/vm-backups",
+                "use/compute/vm-failover",
               ],
             },
             "use/compute/databases",
@@ -185,6 +186,19 @@ const sidebars: SidebarsConfig = {
             "use/mobile/plans",
             "use/mobile/settings",
             "use/mobile/troubleshooting",
+          ],
+        },
+        {
+          type: "category",
+          label: "WordPress Plugin",
+          collapsed: true,
+          items: [
+            "use/wordpress-plugin/overview",
+            "use/wordpress-plugin/installation",
+            "use/wordpress-plugin/credentials",
+            "use/wordpress-plugin/configure",
+            "use/wordpress-plugin/migrate",
+            "use/wordpress-plugin/troubleshooting",
           ],
         },
         {
