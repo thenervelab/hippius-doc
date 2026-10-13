@@ -267,10 +267,10 @@ function HomepageFeatures() {
           <h2 className="text-3xl lg:text-4xl font-medium font-grotesk mt-4 text-grey-10 max-w-screen-sm text-center">
             One account for everything
           </h2>
-          <div className="grid mt-8 gap-5 justify-center justify-items-center items-stretch w-full mx-auto max-w-screen-xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          <div className="grid mt-8 gap-4 justify-center justify-items-center items-stretch w-full mx-auto max-w-screen-xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 min-[1360px]:grid-cols-5">
             {PRODUCTS.map((product, i) => (
               <div
-                className="relative flex flex-col items-center font-medium w-full max-w-[280px] xl:max-w-none xl:w-[236px] sm:min-h-[300px] h-full border rounded-lg py-6 px-4 border-grey-80 bg-grey-100"
+                className="relative flex flex-col items-center font-medium w-full max-w-[280px] min-[1360px]:max-w-none sm:min-h-[300px] h-full border rounded-lg py-6 px-2 border-grey-80 bg-grey-100"
                 key={i}
               >
                 {product.badge && (
@@ -288,7 +288,7 @@ function HomepageFeatures() {
                   {product.description}
                 </P>
                 <Link
-                  className="flex gap-x-2 mt-auto pt-4 items-center font-semibold text-primary-50"
+                  className="flex gap-x-2 mt-auto pt-4 items-center whitespace-nowrap font-semibold text-primary-50"
                   href={product.cta.href}
                 >
                   {product.cta.label}
