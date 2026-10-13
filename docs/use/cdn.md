@@ -41,10 +41,10 @@ With a private bucket, every object under `<bucket>/<prefix>` becomes publicly r
 
 <Unordered>
   <li><strong>HTTPS.</strong> Plain HTTP requests are redirected to HTTPS (301), unless you turn that off in the zone's settings.</li>
-  <li><strong>GET and HEAD only.</strong> Other methods get 405. Range requests work.</li>
+  <li><strong>GET and HEAD only.</strong> Other methods get 405, and so does <code>OPTIONS</code> unless the zone has a CORS policy. Range requests work.</li>
   <li><strong>Content type.</strong> Each object is served with the <code>Content-Type</code> stored in S3. Only when it has none, or a generic one (<code>application/octet-stream</code>), is it guessed from the extension, and only for images, audio, video, fonts, CSS, JavaScript, JSON, WebAssembly and plain text. HTML, SVG and XML are never guessed: upload them with an explicit `Content-Type`. <code>X-Content-Type-Options: nosniff</code> is always sent.</li>
   <li><strong>HTML on the default hostname is sandboxed.</strong> On <code>ZONE_ID.c.hipcdn.net</code>, HTML, SVG and other XML get <code>Content-Security-Policy: sandbox allow-scripts</code>. On your own domains they don't, so serve a website from a custom domain.</li>
-  <li><strong>No CORS headers.</strong> The CDN adds no <code>Access-Control-*</code> headers yet, so a page served from another origin can't read the zone's files with <code>fetch</code> or XHR, or load web fonts from it. Serve the page and the files from the same custom domain of the zone. On the default hostname, HTML is sandboxed, so even same-host requests count as cross-origin.</li>
+  <li><strong>CORS only when you turn it on.</strong> By default the CDN adds no <code>Access-Control-*</code> headers, so a page served from another origin can't read the zone's files with <code>fetch</code> or XHR, or load web fonts from it. To allow it, set a CORS policy on the zone (see <a href="#allow-cross-origin-requests-cors">Allow cross-origin requests (CORS)</a>). On the default hostname, HTML is sandboxed, so even same-host requests count as cross-origin.</li>
   <li><strong>Headers passed through</strong> from the object: <code>Content-Type</code>, <code>Content-Length</code>, <code>Content-Range</code>, <code>Content-Encoding</code>, <code>Content-Language</code>, <code>Content-Disposition</code>, <code>ETag</code>, <code>Last-Modified</code> and <code>Accept-Ranges</code>.</li>
 </Unordered>
 
@@ -77,6 +77,38 @@ To publish a new version, purge `/index.html` (or a prefix that contains it, suc
 Cache rules on a static-site zone match the object path that is served: the home page matches `/index.html`, not `/`.
 
 The zone's **Origin** section on the same tab changes its bucket or prefix, for example to switch to a new build folder. The whole zone is purged at once, so nothing from the previous origin is served again. Moving to a private bucket needs admin access to S3, as at creation.
+
+## Allow cross-origin requests (CORS)
+
+
+Turn CORS on in the **CORS** section of the zone's **Settings** tab when a page on another origin loads the zone's files with `fetch` or XHR, or loads web fonts from it:
+
+<Unordered>
+  <li><strong>Allowed origins</strong>: up to 32, one per line, each a scheme, a host and an optional port with no path, such as <code>https://app.example.com</code> or <code>http://localhost:3000</code>. Leave out the default port (<code>:443</code> for https, <code>:80</code> for http). <code>{"https://*.example.com"}</code> allows exactly one level of subdomain (the <code>*</code> stands for one label, same scheme): it matches <code>a.example.com</code>, but not <code>example.com</code> or <code>a.b.example.com</code>. Or choose <strong>Any origin ({"*"})</strong> for public files.</li>
+  <li><strong>Methods</strong>: GET, HEAD or both. The preflight (<code>OPTIONS</code>) is always answered.</li>
+  <li><strong>Allowed request headers</strong>: headers a page may send beyond the simple ones, such as <code>range</code>. <strong>Exposed response headers</strong>: headers a page's script may read, such as <code>etag</code> or <code>content-length</code>. Up to 32 each, or <code>{"*"}</code> for any.</li>
+  <li><strong>Preflight cache</strong>: how long a browser reuses a preflight answer, from 0 to 86400 seconds (600 by default).</li>
+  <li><strong>Allow credentials</strong>: for requests sent with cookies or <code>credentials: "include"</code>. It can't be combined with <strong>Any origin</strong>, or with <code>{"*"}</code> as the headers.</li>
+</Unordered>
+
+With **Any origin**, every response carries `Access-Control-Allow-Origin: *`. With listed origins, a request from one of them gets its own origin back, a request from any other origin gets no CORS header, and every response carries `Vary: Origin`. CORS headers are sent on error responses too. The cache nodes answer preflight requests themselves with 204: each one counts as one request, with no bytes, and counts toward the zone's request limit.
+
+Through the API, send `PATCH /api/cdn/zones/ZONE_ID/` with `{"cors": {...}}` to set a policy, or `{"cors": null}` to turn CORS off. Each write replaces the whole policy, and keys you leave out take their defaults:
+
+```json
+{
+  "cors": {
+    "allow_origins": ["https://app.example.com", "https://*.example.org"],
+    "allow_methods": ["GET", "HEAD"],
+    "allow_headers": ["range"],
+    "expose_headers": ["etag"],
+    "max_age": 600,
+    "allow_credentials": false
+  }
+}
+```
+
+An invalid policy is refused with `400` and the code `invalid_cors`, and the response says why.
 
 ## Use your own domain
 
