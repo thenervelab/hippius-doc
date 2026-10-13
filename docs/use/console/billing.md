@@ -127,6 +127,8 @@ A Drive plan sets how much encrypted storage your Drive has. These are the plans
 
 **Shared drives.** Plus, Max and Scale can share a drive with other people. Anyone on any plan, including Free, can be invited.
 
+**Screenshots and screen recording.** Screenshots and sharing are unlimited on every plan. On the Free Drive Plan, a recording stops at 5 minutes, you can keep 25 recordings in total (deleting one frees a slot), and screenshots and recordings carry a small Hippius watermark. Captures count toward your 10 GB like any other file. Paid plans have no capture limits beyond their storage, and no watermark. See [Free and paid plans](/use/captures/plans).
+
 **Cancelling** puts you back on the Free Drive Plan, or, for access key accounts, leaves you with no storage at all.
 
 :::warning Without a plan, or over your cap, uploads stop

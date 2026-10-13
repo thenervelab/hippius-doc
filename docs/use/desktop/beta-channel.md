@@ -28,6 +28,8 @@ Stable is what you get by default. Beta follows the development work, so you see
 
 If you rely on Hippius for work you cannot afford to interrupt, stay on Stable.
 
+You do not need the beta for anything that has already been released. [Screenshots and screen recording](/use/captures), for example, are part of the stable app. The beta gets the next improvements to them first, along with everything else.
+
 ## Joining the beta
 
 <Ordered>
