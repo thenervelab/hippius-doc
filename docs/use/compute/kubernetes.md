@@ -55,6 +55,8 @@ The create form shows each size's vCPUs, memory, disk and price per master.
 
 When you create a cluster, the console generates a key file in your browser: `hippius-cluster-NAME.key`. It holds two key pairs: an Ed25519 pair that signs your requests, and an X25519 pair that secrets are sealed to. Hippius only ever receives the two public keys, each sent as the base64 of 32 bytes.
 
+Through the API, send them as `client_sign_pubkey` (the Ed25519 key) and `client_box_pubkey` (the X25519 key) on `POST /api/kubernetes/clusters/`: each is the standard base64 of the raw 32-byte public key, 44 characters with the padding. A hex key is refused with **must decode to 32 bytes**.
+
 You need the key file to:
 
 <Unordered>

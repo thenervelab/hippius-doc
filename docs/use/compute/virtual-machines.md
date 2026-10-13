@@ -116,6 +116,10 @@ Click <BgStyledText>Create VM</BgStyledText>. The console says **Virtual machine
 
 The VM's status starts at **Pending**, then moves to **Provisioning** and **Running**. The **Boot Phase** goes from **Booting** to **Disk unsealed** (the VM passed attestation and its encrypted disk was unlocked) and then to **Running**. A first boot usually takes a few minutes.
 
+**Running** doesn't mean SSH answers yet. With a public IPv4, the path from the internet opens up to about a minute later. Through the API, wait until `network_ready` is `true` on `GET /api/compute/vms/VM_ID/` (it is `null` without a public IPv4): from then on, the ports your firewall opens are reachable as soon as something listens on them. The SSH server can take a few more seconds after a boot, so retry for a little while.
+
+In the API, `status` is the VM's lifecycle and stays `running` while the VM is stopped: a stopped VM is still billed. Whether the VM is on is `power_state`: `running`, `stopping`, `stopped` or `starting`. Read `power_state` to know if the VM is powered off.
+
 If the launch fails, the VM's page says why and what to try, for example another region or a smaller size. Nothing is billed for a VM that never ran. See [Troubleshooting](/use/compute/troubleshooting#a-vm-launch-failed).
 
 ## Connect to your VM via SSH

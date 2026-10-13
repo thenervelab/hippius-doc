@@ -192,7 +192,7 @@ curl -sS https://api.hippius.com/api/registry/plans/
 curl -sS https://api.hippius.com/api/billing/latest-tao-price/
 ```
 
-The plan lists and the TAO price answer without a token. Balance and `registry/me` need one. S3 key create, rotate, and revoke are in Management API. The OpenAPI spec is https://api.hippius.com/?format=openapi
+The plan lists and the TAO price answer without a token. Balance and `registry/me` need one. S3 key create, rotate, and revoke are in Management API. The OpenAPI spec is https://api.hippius.com/openapi.json
 
 ### Desktop
 
@@ -629,7 +629,7 @@ Token types:
 ## Management API
 
 Docs: https://docs.hippius.com/use/api
-Full OpenAPI spec: https://api.hippius.com/?format=openapi
+Full OpenAPI spec: https://api.hippius.com/openapi.json
 
 Auth: account API token from https://console.hippius.com/dashboard/settings
 Header: Authorization: Token <token>

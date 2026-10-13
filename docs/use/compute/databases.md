@@ -122,6 +122,16 @@ psql "host=db-1a2b3c4d.hpcr.io port=5432 sslnegotiation=direct"
 
 The `.env` file already sets `sslmode=verify-full`, the CA, the user, the password and the database. Older clients are dropped with **server closed the connection unexpectedly**.
 
+Ubuntu 24.04 and Debian 12 ship psql 16, which is too old for the edge. Install a newer client from the PostgreSQL project's own repository, then check `psql --version`:
+
+```bash
+sudo apt install -y postgresql-common
+sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+sudo apt install -y postgresql-client-17
+```
+
+From one of your own VMs, the private address above needs no edge and works with any client.
+
 :::warning An exposed database is reachable from the whole internet
 There is no address allow list on the public edge. The password and TLS protect the database, so use a strong password store and unexpose the database when you no longer need it.
 :::
