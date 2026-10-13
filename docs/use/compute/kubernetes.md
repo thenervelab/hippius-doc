@@ -53,7 +53,7 @@ The create form shows each size's vCPUs, memory, disk and price per master.
 
 ## The cluster key file
 
-When you create a cluster, the console generates a key file in your browser: `hippius-cluster-NAME.key`. Hippius only ever receives its public half.
+When you create a cluster, the console generates a key file in your browser: `hippius-cluster-NAME.key`. It holds two key pairs: an Ed25519 pair that signs your requests, and an X25519 pair that secrets are sealed to. Hippius only ever receives the two public keys, each sent as the base64 of 32 bytes.
 
 You need the key file to:
 

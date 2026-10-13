@@ -69,10 +69,11 @@ What happens next:
   <li>The backup is downloaded while the VM keeps running.</li>
   <li>The VM is then stopped for a few minutes while its disk is swapped. The dialog tells you if it will take longer.</li>
   <li>The VM boots on the restored disk and returns to the power state it was in, running or stopped.</li>
+  <li>The restore then shows <strong>Verifying</strong> for about 10 minutes, sometimes longer. The VM is already usable during that time: Hippius only keeps your previous disk aside until the restored one is confirmed.</li>
 </Unordered>
 
 :::danger Everything written after the restore point is lost
-The disk goes back to the time of the backup. Copy anything newer that you need off the VM before you restore.
+The disk goes back to the moment the backup started, the time shown as **Taken**. Like every backup, it is crash-consistent. Copy anything newer that you need off the VM before you restore.
 :::
 
 Your current disk is kept until the restored VM is running. If the restore fails before then, the VM is left as it was, and the panel says **Restore failed — your VM was left unchanged**. If it says **Restore failed — contact support**, [contact support](/use/console/support).
@@ -83,13 +84,25 @@ Only one restore can run on a VM at a time, and you can't restore while the VM i
 
 Backups taken before the VM's last reboot are marked **Earlier boot**. Restoring them rolls the VM back across a reboot, which needs a VM created from a recent image. The console tells you if your VM can't do it. When it can, the dialog asks you to confirm the rollback, and you get an email when it is done. A VM can be rolled back at most once every 30 minutes.
 
+## Failover
+
+If the server running your VM dies, the VM can be restarted on another server in the same region from its newest backup of the current boot, manually by support or automatically if you turn on **Automatic failover** when you create the VM, or later **Automatically restart on another server if this server goes down** in the **Backups** panel. Automatic failover is offered in France only for now, and no failover ever moves a VM to another region. Data written after that backup is lost, and a VM without backups can't be failed over. See [VM failover and high availability](/use/compute/vm-failover).
+
 ## Turn off backups
 
-Turn off **Scheduled backups** and confirm with **Turn off**. No new backups are taken. The existing ones are kept for 7 days, then deleted.
+Turn off **Scheduled backups** and confirm with **Turn off**. No new backups are taken. The existing ones are kept for 7 days, then deleted. This also turns off [automatic failover](/use/compute/vm-failover#turn-on-automatic-failover-on-an-existing-vm), and turning backups back on doesn't turn it back on.
 
 ## What backups cost
 
-Backup storage costs **$6 per TB-month**, billed on what your backups actually store (all the full and incremental copies still kept), not on the size of the disk. Storage is measured every few minutes and billed by the hour. The current price is always in the [live price list](https://console.hippius.com/dashboard/billing/compute#prices), and the **Backups** panel shows it too.
+Backup storage costs **$6 per TB-month**, billed on what your backups store, every full and incremental copy still kept:
+
+<Unordered>
+  <li><strong>Each full backup</strong> stores the whole disk at its full size, however much of it is used, because the disk is encrypted. A 40 GB disk makes a full backup of about 40 GB, even if it is nearly empty.</li>
+  <li><strong>Each incremental backup</strong> stores only the blocks that changed since the previous one. Encryption and file-system journals add to what the guest writes, so it can be a few times larger.</li>
+  <li><strong>After a reboot</strong>, a new chain starts with a new full backup. The previous chain is kept, and billed, for 7 more days.</li>
+</Unordered>
+
+Storage is measured every few minutes and billed by the hour. The current price is always in the [live price list](https://console.hippius.com/dashboard/billing/compute#prices), and the **Backups** panel shows it too.
 
 Backups that are kept after you turn them off are billed until they are deleted. When you create a VM with backups, the [24-hour balance requirement](/use/compute/billing#the-24-hour-balance-requirement) counts one full copy of its disk.
 
