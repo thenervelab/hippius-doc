@@ -80,14 +80,11 @@ The zone's **Origin** section on the same tab changes its bucket or prefix, for 
 
 ## Allow cross-origin requests (CORS)
 
-:::note Rolling out
-You can save a CORS policy now. The cache nodes apply it once they support CORS, and until then they keep sending no CORS headers.
-:::
 
 Turn CORS on in the **CORS** section of the zone's **Settings** tab when a page on another origin loads the zone's files with `fetch` or XHR, or loads web fonts from it:
 
 <Unordered>
-  <li><strong>Allowed origins</strong>: up to 32, one per line, each a scheme, a host and an optional port with no path, such as <code>https://app.example.com</code> or <code>http://localhost:3000</code>. Leave out the default port (<code>:443</code> for https, <code>:80</code> for http). <code>{"https://*.example.com"}</code> allows one level of subdomain: it matches <code>a.example.com</code>, but not <code>example.com</code> or <code>a.b.example.com</code>. Or choose <strong>Any origin ({"*"})</strong> for public files.</li>
+  <li><strong>Allowed origins</strong>: up to 32, one per line, each a scheme, a host and an optional port with no path, such as <code>https://app.example.com</code> or <code>http://localhost:3000</code>. Leave out the default port (<code>:443</code> for https, <code>:80</code> for http). <code>{"https://*.example.com"}</code> allows exactly one level of subdomain (the <code>*</code> stands for one label, same scheme): it matches <code>a.example.com</code>, but not <code>example.com</code> or <code>a.b.example.com</code>. Or choose <strong>Any origin ({"*"})</strong> for public files.</li>
   <li><strong>Methods</strong>: GET, HEAD or both. The preflight (<code>OPTIONS</code>) is always answered.</li>
   <li><strong>Allowed request headers</strong>: headers a page may send beyond the simple ones, such as <code>range</code>. <strong>Exposed response headers</strong>: headers a page's script may read, such as <code>etag</code> or <code>content-length</code>. Up to 32 each, or <code>{"*"}</code> for any.</li>
   <li><strong>Preflight cache</strong>: how long a browser reuses a preflight answer, from 0 to 86400 seconds (600 by default).</li>
