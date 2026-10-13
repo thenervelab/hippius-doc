@@ -9,6 +9,7 @@ pagination_next: null
 
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
+import Screenshot from '@site/src/components/Screenshot';
 
 Most capture problems come down to one of three things: the capture couldn't reach your Drive, your browser or computer said no to something, or you've hit a Free plan limit. Hippius tries hard not to lose anything along the way, so start here.
 
@@ -45,6 +46,8 @@ The console opens each new link in a tab of its own. If your browser blocks pop-
 
 Before each capture, Hippius checks your plan, because it decides the watermark, the 5-minute limit and the 25 free recordings. While it checks, the capture bar says **Checking your plan...** and waits. If the check fails, usually because you're offline, nothing is captured: check your connection and press <BgStyledText>Retry</BgStyledText>.
 
+<Screenshot src="/img/console/captures/plan-check.png" alt="The capture bar saying We couldn't check your plan, with a Retry button" dark raw />
+
 ### Capture says my account doesn't include free storage
 
 Accounts that sign in with an access key don't come with the free 10 GB, so there's nowhere to keep captures until you choose a plan. Press **See plans** to pick one.
@@ -71,7 +74,9 @@ macOS needs your permission before any app can see the screen. If Hippius asks, 
 
 ### There's no Record on Windows
 
-Screen recording on Windows is coming soon. Screenshots work today.
+Screen recording on Windows arrived in Hippius 0.6.9. If you don't see Record, update the app: it usually updates itself, or you can download the latest version from the [Hippius download page](https://hippius.com/desktop-app).
+
+The Windows installer isn't code signed yet, so Windows may show a SmartScreen warning when you install it. Choose **More info**, then **Run anyway**.
 
 ## FAQ
 

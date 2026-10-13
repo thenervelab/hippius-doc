@@ -9,6 +9,7 @@ pagination_prev: null
 
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
+import Screenshot from '@site/src/components/Screenshot';
 
 Sometimes a picture explains a problem faster than a paragraph, and a short video beats a meeting. Hippius lets you take a screenshot or record your screen, and by the time you have let go of the mouse, the capture is saved in your Drive and a link to it is on your clipboard, ready to paste into a chat, an email or a ticket.
 
@@ -31,7 +32,7 @@ There is no folder to pick, no file to name and no upload to start. You can stil
 |---|---|---|
 | **Desktop app on macOS** | Yes | Yes |
 | **Desktop app on Linux** | Yes | Yes |
-| **Desktop app on Windows** | Yes | Coming soon |
+| **Desktop app on Windows** | Yes | Yes |
 | **Console in Chrome or Edge** on a computer | Yes | Yes |
 | **Console in Safari or Firefox** on a computer | Yes | Yes, with a few differences (see [Record your screen](/use/captures/recording#browser-differences)) |
 | **Phones** | No | No |
@@ -57,6 +58,8 @@ You'll find them in two places:
   <li><strong>Captures</strong>, in the sidebar of the desktop app and of the console (under Drive). It lists your newest captures first, with the same search, filters and row menu as any drive.</li>
   <li><strong>The Hippius Captures drive</strong> itself, next to your other drives.</li>
 </Unordered>
+
+<Screenshot src="/img/console/captures/captures-page.png" alt="The Captures page in the console, listing screenshots and recordings with 3 of 25 free recordings used" dark raw />
 
 In the desktop app, your first capture asks once where to keep your captures on your computer. A **Hippius Captures** folder in Documents is suggested, and you can pick another place. That folder is backed up as your Hippius Captures drive, and you can move it later in [Settings](/use/desktop/settings). The capture you just took is kept safe while you decide.
 

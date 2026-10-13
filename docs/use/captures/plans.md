@@ -7,6 +7,7 @@ description: What screenshots and screen recording include on the Hippius Free p
 ---
 
 import Unordered from '@site/src/components/Unordered';
+import Screenshot from '@site/src/components/Screenshot';
 
 Screenshots and screen recording come with every Hippius account that has Drive storage: the free 10 GB, or a paid plan. The Free plan has a few limits on recordings, and paid plans lift them. Accounts that sign in with an access key don't include the free storage, so they need a paid plan to capture.
 
@@ -45,7 +46,11 @@ The Free plan includes 25 recordings in total. The Captures page shows how many 
   <li>Screenshots never count.</li>
 </Unordered>
 
+<Screenshot src="/img/desktop/captures/captures-page-dark.png" alt="The Captures page in the desktop app showing 25 of 25 free recordings used" dark="/img/desktop/captures/captures-page-dark.png" raw />
+
 When you've used all 25, Hippius tells you as soon as you press Record, before anything is recorded, so you never lose a take. Upgrade your plan to record more, or delete an older recording to make room.
+
+<Screenshot src="/img/console/captures/recording-limit.png" alt="The dialog shown after 25 free recordings, with Upgrade, Open Captures and Not now" dark raw />
 
 ## The watermark
 

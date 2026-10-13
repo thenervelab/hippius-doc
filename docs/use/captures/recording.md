@@ -9,14 +9,15 @@ description: Record your entire screen, a window or an area in the Hippius deskt
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
+import Screenshot from '@site/src/components/Screenshot';
 
 A screen recording shows what's happening while you talk someone through it: a bug, a walkthrough, a quick "here's how". Record your **entire screen**, **one window** or an **area**, with your voice and, if you like, a round bubble of your camera. When you stop, the video is saved to your [Hippius Captures](/use/captures#where-your-captures-go) drive and its link is copied.
 
-Screen recording works in the desktop app on macOS and Linux (Windows is coming soon), and in the console in Chrome, Edge, Safari and Firefox on a computer.
+Screen recording works in the desktop app on macOS, Windows and Linux, and in the console in Chrome, Edge, Safari and Firefox on a computer.
 
 ## Get ready
 
-Open the capture bar with **Record**. In the desktop app you'll find it in the menu bar (the Hippius icon, then the <BgStyledText>Record</BgStyledText> tile) and in the header of Drive, Captures and every drive. You can also press <BgStyledText>⌥ ⇧ ⌘ 2</BgStyledText> on a Mac, or <BgStyledText>Ctrl Alt Shift 2</BgStyledText> on Linux. In the console, click <BgStyledText>Record</BgStyledText> at the top of the Drive or Captures page.
+Open the capture bar with **Record**. In the desktop app you'll find it in the menu bar (the Hippius icon, then the <BgStyledText>Record</BgStyledText> tile) and in the header of Drive, Captures and every drive. You can also press <BgStyledText>⌥ ⇧ ⌘ 2</BgStyledText> on a Mac, or <BgStyledText>Ctrl Alt Shift 2</BgStyledText> on Windows and Linux. In the console, click <BgStyledText>Record</BgStyledText> at the top of the Drive or Captures page.
 
 On the bar, choose:
 
@@ -25,6 +26,8 @@ On the bar, choose:
   <li><strong>Microphone</strong>: on or off, and which one. The bar shows a live level so you can check you're being heard.</li>
   <li><strong>Camera</strong>: off by default. Turn it on to add a round bubble of you to the recording.</li>
 </Unordered>
+
+<Screenshot src="/img/console/captures/capture-bar.png" alt="The capture bar in the console set to record, with camera and microphone switches and the free plan note" dark raw />
 
 Under <BgStyledText>Options</BgStyledText> you'll find a few more:
 
@@ -58,6 +61,8 @@ A small set of controls stays on screen. Most are on every computer; a few, like
   <li><strong>Stop</strong> to save the recording and make its link.</li>
   <li><strong>Discard</strong> to throw it away with nothing saved. Hippius asks first.</li>
 </Unordered>
+
+<Screenshot src="/img/console/captures/recording-controls.png" alt="Recording controls in the console with the timer, microphone, pause, restart, stop and discard" dark raw />
 
 In the desktop app, pressing either capture shortcut while you record stops the recording, so you can finish without looking for the controls.
 
