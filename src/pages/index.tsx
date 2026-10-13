@@ -72,7 +72,7 @@ export const SMARTER_CLOUD: SmallCardInfo[] = [
   {
     title: "Encrypted",
     description:
-      "Drive encrypts on your device, only you hold the key. S3 encrypts at rest, every chunk under its own key. Hub keeps private repositories private.",
+      "Drive encrypts on your device, only you hold the key. S3 encrypts at rest, every object under its own key. Hub keeps private repositories private.",
     icon: <Icons.SheildTick className="text-primary-50 relative size-7" />,
   },
 ];
@@ -89,26 +89,32 @@ export const PRODUCTS: (SmallCardInfo & {
     cta: { label: "Store your first file", href: "/use/drive" },
   },
   {
-    title: "S3 Storage",
+    title: "S3 Compatible",
     description:
       "Any S3 client, endpoint s3.hippius.com, no egress fees. Migrate from any S3 provider in one click.",
     icon: <Icons.Strongbox className="text-primary-50 relative size-7" />,
     cta: { label: "Create your first bucket", href: "/use/quickstart" },
   },
   {
+    title: "CDN",
+    description:
+      "Serve the files in your buckets from edge locations, with your own domain, cache rules and a spend cap.",
+    icon: <Icons.Lightning className="text-primary-50 relative size-7" />,
+    cta: { label: "Create your first zone", href: "https://docs.hippius.com/use/cdn" },
+  },
+  {
     title: "Hub",
     description:
-      "Push and pull AI models and container images. A drop-in for the Hugging Face Hub, docker and oras.",
+      "Push and pull AI models and container images with hippius-hub, docker or oras.",
     icon: <Icons.Global className="text-primary-50 relative size-7" />,
     cta: { label: "Publish your first model", href: "/registry" },
   },
   {
-    title: "Confidential Computing",
+    title: "Confidential Compute",
     description:
-      "Virtual machines and databases in hardware-encrypted memory. The host can't read them, and you can verify it.",
+      "VMs, databases, Kubernetes and runners in hardware-encrypted memory. The host can't read them.",
     icon: <Icons.SheildTick className="text-primary-50 relative size-7" />,
     cta: { label: "How it works", href: "/learn/confidential-computing" },
-    badge: "Coming soon",
   },
 ];
 
@@ -175,10 +181,10 @@ function HomepageHeader() {
           </Link>
         </div>
         <H1 className="text-center mt-4 max-w-[1050px]">
-          Encrypted storage, S3 and an AI model Hub
+          Everything you need to build on Hippius
         </H1>
         <P className="text-center mt-4 max-w-[760px] text-white/90" size="lg">
-          Drive for your files, S3 Storage for your apps, Hub for your AI models and containers, and Confidential Computing on the way.
+          Guides, API references and examples for every Hippius product, written for people and for AI agents.
         </P>
 
         <div className="flex gap-y-5  flex-wrap relative items-center justify-center mt-8">
@@ -259,12 +265,12 @@ function HomepageFeatures() {
             Hippius: a distributed cloud
           </P>
           <h2 className="text-3xl lg:text-4xl font-medium font-grotesk mt-4 text-grey-10 max-w-screen-sm text-center">
-            Four products, one account
+            One account for everything
           </h2>
-          <div className="flex gap-8 mt-8 items-start flex-wrap justify-center max-w-screen-xl w-full mx-auto">
+          <div className="grid mt-8 gap-5 justify-center justify-items-center items-stretch w-full mx-auto max-w-screen-xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {PRODUCTS.map((product, i) => (
               <div
-                className="relative flex flex-col items-center font-medium w-[280px] min-h-[300px] border rounded-lg py-6 px-6 border-grey-80 bg-grey-100"
+                className="relative flex flex-col items-center font-medium w-full max-w-[280px] xl:max-w-none xl:w-[236px] sm:min-h-[300px] h-full border rounded-lg py-6 px-4 border-grey-80 bg-grey-100"
                 key={i}
               >
                 {product.badge && (
@@ -275,14 +281,14 @@ function HomepageFeatures() {
                 <AbstractIconWrapper className="size-10">
                   {product.icon}
                 </AbstractIconWrapper>
-                <P className="mt-4" size="lg">
+                <P className="mt-4 whitespace-nowrap text-center" size="lg">
                   {product.title}
                 </P>
-                <P className="mt-2 text-grey-50 text-center flex-1" size="sm">
+                <P className="mt-2 text-grey-50 text-center" size="sm">
                   {product.description}
                 </P>
                 <Link
-                  className="flex gap-x-2 mt-4 items-center font-semibold text-primary-50"
+                  className="flex gap-x-2 mt-auto pt-4 items-center font-semibold text-primary-50"
                   href={product.cta.href}
                 >
                   {product.cta.label}
