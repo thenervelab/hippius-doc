@@ -91,7 +91,7 @@ Top up the balance, then subscribe to a plan. A top-up does not add storage. 1 U
 Five top-up methods, on Billing:
 
 - Card, through Stripe, from $10 to $10,000, or a monthly auto reload.
-- Bitcoin, on-chain or Lightning, from $20 to $10,000. Lightning lands in seconds. On-chain waits for one confirmation.
+- Bitcoin, on-chain or Lightning, from $20 to $100,000. Lightning lands in seconds. On-chain waits for one confirmation.
 - USDC on Base, from a browser wallet, from $5 to $10,000. 1 USDC adds one dollar to your balance.
 - TAO, from a connected wallet or by sending to the TAO deposit address (Manually tab). At least $20 per transfer. Never send TAO to the Hippius account address (Wallet → Receive): it is not credited. A transfer cannot be reversed.
 - hAlpha, the Hippius native token, on the Hippius tab. Credits = hAlpha × the on-chain hAlpha price. Slippage protection 1% by default. Final on chain, no refund. Not invoiced.
