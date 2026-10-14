@@ -31,8 +31,8 @@ Virtual Machines is currently available only to beta users. To request access, p
 
 ## Create a Virtual Machine
 
-:::warning Credit Requirement
-You need at least **10 credits** in your account to create a virtual machine. Make sure you have sufficient credits before proceeding.
+:::warning Balance requirement
+To create a virtual machine, your balance must cover 24 hours of everything you already run plus the new VM. A Small VM costs $32 a month ($0.0438 an hour). See [the 24-hour balance requirement](/use/compute/billing#the-24-hour-balance-requirement) and [Prices](/use/compute/billing#prices).
 :::
 
 Start by clicking the top-right <BgStyledText>Create VM</BgStyledText> button, then select the model that fits your needs and continue with the setup.

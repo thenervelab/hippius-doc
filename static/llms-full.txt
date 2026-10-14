@@ -124,6 +124,8 @@ Hub (names Free, Builder, Pro, Team; paid from the balance only; top up by card,
 
 Catalogs (no auth): GET https://api.hippius.com/api/drive/plans/ · GET https://api.hippius.com/api/s3/plans/ · GET https://api.hippius.com/api/registry/plans/
 
+Plan prices, monthly (the catalogs above are always current): Drive Free 10 GB $0, Starter 500 GB $4, Plus 2 TB $7, Max 10 TB $22, Scale 25 TB $50. S3 Pro 10 TB $53, Business 50 TB $245, Enterprise 100 TB $465. Hub Free $0, Builder $5, Pro $19, Team $99.
+
 Google, GitHub, and Apple accounts include the Free Drive Plan (10 GB). S3 starts on pay as you go at $6 per TB per month. A plan is optional. Creating a Hub namespace needs a balance of at least $10.
 
 Open a support ticket with the account API token: POST https://api.hippius.com/api/support/tickets/ with subject, priority, category, and description.
@@ -223,6 +225,8 @@ Compute is open to every account, in the console under Confidential Computing. T
 Billing: metered per second (one-minute minimum per VM and public IPv4), charged hourly on the Hippius chain from the balance. A VM is billed running or stopped until it is deleted. A launch needs a balance covering 24 hours of the account's compute plus the launch. Quotas apply: new accounts start on the Starter tier (3 VMs, 8 vCPU) and move up automatically with their charged usage.
 
 Prices per 730-hour month: vCPU $18, memory $2.50/GB, disk $0.10/GB. Small (1 vCPU, 4 GB, 40 GB) $32 ($0.0438/h), Medium $64, Large $128, X-Large $256, 2X-Large $512, 4X-Large $1024. Public IPv4 $0.005/h (~$3.65/month). VM backups $6 per TB-month. Outbound bandwidth metered per region, not charged today; inbound free. Managed databases: their VMs plus 25%. Kubernetes: its VMs plus $15 per cluster per month. Database and Kubernetes backups go to the user's own S3, at S3 prices. The live price list wins: https://console.hippius.com/dashboard/billing/compute#prices. Details: https://docs.hippius.com/use/compute/billing
+
+CDN prices, billed hourly from the balance like compute: data out $0.010 per GB billed in FR, $0.060 per GB billed in AU (each byte at the cheaper of the serving and the visitor's region), $0.002 per 10,000 requests, $1 per custom domain per month; the default hostname is included. Each zone has a monthly spend cap, $20 by default. Details: https://docs.hippius.com/use/cdn
 
 Hub stores images. It does not run them.
 
