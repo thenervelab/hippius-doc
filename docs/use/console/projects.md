@@ -1,17 +1,13 @@
 ---
 id: projects
 title: Projects and Billing Accounts
-sidebar_label: Projects & Billing Accounts
+sidebar_label: Projects and billing accounts
 slug: /use/console/projects
 description: Organise your Hippius compute, S3 and CDN into projects, pay for them from separate billing accounts, give team members access per project, follow costs per project, set budgets and quotas, and transfer a project to another account.
 ---
 
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
-
-:::caution Beta, rolling out
-Projects and billing accounts are in beta. They are being turned on for a pilot group first, then for every account. Until they are on for your account, the console does not show them, and everything works as described in the rest of the documentation.
-:::
 
 ## Introduction
 
