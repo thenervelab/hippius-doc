@@ -32,3 +32,5 @@ Setting up a storage miner involves two main steps:
 
 1. **[Running a Blockchain Node](./arion/running-blockchain-node.md)**: First, you need to set up and sync the Hippius Substrate node to connect to the network.
 2. **[Running the Arion Miner](./arion/running-miner.md)**: Once your node is synced, you configure and start the Arion miner service to begin accepting storage and earning rewards.
+
+Once your node is registered, follow it on the [provider dashboard](/operators/getting-started) at [providers.hippius.com](https://providers.hippius.com).

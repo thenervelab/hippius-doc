@@ -230,6 +230,7 @@ const sidebars: SidebarsConfig = {
       label: "Earn",
       collapsed: true,
       items: [
+        "operators/getting-started",
         {
           type: "category",
           label: "Run a Miner",
