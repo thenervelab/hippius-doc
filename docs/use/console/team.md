@@ -201,4 +201,5 @@ The team itself is managed under `/api/accounts/`: `members/`, `invites/` and `a
   <li><a href="/use/compute">Compute</a>: what members can run in the account.</li>
   <li><a href="/use/compute/billing">Compute billing and quotas</a>: what the account pays for.</li>
   <li><a href="/use/console/shared-drives">Shared Drives</a>: share files in Drive.</li>
+  <li><a href="/use/console/projects">Projects and billing accounts</a> (beta): access per project, separate wallets.</li>
 </Unordered>

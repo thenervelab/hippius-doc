@@ -143,6 +143,7 @@ const sidebars: SidebarsConfig = {
             "use/console/referrals",
             "use/console/settings",
             "use/console/team",
+            "use/console/projects",
             "use/console/support",
           ],
         },
