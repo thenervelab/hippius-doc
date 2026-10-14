@@ -26,15 +26,23 @@ Your account itself is the **Default project** and the **Default billing account
 
 Projects work with [shared accounts](/use/console/team): team members can be given access to the whole account, or to one project only.
 
-## Projects
-
-Create a project from the project selector, give it a name and, optionally, a billing account to pay for it. Without one, it is paid from your Default billing account.
-
-Select a project in the console to work in it. VMs, databases, clusters, runners, buckets, S3 keys and CDN zones are listed and created in the selected project. Switching projects is like switching accounts: each one has its own resources.
+Where things are in the console:
 
 <Unordered>
-  <li><strong>Rename</strong> a project, or <strong>move it to another billing account</strong>, from its settings.</li>
-  <li><strong>Archive</strong> a project once it is empty. A project that still owns anything (a VM, a database, a cluster, a public IP, a runner, an S3 bucket or key, a CDN zone) cannot be archived: delete its resources first.</li>
+  <li>The <strong>project switcher</strong> is the button showing the current project's name, at the top right next to your account card. Its menu lists your projects, with <strong>Create project</strong>, <strong>Archive</strong> for the current project, and <strong>Manage projects</strong>.</li>
+  <li>The <strong>Projects</strong> page is in the sidebar, under <strong>Team</strong>.</li>
+  <li>The <strong>Billing Accounts</strong> page is in the sidebar, under <strong>Account</strong>, next to <strong>Billing</strong>.</li>
+</Unordered>
+
+## Projects
+
+Create a project with **Create project**, in the project switcher or at the top of the **Projects** page. Give it a name and, optionally, a billing account to pay for it. Without one, it is paid from your Default billing account.
+
+Pick a project in the project switcher, or choose **Open** next to it on the **Projects** page, to work in it. VMs, databases, clusters, runners, buckets, S3 keys and CDN zones are listed and created in the selected project. Switching projects is like switching accounts: each one has its own resources.
+
+<Unordered>
+  <li><strong>Rename</strong> a project, or <strong>move it to another billing account</strong>, with <strong>Rename</strong> or <strong>Billing</strong> next to it on the <strong>Projects</strong> page (<strong>Billing</strong> opens the <strong>Change billing account</strong> dialog).</li>
+  <li><strong>Archive</strong> a project once it is empty, with <strong>Archive</strong> on the <strong>Projects</strong> page or in the project switcher. A project that still owns anything (a VM, a database, a cluster, a public IP, a runner, an S3 bucket or key, a CDN zone) cannot be archived: delete its resources first. The dialog lists what it still owns.</li>
 </Unordered>
 
 ## S3 and the CDN in projects
@@ -49,13 +57,15 @@ Buckets, S3 access keys and CDN zones belong to the project they are created in,
   <li><strong>S3 migrations</strong> stay at the account level, as before.</li>
 </Unordered>
 
+In a project other than the Default one, the S3 page says that the project's storage is covered by the account's S3 plan and billed on the Default billing account, and the migrations page says that migrations import into the Default project's S3. A team member with S3 access to the project can see the account's S3 plan there. Uploads and deletions you start in a project stay in that project, even if you switch projects before they finish.
+
 ## Billing accounts
 
-Create a billing account from the billing pages. It gets a wallet of its own, separate from your Default one.
+Create a billing account with **Create billing account** on the **Billing Accounts** page. It gets a wallet of its own, separate from your Default one. Choose **Open** next to a billing account to see its balance, the projects it pays for, and its **Costs**, **Invoices**, **Billing details** and **Members** tabs.
 
 <Unordered>
-  <li><strong>Top up</strong> a billing account with a card (one-off or recurring) or with Bitcoin, the same way you top up your account.</li>
-  <li>Its <strong>billing profile</strong> is printed on its invoices, which are mailed to its billing email, or to you when it has none.</li>
+  <li><strong>Top up</strong> a billing account with a card (one-off or recurring) or with Bitcoin, the same way you top up your account, with <strong>Top up</strong> on its page.</li>
+  <li>Its <strong>billing profile</strong>, edited in the <strong>Billing details</strong> tab, is printed on its invoices, which are mailed to its billing email, or to you when it has none.</li>
   <li>Its <strong>balance</strong> pays for every project linked to it. The launch check, the runway and the low-credit alerts look at that balance against what all those projects burn.</li>
 </Unordered>
 
@@ -85,13 +95,13 @@ A team manager can only give access they hold themselves, project by project. Wh
 
 ## Costs
 
-Each billing account has a **costs** page: what it paid, per project, per kind of usage (VM time, public IP, bandwidth, backup storage, database and Kubernetes management fees, CDN traffic, requests and custom domains) and per day, for any period up to a year. Download it as **CSV** for your own reporting.
+Each billing account has a **Costs** tab on its page (also reachable with **Costs** next to it on the **Billing Accounts** page, the Default billing account included): what it paid, per project, per kind of usage (VM time, public IP, bandwidth, backup storage, database and Kubernetes management fees, CDN traffic, requests and custom domains) and per day, for any period up to a year. Choose the days with **From** and **To**, the breakdown with **Split by** (**Project**, **Kind**, **Day**), and download it with **Download CSV** for your own reporting.
 
 Costs show the hours charged or about to be charged. A project that moved to another billing account appears on each billing account for the hours that one paid. Each project's S3 storage is shown for information: it is paid at the account level (see above).
 
 ## Budgets
 
-Set a **monthly budget** on a project, in credits.
+Set a **monthly budget** on a project, in credits, with **Budget** next to it on the **Projects** page: **Monthly limit (USD)**, **Alert at (% of the limit)**, and **Refuse new launches over the limit**. A billing viewer can also open a project's budget from the projects listed on its billing account's page.
 
 <Unordered>
   <li>You get an email when the project's spending for the month reaches each threshold you choose (by default 50%, 90% and 100% of the budget), once per threshold and month.</li>
@@ -100,15 +110,15 @@ Set a **monthly budget** on a project, in credits.
 
 ## Quotas
 
-Your account's [compute quotas](/use/compute/billing#quotas) apply to all your projects together. You can also give a project its **own limits** (number of VMs, vCPUs, memory, disk, databases, clusters, public IPs, runners), within the account's. A launch past a project's limit is refused, even when the account still has room.
+Your account's [compute quotas](/use/compute/billing#quotas) apply to all your projects together. You can also give a project its **own limits** (number of VMs, vCPUs, memory, disk, databases, clusters, public IPs, runners), within the account's, with **Quota** next to it on the **Projects** page. A launch past a project's limit is refused, even when the account still has room.
 
 ## Transferring a project
 
 You can hand a project, with everything it runs, to another Hippius account.
 
 <Ordered>
-  <li>From the project's settings, choose <strong>Transfer</strong> and enter the other account's id.</li>
-  <li>The owner of that account sees the offer and accepts it, choosing which of their billing accounts will pay for the project. The offer is valid for 7 days, and you can cancel it until it is accepted.</li>
+  <li>On the <strong>Projects</strong> page, choose <strong>Transfer</strong> next to the project. In the <strong>Transfer project</strong> dialog, enter the other account's id and choose <strong>Offer transfer</strong>. The other owner finds their account's id in the <strong>Transfers</strong> section of their <strong>Projects</strong> page.</li>
+  <li>The owner of that account sees the offer in the <strong>Transfers</strong> section of their <strong>Projects</strong> page and chooses <strong>Accept</strong> (or <strong>Decline</strong>), choosing which of their billing accounts will pay for the project. The offer is valid for 7 days, and you can cancel it with <strong>Cancel</strong> in your <strong>Transfers</strong> section until it is accepted.</li>
   <li>Once accepted, the project and its resources belong to the other account. Nothing is copied or restarted.</li>
 </Ordered>
 
