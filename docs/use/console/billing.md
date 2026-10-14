@@ -36,7 +36,7 @@ Auto reload is the easiest way to make sure your plans never lapse. You can chan
 
 ### With Bitcoin
 
-In the same Top up dialog, choose <BgStyledText>Bitcoin</BgStyledText>. You can pay on-chain or over Lightning, from $20 to $10,000. The invoice is priced in dollars and opens on pay.hippius.com. Lightning is credited in seconds. An on-chain payment is credited after one confirmation, usually 10 to 60 minutes.
+In the same Top up dialog, choose <BgStyledText>Bitcoin</BgStyledText>. You can pay on-chain or over Lightning, from $20 to $100,000. The invoice is priced in dollars and opens on pay.hippius.com. Lightning is credited in seconds. An on-chain payment is credited after one confirmation, usually 10 to 60 minutes.
 
 <Screenshot src="/img/console/billing/bitcoin.png" alt="Top up with Bitcoin" dark raw />
 
