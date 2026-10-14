@@ -1,12 +1,12 @@
 ---
 title: Provider dashboard
 slug: /operators/getting-started
-description: providers.hippius.com, the dashboard for the people who run nodes for the Hippius network. Sign in, follow your nodes, register a compute miner, and see the network.
+description: provider.hippius.com, the dashboard for the people who run nodes for the Hippius network. Sign in, follow your nodes, register a compute miner, and see the network.
 ---
 
 # Provider dashboard
 
-If you run nodes for the network, you follow them on [providers.hippius.com](https://providers.hippius.com). It's a separate site from the customer console at [console.hippius.com](https://console.hippius.com), which is for buying storage and compute.
+If you run nodes for the network, you follow them on [provider.hippius.com](https://provider.hippius.com). It's a separate site from the customer console at [console.hippius.com](https://console.hippius.com), which is for buying storage and compute.
 
 The operator pages that used to be in the console now live here. Old console links (`/dashboard/miner`, `/dashboard/compute-miners`) redirect to the matching page.
 
@@ -16,7 +16,7 @@ You use the same account as on the console: Google, GitHub, Apple or your access
 
 Each site keeps its own session, though:
 
-- You sign in once on providers.hippius.com and once on console.hippius.com.
+- You sign in once on provider.hippius.com and once on console.hippius.com.
 - Signing out of one site doesn't sign you out of the other.
 
 ## What the dashboard shows
