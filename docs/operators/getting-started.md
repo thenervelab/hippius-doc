@@ -24,8 +24,9 @@ Each site keeps its own session, though:
 The dashboard shows the nodes that belong to the chain accounts linked to your login. The **Accounts** page lists them:
 
 - the wallet you signed in with;
-- your Hippius account;
 - any accounts you linked.
+
+The platform account Hippius generates for your login (the address the console created for you) is not an operator account. Operators run their nodes from keys held in their own wallet extension, linked here.
 
 For each one you see its node count, transferable balance and compute stake. Stake is shown read-only. Requesting an unstake would quarantine the whole family, so the dashboard offers no stake actions.
 
@@ -55,7 +56,7 @@ A node's registered **child** account must be linked with the role *child*, and 
 - **Storage** is temporarily closed to new families: the network is full (600 of 600 families).
   - An existing Arion family that still has room can add a node. On the node, run `generate_registration_data ... --nonce <n> --output-json`, paste the JSON into the page, and sign with the family account.
   - A paid slot takes a deposit of 50,000 hAlpha.
-- If none of your accounts is a family, the page offers **Request onboarding**, which opens a support ticket.
+- If none of your linked accounts is a family, the page offers **Request onboarding**, which opens a support ticket. Link an account first: the button only appears for linked accounts.
 
 ## Actions
 
