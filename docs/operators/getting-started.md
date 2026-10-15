@@ -1,7 +1,7 @@
 ---
 title: Provider dashboard
 slug: /operators/getting-started
-description: provider.hippius.com, the dashboard for the people who run nodes for the Hippius network. Follow your fleet, link your accounts, track earnings and sign on-chain actions from your wallet.
+description: provider.hippius.com, the dashboard for the people who run nodes for the Hippius network. Follow your fleet, link your accounts, see your payouts and sign on-chain actions from your wallet.
 ---
 
 # Provider dashboard
@@ -27,7 +27,7 @@ The dashboard shows the nodes that belong to the chain accounts linked to your l
 - your Hippius account;
 - any accounts you linked.
 
-For each one you see its node count, transferable balance and compute stake.
+For each one you see its node count, transferable balance and compute stake. Stake is shown read-only. Requesting an unstake would quarantine the whole family, so the dashboard offers no stake actions.
 
 To add one, choose **Link an account**:
 
@@ -36,30 +36,55 @@ To add one, choose **Link an account**:
 
 If the account is already linked to another login, you can move it to this one by signing again. You can unlink an account at any time.
 
-The **Compute stake** panel is also on the Accounts page. Use it to add stake, request a withdrawal and claim it.
+A node's registered **child** account must be linked with the role *child*, and its key must be in your extension, for you to change that node's price (see [Set price](#set-price)).
 
 ## Pages
 
 | Page | What it's for |
 |---|---|
-| **My fleet** (`/`) | Summary tiles: nodes online, nodes that need attention, compute capacity and earnings over 30 days. Below them, one table of all your compute and storage nodes, with filters by kind, status and account, and a search. |
-| **Node** (`/nodes/<id>`) | When the node was last seen, its capacity, its VMs (compute) or deposit (storage), and its earnings. Its identity: node id, owner, child account, region, price in USD per unit and deposit. For a compute node, also whether it can take placements (and why not when it can't), its attestation, and launch refusals over 30 days. Then its actions (see below). |
-| **Accounts** | Your linked accounts and your compute stake (see above). |
-| **Earnings** | Earnings per account and per node, with a CSV export. |
-| **Add a node** (`/register`) | **Compute**: the onboarding wizard. It's in private beta for now; if you're not in the beta, the page tells you how to get in touch. **Storage**: points to the host-side setup guides below. |
+| **My fleet** (`/`) | Summary tiles for your fleet. Below them, one table of all your compute and storage nodes, with filters by kind, status and account, and a search. |
+| **Node** (`/nodes/<id>`) | When the node was last seen, its capacity, its VMs (compute) or deposit (storage), and its payouts. Its identity: node id, owner, child account, region, price in USD per unit and deposit. For a compute node, also whether it can take placements (and why not when it can't), its attestation, and launch refusals over 30 days. Then its actions (see below). |
+| **Accounts** | Your linked accounts and their stake (see above). |
+| **Earnings** | Payouts you actually received, never estimates. Storage payouts are listed and can be exported as CSV. Compute payouts say "not available yet". |
+| **Add a node** (`/register`) | See [Adding a node](#adding-a-node). |
 | **Network** | Chain totals and the largest compute and storage families. |
+
+## Adding a node
+
+- **Compute** is in private beta. You need to be in the beta, have a family account, and pick a child account from your extension, linked as *child*. You also give the host's CPU generation (Milan, Genoa or Turin) and its CHIP_ID: 128 hex digits, or 16 on Turin.
+- **Storage** is temporarily closed to new families: the network is full (600 of 600 families).
+  - An existing Arion family that still has room can add a node. On the node, run `generate_registration_data ... --nonce <n> --output-json`, paste the JSON into the page, and sign with the family account.
+  - A paid slot takes a deposit of 50,000 hAlpha.
+- If none of your accounts is a family, the page offers **Request onboarding**, which opens a support ticket.
 
 ## Actions
 
-Every on-chain action is signed in your wallet extension by the account the chain requires. The dashboard never signs for you, and the signing account must be one of your linked accounts.
+Every on-chain action is signed in your wallet extension. The dashboard never signs for you. An action only appears when the live chain supports it.
 
-- **Compute**
-  - **Set price**: your child account announces a price change. It takes effect after a notice period, and each change is limited in size. Then **apply price** to put it in force.
-  - **Deregister** the node and **claim** the deposit, signed by the family account.
-- **Storage**
-  - **Deregister** the node and **claim** the deposit.
+### Set price
 
-An action only appears when the live chain supports it. There's no maintenance, drain or payout-address action, because the chain has no such call.
+The node's registered child account signs the price change, so that child must be a key in your extension, linked to your login as *child*.
+
+The network enforces these rules:
+
+- the price stays between the network's floor and ceiling (currently 5,000 to 15,000 µUSD per unit-hour);
+- each change is at most ×1.5;
+- a change takes effect after about 24 hours of notice;
+- changes are at least 12 hours apart.
+
+Once the change is due, **Apply price** appears; any account can sign it.
+
+If the child isn't linked to your login, the page explains how to re-key the node: graceful exit, deregister, then register it again with a child from your extension.
+
+### Deregister
+
+- **Compute**: a node can only be deregistered once it's drained.
+  1. On the host, run `hippius-miner-agent request-graceful-exit`.
+  2. Wait until the node shows as quarantined with 0 VMs.
+  3. Deregister it. A node without a deposit is freed in the same transaction.
+- **Storage**: deregistering forfeits the node's unpaid accruals. The page asks you to confirm that.
+
+There's no maintenance or payout-address action, because the chain has no such call.
 
 ## Running the node itself
 
