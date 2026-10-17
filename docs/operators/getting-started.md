@@ -28,7 +28,7 @@ The dashboard shows the nodes that belong to the chain accounts linked to your l
 
 The platform account Hippius generates for your login (the address the console created for you) is not an operator account. Operators run their nodes from keys held in their own wallet extension, linked here.
 
-For each one you see its node count, transferable balance and compute stake. Stake is shown read-only. Requesting an unstake would quarantine the whole family, so the dashboard offers no stake actions.
+For each one you see its node count, transferable balance and compute stake. Stake is shown read-only, and the dashboard offers no stake actions. Compute staking isn't enabled on the network today, so requesting an unstake on chain is not required, including when you retire a node.
 
 To add one, choose **Link an account**:
 
@@ -52,7 +52,7 @@ A node's registered **child** account must be linked with the role *child*, and 
 
 ## Adding a node
 
-- **Compute** is in private beta. You need to be in the beta, have a family account, and pick a child account from your extension, linked as *child*. You also give the host's CPU generation (Milan, Genoa or Turin) and its CHIP_ID: 128 hex digits, or 16 on Turin.
+- **Compute** is in private beta. You need to be in the beta, have a family account, and pick a child account from your extension, linked as *child*. You also give the host's CPU generation (Milan, Genoa or Turin) and its CHIP_ID: 128 hex digits, or 16 on Turin. No deposit is taken while the network's compute lockup is off.
 - **Storage** is temporarily closed to new families: the network is full (600 of 600 families).
   - An existing Arion family that still has room can add a node. On the node, run `generate_registration_data ... --nonce <n> --output-json`, paste the JSON into the page, and sign with the family account.
   - A paid slot takes a deposit of 50,000 hAlpha.
@@ -80,9 +80,17 @@ If the child isn't linked to your login, the page explains how to re-key the nod
 ### Deregister
 
 - **Compute**: a node can only be deregistered once it's drained.
-  1. On the host, run `hippius-miner-agent request-graceful-exit`.
+  1. On the host, run:
+
+     ```bash
+     sudo hippius-miner-agent request-graceful-exit --miner-id <your miner id> --edge-url https://edge.hippius.network:443 --ca-cert /var/lib/hippius-miner/mtls/ca.crt
+     ```
+
+     `<your miner id>` is shown on the node's page in provider.hippius.com. For older miners, it's also in `/etc/hippius-miner/config.toml`, under `[miner]`. The node's page shows this exact command with its id already filled in, so you can copy it from there.
+
+     A coming agent release will read these values from `config.toml`, so that the bare `hippius-miner-agent request-graceful-exit` works on its own. Until then, pass the flags.
   2. Wait until the node shows as quarantined with 0 VMs.
-  3. Deregister it. A node without a deposit is freed in the same transaction.
+  3. Deregister it. No deposit is held while the compute lockup is off, so the node is freed in the same transaction. Requesting an unstake is not required today.
 - **Storage**: deregistering forfeits the node's unpaid accruals. The page asks you to confirm that.
 
 There's no maintenance or payout-address action, because the chain has no such call.
