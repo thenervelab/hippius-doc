@@ -181,10 +181,10 @@ function HomepageHeader() {
           </Link>
         </div>
         <H1 className="text-center mt-4 max-w-[1050px]">
-          Encrypted storage, S3 and an AI model Hub
+          Everything you need to build on Hippius
         </H1>
         <P className="text-center mt-4 max-w-[760px] text-white/90" size="lg">
-          Drive for your files, S3 Compatible for your apps, CDN to serve your buckets, Hub for your AI models and containers, and Confidential Compute for virtual machines the host can't read.
+          Guides, API references and examples for every Hippius product, written for people and for AI agents.
         </P>
 
         <div className="flex gap-y-5  flex-wrap relative items-center justify-center mt-8">
@@ -265,7 +265,7 @@ function HomepageFeatures() {
             Hippius: a distributed cloud
           </P>
           <h2 className="text-3xl lg:text-4xl font-medium font-grotesk mt-4 text-grey-10 max-w-screen-sm text-center">
-            Five products, one account
+            One account for everything
           </h2>
           <div className="grid mt-8 gap-4 justify-center justify-items-center items-stretch w-full mx-auto max-w-screen-xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 min-[1360px]:grid-cols-5">
             {PRODUCTS.map((product, i) => (
