@@ -511,19 +511,19 @@ article .theme-doc-breadcrumbs {
   }
 }
 
-/* Hippius logo: slightly smaller than default so it balances the wordmark,
-   with a drop-shadow so the 2-tone mark pops on the light navbar */
+/* Hippius logo: slightly smaller than default so it balances the wordmark.
+   The flat mark (the website's) swaps to a lighter blue on dark via the
+   navbar's `srcDark`. */
 .navbar__logo {
   height: 1.6rem;
 }
 
-.navbar__logo img {
-  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.3));
+/* Hippius wordmark in black, white on dark (brand kit, matches the console
+   and the website). */
+.navbar__brand .navbar__title {
+  color: rgb(var(--grey-10));
 }
 
-/* Hippius wordmark in brand blue (matches the console). --primary-50 stays
-   #3167DD in both light and dark mode, and the navbar background is light/dark
-   (never blue), so the blue title reads in both themes. */
-.navbar__brand .navbar__title {
-  color: rgb(var(--primary-50));
+[data-theme="dark"] .navbar__brand .navbar__title {
+  color: #fff;
 }

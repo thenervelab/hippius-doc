@@ -157,7 +157,8 @@ const config: Config = {
       title: "Hippius",
       logo: {
         alt: "Hippius Logo",
-        src: "img/logo.svg",
+        src: "img/logo-flat.svg",
+        srcDark: "img/logo-flat-dark.svg",
       },
       items: [
         // {
