@@ -29,7 +29,7 @@ export const CATEGORIES: (SmallCardInfo & {
   },
   {
     title: "Use",
-    description: "Drive, S3 Storage, Hub and Confidential Compute, from the console, desktop and mobile apps.",
+    description: "Drive, S3 Compatible, CDN, Hub and Confidential Compute, from the console, desktop and mobile apps.",
     icon: <Icons.Cursor className="text-primary-50 relative size-6" />,
     cta: {
       label: "Use",
@@ -89,11 +89,18 @@ export const PRODUCTS: (SmallCardInfo & {
     cta: { label: "Store your first file", href: "/use/drive" },
   },
   {
-    title: "S3 Storage",
+    title: "S3 Compatible",
     description:
       "Any S3 client, endpoint s3.hippius.com, no egress fees. Migrate from any S3 provider in one click.",
     icon: <Icons.Strongbox className="text-primary-50 relative size-7" />,
     cta: { label: "Create your first bucket", href: "/use/quickstart" },
+  },
+  {
+    title: "CDN",
+    description:
+      "Serve the files in your S3 buckets from edge locations in France and Australia, over HTTPS, on your own domain.",
+    icon: <Icons.Lightning className="text-primary-50 relative size-7" />,
+    cta: { label: "Create your first zone", href: "/use/cdn" },
   },
   {
     title: "Hub",
@@ -177,7 +184,7 @@ function HomepageHeader() {
           Encrypted storage, S3 and an AI model Hub
         </H1>
         <P className="text-center mt-4 max-w-[760px] text-white/90" size="lg">
-          Drive for your files, S3 Storage for your apps, Hub for your AI models and containers, and Confidential Compute for virtual machines the host can't read.
+          Drive for your files, S3 Compatible for your apps, CDN to serve your buckets, Hub for your AI models and containers, and Confidential Compute for virtual machines the host can't read.
         </P>
 
         <div className="flex gap-y-5  flex-wrap relative items-center justify-center mt-8">
@@ -258,12 +265,12 @@ function HomepageFeatures() {
             Hippius: a distributed cloud
           </P>
           <h2 className="text-3xl lg:text-4xl font-medium font-grotesk mt-4 text-grey-10 max-w-screen-sm text-center">
-            Four products, one account
+            Five products, one account
           </h2>
-          <div className="flex gap-8 mt-8 items-start flex-wrap justify-center max-w-screen-xl w-full mx-auto">
+          <div className="grid mt-8 gap-4 justify-center justify-items-center items-stretch w-full mx-auto max-w-screen-xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 min-[1360px]:grid-cols-5">
             {PRODUCTS.map((product, i) => (
               <div
-                className="relative flex flex-col items-center font-medium w-[280px] min-h-[300px] border rounded-lg py-6 px-6 border-grey-80 bg-grey-100"
+                className="relative flex flex-col items-center font-medium w-full max-w-[280px] min-[1360px]:max-w-none sm:min-h-[300px] h-full border rounded-lg py-6 px-2 border-grey-80 bg-grey-100"
                 key={i}
               >
                 {product.badge && (
@@ -274,14 +281,14 @@ function HomepageFeatures() {
                 <AbstractIconWrapper className="size-10">
                   {product.icon}
                 </AbstractIconWrapper>
-                <P className="mt-4" size="lg">
+                <P className="mt-4 whitespace-nowrap text-center" size="lg">
                   {product.title}
                 </P>
                 <P className="mt-2 text-grey-50 text-center flex-1" size="sm">
                   {product.description}
                 </P>
                 <Link
-                  className="flex gap-x-2 mt-4 items-center font-semibold text-primary-50"
+                  className="flex gap-x-2 mt-auto pt-4 items-center whitespace-nowrap font-semibold text-primary-50"
                   href={product.cta.href}
                 >
                   {product.cta.label}
@@ -363,7 +370,7 @@ function HomepageFeatures() {
 
 export default function Home(): ReactNode {
   return (
-    <Layout>
+    <Layout description="Hippius docs: Drive, S3 Compatible, CDN, Hub and Confidential Compute, one account and one balance.">
       <main>
         <HomepageHeader />
         <HomepageFeatures />
