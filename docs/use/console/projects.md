@@ -133,6 +133,7 @@ From the transfer:
   <li>A project that only has CDN zones (and no VMs) is not stopped for unpaid usage of its billing account.</li>
   <li><strong>Native-token and x402 top-ups</strong> are not available on a billing account. Use a card or Bitcoin.</li>
   <li>Drive is not part of projects or shared accounts.</li>
+  <li>The <strong>private network</strong> page and its API (<code>/api/network/</code>) show the account's network, not a project's. Network access for team members is given for the whole account only.</li>
 </Unordered>
 
 ## For developers: the API

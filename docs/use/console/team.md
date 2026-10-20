@@ -3,7 +3,7 @@ id: team
 title: Shared Accounts
 sidebar_label: Shared Accounts
 slug: /use/console/team
-description: Share your Hippius account's compute, S3 and CDN with team members. Invite people by email, give each one Viewer, Operator or Admin access per product, switch between accounts, read the audit trail, and use the X-Hippius-Account header from the API.
+description: Share your Hippius account's compute, S3, CDN and private network with team members. Invite people by email, give each one Viewer, Operator or Admin access per product, switch between accounts, read the audit trail, and use the X-Hippius-Account header from the API.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -12,14 +12,14 @@ import BgStyledText from '@site/src/components/BgStyledText';
 
 ## Introduction
 
-A shared account lets other people work in your Hippius account, each signed in with their own login. You invite them by email and choose, product by product, what each one may do: your virtual machines, databases, Kubernetes clusters, GitHub Actions runners, S3 and CDN.
+A shared account lets other people work in your Hippius account, each signed in with their own login. You invite them by email and choose, product by product, what each one may do: your virtual machines, databases, Kubernetes clusters, GitHub Actions runners, S3, CDN and private network.
 
 The account stays yours. Everything a member creates belongs to your account and is paid from your balance, and the compute they launch counts against your [compute quotas](/use/compute/billing#quotas). Members keep their own account next to yours, and switch between the two from the profile menu.
 
 Open it from the sidebar: **Team** → **Members**.
 
 :::info Drive isn't part of a shared account
-A shared account covers compute, S3 and CDN only. To work on files together, use [Shared Drives](/use/console/shared-drives): they have their own invitations and roles. In another account, Drive, Hub, Wallet and Referrals are hidden.
+A shared account covers compute, S3, CDN and the private network only. To work on files together, use [Shared Drives](/use/console/shared-drives): they have their own invitations and roles. In another account, Drive, Hub, Wallet and Referrals are hidden.
 :::
 
 ## What a member can do
@@ -32,7 +32,7 @@ Each member gets a level per product. A higher level includes the lower ones.
 | **Operator** | Act on what exists: start, stop and reboot VMs, open the browser terminal, turn VM backups on or off, restart a database, cancel or resume a Kubernetes operation, upload and delete S3 objects. |
 | **Admin** | Create, delete and resize, restore from a backup, firewall rules, public IPv4 and published ports, Kubernetes worker pools and nodes, S3 buckets, bucket access and access keys, runner settings and the GitHub link. |
 
-The products you can grant are **Virtual Machines**, **Databases**, **Kubernetes**, **Runners**, **S3** and **CDN**. Two groups set several at once:
+The products you can grant are **Virtual Machines**, **Databases**, **Kubernetes**, **Runners**, **S3**, **CDN** and **Network (NetBird)**. Two groups set several at once:
 
 <Unordered>
   <li><strong>All compute</strong>: Virtual Machines, Databases, Kubernetes and Runners.</li>
@@ -40,6 +40,14 @@ The products you can grant are **Virtual Machines**, **Databases**, **Kubernetes
 </Unordered>
 
 The CDN is in neither group: grant it on its own. A CDN operator can purge the cache and re-check a domain's DNS. A CDN admin can create, edit and delete zones, custom domains, rules and spend caps. A zone in front of a private bucket also needs S3 admin, because it creates a read key on the bucket.
+
+The network (your account's private NetBird network: peers, groups, rules between them, VPC networks) is in neither group either: **All compute** doesn't include it, so grant it on its own. It always applies to the whole account and can't be limited to a project. The levels on the network:
+
+| Level | What it allows on the network |
+|---|---|
+| **Viewer** | See the peers, groups, rules, topology, networks, resources and routers, and the list of setup keys (never a key itself). |
+| **Operator** | Also issue a setup key to enroll a device into the account's network, revoke a setup key, and remove a peer. A setup key is shown once, to whoever issued it. Enrolling into a specific group needs Admin. |
+| **Admin** | Also set up the network, switch its isolation mode, rename a peer or turn its SSH on or off, and create, change or delete groups and their members, rules, networks, resources and routers. |
 
 When a group and a product both apply, the higher level wins. A product left at **No access** is hidden from the member's sidebar.
 
@@ -178,6 +186,7 @@ curl https://api.hippius.com/api/compute/vms/ \
   <li><strong>Account ids.</strong> <code>GET /api/accounts/</code> lists your own account first, then each account you belong to, with its <code>id</code> (<code>acct_</code> followed by 20 hex characters) and your access in it (<code>effective</code>, the level per product). This route ignores the header.</li>
   <li><strong>No header, or your own id</strong>: you act as yourself, exactly as before.</li>
   <li><strong>Routes that can't be used in another account</strong> refuse the header with <code>account_scope_unsupported</code>. This includes Drive and top-ups. Personal routes, such as <code>/api/ssh-keys/</code>, ignore it.</li>
+  <li><strong>The private network</strong> (<code>/api/network/</code>) takes the header like compute: with it, the routes act on the account's network and need a network grant. They refuse <code>X-Hippius-Project</code> and <code>X-Hippius-Billing</code> (the network is account-wide). The miner-operator routes under <code>/api/network/infra/</code> refuse the header.</li>
   <li><strong>The VM terminal WebSocket</strong> takes the account as an <code>account=</code> query parameter next to <code>token=</code>. A refusal closes the socket with code <code>4003</code>.</li>
   <li><strong>Switching accounts</strong> changes what the same URLs return. Clear any cached responses.</li>
 </Unordered>
