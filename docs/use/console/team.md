@@ -12,14 +12,14 @@ import BgStyledText from '@site/src/components/BgStyledText';
 
 ## Introduction
 
-A shared account lets other people work in your Hippius account, each signed in with their own login. You invite them by email and choose, product by product, what each one may do: your virtual machines, databases, Kubernetes clusters, GitHub Actions runners, S3, CDN and private network.
+A shared account lets other people work in your Hippius account, each signed in with their own login. You invite them by email and choose, product by product, what each one may do: your virtual machines, databases, Kubernetes clusters, GitHub Actions runners, S3 and CDN.
 
 The account stays yours. Everything a member creates belongs to your account and is paid from your balance, and the compute they launch counts against your [compute quotas](/use/compute/billing#quotas). Members keep their own account next to yours, and switch between the two from the profile menu.
 
 Open it from the sidebar: **Team** → **Members**.
 
 :::info Drive isn't part of a shared account
-A shared account covers compute, S3, CDN and the private network only. To work on files together, use [Shared Drives](/use/console/shared-drives): they have their own invitations and roles. In another account, Drive, Hub, Wallet and Referrals are hidden.
+A shared account covers compute, S3 and CDN, and through the API your private network. To work on files together, use [Shared Drives](/use/console/shared-drives): they have their own invitations and roles. In another account, Drive, Hub, Wallet and Referrals are hidden.
 :::
 
 ## What a member can do
@@ -32,7 +32,7 @@ Each member gets a level per product. A higher level includes the lower ones.
 | **Operator** | Act on what exists: start, stop and reboot VMs, open the browser terminal, turn VM backups on or off, restart a database, cancel or resume a Kubernetes operation, upload and delete S3 objects. |
 | **Admin** | Create, delete and resize, restore from a backup, firewall rules, public IPv4 and published ports, Kubernetes worker pools and nodes, S3 buckets, bucket access and access keys, runner settings and the GitHub link. |
 
-The products you can grant are **Virtual Machines**, **Databases**, **Kubernetes**, **Runners**, **S3**, **CDN** and **Network (NetBird)**. Two groups set several at once:
+The products you can grant are **Virtual Machines**, **Databases**, **Kubernetes**, **Runners**, **S3** and **CDN**. Two groups set several at once:
 
 <Unordered>
   <li><strong>All compute</strong>: Virtual Machines, Databases, Kubernetes and Runners.</li>
@@ -41,7 +41,11 @@ The products you can grant are **Virtual Machines**, **Databases**, **Kubernetes
 
 The CDN is in neither group: grant it on its own. A CDN operator can purge the cache and re-check a domain's DNS. A CDN admin can create, edit and delete zones, custom domains, rules and spend caps. A zone in front of a private bucket also needs S3 admin, because it creates a read key on the bucket.
 
-The network (your account's private NetBird network: peers, groups, rules between them, VPC networks) is in neither group either: **All compute** doesn't include it, so grant it on its own. It always applies to the whole account and can't be limited to a project. The levels on the network:
+### The private network (API only for now)
+
+Your account's private NetBird network (peers, groups, the rules between them, VPC networks) has its own grant, `network`. For now it is given and used through the API only: add it to a member's grants with `PATCH /api/accounts/members/<id>/` (or in an invitation), for example `{"scope": "network", "level": "viewer"}`. The body's `grants` replaces the whole list, so send the member's other grants too. The member then calls `/api/network/` with the `X-Hippius-Account` header (see [For developers](#for-developers-the-api)). The Console's member editor doesn't offer it yet, and saving that member's access from the Console removes it: set it again through the API afterwards.
+
+`network` is in neither group: **All compute** doesn't include it. It always applies to the whole account and can't be limited to a project. Its levels:
 
 | Level | What it allows on the network |
 |---|---|
