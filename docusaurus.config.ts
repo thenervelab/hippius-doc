@@ -104,7 +104,7 @@ const config: Config = {
     },
   ],
   themeConfig: {
-    image: "img/meta-image.png",
+    image: "img/docs-meta.jpg",
     metadata: [
       {
         name: "description",
@@ -118,7 +118,7 @@ const config: Config = {
       },
       {
         property: "og:image",
-        content: "https://docs.hippius.com/img/meta-image.png",
+        content: "https://docs.hippius.com/img/docs-meta.jpg",
       },
       {
         property: "og:image:width",
@@ -130,7 +130,7 @@ const config: Config = {
       },
       {
         property: "og:image:type",
-        content: "image/png",
+        content: "image/jpeg",
       },
       {
         name: "twitter:description",
@@ -139,7 +139,7 @@ const config: Config = {
       },
       {
         name: "twitter:image",
-        content: "https://docs.hippius.com/img/meta-image.png",
+        content: "https://docs.hippius.com/img/docs-meta.jpg",
       },
       {
         name: "twitter:card",
