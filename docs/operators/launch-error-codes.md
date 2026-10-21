@@ -25,16 +25,16 @@ Every code says who has to act:
 
 ## Check your host with play 09 {#play-09}
 
-Many launch errors have a counterpart in play 09, the launch preflight of the miner play. It checks everything a tenant VM needs (libvirt's default network and its filter, QEMU's access to the disk roots, direct I/O, the agent's sandbox), starts a small test VM, and reports every failure at once with its fix. Run it from the machine you deploy the play from:
+Many launch errors have a counterpart in play 09, the launch preflight of the miner play. It checks everything a tenant VM needs (libvirt's default network and its filter, QEMU's access to the disk roots, direct I/O, the agent's sandbox and umask, symlinks on the storage paths), starts a small test VM, and reports every failure at once with its fix, AppArmor denials included. Run it from the machine you deploy the play from:
 
 ```sh
 ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> --tags launch_preflight
 ```
 
-Play 09 and the detailed error codes ship in **hippius-cvm v2026.10.21 or later**: update your checkout of the play if it lacks play 09. If your agent is older than that release (it reports only coarse codes such as `dispatch-failed`), update it with:
+Play 09 and the detailed error codes ship in **hippius-cvm v2026.10.21.1 or later**: update your checkout of the play if it lacks play 09. If your agent is older than that release (it reports only coarse codes such as `dispatch-failed`), update it with:
 
 ```sh
-ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.21
+ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.21.1
 ```
 
 Each play 09 code and its fix is described in the guide's [Launch preflight codes (play 09)](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09).
@@ -55,7 +55,7 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 |---|---|---|
 | [`miner-unreachable`](#miner-unreachable) | Needs your action | The network could not reach this node |
 | [`libvirt-driver/create:network-inactive`](#network-inactive) | Needs your action | libvirt's default network is not running |
-| [`libvirt-driver/create:disk-open-permission`](#disk-open-permission) | Needs your action | QEMU cannot reach the VM disk directory |
+| [`libvirt-driver/create:disk-open-permission`](#disk-open-permission) | Needs your action | QEMU was refused a VM disk, kernel or firmware |
 | [`libvirt-driver/create:disk-open-invalid`](#disk-open-invalid) | Needs your action | The VM disk filesystem does not support direct I/O |
 | [`libvirt-driver/create:disk-missing`](#disk-missing) | Needs your action | A VM disk file is missing |
 | [`libvirt-driver/create:nwfilter-missing`](#nwfilter-missing) | Needs your action | libvirt's clean-traffic network filter is missing |
@@ -151,20 +151,20 @@ Every VM's network card attaches to libvirt's default network, so no VM can star
 sudo virsh net-start default && sudo virsh net-autostart default
 ```
 
-Play 09 reports this as [`LIBVIRT_DEFAULT_NET_INACTIVE`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
+Play 09 reports this as `LIBVIRT_DEFAULT_NET_INACTIVE` ([launch preflight codes](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09)). Run it to check your host (see [Check your host with play 09](#play-09)).
 
 ### `libvirt-driver/create:disk-open-permission` {#disk-open-permission}
 
-**QEMU cannot reach the VM disk directory.** *Needs your action.*
+**QEMU was refused a VM disk, kernel or firmware.** *Needs your action.*
 
-QEMU's user (libvirt-qemu) cannot enter a directory on the path to a storage root. List the path's permissions, then give others execute permission on each parent directory that lacks it (or setfacl -m u:libvirt-qemu:x `<directory>`).
+Run play 09 from hippius-cvm v2026.10.21.1 or later: it reproduces this with a test VM and names the exact cause. Usually a directory QEMU's user (libvirt-qemu) cannot enter, per-VM staging dirs left by failed launches included (chmod o+x them or delete them); the agent's umask (rerun the play, whose unit sets UMask=0022); a symlink on the path (use a bind mount instead); or an AppArmor denial.
 
 ```sh
 namei -l <data_disk_root>
 sudo chmod o+x <directory>
 ```
 
-Play 09 reports this as [`QEMU_CANNOT_TRAVERSE_DATA_ROOT`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
+Play 09 reports this as `QEMU_CANNOT_TRAVERSE_DATA_ROOT`, `AGENT_UMASK_BLOCKS_QEMU`, `STORAGE_PATH_SYMLINK` or `APPARMOR_DENIED_<DIR>` ([launch preflight codes](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09)). Run it to check your host (see [Check your host with play 09](#play-09)).
 
 ### `libvirt-driver/create:disk-open-invalid` {#disk-open-invalid}
 
@@ -176,7 +176,7 @@ VM disks are opened with O_DIRECT, which this filesystem refuses. Put the storag
 findmnt -T <data_disk_root>
 ```
 
-Play 09 reports this as [`DATA_ROOT_NO_ODIRECT`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
+Play 09 reports this as `DATA_ROOT_NO_ODIRECT` ([launch preflight codes](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09)). Run it to check your host (see [Check your host with play 09](#play-09)).
 
 ### `libvirt-driver/create:disk-missing` {#disk-missing}
 
@@ -199,7 +199,7 @@ Every VM's network card references libvirt's clean-traffic filter. Reinstall the
 sudo apt install --reinstall libvirt-daemon-config-nwfilter && sudo systemctl restart libvirtd
 ```
 
-Play 09 reports this as [`LIBVIRT_NWFILTER_MISSING`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
+Play 09 reports this as `LIBVIRT_NWFILTER_MISSING` ([launch preflight codes](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09)). Run it to check your host (see [Check your host with play 09](#play-09)).
 
 ### `libvirt-driver/create:sev-busy` {#sev-busy}
 
@@ -272,14 +272,14 @@ lsmod | grep kvm
 
 **QEMU was denied access to a VM file.** *Needs your action.*
 
-QEMU's user was refused a file it needs: AppArmor, an ACL, a mount option (NFS root-squash) or file ownership. Look for the denial in the kernel log.
+QEMU's user was refused a file it needs: AppArmor, an ACL, a mount option (NFS root-squash) or file ownership. An AppArmor denial usually means a symlink on the path: replace it with a bind mount, and don't disable AppArmor for libvirt. The kernel log shows every denial.
 
 ```sh
-sudo journalctl -k | grep -i denied
+sudo journalctl -k | grep 'apparmor="DENIED"'
 getfacl <data_disk_root>
 ```
 
-Play 09 reports this as [`QEMU_CANNOT_OPEN_DATA_ROOT`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
+Play 09 reports this as `QEMU_CANNOT_OPEN_DATA_ROOT`, `APPARMOR_DENIED_<DIR>` or `STORAGE_PATH_SYMLINK` ([launch preflight codes](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09)). Run it to check your host (see [Check your host with play 09](#play-09)).
 
 ### `libvirt-driver/create:out-of-memory` {#out-of-memory}
 
@@ -302,7 +302,7 @@ sudo ls -t /var/log/libvirt/qemu/ | head
 sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 ```
 
-Play 09 reports this as [`LAUNCH_SMOKE_FAILED`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
+Play 09 reports this as `LAUNCH_SMOKE_FAILED` ([launch preflight codes](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09)). Run it to check your host (see [Check your host with play 09](#play-09)).
 
 ### `libvirt-driver/create`, `libvirt-driver/create:<other>` {#libvirt-create}
 
@@ -314,7 +314,7 @@ libvirt refused to start the VM for a reason the agent could not classify. libvi
 sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 ```
 
-Play 09 reports this as [`LAUNCH_SMOKE_FAILED`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
+Play 09 reports this as `LAUNCH_SMOKE_FAILED` ([launch preflight codes](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09)). Run it to check your host (see [Check your host with play 09](#play-09)).
 
 ### `libvirt-driver/define` {#libvirt-define}
 
@@ -338,7 +338,7 @@ which virsh
 ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname>
 ```
 
-Play 09 reports this as [`LIBVIRT_NOT_INSTALLED`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
+Play 09 reports this as `LIBVIRT_NOT_INSTALLED` ([launch preflight codes](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09)). Run it to check your host (see [Check your host with play 09](#play-09)).
 
 ### `libvirt-driver/unreachable` {#libvirt-unreachable}
 
@@ -419,7 +419,7 @@ ls /etc/systemd/system/hippius-miner-agent.service.d/
 ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname>
 ```
 
-Play 09 reports this as [`AGENT_SANDBOX_CANNOT_WRITE`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
+Play 09 reports this as `AGENT_SANDBOX_CANNOT_WRITE` ([launch preflight codes](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09)). Run it to check your host (see [Check your host with play 09](#play-09)).
 
 ### `cvm-launch-failed/adopt-serialize` {#adopt-serialize}
 
@@ -483,7 +483,7 @@ ls /etc/systemd/system/hippius-miner-agent.service.d/
 ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname>
 ```
 
-Play 09 reports this as [`AGENT_SANDBOX_CANNOT_WRITE`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
+Play 09 reports this as `AGENT_SANDBOX_CANNOT_WRITE` ([launch preflight codes](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09)). Run it to check your host (see [Check your host with play 09](#play-09)).
 
 ### `tenant-preflight/fetch-client`, `…/fetch-network`, `…/fetch-http-status`, `…/fetch-body`, `…/sha256-mismatch` {#fetch}
 
@@ -533,10 +533,10 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 
 **The agent was built without SEV-SNP support.** *Needs your action.*
 
-The agent binary on this host cannot measure confidential VMs, so every launch fails. Install the released agent with the play (v2026.10.21 or later) instead of a custom build.
+The agent binary on this host cannot measure confidential VMs, so every launch fails. Install the released agent with the play (v2026.10.21.1 or later) instead of a custom build.
 
 ```sh
-ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.21
+ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.21.1
 ```
 
 ### `cvm-launch-digest/sev-compute`, `…/digest-shape`, `…/recipe-artifact-mismatch`, `…/recipe-vcpu-type` {#cvm-launch-digest}
@@ -626,7 +626,7 @@ ls /etc/systemd/system/hippius-miner-agent.service.d/
 ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname>
 ```
 
-Play 09 reports this as [`AGENT_SANDBOX_CANNOT_WRITE`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
+Play 09 reports this as `AGENT_SANDBOX_CANNOT_WRITE` ([launch preflight codes](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09)). Run it to check your host (see [Check your host with play 09](#play-09)).
 
 ### `…-disk/insufficient-space` {#disk-space}
 
@@ -736,7 +736,7 @@ ls /etc/systemd/system/hippius-miner-agent.service.d/
 ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname>
 ```
 
-Play 09 reports this as [`AGENT_SANDBOX_CANNOT_WRITE`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
+Play 09 reports this as `AGENT_SANDBOX_CANNOT_WRITE` ([launch preflight codes](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09)). Run it to check your host (see [Check your host with play 09](#play-09)).
 
 ### `vm-pool-record-missing`, `vm-pool-record` {#vm-pool-record}
 
@@ -766,10 +766,10 @@ sudo dmesg | grep -i 'i/o error'
 
 **The agent could not start the VM.** *Needs your action.*
 
-Your agent predates the detailed error codes, so this is all it reports. Update it to v2026.10.21 to see the exact step, run play 09 to check the host, and read the agent journal.
+Your agent predates the detailed error codes, so this is all it reports. Update it to v2026.10.21.1 to see the exact step, run play 09 to check the host, and read the agent journal.
 
 ```sh
-ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.21
+ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.21.1
 ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> --tags launch_preflight
 sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 ```
@@ -787,7 +787,7 @@ ls /etc/systemd/system/hippius-miner-agent.service.d/
 ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname>
 ```
 
-Play 09 reports this as [`AGENT_SANDBOX_CANNOT_WRITE`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
+Play 09 reports this as `AGENT_SANDBOX_CANNOT_WRITE` ([launch preflight codes](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09)). Run it to check your host (see [Check your host with play 09](#play-09)).
 
 ### `power-policy-store/parse`, `power-policy-store/encode` {#power-policy-record}
 
@@ -901,10 +901,10 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 
 **The node sent an unreadable error code.** *Needs your action.*
 
-The agent's error code was not in the expected format: an outdated or modified agent. Update it to v2026.10.21.
+The agent's error code was not in the expected format: an outdated or modified agent. Update it to v2026.10.21.1.
 
 ```sh
-ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.21
+ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.21.1
 sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 ```
 
