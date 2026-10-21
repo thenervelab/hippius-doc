@@ -197,9 +197,11 @@ Play 09 reports this as [`LIBVIRT_NWFILTER_MISSING`](https://github.com/thenerve
 
 **The SEV firmware is busy.** *Needs your action.*
 
-The processor's SEV firmware answered busy (EBUSY). Reboot the host. If it comes back, turn SMT off in the BIOS (not from the OS).
+The processor's SEV firmware answered busy (EBUSY). Reboot the host. If it comes back, make sure no CPU is taken offline at runtime: no nosmt, maxcpus= or nr_cpus= on the kernel command line, and nothing writing /sys/devices/system/cpu/smt/control. SMT may stay on; to turn it off, use the BIOS only.
 
 ```sh
+cat /proc/cmdline
+cat /sys/devices/system/cpu/offline
 sudo dmesg | grep -i -E 'sev|snp'
 ```
 
@@ -207,9 +209,11 @@ sudo dmesg | grep -i -E 'sev|snp'
 
 **No SEV slot (ASID) is free on the host.** *Needs your action.*
 
-Every SEV address-space id is in use, or held by VMs that did not release it. Reboot the host to free leaked ones, and check the SEV ASID settings in the BIOS.
+Every SEV address-space id is in use, or freed ones are never recycled. Reboot the host. The usual cause is CPUs taken offline at runtime (nosmt, maxcpus= or nr_cpus= on the kernel command line, or a write to /sys/devices/system/cpu/smt/control): remove that. SMT may stay on; to turn it off, use the BIOS only.
 
 ```sh
+cat /proc/cmdline
+cat /sys/devices/system/cpu/offline
 sudo dmesg | grep -i -E 'sev|snp|asid'
 ```
 
