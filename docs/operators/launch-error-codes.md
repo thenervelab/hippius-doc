@@ -569,6 +569,12 @@ The node's disk budget (or the named pool's) has no room for the VM's disks. Thi
 df -h <data_disk_root>
 ```
 
+When the code names a pool (`:<value>`, other than `default`):
+
+```sh
+df -h /var/lib/hippius-miner/pools/<value>
+```
+
 ### `cvm-pool-unavailable:<pool>`, `pool-unavailable:<pool>` {#pool-unavailable}
 
 **A storage pool is unavailable.** *Needs your action.*
@@ -577,6 +583,12 @@ The named pool is draining, closed to OS disks, or not on its filesystem. Check 
 
 ```sh
 findmnt /var/lib/hippius-miner/pools/<pool>
+```
+
+When the code names a pool (`:<value>`, other than `default`):
+
+```sh
+findmnt /var/lib/hippius-miner/pools/<value>
 ```
 
 ### `cvm-vsock-cid/…`, `vsock-cid-exhausted` {#vsock-cid}
@@ -670,11 +682,18 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 
 **A restarted VM's disks are not on this host.** *Needs your action.*
 
-The VM was relaunched here but one of its disks (named after the slash, with its pool) is missing, so the agent refused rather than create a blank one. Check that every storage root and pool is mounted. Never recreate or delete VM disk files; contact support.
+The VM was relaunched here but one of its disks (named after the slash, with the pool it was looked for on after the colon; default is data_disk_root) is missing, so the agent refused rather than create a blank one. Check that every storage root and that pool are mounted. Never recreate or delete VM disk files; contact support.
 
 ```sh
-findmnt -T <data_disk_root>
 findmnt -T <state_disk_root>
+findmnt -T <data_disk_root>
+```
+
+When the code names a pool (`:<value>`, other than `default`):
+
+```sh
+findmnt -T <state_disk_root>
+findmnt /var/lib/hippius-miner/pools/<value>
 ```
 
 ### `relaunch-disks-unreadable/…`, `relaunch-disks-unreadable` {#relaunch-disks-unreadable}
@@ -684,6 +703,7 @@ findmnt -T <state_disk_root>
 The agent could not tell whether the VM's disks are present (an I/O or permission error, or a storage mount not up). Check the mounts and the kernel log.
 
 ```sh
+findmnt -T <state_disk_root>
 findmnt -T <data_disk_root>
 sudo dmesg | tail -50
 ```
