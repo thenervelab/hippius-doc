@@ -74,7 +74,7 @@ Before you start, the family account must be registered as a **miner (its hotkey
      --challenge 0x<from the page> --family 0x<…> --child 0x<…> --nonce <n>
    ```
 
-   `hippius-miner-agent` ships with the [hippius-cvm release v2026.10.20.1](https://github.com/thenervelab/hippius-cvm/releases/tag/v2026.10.20.1); check it against `SHA256SUMS`. It needs glibc 2.39 or newer, libcrypto.so.3 and libgcc_s.so.1 (Ubuntu 24.04+, Debian 13+). For an older host the page shows the same run in a container. The challenge is single use and expires after about an hour.
+   `hippius-miner-agent` ships with [hippius-cvm v2026.10.21](https://github.com/thenervelab/hippius-cvm/releases/tag/v2026.10.21) or later; check it against the release's `SHA256SUMS`. It needs glibc 2.39 or newer, libcrypto.so.3 and libgcc_s.so.1 (Ubuntu 24.04+, Debian 13+). For an older host the page shows the same run in a container. The challenge is single use and expires after about an hour.
 4. Paste the JSON the command printed. The dashboard checks both signatures before anything is signed.
 5. Sign the family registration (`register_node_with_coldkey`) with the family account.
 6. Continue to add the node: the node's registration under the child is already signed, so you only sign it with the family. The family's first node is free, once; each further node reserves a deposit of 50,000 hAlpha, released over 7 days after the node leaves.
