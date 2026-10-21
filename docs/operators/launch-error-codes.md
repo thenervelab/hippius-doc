@@ -98,13 +98,15 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 | [`cvm-busy`](#cvm-busy) | Usually temporary | The VM was busy with another operation |
 | [`state-disk/mkdir`, `…/create`, `…/truncate`](#agent-sandbox) | Needs your action | The agent cannot create the VM's disk files |
 | [`…-disk/insufficient-space`](#disk-space) | Needs your action | Not enough disk space for the VM's disks |
-| [`…-disk/io`, `…-disk/statvfs`](#disk-io) | Needs your action | The storage filesystem could not be read |
+| [`…-disk/io`, `…-disk/statvfs`, `…-disk/disk-list`](#disk-io) | Needs your action | The storage filesystem could not be read |
 | [`state-disk/mkfs-spawn`](#mkfs-missing) | Needs your action | mkfs.ext4 is missing on the host |
-| [`…-disk/race`, `…/size-zero`, `…/size-overflow`, `…/no-parent`, `…/mkfs-failed`, `…-disk/<other>`](#disk-other) | Hippius side: nothing to do | The agent could not prepare the VM's disks |
+| [`state-disk/mkfs-failed`](#mkfs-failed) | Needs your action | Formatting the VM's state disk failed |
+| [`…-disk/race`, `…/size-zero`, `…/size-overflow`, `…/no-parent`, `…-disk/<other>`](#disk-other) | Hippius side: nothing to do | The agent could not prepare the VM's disks |
 | [`relaunch-disks-missing/…[:<pool>]`, `relaunch-disks-missing`](#relaunch-disks-missing) | Needs your action | A restarted VM's disks are not on this host |
 | [`relaunch-disks-unreadable/…`, `relaunch-disks-unreadable`](#relaunch-disks-unreadable) | Needs your action | A restarted VM's disks could not be checked |
 | [`vm-pool-record-unwritable`](#vm-pool-record-unwritable) | Needs your action | The agent cannot save which pool holds the VM's disks |
-| [`vm-pool-record-missing`, `vm-pool-record-unreadable`, `vm-pool-record`](#vm-pool-record) | Hippius side: nothing to do | The VM's pool record is missing or unreadable |
+| [`vm-pool-record-missing`, `vm-pool-record`](#vm-pool-record) | Needs your action | The VM's pool record is missing |
+| [`vm-pool-record-unreadable`](#vm-pool-record-unreadable) | Needs your action | The VM's pool record could not be read |
 | [`dispatch-failed`](#dispatch-failed) | Needs your action | The agent could not start the VM |
 | [`power-policy-store/read`, `…/mkdir`, `…/write`, `…/sync`, `…/rename`, `…/remove`](#agent-state) | Needs your action | The agent could not save the VM's power policy |
 | [`power-policy-store/parse`, `power-policy-store/encode`](#power-policy-record) | Hippius side: nothing to do | The VM's power policy record is unreadable |
@@ -620,11 +622,11 @@ The filesystem under the storage root has no room for the VM's disks. Free space
 df -h <storage_root>
 ```
 
-### `…-disk/io`, `…-disk/statvfs` {#disk-io}
+### `…-disk/io`, `…-disk/statvfs`, `…-disk/disk-list` {#disk-io}
 
 **The storage filesystem could not be read.** *Needs your action.*
 
-An I/O error hit a VM disk, or the filesystem under the storage root could not be measured. Check that the root is mounted and healthy, and look for disk errors in the kernel log.
+An I/O error hit a VM disk, or the filesystem under the storage root could not be measured or listed. Check that the root is mounted and healthy, and look for disk errors in the kernel log.
 
 ```sh
 findmnt -T <storage_root>
@@ -642,7 +644,19 @@ The agent formats each VM's small state disk with mkfs.ext4, which is not instal
 sudo apt-get install -y e2fsprogs
 ```
 
-### `…-disk/race`, `…/size-zero`, `…/size-overflow`, `…/no-parent`, `…/mkfs-failed`, `…-disk/<other>` {#disk-other}
+### `state-disk/mkfs-failed` {#mkfs-failed}
+
+**Formatting the VM's state disk failed.** *Needs your action.*
+
+mkfs.ext4 ran but failed on the VM's small state disk under state_disk_root. Check that the root has free space and no I/O errors, and that e2fsprogs is intact (reinstall it, or rerun the play).
+
+```sh
+df -h <state_disk_root>
+sudo dmesg | grep -i -E 'i/o error|ext4'
+sudo apt-get install --reinstall -y e2fsprogs
+```
+
+### `…-disk/race`, `…/size-zero`, `…/size-overflow`, `…/no-parent`, `…-disk/<other>` {#disk-other}
 
 **The agent could not prepare the VM's disks.** *Hippius side: nothing to do.*
 
@@ -689,11 +703,27 @@ ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <host
 
 Play 09 reports this as [`AGENT_SANDBOX_CANNOT_WRITE`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
 
-### `vm-pool-record-missing`, `vm-pool-record-unreadable`, `vm-pool-record` {#vm-pool-record}
+### `vm-pool-record-missing`, `vm-pool-record` {#vm-pool-record}
 
-**The VM's pool record is missing or unreadable.** *Hippius side: nothing to do.*
+**The VM's pool record is missing.** *Needs your action.*
 
-The agent refused rather than create a blank disk. Contact support with the code; never delete files under vm-pool/.
+The VM has run on this host but its record of which pool holds its disks is missing, so the agent refuses rather than guess (the wrong pool would point at the wrong disks). An unreadable state root reads the same way: check that state_disk_root is mounted and readable. If it is, contact support with the code. Never recreate the record or delete files under vm-pool/.
+
+```sh
+findmnt -T <state_disk_root>
+sudo ls <state_disk_root>/vm-pool/
+```
+
+### `vm-pool-record-unreadable` {#vm-pool-record-unreadable}
+
+**The VM's pool record could not be read.** *Needs your action.*
+
+The agent could not read or parse the VM's pool record under state_disk_root. Check that the root is mounted, readable by the agent and free of I/O errors; if it is, contact support with the code. Never edit or delete files under vm-pool/.
+
+```sh
+findmnt -T <state_disk_root>
+sudo dmesg | grep -i 'i/o error'
+```
 
 ## The agent
 
