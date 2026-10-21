@@ -30,9 +30,33 @@ You can top up by card, with Bitcoin, with USDC, with TAO, or with Hippius token
 
 ### By card
 
-Open Billing and click <BgStyledText>+ Top up</BgStyledText>. You can add money once, anywhere from $10 to $10,000, or choose **Auto reload** to add a fixed amount every month. Payment goes through Stripe, so we never see your card details. If you close the Stripe page without paying, nothing is charged.
+Open Billing and click <BgStyledText>+ Top up</BgStyledText>. You can add money once, anywhere from $10 to $10,000, or choose **Monthly reload** to add a fixed amount every month. Payment goes through Stripe, so we never see your card details. If you close the Stripe page without paying, nothing is charged.
 
-Auto reload is the easiest way to make sure your plans never lapse. You can change or stop it at any time from the same dialog, through Stripe. Anything it has already added stays on your balance.
+Monthly reload is a simple way to keep money coming in. You can change or stop it at any time from the same dialog, through Stripe. Anything it has already added stays on your balance.
+
+### Auto-reload {#auto-reload}
+
+**Monthly reload**: a fixed amount every month. **Auto-reload**: tops up when your balance drops below a threshold.
+
+With auto-reload on, we check your balance every few minutes. When it falls below the threshold you set, we charge your saved card to bring it back to about your target. For example, below $10, back to $50: with $8.40 left, we charge $41.60. The credits show up a few minutes later. Every reload gets an invoice and an email.
+
+Set it up on Billing, in the **Auto-reload** card:
+
+1. Add a card with <BgStyledText>Add a card</BgStyledText> if you don't have one saved. This is the same card your plans paid by card are charged to, so a card you add or change here is used for those too.
+2. Choose the threshold (at least $1) and the target (at least $5 above the threshold).
+3. Optionally, set a monthly limit: the most auto-reload may charge in a calendar month (UTC). Once it is reached, auto-reload pauses until the 1st of next month and we email you.
+4. Turn it on and save. If your balance is already below the threshold, the first reload happens right away.
+
+Safety limits:
+
+- At most 3 reloads in 24 hours.
+- If your card is declined or your bank asks you to confirm the payment (3-D Secure), we email you and wait 24 hours before trying again. To fix it, use <BgStyledText>Change card</BgStyledText> to save the card again, then save your auto-reload settings.
+- After 3 failures in a row, auto-reload turns itself off and we email you. Turn it back on once your card works.
+- If a reload is disputed with your bank, auto-reload turns off.
+
+On a [billing account](/use/console/projects), auto-reload is set per billing account, by its billing admins. Team members who can only view billing see the settings but can't change them. Every reload attempt is listed under the settings.
+
+While auto-reload is on and working, we don't send the 3-day and 1-day low balance warnings. You still get an email if your balance reaches zero.
 
 ### With Bitcoin
 
@@ -196,7 +220,7 @@ Billing shows every product side by side, with the plan you're on, what it costs
 
 ### Invoices
 
-An invoice is issued for each payment, a few minutes after the money comes in: card top-ups and Auto reload, plans paid or renewed by card, Bitcoin, USDC and TAO. We email you when it is ready, and you download the PDF from the **Invoices** tab. There is no monthly invoice. Conversions from hAlpha aren't invoiced. Plans paid from your balance aren't either: the payment that added the money was.
+An invoice is issued for each payment, a few minutes after the money comes in: card top-ups, Monthly reload and auto-reload, plans paid or renewed by card, Bitcoin, USDC and TAO. We email you when it is ready, and you download the PDF from the **Invoices** tab. There is no monthly invoice. Conversions from hAlpha aren't invoiced. Plans paid from your balance aren't either: the payment that added the money was.
 
 ## If your balance runs out
 
@@ -207,11 +231,11 @@ Your balance pays for renewals and for S3 pay as you go, so running dry affects 
   <li>S3 on pay as you go becomes <strong>read only</strong> after 7 days. You can still download, but nothing new can be written. 7 days later S3 is <strong>suspended</strong> and your buckets can't be reached. 23 days after that, 37 days from the start, the data is <strong>deleted</strong>, with a final notice a week before. Any top up that covers your usage puts everything back.</li>
 </Unordered>
 
-Topping up puts everything back. To avoid it altogether, turn on **Low balance alerts** in [Settings](/use/console/settings), or set up [auto reload](#by-card).
+Topping up puts everything back. To avoid it altogether, turn on **Low balance alerts** in [Settings](/use/console/settings), or turn on [auto-reload](#auto-reload).
 
 ## Older subscriptions
 
-Before plans existed, the monthly top-up now called [Auto reload](#by-card) was sold as subscriptions named Personal, Professional, Business and Enterprise. If you still have one, it keeps adding to your balance every month and shows on Billing as **Your top-up subscription**. You can cancel it through Stripe, and doing so doesn't affect any of your plans.
+Before plans existed, the monthly top-up now called [Monthly reload](#by-card) was sold as subscriptions named Personal, Professional, Business and Enterprise. If you still have one, it keeps adding to your balance every month and shows on Billing as **Your top-up subscription**. You can cancel it through Stripe, and doing so doesn't affect any of your plans.
 
 ## Where to next
 
