@@ -231,6 +231,7 @@ const sidebars: SidebarsConfig = {
       collapsed: true,
       items: [
         "operators/getting-started",
+        "operators/launch-error-codes",
         {
           type: "category",
           label: "Run a Miner",

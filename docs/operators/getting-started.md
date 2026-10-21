@@ -44,7 +44,7 @@ A node's registered **child** account must be linked with the role *child*, and 
 | Page | What it's for |
 |---|---|
 | **My fleet** (`/`) | Summary tiles for your fleet. Below them, one table of all your compute and storage nodes, with filters by kind, status and account, and a search. |
-| **Node** (`/nodes/<id>`) | When the node was last seen, its capacity, its VMs (compute) or deposit (storage), and its payouts. Its identity: node id, owner, child account, region, price in USD per unit and deposit. For a compute node, also whether it can take placements (and why not when it can't), its attestation, and launch refusals over 30 days. Then its actions (see below). |
+| **Node** (`/nodes/<id>`) | When the node was last seen, its capacity, its VMs (compute) or deposit (storage), and its payouts. Its identity: node id, owner, child account, region, price in USD per unit and deposit. For a compute node, also why recent VM launches failed (see [Launch error codes](/operators/launch-error-codes)), whether it can take placements (and why not when it can't), its attestation, and launch refusals over 30 days. Then its actions (see below). |
 | **Accounts** | Your linked accounts and their stake (see above). |
 | **Earnings** | Payouts you actually received, never estimates. Storage payouts are listed and can be exported as CSV. Compute payouts say "not available yet". |
 | **Add a node** (`/register`) | See [Adding a node](#adding-a-node). |
@@ -94,6 +94,10 @@ If the child isn't linked to your login, the page explains how to re-key the nod
 - **Storage**: deregistering forfeits the node's unpaid accruals. The page asks you to confirm that.
 
 There's no maintenance or payout-address action, because the chain has no such call.
+
+## Troubleshooting
+
+**VM launches fail on a compute node.** The fleet shows a red **Launches failing** badge on the node, and its page has a **Launch errors** card with the failing step's code, what it means and the commands to fix it. Every code is described in [Launch error codes](/operators/launch-error-codes).
 
 ## Running the node itself
 
