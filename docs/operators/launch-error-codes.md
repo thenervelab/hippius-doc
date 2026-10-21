@@ -693,12 +693,11 @@ findmnt /var/lib/hippius-miner/pools/<value>
 
 **The pool holding a restarted VM's disks is not mounted.** *Needs your action.*
 
-The VM's disks live on a named pool that is not mounted, so the agent cannot check them. Find the pool in the node's Storage configuration panel, mount its filesystem at its path, then restart the agent so it binds the pool. Restart it with SIGKILL as shown: systemd starts it again and it keeps the running VMs (a plain systemctl restart or stop can destroy every VM on the host). Never recreate the VM's disks.
+The VM's disks live on a named pool that is not mounted (often right after a reboot, before its mount comes up), so the agent cannot check them. Find the pool in the node's Storage configuration panel and mount its filesystem at its path: the next retry sees it, with no agent restart. Never recreate the VM's disks.
 
 ```sh
 findmnt /var/lib/hippius-miner/pools/<pool>
 ls /var/lib/hippius-miner/pools/
-sudo systemctl kill --signal=SIGKILL hippius-miner-agent
 ```
 
 ### `relaunch-disks-unreadable/…`, `relaunch-disks-unreadable` {#relaunch-disks-unreadable}
