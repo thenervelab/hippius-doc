@@ -31,13 +31,13 @@ Many launch errors have a counterpart in play 09, the launch preflight of the mi
 ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> --tags launch_preflight
 ```
 
-Play 09 and the detailed error codes ship in **hippius-cvm v2026.10.21 or later**. Check out that release, then update the agent with:
+Play 09 and the detailed error codes ship in **hippius-cvm v2026.10.21 or later**: update your checkout of the play if it lacks play 09. If your agent is older than that release (it reports only coarse codes such as `dispatch-failed`), update it with:
 
 ```sh
 ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.21
 ```
 
-Each play 09 code and its fix is described in the guide's [Launch preflight codes (play 09)](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). An older agent reports only a coarse code such as `dispatch-failed`: update it to see the exact step.
+Each play 09 code and its fix is described in the guide's [Launch preflight codes (play 09)](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09).
 
 ## Reading a code
 
@@ -78,7 +78,8 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 | [`cvm-launch-failed/handle-lost`, `cvm-launch-failed/teardown`](#handle-lost) | Usually temporary | The agent lost track of the VM during launch |
 | [`cvm-launch-failed/rng`](#rng) | Needs your action | The agent could not read the host's random source |
 | [`cvm-launch-failed/adopt-mkdir`, `…/adopt-rename`, `…/adopt-write`](#adopt-write) | Needs your action | The agent could not save the VM's record |
-| [`cvm-launch-failed/adopt-serialize`, `cvm-launch-failed/<other>`](#cvm-launch-failed) | Needs your action | The VM failed to start |
+| [`cvm-launch-failed/adopt-serialize`](#adopt-serialize) | Hippius side: nothing to do | The agent could not encode the VM's record |
+| [`cvm-launch-failed/<other>`](#cvm-launch-failed) | Needs your action | The VM failed to start |
 | [`ticket-delivery/connect-timeout`](#ticket-timeout) | Usually temporary | The VM booted but never took its boot ticket |
 | [`ticket-delivery/write-failed`, `…/cid-not-owned`, `…/no-cid`, `…/empty`, `…/oversize`, `ticket-delivery-failed`](#ticket-delivery) | Usually temporary | The agent could not hand the VM its boot ticket |
 | [`tenant-preflight/ovmf-missing`](#ovmf-missing) | Needs your action | The VM firmware (OVMF) is missing or wrong |
@@ -412,7 +413,13 @@ ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <host
 
 Play 09 reports this as [`AGENT_SANDBOX_CANNOT_WRITE`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
 
-### `cvm-launch-failed/adopt-serialize`, `cvm-launch-failed/<other>` {#cvm-launch-failed}
+### `cvm-launch-failed/adopt-serialize` {#adopt-serialize}
+
+**The agent could not encode the VM's record.** *Hippius side: nothing to do.*
+
+An internal agent failure, not your host's. We're notified; there is nothing for you to do.
+
+### `cvm-launch-failed/<other>` {#cvm-launch-failed}
 
 **The VM failed to start.** *Needs your action.*
 
@@ -686,14 +693,13 @@ The agent refused rather than create a blank disk. Contact support with the code
 
 **The agent could not start the VM.** *Needs your action.*
 
-Your agent predates the detailed error codes, so this is all it reports. Update it to v2026.10.21 to see the exact step, and read the agent journal.
+Your agent predates the detailed error codes, so this is all it reports. Update it to v2026.10.21 to see the exact step, run play 09 to check the host, and read the agent journal.
 
 ```sh
 ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.21
+ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> --tags launch_preflight
 sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 ```
-
-Play 09 reports this as [`LAUNCH_SMOKE_FAILED`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
 
 ### `power-policy-store/<step>`, `power-policy-store`, `idempotency-store` {#agent-state}
 
