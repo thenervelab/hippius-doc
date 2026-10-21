@@ -693,12 +693,12 @@ findmnt /var/lib/hippius-miner/pools/<value>
 
 **The pool holding a restarted VM's disks is not mounted.** *Needs your action.*
 
-The VM's disks live on a named pool that is not mounted, so the agent cannot check them. Find the pool in the node's Storage configuration panel, mount its filesystem at its path, then restart the agent so it binds the pool. Never recreate the VM's disks.
+The VM's disks live on a named pool that is not mounted, so the agent cannot check them. Find the pool in the node's Storage configuration panel, mount its filesystem at its path, then restart the agent so it binds the pool. Restart it with SIGKILL as shown: systemd starts it again and it keeps the running VMs (a plain systemctl restart or stop can destroy every VM on the host). Never recreate the VM's disks.
 
 ```sh
 findmnt /var/lib/hippius-miner/pools/<pool>
 ls /var/lib/hippius-miner/pools/
-sudo systemctl restart hippius-miner-agent
+sudo systemctl kill --signal=SIGKILL hippius-miner-agent
 ```
 
 ### `relaunch-disks-unreadable/…`, `relaunch-disks-unreadable` {#relaunch-disks-unreadable}
@@ -799,10 +799,10 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 
 **The agent hit an internal error.** *Needs your action.*
 
-The agent failed internally; we're notified. Restart it to clear the state, and keep it up to date.
+The agent failed internally; we're notified. Restart it to clear the state, and keep it up to date. Restart it with SIGKILL as shown: systemd starts it again and it keeps the running VMs (a plain systemctl restart or stop can destroy every VM on the host).
 
 ```sh
-sudo systemctl restart hippius-miner-agent
+sudo systemctl kill --signal=SIGKILL hippius-miner-agent
 sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 ```
 
@@ -841,10 +841,10 @@ sudo dmesg | grep -i -E 'sev|snp'
 
 **The VM network rules are not loaded on the host.** *Needs your action.*
 
-The agent has a saved network policy for its VMs, but its nftables rules are not loaded, so it refuses new VMs. Restart the agent, which loads them again, and check that nftables accepts the ruleset.
+The agent has a saved network policy for its VMs, but its nftables rules are not loaded, so it refuses new VMs. Restart the agent, which loads them again, and check that nftables accepts the ruleset. Restart it with SIGKILL as shown: systemd starts it again and it keeps the running VMs (a plain systemctl restart or stop can destroy every VM on the host).
 
 ```sh
-sudo systemctl restart hippius-miner-agent
+sudo systemctl kill --signal=SIGKILL hippius-miner-agent
 sudo nft list ruleset | head
 sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 ```
