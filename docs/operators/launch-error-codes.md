@@ -89,7 +89,8 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 | [`tenant-preflight/cpu-count-zero`, `…/bad-sha256-hex`, `…/json-encode`, `…/golden-missing-rootfs-hash`, `tenant-preflight/<other>`](#tenant-preflight) | Hippius side: nothing to do | The check before the VM starts refused the order |
 | [`cvm-launch-digest/vcpu-generation`](#vcpu-generation) | Needs your action | The host's CPU generation is not supported or not recognised |
 | [`cvm-launch-digest/recipe-artifact-read`](#recipe-artifact-read) | Needs your action | The agent could not read the VM's boot files |
-| [`cvm-launch-digest/feature-disabled`, `…/sev-compute`, `…/digest-shape`, `…/recipe-artifact-mismatch`, `…/recipe-vcpu-type`](#cvm-launch-digest) | Hippius side: nothing to do | The VM's launch measurement could not be computed |
+| [`cvm-launch-digest/feature-disabled`](#feature-disabled) | Needs your action | The agent was built without SEV-SNP support |
+| [`cvm-launch-digest/sev-compute`, `…/digest-shape`, `…/recipe-artifact-mismatch`, `…/recipe-vcpu-type`](#cvm-launch-digest) | Hippius side: nothing to do | The VM's launch measurement could not be computed |
 | [`cvm-launch-input/<check>`, `launch-input`](#cvm-launch-input) | Hippius side: nothing to do | The agent rejected the launch order |
 | [`cvm-insufficient-resources`, `insufficient-resources`](#insufficient-resources) | Usually temporary | The host had no room for the VM |
 | [`cvm-insufficient-disk[:<pool>]`, `insufficient-disk[:<pool>]`](#insufficient-disk) | Usually temporary | The disk budget is used up |
@@ -528,7 +529,17 @@ ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <host
 sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 ```
 
-### `cvm-launch-digest/feature-disabled`, `…/sev-compute`, `…/digest-shape`, `…/recipe-artifact-mismatch`, `…/recipe-vcpu-type` {#cvm-launch-digest}
+### `cvm-launch-digest/feature-disabled` {#feature-disabled}
+
+**The agent was built without SEV-SNP support.** *Needs your action.*
+
+The agent binary on this host cannot measure confidential VMs, so every launch fails. Install the released agent with the play (v2026.10.21 or later) instead of a custom build.
+
+```sh
+ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.21
+```
+
+### `cvm-launch-digest/sev-compute`, `…/digest-shape`, `…/recipe-artifact-mismatch`, `…/recipe-vcpu-type` {#cvm-launch-digest}
 
 **The VM's launch measurement could not be computed.** *Hippius side: nothing to do.*
 
