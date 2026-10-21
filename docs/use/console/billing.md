@@ -157,7 +157,22 @@ The plans page works out what you'd save based on what you store today.
 
 Switching to a plan doesn't touch your buckets or access keys, so there's nothing to reconfigure. When you change plans, the difference is prorated. You can cancel at any time, and you go back to pay as you go automatically. The same happens if a plan ends or can't renew.
 
-**A plan is a ceiling, not a meter.** You are never charged more than the plan price. As you get close to the limit, the console warns you. Once you reach it, new uploads pause until you upgrade or free up space.
+**What happens when you fill your plan** depends on how your plan is billed.
+
+- **Plans billed on the chain** are a ceiling, not a meter. You are never charged more than the plan price. As you get close to the limit, the console warns you. Once you reach it, new uploads pause until you upgrade or free up space.
+- **Plans billed by the Hippius backend** (the new hourly billing for S3) treat the plan's storage as included, not as a hard stop. Storage above it is billed by the hour at your plan's own rate, the plan price divided by its storage: $5.30 per TB per month on S3 Pro, $4.90 on Business and $4.65 on Enterprise. You only pay for what you store above the plan, for the hours you store it.
+
+#### Storage limit {#s3-storage-limit}
+
+With backend billing, a **storage limit** protects you from a runaway bill. It caps the total you can store, and it starts at **twice your plan's storage** (20 TB on S3 Pro). You can change it on the S3 plans page, under **Storage limit**:
+
+- The lowest limit is your plan's storage. At that setting there is no overage at all, and uploads pause at your plan's size, as on a chain plan.
+- There is no fixed maximum. The page shows the most a month of overage could cost at the limit you pick: (limit − plan storage) × your plan's rate, for example (30 TB − 10 TB) × $5.30 = $106 a month on S3 Pro. It is a ceiling, not a forecast. You are billed by the hour for what you actually store.
+- **At the limit, writes pause and reads keep working.** You can still list and download everything, but nothing new can be uploaded. Writes resume on their own as soon as you free up space or raise the limit.
+- We email you at 80% of the limit, when you reach it, and when writes resume.
+- Only the account owner can change the limit. Team members with S3 access can see it.
+
+The control only appears once your plan is billed by the backend. Until then, your plan works as a hard cap, as described above.
 
 ### Hub plans
 
