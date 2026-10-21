@@ -17,7 +17,7 @@ Once a launch is accepted again, the badge goes away and the card says **Recover
 
 Each error has a **code**: the step that failed, as your node's agent reported it. Look it up below. If the dashboard shows a code that isn't listed here, read [Other codes](#other-codes).
 
-The commands run on the node itself, except the Ansible ones, which run from the machine you deploy the miner play from. Replace the parts in angle brackets (`<hostname>`, `<data_disk_root>`, `<directory>`) before running them.
+The commands run on the node itself, except the Ansible ones, which run from the machine you deploy the miner play from. Replace the parts in angle brackets (`<hostname>`, `<data_disk_root>`, `<state_disk_root>`, `<directory>`) before running them.
 
 Two commands come up often:
 
@@ -30,7 +30,7 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> --tags launch_preflight
 ```
 
-Codes in square brackets, such as `[LIBVIRT_DEFAULT_NET_INACTIVE]`, are the ones the play's preflight prints for the same problem.
+The launch preflight ships in play releases after 2026-10-20.1: update your checkout of the play before running it. Codes in square brackets, such as `[LIBVIRT_DEFAULT_NET_INACTIVE]`, are the ones it prints for the same problem.
 
 ## libvirt could not start the VM
 
@@ -107,7 +107,7 @@ ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <host
 
 ### Other `tenant-preflight/` codes {#tenant-preflight}
 
-**The host failed the check that runs before the VM starts** (artifact staging and measurement). Rerun the play. If the check fails again, read the agent's journal.
+**The check that runs before the VM starts failed** (artifact staging and measurement). Most of these codes are about the order, not your host. Read the agent's journal at the time shown, and [contact support](/use/console/support) with the code if it repeats.
 
 ## The VM did not come up
 
@@ -121,7 +121,7 @@ ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <host
 
 ### `cvm-launch-input/<check>` {#cvm-launch-input}
 
-**The agent rejected the launch order.** It refused one of the order's parameters; the part after the slash names the check. This usually means the agent isn't the version the network expects. Rerun the play to update it.
+**The agent rejected the launch order.** It refused one of the order's parameters; the part after the slash names the check. This is about the order, not your host: [contact support](/use/console/support) with the code if it repeats.
 
 ### `ticket-delivery/connect-timeout` {#ticket-timeout}
 
@@ -139,7 +139,7 @@ If it keeps happening, [contact support](/use/console/support) with the code.
 
 ## The VM's disks could not be prepared
 
-The agent prepares up to three disks for each VM: a small state disk (`state-disk/`), the VM's writable overlay (`overlay-disk/`) and its data disk (`data-disk/`). The three share their step codes.
+The agent prepares up to three disks for each VM: a small state disk (`state-disk/`, under `state_disk_root`), the VM's writable overlay (`overlay-disk/`) and its data disk (`data-disk/`), both under `data_disk_root`. The three share their step codes. In the commands below, use the root of the failing disk.
 
 ### `…/mkdir`, `…/create`, `…/statvfs` {#agent-sandbox}
 
@@ -150,8 +150,8 @@ The agent prepares up to three disks for each VM: a small state disk (`state-dis
 3. If it still fails, check that the root is a writable mount with free space, and that no drop-in narrows the sandbox:
 
 ```sh
-findmnt -T <data_disk_root>
-df -h <data_disk_root>
+findmnt -T <state_disk_root or data_disk_root>
+df -h <state_disk_root or data_disk_root>
 ls /etc/systemd/system/hippius-miner-agent.service.d/
 ```
 
@@ -162,7 +162,7 @@ Preflight code: `[AGENT_SANDBOX_CANNOT_WRITE]`.
 **Not enough disk space for the VM's disks.** The filesystem under the storage root doesn't have room for the VM's disks. Free space there, or move the root to a larger filesystem and rerun the play.
 
 ```sh
-df -h <data_disk_root>
+df -h <state_disk_root or data_disk_root>
 ```
 
 ### `state-disk/mkfs-spawn` {#mkfs-missing}
