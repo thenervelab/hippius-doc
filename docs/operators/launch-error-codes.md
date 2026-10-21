@@ -87,7 +87,7 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 | [`tenant-preflight/fetch-client`, `…/fetch-network`, `…/fetch-http-status`, `…/fetch-body`, `…/sha256-mismatch`](#fetch) | Usually temporary | The agent could not download the VM's boot files |
 | [`tenant-preflight/base-in-use`](#base-in-use) | Usually temporary | The VM's base image was busy |
 | [`tenant-preflight/cpu-count-zero`, `…/bad-sha256-hex`, `…/json-encode`, `…/golden-missing-rootfs-hash`, `tenant-preflight/<other>`](#tenant-preflight) | Hippius side: nothing to do | The check before the VM starts refused the order |
-| [`cvm-launch-digest/vcpu-generation`](#vcpu-generation) | Needs your action | The host's CPU generation does not match the node's |
+| [`cvm-launch-digest/vcpu-generation`](#vcpu-generation) | Needs your action | The host's CPU generation is not supported or not recognised |
 | [`cvm-launch-digest/recipe-artifact-read`](#recipe-artifact-read) | Needs your action | The agent could not read the VM's boot files |
 | [`cvm-launch-digest/feature-disabled`, `…/sev-compute`, `…/digest-shape`, `…/recipe-artifact-mismatch`, `…/recipe-vcpu-type`](#cvm-launch-digest) | Hippius side: nothing to do | The VM's launch measurement could not be computed |
 | [`cvm-launch-input/<check>`, `launch-input`](#cvm-launch-input) | Hippius side: nothing to do | The agent rejected the launch order |
@@ -98,7 +98,7 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 | [`cvm-busy`](#cvm-busy) | Usually temporary | The VM was busy with another operation |
 | [`state-disk/mkdir`, `…/create`, `…/truncate`](#agent-sandbox) | Needs your action | The agent cannot create the VM's disk files |
 | [`…-disk/insufficient-space`](#disk-space) | Needs your action | Not enough disk space for the VM's disks |
-| [`…-disk/io`](#disk-io) | Needs your action | An I/O error hit the VM's disks |
+| [`…-disk/io`, `…-disk/statvfs`](#disk-io) | Needs your action | The storage filesystem could not be read |
 | [`state-disk/mkfs-spawn`](#mkfs-missing) | Needs your action | mkfs.ext4 is missing on the host |
 | [`…-disk/race`, `…/size-zero`, `…/size-overflow`, `…/no-parent`, `…/mkfs-failed`, `…-disk/<other>`](#disk-other) | Hippius side: nothing to do | The agent could not prepare the VM's disks |
 | [`relaunch-disks-missing/…[:<pool>]`, `relaunch-disks-missing`](#relaunch-disks-missing) | Needs your action | A restarted VM's disks are not on this host |
@@ -514,9 +514,9 @@ This is about the order Hippius sent, not about your host. We're notified; there
 
 ### `cvm-launch-digest/vcpu-generation` {#vcpu-generation}
 
-**The host's CPU generation does not match the node's.** *Needs your action.*
+**The host's CPU generation is not supported or not recognised.** *Needs your action.*
 
-The VM was measured for another processor generation than this host's. Check that the generation declared for the node (Milan, Genoa or Turin) is the host's; contact support if it is.
+The agent could not identify the host processor as an AMD EPYC Milan, Genoa or Turin from its CPUID, so it cannot measure the VM. Compute nodes must run on one of those, on bare metal (not inside another VM). If the host is one of them, contact support with the code.
 
 ```sh
 lscpu | grep 'Model name'
@@ -620,13 +620,15 @@ The filesystem under the storage root has no room for the VM's disks. Free space
 df -h <storage_root>
 ```
 
-### `…-disk/io` {#disk-io}
+### `…-disk/io`, `…-disk/statvfs` {#disk-io}
 
-**An I/O error hit the VM's disks.** *Needs your action.*
+**The storage filesystem could not be read.** *Needs your action.*
 
-Reading or writing a VM disk failed with an I/O error. Check the disk's health and the kernel log.
+An I/O error hit a VM disk, or the filesystem under the storage root could not be measured. Check that the root is mounted and healthy, and look for disk errors in the kernel log.
 
 ```sh
+findmnt -T <storage_root>
+df -h <storage_root>
 sudo dmesg | grep -i -E 'i/o error|blk_update'
 ```
 
