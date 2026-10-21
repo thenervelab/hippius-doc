@@ -106,10 +106,12 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 | [`vm-pool-record-unwritable`](#vm-pool-record-unwritable) | Needs your action | The agent cannot save which pool holds the VM's disks |
 | [`vm-pool-record-missing`, `vm-pool-record-unreadable`, `vm-pool-record`](#vm-pool-record) | Hippius side: nothing to do | The VM's pool record is missing or unreadable |
 | [`dispatch-failed`](#dispatch-failed) | Needs your action | The agent could not start the VM |
-| [`power-policy-store/<step>`, `power-policy-store`, `idempotency-store`](#agent-state) | Needs your action | The agent could not save its state |
-| [`lock-poisoned`, `dispatch-panic`](#agent-internal) | Needs your action | The agent hit an internal error |
+| [`power-policy-store/read`, `…/mkdir`, `…/write`, `…/sync`, `…/rename`, `…/remove`](#agent-state) | Needs your action | The agent could not save the VM's power policy |
+| [`power-policy-store/parse`, `power-policy-store/encode`](#power-policy-record) | Hippius side: nothing to do | The VM's power policy record is unreadable |
+| [`power-policy-store`, `power-policy-store/<other>`](#power-policy-store) | Needs your action | The agent could not store the VM's power policy |
+| [`lock-poisoned`, `dispatch-panic`, `idempotency-store`, `power-policy-store/lock`](#agent-internal) | Needs your action | The agent hit an internal error |
 | [`snp-probe/…`](#snp-probe) | Needs your action | The agent's SEV-SNP check failed |
-| [`net-policy-not-loaded`](#net-policy-not-loaded) | Usually temporary | The agent's network policy was not loaded yet |
+| [`net-policy-not-loaded`](#net-policy-not-loaded) | Needs your action | The VM network rules are not loaded on the host |
 | [`not-yet-wired`](#not-yet-wired) | Hippius side: nothing to do | The order needs a feature the agent doesn't have yet |
 | [`migration-failed`](#migration-failed) | Hippius side: nothing to do | A VM migration step failed |
 | [`order-stale`](#order-stale) | Usually temporary | The order expired before it arrived |
@@ -705,11 +707,11 @@ ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <host
 sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 ```
 
-### `power-policy-store/<step>`, `power-policy-store`, `idempotency-store` {#agent-state}
+### `power-policy-store/read`, `…/mkdir`, `…/write`, `…/sync`, `…/rename`, `…/remove` {#agent-state}
 
-**The agent could not save its state.** *Needs your action.*
+**The agent could not save the VM's power policy.** *Needs your action.*
 
-The agent could not write one of its state files. The agent's systemd sandbox cannot write a storage root its config names, or the root is not a writable mount. Set miner_data_disk_root and miner_state_disk_root in host_vars and rerun the play, which renders both the config and the unit (don't edit config.toml by hand). Check the root is mounted, writable and not full, and that no drop-in narrows the sandbox.
+The agent could not read or write the VM's power policy file under its state root. The agent's systemd sandbox cannot write a storage root its config names, or the root is not a writable mount. Set miner_data_disk_root and miner_state_disk_root in host_vars and rerun the play, which renders both the config and the unit (don't edit config.toml by hand). Check the root is mounted, writable and not full, and that no drop-in narrows the sandbox.
 
 ```sh
 findmnt -T <storage_root>
@@ -720,7 +722,23 @@ ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <host
 
 Play 09 reports this as [`AGENT_SANDBOX_CANNOT_WRITE`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
 
-### `lock-poisoned`, `dispatch-panic` {#agent-internal}
+### `power-policy-store/parse`, `power-policy-store/encode` {#power-policy-record}
+
+**The VM's power policy record is unreadable.** *Hippius side: nothing to do.*
+
+The agent could not decode or encode the VM's power policy record. We're notified; contact support with the code, and don't edit or delete the file.
+
+### `power-policy-store`, `power-policy-store/<other>` {#power-policy-store}
+
+**The agent could not store the VM's power policy.** *Needs your action.*
+
+The agent journal names the failing step. If it is a file read or write, the agent's state root is not writable or full (see the sandbox entry); otherwise contact support with the code.
+
+```sh
+sudo journalctl -u hippius-miner-agent --since "2 hours ago"
+```
+
+### `lock-poisoned`, `dispatch-panic`, `idempotency-store`, `power-policy-store/lock` {#agent-internal}
 
 **The agent hit an internal error.** *Needs your action.*
 
@@ -743,12 +761,14 @@ sudo dmesg | grep -i -E 'sev|snp'
 
 ### `net-policy-not-loaded` {#net-policy-not-loaded}
 
-**The agent's network policy was not loaded yet.** *Usually temporary.*
+**The VM network rules are not loaded on the host.** *Needs your action.*
 
-The agent had not loaded its VM network policy (for example right after a restart). The network retries; if it lasts, restart the agent.
+The agent has a saved network policy for its VMs, but its nftables rules are not loaded, so it refuses new VMs. Restart the agent, which loads them again, and check that nftables accepts the ruleset.
 
 ```sh
 sudo systemctl restart hippius-miner-agent
+sudo nft list ruleset | head
+sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 ```
 
 ### `not-yet-wired` {#not-yet-wired}
