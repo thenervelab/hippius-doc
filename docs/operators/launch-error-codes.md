@@ -85,7 +85,7 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 | [`tenant-preflight/ovmf-missing`](#ovmf-missing) | Needs your action | The VM firmware (OVMF) is missing or wrong |
 | [`tenant-preflight/staging-mkdir`, `…/stage-mkdir`, `…/stage-create`, `…/stage-write`, `…/stage-sync`, `…/stage-rename`](#stage-write) | Needs your action | The agent could not stage the VM's boot files |
 | [`tenant-preflight/fetch-client`, `…/fetch-network`, `…/fetch-http-status`, `…/fetch-body`, `…/sha256-mismatch`](#fetch) | Usually temporary | The agent could not download the VM's boot files |
-| [`tenant-preflight/base-in-use`](#base-in-use) | Usually temporary | The VM's base image was busy |
+| [`tenant-preflight/base-in-use`](#base-in-use) | Hippius side: nothing to do | The order would overwrite a running VM's base image |
 | [`tenant-preflight/cpu-count-zero`, `…/bad-sha256-hex`, `…/json-encode`, `…/golden-missing-rootfs-hash`, `tenant-preflight/<other>`](#tenant-preflight) | Hippius side: nothing to do | The check before the VM starts refused the order |
 | [`cvm-launch-digest/vcpu-generation`](#vcpu-generation) | Needs your action | The host's CPU generation is not supported or not recognised |
 | [`cvm-launch-digest/recipe-artifact-read`](#recipe-artifact-read) | Needs your action | The agent could not read the VM's boot files |
@@ -103,6 +103,7 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 | [`state-disk/mkfs-failed`](#mkfs-failed) | Needs your action | Formatting the VM's state disk failed |
 | [`…-disk/race`, `…/size-zero`, `…/size-overflow`, `…/no-parent`, `…-disk/<other>`](#disk-other) | Hippius side: nothing to do | The agent could not prepare the VM's disks |
 | [`relaunch-disks-missing/…[:<pool>]`, `relaunch-disks-missing`](#relaunch-disks-missing) | Needs your action | A restarted VM's disks are not on this host |
+| [`relaunch-disks-unreadable/pool-not-mounted`](#pool-not-mounted) | Needs your action | The pool holding a restarted VM's disks is not mounted |
 | [`relaunch-disks-unreadable/…`, `relaunch-disks-unreadable`](#relaunch-disks-unreadable) | Needs your action | A restarted VM's disks could not be checked |
 | [`vm-pool-record-unwritable`](#vm-pool-record-unwritable) | Needs your action | The agent cannot save which pool holds the VM's disks |
 | [`vm-pool-record-missing`, `vm-pool-record`](#vm-pool-record) | Needs your action | The VM's pool record is missing |
@@ -500,13 +501,9 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 
 ### `tenant-preflight/base-in-use` {#base-in-use}
 
-**The VM's base image was busy.** *Usually temporary.*
+**The order would overwrite a running VM's base image.** *Hippius side: nothing to do.*
 
-Another operation was using the VM's base image. The network retries; nothing to do unless it repeats.
-
-```sh
-sudo journalctl -u hippius-miner-agent --since "2 hours ago"
-```
+A live VM on this host already uses a different base image under the same name, and the agent will not overwrite it. This is about the order Hippius sent, not about your host. We're notified; there is nothing for you to do.
 
 ### `tenant-preflight/cpu-count-zero`, `…/bad-sha256-hex`, `…/json-encode`, `…/golden-missing-rootfs-hash`, `tenant-preflight/<other>` {#tenant-preflight}
 
@@ -694,6 +691,18 @@ When the code names a pool (`:<value>`, other than `default`):
 ```sh
 findmnt -T <state_disk_root>
 findmnt /var/lib/hippius-miner/pools/<value>
+```
+
+### `relaunch-disks-unreadable/pool-not-mounted` {#pool-not-mounted}
+
+**The pool holding a restarted VM's disks is not mounted.** *Needs your action.*
+
+The VM's disks live on a named pool that is not mounted, so the agent cannot check them. Find the pool in the node's Storage configuration panel, mount its filesystem at its path, then restart the agent so it binds the pool. Never recreate the VM's disks.
+
+```sh
+findmnt /var/lib/hippius-miner/pools/<pool>
+ls /var/lib/hippius-miner/pools/
+sudo systemctl restart hippius-miner-agent
 ```
 
 ### `relaunch-disks-unreadable/…`, `relaunch-disks-unreadable` {#relaunch-disks-unreadable}
