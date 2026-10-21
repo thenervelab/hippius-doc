@@ -43,7 +43,7 @@ The CDN is in neither group: grant it on its own. A CDN operator can purge the c
 
 ### The private network (API only for now)
 
-Your account's private NetBird network (peers, groups, the rules between them, VPC networks) has its own grant, `network`. For now it is given and used through the API only: add it to a member's grants with `PATCH /api/accounts/members/<id>/` (or in an invitation), for example `{"scope": "network", "level": "viewer"}`. The body's `grants` replaces the whole list, so send the member's other grants too. The member then calls `/api/network/` with the `X-Hippius-Account` header (see [For developers](#for-developers-the-api)). The Console's member editor doesn't offer it yet, and saving that member's access from the Console removes it: set it again through the API afterwards.
+Your account's private NetBird network (peers, groups, the rules between them, VPC networks) has its own grant, `network`. For now it is given and used through the API only: add it to a member's grants with `PATCH /api/accounts/members/<id>/` (or in an invitation), for example `{"scope": "network", "level": "viewer"}`. The body's `grants` replaces the whole list, so send the member's other grants too. The member then calls `/api/network/` with the `X-Hippius-Account` header (see [For developers](#for-developers-the-api)). The Console's member editor doesn't show it yet (it will once the Network page launches), but it keeps it: saving that member's other access from the Console leaves the network grant as it is.
 
 `network` is in neither group: **All compute** doesn't include it. It always applies to the whole account and can't be limited to a project. Its levels:
 
