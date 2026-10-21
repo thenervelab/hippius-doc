@@ -37,6 +37,12 @@ Play 09 and the detailed error codes ship in **hippius-cvm v2026.10.21.1 or late
 ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.21.1
 ```
 
+From v2026.10.21.1, play 09 also names the causes behind most `disk-open-permission` failures:
+
+- `STORAGE_PATH_SYMLINK`: a symlink on the way to a storage directory. Replace it with a bind mount at the same path.
+- `APPARMOR_DENIED_<DIR>` (`STAGING`, `OVERLAY`, `STATE`, `DATA`, `OVMF`, `OTHER`): AppArmor denied QEMU that storage directory, usually because of a symlink. Don't disable AppArmor for libvirt.
+- `AGENT_UMASK_BLOCKS_QEMU`: the agent's unit ran with a umask that closes its per-VM directories to QEMU. Rerun the play (the unit now sets `UMask=0022`), then `chmod o+x` or delete the per-VM staging directories that failed launches left behind.
+
 Each play 09 code and its fix is described in the guide's [Launch preflight codes (play 09)](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09).
 
 ## Reading a code
