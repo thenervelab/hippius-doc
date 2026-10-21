@@ -113,6 +113,8 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 | [`power-policy-store/parse`, `power-policy-store/encode`](#power-policy-record) | Hippius side: nothing to do | The VM's power policy record is unreadable |
 | [`power-policy-store`, `power-policy-store/<other>`](#power-policy-store) | Needs your action | The agent could not store the VM's power policy |
 | [`lock-poisoned`, `dispatch-panic`, `idempotency-store`, `power-policy-store/lock`](#agent-internal) | Needs your action | The agent hit an internal error |
+| [`snp-probe/cpuid-not-amd`, `snp-probe/cpuid-leaf-missing`](#snp-unsupported-cpu) | Needs your action | This host's processor cannot run confidential VMs |
+| [`snp-probe/cbitpos-zero`](#snp-cbitpos) | Needs your action | The processor hides its SEV parameters |
 | [`snp-probe/…`](#snp-probe) | Needs your action | The agent's SEV-SNP check failed |
 | [`net-policy-not-loaded`](#net-policy-not-loaded) | Needs your action | The VM network rules are not loaded on the host |
 | [`not-yet-wired`](#not-yet-wired) | Hippius side: nothing to do | The order needs a feature the agent doesn't have yet |
@@ -371,8 +373,6 @@ The VM was started but did not report ready before the deadline. Check the host'
 sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 ```
 
-Play 09 reports this as [`LAUNCH_SMOKE_FAILED`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
-
 ### `cvm-launch-failed/domain-error` {#domain-error}
 
 **The VM crashed while booting.** *Needs your action.*
@@ -383,8 +383,6 @@ libvirt reported the domain in an error state during boot. The reason is in the 
 sudo ls -t /var/log/libvirt/qemu/ | head
 sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 ```
-
-Play 09 reports this as [`LAUNCH_SMOKE_FAILED`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
 
 ### `cvm-launch-failed/handle-lost`, `cvm-launch-failed/teardown` {#handle-lost}
 
@@ -442,14 +440,12 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 
 **The VM booted but never took its boot ticket.** *Usually temporary.*
 
-The guest booted but never opened the listener the agent hands its boot ticket to. The network retries elsewhere. If every launch fails this way, check that SEV-SNP works and run play 09, which starts a test VM.
+The guest booted but never opened the listener the agent hands its boot ticket to. The network retries elsewhere. If every launch fails this way, check that SEV-SNP works on the host and read the agent journal.
 
 ```sh
 sudo dmesg | grep -i -E 'sev|snp'
 sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 ```
-
-Play 09 reports this as [`LAUNCH_SMOKE_FAILED`](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09). Run it to check your host (see [Check your host with play 09](#play-09)).
 
 ### `ticket-delivery/write-failed`, `…/cid-not-owned`, `…/no-cid`, `…/empty`, `…/oversize`, `ticket-delivery-failed` {#ticket-delivery}
 
@@ -808,6 +804,27 @@ The agent failed internally; we're notified. Restart it to clear the state, and 
 ```sh
 sudo systemctl restart hippius-miner-agent
 sudo journalctl -u hippius-miner-agent --since "2 hours ago"
+```
+
+### `snp-probe/cpuid-not-amd`, `snp-probe/cpuid-leaf-missing` {#snp-unsupported-cpu}
+
+**This host's processor cannot run confidential VMs.** *Needs your action.*
+
+The processor is not an AMD one, or is an AMD processor too old for SEV. Compute nodes need a bare-metal AMD EPYC Milan, Genoa or Turin; no setting fixes this on the current hardware.
+
+```sh
+lscpu | grep -E 'Vendor ID|Model name'
+```
+
+### `snp-probe/cbitpos-zero` {#snp-cbitpos}
+
+**The processor hides its SEV parameters.** *Needs your action.*
+
+The CPU reports no memory-encryption bit, which a real SEV-capable EPYC never does: the host is likely a VM itself, or a hypervisor or BIOS setting masks CPUID. Run the node on bare metal with CPUID unmasked.
+
+```sh
+systemd-detect-virt
+lscpu | grep -E 'Hypervisor|Model name'
 ```
 
 ### `snp-probe/…` {#snp-probe}
