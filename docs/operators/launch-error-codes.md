@@ -31,10 +31,10 @@ Many launch errors have a counterpart in play 09, the launch preflight of the mi
 ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> --tags launch_preflight
 ```
 
-Play 09 and the detailed error codes ship in **hippius-cvm v2026.10.21.1 or later**: update your checkout of the play if it lacks play 09. If your agent is older than that release (it reports only coarse codes such as `dispatch-failed`), update it with:
+Play 09 and the detailed error codes ship in **hippius-cvm v2026.10.22 or later**: update your checkout of the play if it lacks play 09. If your agent is older than that release (it reports only coarse codes such as `dispatch-failed`), update it with:
 
 ```sh
-ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.21.1
+ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.22
 ```
 
 From v2026.10.21.1, play 09 also names the causes behind most `disk-open-permission` failures:
@@ -44,6 +44,10 @@ From v2026.10.21.1, play 09 also names the causes behind most `disk-open-permiss
 - `AGENT_UMASK_BLOCKS_QEMU`: the agent's unit ran with a umask that closes its per-VM directories to QEMU. Rerun the play (the unit now sets `UMask=0022`), then `chmod o+x` or delete the per-VM staging directories that failed launches left behind.
 
 Each play 09 code and its fix is described in the guide's [Launch preflight codes (play 09)](https://github.com/thenervelab/hippius-cvm/blob/main/docs/operator/external-miner-guide.md#launch-preflight-codes-play-09).
+
+## Restarting the agent
+
+Restart the agent with `sudo systemctl kill --signal=SIGKILL hippius-miner-agent`: systemd starts it again, and it keeps the running VMs. From hippius-cvm v2026.10.22, a normal `systemctl stop` or `restart` keeps them running too. On an older agent, a normal stop or restart can destroy every VM on the host.
 
 ## Reading a code
 
@@ -60,6 +64,7 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 | Code | Whose action | What it means |
 |---|---|---|
 | [`miner-unreachable`](#miner-unreachable) | Needs your action | The network could not reach this node |
+| [`preflight-timeout`](#preflight-timeout) | Needs your action | Pre-launch check timed out (3+ times in a row) |
 | [`libvirt-driver/create:network-inactive`](#network-inactive) | Needs your action | libvirt's default network is not running |
 | [`libvirt-driver/create:disk-open-permission`](#disk-open-permission) | Needs your action | QEMU was refused a VM disk, kernel or firmware |
 | [`libvirt-driver/create:disk-open-invalid`](#disk-open-invalid) | Needs your action | The VM disk filesystem does not support direct I/O |
@@ -145,6 +150,19 @@ sudo systemctl status hippius-miner-agent
 netbird status
 ```
 
+### `preflight-timeout` {#preflight-timeout}
+
+**Pre-launch check timed out (3+ times in a row).** *Needs your action.*
+
+The first staging of the VM's base image on this node took longer than the gateway waits (30 s), three times or more with no accepted launch in between. That usually means slow download bandwidth or slow disks under the storage directories. Check both, and that the agent is up and NetBird connected. Single timeouts are hidden: they are normal on a fresh node's first download, and they never cause a strike or lower the node's capacity.
+
+```sh
+sudo systemctl status hippius-miner-agent
+netbird status
+df -h <data_disk_root>
+sudo dd if=/dev/zero of=<data_disk_root>/.hippius-ddtest bs=1M count=256 oflag=direct status=progress && sudo rm <data_disk_root>/.hippius-ddtest
+```
+
 ## libvirt could not start the VM
 
 ### `libvirt-driver/create:network-inactive` {#network-inactive}
@@ -163,7 +181,7 @@ Play 09 reports this as `LIBVIRT_DEFAULT_NET_INACTIVE` ([launch preflight codes]
 
 **QEMU was refused a VM disk, kernel or firmware.** *Needs your action.*
 
-Run play 09 from hippius-cvm v2026.10.21.1 or later: it reproduces this with a test VM and names the exact cause. Usually a directory QEMU's user (libvirt-qemu) cannot enter, per-VM staging dirs left by failed launches included (chmod o+x them or delete them); the agent's umask (rerun the play, whose unit sets UMask=0022); a symlink on the path (use a bind mount instead); or an AppArmor denial.
+Run play 09 from hippius-cvm v2026.10.22 or later: it reproduces this with a test VM and names the exact cause. Usually a directory QEMU's user (libvirt-qemu) cannot enter, per-VM staging dirs left by failed launches included (chmod o+x them or delete them); the agent's umask (rerun the play, whose unit sets UMask=0022); a symlink on the path (use a bind mount instead); or an AppArmor denial.
 
 ```sh
 namei -l <data_disk_root>
@@ -539,10 +557,10 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 
 **The agent was built without SEV-SNP support.** *Needs your action.*
 
-The agent binary on this host cannot measure confidential VMs, so every launch fails. Install the released agent with the play (v2026.10.21.1 or later) instead of a custom build.
+The agent binary on this host cannot measure confidential VMs, so every launch fails. Install the released agent with the play (v2026.10.22 or later) instead of a custom build.
 
 ```sh
-ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.21.1
+ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.22
 ```
 
 ### `cvm-launch-digest/sev-compute`, `…/digest-shape`, `…/recipe-artifact-mismatch`, `…/recipe-vcpu-type` {#cvm-launch-digest}
@@ -772,10 +790,10 @@ sudo dmesg | grep -i 'i/o error'
 
 **The agent could not start the VM.** *Needs your action.*
 
-Your agent predates the detailed error codes, so this is all it reports. Update it to v2026.10.21.1 to see the exact step, run play 09 to check the host, and read the agent journal.
+Your agent predates the detailed error codes, so this is all it reports. Update it to v2026.10.22 to see the exact step, run play 09 to check the host, and read the agent journal.
 
 ```sh
-ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.21.1
+ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.22
 ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> --tags launch_preflight
 sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 ```
@@ -815,7 +833,7 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 
 **The agent hit an internal error.** *Needs your action.*
 
-The agent failed internally; we're notified. Restart it to clear the state, and keep it up to date. Restart it with SIGKILL as shown: systemd starts it again and it keeps the running VMs (a plain systemctl restart or stop can destroy every VM on the host).
+The agent failed internally; we're notified. Restart it to clear the state, and keep it up to date. Restart it with SIGKILL as shown: systemd starts it again and it keeps the running VMs. From hippius-cvm v2026.10.22 a normal systemctl stop or restart keeps them running too; on an older agent it can destroy every VM on the host.
 
 ```sh
 sudo systemctl kill --signal=SIGKILL hippius-miner-agent
@@ -857,7 +875,7 @@ sudo dmesg | grep -i -E 'sev|snp'
 
 **The VM network rules are not loaded on the host.** *Needs your action.*
 
-The agent has a saved network policy for its VMs, but its nftables rules are not loaded, so it refuses new VMs. Restart the agent, which loads them again, and check that nftables accepts the ruleset. Restart it with SIGKILL as shown: systemd starts it again and it keeps the running VMs (a plain systemctl restart or stop can destroy every VM on the host).
+The agent has a saved network policy for its VMs, but its nftables rules are not loaded, so it refuses new VMs. Restart the agent, which loads them again, and check that nftables accepts the ruleset. Restart it with SIGKILL as shown: systemd starts it again and it keeps the running VMs. From hippius-cvm v2026.10.22 a normal systemctl stop or restart keeps them running too; on an older agent it can destroy every VM on the host.
 
 ```sh
 sudo systemctl kill --signal=SIGKILL hippius-miner-agent
@@ -907,10 +925,10 @@ sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 
 **The node sent an unreadable error code.** *Needs your action.*
 
-The agent's error code was not in the expected format: an outdated or modified agent. Update it to v2026.10.21.1.
+The agent's error code was not in the expected format: an outdated or modified agent. Update it to v2026.10.22.
 
 ```sh
-ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.21.1
+ansible-playbook -i inventory.yml playbooks/06-miner-bootstrap.yml --limit <hostname> -e miner_agent_version=v2026.10.22
 sudo journalctl -u hippius-miner-agent --since "2 hours ago"
 ```
 
