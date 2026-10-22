@@ -3,7 +3,7 @@ id: overview
 title: Screenshots and Screen Recording
 sidebar_label: Overview
 slug: /use/captures
-description: Take a screenshot or record your screen in the Hippius desktop app or the console. Every capture is encrypted on your device, saved to your Hippius Captures drive, and comes with a share link ready to paste.
+description: Take a screenshot or record your screen in the Hippius desktop app, the console or the browser extension. Every capture is encrypted on your device, saved to your Hippius Captures drive, and comes with a share link ready to paste.
 pagination_prev: null
 ---
 
@@ -35,15 +35,16 @@ There is no folder to pick, no file to name and no upload to start. You can stil
 | **Desktop app on Windows** | Yes | Yes |
 | **Console in Chrome or Edge** on a computer | Yes | Yes |
 | **Console in Safari or Firefox** on a computer | Yes | Yes, with a few differences (see [Record your screen](/use/captures/recording#browser-differences)) |
+| **[Browser extension](/use/captures/browser-extension)** in Chrome, Edge, Brave or Arc | Yes | Yes |
 | **Phones** | No | No |
 
 On a phone you can't take captures with Hippius, but everything you capture on a computer shows up in **Captures** when you open the console on your phone, and its link works on any device.
 
-If you have the choice, the desktop app gives you the most: system-wide keyboard shortcuts, a one-step area screenshot, Screenshot and Record in the menu bar, and captures that wait safely on your computer if they can't be uploaded straight away. The console needs nothing installed, which makes it handy on a computer that isn't yours.
+If you have the choice, the desktop app gives you the most: system-wide keyboard shortcuts, a one-step area screenshot, Screenshot and Record in the menu bar, and captures that wait safely on your computer if they can't be uploaded straight away. The console needs nothing installed, which makes it handy on a computer that isn't yours. The [browser extension](/use/captures/browser-extension) sits in between: screenshots and recording from your browser's toolbar, on any website, without installing an app.
 
 ## Where your captures go
 
-Every screenshot and recording lands in your **Hippius Captures** drive. The desktop app and the console use the same drive, so a recording you made on your laptop is in the list when you open the console at work, and the other way round.
+Every screenshot and recording lands in your **Hippius Captures** drive. The desktop app, the console and the browser extension use the same drive, so a recording you made on your laptop is in the list when you open the console at work, and the other way round.
 
 Captures are named after the moment you took them, so they sort naturally:
 
