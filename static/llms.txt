@@ -2,31 +2,31 @@
 
 > Hippius is a distributed cloud: encrypted file storage (Drive), S3-compatible object storage, a registry for AI models and containers (Hub), and confidential compute (VMs, managed PostgreSQL, managed Kubernetes, GitHub Actions runners). One account pays for all of them. This file says what each product is and which file to open next.
 
-Open only the file for the product you need. The long reference for the whole product, including the S3 manual, is https://docs.hippius.com/llms-full.txt
+Open only the file for the product you need. The long reference for the whole product, including the S3 manual, is [llms-full.txt](https://docs.hippius.com/llms-full.txt)
 
 ## Which file to open
 
 | Want to | Open |
 |---|---|
-| Store or fetch files from code, rclone, or a backup tool | https://raw.githubusercontent.com/thenervelab/hippius-s3/staging/llms.txt |
-| Store encrypted files in the browser (Drive) | https://docs.hippius.com/use/drive |
-| Publish or pull a model or a container image | https://raw.githubusercontent.com/thenervelab/hippius-hub/main/llms.txt |
-| Sync folders on a computer | https://raw.githubusercontent.com/thenervelab/hippius-desktop/staging/llms.txt |
+| Store or fetch files from code, rclone, or a backup tool | [hippius-s3 llms.txt](https://raw.githubusercontent.com/thenervelab/hippius-s3/staging/llms.txt) |
+| Store encrypted files in the browser (Drive) | [Drive guide](https://docs.hippius.com/use/drive) |
+| Publish or pull a model or a container image | [hippius-hub llms.txt](https://raw.githubusercontent.com/thenervelab/hippius-hub/main/llms.txt) |
+| Sync folders on a computer | [hippius-desktop llms.txt](https://raw.githubusercontent.com/thenervelab/hippius-desktop/staging/llms.txt) |
 | Work in a shared drive | A Drive someone else owns and invited you into. They pay for the storage. It shows in the console under Storage after the invite. |
-| Give a coding agent shared memory | https://raw.githubusercontent.com/thenervelab/hippius-mem/main/llms.txt |
-| Script Drive with encryption on the client | https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt |
-| Sign up, pay, get an API token, or manage Drive and S3 keys in the browser | https://docs.hippius.com/use/console/getting-started |
-| Use Drive on an Android phone | https://docs.hippius.com/use/mobile/getting-started |
-| Run a VM, managed PostgreSQL, managed Kubernetes or GitHub Actions runners (Compute) | https://docs.hippius.com/use/compute |
-| Serve an S3 bucket through the CDN (zones on <zone>.c.hipcdn.net or your own domain; FR $0.010/GB, AU $0.060/GB, $0.002 per 10,000 requests, $1/month per custom domain) | https://docs.hippius.com/use/cdn |
-| Let team members use your compute, S3 and CDN, or work in an account you were invited to (shared accounts) | https://docs.hippius.com/use/console/team |
-| Run a storage miner | https://docs.hippius.com/earn/arion/running-miner and https://raw.githubusercontent.com/thenervelab/arion/main/llms.txt |
-| Run a validator | https://docs.hippius.com/earn/installing-validator |
+| Give a coding agent shared memory | [hippius-mem llms.txt](https://raw.githubusercontent.com/thenervelab/hippius-mem/main/llms.txt) |
+| Script Drive with encryption on the client | [hippius-drive-sdk llms.txt](https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt) |
+| Sign up, pay, get an API token, or manage Drive and S3 keys in the browser | [Console getting started](https://docs.hippius.com/use/console/getting-started) |
+| Use Drive on an Android phone | [Mobile getting started](https://docs.hippius.com/use/mobile/getting-started) |
+| Run a VM, managed PostgreSQL, managed Kubernetes or GitHub Actions runners (Compute) | [Compute guide](https://docs.hippius.com/use/compute) |
+| Serve an S3 bucket through the CDN (zones on <zone>.c.hipcdn.net or your own domain; FR $0.010/GB, AU $0.060/GB, $0.002 per 10,000 requests, $1/month per custom domain) | [CDN guide](https://docs.hippius.com/use/cdn) |
+| Let team members use your compute, S3 and CDN, or work in an account you were invited to (shared accounts) | [Shared accounts guide](https://docs.hippius.com/use/console/team) |
+| Run a storage miner | [Miner guide](https://docs.hippius.com/earn/arion/running-miner) and [arion llms.txt](https://raw.githubusercontent.com/thenervelab/arion/main/llms.txt) |
+| Run a validator | [Validator guide](https://docs.hippius.com/earn/installing-validator) |
 
 ## Account, sign-in, and paying
 
-Full console guide: https://docs.hippius.com/use/console/getting-started
-Billing: https://docs.hippius.com/use/console/billing
+Full console guide: [Console getting started](https://docs.hippius.com/use/console/getting-started)
+Billing: [Billing guide](https://docs.hippius.com/use/console/billing)
 
 - One account covers the console, the desktop app, and the mobile app. Sign-in is Google, GitHub, Apple, or an existing 12-word access key. There is no email and password sign-in.
 - An agent cannot create the account or sign in. That happens in the user's browser or app.
@@ -77,14 +77,14 @@ The Kubernetes cluster key is generated in the user's browser, and database cred
 
 ## Documentation
 
-- Home: https://docs.hippius.com
-- S3 quickstart: https://docs.hippius.com/use/quickstart
-- Hub quickstart: https://docs.hippius.com/registry
-- Desktop: https://docs.hippius.com/use/desktop/getting-started
-- Mobile (Android on Google Play, iPhone not released): https://docs.hippius.com/use/mobile/getting-started
-- Console: https://docs.hippius.com/use/console/getting-started
-- Drive: https://docs.hippius.com/use/drive
-- Compute: https://docs.hippius.com/use/compute
-- Pricing: https://hippius.com/pricing
-- Status: https://status.hippius.com
-- LinkedIn: https://www.linkedin.com/company/hippius
+- [Home](https://docs.hippius.com)
+- [S3 quickstart](https://docs.hippius.com/use/quickstart)
+- [Hub quickstart](https://docs.hippius.com/registry)
+- [Desktop](https://docs.hippius.com/use/desktop/getting-started)
+- [Mobile](https://docs.hippius.com/use/mobile/getting-started): Android on Google Play, iPhone not released
+- [Console](https://docs.hippius.com/use/console/getting-started)
+- [Drive](https://docs.hippius.com/use/drive)
+- [Compute](https://docs.hippius.com/use/compute)
+- [Pricing](https://hippius.com/pricing)
+- [Status](https://status.hippius.com)
+- [LinkedIn](https://www.linkedin.com/company/hippius)
