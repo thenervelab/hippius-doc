@@ -195,6 +195,7 @@ const sidebars: SidebarsConfig = {
           collapsed: true,
           items: [
             "use/captures/overview",
+            "use/captures/browser-extension",
             "use/captures/screenshots",
             "use/captures/recording",
             "use/captures/share-links",
