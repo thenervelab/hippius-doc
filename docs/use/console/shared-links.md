@@ -14,11 +14,13 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-Hippius lets you share any file from your Drive as a public download link. Recipients don't need a Hippius account. They just open the link in any browser and the file downloads directly to their device.
+Hippius lets you share any file from your Drive as a public link. Recipients don't need a Hippius account. They open it in any browser and see the file right there, or download it. Pictures, videos, PDFs and many documents preview on the page (see [What Recipients See](#what-recipients-see)).
+
+Screenshots and recordings get a link automatically, and those links show up here too. See [Share links for captures](/use/captures/share-links).
 
 To share a file, go to **Drive**, open the menu on any file, and choose **Share via link**. Hippius creates a secure encrypted copy in your browser and generates a shareable URL.
 
-After sharing, all your active links are tracked on the **Shared Links** page, reached from the <BgStyledText>Shared Links</BgStyledText> button in the Drive header (sidebar: <BgStyledIconWithText text="Drive" icon="FolderOpen" /> → <BgStyledText>My Drives</BgStyledText>). From there you can copy a link again, revoke access, and see a history of ended shares.
+After sharing, all your active links are tracked on the **Shared Links** page, reached from the <BgStyledText>Shared Links</BgStyledText> button in the Drive header (<BgStyledText>My Drives</BgStyledText>, under <BgStyledIconWithText text="Drive" icon="FolderOpen" /> in the sidebar). From there you can copy a link again, revoke access, and see a history of ended shares.
 
 <Screenshot src="/img/console/drive/shared-links-overview.png" alt="Shared Links page overview" dark />
 
@@ -103,7 +105,7 @@ A link you create yourself gets an expiry, chosen before you create it:
 The share dialog has no silent default. It asks, because a link that quietly expired in a day was the behaviour people found surprising.
 
 :::info Links made for screenshots and recordings
-A [screenshot or screen recording](/use/captures) gets its share link automatically, the moment it is saved. That link is public and never expires by default, so it is ready to paste straight away. It is listed here with your other links, and you revoke it the same way. See [Share links for captures](/use/captures/share-links).
+A [screenshot or screen recording](/use/captures) gets its share link automatically, the moment it is saved. That link is public and keeps working until you turn it off, so it is ready to paste straight away. It is listed here with your other links, and you revoke it the same way. See [Share links for captures](/use/captures/share-links).
 :::
 
 ### Requiring a password
@@ -280,7 +282,7 @@ The desktop app also has a Shared Links page with a few extra capabilities:
 | **Revoke** | ✅ Works from any device | ✅ Works from any device |
 | **History** | ✅ Yes | ✅ Yes |
 
-**Why the desktop app can copy links after a reload:** The desktop app saves each share's key to a local SQLite database. The console holds the key only in memory, so when you close or reload the tab it's gone.
+**Why the desktop app can copy links after a reload:** The desktop app remembers each share's key on your computer. The console holds the key only in memory, so when you close or reload the tab it's gone.
 
 **Changing an expiry.** For a **folder** share, open its action menu on the Shared Links page and choose <BgStyledText>Change expiry</BgStyledText>. This works only in the session that created the share, because changing it needs the share token, which is held in memory there and nowhere else. A share created on another device shows the option greyed out, with a tooltip saying where to go.
 

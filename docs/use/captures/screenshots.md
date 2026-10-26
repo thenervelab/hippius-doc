@@ -11,33 +11,28 @@ import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import Screenshot from '@site/src/components/Screenshot';
 
-A Hippius screenshot can be your **entire screen**, **one window**, or an **area** you drag out. Whichever you pick, it is saved to your [captures drive](/use/captures#where-your-captures-go) and its link is copied for you. Screenshots are unlimited on every plan.
+Grab your whole screen, one window, or just the part you drag over. The screenshot is saved to your [captures drive](/use/captures#where-your-captures-go) and its link is copied for you, ready to paste. Screenshots are unlimited on every plan.
 
-You can take screenshots in the desktop app, in the console, or with the Hippius browser extension (see [Where you can use it](/use/captures#where-you-can-use-it)).
+You can take them in the desktop app, in the console, or with the Hippius browser extension. Not sure which? See [Pick your app](/use/captures#where-you-can-use-it).
 
 ## In the desktop app
 
 ### The quickest way: the shortcut
 
-Press <BgStyledText>⌘ Shift 2</BgStyledText> on a Mac, or <BgStyledText>Ctrl Shift 2</BgStyledText> on Windows and Linux, from any app. The pointer turns into a crosshair:
+Press <BgStyledText>Command Shift 2</BgStyledText> on a Mac, or <BgStyledText>Ctrl Shift 2</BgStyledText> on Windows and Linux, from any app. The pointer turns into a crosshair.
 
 <Ordered>
   <li>Drag over the part of the screen you want.</li>
-  <li>Let go. That's it: the screenshot is saved and its link is copied.</li>
+  <li>Let go, and that's it. The screenshot is saved and its link is on your clipboard.</li>
 </Ordered>
 
-While you drag, hold <BgStyledText>Space</BgStyledText> to move the whole area, or press <BgStyledText>Esc</BgStyledText> to cancel. You can change the shortcut, or turn it off, in [Settings, under Screenshots &amp; Recording](/use/desktop/settings#screenshots--recording).
+While you drag, hold <BgStyledText>Space</BgStyledText> to move the whole area, or press <BgStyledText>Esc</BgStyledText> to cancel. You can change the shortcut, or turn it off, in [Settings, Screenshots &amp; Recording](/use/desktop/settings#screenshots--recording).
 
 ### With the capture bar
 
-For a window or the whole screen, or when you want a timer, use the capture bar. You can open it from three places:
+For a window or the whole screen, or when you want a timer, use the capture bar. Open it from the Hippius icon in your menu bar (the system tray on Windows and Linux) with the <BgStyledText>Screenshot</BgStyledText> tile, or with the <BgStyledText>Screenshot</BgStyledText> button at the top of Drive, of Captures, or of any drive you open, shared ones too. The small arrow on the tile, and the button's menu, go straight to an area, a window or the entire screen if you already know what you want.
 
-<Unordered>
-  <li><strong>The menu bar</strong> (the notification area on Windows): click the Hippius icon, then the <BgStyledText>Screenshot</BgStyledText> tile, next to Record. The small arrow in the tile's corner lets you go straight to an area, a window or the entire screen.</li>
-  <li><strong>Drive, Captures and every drive</strong>, including drives shared with you: the <BgStyledText>Screenshot</BgStyledText> button in the header, next to Record. It opens a short menu, to take an area, a window or the entire screen straight away, or to open the capture bar.</li>
-</Unordered>
-
-The bar sits at the bottom of your screen, on the screen your pointer is on. Pick a mode, then:
+The bar sits at the bottom of the screen your pointer is on. Pick a mode, then:
 
 <Unordered>
   <li><strong>Entire screen</strong>: click the screen you want, or press <BgStyledText>Enter</BgStyledText>.</li>
@@ -45,7 +40,7 @@ The bar sits at the bottom of your screen, on the screen your pointer is on. Pic
   <li><strong>Area</strong>: drag out the area, adjust it by dragging or with the arrow keys, then double-click or press <BgStyledText>Enter</BgStyledText>.</li>
 </Unordered>
 
-<BgStyledText>Options</BgStyledText> on the bar has a **Timer** (none, 5 seconds or 10 seconds) so you can open a menu or hover over something before the picture is taken, and three choices for what happens afterwards: **Copy a share link after capture**, **Open the link in your browser** and **Show a preview in chats** (see [chat previews](/use/captures/share-links#a-preview-when-you-paste-the-link-in-a-chat)). All three are on unless you turn them off, and they are also in [Settings](/use/desktop/settings#screenshots--recording).
+Under <BgStyledText>Options</BgStyledText> you can set a timer of 5 or 10 seconds, handy when you need to open a menu or hover over something first. You can also choose what happens after the shot. By default the link is copied, opened in your browser so you can check it, and given a [preview picture for chats](/use/captures/share-links#a-preview-when-you-paste-the-link-in-a-chat). Each of these is a switch you can turn off here or in [Settings](/use/desktop/settings#screenshots--recording).
 
 :::info The first time on a Mac
 macOS asks you to allow Hippius to record your screen before the first capture. Hippius explains what to do and opens the right page in System Settings. Turn Hippius on there, then relaunch Hippius: macOS only applies the change after a restart.
@@ -53,9 +48,13 @@ macOS asks you to allow Hippius to record your screen before the first capture. 
 
 ### On Linux with Wayland
 
-On most recent Linux desktops (GNOME and KDE on Wayland), apps aren't allowed to look at the screen on their own. Hippius hands over to your desktop's own screenshot tool, where you choose an area, a window or a whole screen, and takes it from there: the screenshot is saved to your captures drive and its link is copied, just as on any other computer.
+On most recent Linux desktops (GNOME and KDE on Wayland), apps aren't allowed to look at the screen on their own. Not sure which you have? If you're on a recent Ubuntu or Fedora, you're probably on Wayland. Hippius hands over to your desktop's own screenshot tool, where you choose an area, a window or a whole screen, and takes it from there. The screenshot is saved to your captures drive and its link is copied, just as on any other computer.
 
-The keyboard shortcut works there too. Settings shows a short command to add as a custom shortcut in your desktop's own keyboard settings, and the shortcut then works even when Hippius is closed: Hippius starts and takes the screenshot as soon as you're signed in. (On the [beta channel](/use/desktop/beta-channel), Hippius can ask desktops that support it to set up the screenshot shortcut for you.)
+The keyboard shortcut works there too. Settings shows a short command to add as a custom shortcut in your desktop's own keyboard settings, and the shortcut then works even when Hippius is closed: Hippius starts and takes the screenshot as soon as you're signed in.
+
+:::tip On the beta channel
+On the [beta channel](/use/desktop/beta-channel), Hippius can ask desktops that support it to set up the screenshot shortcut for you.
+:::
 
 ## In the console
 
@@ -64,8 +63,8 @@ The console works in Chrome, Edge, Safari and Firefox on a computer. There's not
 <Ordered>
   <li>Click <BgStyledText>Screenshot</BgStyledText> at the top of the <strong>Drive</strong> page or the <strong>Captures</strong> page, next to Record. The capture bar opens at the bottom of the page.</li>
   <li>Pick <strong>Entire screen</strong>, <strong>Window</strong> or <strong>Area</strong>, and a timer under <BgStyledText>Options</BgStyledText> if you want one.</li>
-  <li>Press <BgStyledText>Capture</BgStyledText> (or <BgStyledText>Enter</BgStyledText>). Your browser asks what you want to share: choose the screen or the window.</li>
-  <li>For an area, choose the screen it is on. A still picture of that screen fills the page: drag out the area, then double-click or press <BgStyledText>Enter</BgStyledText>.</li>
+  <li>Click <BgStyledText>Capture</BgStyledText> (or press <BgStyledText>Enter</BgStyledText>). Your browser asks what you want to share. Choose the screen or the window.</li>
+  <li>For an area, choose the screen it's on. A still picture of that screen fills the page. Drag out the area, then double-click or press <BgStyledText>Enter</BgStyledText>.</li>
 </Ordered>
 
 <Screenshot src="/img/console/captures/capture-bar.png" alt="The console's capture bar with Record and Capture modes, camera and microphone switches, and the free plan note" dark raw />
@@ -82,22 +81,13 @@ Once the link is ready, the console copies it and also opens it in a new tab so 
 
 ## When it's done
 
-A small card in the corner shows how the upload is going, then says the link is ready and who can open it: *Anyone with the link can view. Never expires.* From there you can:
+A small card in the corner shows how the upload is going, then says the link is ready and copied, and who can open it. From the card you can copy the link again if something else has taken over your clipboard, jump to the screenshot in your Captures, or see what the people you send it to will see (<BgStyledText>Open</BgStyledText> in the console). Want to point at something or hide a password first? Open it in the [editor](/use/captures/edit). In the desktop app, just click the picture on the card.
 
-<Unordered>
-  <li><BgStyledText>Copy link</BgStyledText> again, if something else has taken over your clipboard.</li>
-  <li><BgStyledText>Open</BgStyledText> the link to see the page the people you send it to will see (in the console).</li>
-  <li><BgStyledText>Show in folder</BgStyledText> to jump to the screenshot in your Captures.</li>
-  <li><strong>Manage link</strong> to open it in Shared Links. See <a href="/use/captures/share-links">Share links for captures</a>.</li>
-  <li><strong>Insights</strong> (<strong>View insights</strong> in the console) to see who opened it. In the desktop app this arrives in version 0.6.16. See <a href="/use/captures/insights">Insights, comments and reactions</a>.</li>
-  <li><strong>Edit screenshot</strong>, in the desktop app, to open the screenshot in the editor straight away. Clicking the picture does the same.</li>
-</Unordered>
-
-In the desktop app, the less common actions (Manage link, Insights, Revoke link, Edit screenshot) are in the card's More menu. The card slides away on its own once the upload and link are done; point at it to keep it open.
+The less common actions, like managing the link, its [Insights](/use/captures/insights) or turning it off, are under the card's **More** menu in the desktop app, next to Show in Finder (Show in Explorer on Windows). In the console, **View insights** is right on the card. See [Share links for captures](/use/captures/share-links) for everything you can do with the link.
 
 <Screenshot src="/img/desktop/captures/capture-card.png" alt="The desktop app's card after a recording, saying Public link copied and Never expires, with its More menu open on Show in Finder, Manage link, Insights and Revoke link" raw />
 
-Want to point at something or hide a password before you send it? Open the screenshot in the [editor](/use/captures/edit).
+The card slides away on its own once the upload and link are done. Hover over it to keep it open.
 
 ## Where to go next
 

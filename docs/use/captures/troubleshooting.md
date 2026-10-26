@@ -7,11 +7,10 @@ description: What to do when a Hippius screenshot or recording can't be uploaded
 pagination_next: null
 ---
 
-import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import Screenshot from '@site/src/components/Screenshot';
 
-Most capture problems come down to one of three things: the capture couldn't reach your Drive, your browser or computer said no to something, or you've hit a Free plan limit. Hippius tries hard not to lose anything along the way, so start here.
+Most capture problems come down to one of three things: the capture couldn't reach your Drive, your browser or computer said no to something, or you've hit a Free plan limit. Find your symptom below. Hippius tries hard not to lose anything along the way, so nothing is lost while you sort it out.
 
 ## Troubleshooting
 
@@ -19,14 +18,11 @@ Most capture problems come down to one of three things: the capture couldn't rea
 
 If your storage is full, your Drive is locked, or your connection drops, the capture isn't thrown away. The card after the capture says what went wrong (for example **Your storage is full** or **Your Drive couldn't be reached**) and offers a way forward: <BgStyledText>Retry</BgStyledText>, <BgStyledText>Upgrade</BgStyledText> when you're out of space, or <BgStyledText>Unlock</BgStyledText> when your Drive needs your password.
 
-Where the capture waits in the meantime depends on where you took it:
+In the desktop app, the capture is kept on your computer. The card comes back with Retry the next time you capture, and also when you open Hippius again, even after a restart.
 
-<Unordered>
-  <li><strong>Desktop app:</strong> it's kept on your computer. The card comes back with Retry the next time you capture, and also when you open Hippius again, even after a restart.</li>
-  <li><strong>Console:</strong> it's kept in your browser, encrypted with your Drive's keys, so closing the tab or reloading doesn't lose it. The exceptions are a Drive that was locked when you captured, a private window, and a recording too large for the browser to keep; then the card asks you to keep the tab open. It waits at the top of the <strong>Captures</strong> page with <BgStyledText>Retry</BgStyledText> and <BgStyledText>Discard</BgStyledText>, and the console reminds you about it when you come back. It stays in that browser on that computer only, so retry from there.</li>
-</Unordered>
+In the console, a capture that can't upload waits in your browser, encrypted with your Drive's keys, and survives closing the tab or reloading. You'll find it at the top of the **Captures** page with <BgStyledText>Retry</BgStyledText> and <BgStyledText>Discard</BgStyledText>, and the console reminds you about it when you come back. It only lives in that browser on that computer, so retry from there.
 
-Your browser has limited room for this. If a recording is too large to keep, the card says so and asks you to keep the tab open until it's saved. Don't close that tab until the card says **Link ready**.
+The browser can't keep it in a private window, if your Drive was locked when you captured, or if the recording is too large for the room the browser has. In those cases the card says so: keep the tab open until it says **Link ready**.
 
 If you're out of space, free some up by deleting files you no longer need, or move to a bigger plan, then press Retry.
 
@@ -68,6 +64,18 @@ Recording an area in the console needs Chrome or Edge. In Safari and Firefox, re
 
 In the console, Safari and Firefox only record the camera with **Entire screen**, and Firefox doesn't offer the camera at all. Use Chrome or Edge, or the desktop app, to have your camera in window and area recordings. Also check that your browser or computer is allowed to use the camera.
 
+### My keyboard shortcut doesn't work
+
+In the desktop app, check the keys in [Settings, Screenshots &amp; Recording](/use/desktop/settings#screenshots--recording). If another app already uses them, click **Change** and pick new ones, or click **Reset** to put the original keys back. Hippius won't take keys your system uses for its own screenshots.
+
+On Linux with Wayland, apps can't listen for keys on their own, so the shortcut only works once you've added it in your desktop's keyboard settings. Settings shows you the command to paste.
+
+In the console, the stop shortcut (<BgStyledText>Option Shift X</BgStyledText> on a Mac, <BgStyledText>Alt Shift X</BgStyledText> elsewhere) only works while the console tab or its floating controls window is in front.
+
+### The recording controls showed up in my video
+
+That depends on where you recorded. In the desktop app on a Mac and Windows they're never filmed, but on Linux they always are, because Linux doesn't let an app hide a window from a recording. In the console, recording the entire screen films the floating controls window; record a window or an area instead to keep them out. See [Keep the controls out of the video](/use/captures/recording#keep-the-controls-out-of-the-video).
+
 ### Nothing gets captured on a Mac
 
 macOS needs your permission before any app can see the screen. If Hippius asks, follow its steps to allow it in System Settings, then relaunch Hippius. macOS only applies the change after a restart.
@@ -102,7 +110,7 @@ The Windows installer isn't code signed yet, so Windows may show a SmartScreen w
 
 **Can I use my own domain for capture links?**
 
-Not yet. Custom domains for share links are planned for the Plus, Max and Scale plans, the same plans that include shared drives.
+Not yet. It's something we'd like to offer.
 
 **Can I get a shorter link?**
 
@@ -112,13 +120,9 @@ Not yet. A Hippius link is long because it carries the key that decrypts your ca
 
 No. Captures are taken on a computer, in the desktop app or the console. Everything you capture there shows up in **Captures** when you open the console on your phone, and the links work on any device.
 
-**Is it only in the beta?**
-
-No. Screenshots and screen recording are part of the regular desktop app and the console.
-
 **Is there a browser extension?**
 
-Yes. The Hippius browser extension takes screenshots and records your screen from your browser's toolbar, without the browser differences described in [Record your screen](/use/captures/recording#browser-differences). See [Where you can use it](/use/captures#where-you-can-use-it).
+Yes, for Chrome and Edge. It takes screenshots and records your screen from your browser's toolbar, without the browser differences described in [Record your screen](/use/captures/recording#browser-differences). See [Pick your app](/use/captures#where-you-can-use-it).
 
 **Can people comment on my captures?**
 
@@ -126,15 +130,15 @@ Yes, when comments are on for the link. Anyone with the link can read them, and 
 
 **Who can see my captures?**
 
-Only you, until you share them. Every capture gets a link that anyone holding it can open, so share it with care, and revoke it in Shared Links when it's done its job. See [Share links for captures](/use/captures/share-links).
+Only you, until you share them. Every capture gets a link that anyone holding it can open, so share it with care, and turn it off in Shared Links when it's done its job. See [Share links for captures](/use/captures/share-links).
 
 **Can I stop links being made automatically?**
 
-In the desktop app, yes: turn off **Copy a share link after capture** in the capture bar's Options or in Settings. In the console every capture gets a link; revoke the ones you don't need in Shared Links.
+In the desktop app, yes: turn off **Copy a share link after capture** in the capture bar's Options or in Settings. In the console every capture gets a link; turn off the ones you don't need in Shared Links.
 
 **If I delete a capture, does its link stop working?**
 
-No. A link is its own encrypted copy of the file, so it keeps working after the file is deleted. Revoke the link in Shared Links. See [Deleting a capture doesn't end its link](/use/captures/share-links#deleting-a-capture-doesnt-end-its-link).
+No. A link is its own encrypted copy of the file, so it keeps working after the file is deleted. Turn the link off in Shared Links. See [Deleting a capture doesn't end its link](/use/captures/share-links#deleting-a-capture-doesnt-end-its-link).
 
 **Do captures use my storage?**
 

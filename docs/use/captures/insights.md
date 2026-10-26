@@ -15,28 +15,21 @@ You sent a recording to your team. Did anyone watch it? Did they get to the part
 
 The people you send a link to can also leave comments and react with an emoji, right under the screenshot or video. Their comments are end-to-end encrypted, so only people who have the link can read them. Not even Hippius can.
 
-Insights, comments and reactions work for any file you share by link, but they are made for [screenshots and recordings](/use/captures), so that's where they're switched on for you.
+Insights, comments and reactions work for any file you share by link. For [screenshots and recordings](/use/captures) on a paid plan, they're switched on for you.
 
-:::info Where you'll find them
-Insights, comments and reactions are live in the [console](/use/console/shared-links). In the desktop app they arrive in version **0.6.16**, which is available now on the [beta channel](/use/desktop/beta-channel) and comes to everyone with the next release.
+:::info Coming in desktop 0.6.16
+Insights, comments and reactions are live in the [console](/use/console/shared-links). In the desktop app they arrive in version 0.6.16, which you can use now on the [beta channel](/use/desktop/beta-channel) and which comes to everyone with the next release. Everything on this page about the desktop app, including link emails and the Free plan defaults, applies from that version.
 :::
+
+{/* Remove the callout above, and this comment, once desktop 0.6.16 is on the main channel. */}
 
 ## Open a link's Insights
 
-Insights open in a panel on the right, so the list you were looking at stays in view. You can open them from wherever you are:
-
-<Unordered>
-  <li><strong>Captures</strong>: in the desktop app, the <BgStyledText>Insights</BgStyledText> button next to a capture that has a link. In the console, <BgStyledText>View insights</BgStyledText> in the capture's row menu.</li>
-  <li><strong>Shared Links</strong>: from the link's row.</li>
-  <li><strong>The card after a capture</strong>: <BgStyledText>Insights</BgStyledText> in the card's More menu in the desktop app, or <BgStyledText>View insights</BgStyledText> on the card in the console.</li>
-  <li><strong>An email about your link</strong>, which takes you straight to it in the console.</li>
-</Unordered>
+Insights open in a panel on the right, so the list you were looking at stays in view. In **Captures**, click <BgStyledText>Insights</BgStyledText> next to a capture that has a link (in the console, <BgStyledText>View insights</BgStyledText> is in the capture's row menu). You can also open them from the link's row in **Shared Links**, from the card right after a capture (in its More menu in the desktop app, right on the card in the console), and from any email about your link, which takes you straight there in the console.
 
 <Screenshot src="/img/desktop/captures/insights-panel.png" alt="The Insights panel in the desktop app next to the Captures page, showing 9 views, 5 people, 71% completion and four comments" dark raw />
 
-In the desktop app, the top of the panel keeps the numbers that matter most: views, how many people watched, how much of the recording they got through on average, and how many comments and reactions there are. Below that, **Comments**, **Viewers** and **Reactions** each have a tab of their own, so a link with dozens of comments stays easy to read. Long comments fold away until you open them, and you can sort them newest or oldest first.
-
-In the console the same information is laid out in one column: the view counts, a chart of where people stopped, the viewers, the comments and the reactions.
+The panel shows the headline numbers first (views, people and how much they watched), then the comments, viewers and reactions. The desktop app gives each of those its own tab, so a link with dozens of comments stays easy to read, and the console stacks them in one column.
 
 <Screenshot src="/img/console/captures/insights.png" alt="The Insights panel in the console with total views, unique viewers, completion rate, a chart of where people stopped, and the viewer list" dark raw />
 
@@ -59,22 +52,11 @@ When comments are on, people who open your link see a comment box under the scre
 
 A comment on a recording shows the moment in the video it was written at, so you know which part someone is talking about.
 
-You stay in charge of what appears under your link. Open a comment's menu in Insights to:
-
-<Unordered>
-  <li><strong>Delete</strong> the comment. It disappears for everyone.</li>
-  <li><strong>Block</strong> the person who wrote it from commenting and reacting on this link. Their earlier comments stay until you delete them.</li>
-</Unordered>
+You stay in charge of what appears under your link. From a comment's menu in Insights you can delete it for everyone, or block its author from commenting and reacting on this link. Their earlier comments stay until you delete them.
 
 ## Choose what each link collects
 
-Every file link has three switches:
-
-<Unordered>
-  <li><strong>Insights</strong>: count views and watch time. People who open the link see a short note saying the owner can see how many people viewed it.</li>
-  <li><strong>Comments</strong>: let people comment on the link.</li>
-  <li><strong>Reactions</strong>: let people react with an emoji.</li>
-</Unordered>
+Each link has three switches: **Insights** (counting views and watch time), **Comments** and **Reactions**. When Insights is on, people who open the link see a short note saying you can see how many people viewed it.
 
 You'll find them in the share dialog when you make a link, and later in the link's Insights: behind the gear at the top of the panel in the desktop app, or under **Link settings** in the console. Changes apply straight away. Turning one off stops new views, comments or reactions from being added, and what was already collected stays in your Insights.
 
@@ -82,29 +64,21 @@ You'll find them in the share dialog when you make a link, and later in the link
 
 ### Where the switches start
 
-<Unordered>
-  <li><strong>Screenshots and recordings on a paid Drive plan</strong>: all three start on, so every capture you share comes with Insights from the first view.</li>
-  <li><strong>Other files</strong>: all three start off. Turn them on when you share the file if you want them.</li>
-  <li><strong>On the Free plan</strong>: in the desktop app (0.6.16), new links start with all three off, and turning one on shows an upgrade prompt. Links that already have one on keep it, and you can always turn it off. Insights on the Free plan still show how many views a link has had and by how many people; completion, the chart and the viewer list come with paid plans.</li>
-</Unordered>
+| | Desktop app | Console |
+|---|---|---|
+| Screenshots and recordings, paid plan | On | On |
+| Screenshots and recordings, Free plan | Off | On, for now |
+| Other files, any plan | Off | Off |
 
-In the desktop app, **Track views, comments and reactions** in [Settings, under Screenshots &amp; Recording](/use/desktop/settings#screenshots--recording) decides where the switches start for your captures.
+On the Free plan in the desktop app, turning a switch on shows an upgrade prompt. Links that already have one on keep it, and you can always turn it off. In both apps, Insights on the Free plan show how many views a link has had and by how many people; completion, the chart and the viewer list come with paid plans. The console will start matching the desktop app's Free plan defaults soon.
 
-:::note In the console today
-The console currently starts all three switches on for the screenshots and recordings you take there, on every plan, and off for other files. On the Free plan, the counts you can see are the same as in the desktop app: views and viewers, with the rest behind an upgrade. Matching the desktop app's Free plan defaults is coming soon.
-:::
+In the desktop app, **Track views, comments and reactions** in [Settings, Screenshots &amp; Recording](/use/desktop/settings#screenshots--recording) decides where the switches start for your captures.
 
 ## Emails about your links
 
-Hippius can email you when something happens to your links, so you don't have to keep checking:
+Hippius can email you when something happens to your links, so you don't have to keep checking. You can get an email when a link is opened for the first time, and another when people comment (comments are encrypted, so it says how many there are, not what they say). There's also a daily or weekly summary of views and comments across all your links, if you'd like one.
 
-<Unordered>
-  <li><strong>First views</strong>: an email when one of your links is opened for the first time.</li>
-  <li><strong>New comments</strong>: an email when people comment on your links. Comments are encrypted, so the email says how many there are, not what they say.</li>
-  <li><strong>Summary</strong>: a daily or weekly round-up of views and comments across all your links, or none.</li>
-</Unordered>
-
-Choose them in the desktop app under [Settings, Notifications](/use/desktop/settings#notifications) (version 0.6.16), or in the console under [Settings, Share link emails](/use/console/settings#share-link-emails). Each email also has a link to stop that kind of email. These emails are rolling out, so if you don't see the settings yet, they're on their way.
+Choose them in the desktop app under [Settings, Notifications](/use/desktop/settings#emails-about-your-links), or in the console under [Settings, Share link emails](/use/console/settings#share-link-emails). Each email also has a link to stop that kind of email. These emails are rolling out, so if you don't see the settings yet, they're on their way.
 
 <Screenshot src="/img/desktop/captures/settings-link-emails.png" alt="Emails about your links in the desktop app's notification settings, with First views, New comments and a weekly Summary" dark raw />
 
@@ -112,15 +86,13 @@ Choose them in the desktop app under [Settings, Notifications](/use/desktop/sett
 
 Share links are public: anyone who has the full link can open the file. Insights, comments and reactions follow the same idea, with as little as possible visible to Hippius.
 
-<Unordered>
-  <li><strong>Comments and names are end-to-end encrypted.</strong> They're encrypted with a key that comes from the link itself, the part after the <code>#</code> that browsers never send to a server. Only people with the link can read them. Hippius stores the encrypted text and can't read it, which is also why comment emails only give a count.</li>
-  <li><strong>Reading comments on a new device.</strong> To show you the comments, Hippius needs the link's key on the device you're using. The desktop app recovers it from your account when it can, and tells you if it can't. In the console, if the key isn't in your browser yet, Insights asks you to unlock with your password first, the same <a href="/use/console/unlock-password">unlock password</a> that opens your Drive.</li>
-  <li><strong>Password-protected links</strong> keep their comments on the link's own page. Open the link with its password to read them.</li>
-  <li><strong>Views are anonymous.</strong> A view is counted with a random ID kept in the viewer's browser. There's no account and no IP address attached to it, and only numbers are kept, never what was on screen.</li>
-  <li><strong>Reactions and view counts are not encrypted.</strong> Hippius can see which emoji were chosen and how many times a link was viewed, because it has to count them. It still can't see the file.</li>
-</Unordered>
+**Who can read comments.** Comments, and the names people comment under, are encrypted with the link's key, the part after the `#` that browsers never send to a server. Anyone with the link can read them, and Hippius can't. That's also why comment emails only tell you how many there are.
 
-If a link reaches someone it shouldn't, revoke it in Shared Links. From then on nobody can open the link, its comments or its reactions. See [Share links for captures](/use/captures/share-links#turn-a-link-off).
+**Reading them on a new device.** Hippius needs that key again before it can show you the comments. In the console, Insights asks for your [unlock password](/use/console/unlock-password), the same one that opens your Drive. The desktop app finds the key in your account by itself. If it can't, a comment shows as *This comment couldn't be read*, and opening the full link in your browser still shows every comment on the link's own page. Comments on a link with a password are only shown on that page, after the password.
+
+**What isn't encrypted.** Reactions and view counts. Hippius has to count them, so it can see which emoji were picked and how many views a link had, but never the file. Views are anonymous: a random ID kept in the viewer's browser, with no account or IP address, and only numbers are kept, never what was on screen.
+
+If a link reaches someone it shouldn't, turn it off in Shared Links. From then on nobody can open the link, its comments or its reactions. See [Share links for captures](/use/captures/share-links#turn-a-link-off).
 
 ## Where to go next
 

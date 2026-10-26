@@ -58,7 +58,7 @@ Sync & Storage
       <li>A three-dot (⋮) menu of folder actions</li>
     </Unordered>
 
-    <p>If you haven't added anything yet, the section reads "No Folder Syncing Yet — Add a folder to get started with encrypted sync."</p>
+    <p>If you haven't added anything yet, the section reads "No Folder Syncing Yet", with a line underneath: "Add a folder to get started with encrypted sync."</p>
 
     #### Per-Folder Actions
 
@@ -104,20 +104,22 @@ Sync & Storage
   Screenshots &amp; Recording
   </>
   <>
-    <p>Everything about <a href="/use/captures">screenshots and screen recording</a> lives in this one section: your keyboard shortcuts, where captures are kept, and what happens after you take one. It appears on computers where Hippius can take captures.</p>
+    <p>Set your capture shortcuts, choose where captures are saved, and decide what happens after each one. This section appears on computers where Hippius can take <a href="/use/captures">screenshots and recordings</a>.</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />, then open <strong>Screenshots &amp; Recording</strong>.</li>
     </Ordered>
 
+    <p>If this computer can take screenshots but not recordings, a note at the bottom of the section says why. On Linux with Wayland, a note explains that screenshots go through your desktop's own screenshot tool.</p>
+
     ### Shortcuts
 
     <p>Two keyboard shortcuts work from any app while Hippius is running, even with its window closed:</p>
     <Unordered>
-      <li><strong>Screenshot shortcut</strong>: <BgStyledText>⌘ Shift 2</BgStyledText> on a Mac, <BgStyledText>Ctrl Shift 2</BgStyledText> on Windows and Linux. Drag over an area and let go: the screenshot is saved and its link is copied, in one step.</li>
-      <li><strong>Recording shortcut</strong>: <BgStyledText>⌥ ⇧ ⌘ 2</BgStyledText> on a Mac, <BgStyledText>Ctrl Alt Shift 2</BgStyledText> on Windows and Linux. It opens the capture bar ready to record. Shown on computers where Hippius can record.</li>
+      <li><strong>Recording shortcut</strong>: <BgStyledText>Option Shift Command 2</BgStyledText> on a Mac, <BgStyledText>Ctrl Alt Shift 2</BgStyledText> on Windows and Linux. It opens the capture bar ready to record. Shown on computers where Hippius can record.</li>
+      <li><strong>Screenshot shortcut</strong>: <BgStyledText>Command Shift 2</BgStyledText> on a Mac, <BgStyledText>Ctrl Shift 2</BgStyledText> on Windows and Linux. Drag over an area and let go, and the screenshot is saved and its link copied, in one step.</li>
     </Unordered>
-    <p>Press either one during a recording to stop it. Click <BgStyledText>Change</BgStyledText> on a card and press the new keys (<BgStyledText>Esc</BgStyledText> cancels), or use <BgStyledText>Turn off</BgStyledText> and <BgStyledText>Turn on</BgStyledText>. Hippius won't let both shortcuts use the same keys, and it refuses keys your system already uses for its own screenshots, such as <BgStyledText>⌘ Shift 3</BgStyledText> to <BgStyledText>⌘ Shift 6</BgStyledText> on a Mac or the Print Screen keys.</p>
+    <p>Press either one during a recording to stop it. To pick other keys, click <BgStyledText>Change</BgStyledText> on a card and press the new keys (<BgStyledText>Esc</BgStyledText> cancels). <BgStyledText>Reset</BgStyledText> puts the original keys back, and <BgStyledText>Turn off</BgStyledText> and <BgStyledText>Turn on</BgStyledText> do what they say. Hippius won't let both shortcuts use the same keys, and it refuses keys your system already uses for its own screenshots, such as <BgStyledText>Command Shift 3</BgStyledText> to <BgStyledText>Command Shift 6</BgStyledText> on a Mac or the Print Screen keys.</p>
 
     :::note On Linux with Wayland
     Apps can't grab keys there on their own, so each card shows a short command to add as a custom shortcut in your desktop's keyboard settings. The shortcut then works even when Hippius is closed: Hippius starts and opens the capture as soon as you're signed in. On the beta channel, Hippius can also ask desktops that support it to set up the screenshot shortcut for you, and your desktop may ask you to confirm.
@@ -125,34 +127,36 @@ Sync & Storage
 
     ### Capture folder
 
-    <p>Shows where your screenshots and recordings are kept on this computer. Your first capture asks once and suggests a folder called <code>hippius-captures</code> in Documents; you can choose any other folder, with any name, including a folder inside one of your drives. That folder is backed up as your captures drive, the same drive the console uses. Click <BgStyledText>Show in Finder</BgStyledText> (<BgStyledText>Show in folder</BgStyledText> on Windows and Linux) to open it, or <BgStyledText>Change</BgStyledText> to save new captures somewhere else; the ones you already took stay where they are. If you haven't taken a capture yet, <BgStyledText>Set up</BgStyledText> lets you choose now. See <a href="/use/captures#choose-where-captures-are-saved">Choose where captures are saved</a>.</p>
+    <p>Shows where your screenshots and recordings are kept on this computer. That folder is backed up as your captures drive, the same drive the console uses. Click <BgStyledText>Show in Finder</BgStyledText> (<BgStyledText>Show in folder</BgStyledText> on Windows and Linux) to open it.</p>
+
+    <p>Click <BgStyledText>Change</BgStyledText> to save new captures somewhere else, any folder with any name, including a folder inside one of your drives. The captures you already took stay where they are.</p>
+
+    <p>Your first capture asks where to keep captures and suggests a folder called <code>hippius-captures</code> in Documents. If you haven't taken one yet, <BgStyledText>Set up</BgStyledText> lets you choose now. See <a href="/use/captures#choose-where-captures-are-saved">Choose where captures are saved</a>.</p>
 
     <Screenshot src="/img/desktop/captures/settings-captures.png" alt="The Screenshots and Recording settings with both shortcuts, the capture folder in Documents › hippius-captures, and the after-capture switches" dark raw />
 
     ### After a capture
 
+    <p>All of these start on except <strong>Record system audio</strong>, and most are also in the capture bar's <strong>Options</strong> menu. Changing them in either place changes both.</p>
     <Unordered>
-      <li><strong>Copy a share link after capture</strong>: on by default. Each screenshot and recording gets a public link that is copied once it is uploaded. Turn it off and captures are only saved to your drive; you can share them later. See <a href="/use/captures/share-links">Share links for captures</a>.</li>
-      <li><strong>Open the link in your browser</strong>: on by default, while links are being made. Opens each capture's link as soon as it is ready, so you can check it.</li>
-      <li><strong>Show a preview in chats</strong>: on by default. When you paste a capture's link into a chat, it shows the screenshot or the recording's first frame. The preview picture and file name aren't encrypted. See <a href="/use/captures/share-links#a-preview-when-you-paste-the-link-in-a-chat">chat previews</a>.</li>
-      <li><strong>Track views, comments and reactions</strong> (version 0.6.16): links to your screenshots and recordings count views and watch time and let viewers comment and react. You can still turn any of it off for a single link. On the Free plan it's marked as a paid feature. See <a href="/use/captures/insights">Insights, comments and reactions</a>.</li>
+      <li><strong>Copy a share link after capture</strong>: each screenshot and recording gets a public link that is copied once it's uploaded. Turn it off and captures are only saved to your drive, so you can share them later. See <a href="/use/captures/share-links">Share links for captures</a>.</li>
+      <li><strong>Open the link in your browser</strong>, while links are being made: opens each capture's link as soon as it's ready, so you can check it.</li>
+      <li><strong>Show a preview in chats</strong>: when you paste a capture's link into a chat, it shows the screenshot or the recording's first frame. The preview picture and file name aren't encrypted. See <a href="/use/captures/share-links#a-preview-when-you-paste-the-link-in-a-chat">chat previews</a>.</li>
+      <li><strong>Track views, comments and reactions</strong>, coming in desktop 0.6.16: links to your screenshots and recordings count views and watch time and let viewers comment and react. You can still turn any of it off for a single link. On the Free plan it's marked as a paid feature and starts off. See <a href="/use/captures/insights">Insights, comments and reactions</a>.</li>
       <li><strong>Recording countdown</strong>: none, 3 seconds or 5 seconds between pressing Record and the recording starting.</li>
-      <li><strong>Record system audio</strong>: adds what your computer plays to recordings, where your computer supports it. Off by default; with speakers your voice may be recorded twice, and headphones avoid that.</li>
+      <li><strong>Record system audio</strong>: adds what your computer plays to recordings, where your computer supports it. With speakers your voice may be recorded twice, and headphones avoid that.</li>
     </Unordered>
-    <p>Most of these are also in the capture bar's <strong>Options</strong> menu. Changing them in either place changes both.</p>
 
     ### When saving an edited image
 
     <p>What <strong>Save</strong> does in the <a href="/use/captures/edit">screenshot editor</a>: <strong>Ask</strong> each time, always <strong>Save a copy</strong> next to the original, or always <strong>Replace the original</strong>.</p>
-
-    <p>If this computer can take screenshots but not recordings, a note at the bottom says why. On Linux with Wayland, a note explains that screenshots go through your desktop's own screenshot tool.</p>
 
 </>
 </DocAccordionItem>
 
 {/*
   ───────────────────────────────────────────────────────────────────────
-  WALLETS SECTION — hidden while the wallet feature is gated off in the
+  WALLETS SECTION: hidden while the wallet feature is gated off in the
   desktop app (WALLET_FEATURE_ENABLED = false in app/lib/featureFlags.ts).
   Preserved for future release: to restore, delete this comment wrapper
   (this opening line and the closing line at the bottom of the section),
@@ -166,7 +170,7 @@ Sync & Storage
   Wallets
   </>
   <>
-    <p>The <strong>Wallets</strong> section manages the local wallets stored on this device — "Switch between them, rename, export a backup, or remove ones you no longer use."</p>
+    <p>The <strong>Wallets</strong> section manages the local wallets stored on this device: "Switch between them, rename, export a backup, or remove ones you no longer use."</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />, then open <strong>Wallets</strong>.</li>
@@ -195,7 +199,7 @@ Sync & Storage
   Security
   </>
   <>
-    <p>The <strong>Security</strong> section lets you back up your mnemonic seed and set or change your unlock password — "Backup your mnemonic seed and set an unlock password to access your encrypted files on other devices."</p>
+    <p>The <strong>Security</strong> section lets you back up your mnemonic seed and set or change your unlock password: "Backup your mnemonic seed and set an unlock password to access your encrypted files on other devices."</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />, then open <strong>Security</strong>.</li>
@@ -253,7 +257,7 @@ Sync & Storage
    Notifications
   </>
   <>
-    <p>The <strong>Notification</strong> section controls which updates you receive — "Choose which updates you'd like to receive in your inbox. You're in control—check only the notifications that matter to you."</p>
+    <p>Choose which updates Hippius sends you, in the app and by email.</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />, then open <strong>Notifications</strong>.</li>
@@ -281,7 +285,9 @@ Sync & Storage
 
     <Screenshot src="/img/desktop/settings/email-preference.png" alt="Email notification preferences" dark />
 
-    <p><strong>Emails about your links.</strong> From version 0.6.16, this card lets Hippius email you about your share links: <strong>First views</strong> when a link is opened for the first time, <strong>New comments</strong> when people comment (the email says how many, since comments are encrypted), and a <strong>Summary</strong> of views and comments, daily, weekly or off. These emails are rolling out, so the card may not appear yet. See <a href="/use/captures/insights#emails-about-your-links">Emails about your links</a>.</p>
+    ### Emails about your links
+
+    <p>Arriving with <a href="/use/captures/insights">Insights</a>, this card lets Hippius email you about your share links: <strong>First views</strong> when a link is opened for the first time, <strong>New comments</strong> when people comment (the email says how many, since comments are encrypted), and a <strong>Summary</strong> of views and comments, daily, weekly or off. These emails are rolling out, so the card may not appear yet. More in <a href="/use/captures/insights#emails-about-your-links">Emails about your links</a>.</p>
 
     <Screenshot src="/img/desktop/captures/settings-link-emails.png" alt="Emails about your links with First views, New comments and a weekly Summary" dark raw />
 
@@ -295,7 +301,7 @@ Sync & Storage
   Appearance
   </>
   <>
-    <p>The <strong>Appearance</strong> section controls how Hippius looks on this device — "Personalize how Hippius looks on this device."</p>
+    <p>The <strong>Appearance</strong> section controls how Hippius looks on this device: "Personalize how Hippius looks on this device."</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />, then open <strong>Appearance</strong>.</li>
@@ -306,7 +312,7 @@ Sync & Storage
     <p>Under <strong>Theme</strong>, pick the look you want: <strong>Light</strong>, <strong>Dark</strong>, or <strong>System</strong> to follow your operating system. The change applies right away.</p>
 
     :::note
-    Your theme choice is stored locally, so it only affects this device — your other devices and the <a href="https://console.hippius.com">Hippius Console</a> keep their own setting.
+    Your theme choice is stored locally, so it only affects this device. Your other devices and the <a href="https://console.hippius.com">Hippius Console</a> keep their own setting.
     :::
 
     <Screenshot src="/img/desktop/settings/appearance-settings.png" alt="Appearance screen" dark />
@@ -322,7 +328,7 @@ Sync & Storage
   API Token
   </>
   <>
-    <p>The <strong>API Token</strong> section gives you the token that authenticates API requests to the Hippius platform — "Manage your API token for secure file operations and delegated access."</p>
+    <p>The <strong>API Token</strong> section gives you the token that authenticates API requests to the Hippius platform: "Manage your API token for secure file operations and delegated access."</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />, then open <strong>API Token</strong>.</li>
@@ -348,7 +354,7 @@ Sync & Storage
   Customize RPC
   </>
   <>
-    <p>The <strong>RPC Setting</strong> section controls which blockchain endpoint the app connects to — "Customize your connection by updating the blockchain RPC endpoint." The default is <code>wss://rpc.hippius.network</code>. A custom endpoint can improve performance in some regions or point at your own node — only use a trusted provider.</p>
+    <p>The <strong>RPC Setting</strong> section controls which blockchain endpoint the app connects to: "Customize your connection by updating the blockchain RPC endpoint." The default is <code>wss://rpc.hippius.network</code>. A custom endpoint can improve performance in some regions or point at your own node. Only use a provider you trust.</p>
 
     <Ordered>
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />, then open <strong>Customize RPC</strong>.</li>
