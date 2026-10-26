@@ -57,7 +57,7 @@ The watermark is drawn into the picture on your computer, before the capture is 
 
 On a paid Drive plan, links to your screenshots and recordings come with full [Insights](/use/captures/insights): views, viewers, how much of a recording each person watched and where they stopped, plus comments and reactions, all switched on for you.
 
-On the Free plan, Insights show how many times a link was opened and by how many people; completion, the chart of where people stopped and the viewer list come with paid plans. In the desktop app, new links on the Free plan start with Insights, comments and reactions off, and turning them on shows an upgrade prompt. See [Where the switches start](/use/captures/insights#where-the-switches-start).
+On the Free plan, Insights show how many times a link was opened and by how many people; completion, the chart of where people stopped and the viewer list come with paid plans. New links on the Free plan start with Insights, comments and reactions off, in the desktop app and the console, and turning one on shows an upgrade prompt. Links that already had one on keep it until you turn it off. See [Where the switches start](/use/captures/insights#where-the-switches-start).
 
 ## Storage
 
