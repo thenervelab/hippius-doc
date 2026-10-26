@@ -72,6 +72,26 @@ In the console, Safari and Firefox only record the camera with **Entire screen**
 
 macOS needs your permission before any app can see the screen. If Hippius asks, follow its steps to allow it in System Settings, then relaunch Hippius. macOS only applies the change after a restart.
 
+Screen recording also needs macOS 13 or later, and recording your microphone needs macOS 15 or later. On an older Mac, Record is shown greyed out with the reason.
+
+### I can't find my captures folder
+
+In the desktop app, open [Settings, Screenshots &amp; Recording](/use/desktop/settings#screenshots--recording): **Capture folder** says where your captures are saved, and **Show in Finder** (**Show in folder** on Windows and Linux) opens it. Unless you chose another place, it's the `hippius-captures` folder in your Documents folder. If you picked a folder inside another drive, the Captures page tells you where it is and opens it.
+
+If Hippius says the captures folder was moved or deleted, it asks you to choose it again rather than making a new one, so nothing already in your drive is removed.
+
+### The link shows no picture in a chat
+
+A chat preview needs **Show a preview in chats** to be on when the link is made, and a link with a password never gets one. Some chat apps also keep the first preview they saw for a link, so a link pasted before the preview was ready may stay plain in that chat. See [chat previews](/use/captures/share-links#a-preview-when-you-paste-the-link-in-a-chat).
+
+### Insights ask me to unlock before showing comments
+
+Comments are end-to-end encrypted with the link's key. In the console, if that key isn't in your browser yet, enter your [unlock password](/use/console/unlock-password) and the comments appear. For a link with a password, comments can only be read on the link's own page. See [Insights, comments and reactions](/use/captures/insights#privacy).
+
+### I don't see Insights in the desktop app
+
+Insights, comments and reactions arrive in the desktop app in version 0.6.16. Until it reaches you, switch to the [beta channel](/use/desktop/beta-channel), or open the link's Insights in the console.
+
 ### There's no Record on Windows
 
 Screen recording on Windows arrived in Hippius 0.6.9. If you don't see Record, update the app: it usually updates itself, or you can download the latest version from the [Hippius download page](https://hippius.com/desktop-app).
@@ -96,9 +116,13 @@ No. Captures are taken on a computer, in the desktop app or the console. Everyth
 
 No. Screenshots and screen recording are part of the regular desktop app and the console.
 
-**Will there be a browser extension?**
+**Is there a browser extension?**
 
-Yes, one is coming soon. It removes the browser differences described in [Record your screen](/use/captures/recording#browser-differences).
+Yes. The Hippius browser extension takes screenshots and records your screen from your browser's toolbar, without the browser differences described in [Record your screen](/use/captures/recording#browser-differences). See [Where you can use it](/use/captures#where-you-can-use-it).
+
+**Can people comment on my captures?**
+
+Yes, when comments are on for the link. Anyone with the link can read them, and posting needs a Hippius account. Comments are end-to-end encrypted. You can delete a comment or block its author from that link in Insights. See [Insights, comments and reactions](/use/captures/insights).
 
 **Who can see my captures?**
 
@@ -118,7 +142,7 @@ Yes, like any other file. See [Free and paid plans](/use/captures/plans#storage)
 
 **Can a script or an AI agent take captures?**
 
-There is no capture API: screenshots and recordings are taken by a person in the desktop app or the console. A script can do the next best thing with the [Hippius Drive SDK](https://github.com/thenervelab/hippius-drive-sdk): upload a picture or a video it already has, and create a share link for it, for example with `hippius-drive share put`. Those files carry no watermark. Videos uploaded into your Hippius Captures drive count toward the 25 free recordings like any other; uploads anywhere else don't.
+There is no capture API: screenshots and recordings are taken by a person in the desktop app or the console. A script can do the next best thing with the [Hippius Drive SDK](https://github.com/thenervelab/hippius-drive-sdk): upload a picture or a video it already has, and create a share link for it, for example with `hippius-drive share put`. Those files carry no watermark. Videos uploaded into your captures drive count toward the 25 free recordings like any other; uploads anywhere else don't.
 
 ## Still stuck?
 
