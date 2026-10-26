@@ -100,6 +100,6 @@ Want to point at something or hide a password before you send it? Open the scree
 <Unordered>
   <li><a href="/use/captures/recording">Record your screen</a></li>
   <li><a href="/use/captures/edit">Edit a screenshot</a></li>
-  <li><a href="/use/captures/browser-extension">Take screenshots with the browser extension</a></li>
+  <li><a href="/use/browser-extension/screenshots">Take screenshots with the browser extension</a></li>
   <li><a href="/use/captures/troubleshooting">Troubleshooting &amp; FAQ</a></li>
 </Unordered>
