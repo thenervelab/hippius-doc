@@ -35,9 +35,9 @@ Previews are on for captures unless you turn off **Show a preview in chats**, in
 
 ## Views, comments and reactions
 
-A capture link can also tell you who watched, and let people reply. You see how many people opened it and, on a paid plan, how far into a recording they got. Viewers can comment and react right under the video or screenshot. Comments are end-to-end encrypted with the link's key, while reactions and view counts aren't.
+A capture link can also tell you who watched, and let people reply. You see how many people opened it and, on a paid plan, how far into a recording they got. Viewers can comment and react right on the link's page, beside the video or screenshot. Comments are end-to-end encrypted with the link's key, while reactions and view counts aren't.
 
-Each link has its own Insights, Comments and Reactions switches, in the share dialog and in the link's Insights. On paid Drive plans they start on for screenshots and recordings.
+Each link has its own Insights, Comments and Reactions switches, in the share dialog and in the link's Insights. On paid Drive plans they start on for screenshots and recordings; on the Free plan they start off.
 
 <Screenshot src="/img/desktop/captures/share-dialog.png" alt="The Share via link dialog in the desktop app with Show a preview in chats, Insights, Comments and Reactions switches" dark raw />
 

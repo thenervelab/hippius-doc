@@ -47,7 +47,7 @@ For a file over 300 MB, copy or make its link in the console instead.
 
 ## See who watched
 
-On a paid plan, every link the extension makes comes with insights, comments and reactions switched on. You can see how many people opened the link and how much of a recording they watched, and the people you send it to can comment and react right under the video or screenshot.
+On a paid plan, every link the extension makes comes with insights, comments and reactions switched on. You can see how many people opened the link and how much of a recording they watched, and the people you send it to can comment and react right on the link's page, beside the video or screenshot.
 
 To look, find the capture in the popup. A capture with a link shows its views, reactions and comments at the end of its row, and the views turn blue when there's something new. Choose <BgStyledText>View insights</BgStyledText> from the row's three-dot menu to see who watched, for how long, and what they said. It works for any capture with a live link, wherever the link was made, and the comments usually open straight away, without asking for your password.
 
