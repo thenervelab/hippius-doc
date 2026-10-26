@@ -53,7 +53,7 @@
    sidebar, code blocks). Here we mirror the custom token scale so the
    Tailwind utilities backed by these vars (text-grey-10, bg-grey-100, …)
    invert automatically across the custom components, and patch a few
-   hardcoded light colors. This is a first pass — the custom components
+   hardcoded light colors. This is a first pass: the custom components
    (hero, cards, FAQ, etc.) still need a visual review for edge cases. */
 [data-theme="dark"] {
   /* Grey scale mirrored: low tokens (used as text) become light, high
@@ -397,15 +397,13 @@
   animation: slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1);
 }
 .AccordionContent[data-state="closed"] {
-  animation: slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1);
+  /* The panel is always rendered (forceMount) so the anchors inside it
+     exist, and a closed one is not shown. */
+  display: none;
 }
-@keyframes slideUp {
-  from {
-    height: var(--radix-accordion-content-height);
-  }
-  to {
-    height: 0;
-  }
+/* Land below the sticky navbar when a link scrolls to a section. */
+.doc-accordion-item {
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 0.5rem);
 }
 /* Hide breadcrumbs */
 article .theme-doc-breadcrumbs {

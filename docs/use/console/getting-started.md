@@ -57,7 +57,7 @@ You can switch between Normal and Pro at any time from [Settings](/use/console/s
 The **sidebar on the left** is how you move between sections. It's organised into groups:
 
 <Unordered>
-  <li><strong>Drive</strong>: My Drives (your encrypted files) and Shared Drives.</li>
+  <li><strong>Drive</strong>: My Drives (your encrypted files), Shared Drives, and Captures, where your <a href="/use/captures">screenshots and recordings</a> live.</li>
   <li><strong>S3</strong>: S3 Buckets and S3 Migrations.</li>
   <li><strong>Confidential Computing</strong>: Virtual Machines, marked coming soon.</li>
   <li><strong>Hub</strong>: your container images and AI models.</li>

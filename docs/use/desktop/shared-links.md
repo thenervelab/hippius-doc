@@ -20,6 +20,8 @@ To share a file, right click it in the desktop app and choose **Share via link**
 
 After sharing, all your active links are tracked on the **Shared Links** page. Open it with the <BgStyledText>Shared Links</BgStyledText> button in the top right of the <BgStyledIconWithText text="Drive" icon="Category" /> view header. From there you can copy a link again, revoke access, reshare a file, and see a history of ended shares.
 
+Screenshots and recordings get a link automatically, and those links show up here too. See [Share links for captures](/use/captures/share-links).
+
 :::tip Two ways to share
 You can share from the **Drive view** inside the app, or, on macOS, right from **Finder**. Just right click any file or folder and choose **Share with Hippius**. See [Share from Finder](/use/desktop/share-from-finder).
 :::
@@ -100,7 +102,7 @@ A link you create yourself gets an expiry, chosen before you create it:
 | **Until I revoke it** | Never on its own. It stays live until you revoke it. |
 
 :::info Links made for screenshots and recordings
-A [screenshot or screen recording](/use/captures) gets its share link automatically, the moment it is saved. That link is public and never expires by default, so it is ready to paste straight away. It is listed in Shared Links with your other links, and you revoke it the same way. You can stop these links being made by turning off **Copy a share link after capture** in [Settings](/use/desktop/settings#screenshots--recording). See [Share links for captures](/use/captures/share-links).
+A [screenshot or screen recording](/use/captures) gets its share link automatically, the moment it is saved. That link is public and keeps working until you turn it off, so it is ready to paste straight away. It is listed in Shared Links with your other links, and you revoke it the same way. You can stop these links being made by turning off **Copy a share link after capture** in [Settings](/use/desktop/settings#screenshots--recording). See [Share links for captures](/use/captures/share-links).
 :::
 
 ### Requiring a password
@@ -253,11 +255,11 @@ If the link has expired or been revoked, recipients see: _"This link has expired
 
 ## Views, Comments and Reactions
 
-From version 0.6.16 (on the [beta channel](/use/desktop/beta-channel) now), the **Share via link** dialog has **Insights**, **Comments** and **Reactions** switches for each file you share, next to **Show a preview in chats** for pictures and videos. On a paid Drive plan they start on for screenshots and recordings and off for other files; on the Free plan they start off and turning one on shows an upgrade prompt.
+You can see who opened a link, and let people comment and react under it. The **Share via link** dialog has **Insights**, **Comments** and **Reactions** switches for each file you share, next to **Show a preview in chats** for pictures and videos. On a paid Drive plan they start on for screenshots and recordings and off for other files; on the Free plan they start off and turning one on shows an upgrade prompt. These arrive in desktop 0.6.16, on the [beta channel](/use/desktop/beta-channel) now.
 
 <Screenshot src="/img/desktop/captures/share-dialog.png" alt="The desktop Share via link dialog with Show a preview in chats, Insights, Comments and Reactions switches" dark raw />
 
-Open a link's **Insights** from its row in Shared Links, or from Captures. They open in a panel on the right with the views, how much people watched, and **Comments**, **Viewers** and **Reactions** tabs; the gear at the top changes the link's switches. See [Insights, comments and reactions](/use/captures/insights).
+Open a link's **Insights** from its row in Shared Links, or from Captures, to see who watched and read what they said. See [Insights, comments and reactions](/use/captures/insights).
 
 ## Storage Usage
 
