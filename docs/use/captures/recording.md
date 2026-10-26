@@ -106,5 +106,6 @@ On the Free plan, a recording stops on its own at **5 minutes**. In the last min
 <Unordered>
   <li><a href="/use/captures/share-links">Share links for captures</a></li>
   <li><a href="/use/captures/plans">Free and paid plans</a></li>
+  <li><a href="/use/captures/browser-extension">Record with the browser extension</a></li>
   <li><a href="/use/captures/troubleshooting">Troubleshooting &amp; FAQ</a></li>
 </Unordered>
