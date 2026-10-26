@@ -144,6 +144,25 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "category",
+          label: "Browser Extension",
+          collapsed: true,
+          items: [
+            "use/browser-extension/overview",
+            "use/browser-extension/get-started",
+            "use/browser-extension/account",
+            "use/browser-extension/screenshots",
+            "use/browser-extension/recording",
+            "use/browser-extension/sharing",
+            "use/browser-extension/captures",
+            "use/browser-extension/shortcuts",
+            "use/browser-extension/plans",
+            "use/browser-extension/privacy",
+            "use/browser-extension/troubleshooting",
+            "use/browser-extension/faq",
+          ],
+        },
+        {
+          type: "category",
           label: "Screenshots & Recording",
           collapsed: true,
           items: [

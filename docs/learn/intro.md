@@ -27,6 +27,7 @@ Hippius is a distributed cloud. It gives you **Drive**, encrypted file storage f
 | **Web console** | Everything: Drive, S3 keys and buckets, migrations, CDN zones, Hub, Confidential Compute, your balance and plans, team members, referrals, staking and the token bridge, support tickets. | [Console guide](/use/console/getting-started) |
 | **Desktop app** | Drive on Mac, Windows and Linux: sync folders, share from Finder, notifications. | [Desktop guide](/use/desktop/getting-started) |
 | **Mobile app** | Drive on your phone: photo and video backup, browse, preview and share. Android today, iPhone coming soon. | [Mobile guide](/use/mobile/getting-started) |
+| **Browser extension** | Screenshots and screen recording from the toolbar of Chrome or Edge, saved encrypted to your Drive with a share link copied for you. | [Extension guide](/use/browser-extension) |
 | **Command line and code** | Any S3 client for S3 Compatible, `hippius-hub` for the Hub, the Management API for your account, the HCFS API for Drive. | [API reference](/use/api) |
 
 ## Signing in and paying
