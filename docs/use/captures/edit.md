@@ -11,18 +11,18 @@ import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import Screenshot from '@site/src/components/Screenshot';
 
-A screenshot often needs a little help: an arrow to the button that matters, a box around the error, or a blur over a name you shouldn't be sending. The Hippius editor does that without leaving the app or the console, and the edited picture stays encrypted like everything else.
+A screenshot often needs a little help: an arrow to the button that matters, a box around the error, or a blur over a name you shouldn't be sending. The Hippius editor does that without leaving Hippius, and the edited picture stays encrypted like everything else.
 
-The editor opens PNG, JPEG and WebP pictures, so it works on any picture in your drives, not just screenshots. In the desktop app it opens PNG and JPEG.
+You can edit any PNG or JPEG in your drives, not just screenshots. The console opens WebP pictures too.
 
 ## Open the editor
 
 <Unordered>
   <li><strong>In the console</strong>: open the row menu of a picture in Captures or any drive and choose <BgStyledText>Edit</BgStyledText>. You may be asked for your unlock password first, because the picture is decrypted on your computer to be drawn on.</li>
-  <li><strong>In the desktop app</strong>: choose <BgStyledText>Edit image</BgStyledText> from a picture's menu in Drive or Captures, press <BgStyledText>Edit</BgStyledText> in the viewer or on the card right after a screenshot, or click the arrow on the menu bar's Screenshot tile and choose <strong>Annotate an image</strong> to open any picture on your computer.</li>
+  <li><strong>In the desktop app</strong>: choose <BgStyledText>Edit image</BgStyledText> from a picture's menu in Drive or Captures, press <BgStyledText>Edit</BgStyledText> in the viewer, click the picture on the card right after a screenshot, or click the arrow on the Screenshot tile in your menu bar (the system tray on Windows and Linux) and choose <strong>Annotate an image</strong> to open any picture on your computer.</li>
 </Unordered>
 
-You can only edit pictures in drives you're allowed to change. In a shared drive where you are a Viewer, Edit isn't offered.
+In the desktop app you can edit pictures in your own drives. In the console you can also edit pictures in a drive shared with you, as long as you're an Editor or a Manager there; Viewers aren't offered Edit.
 
 ## The tools
 
@@ -62,7 +62,7 @@ A share link is its own copy of the file, made when the link was created. If you
 
 That's why **Save as a copy** is the default: the copy gets its own link when you share it, and nothing you've already sent changes under anyone's feet.
 
-In the desktop app you can skip the question. In [Settings, under Screenshots &amp; Recording](/use/desktop/settings#screenshots--recording), **When saving an edited image** can be set to **Ask**, **Save a copy** or **Replace the original**. Picking **Remember my choice** in the save dialog sets the same thing.
+In the desktop app you can skip the question. In [Settings, Screenshots &amp; Recording](/use/desktop/settings#screenshots--recording), **When saving an edited image** can be set to **Ask**, **Save a copy** or **Replace the original**. Picking **Remember my choice** in the save dialog sets the same thing.
 
 A picture you open with **Annotate an image** from outside your drives is saved as a new screenshot with its own link, and the file on your computer is left as it was.
 

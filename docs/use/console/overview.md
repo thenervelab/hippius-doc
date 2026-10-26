@@ -18,6 +18,8 @@ The **Overview** is your console home page. Every time you sign in, this is wher
 
 You can switch between **Normal** and **Pro** view at any time from [Settings](/use/console/settings).
 
+Want to show someone what's on your screen? Take a screenshot or record it from **Captures**, under Drive in the sidebar. See [Screenshots and Recording](/use/captures).
+
 <Screenshot src="/img/console/overview/overview.png" alt="Overview page" dark />
 
 ## Normal View
@@ -80,6 +82,7 @@ A banner can be dismissed once you have read it. It comes back if the situation 
 
 <Unordered>
   <li><a href="/use/console/drive">Drive</a>: upload and manage your personal encrypted files.</li>
+  <li><a href="/use/captures">Screenshots and Recording</a>: capture your screen and share it with a link.</li>
   <li><a href="/use/console/s3">S3 Buckets</a>: manage your S3 compatible buckets and access tokens.</li>
   <li><a href="/use/console/hub">Hub</a>: your container images and AI models.</li>
   <li><a href="/use/console/wallet">Wallet</a>: check your hAlpha balance, send and receive tokens.</li>

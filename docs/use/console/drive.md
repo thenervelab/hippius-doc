@@ -225,6 +225,10 @@ How much you can upload depends on your **Drive plan**, not on your balance.
 See [Billing → Drive plans](/use/console/billing#drive-plans) for the plans and what happens without one.
 
 
+## Screenshots and Recordings
+
+Want to show someone what's on your screen? Click <BgStyledText>Screenshot</BgStyledText> or <BgStyledText>Record</BgStyledText> at the top of the Drive page, and Hippius saves the capture to your captures drive and copies a link to it, ready to paste. Everything you capture, here or in the desktop app, is listed in **Captures**, under Drive in the sidebar. See [Screenshots and Recording](/use/captures).
+
 ## Sharing With Other People
 
 There are two ways to give someone your files, and they suit different jobs:
@@ -253,8 +257,9 @@ The two folder download limits come from the zip format itself, not from Hippius
 ## Where to next
 
 <Unordered>
-  <li><a href="/use/console/shared-links">Shared Links</a>: share any Drive file as a public download link — no account required for recipients.</li>
+  <li><a href="/use/console/shared-links">Shared Links</a>: share any Drive file as a public link, with no account needed to open it.</li>
   <li><a href="/use/console/shared-drives">Shared Drives</a>: share a drive or a folder with people who have a Hippius account, and work in drives shared with you.</li>
+  <li><a href="/use/captures">Screenshots and Recording</a>: capture your screen and share it with a link.</li>
   <li><a href="/use/console/uploads">Console Uploads</a>: full reference for the upload queue, progress widget, and error handling.</li>
   <li><a href="/use/console/s3">S3 Buckets</a>: S3 compatible storage for use with any S3 client.</li>
   <li><a href="/use/desktop/getting-started">Hippius Desktop App</a>: real time folder sync and uploads beyond the 100 MB cap.</li>
