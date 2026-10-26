@@ -35,11 +35,14 @@ There is no folder to pick, no file to name and no upload to start. You can stil
 | **Desktop app on Windows** | Yes | Yes |
 | **Console in Chrome or Edge** on a computer | Yes | Yes |
 | **Console in Safari or Firefox** on a computer | Yes | Yes, with a few differences (see [Record your screen](/use/captures/recording#browser-differences)) |
+| **[Browser extension](/use/browser-extension)** in Chrome or Edge on a computer | Yes | Yes |
 | **Phones** | No | No |
 
 On a phone you can't take captures with Hippius, but everything you capture on a computer shows up in **Captures** when you open the console on your phone, and its link works on any device.
 
 If you have the choice, the desktop app gives you the most: system-wide keyboard shortcuts, a one-step area screenshot, Screenshot and Record in the menu bar, and captures that wait safely on your computer if they can't be uploaded straight away. The console needs nothing installed, which makes it handy on a computer that isn't yours.
+
+If you live in your browser, the Hippius extension for Chrome and Edge puts screenshots and recording a click away in your toolbar. Its own guide, [Browser Extension](/use/browser-extension), starts from installing it.
 
 ## Where your captures go
 
