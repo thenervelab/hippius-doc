@@ -20,6 +20,7 @@ Screenshots and screen recording come with every Hippius account that has Drive 
 | **Length of a recording** | Up to 5 minutes | No limit |
 | **Number of recordings** | 25 in total | No limit |
 | **Hippius watermark** | A small mark in the corner | None |
+| **Insights, comments and reactions** | Views and viewer counts; switches start off (desktop app 0.6.16) | Full Insights; on by default for captures |
 | **Storage** | Captures count toward your 10 GB | Captures count toward your plan's storage |
 
 The only limit on a paid plan is your storage.
@@ -41,12 +42,13 @@ The card after the recording has an Upgrade button if you need longer.
 The Free plan includes 25 recordings in total. The Captures page shows how many you've used, for example **3 of 25 free recordings used**, and the capture bar shows it too, in the desktop app and in the console.
 
 <Unordered>
-  <li>Every video in your Hippius Captures drive counts, whatever it's called and whichever folder it's in, and whether you recorded it in the desktop app, in the console or on another computer.</li>
-  <li><strong>Deleting a recording frees a slot</strong> straight away. So does moving it out of your Hippius Captures drive.</li>
+  <li>Every video in your captures drive counts, whatever it's called and whichever folder it's in, and whether you recorded it in the desktop app, in the console or on another computer. That includes a captures folder you picked yourself, or one inside another drive.</li>
+  <li>Moving your captures folder to another place doesn't start the count again.</li>
+  <li><strong>Deleting a recording frees a slot</strong> straight away. So does moving it out of your captures drive.</li>
   <li>Screenshots never count.</li>
 </Unordered>
 
-<Screenshot src="/img/desktop/captures/captures-page-dark.png" alt="The Captures page in the desktop app showing 25 of 25 free recordings used" dark="/img/desktop/captures/captures-page-dark.png" raw />
+<Screenshot src="/img/desktop/captures/captures-page.png" alt="The Captures page in the desktop app showing 3 of 25 free recordings used above the list of captures" dark raw />
 
 When you've used all 25, Hippius tells you as soon as you press Record, before anything is recorded, so you never lose a take. Upgrade your plan to record more, or delete an older recording to make room.
 
@@ -57,6 +59,12 @@ When you've used all 25, Hippius tells you as soon as you press Record, before a
 Screenshots and recordings made on the Free plan carry a small Hippius mark (the Hippius logo and the word "Hippius") in the bottom-right corner. It's white and slightly see-through, so it reads on light and dark backgrounds without getting in the way. Your camera bubble sits in the opposite corner.
 
 The mark is drawn into the picture on your device, before the capture is encrypted, so it stays on the file when you share it or download it. Captures made on a paid plan have no mark. Upgrading doesn't remove the mark from captures you've already taken.
+
+## Insights, comments and reactions
+
+On a paid Drive plan, links to your screenshots and recordings come with full [Insights](/use/captures/insights): views, viewers, how much of a recording each person watched and where they stopped, plus comments and reactions, all switched on for you.
+
+On the Free plan, Insights show how many times a link was opened and by how many people; completion, the chart of where people stopped and the viewer list come with paid plans. In the desktop app (from version 0.6.16), new links on the Free plan start with insights, comments and reactions off, and turning them on shows an upgrade prompt.
 
 ## Storage
 

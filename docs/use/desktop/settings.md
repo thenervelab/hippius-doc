@@ -115,27 +115,31 @@ Sync & Storage
     <p>Two keyboard shortcuts work from any app while Hippius is running, even with its window closed:</p>
     <Unordered>
       <li><strong>Screenshot shortcut</strong>: <BgStyledText>⌘ Shift 2</BgStyledText> on a Mac, <BgStyledText>Ctrl Shift 2</BgStyledText> on Windows and Linux. Drag over an area and let go: the screenshot is saved and its link is copied, in one step.</li>
-      <li><strong>Recording shortcut</strong>: <BgStyledText>⌥ ⇧ ⌘ 2</BgStyledText> on a Mac, <BgStyledText>Ctrl Alt Shift 2</BgStyledText> on Linux. It opens the capture bar ready to record. Shown on computers where Hippius can record.</li>
+      <li><strong>Recording shortcut</strong>: <BgStyledText>⌥ ⇧ ⌘ 2</BgStyledText> on a Mac, <BgStyledText>Ctrl Alt Shift 2</BgStyledText> on Windows and Linux. It opens the capture bar ready to record. Shown on computers where Hippius can record.</li>
     </Unordered>
     <p>Press either one during a recording to stop it. Click <BgStyledText>Change</BgStyledText> on a card and press the new keys (<BgStyledText>Esc</BgStyledText> cancels), or use <BgStyledText>Turn off</BgStyledText> and <BgStyledText>Turn on</BgStyledText>. Hippius won't let both shortcuts use the same keys, and it refuses keys your system already uses for its own screenshots, such as <BgStyledText>⌘ Shift 3</BgStyledText> to <BgStyledText>⌘ Shift 6</BgStyledText> on a Mac or the Print Screen keys.</p>
 
     :::note On Linux with Wayland
-    Apps can't grab keys there on their own. Where your desktop supports it, Hippius asks your desktop to set up the shortcut, and your desktop may ask you to confirm. Otherwise the card shows a short command to add as a custom shortcut in your desktop's keyboard settings. The shortcut then works even when Hippius is closed.
+    Apps can't grab keys there on their own, so each card shows a short command to add as a custom shortcut in your desktop's keyboard settings. The shortcut then works even when Hippius is closed: Hippius starts and opens the capture as soon as you're signed in. On the beta channel, Hippius can also ask desktops that support it to set up the screenshot shortcut for you, and your desktop may ask you to confirm.
     :::
 
     ### Capture folder
 
-    <p>Shows where your screenshots and recordings are kept on this computer. Your first capture asks once and suggests a <strong>Hippius Captures</strong> folder in Documents. That folder is backed up as your Hippius Captures drive, the same drive the console uses. Click <BgStyledText>Show in Finder</BgStyledText> (<BgStyledText>Show in folder</BgStyledText> on Windows and Linux) to open it, or <BgStyledText>Change</BgStyledText> to keep captures somewhere else. If you haven't taken a capture yet, <BgStyledText>Set up</BgStyledText> lets you choose now.</p>
+    <p>Shows where your screenshots and recordings are kept on this computer. Your first capture asks once and suggests a folder called <code>hippius-captures</code> in Documents; you can choose any other folder, with any name, including a folder inside one of your drives. That folder is backed up as your captures drive, the same drive the console uses. Click <BgStyledText>Show in Finder</BgStyledText> (<BgStyledText>Show in folder</BgStyledText> on Windows and Linux) to open it, or <BgStyledText>Change</BgStyledText> to save new captures somewhere else; the ones you already took stay where they are. If you haven't taken a capture yet, <BgStyledText>Set up</BgStyledText> lets you choose now. See <a href="/use/captures#choose-where-captures-are-saved">Choose where captures are saved</a>.</p>
+
+    <Screenshot src="/img/desktop/captures/settings-captures.png" alt="The Screenshots and Recording settings with both shortcuts, the capture folder in Documents › hippius-captures, and the after-capture switches" dark raw />
 
     ### After a capture
 
     <Unordered>
       <li><strong>Copy a share link after capture</strong>: on by default. Each screenshot and recording gets a public link that is copied once it is uploaded. Turn it off and captures are only saved to your drive; you can share them later. See <a href="/use/captures/share-links">Share links for captures</a>.</li>
       <li><strong>Open the link in your browser</strong>: on by default, while links are being made. Opens each capture's link as soon as it is ready, so you can check it.</li>
+      <li><strong>Show a preview in chats</strong>: on by default. When you paste a capture's link into a chat, it shows the screenshot or the recording's first frame. The preview picture and file name aren't encrypted. See <a href="/use/captures/share-links#a-preview-when-you-paste-the-link-in-a-chat">chat previews</a>.</li>
+      <li><strong>Track views, comments and reactions</strong> (version 0.6.16): links to your screenshots and recordings count views and watch time and let viewers comment and react. You can still turn any of it off for a single link. On the Free plan it's marked as a paid feature. See <a href="/use/captures/insights">Insights, comments and reactions</a>.</li>
       <li><strong>Recording countdown</strong>: none, 3 seconds or 5 seconds between pressing Record and the recording starting.</li>
       <li><strong>Record system audio</strong>: adds what your computer plays to recordings, where your computer supports it. Off by default; with speakers your voice may be recorded twice, and headphones avoid that.</li>
     </Unordered>
-    <p>These are the same choices as in the capture bar's <strong>Options</strong> menu. Changing them in either place changes both.</p>
+    <p>Most of these are also in the capture bar's <strong>Options</strong> menu. Changing them in either place changes both.</p>
 
     ### When saving an edited image
 
@@ -276,6 +280,10 @@ Sync & Storage
     <p>After changing anything, click <BgStyledText>Save Changes</BgStyledText> (or <BgStyledText>Cancel</BgStyledText> to discard). These buttons stay disabled until you have unsaved changes.</p>
 
     <Screenshot src="/img/desktop/settings/email-preference.png" alt="Email notification preferences" dark />
+
+    <p><strong>Emails about your links.</strong> From version 0.6.16, this card lets Hippius email you about your share links: <strong>First views</strong> when a link is opened for the first time, <strong>New comments</strong> when people comment (the email says how many, since comments are encrypted), and a <strong>Summary</strong> of views and comments, daily, weekly or off. These emails are rolling out, so the card may not appear yet. See <a href="/use/captures/insights#emails-about-your-links">Emails about your links</a>.</p>
+
+    <Screenshot src="/img/desktop/captures/settings-link-emails.png" alt="Emails about your links with First views, New comments and a weekly Summary" dark raw />
 
 </>
 </DocAccordionItem>

@@ -236,6 +236,16 @@ A **Download** option is always available. The file is streamed directly to the 
 
 If the link has been revoked or has expired, recipients see: _"This link has expired or been revoked."_ The page deliberately does not say which, which prevents anyone from guessing whether a link was ever valid.
 
+## Views, Comments and Reactions
+
+Once a link exists, the share dialog shows three more switches under **Views, comments and reactions**: **Insights** counts views and watch time, **Comments** lets people comment, and **Reactions** lets them react with an emoji. They start on for screenshots and recordings you take in the console, and off for other files. Recipients see a short note when views are counted, can read comments without an account, and need a Hippius account to post a comment or react.
+
+<Screenshot src="/img/console/captures/share-dialog-switches.png" alt="The console share dialog after the link is made, with Show a preview in chats and the Insights, Comments and Reactions switches" dark raw />
+
+To see what happened to a link, choose **View insights** from its row in Shared Links or in [Captures](/use/captures). Insights open in a panel on the right with the views, the viewers, a chart of where people stopped watching a video, the comments and the reactions. Comments and viewer names are end-to-end encrypted with the link's key. Everything about it, including what the Free plan shows, is in [Insights, comments and reactions](/use/captures/insights).
+
+<Screenshot src="/img/console/captures/insights-comments.png" alt="The console Insights panel showing viewers, comments with block and delete buttons, reactions and the Link settings switches" dark raw />
+
 ## Storage Usage
 
 Every active share stores a separate encrypted copy of your file on the Hippius network. This copy:

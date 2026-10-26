@@ -151,6 +151,7 @@ const sidebars: SidebarsConfig = {
             "use/captures/screenshots",
             "use/captures/recording",
             "use/captures/share-links",
+            "use/captures/insights",
             "use/captures/edit",
             "use/captures/plans",
             "use/captures/troubleshooting",

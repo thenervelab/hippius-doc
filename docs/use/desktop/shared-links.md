@@ -251,6 +251,14 @@ A **Download** option is always available. The file is decrypted directly in the
 
 If the link has expired or been revoked, recipients see: _"This link has expired or been revoked."_ We don't say which, so no one can guess whether a token was ever valid.
 
+## Views, Comments and Reactions
+
+From version 0.6.16 (on the [beta channel](/use/desktop/beta-channel) now), the **Share via link** dialog has **Insights**, **Comments** and **Reactions** switches for each file you share, next to **Show a preview in chats** for pictures and videos. On a paid Drive plan they start on for screenshots and recordings and off for other files; on the Free plan they start off and turning one on shows an upgrade prompt.
+
+<Screenshot src="/img/desktop/captures/share-dialog.png" alt="The desktop Share via link dialog with Show a preview in chats, Insights, Comments and Reactions switches" dark raw />
+
+Open a link's **Insights** from its row in Shared Links, or from Captures. They open in a panel on the right with the views, how much people watched, and **Comments**, **Viewers** and **Reactions** tabs; the gear at the top changes the link's switches. See [Insights, comments and reactions](/use/captures/insights).
+
 ## Storage Usage
 
 Every active share stores a separate encrypted copy of your file on Hippius:
