@@ -11,7 +11,7 @@ A dedicated disk is a whole physical disk of a Hippius server, passed through to
 
 ## What you choose
 
-- **Tier:** HDD, SSD or NVMe, when offered. The tier is a minimum: you may get a faster disk, billed at the tier you chose.
+- **Tier:** HDD, SSD or NVMe, when offered. You get exactly this tier, billed at that tier. The console shows how many disks of each tier and size are free in the region you pick: a tier marked "none available" cannot be placed there right now.
 - **Size:** each disk is sold at its size class, its real size rounded down to 100 GiB. That size class is what you are billed for.
 - **Count:** 1 to 8 disks, all on the same server.
 
