@@ -13,8 +13,27 @@ type RootProps = {
   children: React.ReactNode;
 };
 
+/** Find the accordion item a page anchor belongs to. */
+function itemValueForAnchor(target: HTMLElement): string | null {
+  // A heading inside an item's panel.
+  const inside = target.closest<HTMLElement>("[data-doc-accordion-value]");
+  if (inside) return inside.dataset.docAccordionValue ?? null;
+  // A section heading written just above its item, as on the settings page.
+  let next = target.nextElementSibling as HTMLElement | null;
+  while (next) {
+    if (next.dataset.docAccordionValue) return next.dataset.docAccordionValue;
+    if (/^H[1-6]$/.test(next.tagName)) return null;
+    next = next.nextElementSibling as HTMLElement | null;
+  }
+  return null;
+}
+
 /**
  * Root wrapper. Multiple-open by default.
+ *
+ * Opening the page at a section's anchor (#screenshots--recording) opens
+ * that section and scrolls to it, so links from other pages land on the
+ * section instead of the top of the page.
  */
 export function DocAccordion({
   defaultValue,
@@ -23,16 +42,61 @@ export function DocAccordion({
   children,
 }: RootProps) {
   // Map defaultValue to what Radix expects.
-  const mappedDefault =
-    multiple && typeof defaultValue === "string"
+  const mappedDefault: string[] = Array.isArray(defaultValue)
+    ? defaultValue
+    : defaultValue
       ? [defaultValue]
-      : (defaultValue as any);
+      : [];
+  const [open, setOpen] = React.useState<string[]>(mappedDefault);
+
+  React.useEffect(() => {
+    const timers: number[] = [];
+    const openFromHash = () => {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      if (!id) return;
+      const target = document.getElementById(id);
+      if (!target) return;
+      const value = itemValueForAnchor(target);
+      if (!value) return;
+      setOpen((current) =>
+        current.includes(value) ? current : multiple ? [...current, value] : [value]
+      );
+      // A section heading is hidden in accordion mode, so scroll to the
+      // item's own header. Scroll again once the panel has opened and the
+      // pictures above have taken their space.
+      const scroll = () => {
+        const item = document.querySelector<HTMLElement>(
+          `[data-doc-accordion-value="${value}"]`
+        );
+        const into = target.closest("[data-doc-accordion-value]") ? target : item;
+        into?.scrollIntoView({ block: "start" });
+      };
+      [50, 400, 1200].forEach((ms) => timers.push(window.setTimeout(scroll, ms)));
+    };
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+    return () => {
+      window.removeEventListener("hashchange", openFromHash);
+      timers.forEach((t) => window.clearTimeout(t));
+    };
+  }, [multiple]);
+
+  const rootProps = multiple
+    ? {
+        type: "multiple" as const,
+        value: open,
+        onValueChange: (next: string[]) => setOpen(next),
+      }
+    : {
+        type: "single" as const,
+        value: open[0] ?? "",
+        onValueChange: (next: string) => setOpen(next ? [next] : []),
+        collapsible: true,
+      };
 
   return (
     <Accordion.Root
-      type={multiple ? "multiple" : "single"}
-      defaultValue={mappedDefault}
-      collapsible
+      {...rootProps}
       className={cn("w-full doc-accordion-mode", className)}
     >
       {children}
@@ -52,7 +116,7 @@ type ItemProps = {
 
 /**
  * Item expects EXACTLY TWO children.
- * First child = header content (MDX/JSX — use <h2>…</h2> as requested).
+ * First child = header content (MDX/JSX, use <h2>…</h2> as requested).
  * Second child = accordion panel content.
  */
 export function DocAccordionItem({
@@ -71,7 +135,11 @@ export function DocAccordionItem({
   const content = kids[1] ?? null;
   console.log("Rendering DocAccordionItem:", value);
   return (
-    <Accordion.Item value={value} className={cn(className)}>
+    <Accordion.Item
+      value={value}
+      data-doc-accordion-value={value}
+      className={cn("doc-accordion-item", className)}
+    >
       <Accordion.Header
         className={cn("!mb-0", {
           "border-t border-grey-80": !isFirst,
@@ -128,7 +196,13 @@ export function DocAccordionItem({
         </Accordion.Trigger>
       </Accordion.Header>
 
-      <Accordion.Content className="overflow-hidden will-change-[height,opacity,transform] AccordionContent">
+      {/* Always rendered, and hidden by CSS while closed, so the headings
+          inside have their anchors in the page (and in its table of
+          contents) before anyone opens the section. */}
+      <Accordion.Content
+        forceMount
+        className="overflow-hidden will-change-[height,opacity,transform] AccordionContent"
+      >
         <div className="markdown mb-6">{content}</div>
       </Accordion.Content>
     </Accordion.Item>

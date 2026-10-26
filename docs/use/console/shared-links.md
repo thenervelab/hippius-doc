@@ -14,11 +14,13 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-Hippius lets you share any file from your Drive as a public download link. Recipients don't need a Hippius account. They just open the link in any browser and the file downloads directly to their device.
+Hippius lets you share any file from your Drive as a public link. Recipients don't need a Hippius account. They open it in any browser and see the file right there, or download it. Pictures, videos, PDFs and many documents preview on the page (see [What Recipients See](#what-recipients-see)).
+
+Screenshots and recordings get a link automatically, and those links show up here too. See [Share links for captures](/use/captures/share-links).
 
 To share a file, go to **Drive**, open the menu on any file, and choose **Share via link**. Hippius creates a secure encrypted copy in your browser and generates a shareable URL.
 
-After sharing, all your active links are tracked on the **Shared Links** page, reached from the <BgStyledText>Shared Links</BgStyledText> button in the Drive header (sidebar: <BgStyledIconWithText text="Drive" icon="FolderOpen" /> → <BgStyledText>My Drives</BgStyledText>). From there you can copy a link again, revoke access, and see a history of ended shares.
+After sharing, all your active links are tracked on the **Shared Links** page, reached from the <BgStyledText>Shared Links</BgStyledText> button in the Drive header (<BgStyledText>My Drives</BgStyledText>, under <BgStyledIconWithText text="Drive" icon="FolderOpen" /> in the sidebar). From there you can copy a link again, revoke access, and see a history of ended shares.
 
 <Screenshot src="/img/console/drive/shared-links-overview.png" alt="Shared Links page overview" dark />
 
@@ -103,7 +105,7 @@ A link you create yourself gets an expiry, chosen before you create it:
 The share dialog has no silent default. It asks, because a link that quietly expired in a day was the behaviour people found surprising.
 
 :::info Links made for screenshots and recordings
-A [screenshot or screen recording](/use/captures) gets its share link automatically, the moment it is saved. That link is public and never expires by default, so it is ready to paste straight away. It is listed here with your other links, and you revoke it the same way. See [Share links for captures](/use/captures/share-links).
+A [screenshot or screen recording](/use/captures) gets its share link automatically, the moment it is saved. That link is public and keeps working until you turn it off, so it is ready to paste straight away. It is listed here with your other links, and you revoke it the same way. See [Share links for captures](/use/captures/share-links).
 :::
 
 ### Requiring a password
@@ -236,6 +238,16 @@ A **Download** option is always available. The file is streamed directly to the 
 
 If the link has been revoked or has expired, recipients see: _"This link has expired or been revoked."_ The page deliberately does not say which, which prevents anyone from guessing whether a link was ever valid.
 
+## Views, Comments and Reactions
+
+Once a link exists, the share dialog shows three more switches under **Views, comments and reactions**: **Insights** counts views and watch time, **Comments** lets people comment, and **Reactions** lets them react with an emoji. They start on for screenshots and recordings you take in the console, and off for other files. Recipients see a short note when views are counted, can read comments without an account, and need a Hippius account to post a comment or react.
+
+<Screenshot src="/img/console/captures/share-dialog-switches.png" alt="The console share dialog after the link is made, with Show a preview in chats and the Insights, Comments and Reactions switches" dark raw />
+
+To see what happened to a link, choose **View insights** from its row in Shared Links or in [Captures](/use/captures). Insights open in a panel on the right with the views, the viewers, a chart of where people stopped watching a video, the comments and the reactions. Comments and viewer names are end-to-end encrypted with the link's key. Everything about it, including what the Free plan shows, is in [Insights, comments and reactions](/use/captures/insights).
+
+<Screenshot src="/img/console/captures/insights-comments.png" alt="The console Insights panel showing viewers, comments with block and delete buttons, reactions and the Link settings switches" dark raw />
+
 ## Storage Usage
 
 Every active share stores a separate encrypted copy of your file on the Hippius network. This copy:
@@ -270,7 +282,7 @@ The desktop app also has a Shared Links page with a few extra capabilities:
 | **Revoke** | ✅ Works from any device | ✅ Works from any device |
 | **History** | ✅ Yes | ✅ Yes |
 
-**Why the desktop app can copy links after a reload:** The desktop app saves each share's key to a local SQLite database. The console holds the key only in memory, so when you close or reload the tab it's gone.
+**Why the desktop app can copy links after a reload:** The desktop app remembers each share's key on your computer. The console holds the key only in memory, so when you close or reload the tab it's gone.
 
 **Changing an expiry.** For a **folder** share, open its action menu on the Shared Links page and choose <BgStyledText>Change expiry</BgStyledText>. This works only in the session that created the share, because changing it needs the share token, which is held in memory there and nowhere else. A share created on another device shows the option greyed out, with a tooltip saying where to go.
 

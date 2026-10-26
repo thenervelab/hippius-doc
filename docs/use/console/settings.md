@@ -3,7 +3,7 @@ id: settings
 title: Settings
 sidebar_label: Settings
 slug: /use/console/settings
-description: API token, email notifications, theme, Normal or Pro mode, table density, your unlock password, your Drive plan and account deletion in the Hippius Console.
+description: API token, email notifications and emails about your share links, theme, Normal or Pro mode, table density, your unlock password, your Drive plan and account deletion in the Hippius Console.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -14,7 +14,7 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-The **Settings** page is where you personalise the console and manage your account preferences. You can grab your API token, control which emails Hippius sends you, switch between light and dark mode, change your dashboard layout, set or change your unlock password, adjust table density, and see your Drive plan.
+The **Settings** page is where you personalise the console and manage your account preferences. You can grab your API token, control which emails Hippius sends you (including emails about your share links), switch between light and dark mode, change your dashboard layout, set or change your unlock password, adjust table density, and see your Drive plan.
 
 To reach Settings, click the **Hippius** dropdown in the top left of the sidebar, then click **Settings** from the menu that appears.
 
@@ -52,6 +52,18 @@ When the master switch is **off**, no emails are sent regardless of the individu
 | **Marketing emails & newsletter**  | Product updates, announcements, and occasional offers.                   |
 
 Click any toggle to flip it. The change saves immediately.
+
+## Share link emails
+
+Hippius can also email you about your [share links](/use/console/shared-links), including the links to your [screenshots and recordings](/use/captures):
+
+| Email | When it comes |
+| --- | --- |
+| **Email me when a link gets its first views** | When one of your links is opened for the first time. |
+| **Email me about new comments** | When people comment on your links. Comments are end-to-end encrypted, so the email says how many there are, not what they say. |
+| **Summary email** | A round-up of views and comments across your links: **Off**, **Daily** or **Weekly**. |
+
+Each email has a link to stop that kind of email. These emails are rolling out, so if you don't see this section yet, it's on its way. See [Insights, comments and reactions](/use/captures/insights).
 
 ## Theme
 
@@ -91,7 +103,7 @@ Click <BgStyledText>Change Plan</BgStyledText>, or <BgStyledText>Subscribe to a 
 
 ## Delete Account
 
-The last row on the page deletes your account and everything in it. You do the whole thing yourself, in the console — there is no support ticket to raise and no form to fill in, whichever way you sign in.
+The last row on the page deletes your account and everything in it. You do the whole thing yourself, in the console. There is no support ticket to raise and no form to fill in, whichever way you sign in.
 
 Deleting is not instant. Your account is **locked the moment you confirm**, and permanently deleted **7 days later**. Those 7 days are a grace period: until the deletion runs you can still stop it and get everything back.
 
@@ -128,25 +140,25 @@ Everyone finishes by typing the confirmation phrase. The only thing that differs
 
 | How you sign in                                   | Steps                                   |
 | ------------------------------------------------- | --------------------------------------- |
-| **Social login** (Google, GitHub, Apple) | **3** — inventory, emailed code, phrase |
-| **Recovery seed or access key**                   | **2** — inventory, phrase               |
+| **Social login** (Google, GitHub, Apple) | **3**: inventory, emailed code, phrase |
+| **Recovery seed or access key**                   | **2**: inventory, phrase               |
 
 A wallet-only account is deleted in exactly the same way, on exactly the same 7 day schedule. It simply has no mailbox to send a code to, so that one screen does not exist and the counter reads "of 2" instead of "of 3". Nothing else changes, and you do not need to contact anyone.
 
-**Step 1 — What will be deleted.** Read the inventory and tick each group's checkbox. **Continue** stays disabled until every group that holds something is ticked.
+**Step 1: What will be deleted.** Read the inventory and tick each group's checkbox. **Continue** stays disabled until every group that holds something is ticked.
 
-**Step 2 — Prove it's you.** _Social logins only._ Hippius emails you a **6-digit code** as soon as this screen opens; you don't have to ask for it. The code expires in 15 minutes. If it doesn't arrive, use **Resend** at the bottom, which becomes available again 60 seconds after each send.
+**Step 2: Prove it's you.** _Social logins only._ Hippius emails you a **6-digit code** as soon as this screen opens; you don't have to ask for it. The code expires in 15 minutes. If it doesn't arrive, use **Resend** at the bottom, which becomes available again 60 seconds after each send.
 
-**Last step — Type to confirm.** Type <BgStyledText>delete my account</BgStyledText> exactly, then click **Delete my account and everything in it**. This screen is shown to everyone: it is step 3 of 3 with an email address on the account, and step 2 of 2 without one.
+**Last step: Type to confirm.** Type <BgStyledText>delete my account</BgStyledText> exactly, then click **Delete my account and everything in it**. This screen is shown to everyone: it is step 3 of 3 with an email address on the account, and step 2 of 2 without one.
 
 ### What happens right after
 
-You are not dropped back at a login form. The console takes you to a page headed **Your account is locked**, which gives the exact date the account will be deleted, says how to keep it, and offers a **Back to Hippius** button. That page is public, so you can leave it open, bookmark it, or come back to it — it does not need a session.
+You are not dropped back at a login form. The console takes you to a page headed **Your account is locked**, which gives the exact date the account will be deleted, says how to keep it, and offers a **Back to Hippius** button. That page is public, so you can leave it open, bookmark it, or come back to it. It does not need a session.
 
 Behind that, three things have happened at once:
 
 <Ordered>
-  <li>Your account is <strong>locked</strong>. Drive and S3 are suspended, and every API token and session is revoked — including the one you were just using, which is why you are signed out. Scripts and integrations stop working straight away.</li>
+  <li>Your account is <strong>locked</strong>. Drive and S3 are suspended, and every API token and session is revoked, including the one you were just using, which is why you are signed out. Scripts and integrations stop working straight away.</li>
   <li>The deletion is scheduled for 7 days later.</li>
   <li>If the account has an email address, the cancel link is sent to it.</li>
 </Ordered>
