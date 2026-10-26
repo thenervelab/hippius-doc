@@ -149,6 +149,7 @@ const sidebars: SidebarsConfig = {
           items: [
             "use/browser-extension/overview",
             "use/browser-extension/get-started",
+            "use/browser-extension/account",
             "use/browser-extension/screenshots",
             "use/browser-extension/recording",
             "use/browser-extension/sharing",
@@ -157,6 +158,7 @@ const sidebars: SidebarsConfig = {
             "use/browser-extension/plans",
             "use/browser-extension/privacy",
             "use/browser-extension/troubleshooting",
+            "use/browser-extension/faq",
           ],
         },
         {

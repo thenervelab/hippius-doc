@@ -10,11 +10,9 @@ import Ordered from '@site/src/components/Ordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 import Screenshot from '@site/src/components/Screenshot';
 
-Once you capture often, shortcuts save you a trip to the popup. Four of them cover everything: start and stop a recording, pause it, and take two kinds of screenshot.
+Once you capture often, shortcuts save you a trip to the popup. There are four, one to start and stop a recording, one to pause it, and two for screenshots.
 
 ## The shortcuts
-
-They're the same on every computer. On a Mac, use Option instead of Alt.
 
 | Shortcut | On a Mac | What it does |
 |---|---|---|
@@ -23,13 +21,9 @@ They're the same on every computer. On a Mac, use Option instead of Alt.
 | <BgStyledText>Alt Shift S</BgStyledText> | <BgStyledText>Option Shift S</BgStyledText> | Screenshot of the visible page |
 | <BgStyledText>Alt Shift D</BgStyledText> | <BgStyledText>Option Shift D</BgStyledText> | Screenshot of an area you drag out |
 
-To check which keys each one has right now, open the keyboard button at the top of the popup.
+To check which keys each one has right now, click the keyboard button at the top of the popup.
 
 <Screenshot src="/img/extension/popup-shortcuts.png" alt="The Keyboard shortcuts panel in the popup, listing all four shortcuts and Change shortcuts" dark raw />
-
-:::note Used an earlier version?
-Earlier versions used Alt Shift R, P and A. Chrome keeps those keys for itself on Windows and Linux, so they never reached Hippius there. When the extension updates, it moves to the keys above, unless you had set your own, which stay as they are.
-:::
 
 ## When a shortcut has no keys
 
@@ -38,11 +32,19 @@ Your browser, not Hippius, decides which keys an extension gets. It hands them o
 ## Change a shortcut
 
 <Ordered>
-  <li>Open <BgStyledText>Change shortcuts</BgStyledText> from the keyboard panel in the popup, or type <code>chrome://extensions/shortcuts</code> into the address bar (<code>edge://extensions/shortcuts</code> in Edge).</li>
+  <li>Click <BgStyledText>Change shortcuts</BgStyledText> in the keyboard panel in the popup, or type <code>chrome://extensions/shortcuts</code> into the address bar (<code>edge://extensions/shortcuts</code> in Edge).</li>
   <li>Find <strong>Hippius</strong> and click the pencil next to the shortcut.</li>
   <li>Press the keys you want. They need Ctrl or Alt (Command or Option on a Mac).</li>
 </Ordered>
 
 <Screenshot src="/img/extension/chrome-shortcuts.png" alt="The browser's Keyboard shortcuts page with Hippius's four shortcuts and their keys" dark raw />
 
-The same page lets you add a key to **Activate the extension**, which opens the Hippius popup, and choose whether each shortcut works only in the browser or everywhere on your computer.
+On the same page you can add a key that opens the Hippius popup (**Activate the extension**), and choose whether each shortcut works only in the browser or everywhere on your computer.
+
+:::note Used an earlier version?
+Earlier versions used Alt Shift R, P and A. Chrome keeps those keys for itself on Windows and Linux, so they never reached Hippius there. When the extension updates, it moves to the keys in the table above, unless you had set your own, which stay as they are.
+:::
+
+## Next
+
+Shortcuts start captures; [Settings](/use/browser-extension/captures#settings) decide what happens after them, like whether the link opens in a new tab.
