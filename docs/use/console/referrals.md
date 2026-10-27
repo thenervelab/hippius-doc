@@ -41,7 +41,7 @@ You can create as many links as you like, each labelled with where you plan to s
 <Ordered>
   <li>Select <strong>+ New Link</strong> on the Referrals page.</li>
   <li>Choose the platform you are sharing on: X, Discord, LinkedIn, Instagram, Telegram, YouTube or Reddit. Pick <strong>Other</strong> to type your own label for anywhere else, like a newsletter or a conference talk.</li>
-  <li>Select <strong>Create</strong>. The new link appears in the table below, ready to copy or share.</li>
+  <li>Select <strong>Create Link</strong>. The new link appears in the table below, ready to copy or share.</li>
 </Ordered>
 
 <Screenshot src="/img/console/referrals/new-link.png" alt="The New Referral Link dialog with the platform list" dark />

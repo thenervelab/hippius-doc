@@ -30,7 +30,7 @@ A shared link is a read only copy for anyone, no account needed. If you want peo
 
 ## How Sharing Works
 
-Understanding the sharing process will help explain a few things you'll notice, like why sharing takes a moment and why you can only copy a link on the device where you created it.
+Understanding the sharing process will help explain a few things you'll notice, like why sharing takes a moment and why copying a link later asks you to unlock first.
 
 ### Your files are encrypted with a key only you hold
 
@@ -161,14 +161,12 @@ If a share was created on a different device or browser, the filename shows as `
 
 Click the three dot menu on any row and choose <BgStyledText>Copy link</BgStyledText> to copy the full share URL to your clipboard.
 
-**The link can only be copied on the device where you created it.** The share URL includes the encryption key in the `#` fragment. That key lives only in memory in the browser session where you created the share. If you close the tab, reload the page, or switch to a different device, the key is gone, so Copy link will be disabled for that row.
+**After a reload or on another device, unlock first.** The share URL includes the encryption key in the `#` fragment, and that key is not stored in readable form. For links made now, the row shows <BgStyledText>Unlock to copy link</BgStyledText> instead: enter your [unlock password](/use/console/unlock-password) and the console rebuilds the same link, in any session.
 
-A tooltip on the disabled action explains: _"Link is only available on the device where the share was created."_
+Some older links can only be copied in the browser session that created them. Their row reads **Not available in this session**. To share one of those again, revoke it and create a new share.
 
-This is by design. If you need to share a link again from a different device, you can revoke the existing share and create a new one.
-
-:::tip Save your link before closing the tab
-After creating a share, copy the URL straight away and save it somewhere you can access it. Once you close or reload the tab, you won't be able to copy the link again from this browser.
+:::tip Save your link when you create it
+Copying the URL straight after creating a share saves you the unlock step later.
 :::
 
 ### Revoke
@@ -278,11 +276,11 @@ The desktop app also has a Shared Links page with a few extra capabilities:
 | **Change the expiry later** | ✅ Folder shares, from the session that created them | Uses Reshare instead |
 | **How it reads the file** | Downloads and decrypts the Drive copy | Reads the local plaintext file directly from disk |
 | **Copy link (same session)** | ✅ Yes | ✅ Yes |
-| **Copy link after reload** | ❌ No, key is lost when you close or reload the tab | ✅ Yes, key is saved to a local database |
+| **Copy link after reload** | ✅ Yes, after you unlock (older links: no) | ✅ Yes, key is saved to a local database |
 | **Revoke** | ✅ Works from any device | ✅ Works from any device |
 | **History** | ✅ Yes | ✅ Yes |
 
-**Why the desktop app can copy links after a reload:** The desktop app remembers each share's key on your computer. The console holds the key only in memory, so when you close or reload the tab it's gone.
+**How each app copies links after a reload:** The desktop app remembers each share's key on your computer. The console rebuilds the link once you unlock with your password.
 
 **Changing an expiry.** For a **folder** share, open its action menu on the Shared Links page and choose <BgStyledText>Change expiry</BgStyledText>. This works only in the session that created the share, because changing it needs the share token, which is held in memory there and nowhere else. A share created on another device shows the option greyed out, with a tooltip saying where to go.
 

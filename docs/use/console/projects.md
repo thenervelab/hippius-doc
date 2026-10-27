@@ -32,7 +32,7 @@ Where things are in the console:
 
 ## Projects
 
-Create a project with **Create project**, in the project switcher or at the top of the **Projects** page. Give it a name and, optionally, a billing account to pay for it. Without one, it is paid from your Default billing account.
+Create a project with **Create project**, in the project switcher or at the top of the **Projects** page. Give it a name and, optionally, a billing account to pay for it. Without one, it is paid from your Default billing account. An account can have up to 50 projects that aren't archived.
 
 Pick a project in the project switcher, or choose **Open** next to it on the **Projects** page, to work in it. VMs, databases, clusters, runners, buckets, S3 keys and CDN zones are listed and created in the selected project. Switching projects is like switching accounts: each one has its own resources.
 
@@ -57,7 +57,7 @@ In a project other than the Default one, the S3 page says that the project's sto
 
 ## Billing accounts
 
-Create a billing account with **Create billing account** on the **Billing Accounts** page. It gets a wallet of its own, separate from your Default one. Choose **Open** next to a billing account to see its balance, the projects it pays for, and its **Costs**, **Invoices**, **Billing details** and **Members** tabs.
+Create a billing account with **Create billing account** on the **Billing Accounts** page, up to 50 per account. It gets a wallet of its own, separate from your Default one. Choose **Open** next to a billing account to see its balance, the projects it pays for, and its **Costs**, **Invoices**, **Billing details** and **Members** tabs.
 
 <Unordered>
   <li><strong>Top up</strong> a billing account with a card (one-off or recurring) or with Bitcoin, the same way you top up your account, with <strong>Top up</strong> on its page.</li>
@@ -84,7 +84,7 @@ In a shared account, a member's access can be limited to one project or one bill
 <Unordered>
   <li>Access given <strong>for the whole account</strong> works as before, in every project.</li>
   <li>Access given <strong>for one project</strong> works in that project only, never in another one or in the Default project.</li>
-  <li>The <strong>Billing</strong> role has two levels: <strong>Viewer</strong> reads balances, invoices and costs; <strong>Admin</strong> can also top up, edit the billing profile, create billing accounts and move projects onto a billing account. It can be given for the whole account or for one billing account.</li>
+  <li>The <strong>Billing</strong> role has two levels: <strong>Viewer</strong> reads balances, invoices and costs; <strong>Admin</strong> can also top up, edit the billing profile and move projects onto a billing account. It can be given for the whole account or for one billing account. Only the owner or a billing admin of the whole account can create billing accounts.</li>
 </Unordered>
 
 A team manager can only give access they hold themselves, project by project. When a project is archived or transferred, the access limited to it is removed.

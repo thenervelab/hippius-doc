@@ -26,14 +26,14 @@ Want to show someone what's on your screen? Take a screenshot or record it from 
 
 Normal is the simpler view, built around your Drive: your latest uploads, your balance and how much storage you use.
 
-Two shortcut buttons sit in the top right: <BgStyledText>+ Top up</BgStyledText>, which opens [Billing](/use/console/billing), and <BgStyledText>+ New File</BgStyledText>, which starts an upload.
+The page is titled **Welcome to Hippius**. Its header has <BgStyledText>+ Top up</BgStyledText>, which opens [Billing](/use/console/billing), and three Drive buttons: <BgStyledText>New Folder</BgStyledText>, <BgStyledText>Upload Folder</BgStyledText> and <BgStyledText>Upload File</BgStyledText>. To save space they read **Folder**, **Folder** and **File**: the plus icon means new, the arrow means upload.
 
 Three panels sit across the top of the page:
 
 <Unordered>
   <li><strong>Last Uploads</strong>: your most recently uploaded files with their file type and upload time.</li>
   <li><strong>Account Balance</strong>: your current balance. Click the graph icon to expand the spending chart and see how your spending has changed over time.</li>
-  <li><strong>Storage Usage</strong>: how much Drive storage you're using. Click the graph icon to expand your usage chart over time.</li>
+  <li><strong>Storage Usage (Drive + S3)</strong>: how much you store in Drive and S3 together. Click the graph icon to expand your usage chart over time.</li>
 </Unordered>
 
 Below the panels, the **Files** section shows all your Drive folders in a searchable table. Your total storage size and file count are shown at the top of the section.
@@ -86,8 +86,9 @@ A banner can be dismissed once you have read it. It comes back if the situation 
   <li><a href="/use/console/s3">S3 Buckets</a>: manage your S3 compatible buckets and access tokens.</li>
   <li><a href="/use/console/hub">Hub</a>: your container images and AI models.</li>
   <li><a href="/use/console/wallet">Wallet</a>: check your hAlpha balance, send and receive tokens.</li>
-  <li><a href="/use/console/staking">Staking</a>: stake hAlpha to earn rewards.</li>
+  <li><a href="/use/console/staking">Staking</a>: stake hAlpha to earn rewards, from the Wallet page.</li>
   <li><a href="/use/console/billing">Billing</a>: your plans, your balance, and how to top it up.</li>
   <li><a href="/use/console/referrals">Referrals</a>: invite people to Hippius and earn commission on what they spend.</li>
   <li><a href="/use/console/settings">Settings</a>: switch between Normal and Pro view.</li>
+  <li><a href="/use/console/projects">Projects</a>: split your resources into projects, each billed to a billing account.</li>
 </Unordered>

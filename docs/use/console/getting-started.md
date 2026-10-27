@@ -57,18 +57,23 @@ You can switch between Normal and Pro at any time from [Settings](/use/console/s
 The **sidebar on the left** is how you move between sections. It's organised into groups:
 
 <Unordered>
-  <li><strong>Drive</strong>: My Drives (your encrypted files), Shared Drives, and Captures, where your <a href="/use/captures">screenshots and recordings</a> live.</li>
-  <li><strong>S3</strong>: S3 Buckets and S3 Migrations.</li>
-  <li><strong>Confidential Compute</strong>: Virtual Machines, Databases, Kubernetes and Runners.</li>
-  <li><strong>Hub</strong>: your container images and AI models.</li>
-  <li><strong>Account</strong>: Billing, Wallet and Referrals.</li>
-  <li><strong>Support</strong>: Documentation and Help & Support, to open a ticket with our team.</li>
+  <li><strong>Overview</strong>: your <a href="/use/console/overview">home page</a>.</li>
+  <li><strong>Infrastructure</strong>, with one entry per product:
+  <strong>Drive</strong> (My Drives for your encrypted files, Shared Drives, and Captures, where your <a href="/use/captures">screenshots and recordings</a> live),
+  <strong>S3</strong> (S3 Buckets and S3 Migrations),
+  <strong>CDN</strong> (shown only to accounts in the CDN beta),
+  <strong>Confidential Computing</strong> (Virtual Machines, Compute Usage, Databases, Kubernetes and Runners)
+  and <strong>Hub</strong> (your container images and AI models).</li>
+  <li><strong>Team</strong>: Members and <a href="/use/console/projects">Projects</a>. See <a href="/use/console/team">Shared Accounts</a>.</li>
+  <li><strong>Account</strong>: Billing, Billing Accounts, Wallet and Referrals.</li>
+  <li><strong>Support</strong>: Documentation, Help & Support to open a ticket with our team, and Become a provider, which opens the providers dashboard.</li>
 </Unordered>
 
+**Settings**, the theme, your accounts and **Log out** are in the account menu: click your identity card in the top right corner.
 
 ## Theme
 
-The console automatically follows your system's dark or light mode. If you'd prefer a different theme, you can override it at any time from [Settings](/use/console/settings).
+The console automatically follows your system's dark or light mode. If you'd prefer a different theme, you can override it at any time from the account menu or [Settings](/use/console/settings).
 
 <Screenshot src="/img/console/getting-started/theme.png" alt="Theme setting" dark />
 

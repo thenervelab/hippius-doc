@@ -3,7 +3,7 @@ id: settings
 title: Settings
 sidebar_label: Settings
 slug: /use/console/settings
-description: API token, email notifications and emails about your share links, theme, Normal or Pro mode, table density, your unlock password, your Drive plan and account deletion in the Hippius Console.
+description: API token, sign-in methods, email notifications and emails about your share links, theme, Normal or Pro mode, table text size, your unlock password, your Drive plan and account deletion in the Hippius Console.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -14,9 +14,9 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-The **Settings** page is where you personalise the console and manage your account preferences. You can grab your API token, control which emails Hippius sends you (including emails about your share links), switch between light and dark mode, change your dashboard layout, set or change your unlock password, adjust table density, and see your Drive plan.
+The **Settings** page is where you personalise the console and manage your account preferences. You can grab your API token, add or remove ways to sign in, control which emails Hippius sends you (including emails about your share links), pick a theme, change your dashboard layout, set or change your unlock password, adjust table density, and see your Drive plan.
 
-To reach Settings, click the **Hippius** dropdown in the top left of the sidebar, then click **Settings** from the menu that appears.
+To reach Settings, click your identity card in the top right corner to open the account menu, then click **Settings**.
 
 All changes save automatically. There is no save button anywhere on this page.
 
@@ -29,7 +29,7 @@ Your **API Token** lets you make direct API calls to Hippius on your behalf, for
 The token is hidden by default. Click the **eye** icon to reveal it, then the **copy** icon to copy it to your clipboard. Click the eye again to hide it.
 
 ```http
-Authorization: Bearer <your-token>
+Authorization: Token <your-token>
 ```
 
 See [Hippius API](/use/api) for available endpoints.
@@ -37,6 +37,18 @@ See [Hippius API](/use/api) for available endpoints.
 :::warning Keep this token private
 Anyone with this token has full access to your account. Never paste it into public documents, repositories, screenshots, or chat messages. If you believe it has been compromised, contact our support team immediately.
 :::
+
+## Sign-in methods
+
+**Sign-in methods** lists every way into this account: your **Wallet (access key)**, if it has one, the email addresses linked to it, and your social logins.
+
+<Unordered>
+  <li><BgStyledText>Add email</BgStyledText> links an email address. We send a 6-digit code to it, valid for 15 minutes.</li>
+  <li><BgStyledText>Connect Google</BgStyledText>, <BgStyledText>Connect GitHub</BgStyledText> or <BgStyledText>Connect Apple</BgStyledText> links a social login. You sign in with the provider and come back to this page.</li>
+  <li><BgStyledText>Remove</BgStyledText> unlinks one.</li>
+</Unordered>
+
+Every change first asks you to **Confirm it's you**: sign with your wallet, or enter a code we email to an address already on the account. Linking an email address or a social login also lifts the Drive suspension of an account that only had an access key.
 
 ## Email Notifications
 
@@ -65,9 +77,11 @@ Hippius can also email you about your [share links](/use/console/shared-links), 
 
 Each email has a link to stop that kind of email. These emails are rolling out, so if you don't see this section yet, it's on its way. See [Insights, comments and reactions](/use/captures/insights).
 
+If you run nodes, **New advice for your nodes (providers dashboard)** emails you when the providers dashboard has new advice for them.
+
 ## Theme
 
-Pick **Light** or **Dark**. The change applies instantly and persists across all your sessions and devices.
+Pick **Light**, **Dark** or **System**, which follows your device. The change applies instantly and is saved in this browser. You can also change it from the account menu.
 
 ## Home View
 
@@ -85,13 +99,7 @@ The **Unlock Password** row shows <BgStyledText>Set Password</BgStyledText> if y
 
 ## Table Text Size
 
-Choose how rows look across all tables in the console. Drive, S3, and Billing tabs all follow this setting.
-
-| Option                      | Best for                                                       |
-| --------------------------- | -------------------------------------------------------------- |
-| **Compact**                 | Seeing more rows at once on large monitors or dense data sets. |
-| **Comfortable** _(default)_ | Balanced spacing for everyday use.                             |
-| **Spacious**                | Easier reading during long sessions or on smaller screens.     |
+Choose the text size of every table in the console: **8px**, **10px**, **12px** (the default), **14px** or **16px**. Drive, S3, and Billing tabs all follow this setting. It is saved in this browser.
 
 A preview row at the top of this section updates live as you switch options, so you can see the difference before committing.
 
@@ -121,7 +129,7 @@ The first screen of the dialog is not a warning, it is an **inventory**. It read
 | **Compute**              | Virtual machines and managed databases.                         |
 | **Hub and network**      | Hub projects and images, and your network peers.                 |
 | **Subscriptions**        | Any active Drive, S3 or Hub plan, which is cancelled.           |
-| **Credits**              | Your remaining balance, which is forfeited, and any saved card. |
+| **Account balance**      | Your remaining balance, which is forfeited, and any saved card. |
 | **Access and account**   | API tokens, S3 keys, SSH keys and every way of signing in.      |
 
 Only groups that hold something get a checkbox to tick. A group that is empty collapses to a single grey line, so you are only asked to confirm what you actually have.
