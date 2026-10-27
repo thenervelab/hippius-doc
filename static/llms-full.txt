@@ -308,12 +308,13 @@ Master keys bypass ACLs. Sub-tokens need an explicit grant unless scoped to that
 
 Scoped credentials: per-bucket, read-only or read/write, optional expiry.
 Create in Console > S3 Buckets (https://docs.hippius.com/use/console/s3) or via Management API.
-Rotate keeps the Access Key ID and issues a new secret. Revoke is immediate.
+Rotate issues a new Access Key ID and secret with the same permissions and revokes the old pair. Revoke is immediate.
 
     curl -X POST https://api.hippius.com/api/objectstore/sub-tokens/ \
       -H "Authorization: Token YOUR_BEARER_TOKEN" \
       -H "Content-Type: application/json" \
-      -d '{"name": "read-only-backup", "permissions": ["read"]}'
+      -d '{"name": "read-only-backup", "scope_type": "single_bucket", "bucket_names": ["my-bucket"], "actions": ["read"]}'
+    # scope_type: single_bucket, multi_bucket or global. actions: ["read"] or ["read", "write"]
 
     curl -X POST https://api.hippius.com/api/objectstore/master-tokens/{id}/revoke/ \
       -H "Authorization: Token YOUR_BEARER_TOKEN"
@@ -323,7 +324,7 @@ Rotate keeps the Access Key ID and issues a new secret. Revoke is immediate.
 
 ### Large files
 
-Console upload cap is 100 MB. Use multipart via AWS CLI / SDKs for larger objects (up to ~5 TiB).
+Console upload cap is 100 MB. Use multipart via AWS CLI / SDKs for larger objects: parts up to 512 MiB, at most 10,000 parts (~5 TiB).
 
 ### Object Lock
 
@@ -485,14 +486,14 @@ Supported operations:
 - Bucket: CreateBucket, DeleteBucket, ListBuckets, HeadBucket, GetBucketLocation
 - Object: PutObject, GetObject, HeadObject, DeleteObject, CopyObject
 - List: ListObjects, ListObjectsV2
-- Multipart: InitiateMultipartUpload, UploadPart, CompleteMultipartUpload, AbortMultipartUpload (up to ~5 TiB)
+- Multipart: InitiateMultipartUpload, UploadPart, UploadPartCopy, CompleteMultipartUpload, AbortMultipartUpload, ListParts, ListMultipartUploads (parts up to 512 MiB, at most 10,000 parts, ~5 TiB)
 - Tags: PutObjectTagging, GetObjectTagging, DeleteObjectTagging, PutBucketTagging, GetBucketTagging
 - ACL: PutBucketAcl, GetBucketAcl, PutObjectAcl, GetObjectAcl
-- Policy: PutBucketPolicy, GetBucketPolicy, DeleteBucketPolicy
+- Policy: PutBucketPolicy, GetBucketPolicy, DeleteBucketPolicy. A policy may only allow anonymous s3:GetObject, on the whole bucket or on up to 32 prefixes (arn:aws:s3:::bucket/prefix/*); anything else is 400 InvalidPolicyDocument. DeleteBucketPolicy returns 409 while the bucket ACL is public-read
 - Versioning: PutBucketVersioning (Enabled only; Suspended returns 501), GetBucketVersioning, ListObjectVersions
 - Object Lock: Put/Get ObjectLockConfiguration, Retention, LegalHold (GOVERNANCE and COMPLIANCE)
 - Presigned URLs GET/PUT/DELETE (max 7 days), range requests, video streaming
-- Lifecycle: basic expiration rules only
+- Lifecycle: configuration accepted but not applied; nothing expires
 
 Not supported: S3 Select, POST Object, virtual-hosted style, event notifications, S3 Batch Operations, cross-region replication (network replicates automatically)
 
@@ -510,7 +511,7 @@ Public URL format: https://s3.hippius.com/{bucket-name}/{object-key}
 
 ### Rate limits
 
-100 requests per minute per account
+No fixed per-account request limit. Under load the gateway answers 503 SlowDown (retryable, sometimes with Retry-After): retry with backoff, as the AWS SDKs do.
 
 ---
 
@@ -674,6 +675,22 @@ Top up (browser or wallet, not subscribe):
 
 Support:
     POST https://api.hippius.com/api/support/tickets/
+
+### Public prices (no auth)
+
+Docs: https://docs.hippius.com/use/api-prices
+    GET  https://api.hippius.com/api/compute/public-prices/   everything compute sells: os_disk_tiers[] (tier, disk_gb rate, max_flavor, flavors[]), dedicated_disks[], public_ip, backup_storage, managed_database, managed_kubernetes, runners[], bandwidth_per_gb, bandwidth_by_region
+    GET  https://api.hippius.com/api/compute/flavors/         VM sizes, price_credits_monthly (NVMe)
+    GET  https://api.hippius.com/api/cdn/prices/              base units (divide by 10^18 for credits)
+    GET  https://api.hippius.com/api/s3/plans/ · /api/drive/plans/ · /api/registry/plans/
+Compute public prices are credits (1 credit = 1 USD) as decimal strings; monthly = hourly x 730, to the cent. null means the catalogue has no price yet, never free. Cache-Control: public, max-age=60 (flavors 300), Vary: Authorization. 300 requests/min per client address on the compute and CDN lists, then 429.
+
+### Access key sign-in (for apps, not agents)
+
+Docs: https://docs.hippius.com/use/wallet-login
+    POST https://api.hippius.com/api/auth/mnemonic/  {"address": "0x...", "substrate_address": "5..."}  -> challenge, message, expires_in (300)
+    POST https://api.hippius.com/api/auth/verify/    {"address", "substrate_address", "challenge", "signature", "substrate_signature"} -> token
+Sign `message` verbatim: signature = EIP-191 personal_sign by the Ethereum key (m/44'/60'/0'/0/0); substrate_signature = sr25519 by the Substrate key (no derivation path) over the raw message bytes. A signature over the polkadot.js <Bytes> wrapping (browser extension signRaw) is refused: 401 code substrate_signature_invalid. Missing proof on a new or never-proven account: 401 code substrate_signature_required. Never ask a user to paste their 12 words into chat.
 
 ---
 
