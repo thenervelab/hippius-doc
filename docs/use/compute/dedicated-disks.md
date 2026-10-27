@@ -70,7 +70,7 @@ Each disk is billed per GiB-hour of its size class, from the moment the VM is bi
 
 ## Quota
 
-Dedicated disks have their own quota, in GiB, separate from the disk quota of your VMs. Each VM counts its number of disks times the size you asked for, until you delete it. If your account has no dedicated-disk quota, the console doesn't offer the add-on: [open a ticket](/use/console/support) to ask for one. See [Quotas](/use/compute/billing#quotas).
+Dedicated disks have their own quota, separate from the disk quota of your VMs: **4 TiB** on Starter, **16 TiB** on Standard and **64 TiB** on Business. Each VM counts its number of disks times the size you asked for, until you delete it. Need more? [Open a ticket](/use/console/support). See [Quotas](/use/compute/billing#quotas).
 
 ## Why a launch with dedicated disks can fail
 

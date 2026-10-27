@@ -128,6 +128,7 @@ Your limits depend on your account's tier. A new account starts on **Starter**:
 | vCPUs | 8 | 32 | 96 |
 | Memory | 32 GB | 128 GB | 384 GB |
 | Disk | 320 GB | 1024 GB | 4096 GB |
+| Dedicated disks | 4 TiB | 16 TiB | 64 TiB |
 | Public IPv4 | 3 | 6 | 15 |
 | GitHub Actions runners (at once) | 3 | 10 | 20 |
 
@@ -146,7 +147,7 @@ A few things to know:
 <Unordered>
   <li>The vCPU, memory and disk quotas include the instances of your databases, your Kubernetes nodes and your runners. The <strong>Virtual machines</strong> quota only counts the VMs you create yourself.</li>
   <li>A High availability database counts three instances. A Kubernetes cluster counts three masters and their three public IPv4 addresses.</li>
-  <li><a href="/use/compute/dedicated-disks">Dedicated disks</a> have their own quota, in GiB. An account without one isn't offered them: ask support.</li>
+  <li><a href="/use/compute/dedicated-disks">Dedicated disks</a> have their own quota, separate from the disk quota of your VMs.</li>
   <li>Only what you add is checked. If your account is above a limit, you keep everything, but you can't add more until you are back under it.</li>
 </Unordered>
 
