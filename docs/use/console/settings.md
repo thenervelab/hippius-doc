@@ -14,7 +14,7 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-The **Settings** page is where you personalise the console and manage your account preferences. You can grab your API token, add or remove ways to sign in, control which emails Hippius sends you (including emails about your share links), pick a theme, change your dashboard layout, set or change your unlock password, adjust table density, and see your Drive plan.
+The **Settings** page is where you personalise the console and manage your account preferences. You can grab your API token, add or remove ways to sign in, control which emails Hippius sends you (including emails about your share links), pick a theme, change your dashboard layout, set or change your unlock password, adjust table text size, and see your Drive plan.
 
 To reach Settings, click your identity card in the top right corner to open the account menu, then click **Settings**.
 
@@ -76,8 +76,6 @@ Hippius can also email you about your [share links](/use/console/shared-links), 
 | **Summary email** | A round-up of views and comments across your links: **Off**, **Daily** or **Weekly**. |
 
 Each email has a link to stop that kind of email. These emails are rolling out, so if you don't see this section yet, it's on its way. See [Insights, comments and reactions](/use/captures/insights).
-
-If you run nodes, **New advice for your nodes (providers dashboard)** emails you when the providers dashboard has new advice for them.
 
 ## Theme
 
