@@ -84,7 +84,7 @@ Either way, your balance usually updates within a few minutes.
 <Screenshot src="/img/console/billing/tao-wallet.png" alt="Top up with a Bittensor wallet" dark />
 
 :::warning Send TAO only to your TAO deposit address
-Copy the address from the **Manually** tab. It is not your Hippius account address, the one shown under **Convert balance** and in your Wallet: TAO sent there is not added to your balance, and you would have to [contact support](/use/console/support) to recover it. The console asks for at least $20 of TAO in a single transaction.
+Copy the address from the **Manually** tab. It is not your Hippius account address, the one shown under **Convert balance** and in your Wallet: TAO sent there is not added to your balance, and you would have to [contact support](/use/console/support) to recover it. Send at least $20 of TAO in a single transaction. From a browser wallet, the console won't take less.
 
 TAO transfers are final. TAO sent to anyone else's address can't be recovered.
 :::
@@ -108,7 +108,7 @@ How you convert depends on how you sign in.
 
 Either way, the conversion is protected against price moves. **Slippage tolerance** is 1% by default; you can choose 0.5%, 1% or 3%. **At least** is the smallest amount you accept. If the price moves past it before the purchase lands, the conversion is refused and your hAlpha isn't converted. If the chain refused it, the network fee is still charged.
 
-Your balance updates once the purchase is final on chain, usually within a minute or two. The conversion shows in **Transaction history** as **Hippius tokens**. No invoice is issued for it.
+Your balance updates once the purchase is final on chain, usually within a minute or two. The conversion shows in **Payments and top-ups** as **Hippius tokens**. No invoice is issued for it.
 
 :::warning Conversions are final
 A conversion is an on-chain transaction. Once it is final it can't be reversed, and the hAlpha can't be refunded.
@@ -123,11 +123,11 @@ Each product has its own plans page. You can get there from the product's card o
 When you subscribe, you choose how to pay:
 
 <Unordered>
-  <li><strong>Card.</strong> You pay through Stripe, and each renewal is charged to your card too, so your balance is left for usage such as Compute. Stripe keeps your card on file. If the card can't be charged, the renewal is paid from your balance when it covers it, and we email you to update the card.</li>
+  <li><strong>Card.</strong> You pay through Stripe, and each renewal is charged to your card too, up to 3 days before it is due, so your balance is left for usage such as Compute. Stripe keeps your card on file. If the card can't be charged, the renewal is paid from your balance when it covers it, and we email you to update the card.</li>
   <li><strong>Account balance.</strong> The plan is paid straight from what you already have. If it is not enough, the console tells you and offers a top up.</li>
 </Unordered>
 
-All plans are monthly. Hub plans are paid from your balance; paying them by card is marked coming soon.
+All plans are monthly. Hub plans are paid from your balance; paying them by card is marked coming soon. Drive offers the card only to an account subscribing for the first time; see [Drive plans](#drive-plans).
 
 ### Drive plans
 
@@ -145,18 +145,34 @@ A Drive plan sets how much encrypted storage your Drive has. These are the plans
 
 **Who gets the free plan.** If you sign in with Google, GitHub, or Apple, your account comes with the Free Drive Plan, and you fall back to it if you ever cancel a paid plan. An **access key** creates a wallet-only account. It has no real email address, so it gets no lifecycle mail, and it does not include free storage, so you'll need to pick a Drive plan before your first upload. S3 and Hub work the same as on any other account.
 
-**Subscribing** takes a minute. Pick a plan, choose how to pay and confirm. After a card payment the console shows the plan activating. That usually finishes in under a minute, and you can leave the page while it does. In the rare case a card payment goes through but the plan does not activate, the money stays on your balance and you can subscribe from there.
+**Subscribing** takes a minute. Pick a plan and confirm. On an account with no plan at all, such as an access key account, you choose how to pay: **Card** (Stripe checkout, and the card is kept for renewals) or **Account balance**. After a card payment the console shows the plan activating. That usually finishes in under a minute, and you can leave the page while it does. In the rare case a card payment goes through but the plan does not activate, the money stays on your balance and you can subscribe from there.
 
-**Moving to a bigger or smaller plan** is paid from your balance and takes effect straight away. You can't move to a plan smaller than what you already store, so free up some space first.
+Plans are sold monthly. Moving from the Free Drive Plan to a paid plan, and every later change, is paid from your balance, so [top up](#add-money-to-your-balance) first if you need to.
+
+**Moving to a bigger plan** (<BgStyledText>Upgrade</BgStyledText>) charges the difference for the rest of the current period now, prorated, and the bigger plan applies straight away. It then renews at its own price. You can't upgrade in the last 25 hours of a period: wait for the renewal, then upgrade.
+
+**Moving to a smaller plan** (<BgStyledText>Downgrade</BgStyledText>) charges nothing and refunds nothing. You keep your current plan until the end of the period, then it switches. Until then, <BgStyledText>Keep this plan</BgStyledText> undoes it. You can't move to a plan smaller than what you already store, so free up some space first.
 
 **Shared drives.** Plus, Max and Scale can share a drive with other people. Anyone on any plan, including Free, can be invited.
 
 **Screenshots and screen recording.** Screenshots and sharing are unlimited on every plan. On the Free Drive Plan, a recording stops at 5 minutes, you can keep 25 recordings in total (deleting one frees a slot), and screenshots and recordings carry a small Hippius watermark. Captures count toward your 10 GB like any other file. Paid plans have no capture limits beyond their storage, and no watermark. See [Free and paid plans](/use/captures/plans).
 
-**Cancelling** puts you back on the Free Drive Plan, or, for access key accounts, leaves you with no storage at all.
+**Cancelling** stops the renewal. The plan stays active until the end of the period you paid for, nothing is refunded, and <BgStyledText>Resume plan</BgStyledText> keeps it until then. After that you're back on the Free Drive Plan, or, for access key accounts, left with no storage at all.
 
-:::warning Without a plan, or over your cap, uploads stop
-If your Drive has no plan, or holds more than its plan allows, you get a notice, a reminder after 7 days, and after 14 days Drive becomes **read only**: you can still open, download and delete, but nothing new can be uploaded. Nothing is deleted. Subscribing to a plan, or getting back under your cap, lifts it at the next daily check.
+**Renewals.** Each month is charged from your balance, or your card for a plan paid by card, when the previous one ends. If it can't be charged, the plan ends and your Drive goes back to the Free Drive Plan.
+
+#### Storage cap on Max and Scale {#drive-storage-cap}
+
+Max and Scale don't stop at their storage. What you store above it is billed by the hour from your balance, at **$2.20 per TB per month** on Max and **$2.00** on Scale, up to a **storage cap**.
+
+The cap starts at twice your plan's storage: 20 TB on Max, 50 TB on Scale. Change it on the Drive plans page, under **Storage cap**, with <BgStyledText>Save cap</BgStyledText>, or go back with <BgStyledText>Reset to default</BgStyledText>. It can't go below your plan's storage. Changing plan resets it to the new plan's default.
+
+At 80% of the cap the console warns you. At the cap, new uploads pause and your files stay readable. Raise the cap, upgrade, or free up space to upload again.
+
+:::warning Over the Free Drive Plan, uploads stop
+If you store more than the Free Drive Plan's 10 GB and have no paid plan, you get a notice, a reminder after 7 days, and after 14 days Drive becomes **read only**: you can still open, download and delete, but nothing new can be uploaded. Subscribing to a plan, or getting back under 10 GB, lifts it at the next daily check.
+
+Starter and Plus stop uploads as soon as they are full. An account with no plan at all can't upload anything, and the console warns that files already uploaded are deleted if it stays without a plan.
 :::
 
 When your Drive is full, uploads stop and the console offers a bigger plan. You can also delete something and try again.
@@ -208,12 +224,13 @@ Hub plans set how much you can store in your Hub namespace. Everyone starts on t
 
 ## Keep track of what you pay
 
-Billing shows every product side by side, with the plan you're on, what it costs and when it renews. Three tabs underneath give you the detail:
+Billing shows every product side by side, with the plan you're on, what it costs and when it renews. Four tabs underneath give you the detail:
 
 <Unordered>
   <li><strong>Active subscriptions</strong> lists every paid plan with its next charge. Anything past due or about to end is flagged.</li>
-  <li><strong>Transaction history</strong> lists every top up, plan charge and renewal, and how each one was paid.</li>
+  <li><strong>Payments and top-ups</strong> lists every top up, plan charge and renewal, and how each one was paid.</li>
   <li><strong>Invoices</strong> lists your invoices, to download as PDF.</li>
+  <li><strong>Billing details</strong> holds the company name and tax ID printed on your invoices. A change applies to invoices issued after you save it.</li>
 </Unordered>
 
 <Screenshot src="/img/console/billing/tx-history.png" alt="Billing transaction history" dark raw />
@@ -227,7 +244,7 @@ An invoice is issued for each payment, a few minutes after the money comes in: c
 Your balance pays for renewals and for S3 pay as you go, so running dry affects both:
 
 <Unordered>
-  <li>A plan that can't renew is marked <strong>past due</strong>, and the console asks you to top up. An S3 plan is the exception: it ends, and your storage goes back to pay as you go.</li>
+  <li>A Hub plan that can't renew is marked <strong>past due</strong>, and the console asks you to top up. A Drive plan ends instead, and your Drive goes back to the Free Drive Plan. An S3 plan ends too, and your storage goes back to pay as you go.</li>
   <li>S3 on pay as you go becomes <strong>read only</strong> after 7 days. You can still download, but nothing new can be written. 7 days later S3 is <strong>suspended</strong> and your buckets can't be reached. 23 days after that, 37 days from the start, the data is <strong>deleted</strong>, with a final notice a week before. Any top up that covers your usage puts everything back.</li>
 </Unordered>
 
