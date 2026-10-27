@@ -257,6 +257,10 @@ chmod 600 /var/lib/hippius/miner/data/keypair.bin
 
 Now register your miner in the Arion pallet using the signature generated in Step 2.
 
+:::tip
+You can do this step from the [provider dashboard](/operators/getting-started#adding-a-node) instead: link your family account, open **Add a node → Storage node**, run the `generate_registration_data … --output-json` command it shows (with the chain's nonce), paste the JSON and sign with the family in your wallet extension.
+:::
+
 1. Navigate to [Polkadot.js Apps](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.hippius.network#/extrinsics)
 2. Go to **Developer → Extrinsics**
 3. Select your **coldkey account** (family/main account)

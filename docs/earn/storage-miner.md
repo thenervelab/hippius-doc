@@ -33,4 +33,8 @@ Setting up a storage miner involves two main steps:
 1. **[Running a Blockchain Node](./arion/running-blockchain-node.md)**: First, you need to set up and sync the Hippius Substrate node to connect to the network.
 2. **[Running the Arion Miner](./arion/running-miner.md)**: Once your node is synced, you configure and start the Arion miner service to begin accepting storage and earning rewards.
 
-Once your node is registered, follow it on the [provider dashboard](/operators/getting-started) at [provider.hippius.com](https://provider.hippius.com).
+You can also create your storage family and register the node from the [provider dashboard](/operators/getting-started) at [provider.hippius.com](https://provider.hippius.com), signing each step in your wallet extension. Once your node is registered, follow it there.
+
+:::info Running compute too
+A family registers compute nodes only if it already runs at least one Active Arion storage node. Each compute node needs its own child account: an Arion storage child can't also be a compute child. See [Adding a node](/operators/getting-started#adding-a-node).
+:::
