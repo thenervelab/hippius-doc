@@ -71,7 +71,9 @@ Two checks run every time you launch something. You see both in the create form 
 
 | What | Price |
 |---|---|
-| VM | $18 per vCPU, $2.50 per GB of memory and $0.10 per GB of disk, per month. A Small VM (1 vCPU, 4 GB, 40 GB) is $32 a month, $0.0438 an hour. |
+| VM | $18 per vCPU, $2.50 per GB of memory and $0.10 per GB of disk, per month, on the default NVMe OS disk. A Small VM (1 vCPU, 4 GB, 40 GB) is $32 a month, $0.0438 an hour. |
+| Cheaper OS disks | The same Small VM is $27.60 a month on SSD and $17.16 on HDD, a slow tier for development and test, offered up to the Large size. See [OS disk tiers](/use/compute/billing#os-disk-tiers). |
+| Dedicated disks | Whole physical disks for one VM: $2.50 (HDD), $5 (SSD) or $8 (NVMe) per TiB-month. See [Dedicated disks](/use/compute/dedicated-disks). |
 | Public IPv4 | $0.005 an hour, about $3.65 a month, while attached. |
 | VM backups | $6 per TB-month stored. Each full backup stores the whole disk size. |
 | Outbound bandwidth | Not charged today. Inbound traffic is free. |

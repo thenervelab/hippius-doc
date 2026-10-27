@@ -77,7 +77,19 @@ A size can be greyed out. **Coming soon** means it isn't available yet. **Too sm
 You can [resize](/use/compute/resize) the vCPUs and memory of a VM later, but its disk keeps the size it was launched with. Pick a size whose disk is big enough.
 :::
 
-### 4. Authentication
+### 4. Choose the OS disk
+
+Pick the tier of the disk the VM boots from. It can't be changed after launch. Each card shows the hourly price of the chosen size on that tier, and how much less it costs than NVMe.
+
+<Unordered>
+  <li><strong>NVMe</strong>: the fastest disk, and the default.</li>
+  <li><strong>SSD</strong>: slower than NVMe, and cheaper.</li>
+  <li><strong>Budget HDD (slow)</strong>: slow, shared HDD storage, the cheapest. For sandboxes, development and test VMs, not for production or databases. It is offered up to the Large size, and never chosen for you.</li>
+</Unordered>
+
+A tier can be greyed out with the reason, for example when no server in the region has room on it. If you pick a size bigger than Large while Budget HDD is selected, the form switches the OS disk back to NVMe and says so. See [OS disk tiers](/use/compute/billing#os-disk-tiers) for the prices.
+
+### 5. Authentication
 
 Select every SSH key that should be able to log in. Each selected key can log in as the VM's default user. Saved keys show their name and fingerprint.
 
@@ -85,7 +97,7 @@ To add a key here, click **Add new key**, give it a name (for example `laptop`),
 
 You can select up to 20 keys per VM. You must select at least one, unless you picked a managed service.
 
-### 5. Add-ons
+### 6. Add-ons
 
 These are optional. Each one is added to the price in the summary.
 
@@ -94,11 +106,12 @@ These are optional. Each one is added to the price in the summary.
   <li><strong>Automatic failover</strong>: shown under the backups once they are on, in a region where it is offered (France for now). If the VM's server fails, the VM restarts on another server from its latest backup, so you can lose up to one backup interval of data, more if backups were failing. It is active after the first full backup. See <a href="/use/compute/vm-failover#turn-on-automatic-failover-at-creation">Turn on automatic failover at creation</a>.</li>
   <li><strong>Public IPv4</strong>: a dedicated public address for this VM. Inbound traffic is blocked unless a firewall rule allows it. It is off by default.</li>
   <li><strong>Open SSH (port 22) to the internet</strong>: shown once you tick Public IPv4, and on by default. It creates a firewall rule named <code>SSH (opened at launch)</code> that lets anyone reach port 22. Ping (ICMP) is always allowed. You can restrict or delete that rule later; see <a href="/use/compute/networking#restrict-ssh-to-your-own-address">Restrict SSH to your own address</a>.</li>
+  <li><strong>Dedicated disks</strong>: whole physical HDD, SSD or NVMe disks for this VM only, up to 8, for bulk storage you make redundant yourself. They pin the VM to its server: no backups, no migration and no failover. Offered on plain VMs, to accounts with a dedicated-disk quota. See <a href="/use/compute/dedicated-disks">Dedicated disks</a>.</li>
 </Unordered>
 
 Without a public IPv4, the VM can't be reached from the internet. You can still open a shell from the browser, and you can attach an address later. See [Public IPv4 and firewall](/use/compute/networking).
 
-### 6. Finalize details
+### 7. Finalize details
 
 Give the VM a **Name** of up to 64 characters, such as `web-1`.
 

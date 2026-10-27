@@ -16,6 +16,7 @@ A VM's disk lives on the server that runs it, encrypted inside the confidential 
   <li><strong>The VM is restored from its newest backup</strong> of the current boot, on another server in the same region.</li>
   <li><strong>Data written after that backup is lost.</strong> The most you can lose (the recovery point objective, or RPO) is the backup interval you chose: 24 hours, 6 hours, 1 hour or 15 minutes. If backups were failing or out of date, the newest backup is older and you lose more.</li>
   <li><strong>No backups, no failover.</strong> A VM without a restorable backup can't be failed over. Turn on <a href="/use/compute/vm-backups#turn-on-backups">scheduled backups</a> on any VM you want to be able to recover.</li>
+  <li><strong>No failover with dedicated disks.</strong> A VM with <a href="/use/compute/dedicated-disks">dedicated disks</a> is pinned to its server: it has no backups and is never failed over.</li>
   <li><strong>It takes a few minutes.</strong> A failover typically takes about 5 to 10 minutes for a 40 GiB disk.</li>
 </Unordered>
 
@@ -68,7 +69,7 @@ To survive the loss of a whole region, run your own redundancy across regions. S
 
 ### Turn on automatic failover at creation
 
-When you [create a VM](/use/virtual-machines#5-add-ons), turn on **Automatic backups**, then the **Automatic failover** switch under them. The switch is shown only once you pick a region where automatic failover is offered. In another region, the form says why instead, for example **Automatic failover isn't offered in Netherlands yet: no pair of servers in this region can fail over yet.** If you leave the region on automatic placement, it asks you to pick a region where it is offered.
+When you [create a VM](/use/virtual-machines#6-add-ons), turn on **Automatic backups**, then the **Automatic failover** switch under them. The switch is shown only once you pick a region where automatic failover is offered. In another region, the form says why instead, for example **Automatic failover isn't offered in Netherlands yet: no pair of servers in this region can fail over yet.** If you leave the region on automatic placement, it asks you to pick a region where it is offered.
 
 The summary then lists **Automatic failover: On**. A VM launched with automatic failover is placed on a server that has a failover partner. Until the VM is running, the **Failover** section of its **Backups** panel says **Automatic failover was asked for at launch: it is turned on with the backups once the VM is running.** If it can't be turned on then, the section says why, for example **Automatic failover could not be enabled: …** followed by **Backups are on; failover stays manual.**
 
