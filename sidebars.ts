@@ -283,6 +283,8 @@ const sidebars: SidebarsConfig = {
       collapsed: true,
       items: [
         "use/hippius-api",
+        "use/api-prices",
+        "use/wallet-login",
         "blockchain/api",
         {
           type: "category",

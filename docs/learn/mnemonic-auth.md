@@ -1,57 +1,30 @@
 ---
 sidebar_position: 4
-description: Legacy authentication method for existing Hippius users
+description: How signing in to Hippius with a 12-word access key works, and how it compares with Google, GitHub and Apple
 ---
 
-# Mnemonic Authentication (Legacy)
+# Access Key Authentication
 
-:::warning Legacy Authentication Method
-**Mnemonic authentication is ONLY available for existing users who created accounts before November 2025.**
+Hippius lets you sign in with a 12-word access key (a mnemonic, or recovery phrase) instead of Google, GitHub or Apple. Anyone can use it: the first sign-in with a new key creates a wallet-only account. That account has no email address and no free Drive plan, so subscribe before your first Drive upload.
 
-New users cannot use mnemonic authentication. If you're a new user, please use one of our modern authentication methods: **Google**, **Apple**, or **GitHub** OAuth.
-
-→ [See Authentication Methods](#authentication-methods) for details.
+:::info Building an app?
+The challenge and signature flow, with code, is in [Access Key Sign-In API](/use/wallet-login).
 :::
-
-Learn about our secure, extension-free authentication system using cryptographic mnemonics. This method is maintained for existing users who registered before the transition to OAuth-based authentication.
 
 ## Authentication Methods
 
-We offer different authentication options depending on when you created your account:
+| Method | Description |
+| ------ | ----------- |
+| **Google**, **GitHub**, **Apple** | Sign in with that account. Includes the Free Drive Plan. |
+| **Access Key** | Enter your 12 words. Wallet-only account, no email, no free Drive plan. |
 
-### For New Users (November 2025 onwards)
-
-New users must authenticate using one of the following OAuth providers:
-
-| Provider   | Description                                |
-| ---------- | ------------------------------------------ |
-| **Google** | Sign in with your Google account           |
-| **Apple**  | Sign in with your Apple ID _(Coming Soon)_ |
-| **GitHub** | Sign in with your GitHub account           |
-
-These modern authentication methods provide:
-
-- Seamless single sign-on experience
-- Two-factor authentication support from your provider
-- No need to manage or backup recovery phrases
-- Industry-standard OAuth 2.0 security
-
-### For Existing Users (before November 2025)
-
-If you created your account before November 2025, you have two options:
-
-1. **Mnemonic Authentication** - Continue using your existing mnemonic phrase (legacy method, documented below)
-2. **OAuth Authentication** - Link your account to Google, Apple, or GitHub for a modern sign-in experience
+Google, GitHub and Apple give you single sign-on, your provider's two-factor authentication, and nothing to back up. The access key needs no third-party account, but nobody can recover it for you. See [Signing In](/use/console/getting-started#signing-in) in the console guide.
 
 ---
 
-## Overview (Legacy Mnemonic System)
+## Overview
 
-Hippius originally used a mnemonic-based authentication system that provides secure access without requiring browser extensions or storing sensitive data. Your mnemonic phrase acts as both your identity and encryption key, giving you complete control over your account security.
-
-:::note
-This section documents the legacy mnemonic authentication system for existing users only.
-:::
+The access key signs you in without a browser extension and without Hippius storing anything secret. The words are your identity: whoever has them can sign in to your account.
 
 ## How It Works
 
@@ -61,17 +34,13 @@ Your mnemonic is a sequence of words that represents your cryptographic identity
 
 ### Key Derivation
 
-From your mnemonic, we derive multiple cryptographic keys for different purposes (authentication, encryption, signing) using deterministic algorithms.
+From your mnemonic, the app derives two key pairs on your device: an Ethereum key and a Substrate (sr25519) key. Your account is named by the Substrate address.
 
 ### Secure Authentication
 
-When you log in, we use your mnemonic to generate your public-private key pair. The public key identifies you, while the private key proves your identity.
+When you log in, the app asks the server for a one-time challenge and signs it with both keys. The server checks both signatures against your addresses and returns a session token. The words themselves are never sent.
 
-## Advantages Over Browser Extensions (Legacy)
-
-:::info
-These advantages apply to the legacy mnemonic system. New users should use OAuth authentication instead.
-:::
+## Advantages Over Browser Extensions
 
 ### No Dependencies:
 
@@ -92,7 +61,7 @@ These advantages apply to the legacy mnemonic system. New users should use OAuth
 - No need to sync extensions between browsers
 - Faster loading without extension overhead
 
-## Security Considerations (Legacy Mnemonic System)
+## Security Considerations
 
 ### Zero Storage Policy:
 
@@ -140,11 +109,7 @@ Our application is designed with security in mind:
 - We use secure input fields that prevent accidental exposure of sensitive data
 - All cryptographic operations are performed client-side for maximum security
 
-## Best Practices (Legacy Mnemonic Users)
-
-:::tip Consider Migrating to OAuth
-If you're an existing user still using mnemonic authentication, consider linking your account to Google, Apple, or GitHub for a more convenient sign-in experience while maintaining the same level of security.
-:::
+## Best Practices
 
 - Store your mnemonic phrase securely offline
 - Never share your mnemonic with anyone

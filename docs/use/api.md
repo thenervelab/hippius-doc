@@ -51,7 +51,9 @@ Management API requests need an access token. Generate one in the [Hippius Conso
 curl -H "Authorization: Token YOUR_TOKEN" https://api.hippius.com/api/accounts/
 ```
 
-A few catalogue reads need no token, for example the compute sizes and prices at `GET /api/compute/flavors/` and the plans at `GET /api/s3/plans/` and `GET /api/drive/plans/`. To act in an account shared with you, add the header `X-Hippius-Account: acct_...`. See [Shared accounts](/use/console/team).
+The price lists need no token: compute at `GET /api/compute/public-prices/`, CDN at `GET /api/cdn/prices/`, and the plans at `GET /api/s3/plans/`, `GET /api/drive/plans/` and `GET /api/registry/plans/`. See [Public Price API](/use/api-prices). To act in an account shared with you, add the header `X-Hippius-Account: acct_...`. See [Shared accounts](/use/console/team).
+
+To get a token from a user's 12-word access key inside your own app, see [Access Key Sign-In API](/use/wallet-login).
 
 ## Compute API
 
@@ -100,6 +102,8 @@ Some HTTP clients' default `User-Agent` is blocked in front of the API, with `40
 ## Related
 
 <Unordered>
+  <li><a href="/use/api-prices">Public Price API</a>: compute, CDN and plan prices without a token</li>
+  <li><a href="/use/wallet-login">Access Key Sign-In API</a>: sign users in with their 12-word key</li>
   <li><a href="/use/quickstart">S3 Quickstart</a>: first upload</li>
   <li><a href="/storage/s3/advanced">Advanced Usage</a> — Presigned URLs, ACLs, public buckets, sub-tokens</li>
   <li><a href="/storage/s3/compatibility">S3 Compatibility Matrix</a> — Supported S3 operations</li>
