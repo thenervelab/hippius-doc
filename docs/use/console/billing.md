@@ -172,7 +172,7 @@ At 80% of the cap the console warns you. At the cap, new uploads pause and your 
 :::warning Over the Free Drive Plan, uploads stop
 If you store more than the Free Drive Plan's 10 GB and have no paid plan, you get a notice, a reminder after 7 days, and after 14 days Drive becomes **read only**: you can still open, download and delete, but nothing new can be uploaded. Subscribing to a plan, or getting back under 10 GB, lifts it at the next daily check.
 
-Starter and Plus stop uploads as soon as they are full. An account with no plan at all can't upload anything, and the console warns that files already uploaded are deleted if it stays without a plan.
+Starter and Plus stop uploads as soon as they are full. An account with no plan at all can't upload anything. When a plan ends, files already uploaded are kept for a grace period and may then be removed; [contact support](/use/console/support) if you need more time.
 :::
 
 When your Drive is full, uploads stop and the console offers a bigger plan. You can also delete something and try again.
@@ -245,7 +245,7 @@ Your balance pays for renewals and for S3 pay as you go, so running dry affects 
 
 <Unordered>
   <li>A Hub plan that can't renew is marked <strong>past due</strong>, and the console asks you to top up. A Drive plan ends instead, and your Drive goes back to the Free Drive Plan. An S3 plan ends too, and your storage goes back to pay as you go.</li>
-  <li>S3 on pay as you go becomes <strong>read only</strong> after 7 days. You can still download, but nothing new can be written. 7 days later S3 is <strong>suspended</strong> and your buckets can't be reached. 23 days after that, 37 days from the start, the data is <strong>deleted</strong>, with a final notice a week before. Any top up that covers your usage puts everything back.</li>
+  <li>S3 on pay as you go becomes <strong>read only</strong> after 7 days. You can still download, but nothing new can be written. 7 days later S3 is <strong>suspended</strong> and your buckets can't be reached. After 37 days of unpaid storage the data may be <strong>deleted</strong>, with a final notice a week before. Any top up that covers your usage puts everything back.</li>
 </Unordered>
 
 Topping up puts everything back. To avoid it altogether, turn on **Low balance alerts** in [Settings](/use/console/settings), or turn on [auto-reload](#auto-reload).
