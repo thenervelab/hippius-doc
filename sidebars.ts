@@ -69,7 +69,15 @@ const sidebars: SidebarsConfig = {
             "storage/s3/examples/duplicati",
           ],
         },
-        "use/cdn",
+        {
+          type: "category",
+          label: "CDN",
+          collapsed: true,
+          items: [
+            { type: "doc", id: "use/cdn", label: "Overview" },
+            "use/cdn-firewall",
+          ],
+        },
         {
           type: "category",
           label: "Hub",
