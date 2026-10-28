@@ -234,17 +234,19 @@ When someone opens your share link, they land on a simple page in their browser 
 
 A **Download** option is always available. The file is streamed directly to the recipient's device, decrypted entirely in their browser. We never see the file in plaintext on the recipient's end either.
 
+When you've turned on comments or reactions for a link, recipients also see the comments in a panel beside the file (below it on a phone) and a bar of emoji reactions under it. See [Views, Comments and Reactions](#views-comments-and-reactions).
+
 If the link has been revoked or has expired, recipients see: _"This link has expired or been revoked."_ The page deliberately does not say which, which prevents anyone from guessing whether a link was ever valid.
 
 ## Views, Comments and Reactions
 
-Once a link exists, the share dialog shows three more switches under **Views, comments and reactions**: **Insights** counts views and watch time, **Comments** lets people comment, and **Reactions** lets them react with an emoji. They start on for screenshots and recordings you take in the console, and off for other files. Recipients see a short note when views are counted, can read comments without an account, and need a Hippius account to post a comment or react.
+Once a link exists, the share dialog shows three more switches under **Views, comments and reactions**: **Insights** counts views and watch time, **Comments** lets people comment, and **Reactions** lets them react with an emoji. On a paid Drive plan they start on for screenshots and recordings, and off for other files. On the Free plan they all start off, and turning one on shows an upgrade prompt instead. Recipients see a short note when views are counted, can read comments without an account, and need a Hippius account to post a comment or react.
 
 <Screenshot src="/img/console/captures/share-dialog-switches.png" alt="The console share dialog after the link is made, with Show a preview in chats and the Insights, Comments and Reactions switches" dark raw />
 
-To see what happened to a link, choose **View insights** from its row in Shared Links or in [Captures](/use/captures). Insights open in a panel on the right with the views, the viewers, a chart of where people stopped watching a video, the comments and the reactions. Comments and viewer names are end-to-end encrypted with the link's key. Everything about it, including what the Free plan shows, is in [Insights, comments and reactions](/use/captures/insights).
+To see what happened to a link, click <BgStyledText>Insights</BgStyledText> on its row in Shared Links or in [Captures](/use/captures), or choose **View insights** from the row menu. Shared Links also shows each link's **Views** and **Comments**, and you can sort by either. Insights open in a panel on the right with the views, a chart of where people stopped watching a video, and Comments, Viewers and Reactions tabs. The link's switches are behind the gear at the top of the panel. Comments and viewer names are end-to-end encrypted with the link's key. Everything about it, including what the Free plan shows, is in [Insights, comments and reactions](/use/captures/insights).
 
-<Screenshot src="/img/console/captures/insights-comments.png" alt="The console Insights panel showing viewers, comments with block and delete buttons, reactions and the Link settings switches" dark raw />
+<Screenshot src="/img/console/captures/insights-comments.png" alt="The Comments tab of the console's Insights panel, with comments from Sam, Robin and Jordan at moments in the recording, a reply from the owner, and the reaction totals in the summary" dark raw />
 
 ## Storage Usage
 

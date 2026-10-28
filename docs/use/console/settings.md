@@ -75,7 +75,7 @@ Hippius can also email you about your [share links](/use/console/shared-links), 
 | **Email me about new comments** | When people comment on your links. Comments are end-to-end encrypted, so the email says how many there are, not what they say. |
 | **Summary email** | A round-up of views and comments across your links: **Off**, **Daily** or **Weekly**. |
 
-Each email has a link to stop that kind of email. These emails are rolling out, so if you don't see this section yet, it's on its way. See [Insights, comments and reactions](/use/captures/insights).
+Each email has a link to stop that kind of email. See [Insights, comments and reactions](/use/captures/insights).
 
 ## Theme
 

@@ -15,7 +15,7 @@ Some things are quicker to show than to explain. Take a screenshot or record you
 
 What sets Hippius apart is where your captures live. Most screen recorders upload your videos to their own servers, in a form they can read. Hippius encrypts every capture on your computer before it's uploaded, into a drive in your own account. The key that opens it travels inside the link, so the people you send it to can watch it, and we can't.
 
-And a link can do more than play the video. You can see how many people opened it and, on a paid plan, how far into a recording they got. The people you sent it to can reply right under it, and their comments are encrypted with the same key as the capture.
+And a link can do more than play the video. You can see how many people opened it and, on a paid plan, how far into a recording they got. The people you sent it to can comment right next to it, and their comments are encrypted with the same key as the capture.
 
 ## What happens when you capture
 

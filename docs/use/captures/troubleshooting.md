@@ -94,7 +94,7 @@ A chat preview needs **Show a preview in chats** to be on when the link is made,
 
 ### Insights ask me to unlock before showing comments
 
-Comments are end-to-end encrypted with the link's key. In the console, if that key isn't in your browser yet, enter your [unlock password](/use/console/unlock-password) and the comments appear. For a link with a password, comments can only be read on the link's own page. See [Insights, comments and reactions](/use/captures/insights#privacy).
+Comments are end-to-end encrypted with the link's key. The console only asks when it can't find that key anywhere in your browser: not in this tab, not in your Drive if it's unlocked, and not in another console tab you have open. Enter your [unlock password](/use/console/unlock-password) and the comments appear. If your Drive is unlocked in another console tab, leave that tab open and the comments open without asking. For a link with a password, comments can only be read on the link's own page. See [Insights, comments and reactions](/use/captures/insights#privacy).
 
 ### I don't see Insights in the desktop app
 
