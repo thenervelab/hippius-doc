@@ -3,7 +3,7 @@ id: runners
 title: GitHub Actions Runners
 sidebar_label: GitHub Actions runners
 slug: /use/compute/runners
-description: Run your GitHub Actions jobs on single-use confidential Hippius VMs. Install the Hippius Runners GitHub App, link it to your account, use the hippius-small, hippius-medium and hippius-large labels, configure limits, and understand job statuses and billing.
+description: Run your GitHub Actions jobs on single-use confidential Hippius VMs. Install the Hippius Runners GitHub App, link it to your account, use the hippius-small, hippius-medium and hippius-large labels (or their cheaper -ssd versions), configure limits, and understand job statuses and billing.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -67,10 +67,22 @@ There are three sizes. A runner has the vCPUs and memory of the VM size with the
 
 The Runners page shows the current sizes and prices.
 
-To pin the region, add a two-letter country code: `hippius-medium-fr` runs only on servers in France. Without one, your **Default region** setting applies, or any region if it is empty.
+### Economy runners on SSD
+
+Add `-ssd` to the size for a cheaper runner on an SSD disk instead of NVMe. It runs the same jobs, but its VM takes several minutes longer to start.
+
+| Label | Resources | Price |
+|---|---|---|
+| `hippius-small-ssd` | 1 vCPU, 4 GB memory, 20 GB disk | $26.40 a month ($0.0362 an hour) |
+| `hippius-medium-ssd` | 2 vCPU, 8 GB memory, 20 GB disk | $51.60 a month ($0.0707 an hour) |
+| `hippius-large-ssd` | 4 vCPU, 16 GB memory, 30 GB disk | $102.60 a month ($0.1405 an hour) |
+
+An `-ssd` job only ever runs on SSD: when no server has SSD room, it waits rather than taking an NVMe runner. A job can't ask for both tiers: labels mixing `hippius-medium` and `hippius-medium-ssd` are refused.
+
+To pin the region, add a two-letter country code at the end: `hippius-medium-fr` and `hippius-medium-ssd-fr` run only on servers in France. Without one, your **Default region** setting applies, or any region if it is empty.
 
 :::warning Check the label
-Labels are matched without regard to case. A label that starts with `hippius` but isn't one of the three sizes, with an optional two-letter country, is refused: the Runners page shows **Unknown runner label** with the labels it accepts. A label that doesn't start with `hippius` never reaches Hippius at all: the job waits on GitHub until GitHub gives up on it, after about 24 hours. Check the label if a job sits in **Queued** and nothing appears in the console.
+Labels are matched without regard to case. A label that starts with `hippius` but isn't one of the three sizes, with an optional `-ssd` and an optional two-letter country, is refused: the Runners page shows **Unknown runner label** with the labels it accepts. A label that doesn't start with `hippius` never reaches Hippius at all: the job waits on GitHub until GitHub gives up on it, after about 24 hours. Check the label if a job sits in **Queued** and nothing appears in the console.
 :::
 
 ### What's on the runner
@@ -116,7 +128,7 @@ The **Jobs** table lists each job with its repository, workflow, size and region
 | **Failed** | The launch or the runner failed, and the VM was destroyed. |
 | **Timed out** | The job ran over the 6-hour limit, and the VM was destroyed. |
 
-**Boot time.** Expect about 3 to 5 minutes from queued to the job starting: each runner is a fresh confidential VM that boots, then installs Docker and the GitHub runner.
+**Boot time.** Expect about 3 to 5 minutes from queued to the job starting: each runner is a fresh confidential VM that boots, then installs Docker and the GitHub runner. An `-ssd` runner takes several minutes longer.
 
 **6-hour limit.** A job can run for 6 hours. A job still running after that is stopped within a few minutes, marked **Timed out**, and its VM destroyed.
 
@@ -137,6 +149,8 @@ Refusals show on the Runners page only. On GitHub, the job just stays queued ("W
 | GitHub installation suspended or unlinked | Unsuspend the App on GitHub (**Manage on GitHub**), or connect it again. |
 | Installation linked to another Hippius account | The installation was moved to another account. |
 | Unknown runner label | The label starts with `hippius` but isn't a size we serve. Fix the label in your workflow. |
+| Runner tier not offered | The `-ssd` tier isn't sold right now. Use the label without `-ssd`. |
+| Conflicting labels | The job asks for both an NVMe and an SSD runner. Keep one. |
 | Over your compute quota | Runners count against your compute quotas. Free some resources, or contact support. |
 | Balance too low for the runway | Top up: your balance must cover 24 hours of your compute, including the runner. |
 | Unpaid compute usage | Top up to settle what your account owes. |
@@ -147,7 +161,7 @@ Refusals show on the Runners page only. On GitHub, the job just stays queued ("W
 
 ## Billing
 
-A runner VM is billed per second at its size's price while the VM is billed, like any VM, with a minimum of one minute. That runs from one minute before the job starts (never before the VM was created) until the VM is torn down. Most of the boot is not billed, and a runner VM that never ran a job (cancelled while booting, or its job taken by another runner) costs nothing. The **Est. cost** column shows each job's billed time at today's price.
+A runner VM is billed per second at the price of its label (size and tier) while the VM is billed, like any VM, with a minimum of one minute. That runs from one minute before the job starts (never before the VM was created) until the VM is torn down. Most of the boot is not billed, and a runner VM that never ran a job (cancelled while booting, or its job taken by another runner) costs nothing. The **Est. cost** column shows each job's billed time at today's price.
 
 Runner VMs don't appear in your VM list. They count against your **GitHub Actions runners** quota (3 at once on a new account) and against your vCPU, memory and disk quotas. The [24-hour balance requirement](/use/compute/billing#the-24-hour-balance-requirement) is checked for each job.
 

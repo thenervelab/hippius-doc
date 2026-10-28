@@ -18,7 +18,7 @@ All are `GET` on `https://api.hippius.com`, with no authentication.
 
 | Endpoint | What it returns | Amounts in |
 |----------|-----------------|------------|
-| `/api/compute/public-prices/` | Everything compute sells: VM sizes per disk tier, dedicated disks, public IPv4, backups, managed database and Kubernetes fees, runners, bandwidth | Credits, decimal strings |
+| `/api/compute/public-prices/` | Everything compute sells: VM sizes per disk tier, dedicated disks and their free stock per region, public IPv4, backups, managed database and Kubernetes fees, runners per tier, bandwidth | Credits, decimal strings |
 | `/api/compute/flavors/` | VM sizes with their monthly price on NVMe | Credits, numbers |
 | `/api/cdn/prices/` | CDN egress per region, requests, custom domains | Base units, strings |
 | `/api/s3/plans/` | S3 plans and the pay-as-you-go rate | Credits, numbers |
@@ -52,8 +52,13 @@ A trimmed response (one tier, one size per list):
     }
   ],
   "dedicated_disks": [
-    { "tier": "hdd", "name": "HDD", "gib_hourly": "0.000003344392123287",
-      "tib_monthly": "2.50", "min_size_gb": 1000, "max_per_vm": 8 }
+    { "tier": "nvme", "name": "NVMe", "gib_hourly": "0.00001070205479452",
+      "tib_monthly": "8.00", "min_size_gb": 1000, "max_per_vm": 8, "size_class_gb": 100,
+      "regions": [
+        { "region": "FR", "name": "France",
+          "sizes": [ { "size_gb": 3500, "free": 4, "max_count": 4,
+                       "hourly": "0.03745719178082", "monthly": "27.34" } ] }
+      ] }
   ],
   "public_ip": { "price": { "hourly": "0.005", "monthly": "3.65" },
                  "free": false, "free_until": null, "after_free": null },
@@ -68,6 +73,13 @@ A trimmed response (one tier, one size per list):
     { "size": "small", "label": "hippius-small", "vcpus": 1, "memory_mb": 4096, "disk_gb": 20,
       "hourly": "0.041095890410958904", "monthly": "30.00" }
   ],
+  "runner_tiers": [
+    { "tier": "ssd", "name": "SSD",
+      "runners": [
+        { "size": "small", "tier": "ssd", "label": "hippius-small-ssd", "vcpus": 1, "memory_mb": 4096,
+          "disk_gb": 20, "hourly": "0.036164383561643819", "monthly": "26.40" }
+      ] }
+  ],
   "bandwidth_per_gb": "0",
   "bandwidth_by_region": {
     "FR": { "unlimited": true, "included_bytes_per_month": null, "overage_per_gb": "0", "cap_mbps": {} },
@@ -81,7 +93,9 @@ A trimmed response (one tier, one size per list):
 <Unordered>
   <li><strong>Amounts</strong> are decimal strings in credits. Parse them with a decimal type, not a float. <code>hourly</code> is exact; <code>monthly</code> is <code>hourly</code> × <code>hours_per_month</code> (730), rounded to the cent.</li>
   <li><strong><code>os_disk_tiers</code></strong> lists the boot-disk tiers you can launch on now (<code>nvme</code>, <code>ssd</code>, <code>hdd</code>), each with its sizes priced on that tier and the disk's own rate per GB (<code>disk_gb</code>). <code>max_flavor</code> is the largest size the tier allows, set on <code>hdd</code> only.</li>
-  <li><strong><code>dedicated_disks</code></strong> are extra whole disks attached to a VM, priced per TiB-month, from <code>min_size_gb</code> and up to <code>max_per_vm</code> per VM.</li>
+  <li><strong><code>dedicated_disks</code></strong> are extra whole disks attached to a VM, priced per TiB-month, from <code>min_size_gb</code> and up to <code>max_per_vm</code> per VM. A disk is sold and billed at its size class, its size rounded down to <code>size_class_gb</code> GiB.</li>
+  <li><strong><code>dedicated_disks[].regions</code></strong> is the stock right now: per region, each size class (<code>size_gb</code>) with how many disks are <code>free</code>, <code>max_count</code>, the most one VM can get at that size (they must sit on one server), and the price of one disk. An empty list means none free; <code>null</code> means stock is not known at the moment, not that none are free.</li>
+  <li><strong><code>runners</code></strong> are the GitHub Actions runner sizes on the standard NVMe tier, with the label to put in <code>runs-on</code>. <strong><code>runner_tiers</code></strong> lists every runner tier sold now, NVMe first, then SSD (economy, labels ending in <code>-ssd</code>), each with its sizes and prices.</li>
   <li><strong><code>managed_database</code></strong> costs its VMs plus <code>fee_percent</code>; an HA database runs <code>ha_instances</code> VMs. <strong><code>managed_kubernetes</code></strong> costs its VMs plus <code>cluster_fee</code>, with <code>control_plane_nodes</code> control-plane VMs. <code>sizes</code> map each size to the VM size it runs on.</li>
   <li><strong><code>bandwidth_by_region</code></strong> is outbound traffic per region. <code>included_bytes_per_month</code> is a byte count as a string, null when <code>unlimited</code>. Inbound traffic is free.</li>
   <li><strong><code>backup_storage.max_disk_gb</code></strong> is the largest VM disk backups are sold for; <code>0</code> means no limit.</li>

@@ -679,7 +679,7 @@ Support:
 ### Public prices (no auth)
 
 Docs: https://docs.hippius.com/use/api-prices
-    GET  https://api.hippius.com/api/compute/public-prices/   everything compute sells: os_disk_tiers[] (tier, disk_gb rate, max_flavor, flavors[]), dedicated_disks[], public_ip, backup_storage, managed_database, managed_kubernetes, runners[], bandwidth_per_gb, bandwidth_by_region
+    GET  https://api.hippius.com/api/compute/public-prices/   everything compute sells: os_disk_tiers[] (tier, disk_gb rate, max_flavor, flavors[]), dedicated_disks[] (size_class_gb, regions[] free stock per size), public_ip, backup_storage, managed_database, managed_kubernetes, runners[], runner_tiers[] (nvme, ssd), bandwidth_per_gb, bandwidth_by_region
     GET  https://api.hippius.com/api/compute/flavors/         VM sizes, price_credits_monthly (NVMe)
     GET  https://api.hippius.com/api/cdn/prices/              base units (divide by 10^18 for credits)
     GET  https://api.hippius.com/api/s3/plans/ · /api/drive/plans/ · /api/registry/plans/
