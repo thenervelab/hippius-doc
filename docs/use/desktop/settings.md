@@ -287,7 +287,7 @@ Sync & Storage
 
     ### Emails about your links
 
-    <p>Arriving with <a href="/use/captures/insights">Insights</a>, this card lets Hippius email you about your share links: <strong>First views</strong> when a link is opened for the first time, <strong>New comments</strong> when people comment (the email says how many, since comments are encrypted), and a <strong>Summary</strong> of views and comments, daily, weekly or off. These emails are rolling out, so the card may not appear yet. More in <a href="/use/captures/insights#emails-about-your-links">Emails about your links</a>.</p>
+    <p>Arriving with <a href="/use/captures/insights">Insights</a> in version 0.6.16, which is on the <a href="/use/desktop/beta-channel">beta channel</a> now, this card lets Hippius email you about your share links: <strong>First views</strong> when a link is opened for the first time, <strong>New comments</strong> when people comment (the email says how many, since comments are encrypted), and a <strong>Summary</strong> of views and comments, daily, weekly or off. Until 0.6.16 reaches you, you can choose the same emails in the console. More in <a href="/use/captures/insights#emails-about-your-links">Emails about your links</a>.</p>
 
     <Screenshot src="/img/desktop/captures/settings-link-emails.png" alt="Emails about your links with First views, New comments and a weekly Summary" dark raw />
 
