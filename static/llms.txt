@@ -72,7 +72,7 @@ Prices per 730-hour month, on the default NVMe OS disk: vCPU $18, memory $2.50/G
 - Managed Kubernetes clusters (cluster key, kubeconfig, API access): https://docs.hippius.com/use/compute/kubernetes
 - Kubernetes worker pools and signed node operations: https://docs.hippius.com/use/compute/kubernetes-worker-pools
 - Kubernetes backups (etcd snapshots, Velero, restore with rclone): https://docs.hippius.com/use/compute/kubernetes-backups
-- GitHub Actions runners (`runs-on: hippius-small|medium|large`): https://docs.hippius.com/use/compute/runners
+- GitHub Actions runners (`runs-on: hippius-small|medium|large`, `-ssd` for the cheaper SSD tier): https://docs.hippius.com/use/compute/runners
 - Compute prices, management fees, quotas and unpaid balance: https://docs.hippius.com/use/compute/billing
 - Refusals and troubleshooting: https://docs.hippius.com/use/compute/troubleshooting
 
