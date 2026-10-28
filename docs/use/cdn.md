@@ -3,7 +3,7 @@ id: cdn
 title: Hippius CDN
 sidebar_label: CDN
 slug: /use/cdn
-description: Put the Hippius CDN in front of an S3 bucket. Create a zone, serve it on its default hostname or your own domain, host a static site or single-page app, set cache rules, purge, and understand CDN prices, billing regions and the monthly spend cap.
+description: Put the Hippius CDN in front of an S3 bucket. Create a zone, serve it on its default hostname or your own domain, host a static site or single-page app, set cache rules, purge, read traffic stats, and understand CDN prices, billing regions and the monthly spend cap.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -19,7 +19,7 @@ A **zone** is a CDN in front of one bucket, or one folder (prefix) of it. As soo
 <Unordered>
   <li><strong>Origins.</strong> Hippius S3 buckets, public or private. Other web servers (HTTP(S) origins) aren't supported yet.</li>
   <li><strong>Regions.</strong> Cache nodes serve from France (FR) and Australia (AU). Visitors in Oceania are sent to AU (or to FR if AU has no node up), everyone else to FR. The <strong>shield region</strong> of a zone is the cache the other regions fill from: pick the one nearest the bucket. FR is the default.</li>
-  <li><strong>Limits.</strong> 10 zones per account and 20 custom domains per zone.</li>
+  <li><strong>Limits.</strong> 10 zones per account and 20 custom domains per zone. Each cache node serves a zone up to 20,000 requests per second and 2,000 Mbit/s: above that, new requests get <code>503</code> with <code>Retry-After</code>, and aren't billed.</li>
 </Unordered>
 
 ## Create a zone
@@ -120,9 +120,9 @@ On the zone's **Hostnames** tab, click <BgStyledText>Add domain</BgStyledText> a
 |---|---|---|
 | `CNAME social.example.com` | `ZONE_ID.c.hipcdn.net` | Sends visitors to the CDN, and proves you own the name. Creating it switches live traffic to Hippius. |
 | `TXT _hippius-cdn.social.example.com` | `hippius-cdn-…` (your token) | Proves you own the name. Optional for a subdomain (the CNAME proves it too), but it lets you prove ownership, and get the certificate, before you move the CNAME. Required for a bare domain. |
+| `CNAME _acme-challenge.social.example.com` | `….dcv.c.hipcdn.net` | **Required** for the HTTPS certificate: it lets Hippius complete the certificate authority's DNS check for your name. |
 
 Either the hostname CNAME or the TXT is enough to prove ownership. Once it is proven and the certificate is issued, the domain is **Active** and served. It is billed only once its traffic points to the CDN: from the first check that sees the hostname CNAME (for a bare domain, its ALIAS flattened into Hippius CDN addresses) in place. With the TXT alone, the console shows it as verified, with billing starting when traffic points to the CDN. Such a domain is checked again every 10 minutes, so billing starts shortly after you switch the CNAME.
-| `CNAME _acme-challenge.social.example.com` | `….dcv.c.hipcdn.net` | **Required** for the HTTPS certificate: it lets Hippius complete the certificate authority's DNS check for your name. |
 
 A name can hold a CNAME and nothing else. If `social.example.com` already has an A, AAAA or CNAME record (for example a CNAME to CloudFront), edit or delete it rather than adding a second one. The same goes for an old `_acme-challenge` TXT record left by another certificate tool.
 
@@ -235,11 +235,15 @@ The two reminders respect the email notifications switch in your account setting
 
 **By default**, a zone caches successful responses (200 and 206) for 1 hour and 404s for 1 minute. Redirects (3xx) and server errors (5xx) aren't cached. Visitors get `Cache-Control: public, max-age=3600`. The origin's own `Cache-Control` and `Expires` are ignored. The query string isn't part of the cache key, and isn't sent to the bucket: a file is cached once per path.
 
-The **Cache rules** tab holds an ordered list of up to 50 rules. Each rule matches a path prefix, a glob or a list of file extensions, and sets one or more actions: how long the cache keeps a file (`edge_ttl`), how long browsers keep it (`browser_ttl`), which query parameters are part of the cache key, whether to bypass the cache, and whether to ignore `Set-Cookie`. Rules are evaluated top to bottom. Click <BgStyledText>Save rules</BgStyledText> to save the list.
+The **Cache rules** tab holds an ordered list of up to 50 rules. Each rule matches a path prefix, a glob or a list of file extensions, and sets one or more actions: how long the cache keeps a file (`edge_ttl`, in seconds, or `"origin"` to follow the object's own `Cache-Control` or `Expires`), how long browsers keep it (`browser_ttl`), which query parameters are part of the cache key, whether to bypass the cache, and whether to ignore `Set-Cookie`. Rules are evaluated top to bottom and the first match wins, whole: put specific rules first. Click <BgStyledText>Save rules</BgStyledText> to save the list.
 
-The **Purge** tab invalidates what you name on every cache node: paths, folders (prefixes ending in `/`), or everything. The next request for it is fetched from the origin. A purge usually reaches every node in under a minute. You can purge up to 100 times a minute per zone, and everything once a minute.
+The **Purge** tab invalidates what you name on every cache node: paths, folders (prefixes ending in `/`), or everything. The next request for it is fetched from the origin. A purge usually reaches every node in under a minute. A request names up to 1,000 paths or prefixes. You can purge up to 100 times a minute per zone, and everything once a minute.
 
 Through the API, send `POST /api/cdn/zones/ZONE_ID/purge/` with exactly one of `{"paths": [...]}`, `{"prefixes": [...]}` or `{"all": true}`.
+
+## Traffic stats
+
+The zone's **Stats** tab shows what it served over the last 24 hours, 7 days or 30 days: bytes, requests and cache hit ratio, a chart over time, a breakdown by the region of the cache node that answered, responses by status class, the bytes fetched from the bucket, and the requests refused and not billed (such as those of a paused zone). Traffic shows there within a few minutes.
 
 ## Prices
 
@@ -260,16 +264,22 @@ Prices can change. The console's CDN pages show the current ones, and the create
 
 ## Monthly spend cap
 
-Each zone has a monthly spend cap, $20 by default. The month's spend is checked every minute.
+Each zone has a monthly spend cap: $20 by default, from $1 to $100,000. It is a hard stop, not a warning. The month runs in UTC. Its spend (traffic, requests and custom domains) is checked every minute, and shown in the zone list and on the zone's **Settings** tab.
 
 <Unordered>
-  <li>At 80% of the cap, you get an email.</li>
-  <li>At the cap, the zone is <strong>paused</strong>: requests get an error, and they aren't billed. Because the spend is checked every minute, it can end slightly above the cap. Raise the cap on the zone's <strong>Settings</strong> tab and it serves again at once. Otherwise it resumes on the 1st of the next month.</li>
+  <li><strong>At 80% of the cap</strong>, you get an email.</li>
+  <li><strong>At the cap</strong>, the zone is <strong>paused</strong>, and you get an email. Every request, on the default hostname and on your custom domains, is answered <code>503</code>, and nothing is billed: not the requests, not the custom domains.</li>
+  <li><strong>No fallback.</strong> A paused zone doesn't send visitors to the bucket or redirect them anywhere: requests stop at the cache node. Your bucket and its files aren't touched.</li>
+  <li><strong>Resuming.</strong> Raise the cap on the zone's <strong>Settings</strong> tab: the zone serves again within a minute of the cap going above the month's spend. Otherwise it resumes by itself on the 1st of the next month. Either way, you get an email when it serves again.</li>
 </Unordered>
+
+Because the spend is checked every minute, a zone can end slightly above its cap.
+
+If your account's unpaid usage gets its virtual machines stopped, its zones are **suspended** too: they answer `403` until the balance is settled, then serve again.
 
 ## Emails
 
-The account owner is emailed when a zone reaches 80% of its cap, is paused by its cap or serves again, is suspended or blocked, when a custom domain turns active or needs action (DNS not proven after 1, 3 and 6 days: see [Reminder emails](#reminder-emails); certificate not issued; DNS moved), when a certificate is about to expire or has expired, and on the 1st of each month with a summary of last month's CDN usage, if there was any. The monthly summary and the two DNS reminders respect the email notifications switch in your account settings; the others are always sent.
+The account owner is emailed when a zone reaches 80% of its cap, is paused by its cap or serves again, is suspended for unpaid usage or blocked, when a custom domain turns active or needs action (DNS not proven after 1, 3 and 6 days: see [Reminder emails](#reminder-emails); certificate not issued; DNS moved), when a certificate is about to expire or has expired, and on the 1st of each month with a summary of last month's CDN usage, if there was any. The monthly summary and the two DNS reminders respect the email notifications switch in your account settings; the others are always sent.
 
 ## Where to next
 

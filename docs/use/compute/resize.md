@@ -17,13 +17,14 @@ Resizing moves a VM to another size: more or fewer vCPUs and more or less memory
 <Unordered>
   <li><strong>vCPUs and memory change</strong> to those of the new size.</li>
   <li><strong>The disk keeps its size and its data.</strong> It can't grow or shrink, because it is encrypted with integrity protection. A VM launched with a 40 GB disk keeps 40 GB at any size, and a VM you make smaller keeps its bigger disk.</li>
+  <li><strong>The OS disk tier and any <a href="/use/compute/dedicated-disks">dedicated disks</a> are kept</strong> as they are.</li>
 </Unordered>
 
 :::note Need a bigger disk?
 Launch a new VM at a size with a bigger disk, and move your data across.
 :::
 
-The price of a resized VM is worked out from what it actually has: the new size's vCPUs and memory, plus its own disk. So a resized VM whose disk is smaller than the new size's usual disk costs less than a new VM of that size. The resize dialog shows the exact new price.
+The price of a resized VM is worked out from what it actually has: the new size's vCPUs and memory, plus its own disk on its own OS disk tier. So a resized VM whose disk is smaller than the new size's usual disk costs less than a new VM of that size. The resize dialog shows the exact new price.
 
 ## Resize a VM
 

@@ -21,12 +21,13 @@ These are the prices in force today. Amounts are in dollars, taken from your bal
 |---|---|
 | vCPU | $18 per vCPU per month |
 | Memory | $2.50 per GB per month |
-| Disk | $0.10 per GB per month |
+| OS disk | Per GB per month: $0.10 on NVMe, $0.06 on SSD, $0.03 on HDD |
+| Dedicated disks | Per TiB-month: $2.50 HDD, $5 SSD, $8 NVMe. See [Dedicated disks](/use/compute/dedicated-disks). |
 | Public IPv4 | $0.005 per hour (about $3.65 a month), while attached |
 | VM backups | $6 per TB-month stored. Each full backup stores the whole disk size. |
 | Outbound bandwidth | Measured per region; $0 today in France, the Netherlands and Australia (Australia: 1 TB per VM per month included). Inbound traffic is free. |
 
-A VM costs the sum of its vCPUs, memory and disk:
+A VM's price depends on its size and on the tier of its OS disk, chosen when you create it. On an NVMe OS disk, the default, a VM costs the sum of its vCPUs, memory and disk:
 
 | Size | Resources | Price |
 |---|---|---|
@@ -37,7 +38,22 @@ A VM costs the sum of its vCPUs, memory and disk:
 | **2X-Large** | 16 vCPU, 64 GB memory, 640 GB disk | $512 a month ($0.7014 an hour) |
 | **4X-Large** | 32 vCPU, 128 GB memory, 1280 GB disk | $1024 a month ($1.4027 an hour) |
 
-A VM you have resized keeps its disk, so it is priced on the vCPUs and memory it has now and the disk it was launched with.
+### OS disk tiers
+
+SSD and HDD OS disks are slower than NVMe, and cost less: the whole VM is cheaper, not only its disk.
+
+| Size | NVMe | SSD | HDD |
+|---|---|---|---|
+| **Small** | $32 | $27.60 | $17.16 |
+| **Medium** | $64 | $55.20 | $34.32 |
+| **Large** | $128 | $110.40 | $68.64 |
+| **X-Large** | $256 | $220.80 | Not offered |
+| **2X-Large** | $512 | $441.60 | Not offered |
+| **4X-Large** | $1024 | $883.20 | Not offered |
+
+Prices are per month. HDD is a slow, shared tier for sandboxes, development and test VMs, not for production or databases. It is offered up to the Large size. Managed databases and Kubernetes nodes always run on NVMe.
+
+A VM you have resized keeps its disk, so it is priced on the vCPUs and memory it has now and the disk, and disk tier, it was launched with.
 
 Prices can change. The **Prices** section of <a href="https://console.hippius.com/dashboard/billing/compute#prices">Compute Usage</a> is always current, and every create form shows the hourly and monthly price of what you are about to launch.
 
@@ -65,6 +81,7 @@ Some examples:
 | What | How it is billed |
 |---|---|
 | **Virtual machines** | Per second, by size: its vCPUs, memory and disk. From the first time the VM runs until you ask to delete it, **including while it is stopped**. |
+| **Dedicated disks** | Per GiB-hour of each disk's size class, at its tier's price, **including while the VM is stopped**. See [Dedicated disks](/use/compute/dedicated-disks#billing). |
 | **Public IPv4** | Per second while the address is attached. |
 | **Bandwidth** | Outbound traffic is measured per VM and per region, and not charged today. Inbound traffic is free. |
 | **VM backups** | Per GB of backup storage per hour, $6 per TB-month: each full backup at the disk's full size, each incremental at what changed, and older chains for 7 days. See [VM backups](/use/compute/vm-backups#what-backups-cost). |
@@ -111,6 +128,7 @@ Your limits depend on your account's tier. A new account starts on **Starter**:
 | vCPUs | 8 | 32 | 96 |
 | Memory | 32 GB | 128 GB | 384 GB |
 | Disk | 320 GB | 1024 GB | 4096 GB |
+| Dedicated disks | 4 TiB | 16 TiB | 64 TiB |
 | Public IPv4 | 3 | 6 | 15 |
 | GitHub Actions runners (at once) | 3 | 10 | 20 |
 
@@ -129,6 +147,7 @@ A few things to know:
 <Unordered>
   <li>The vCPU, memory and disk quotas include the instances of your databases, your Kubernetes nodes and your runners. The <strong>Virtual machines</strong> quota only counts the VMs you create yourself.</li>
   <li>A High availability database counts three instances. A Kubernetes cluster counts three masters and their three public IPv4 addresses.</li>
+  <li><a href="/use/compute/dedicated-disks">Dedicated disks</a> have their own quota, separate from the disk quota of your VMs.</li>
   <li>Only what you add is checked. If your account is above a limit, you keep everything, but you can't add more until you are back under it.</li>
 </Unordered>
 

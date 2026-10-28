@@ -114,3 +114,4 @@ Backups that are kept after you turn them off are billed until they are deleted.
 | Backups are available only for VMs launched from one of our standard images. | Backups can't be turned on for this VM. |
 | This VM's disk is too large to be backed up for now. | Backups can't be turned on for this VM yet. |
 | Backups are not available right now. | Try again later. |
+| This VM has dedicated disks: it is pinned to its server and is not backed up. | A VM with [dedicated disks](/use/compute/dedicated-disks) can't have backups. Back its data up yourself. |

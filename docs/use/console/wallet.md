@@ -98,7 +98,7 @@ The selector in the top right shows your connected account. Click it to open the
 
 <Ordered>
   <li>Find the account you want to use.</li>
-  <li>Click <BgStyledText>Select Wallet</BgStyledText> next to it.</li>
+  <li>Click <BgStyledText>Switch wallet</BgStyledText> next to it. The account in use is marked <strong>Active wallet</strong>.</li>
 </Ordered>
 
 Hover a truncated address to see it in full. Click the copy icon to copy it, or the link icon to open it on [hipstats.com](https://hipstats.com). We remember your choice across sessions.

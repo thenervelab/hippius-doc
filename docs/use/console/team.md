@@ -60,7 +60,7 @@ Two permissions sit next to the levels:
 | Permission | What it allows |
 |---|---|
 | **Manage the team** | Invite, change and remove members, revoke invitations, and read the audit trail. A manager can only give access they hold themselves, can't change their own access, and can't change or remove anyone whose access goes beyond theirs. |
-| **Billing** | Read the account's balance, invoices, compute usage and billing summary, and S3 plan history. Payments stay with the owner. |
+| **Billing** | Read the balance, invoices and compute usage of every billing account, the billing summary, and S3 plan history. To let someone pay, make them a billing admin of a [billing account](/use/console/projects). |
 
 ### What only the owner can do
 
@@ -69,7 +69,7 @@ Some actions stay with the owner, whatever a member's level:
 <Unordered>
   <li><strong>Create a Kubernetes cluster.</strong> A cluster is bound to its creator's key file, so one created by a member couldn't be opened by the owner.</li>
   <li><strong>Open a cluster's kubeconfig and backups</strong>, and the node operations signed with the cluster's key file: adding or replacing nodes and accepting data loss. A Kubernetes admin can still scale a pool down, remove a node, cancel an operation and delete the cluster.</li>
-  <li><strong>Add money to the balance.</strong> A member is told to ask the owner.</li>
+  <li><strong>Add money to the balance</strong>, unless the member is a billing admin of a <a href="/use/console/projects">billing account</a>: a billing admin can top it up by card or Bitcoin and edit its billing details. Anyone else is told to ask the owner.</li>
   <li><strong>Buy, change or cancel an S3 or Drive plan.</strong></li>
   <li><strong>Manage the team</strong>, unless the owner gives that permission to a member. Nobody can remove the owner or change the owner's access.</li>
 </Unordered>
@@ -173,7 +173,7 @@ The owner's own product actions aren't recorded here.
 <Unordered>
   <li><strong>The owner pays.</strong> What a member launches is billed to the account, by the hour, from the owner's balance. See <a href="/use/compute/billing">Compute billing</a>.</li>
   <li><strong>The owner's quotas apply.</strong> A member's launches count against the account's quotas and its <a href="/use/compute/billing#the-24-hour-balance-requirement">24-hour balance requirement</a>, not the member's own.</li>
-  <li><strong>Alerts go to the owner.</strong> Low balance, unpaid usage and VM emails are sent to the owner only.</li>
+  <li><strong>Alerts go to the owner.</strong> Low balance, unpaid usage and plan emails go to the owner, and also to the billing admins and the billing email of the billing account that pays. Other emails, such as VM emails, go to the owner only.</li>
 </Unordered>
 
 ## For developers: the API
@@ -214,5 +214,5 @@ The team itself is managed under `/api/accounts/`: `members/`, `invites/` and `a
   <li><a href="/use/compute">Compute</a>: what members can run in the account.</li>
   <li><a href="/use/compute/billing">Compute billing and quotas</a>: what the account pays for.</li>
   <li><a href="/use/console/shared-drives">Shared Drives</a>: share files in Drive.</li>
-  <li><a href="/use/console/projects">Projects and billing accounts</a> (beta): access per project, separate wallets.</li>
+  <li><a href="/use/console/projects">Projects and billing accounts</a>: access per project, separate wallets.</li>
 </Unordered>

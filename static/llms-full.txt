@@ -124,7 +124,7 @@ Hub (names Free, Builder, Pro, Team; paid from the balance only; top up by card,
 
 Catalogs (no auth): GET https://api.hippius.com/api/drive/plans/ · GET https://api.hippius.com/api/s3/plans/ · GET https://api.hippius.com/api/registry/plans/
 
-Plan prices, monthly (the catalogs above are always current): Drive Free 10 GB $0, Starter 500 GB $4, Plus 2 TB $7, Max 10 TB $22, Scale 25 TB $50. S3 Pro 10 TB $53, Business 50 TB $245, Enterprise 100 TB $465. Hub Free $0, Builder $5, Pro $19, Team $99.
+Plan prices, monthly (the catalogs above are always current): Drive Free 10 GB $0, Starter 500 GB $4, Plus 2 TB $7, Max 10 TB $22, Scale 25 TB $50 (Max and Scale bill storage above the plan hourly, $2.20 and $2.00 per TB per month, up to a storage cap that defaults to twice the plan; Drive plans are monthly only, a downgrade or cancel takes effect at the end of the period). S3 Pro 10 TB $53, Business 50 TB $245, Enterprise 100 TB $465. Hub Free $0, Builder $5, Pro $19, Team $99.
 
 Google, GitHub, and Apple accounts include the Free Drive Plan (10 GB). S3 starts on pay as you go at $6 per TB per month. A plan is optional. Creating a Hub namespace needs a balance of at least $10.
 
@@ -224,9 +224,9 @@ Compute is open to every account, in the console under Confidential Computing. T
 
 Billing: metered per second (one-minute minimum per VM and public IPv4), charged hourly on the Hippius chain from the balance. A VM is billed running or stopped until it is deleted. A launch needs a balance covering 24 hours of the account's compute plus the launch. Quotas apply: new accounts start on the Starter tier (3 VMs, 8 vCPU) and move up automatically with their charged usage.
 
-Prices per 730-hour month: vCPU $18, memory $2.50/GB, disk $0.10/GB. Small (1 vCPU, 4 GB, 40 GB) $32 ($0.0438/h), Medium $64, Large $128, X-Large $256, 2X-Large $512, 4X-Large $1024. Public IPv4 $0.005/h (~$3.65/month). VM backups $6 per TB-month. Outbound bandwidth metered per region, not charged today; inbound free. Managed databases: their VMs plus 25%. Kubernetes: its VMs plus $15 per cluster per month. Database and Kubernetes backups go to the user's own S3, at S3 prices. The live price list wins: https://console.hippius.com/dashboard/billing/compute#prices. Details: https://docs.hippius.com/use/compute/billing
+Prices per 730-hour month, on the default NVMe OS disk: vCPU $18, memory $2.50/GB, disk $0.10/GB. Small (1 vCPU, 4 GB, 40 GB) $32 ($0.0438/h), Medium $64, Large $128, X-Large $256, 2X-Large $512, 4X-Large $1024. OS disk tier chosen at launch, fixed: SSD (disk $0.06/GB; Small $27.60, Medium $55.20, Large $110.40, X-Large $220.80, 2X-Large $441.60, 4X-Large $883.20) or HDD, slow, for dev and test, up to Large (disk $0.03/GB; Small $17.16, Medium $34.32, Large $68.64). Managed databases and Kubernetes nodes run on NVMe. Dedicated disks: whole physical disks for one VM, up to 8, at least 1,000 GiB, exact tier, $2.50 HDD / $5 SSD / $8 NVMe per TiB-month, billed while stopped; the VM is pinned (no backups, migration or failover) and counts against a dedicated-disk quota (4 TiB Starter, 16 TiB Standard, 64 TiB Business): https://docs.hippius.com/use/compute/dedicated-disks. Public IPv4 $0.005/h (~$3.65/month). VM backups $6 per TB-month. Outbound bandwidth metered per region, not charged today; inbound free. Managed databases: their VMs plus 25%. Kubernetes: its VMs plus $15 per cluster per month. Database and Kubernetes backups go to the user's own S3, at S3 prices. The live price list wins: https://console.hippius.com/dashboard/billing/compute#prices. Details: https://docs.hippius.com/use/compute/billing
 
-CDN prices, billed hourly from the balance like compute: data out $0.010 per GB billed in FR, $0.060 per GB billed in AU (each byte at the cheaper of the serving and the visitor's region), $0.002 per 10,000 requests, $1 per custom domain per month; the default hostname is included. Each zone has a monthly spend cap, $20 by default. Details: https://docs.hippius.com/use/cdn
+CDN prices, billed hourly from the balance like compute: data out $0.010 per GB billed in FR, $0.060 per GB billed in AU (each byte at the cheaper of the serving and the visitor's region), $0.002 per 10,000 requests, $1 per custom domain per month; the default hostname is included. Each zone has a monthly spend cap ($20 by default, $1 to $100,000): at the cap the zone is paused and answers 503 on every hostname, unbilled and with no fallback to the bucket, until the cap is raised or the next month (UTC) starts. Emails at 80%, at the cap and on resume. Details: https://docs.hippius.com/use/cdn
 
 CDN WAF (private beta, ask support to join): per-zone custom rules (Cloudflare-style expressions), rate limits answered 429 and counted per cache node, IP/ASN/country lists, log-only mode, versions with rollback. Standard $5 per zone per month (25 rules, 5 rate limits), Advanced $20 (100 rules, 25 rate limits, regex, 7-day events), billed per second while the mode is not off; blocked requests are never billed. Details: https://docs.hippius.com/use/cdn
 
@@ -310,12 +310,13 @@ Master keys bypass ACLs. Sub-tokens need an explicit grant unless scoped to that
 
 Scoped credentials: per-bucket, read-only or read/write, optional expiry.
 Create in Console > S3 Buckets (https://docs.hippius.com/use/console/s3) or via Management API.
-Rotate keeps the Access Key ID and issues a new secret. Revoke is immediate.
+Rotate issues a new Access Key ID and secret with the same permissions and revokes the old pair. Revoke is immediate.
 
     curl -X POST https://api.hippius.com/api/objectstore/sub-tokens/ \
       -H "Authorization: Token YOUR_BEARER_TOKEN" \
       -H "Content-Type: application/json" \
-      -d '{"name": "read-only-backup", "permissions": ["read"]}'
+      -d '{"name": "read-only-backup", "scope_type": "single_bucket", "bucket_names": ["my-bucket"], "actions": ["read"]}'
+    # scope_type: single_bucket, multi_bucket or global. actions: ["read"] or ["read", "write"]
 
     curl -X POST https://api.hippius.com/api/objectstore/master-tokens/{id}/revoke/ \
       -H "Authorization: Token YOUR_BEARER_TOKEN"
@@ -325,7 +326,7 @@ Rotate keeps the Access Key ID and issues a new secret. Revoke is immediate.
 
 ### Large files
 
-Console upload cap is 100 MB. Use multipart via AWS CLI / SDKs for larger objects (up to ~5 TiB).
+Console upload cap is 100 MB. Use multipart via AWS CLI / SDKs for larger objects: parts up to 512 MiB, at most 10,000 parts (~5 TiB).
 
 ### Object Lock
 
@@ -487,14 +488,14 @@ Supported operations:
 - Bucket: CreateBucket, DeleteBucket, ListBuckets, HeadBucket, GetBucketLocation
 - Object: PutObject, GetObject, HeadObject, DeleteObject, CopyObject
 - List: ListObjects, ListObjectsV2
-- Multipart: InitiateMultipartUpload, UploadPart, CompleteMultipartUpload, AbortMultipartUpload (up to ~5 TiB)
+- Multipart: InitiateMultipartUpload, UploadPart, UploadPartCopy, CompleteMultipartUpload, AbortMultipartUpload, ListParts, ListMultipartUploads (parts up to 512 MiB, at most 10,000 parts, ~5 TiB)
 - Tags: PutObjectTagging, GetObjectTagging, DeleteObjectTagging, PutBucketTagging, GetBucketTagging
 - ACL: PutBucketAcl, GetBucketAcl, PutObjectAcl, GetObjectAcl
-- Policy: PutBucketPolicy, GetBucketPolicy, DeleteBucketPolicy
+- Policy: PutBucketPolicy, GetBucketPolicy, DeleteBucketPolicy. A policy may only allow anonymous s3:GetObject, on the whole bucket or on up to 32 prefixes (arn:aws:s3:::bucket/prefix/*); anything else is 400 InvalidPolicyDocument. DeleteBucketPolicy returns 409 while the bucket ACL is public-read
 - Versioning: PutBucketVersioning (Enabled only; Suspended returns 501), GetBucketVersioning, ListObjectVersions
 - Object Lock: Put/Get ObjectLockConfiguration, Retention, LegalHold (GOVERNANCE and COMPLIANCE)
 - Presigned URLs GET/PUT/DELETE (max 7 days), range requests, video streaming
-- Lifecycle: basic expiration rules only
+- Lifecycle: configuration accepted but not applied; nothing expires
 
 Not supported: S3 Select, POST Object, virtual-hosted style, event notifications, S3 Batch Operations, cross-region replication (network replicates automatically)
 
@@ -512,7 +513,7 @@ Public URL format: https://s3.hippius.com/{bucket-name}/{object-key}
 
 ### Rate limits
 
-100 requests per minute per account
+No fixed per-account request limit. Under load the gateway answers 503 SlowDown (retryable, sometimes with Retry-After): retry with backoff, as the AWS SDKs do.
 
 ---
 
@@ -676,6 +677,22 @@ Top up (browser or wallet, not subscribe):
 
 Support:
     POST https://api.hippius.com/api/support/tickets/
+
+### Public prices (no auth)
+
+Docs: https://docs.hippius.com/use/api-prices
+    GET  https://api.hippius.com/api/compute/public-prices/   everything compute sells: os_disk_tiers[] (tier, disk_gb rate, max_flavor, flavors[]), dedicated_disks[], public_ip, backup_storage, managed_database, managed_kubernetes, runners[], bandwidth_per_gb, bandwidth_by_region
+    GET  https://api.hippius.com/api/compute/flavors/         VM sizes, price_credits_monthly (NVMe)
+    GET  https://api.hippius.com/api/cdn/prices/              base units (divide by 10^18 for credits)
+    GET  https://api.hippius.com/api/s3/plans/ · /api/drive/plans/ · /api/registry/plans/
+Compute public prices are credits (1 credit = 1 USD) as decimal strings; monthly = hourly x 730, to the cent. null means the catalogue has no price yet, never free. Cache-Control: public, max-age=60 (flavors 300), Vary: Authorization. 300 requests/min per client address on the compute and CDN lists, then 429.
+
+### Access key sign-in (for apps, not agents)
+
+Docs: https://docs.hippius.com/use/wallet-login
+    POST https://api.hippius.com/api/auth/mnemonic/  {"address": "0x...", "substrate_address": "5..."}  -> challenge, message, expires_in (300)
+    POST https://api.hippius.com/api/auth/verify/    {"address", "substrate_address", "challenge", "signature", "substrate_signature"} -> token
+Sign `message` verbatim: signature = EIP-191 personal_sign by the Ethereum key (m/44'/60'/0'/0/0); substrate_signature = sr25519 by the Substrate key (no derivation path) over the raw message bytes. A signature over the polkadot.js <Bytes> wrapping (browser extension signRaw) is refused: 401 code substrate_signature_invalid. Missing proof on a new or never-proven account: 401 code substrate_signature_required. Never ask a user to paste their 12 words into chat.
 
 ---
 

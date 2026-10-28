@@ -17,6 +17,7 @@ Compute is open to every account. The full guides are in the [Compute](/use/comp
   <li><a href="/use/compute">Compute overview</a>: quotas, the 24-hour balance requirement and billing.</li>
   <li><a href="/use/virtual-machines">Create and connect to a virtual machine</a>.</li>
   <li><a href="/use/compute/networking">Public IPv4 and firewall</a>.</li>
+  <li><a href="/use/compute/dedicated-disks">Dedicated disks</a>: whole physical disks for one VM.</li>
   <li><a href="/use/compute/databases">Managed PostgreSQL</a>.</li>
   <li><a href="/use/compute/kubernetes">Managed Kubernetes</a>.</li>
   <li><a href="/use/compute/runners">GitHub Actions runners</a>.</li>
