@@ -51,6 +51,9 @@ If a VM ends up **Failed**, its page explains why:
 | No verified server in this region right now. | Try another region. |
 | No compute node can take this VM right now. | This is capacity, not your configuration. Try again shortly, or pick a smaller size. |
 | No compute node has room for this size right now. | Try a smaller size, or again shortly. |
+| No server with a disk of this VM's tier can take it right now. | Pick another [OS disk tier](/use/compute/billing#os-disk-tiers) or region, or try again later. |
+| This OS disk tier is not offered right now. | Pick another OS disk tier. |
+| No server has that many free dedicated disks of that size right now. | Ask for fewer or smaller [dedicated disks](/use/compute/dedicated-disks), or try again later. |
 | That image is not available on the compute nodes. | Pick another image. |
 | The compute node did not answer in time. | Nothing was charged. Try again. |
 | The node could not prove it is running confidential hardware. | The launch was refused to protect you. Try again. |
@@ -92,6 +95,11 @@ If you call the API directly, refusals come with an HTTP status and, for most of
 | `resize-in-flight` | 409 | The VM is being resized. |
 | `resize-cooldown` | 429 | The VM was resized a moment ago. `retry_after_s` says when to retry. |
 | `job-in-flight` | 409 | Another operation is running on the VM. |
+| `disk-tier-not-offered` | 409 | That OS disk tier isn't sold, or not for this size (HDD goes up to Large). Pick another tier. |
+| `dedicated-pinned` | 409 | Dedicated disks were asked for with backups or failover. A VM with dedicated disks can't have them. |
+| `dedicated-not-with-app` | 409 | Dedicated disks are offered on plain VMs only, not with an application. |
+| `dedicated-disks-not-offered` | 409 | Dedicated disks aren't offered right now, or not to this account. |
+| `dedicated-ack-required` | 400 | A launch with dedicated disks needs `pinned_ack: true`. |
 | `no-operator` | 409 | The cluster can't run node operations. Create a new cluster to use worker pools. |
 
 In an account you are a member of, refusals of the shared account itself are a `403` with codes such as `not_a_member` or `insufficient_grant`. They are listed in [Shared accounts](/use/console/team#for-developers-the-api).
