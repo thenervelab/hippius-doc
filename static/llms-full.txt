@@ -228,7 +228,7 @@ Prices per 730-hour month, on the default NVMe OS disk: vCPU $18, memory $2.50/G
 
 CDN prices, billed hourly from the balance like compute: data out $0.010 per GB billed in FR, $0.060 per GB billed in AU (each byte at the cheaper of the serving and the visitor's region), $0.002 per 10,000 requests, $1 per custom domain per month; the default hostname is included. Each zone has a monthly spend cap ($20 by default, $1 to $100,000): at the cap the zone is paused and answers 503 on every hostname, unbilled and with no fallback to the bucket, until the cap is raised or the next month (UTC) starts. Emails at 80%, at the cap and on resume. Details: https://docs.hippius.com/use/cdn
 
-CDN WAF (private beta, ask support to join): per-zone custom rules (Cloudflare-style expressions), rate limits answered 429 and counted per cache node, IP/ASN/country lists, log-only mode, versions with rollback. Standard $5 per zone per month (25 rules, 5 rate limits), Advanced $20 (100 rules, 25 rate limits, regex, 7-day events), billed per second while the mode is not off; blocked requests are never billed. Details: https://docs.hippius.com/use/cdn
+CDN WAF (available on every zone, from its Security tab): per-zone custom rules (Cloudflare-style expressions), rate limits answered 429 and counted per cache node, IP/ASN/country lists, log-only mode, versions with rollback. Standard $5 per zone per month (25 rules, 5 rate limits), Advanced $20 (100 rules, 25 rate limits, regex, 7-day events), billed per second while the mode is not off; blocked requests are never billed. Details: https://docs.hippius.com/use/cdn
 
 Hub stores images. It does not run them.
 

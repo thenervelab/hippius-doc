@@ -10,11 +10,9 @@ import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 
-:::info Private beta
-The WAF is in private beta. [Ask support](/use/console/support) to join.
-:::
-
 The WAF decides on each cache node which requests to a [CDN zone](/use/cdn) are served. Use it to block scrapers or whole countries, restrict an admin path to your office's addresses, or slow down a client that hammers the zone. It runs before CORS, the HTTPS redirect, the cache and the bucket, so a blocked request never reaches any of them, and it is never billed.
+
+The WAF is available on every CDN zone, from the zone's **Security** tab.
 
 ## How it works
 
@@ -214,7 +212,6 @@ List items are JSON (`{"items": ["203.0.113.7", "198.51.100.0/24"]}`) or `text/p
 |---|---|---|
 | 400 | `syntax`, `field`, `type`, `value`, `limit`, `regex`, `list`, `rule`, `tier`, `size`, `block_response`, `unsupported`, `invalid_waf` | The change doesn't compile or is over the tier's limits. Nothing changes; `rule_id` names the rule when there is one. |
 | 400 | `invalid_list`, `list_limit` | A list body is invalid, or the account already has 25 lists |
-| 403 | `waf_beta_only` | The account isn't in the beta. Turning an enabled WAF off with `{"mode": "off"}` still works. |
 | 409 | `list_exists`, `list_in_use` | A list with that name exists, or rules still use it |
 | 412 | `waf_conflict` | `If-Match` doesn't name the active version |
 | 413 | `too_large` | The body is too big |
@@ -228,5 +225,4 @@ Writes are limited to 60 a minute and 600 a day per account, reads to 120 a minu
 <Unordered>
   <li><a href="/use/cdn">Hippius CDN</a>: create a zone and serve it on your own domain.</li>
   <li><a href="/use/console/team">Shared accounts</a>: give team members CDN access.</li>
-  <li><a href="/use/console/support">Support</a>: ask to join the beta.</li>
 </Unordered>

@@ -284,7 +284,7 @@ The account owner is emailed when a zone reaches 80% of its cap, is paused by it
 ## Where to next
 
 <Unordered>
-  <li><a href="/use/cdn/firewall">WAF</a> (private beta): block, allow or rate-limit requests to a zone with firewall rules.</li>
+  <li><a href="/use/cdn/firewall">WAF</a>: block, allow or rate-limit requests to a zone with firewall rules.</li>
   <li><a href="/use/console/s3">S3 Buckets</a>: create the bucket that serves as your origin.</li>
   <li><a href="/use/compute/billing">Billing and quotas</a>: how hourly usage is charged.</li>
   <li><a href="/use/console/team">Shared accounts</a>: give team members access to your CDN.</li>
