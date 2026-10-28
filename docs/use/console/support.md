@@ -27,12 +27,12 @@ Reach Help & Support from the sidebar at <BgStyledIconWithText text="Help & Supp
 Click <BgStyledText>+ New Ticket</BgStyledText> in the top right corner to open the **Create a Ticket** dialog.
 
 <Ordered>
-  <li>Enter a clear, one line <strong>Subject</strong>, for example <em>"Upload stuck in processing after several minutes"</em>.</li>
+  <li>Enter a clear, one line <strong>Ticket Subject</strong>, for example <em>"Upload stuck in processing after several minutes"</em>.</li>
   <li>Pick a <strong>Ticket Category</strong> from the dropdown (see the categories below).</li>
   <li>Pick a <strong>Ticket Severity</strong>: <strong>Low</strong> (minor issue, question, or feature request), <strong>Normal</strong> (affects you but you have a workaround), <strong>High</strong> (blocking: you can't use the platform), or <strong>Urgent</strong> (data loss or a security concern).</li>
-  <li>Describe the problem in the <strong>Description</strong> field. Include what you were doing, what you expected to happen, what actually happened, any error text, and your browser, OS, and the approximate time.</li>
-  <li>(Optional) Click the attachment icon to add a screenshot, log file, or other supporting file.</li>
-  <li>Click <BgStyledText>Create Ticket</BgStyledText>.</li>
+  <li>Describe the problem in the <strong>Ticket Description</strong> field. Include what you were doing, what you expected to happen, what actually happened, any error text, and your browser, OS, and the approximate time.</li>
+  <li>(Optional) Click the attachment icon to add a screenshot. Only images can be attached when you create a ticket.</li>
+  <li>Click <BgStyledText>Submit Ticket</BgStyledText>.</li>
 </Ordered>
 
 <Screenshot src="/img/console/support/create-ticket.png" alt="Create ticket modal" dark />
@@ -58,14 +58,13 @@ Include your browser and OS, the exact time the issue occurred, and a screenshot
 
 ## Your Tickets
 
-All your tickets appear in a table with the subject, category badge, status, and date of the last update. Use the filter pills above the table to show only tickets with a specific status:
+All your tickets appear in the **My Tickets** table, with their subject, status, category, priority and creation date. Use **Search Tickets** above the table to find one. Open tickets are listed first. A ticket can be:
 
 <Unordered>
-  <li><strong>All</strong>: every ticket regardless of status.</li>
   <li><strong>Open</strong>: newly created, waiting on our team.</li>
   <li><strong>In Progress</strong>: someone on our team is actively working on it.</li>
-  <li><strong>Awaiting Response</strong>: we've replied and are waiting on your input.</li>
-  <li><strong>Closed</strong>: resolved tickets.</li>
+  <li><strong>Resolved</strong>: we consider it fixed. If it isn't, reply and the ticket reopens as <strong>Pending</strong>, back with our team.</li>
+  <li><strong>Closed</strong>: done. A closed ticket takes no more replies.</li>
 </Unordered>
 
 Click any row to open the full ticket conversation.
@@ -83,7 +82,7 @@ To reply:
   <li>Click the <BgStyledText>Send</BgStyledText> arrow.</li>
 </Ordered>
 
-Your reply is added to the thread. If the ticket was **Awaiting Response**, the status moves back to **In Progress** and our team is notified.
+Your reply is added to the thread and our team is notified.
 
 You cannot reply on a closed ticket. The input field is disabled with a notice explaining this.
 
@@ -94,12 +93,12 @@ You cannot reply on a closed ticket. The input field is disabled with a notice e
 If your issue is resolved, you can close the ticket yourself:
 
 <Ordered>
-  <li>From the tickets table, open the action menu on the row and click <BgStyledText>Close Ticket</BgStyledText>, or open the ticket and click the close icon in the dialog header.</li>
+  <li>From the tickets table, open the action menu on the row and click <BgStyledText>Close Ticket</BgStyledText>.</li>
   <li>Confirm in the <strong>Close Ticket</strong> dialog.</li>
 </Ordered>
 
 
-Closed tickets stay visible in the table and can be filtered with the **Closed** pill. They cannot be reopened. If the same issue comes back, create a new ticket and reference the old one in the description.
+Closed tickets stay visible in the table. They cannot be reopened. If the same issue comes back, create a new ticket and reference the old one in the description.
 
 ## Other Ways to Reach Us
 

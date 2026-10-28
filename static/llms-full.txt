@@ -124,7 +124,7 @@ Hub (names Free, Builder, Pro, Team; paid from the balance only; top up by card,
 
 Catalogs (no auth): GET https://api.hippius.com/api/drive/plans/ · GET https://api.hippius.com/api/s3/plans/ · GET https://api.hippius.com/api/registry/plans/
 
-Plan prices, monthly (the catalogs above are always current): Drive Free 10 GB $0, Starter 500 GB $4, Plus 2 TB $7, Max 10 TB $22, Scale 25 TB $50. S3 Pro 10 TB $53, Business 50 TB $245, Enterprise 100 TB $465. Hub Free $0, Builder $5, Pro $19, Team $99.
+Plan prices, monthly (the catalogs above are always current): Drive Free 10 GB $0, Starter 500 GB $4, Plus 2 TB $7, Max 10 TB $22, Scale 25 TB $50 (Max and Scale bill storage above the plan hourly, $2.20 and $2.00 per TB per month, up to a storage cap that defaults to twice the plan; Drive plans are monthly only, a downgrade or cancel takes effect at the end of the period). S3 Pro 10 TB $53, Business 50 TB $245, Enterprise 100 TB $465. Hub Free $0, Builder $5, Pro $19, Team $99.
 
 Google, GitHub, and Apple accounts include the Free Drive Plan (10 GB). S3 starts on pay as you go at $6 per TB per month. A plan is optional. Creating a Hub namespace needs a balance of at least $10.
 

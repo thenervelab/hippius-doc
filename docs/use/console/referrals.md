@@ -16,8 +16,6 @@ import Screenshot from '@site/src/components/Screenshot';
 
 Invite someone to Hippius and you earn **5% of what they spend, for as long as their account keeps spending**. It is not a one time bonus for the signup. Commission is paid in hAlpha, automatically, and there is nothing to claim.
 
-The person you invite gets something too: **5% off their first subscription**.
-
 Because it settles on our chain, you can verify what you have been paid without taking our word for it. More on that in [Checking your commission](#checking-your-commission).
 
 Find it in the sidebar at <BgStyledIconWithText text="Referrals" icon="User" />.
@@ -31,7 +29,7 @@ Your referral link sits at the top of the page. Select it, or the copy icon besi
 Next to it are buttons for X, Telegram and Discord. Each one opens that platform with a message already written for it, so you are not composing a post from scratch every time. The Discord button copies a formatted message to your clipboard instead, ready to paste into any channel.
 
 :::tip
-Anyone can use your link. They do not need a Hippius account first, and there is nothing either of you has to enter. Your commission and their discount are both applied on their own.
+Anyone can use your link. They do not need a Hippius account first, and there is nothing either of you has to enter. Your commission is applied on its own.
 :::
 
 ## Creating a link for each platform
@@ -41,7 +39,7 @@ You can create as many links as you like, each labelled with where you plan to s
 <Ordered>
   <li>Select <strong>+ New Link</strong> on the Referrals page.</li>
   <li>Choose the platform you are sharing on: X, Discord, LinkedIn, Instagram, Telegram, YouTube or Reddit. Pick <strong>Other</strong> to type your own label for anywhere else, like a newsletter or a conference talk.</li>
-  <li>Select <strong>Create</strong>. The new link appears in the table below, ready to copy or share.</li>
+  <li>Select <strong>Create Link</strong>. The new link appears in the table below, ready to copy or share.</li>
 </Ordered>
 
 <Screenshot src="/img/console/referrals/new-link.png" alt="The New Referral Link dialog with the platform list" dark />
@@ -88,13 +86,7 @@ Commission follows what your referrals actually pay, so it appears after they sp
 
 ## What the person you refer gets
 
-They get **5% off their first subscription purchase**, applied automatically when they subscribe to a plan. There is no code for them to enter.
-
-It is a one time discount, not a standing one, so it does not repeat on renewals.
-
-:::note
-The discount applies to **subscriptions only**. Someone who sticks to hourly, pay as you go usage such as S3 will not see one, because there is no subscription purchase for it to apply to. Your commission is unaffected either way, since that covers hourly usage as well.
-:::
+They sign up and pay the same prices as everyone else. There is no discount or bonus for them: the referral only pays you a commission on what they spend.
 
 ## Checking your commission
 
