@@ -58,6 +58,8 @@ When you save, Hippius asks how:
 
 :::info An existing link keeps the old picture
 A share link is its own copy of the file, made when the link was created. If you replace a picture that already has a link, that link still shows the picture as it was. To share the edited version, share it again (and revoke the old link if you don't want the old picture out there).
+
+There's one exception. In the desktop app, when you open the editor from the card right after a screenshot and choose **Replace the original**, the edited picture gets a new link and the old link stops working. The save dialog says so before you save: *It gets a new link, and the old link stops working.*
 :::
 
 That's why **Save as a copy** is the default: the copy gets its own link when you share it, and nothing you've already sent changes under anyone's feet.
