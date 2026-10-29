@@ -21,7 +21,7 @@ Insights, comments and reactions work for any file you share by link. For [scree
 
 Insights open in a panel on the right, so the list you were looking at stays in view. In **Captures**, click <BgStyledText>Insights</BgStyledText> on a capture's row, or choose <BgStyledText>View insights</BgStyledText> from its row menu. The button shows how many views the capture's link has had, for example **12 views**, or **Insights off** when the link isn't counting views.
 
-You can also open them from the link's row in **Shared Links**, from the card right after a capture (in its More menu in the desktop app, <BgStyledText>View insights</BgStyledText> right on the card in the console), and from any email about your link, which takes you straight there in the console.
+You can also open them from the link's row in **Shared Links**, from the card right after a capture (<BgStyledText>Insights</BgStyledText> in its More menu in the desktop app, <BgStyledText>View insights</BgStyledText> right on the card in the console), and from any email about your link, which takes you straight there in the console.
 
 ### A capture without a link yet
 
