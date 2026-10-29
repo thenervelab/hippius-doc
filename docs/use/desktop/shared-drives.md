@@ -61,13 +61,13 @@ Once people have joined, the drive's row shows **Shared with** and the number of
 
 ### Inviting people by email
 
-On **By email**, type an address, pick **Viewer** or **Editor**, and press <BgStyledText>Send invite</BgStyledText>. The invite is for that one person, works once and lasts 7 days. The email carries no key, so a forwarded invite is useless to anyone else.
+On **By email**, type an address, pick **Viewer**, **Editor** or **Manager**, and press <BgStyledText>Send invite</BgStyledText>. The invite is for that one person, works once and lasts 7 days. A Manager invite lasts 24 hours, so they need to join by then. The email carries no key, so a forwarded invite is useless to anyone else.
 
 If the app is locked, it asks for your unlock password first, then sends the invite. That's because the drive's key is packed into the invite for the person you're inviting. Cancel, and nothing is sent: the address stays in the box.
 
 The person opens the link in the email and signs in to the console with the address it was sent to. If they already use Hippius, they join straight away, even if your app is closed. If they're new, see [Keys are delivered for you](#keys-are-delivered-for-you).
 
-To add a **Manager**, invite them as an Editor, then change their role once they have joined. Email invites can't make someone a Manager.
+Manager is offered for a whole drive only. A single folder is shared as Viewer or Editor. (In the console, email invites stop at Editor: invite someone as an Editor there and change their role once they've joined.)
 
 ### Sharing with an invite link
 
