@@ -29,7 +29,14 @@ A capture link is an ordinary [share link](/use/console/shared-links), so it sho
 
 Paste a screenshot's link into Slack, Discord, WhatsApp or most other chat apps and the chat shows the screenshot itself, instead of a plain grey card. A recording's link shows its first frame with a play button and how long it is.
 
-To make that possible, Hippius uploads a small preview picture along with the link. Chat apps can't decrypt anything, so **the preview picture and the file name aren't encrypted**. Everything else, including the full-size file, stays end-to-end encrypted. If a screenshot has something private on it, blur it in the [editor](/use/captures/edit) first, or turn previews off.
+To make that possible, Hippius uploads a small preview picture along with the link. Chat apps can't decrypt anything, so **the preview picture and the file name aren't encrypted**. Everything else, including the full-size file, stays end-to-end encrypted.
+
+The link and its preview are made the moment a capture is saved, before you'd have a chance to open the editor. So if you're about to capture something private, turn previews off first (see below). If a capture you just took shows something it shouldn't:
+
+<Unordered>
+  <li><strong>In the desktop app</strong>, click the picture on the capture's card to open the <a href="/use/captures/edit">editor</a>, blur what needs hiding, and save with <strong>Replace the original</strong>. The edited picture gets a new link, and the old link stops working. Copy the new link from the message that appears after saving.</li>
+  <li><strong>Anywhere else</strong>, <a href="#turn-a-link-off">turn the link off</a> first, then blur the picture in the editor and share the edited version.</li>
+</Unordered>
 
 Previews are on for captures unless you turn off **Show a preview in chats**, in the capture bar's <BgStyledText>Options</BgStyledText> (desktop app and console) or in desktop [Settings, Screenshots &amp; Recording](/use/desktop/settings#screenshots--recording). For other pictures and videos, the share dialog has the same switch, off to begin with. A link with a password never gets a preview, since the preview would show what the password protects.
 
@@ -64,7 +71,7 @@ The [browser extension](/use/browser-extension/captures#delete-a-capture) is the
 
 <Screenshot src="/img/console/captures/delete-dialog.png" alt="The Delete File dialog noting that share links made from the file keep working" dark raw />
 
-The same goes for edits. If you [edit a screenshot](/use/captures/edit) and replace the original, a link made before the edit keeps showing the old picture.
+Edits work much the same way. If you [edit a screenshot](/use/captures/edit) and replace the original, a link made before the edit keeps showing the old picture. The exception is the desktop app's capture card: replacing the original from there gives the edited picture a new link and turns the old one off.
 
 ## A link with an expiry or a password
 
