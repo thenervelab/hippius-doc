@@ -44,7 +44,9 @@ A single folder can be shared as **Viewer** or **Editor**. Nobody manages a fold
 
 <Screenshot src="/img/console/shared-drives/owner-share-drive-menu.png" alt="The row menu of a drive in My Drives, with Share drive" dark raw />
 
-You can also start from **Drive** → **Shared Drives**: press <BgStyledText>Share a drive</BgStyledText>, pick one of your drives, and press <BgStyledText>Continue</BgStyledText>. The list tells you which of your drives are already shared, and with how many people. It opens the same Share dialog.
+You can also start from **Drive** → **Shared Drives**: press <BgStyledText>Share a drive</BgStyledText> at the top of the page, pick one of your drives, and press <BgStyledText>Continue</BgStyledText>. The list tells you which of your drives are already shared, and with how many people. It opens the same Share dialog.
+
+Want a fresh drive just for sharing? Press <BgStyledText>New drive</BgStyledText> beside the search in the same dialog, give the drive a name and press <BgStyledText>Create drive</BgStyledText>. The drive is made and its Share dialog opens straight away. If you don't have a drive yet, New drive is the main button.
 
 <Screenshot src="/img/console/shared-drives/share-a-drive-picker.png" alt="The Share a drive picker, listing your drives and whether each one is shared" dark raw />
 
@@ -150,17 +152,21 @@ Accounts that sign in with an access key have no email address on file, so they 
 
 ## Working in a Shared Drive
 
-Drives and folders shared with you live under **Drive** → **Shared Drives** in the sidebar. The page is always there. Until someone shares with you, it explains what shared drives are and offers <BgStyledText>Share a drive</BgStyledText> so you can start one yourself.
+**Drive** → **Shared Drives** in the sidebar is one list of everything that's shared: the drives you've shared with other people, marked as yours, and the drives and folders other people have invited you into. The page is always there. Until anything is shared, it explains what shared drives are and offers <BgStyledText>Share a drive</BgStyledText> so you can start one yourself.
 
 <Screenshot src="/img/console/shared-drives/shared-drives-empty.png" alt="The Shared Drives page before anything has been shared, with the Share a drive button" dark raw />
 
 <Screenshot src="/img/console/shared-drives/list.png" alt="The Shared Drives page, with two whole drives and a folder shared on its own" dark raw />
 
-Each row shows who owns it, how many people are in it, its size and your role there. Two people can both have a drive called "Design", so the owner is part of how you tell them apart. Your role is shown on the drive, not on every folder inside it, because it covers the whole drive.
+Once something is shared, tabs above the list narrow it down: **All**, **Shared with you** and **Shared by you**. The total size of what you're looking at sits beside them. The list shows ten drives a page, with page numbers only when there are more than ten. If a tab is empty, it says what belongs there: drives other people invite you into, or a way to share one of your own.
+
+Each row shows who owns the drive, how many people are in it, its size and your role there ("You're an Editor", for example). Two people can both have a drive called "Design", so the owner is part of how you tell them apart. A drive of yours that nobody has joined yet says **1 invite pending** or **No members yet** instead of a number. Your role is shown on the drive, not on every folder inside it, because it covers the whole drive.
 
 A folder shared with you on its own shows up in the same list, marked **Folder in a drive**. You see that folder and what's inside it, and nothing else. Its size is the size of that folder, and its **Members** column shows a dash.
 
-Open a shared drive and you get the same file browser as your own Drive, with search, previews and downloads. Uploads, renames and deletes are there if your role allows them. The breadcrumb starts at **Shared Drives**, so going up takes you back to the list.
+If the list can't load, for example while you're offline, it says so and offers <BgStyledText>Try again</BgStyledText>, rather than telling you nothing is shared.
+
+Open a shared drive and you get the same file browser as your own Drive, with search, previews and downloads. Uploads, renames and deletes are there if your role allows them. The breadcrumb starts at **Shared Drives**, so going up takes you back to the list, on the same tab and page you left.
 
 <Screenshot src="/img/console/shared-drives/inside-drive.png" alt="Browsing inside a shared drive as a Manager, with who added each file" dark raw />
 
@@ -208,7 +214,7 @@ If the owner or a Manager removes you, the drive disappears from your Shared Dri
 
 Sharing a drive or a folder, sending email invites, creating invite links and approving email invites are included with the **Plus**, **Max** and **Scale** Drive plans. See [Drive plans](/use/console/billing#drive-plans).
 
-On **Free** and **Starter**, the Share dialog shows an upgrade prompt in place of the tabs that add people, and so does **Share a drive** on the Shared Drives page. Anyone who already has access keeps it, and you can still see and remove them, so moving to a smaller plan never locks you out of your own drive.
+On **Free** and **Starter**, the Share dialog shows an upgrade prompt in place of the tabs that add people. On the Shared Drives page, <BgStyledText>Share a drive</BgStyledText> carries a **Plus** label and takes you to the plans instead. Drives other people share with you still list and open as usual, on any plan. Anyone who already has access keeps it, and you can still see and remove them, so moving to a smaller plan never locks you out of your own drive.
 
 <Screenshot src="/img/console/shared-drives/upgrade-card.png" alt="The upgrade prompt in the Share dialog on a plan without sharing" dark raw />
 

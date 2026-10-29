@@ -41,9 +41,9 @@ No. A link keeps working until you turn it off in the console. If you want one t
 
 The connection to your account is kept only while your browser is open, so nothing that can save to your account is left on your computer. After a restart, click Connect account and Connect again. It takes a few seconds. [Staying connected](/use/browser-extension/account#staying-connected).
 
-### Why isn't my face in my window recording?
+### Is my face in a window recording?
 
-With Screen, your camera floats in a window of its own, so it's only in the video when you share your entire screen. For one tab, use This tab. For one window, record an Area drawn around it. [Your camera with Screen](/use/browser-extension/recording#your-camera-with-screen).
+Yes, from version 0.3.0. With Screen and the camera on, your camera is drawn into the corner of a window or tab recording, and shown where the floating window is when you share your entire screen. The floating controls stay out of the video either way. [Your camera with Screen](/use/browser-extension/recording#your-camera-with-screen).
 
 ### Can I use it in Firefox or Safari?
 

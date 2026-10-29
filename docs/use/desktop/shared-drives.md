@@ -20,6 +20,12 @@ Every drive belongs to one person, its owner. The owner pays for its storage and
 
 Shared drives work the same way in the desktop app and in the [Hippius Console](/use/console/shared-drives), and you can use both. A drive you share from the app can be managed from the console, and the other way round.
 
+:::info New in desktop 0.6.16
+From version 0.6.16, shared drives have their own **Shared Drives** page in the sidebar, which this guide describes. You can use it now on the [beta channel](/use/desktop/beta-channel), and it comes to everyone with the next release. In earlier versions, drives shared with you are listed under **Shared with Me** on the Drive page, and **Share a drive** sits there too.
+:::
+
+{/* Remove the callout above, and this comment, once desktop 0.6.16 is on the main channel. */}
+
 ## Who Can Do What
 
 When you let someone into a drive, you give them one of three roles:
@@ -45,7 +51,9 @@ A single folder can be shared as **Viewer** or **Editor**. Nobody manages a fold
 
 <Screenshot src="/img/desktop/shared-drives/share-drive-menu.png" alt="A drive's menu in the desktop app, with Share drive" dark raw />
 
-You can also press <BgStyledText>Share a drive</BgStyledText> under **Shared with Me** on the Drive page, pick one of your drives and press <BgStyledText>Continue</BgStyledText>. The list tells you which of your drives are already shared, and with how many people. It opens the same Share dialog.
+You can also open **Shared Drives** in the sidebar and press <BgStyledText>Share a drive</BgStyledText> at the top of the page, pick one of your drives and press <BgStyledText>Continue</BgStyledText>. The list tells you which of your drives are already shared, and with how many people. It opens the same Share dialog.
+
+Want a fresh drive just for sharing? Press <BgStyledText>New drive</BgStyledText> beside the search in the same dialog, give it a name and press <BgStyledText>Create drive</BgStyledText>, and the Share dialog for it opens straight away. The new drive lives on Hippius without a folder on your computer, so you don't have to pick one just to share something. It shows as **Not synced here** in your drives, and <BgStyledText>Sync to this computer</BgStyledText> in its menu links it to a folder whenever you like.
 
 <Screenshot src="/img/desktop/shared-drives/share-a-drive-picker.png" alt="The Share a drive picker, choosing which drive to share" dark raw />
 
@@ -148,17 +156,19 @@ Invites are accepted in the browser. Open the invite link, or the link in your i
 
 Joining is free on every plan, because the owner pays for the storage. Once you've joined, the drive shows up in the desktop app too.
 
-## Drives Shared With You
+## The Shared Drives Page {#drives-shared-with-you}
 
-Drives you've joined are listed under **Shared with Me**, below your own drives on the Drive page, and also in <BgStyledIconWithText text="Settings" icon="Settings" /> → **Sync & Storage**. On the Drive page the section is always there: until someone shares with you, it explains what shared drives are and offers <BgStyledText>Share a drive</BgStyledText> so you can start one yourself.
+**Shared Drives** in the sidebar is one list of everything that's shared: your own drives that you've shared, marked as yours with who they're shared with, and the drives and folders other people have invited you into. Drives shared with you are listed here, not on the Drive page. They also appear in <BgStyledIconWithText text="Settings" icon="Settings" /> → **Sync &amp; Storage**.
+
+Once something is shared, tabs above the list narrow it down: **All**, **Shared with you** and **Shared by you**. Beside them is the total size and number of files of what you're looking at. The list shows ten drives a page, with page numbers only when there are more than ten.
+
+Until anything is shared, the page explains what shared drives are and offers <BgStyledText>Share a drive</BgStyledText>. An empty tab says what belongs there: drives other people invite you into, or a way to share one of your own. If the list can't load, for example while you're offline, it says so with <BgStyledText>Try again</BgStyledText> instead of claiming nothing is shared, and loads again by itself once you're back online.
+
+{/* The screenshot below shows the older Shared with Me section on the Drive page. Replace it with a capture of the Shared Drives page. */}
 
 <Screenshot src="/img/desktop/shared-drives/shared-with-me.png" alt="Shared with Me in the desktop app" dark raw />
 
-Before anything has been shared with you, the section looks like this:
-
-<Screenshot src="/img/desktop/shared-drives/shared-with-me-empty.png" alt="Shared with Me before anything is shared, with Share a drive" dark raw />
-
-Each row shows the drive's name, your role, who shared it, how many people are in it and how big it is. If you're a Manager, the row also has its own <BgStyledText>Manage access</BgStyledText> button. From there you can:
+A drive of yours has <BgStyledText>Open</BgStyledText>, <BgStyledText>Share drive…</BgStyledText> and <BgStyledText>Manage access</BgStyledText> in its menu. A drive someone shared with you shows its name, your role, who shared it, how many people are in it and how big it is. If you're a Manager, the row also has its own <BgStyledText>Manage access</BgStyledText> button. From there you can:
 
 <Unordered>
   <li><strong>Open it.</strong> Click the row to browse the drive straight from the network. Nothing is downloaded to your computer until you download a file.</li>
@@ -171,12 +181,12 @@ When you browse a shared drive, the **Added by** column tells you who put each f
 
 If the owner's account runs into a billing limit, the drive is marked **Frozen**. You can still open and download files, but nobody can change anything until the owner sorts out their billing.
 
-A folder someone shared with you on its own gets its own row in **Shared with Me**, next to the drives. It shows the folder's name, the drive it lives in, who shared it, your role and the size of that folder. Click it on the Drive page to open the folder. You see that folder and what's inside it, and nothing else. A single folder can't be synced to your computer, so you always open it from the network, here or under **Shared Drives** in the [console](/use/console/shared-drives#working-in-a-shared-drive).
+A folder someone shared with you on its own gets its own row on the Shared Drives page, next to the drives, marked **Folder in a drive**. It shows the folder's name, the drive it lives in, who shared it, your role and the size of that folder. Click it to open the folder. You see that folder and what's inside it, and nothing else. A single folder can't be synced to your computer, so you always open it from the network, here or under **Shared Drives** in the [console](/use/console/shared-drives#working-in-a-shared-drive).
 
 ## Leaving a Shared Drive
 
 <Unordered>
-  <li>In <strong>Shared with Me</strong>, open the drive's menu and choose <BgStyledText>Leave drive</BgStyledText>.</li>
+  <li>On the <strong>Shared Drives</strong> page, open the drive's menu and choose <BgStyledText>Leave drive</BgStyledText>.</li>
   <li>If you sync the drive, you can also choose <BgStyledText>Leave shared drive</BgStyledText> from its menu in your drive list.</li>
   <li>For a folder shared with you on its own, choose <BgStyledText>Leave folder</BgStyledText> in its menu. You also lose any other folders of the same drive that were shared with you.</li>
 </Unordered>
@@ -187,7 +197,7 @@ You lose access to its files and the drive stops syncing. Anything already on yo
 
 Sharing a drive or a folder, sending email invites, creating invite links and approving email invites are included with the **Plus**, **Max** and **Scale** Drive plans. See [Billing](/use/desktop/billing).
 
-On **Free** and **Starter**, the Share dialog still opens, but an upgrade prompt stands in for the tabs that add people, and so does **Share a drive**. Anyone who already has access keeps it, and you can still see and remove them. <BgStyledText>Upgrade plan</BgStyledText> takes you to the plans in Settings.
+On **Free** and **Starter**, the Share dialog still opens, but an upgrade prompt stands in for the tabs that add people. On the Shared Drives page, <BgStyledText>Share a drive</BgStyledText> carries a **Plus** label and takes you to upgrade instead. Drives other people share with you still open as usual, on any plan. Anyone who already has access keeps it, and you can still see and remove them. <BgStyledText>Upgrade plan</BgStyledText> takes you to the plans in Settings.
 
 <Screenshot src="/img/desktop/shared-drives/upgrade-card.png" alt="The sharing upgrade prompt in the desktop app" dark raw />
 

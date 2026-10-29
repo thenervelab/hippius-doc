@@ -21,7 +21,7 @@ Once you capture often, shortcuts save you a trip to the popup. There are four, 
 | <BgStyledText>Alt Shift S</BgStyledText> | <BgStyledText>Option Shift S</BgStyledText> | Screenshot of the visible page |
 | <BgStyledText>Alt Shift D</BgStyledText> | <BgStyledText>Option Shift D</BgStyledText> | Screenshot of an area you drag out |
 
-To check which keys each one has right now, click the keyboard button at the top of the popup.
+To check which keys each one has right now, open Settings at the top of the popup and look under **Keyboard shortcuts**.
 
 <Screenshot src="/img/extension/popup-shortcuts.png" alt="The Keyboard shortcuts panel in the popup, listing all four shortcuts and Change shortcuts" dark raw />
 
@@ -32,7 +32,7 @@ Your browser, not Hippius, decides which keys an extension gets. It hands them o
 ## Change a shortcut
 
 <Ordered>
-  <li>Click <BgStyledText>Change shortcuts</BgStyledText> in the keyboard panel in the popup, or type <code>chrome://extensions/shortcuts</code> into the address bar (<code>edge://extensions/shortcuts</code> in Edge).</li>
+  <li>Click <BgStyledText>Change shortcuts in your browser</BgStyledText> under Keyboard shortcuts in the popup's Settings, or type <code>chrome://extensions/shortcuts</code> into the address bar (<code>edge://extensions/shortcuts</code> in Edge).</li>
   <li>Find <strong>Hippius</strong> and click the pencil next to the shortcut.</li>
   <li>Press the keys you want. They need Ctrl or Alt (Command or Option on a Mac).</li>
 </Ordered>
