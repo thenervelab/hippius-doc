@@ -123,6 +123,10 @@ Right click a **folder** instead of a file and choose <BgStyledText>Share via li
 Recipients always see the folder's **current** contents, so anything you add later becomes visible to everyone holding the link. Share files individually if you want a fixed set.
 :::
 
+:::warning Replace old folder links
+Folder links made now open only the folder you shared. Older ones carry your drive's key, and anyone who has the link holds that key, even after it stops working. On the Shared Links page they have an **Old link** badge. Choose <BgStyledText>Reshare with a safer link</BgStyledText> from the row's menu: the app makes a new link to the same folder and turns the old one off. Send the new link instead.
+:::
+
 Recipients can browse subfolders, search by name, preview files, download any single file, or download the whole folder as a zip. They do not need a Hippius account.
 
 To share a file that isn't in a synced folder, use [Share from Finder](/use/desktop/share-from-finder) on macOS.
