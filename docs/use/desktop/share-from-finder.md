@@ -13,7 +13,7 @@ import Screenshot from '@site/src/components/Screenshot';
 
 Sharing a file with Hippius can be as quick as a right click. On macOS you don't have to open the app, hunt through folders, or upload anything first: point at any file or folder in Finder, choose **Share with Hippius**, and we'll hand you a link that's ready to send.
 
-It works on **any** file on your Mac, not just the ones in your synced folders, and it's the only place you can create a **password-protected** link.
+It works on **any** file on your Mac, not just the ones in your synced folders. You get the same choices as in the app: a public link or a **password-protected** one, and how long it lasts.
 
 :::info Before you start
 You'll need the **latest version** of the Hippius desktop app. Finder sharing is macOS only, since it relies on a macOS Finder extension. On Windows and Linux, share from the [Drive view](/use/desktop/shared-links#creating-a-share) instead.
@@ -26,8 +26,8 @@ You'll need the **latest version** of the Hippius desktop app. Finder sharing is
 <Ordered>
   <li>In Finder, right click any file or folder in your home folder.</li>
   <li>Choose <BgStyledText>Share with Hippius</BgStyledText>. If the app isn't running or you're signed out, you'll see <BgStyledText>Open Hippius to share</BgStyledText> instead. Open Hippius, sign in, and try again.</li>
-  <li>We bring the app forward and ask who should be able to open the link. Pick <strong>Anyone with the link</strong> for a public link, or <strong>Password protected</strong> for a private one.</li>
-  <li>Click <BgStyledText>Create share link</BgStyledText>. We encrypt and upload the item, then show you the link (and the password, if it's protected) and copy the link to your clipboard for you.</li>
+  <li>We bring the app forward with the same <strong>Share via link</strong> dialog you get inside the app. Pick <strong>Anyone with the link</strong> for a public link, or <strong>Password protected</strong> for a private one, and choose when the link expires.</li>
+  <li>Click <BgStyledText>Create share link</BgStyledText>. We make the link, then show it to you (with the password, if it's protected) and copy it to your clipboard for you.</li>
 </Ordered>
 
 Here's what the two access options mean:
@@ -42,7 +42,7 @@ Here's what the two access options mean:
 Sharing from Finder works on **any file or folder in your home folder**. It doesn't have to live in one of your synced folders, which is what makes it different from sharing inside the Drive view.
 
 :::info Sharing a folder
-When you share a folder, we pack everything inside it into a single `.zip` file and share that, so whoever you send it to downloads one tidy archive.
+A folder inside one of your drives is shared as a live link: whoever opens it browses the folder as it is now, and sees files you add later. A folder from anywhere else on your Mac is uploaded as a copy, so the link shows the folder as it was when you shared it, and later changes aren't included. Either way, recipients can open single files or download the whole folder as a zip.
 :::
 
 ## Password-protected links
