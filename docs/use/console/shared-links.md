@@ -61,7 +61,7 @@ The download, decrypt, encrypt, and upload steps run each time you create a shar
 <Unordered>
   <li>The server holds an encrypted copy. It cannot read the file and does not know the key.</li>
   <li>The recipient's browser decrypts the file locally. Nothing is decrypted on the server.</li>
-  <li>Revoking a share deletes the encrypted copy and frees the storage immediately.</li>
+  <li>Revoking a share deletes the encrypted copy, and its storage comes back within a few minutes.</li>
   <li>Each share is independent. Revoking one share of a file doesn't affect any other share of the same file.</li>
   <li>Deleting a file does not end the links made from it. Each link is its own encrypted copy, so it keeps working until you revoke it here or it expires. The delete confirmation reminds you of this.</li>
 </Unordered>
@@ -72,7 +72,7 @@ A few things need to be in place before you can create a share:
 
 <Unordered>
   <li><strong>Your session must be unlocked.</strong> Sharing requires your folder key, which is only available after you've entered your unlock password in the current session. If the console asks for your password, enter it and then retry.</li>
-  <li><strong>You need room in your Drive plan.</strong> Creating a share uploads a new encrypted copy of the file, so it needs storage like any other upload.</li>
+  <li><strong>You need room in your Drive plan.</strong> Creating a share uploads a new encrypted copy of the file, and that copy counts toward your storage. If you're at your plan's limit, the link isn't created.</li>
   <li><strong>The file must be in Drive.</strong> Shared Links only works for files stored in your Hippius Drive.</li>
 </Unordered>
 
@@ -252,18 +252,24 @@ To see what happened to a link, click <BgStyledText>Insights</BgStyledText> on i
 
 ## Storage Usage
 
-Every active share stores a separate encrypted copy of your file on the Hippius network. This copy:
+Every file link stores a separate encrypted copy of your file on the Hippius network. This copy:
 
 <Unordered>
-  <li><strong>Costs nothing extra while the file is still in your Drive.</strong> Your storage already counts that file, so the link adds nothing on top. If you delete the file and keep the link, the link's copy counts against your storage quota from then on, until you revoke the link or it expires.</li>
+  <li><strong>Counts toward your storage</strong>, on top of the file in your Drive. It's new data, encrypted with its own key, so it's never treated as a duplicate of the original. Sharing a 1 GB file uses another 1 GB while the link is live.</li>
   <li><strong>Is independent of your Drive copy</strong>, using a different key and living in a different location on the network, unaffected by any changes to your original file. Deleting or replacing the original leaves the link showing the file as it was when you shared it.</li>
-  <li><strong>Is freed automatically</strong> when you revoke it or when it expires.</li>
+  <li><strong>Is deleted when you revoke the link or it expires</strong>, and the space comes back within a few minutes. A link set to never expire keeps using space until you revoke it.</li>
 </Unordered>
 
-If you share the same file multiple times, each share is a separate encrypted copy with its own key. While the file is in your Drive, none of them adds to your storage.
+The chat preview picture doesn't count toward your storage.
 
-:::tip Revoke shares you no longer need
-A link whose file you've deleted uses storage quota. If you shared a file temporarily, say to send to a colleague, revoke it when you're done.
+Before a link's copy is uploaded, Hippius checks that you have room. If you're at your plan's limit (10 GB on the Free plan), the link isn't created: free up some space or upgrade, then try again.
+
+If you share the same file several times, each link is a separate copy, and each one counts.
+
+**Folder links are different.** A link to a folder in your Drive doesn't upload anything: the people you send it to open the folder's own encrypted files, so it uses no extra storage. A folder shared from outside your drives (from Finder in the desktop app) is uploaded as a copy, and that copy counts like a file link's.
+
+:::tip Revoke links you no longer need
+Every live file link uses storage. If you shared a file temporarily, say to send to a colleague, revoke it when you're done.
 :::
 
 ## Console vs Desktop App
