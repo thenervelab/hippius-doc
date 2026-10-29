@@ -17,12 +17,6 @@ The people you send a link to can also leave comments and react with an emoji, r
 
 Insights, comments and reactions work for any file you share by link. For [screenshots and recordings](/use/captures) on a paid plan, they're switched on for you.
 
-:::info Coming in desktop 0.6.16
-Insights, comments and reactions are live in the [console](/use/console/shared-links). In the desktop app they arrive in version 0.6.16, which you can use now on the [beta channel](/use/desktop/beta-channel) and which comes to everyone with the next release. Everything on this page about the desktop app, including link emails and the Free plan defaults, applies from that version.
-:::
-
-{/* Remove the callout above, and this comment, once desktop 0.6.16 is on the main channel. */}
-
 ## Open a capture's Insights
 
 Insights open in a panel on the right, so the list you were looking at stays in view. In **Captures**, click <BgStyledText>Insights</BgStyledText> on a capture's row, or choose <BgStyledText>View insights</BgStyledText> from its row menu. The button shows how many views the capture's link has had, for example **12 views**, or **Insights off** when the link isn't counting views.

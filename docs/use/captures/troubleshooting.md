@@ -98,7 +98,7 @@ Comments are end-to-end encrypted with the link's key. The console only asks whe
 
 ### I don't see Insights in the desktop app
 
-Insights, comments and reactions arrive in the desktop app in version 0.6.16. Until it reaches you, switch to the [beta channel](/use/desktop/beta-channel), or open the link's Insights in the console.
+Insights, comments and reactions came to the desktop app in version 0.6.16. If you don't see them, your app is older: install the update when Hippius offers it and let it restart. You can always open a link's Insights in the console too.
 
 ### A capture's Insights button is grey
 
