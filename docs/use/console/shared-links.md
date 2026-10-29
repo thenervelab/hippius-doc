@@ -190,6 +190,10 @@ Anyone holding the link loses access the moment you confirm. There is no way to 
 
 <Screenshot src="/img/console/drive/shared-links-revoke.png" alt="Revoke confirmation dialog" dark />
 
+### Remove chat preview
+
+If a link has a [chat preview](/use/captures/share-links#a-preview-when-you-paste-the-link-in-a-chat) you'd rather not have out there, choose <BgStyledText>Remove chat preview</BgStyledText> from its menu. The preview picture is deleted from Hippius and the link keeps working. Chat apps that look the link up from then on show a plain card, but a chat that already showed the preview keeps its own copy.
+
 ## Share History
 
 The History section appears below the Active Shares table once there is at least one ended share recorded on this device.
