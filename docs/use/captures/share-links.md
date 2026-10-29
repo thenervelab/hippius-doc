@@ -80,7 +80,9 @@ In the console every capture gets its link. In the desktop app you can stop link
 
 ## Storage
 
-Like every share link, a capture link keeps its own encrypted copy of the file on Hippius. While the capture is still in your Drive, the link adds nothing to your storage. If you delete the capture and keep the link, the link's copy counts toward your storage until you turn the link off. See [Storage usage](/use/console/shared-links#storage-usage) for the details.
+Like every file link, a capture link keeps its own encrypted copy of the file on Hippius, and that copy counts toward your storage, on top of the capture itself in your Drive. So a shared screenshot or recording uses about twice its size while its link is live. The chat preview picture doesn't count.
+
+Hippius checks for room before it uploads a link's copy. If you're at your plan's limit (10 GB on the Free plan), the link isn't made: free up some space or upgrade, then make the link again. When you turn a link off, its copy is deleted and the space comes back within a few minutes. Capture links never expire on their own, so they keep using space until you turn them off. See [Storage usage](/use/console/shared-links#storage-usage) for the details.
 
 ## Where to go next
 
