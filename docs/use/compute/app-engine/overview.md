@@ -49,7 +49,7 @@ An app is a [compute VM](/use/compute) like any other. It is billed like a VM of
 
 An app VM has no SSH key, no browser terminal and no serial console. Nobody logs in to it, you included. You change what runs only by [updating the compose](/use/compute/app-engine/deploy#update-an-app), which relaunches the VM.
 
-Power operations, resize and backups work as for other VMs. Stopping, starting, rebooting or resizing an app relaunches it with the same compose: the measurement changes, the compose hash doesn't. [Backups](/use/compute/vm-backups) cover the app's volumes only.
+Power operations, resize and backups work as for other VMs. A reboot, a stop and start, or a resize boots the app again with the same compose: the runner checks the file, pulls the images again and starts the services. After a stop and start or a resize the measurement changes; the compose hash doesn't. [Backups](/use/compute/vm-backups) cover the app's volumes only.
 
 ## Next steps
 

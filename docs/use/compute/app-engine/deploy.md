@@ -24,7 +24,7 @@ Secret values and volume contents are not confidential from Hippius in this phas
 The app engine accepts a strict subset of the compose format, called grammar v1. It is strict so that a person reviewing the file, Hippius's checks and `docker compose` all read the same thing. The console checks the file as you type, and every refusal names a [rule](/use/compute/app-engine/compose-rules).
 
 <Unordered>
-  <li><strong>Images pinned by digest.</strong> Every <code>image</code> is <code>&lt;registry&gt;/&lt;path&gt;@sha256:&lt;64 hex&gt;</code>, with no tag. Get the digest with <code>docker buildx imagetools inspect &lt;image&gt;</code> or from your registry. The VM pulls the <code>linux/amd64</code> image, and every layer is checked against the digest.</li>
+  <li><strong>Images pinned by digest.</strong> Every <code>image</code> is <code>[&lt;registry&gt;/]&lt;path&gt;@sha256:&lt;64 hex&gt;</code>, with no tag, such as <code>ghcr.io/acme/web@sha256:...</code> or <code>redis@sha256:...</code> for Docker Hub. Get the digest with <code>docker buildx imagetools inspect &lt;image&gt;</code> or from your registry. The VM pulls the <code>linux/amd64</code> image, and every layer is checked against the digest.</li>
   <li><strong>Public registries only.</strong> Images are pulled without credentials, from a registry with a public DNS name (<code>docker.io</code>, <code>ghcr.io</code>, <code>quay.io</code>, ...). An IP address, <code>localhost</code>, a single-label name or a private suffix such as <code>.local</code> or <code>.internal</code> is refused. Private registries aren't supported in this phase.</li>
   <li><strong>TCP only.</strong> Ports are <code>"&lt;host&gt;:&lt;container&gt;"</code> or <code>"&lt;host&gt;:&lt;container&gt;/tcp"</code>, without a host IP or range. UDP is not supported in this phase. Host ports 9080, 9443 and 51820 are reserved. At most 64 published ports.</li>
   <li><strong>At most 64 services.</strong> The file is at most 64 KiB.</li>
@@ -120,7 +120,7 @@ A secret is a name in `x-hippius.secrets` with a value you enter in the console.
 
 ## Public IP and firewall
 
-**Public IPv4** is on by default. It is what lets anyone reach and verify the app today, and it costs the same as a [public IPv4 on any VM](/use/compute/networking#what-a-public-ipv4-costs).
+**Public IPv4** is on by default wherever public addresses are offered. It is what lets anyone reach and verify the app today, and it costs the same as a [public IPv4 on any VM](/use/compute/networking#what-a-public-ipv4-costs).
 
 The VM's firewall gets two rules, open to any source, over TCP only: one for the compose's published ports, and one for port 9080, the evidence port. Their descriptions start with `App engine:`. An update rewrites those two rules and leaves any rule you added alone. No SSH rule is opened: app VMs are sealed.
 

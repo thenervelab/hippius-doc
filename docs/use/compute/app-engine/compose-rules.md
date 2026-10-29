@@ -143,19 +143,19 @@ A service may use: `image`, `command`, `entrypoint`, `environment`, `ports`, `ex
 | `expose` | A list of distinct strings, ports 1 to 65535. |
 | `volumes` (service) | A list of maps: `type: "volume"` with `source` (a declared volume), `target`, optional `read_only`; or `type: "tmpfs"` with `target`, optional `read_only`, optional `tmpfs:` → `size`. |
 | `tmpfs` | A list of absolute paths. |
-| Absolute paths (`target`, `tmpfs`, `working_dir`) | `/` then segments of `[A-Za-z0-9._@+-]`, none empty, `.` or `..`, no trailing `/`, not `/` alone. Mount targets distinct within a service. |
+| Absolute paths (`target`, `tmpfs`, `working_dir`) | `/` then segments of `[A-Za-z0-9._@+-]`, none empty, `.` or `..`, no trailing `/`, not `/` alone, at most 4096 bytes. Mount targets distinct within a service. |
 | `depends_on` | A list of service names, or a map of names to `condition` (`"service_started"`, `"service_healthy"`, `"service_completed_successfully"`) and optional `required`. No cycles. |
 | `restart` | `"no"`, `"always"`, `"on-failure"`, `"unless-stopped"`. |
 | `healthcheck` | `test` (a list starting `"CMD"`, `"CMD-SHELL"` or `"NONE"`), durations `interval`, `timeout`, `start_period`, `start_interval`, `retries` (an integer ≥ 1), `disable` (bool). |
-| Durations (`stop_grace_period`, healthcheck) | A string `"<n>ms"`, `"<n>s"`, `"<n>m"`, `"<n>h"`, with `n` ≥ 1. |
-| Sizes (`mem_limit`, `shm_size`, `tmpfs.size`) | An integer ≥ 1 (bytes), or a string `"<n>"`, `"<n>b"`, `"<n>k"`, `"<n>m"`, `"<n>g"` (1024-based). |
+| Durations (`stop_grace_period`, healthcheck) | A string `"<n>ms"`, `"<n>s"`, `"<n>m"`, `"<n>h"`, with `n` ≥ 1, at most 2^53 - 1 nanoseconds in total. |
+| Sizes (`mem_limit`, `shm_size`, `tmpfs.size`) | An integer ≥ 1 (bytes), or a string `"<n>"`, `"<n>b"`, `"<n>k"`, `"<n>m"`, `"<n>g"` (1024-based), at most 2^53 - 1 bytes. |
 | `cpus` | An integer 1 to 999, or a string such as `"0.5"` or `"1.25"` (at most two decimals, no trailing zero). |
 | `user` | `"<user>"` or `"<user>:<group>"`, each `[A-Za-z0-9_.-]{1,64}`. |
 | `read_only`, `init` | `true` or `false`. |
 | `cap_drop` | A list of distinct capabilities, such as `"NET_RAW"`. |
 | `ulimits` | A map of `[a-z]+` to an integer, or to `soft` and `hard` integers with `soft` ≤ `hard`. |
 | `pids_limit` | An integer ≥ 1. |
-| `stop_signal` | `"SIG..."`, such as `"SIGTERM"`. |
+| `stop_signal` | `"SIG..."`, such as `"SIGTERM"`, at most 16 bytes. |
 | `labels` | A map of `[A-Za-z0-9][A-Za-z0-9._/-]*`, at most 255 bytes, to strings. A key that starts with a digit is double-quoted. Not under `com.docker.` or `io.hippius.`. |
 | `hostname` | One lowercase DNS label. |
 | `networks` (service) | A list of distinct declared networks, or `"default"`. |
