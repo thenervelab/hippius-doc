@@ -120,6 +120,21 @@ const sidebars: SidebarsConfig = {
               ],
             },
             "use/compute/runners",
+            // ⚠️ App engine (beta) pages are `unlisted: true` until the beta
+            // opens: reachable by direct link (the console links to
+            // /use/compute/app-engine/verify), not indexed, not in the sidebar.
+            // To publish, drop `unlisted` from the four pages and enable this:
+            // {
+            //   type: "category",
+            //   label: "App engine (Beta)",
+            //   collapsed: true,
+            //   items: [
+            //     "use/compute/app-engine/overview",
+            //     "use/compute/app-engine/deploy",
+            //     "use/compute/app-engine/verify",
+            //     "use/compute/app-engine/compose-rules",
+            //   ],
+            // },
             "use/compute/billing",
             "use/compute/troubleshooting",
           ],
