@@ -46,19 +46,23 @@ The panel shows the headline numbers first (views, people and how much they watc
 ## What the numbers mean
 
 <Unordered>
-  <li><strong>Views</strong>: every time the file was opened from the link. Your own visits don't count.</li>
+  <li><strong>Views</strong>: every time the file was opened from the link. Your own visits don't count while you're signed in to the console in that browser. Open your link in a browser where you aren't signed in, a private window for example, and that visit counts like anyone else's.</li>
   <li><strong>Unique viewers</strong>: different browsers that opened it. The same person on their phone and their laptop counts twice.</li>
   <li><strong>Completion</strong>: for each view of a recording, how much of the video was played, averaged over all views. Skipped parts don't count, and parts watched twice count once.</li>
   <li><strong>Average watch time</strong>: how long people watched, on average.</li>
   <li><strong>Where people stopped</strong>: a chart that shows, for each moment of the recording, how many views reached it. A sharp drop tells you where people lost interest or found what they needed. Each commenter appears on the chart at the moment their comment is about.</li>
-  <li><strong>Viewers</strong>: everyone who watched, with how much they watched and when. People appear as <em>Anonymous viewer</em> unless they commented under a name.</li>
+  <li><strong>Viewers</strong>: everyone who watched, with how much they watched and when. You don't see who they are: each one shows as <em>Anonymous viewer</em>, unless they also left a comment under their name in the same browser, which puts that name on their views.</li>
 </Unordered>
 
 Screenshots and other pictures get views and viewers, but no completion or chart, since there is nothing to play.
 
 ## Comments and reactions
 
-When comments are on, people who open your link see the comments in a panel beside the screenshot or video (below it on a phone), with a box to add their own. Anyone with the link can read the comments, and posting one needs a Hippius account. People comment under their account's name. Someone who signs in with an access key has no name of their own, so they show as a short form of their account address, such as <code>5dsqam…sk63</code>, on the link's page and in your Insights. People can also reply to a comment, and a reply you post on your own link carries an **Owner** badge.
+When comments are on, people who open your link see the comments in a panel beside the screenshot or video (below it on a phone), with a box to add their own. Anyone with the link can read the comments, and posting one needs a Hippius account.
+
+People comment under their account's name, or leave it off: the **Posting as** menu next to the box offers their name (*Shown to the owner and anyone with the link*) or **Anonymous viewer** (*Your name isn't shown with this comment*). Someone who signs in with an access key has no name of their own, so they show as a short form of their account address, such as <code>5dsqam…sk63</code>, on the link's page and in your Insights. Since every comment needs a sign-in, Hippius knows which account posted it, even when it shows as Anonymous viewer. Only the name, or Anonymous viewer, is shown to you and to other viewers.
+
+People can also reply to a comment, and a reply you post on your own link carries an **Owner** badge.
 
 Reactions sit in a row of chips under the file: all eight of them (👍 ❤️ 😂 😮 🎉 👏 🔥 🙌), always in the same order, each with how many people picked it once someone has. One tap adds your reaction, and tapping it again takes it back. Anyone with the link sees the counts, but not who reacted. Viewing the link needs no account, while reacting needs a sign-in, the same as commenting.
 
@@ -76,7 +80,7 @@ When someone tags you as the owner, you see it in Insights, in the console and i
 
 ## Choose what each link collects
 
-Each link has three switches: **Insights** (counting views and watch time), **Comments** and **Reactions**. When Insights is on, people who open the link see a short note saying you can see how many people viewed it.
+Each link has three switches: **Insights** (counting views and watch time), **Comments** and **Reactions**. When Insights is on, people who open the link see a short note on the page: *The owner can see who viewed*. What you actually see is how many views and viewers the link had, and a name only for people who commented under their name.
 
 You'll find them in the share dialog when you make a link, and later in the link's Insights, behind the gear at the top of the panel (**Link settings**). In the console, clicking any of the pills under the file name opens them too. Changes apply straight away. Turning one off stops new views, comments or reactions from being added, and what was already collected stays in your Insights.
 
@@ -106,11 +110,13 @@ Choose them in the console under [Settings, Share link emails](/use/console/sett
 
 Share links are public: anyone who has the full link can open the file. Insights, comments and reactions follow the same idea, with as little as possible visible to Hippius.
 
-**Who can read comments.** Comments, the names people comment under and who they tag are encrypted with the link's key, the part after the `#` that browsers never send to a server. Anyone with the link can read them, and Hippius can't. That's also why comment emails only tell you how many there are.
+**Who can read comments.** Comments, the names people comment under and who they tag are encrypted with the link's key, the part after the `#` that browsers never send to a server. Anyone with the link can read them, and Hippius can't. That's also why comment emails only tell you how many there are. Hippius does know which account posted each comment, because posting needs a sign-in, and that includes comments posted as Anonymous viewer.
 
 **Reading them on a new device.** Hippius needs that key again before it can show you the comments. The console looks for it wherever your browser already has it: the tab you made the link in, your Drive if it's unlocked, another console tab you have open, or the browser extension when you open Insights from it. When it finds the key, the comments open straight away, with no password. Only when none of those has it does Insights ask for your [unlock password](/use/console/unlock-password), the same one that opens your Drive. The desktop app finds the key in your account by itself. If it can't, a comment shows as *This comment couldn't be read*, and opening the full link in your browser still shows every comment on the link's own page. Comments on a link with a password are only shown on that page, after the password.
 
-**What isn't encrypted.** Reactions and view counts. Hippius has to count them, so it can see which emoji were picked and how many views a link had, but never the file. Views are anonymous: a random ID kept in the viewer's browser, with no account or IP address, and only numbers are kept, never what was on screen.
+**What isn't encrypted.** Reactions, the moment in a recording each reaction was added at, and view counts. Hippius has to count them, so it can see which emoji were picked and where, and how many views a link had, but never the file. Only numbers are kept, never what was on screen.
+
+**How viewers are counted.** A view carries no account or IP address, only a random ID kept in the viewer's browser. That browser sends the same ID to every Hippius link it opens, so the ID isn't private to one link. If someone comments under their name in the same browser, their name appears next to their views in your Insights.
 
 If a link reaches someone it shouldn't, turn it off in Shared Links. From then on nobody can open the link, its comments or its reactions. See [Share links for captures](/use/captures/share-links#turn-a-link-off).
 
