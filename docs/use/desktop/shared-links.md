@@ -259,7 +259,7 @@ You can see who opened a link, and let people comment and react under it. The **
 
 <Screenshot src="/img/desktop/captures/share-dialog.png" alt="The desktop Share via link dialog with Show a preview in chats, Insights, Comments and Reactions switches" dark raw />
 
-Open a link's **Insights** from its row in Shared Links, or from Captures, to see who watched and read what they said. See [Insights, comments and reactions](/use/captures/insights).
+Open a link's **Insights** from its row in Shared Links, or from Captures, to see who watched and read what they said. They open in a panel on the right, with Comments, Viewers and Reactions tabs, and the link's switches behind the gear at the top. In Captures every screenshot and recording offers Insights, and one without a link yet can get one there with **Create link**. A comment that tags you with `@` says **Mentioned you**, and the **Mentions you** filter shows only those. See [Insights, comments and reactions](/use/captures/insights).
 
 ## Storage Usage
 

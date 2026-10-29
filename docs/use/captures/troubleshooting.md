@@ -100,6 +100,10 @@ Comments are end-to-end encrypted with the link's key. The console only asks whe
 
 Insights, comments and reactions arrive in the desktop app in version 0.6.16. Until it reaches you, switch to the [beta channel](/use/desktop/beta-channel), or open the link's Insights in the console.
 
+### A capture's Insights button is grey
+
+That capture has no share link yet, so there's nothing to count. Click the button and then <BgStyledText>Create link</BgStyledText> in the panel: the link is made and copied, and its Insights appear. See [A capture without a link yet](/use/captures/insights#a-capture-without-a-link-yet).
+
 ### There's no Record on Windows
 
 Screen recording on Windows arrived in Hippius 0.6.9. If you don't see Record, update the app: it usually updates itself, or you can download the latest version from the [Hippius download page](https://hippius.com/desktop-app).
@@ -126,7 +130,7 @@ Yes, for Chrome and Edge. It takes screenshots and records your screen from your
 
 **Can people comment on my captures?**
 
-Yes, when comments are on for the link. Anyone with the link can read them, and posting needs a Hippius account. Comments are end-to-end encrypted. You can delete a comment or block its author from that link in Insights. See [Insights, comments and reactions](/use/captures/insights).
+Yes, when comments are on for the link. Anyone with the link can read them, and posting needs a Hippius account. People can tag you, or each other, by typing `@`. Comments are end-to-end encrypted. You can delete a comment or block its author from that link in Insights. See [Insights, comments and reactions](/use/captures/insights).
 
 **Who can see my captures?**
 
@@ -138,7 +142,7 @@ In the desktop app, yes: turn off **Copy a share link after capture** in the cap
 
 **If I delete a capture, does its link stop working?**
 
-No. A link is its own encrypted copy of the file, so it keeps working after the file is deleted. Turn the link off in Shared Links. See [Deleting a capture doesn't end its link](/use/captures/share-links#deleting-a-capture-doesnt-end-its-link).
+Not in the desktop app or the console. A link is its own encrypted copy of the file, so it keeps working after the file is deleted. Turn the link off in Shared Links. In the [browser extension](/use/browser-extension/captures#delete-a-capture), deleting a capture from the popup turns its links off for you. See [Deleting a capture doesn't end its link](/use/captures/share-links#deleting-a-capture-doesnt-end-its-link).
 
 **Do captures use my storage?**
 

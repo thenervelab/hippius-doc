@@ -14,7 +14,7 @@ Five minutes from now you can have your first link on your clipboard. You'll ins
 
 ## Install the extension
 
-The extension is for Chrome and Microsoft Edge on a computer, version 116 or later. Both install it from the Chrome Web Store.
+The extension is for Chrome and Microsoft Edge on a computer, version 130 or later. Both install it from the Chrome Web Store.
 
 <Ordered>
   <li>Open <a href="https://chromewebstore.google.com/detail/hippius/ndpfdlfaechmhnffnmkbfgddhneehgld">Hippius on the Chrome Web Store</a> and click <BgStyledText>Add to Chrome</BgStyledText>. In Edge, the store first asks whether to allow extensions from other stores. Allow it, then click the button again.</li>

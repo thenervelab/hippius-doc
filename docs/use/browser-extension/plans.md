@@ -7,9 +7,10 @@ description: What the Hippius extension includes on the Free plan (unlimited scr
 ---
 
 import Unordered from '@site/src/components/Unordered';
+import BgStyledText from '@site/src/components/BgStyledText';
 import Screenshot from '@site/src/components/Screenshot';
 
-The extension itself is free. What you can capture depends on your Hippius Drive plan, because that's where your captures are stored. The same rules apply in the extension, the console and the desktop app, and the popup shows which plan you're on when it matters.
+The extension itself is free. What you can capture depends on your Hippius Drive plan, because that's where your captures are stored. The same rules apply in the extension, the console and the desktop app. The popup's account line shows your plan, for example **Connected · Free plan**, and so does the Account part of Settings.
 
 ## Free plan
 
@@ -17,7 +18,7 @@ Every account that signs in with Google, GitHub or Apple starts on the Free plan
 
 <Unordered>
   <li>Unlimited screenshots and unlimited share links.</li>
-  <li>25 recordings in total. The popup shows how many you've used.</li>
+  <li>25 recordings in total. The popup shows how many you've used, says "1 left" at 24, and turns amber with a lock on Record once all 25 are used.</li>
   <li>Recordings of up to 5 minutes. The timer counts down the last minute, then saves and shares the recording for you. Paused time doesn't count.</li>
   <li>A small Hippius watermark in the corner of each screenshot and recording. It's drawn into the picture before the capture is encrypted, so it stays when you share or download it.</li>
   <li>Share links without insights, comments or reactions. Those are part of the paid plans, and links you make after upgrading have them switched on.</li>
@@ -39,9 +40,9 @@ Plans are bought in the console. See [Drive plans](/use/console/billing#drive-pl
 
 ## No plan
 
-This applies only if you signed in with a 12-word access key. If you signed in with Google, GitHub or Apple, you're on the Free plan instead.
+Accounts that sign in with Google, GitHub or Apple get the Free plan. An account that comes with no free storage, such as one that signs in with a 12-word access key, has nowhere to save captures until it picks a plan.
 
-Access-key accounts don't come with free storage, so until they pick a plan there's nowhere to save captures. The popup says **No plan** with a link to the plans, and Record doesn't start. If you take a screenshot or upload a file anyway, it waits safely in your browser, and saves once you've picked a plan and clicked Retry.
+The popup says **No storage plan yet** with a <BgStyledText>Choose a plan</BgStyledText> button, and Record, Screenshot and Upload show a lock. Hippius tells you before a capture is taken rather than after, so you never record something that can't be saved.
 
 <Screenshot src="/img/extension/popup-no-plan.png" alt="The popup for an access-key account with no plan, saying there's nowhere to save captures, with See plans" dark raw />
 

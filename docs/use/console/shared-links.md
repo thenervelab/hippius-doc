@@ -234,7 +234,7 @@ When someone opens your share link, they land on a simple page in their browser 
 
 A **Download** option is always available. The file is streamed directly to the recipient's device, decrypted entirely in their browser. We never see the file in plaintext on the recipient's end either.
 
-When you've turned on comments or reactions for a link, recipients also see the comments in a panel beside the file (below it on a phone) and a bar of emoji reactions under it. See [Views, Comments and Reactions](#views-comments-and-reactions).
+When you've turned on comments or reactions for a link, recipients also see the comments in a panel beside the file (below it on a phone) and a row of reaction chips under it, where one tap adds a reaction and another takes it back. Commenters can tag you, or each other, by typing `@`. See [Views, Comments and Reactions](#views-comments-and-reactions).
 
 If the link has been revoked or has expired, recipients see: _"This link has expired or been revoked."_ The page deliberately does not say which, which prevents anyone from guessing whether a link was ever valid.
 
@@ -244,7 +244,7 @@ Once a link exists, the share dialog shows three more switches under **Views, co
 
 <Screenshot src="/img/console/captures/share-dialog-switches.png" alt="The console share dialog after the link is made, with Show a preview in chats and the Insights, Comments and Reactions switches" dark raw />
 
-To see what happened to a link, click <BgStyledText>Insights</BgStyledText> on its row in Shared Links or in [Captures](/use/captures), or choose **View insights** from the row menu. Shared Links also shows each link's **Views** and **Comments**, and you can sort by either. Insights open in a panel on the right with the views, a chart of where people stopped watching a video, and Comments, Viewers and Reactions tabs. The link's switches are behind the gear at the top of the panel. Comments and viewer names are end-to-end encrypted with the link's key. Everything about it, including what the Free plan shows, is in [Insights, comments and reactions](/use/captures/insights).
+To see what happened to a link, click <BgStyledText>Insights</BgStyledText> on its row in Shared Links or in [Captures](/use/captures), or choose **View insights** from the row menu. Shared Links also shows each link's **Views** and **Comments**, and you can sort by either. Insights open in a panel on the right with the views, a chart of where people stopped watching a video, and Comments, Viewers and Reactions tabs. The link's switches are behind the gear at the top of the panel. A comment that tags you says **Mentioned you**, and the **Mentions you** filter shows only those. Comments, viewer names and who was tagged are end-to-end encrypted with the link's key. Everything about it, including what the Free plan shows, is in [Insights, comments and reactions](/use/captures/insights).
 
 <Screenshot src="/img/console/captures/insights-comments.png" alt="The Comments tab of the console's Insights panel, with comments from Sam, Robin and Jordan at moments in the recording, a reply from the owner, and the reaction totals in the summary" dark raw />
 
