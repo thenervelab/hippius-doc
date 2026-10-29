@@ -83,7 +83,9 @@ A folder shared on its own gets its own **Shared** mark and its own <BgStyledTex
 
 <Screenshot src="/img/console/shared-drives/folder-shared-row.png" alt="A folder shared on its own, with its Shared mark, Manage access button and row menu" dark raw />
 
-There is no way to change someone's role on a single folder in place. To give them different access, remove them and invite them again.
+To change which folders someone has, open <BgStyledText>Manage access</BgStyledText>, choose <BgStyledText>Change folders</BgStyledText> in the menu beside their name, and remove a folder or type the path of another one in the drive (for example `Clients/ACME`), with Viewer or Editor access. Save, and the change applies at once. Folders they already have keep their access, and they must keep at least one: to take everything away, remove them instead.
+
+There is no way to change someone's role on a folder they already have. To give them different access, remove them and invite them again.
 
 ## Inviting People by Email
 
