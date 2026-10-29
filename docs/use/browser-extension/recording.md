@@ -33,13 +33,12 @@ For a quick video message, record just your camera: turn off the mode row (This 
 
 ### Your camera with Screen
 
-With **Screen**, your camera floats in a small window of its own above every tab and app, so you can see yourself while you switch windows. Because it's a separate window, it's only in the video when you share your **entire screen**. If you share one window or a tab, you'll still see the bubble, but the video won't have it. The bar reminds you of this when the camera is on.
-
-To have your face in the video while you show just part of your screen:
+With **Screen**, your camera and the recording controls float together in one small window above every tab and app. You can see yourself while you switch windows, and stop, pause or mute right under your camera. What ends up in the video depends on what you pick in your browser's sharing dialog:
 
 <Unordered>
-  <li>For a single tab, use <strong>This tab</strong>. The bubble is drawn in the page, so it's recorded.</li>
-  <li>For a single window or app, use <strong>Area</strong> and draw the area around that window. Your camera is drawn into the video inside the area, wherever you place it. Anything that moves into that part of the screen is recorded too, so keep other windows clear of it.</li>
+  <li><strong>A window or a tab</strong>: your camera is drawn into the video in the bottom-left corner, at the size you pick in the camera menu. The floating window is there only for you and is never in the video.</li>
+  <li><strong>Your entire screen</strong>: the video shows your camera wherever the floating window is, even as you move it, and never the window's controls or title bar. If you hide your camera, that spot shows a soft blur instead. With more than one display, your browser asks once to let Hippius see where they are, so the camera lands in the right place.</li>
+  <li><strong>Your entire screen with the camera off</strong>: the controls start folded to a small red dot, the time and Stop, and those are in the video. Share a window or a tab, or use the <a href="/use/captures/recording">desktop app</a>, to keep them out.</li>
 </Unordered>
 
 ### Your microphone and camera
@@ -85,13 +84,15 @@ Everything inside the area is recorded, other windows and apps too, so you can s
 
 With the camera on, place it inside the area on that picture. It's drawn into the video exactly there, so it's always in the recording however your windows are arranged.
 
+The recording controls float in a small window of their own, with a little live picture of your camera beside them when it's on. They're in the video whenever they sit inside the area, so keep them outside it. The countdown tells you when they're inside.
+
 ## While you record
 
 A short countdown runs first. Click it, or press <BgStyledText>Enter</BgStyledText> (<BgStyledText>Return</BgStyledText> on a Mac), to start straight away. Then the recording controls appear, with the time and everything you need to mute, hide your camera, pause, start over or stop.
 
 <Screenshot src="/img/extension/recording-controls.png" alt="The recording controls on the page, with the time, microphone, camera, pause, restart, stop and discard, next to the camera bubble" dark raw />
 
-When the camera floats in its own window, move it by dragging and resize it from its edges. Hover over it to mute or hide the camera.
+When your camera floats in its own window, move it by dragging and resize it from its edges. The camera menu in the controls changes its size, or switches to another camera, without stopping.
 
 ### Pause, start over or stop
 
@@ -104,14 +105,14 @@ Stop saves the recording. Stop from the controls, by pressing <BgStyledText>Alt 
 <Screenshot src="/img/extension/popup-recording.png" alt="The Hippius popup during a recording, with the time, Pause, Restart, Stop recording and Discard" dark raw />
 
 :::tip Keeping the controls out of your video
-**This tab** never shows the controls in the video. **Area** with the camera off shows nothing extra either; stop with <BgStyledText>Alt Shift M</BgStyledText> or the Hippius button. If you'd rather have the controls on screen, turn on **Float the recording controls** in the Hippius tab and keep them outside the area. **A whole screen** includes the small folded controls; share a single window instead if that matters.
+**This tab**, and a window or tab shared with **Screen**, never show the controls in the video. **A whole screen** with the camera on shows only your camera where the controls float; with the camera off it includes the small folded controls. With **Area**, the controls float and are in the video whenever they sit inside the area, so keep them outside it. To keep every control off your screen, turn off **Float the recording controls** in the Hippius tab before you start, and stop with <BgStyledText>Alt Shift M</BgStyledText> or the Hippius button. Hippius remembers your choice.
 :::
 
 On the Free plan a recording stops on its own at 5 minutes, and the timer counts down the last minute. Paused time doesn't count. See [Plans and Limits](/use/browser-extension/plans).
 
 ## When you stop
 
-A small card in the corner shows Hippius encrypting and saving the recording. When it's done, the link is on your clipboard and the recording opens in a new tab so you can watch it back (you can turn that off in [Settings](/use/browser-extension/captures#settings)). [When your link is ready](/use/browser-extension/sharing#when-your-link-is-ready) explains the card.
+A small card in the corner shows Hippius encrypting and saving the recording. When it's done, the link is on your clipboard. A new tab opens the moment you press Stop, shows the recording being saved, and turns into the recording's page as soon as the link is ready, so you can watch it back (you can turn that off in [Settings](/use/browser-extension/captures#settings)). If the link can't be made, the tab says why, with <BgStyledText>Retry</BgStyledText>. [When your link is ready](/use/browser-extension/sharing#when-your-link-is-ready) explains the card.
 
 ## If something goes wrong, your recording is safe
 

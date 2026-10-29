@@ -64,7 +64,7 @@ The extension talks only to Hippius, and only to save and share your captures. N
 
 ## What you need
 
-You need Chrome or Microsoft Edge 116 or later on a computer, and a free Hippius account for your captures to live in. Brave, Arc and other browsers built on Chrome can install it from the Chrome Web Store too, though we build and test it on Chrome and Edge. It needs nothing beyond your browser, so it also works on a computer where you can't install apps.
+You need Chrome or Microsoft Edge 130 or later on a computer, and a free Hippius account for your captures to live in. Brave, Arc and other browsers built on Chrome can install it from the Chrome Web Store too, though we build and test it on Chrome and Edge. It needs nothing beyond your browser, so it also works on a computer where you can't install apps.
 
 Not ready to make an account? <BgStyledText>Capture without saving</BgStyledText> in the popup works straight away. Those captures wait on your computer until you connect.
 

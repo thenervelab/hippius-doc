@@ -67,7 +67,7 @@ Captures are named after the moment you took them, so they sort naturally:
   <li><code>Recording 2026-10-12 at 14.05.40.mp4</code> (some browsers save a <code>.webm</code> video instead)</li>
 </Unordered>
 
-Open **Captures** in the sidebar (under Drive in the console) to see your newest captures first, with the same search, filters and row menu as any drive, and a quick way into the [Insights](/use/captures/insights) of any capture that has a link. They're also ordinary files in your captures drive, next to your other drives.
+Open **Captures** in the sidebar (under Drive in the console) to see your newest captures first, with the same search, filters and row menu as any drive, and a quick way into the [Insights](/use/captures/insights) of each capture's link. In the desktop app every screenshot and recording offers Insights, and one without a link yet can get one right there. They're also ordinary files in your captures drive, next to your other drives.
 
 <Screenshot src="/img/console/captures/captures-page.png" alt="The Captures page in the console, listing screenshots and recordings with 3 of 25 free recordings used" dark raw />
 

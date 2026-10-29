@@ -20,7 +20,9 @@ When you take a screenshot or stop a recording, a small card opens in the corner
 
 The card also lets you open the capture, copy the link again, or, for a screenshot, edit it in the console's [editor](/use/captures/edit) before you send it. Download and Discard are in its menu. Once everything is saved, it closes by itself after a few seconds; hover over it to keep it open.
 
-After a recording, the link also opens in a new tab so you can check it. In [Settings](/use/browser-extension/captures#settings) you can choose whether the link is copied, and whether it opens after recordings and after screenshots.
+You don't have to wait for it. In Chrome and Edge you can close the card while it's still saving: the upload carries on and the link still opens. If saving fails after you closed it, the card comes back, or the Hippius button shows a "!" with what went wrong.
+
+After a recording, a new tab opens as soon as you press Stop. It shows the recording being saved and turns into the link's page once it's ready, so you can check it. In [Settings](/use/browser-extension/captures#settings) you can choose whether the link is copied, and whether it opens after recordings and after screenshots.
 
 ## Who can open a link, and for how long
 
@@ -59,7 +61,7 @@ Insights, comments and reactions are part of the paid plans, so links you make o
 
 ## Turn a link off
 
-If a link reaches someone it shouldn't, turn it off in the console under [Shared Links](/use/console/shared-links) (the button says Revoke). Deleting a capture from the popup also turns off the links this browser made for it (see [Delete a capture](/use/browser-extension/captures#delete-a-capture)).
+If a link reaches someone it shouldn't, turn it off in the console under [Shared Links](/use/console/shared-links) (the button says Revoke). Deleting a capture from the popup also turns off its links, wherever they were made (see [Delete a capture](/use/browser-extension/captures#delete-a-capture)).
 
 ## Next
 

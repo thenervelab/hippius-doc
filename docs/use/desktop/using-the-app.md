@@ -212,11 +212,12 @@ Hippius Desktop keeps a compact **menu bar window** in your system tray (the men
 The window has these parts:
 
 <Unordered>
-  <li><strong>Credits</strong>: your current balance, shown in the top left so you can keep an eye on it at any time.</li>
-  <li><strong>Screenshot, Record and Upload</strong>: three tiles side by side at the top. See <a href="#screenshots-and-recordings">Screenshots and recordings</a> below.</li>
-  <li><strong>Notification bell</strong>: in the top right, with a badge for the number of unread notifications.</li>
+  <li><strong>Balance</strong>: at the top right, your balance in dollars, next to the notification bell with a badge for unread notifications.</li>
+  <li><strong>The menu (three dots)</strong>: your balance with <strong>Top up</strong>, your plan and how much of it you use, and shortcuts to <strong>Open Hippius</strong>, your captures folder, <strong>Settings</strong>, <strong>Help &amp; Support</strong> and <strong>Quit Hippius</strong>.</li>
+  <li><strong>Record, Screenshot and Upload</strong>: three tiles side by side. See <a href="#screenshots-and-recordings">Screenshots and recordings</a> below.</li>
   <li><strong>Search Files</strong>: a search box with the <BgStyledText>⌘F</BgStyledText> shortcut.</li>
-  <li><strong>Your Uploads</strong>: your most recently uploaded files, grouped by when they were added (for example <strong>Today</strong>, <strong>Yesterday</strong>, <strong>Last 7 Days</strong>, and <strong>Older</strong>). Each row shows the file name, size, and upload date.</li>
+  <li><strong>Captures and All files</strong>: your latest captures, or all your recent files, a tab apart, grouped by when they were added, with a one-line sync status beside the tabs.</li>
+  <li><strong>Your account</strong>: at the bottom, the email (or GitHub handle) you signed in with and your account address.</li>
 </Unordered>
 
 Each control is a shortcut into the full app:
@@ -224,8 +225,11 @@ Each control is a shortcut into the full app:
 <Unordered>
   <li>Click the <strong>Search Files</strong> box to open Hippius Desktop with the search bar focused, ready for you to find a file.</li>
   <li>Click the <strong>notification bell</strong> to open your <a href="/use/desktop/notifications">Notifications</a> in the app.</li>
+  <li>Click a screenshot, a recording or any file Hippius can preview to open it in the Hippius viewer. Point at a row for <strong>Copy link</strong> and <strong>Edit</strong>, or open its menu to view, download, share, rename or delete it, show it in Hippius or in your file manager, or, for a capture, see its <a href="/use/captures/insights#from-the-menu-bar">Insights</a>.</li>
   <li>Click <BgStyledText>Open Hippius →</BgStyledText> at the bottom to bring the full Hippius Desktop window to the front.</li>
 </Unordered>
+
+{/* The screenshot above shows an older layout of the menu bar window. Replace it with a capture of the current one. */}
 
 ## Screenshots and Recordings {#screenshots-and-recordings}
 

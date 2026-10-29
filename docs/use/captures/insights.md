@@ -23,9 +23,23 @@ Insights, comments and reactions are live in the [console](/use/console/shared-l
 
 {/* Remove the callout above, and this comment, once desktop 0.6.16 is on the main channel. */}
 
-## Open a link's Insights
+## Open a capture's Insights
 
-Insights open in a panel on the right, so the list you were looking at stays in view. In **Captures**, click <BgStyledText>Insights</BgStyledText> next to a capture that has a link. In the console that button shows how many views the link has had, for example **12 views**, or **Insights off** when the link isn't counting views, and <BgStyledText>View insights</BgStyledText> in the capture's row menu opens the same panel. You can also open them from the link's row in **Shared Links**, from the card right after a capture (in its More menu in the desktop app, <BgStyledText>View insights</BgStyledText> right on the card in the console), and from any email about your link, which takes you straight there in the console.
+Insights open in a panel on the right, so the list you were looking at stays in view. In **Captures**, click <BgStyledText>Insights</BgStyledText> on a capture's row, or choose <BgStyledText>View insights</BgStyledText> from its row menu. The button shows how many views the capture's link has had, for example **12 views**, or **Insights off** when the link isn't counting views.
+
+You can also open them from the link's row in **Shared Links**, from the card right after a capture (in its More menu in the desktop app, <BgStyledText>View insights</BgStyledText> right on the card in the console), and from any email about your link, which takes you straight there in the console.
+
+### A capture without a link yet
+
+In the desktop app, every screenshot and recording on the Captures page has the Insights button, even one that has no share link yet. That happens when you've turned off **Copy a share link after capture**, for example. On those captures the button is grey, and the panel explains that Insights start once the capture has a share link.
+
+Click <BgStyledText>Create link</BgStyledText> and Hippius makes the link, copies it to your clipboard and shows its Insights right there in the panel. Views, comments and reactions are switched on for the new link where your plan includes them. On the Free plan they start off, as they do for every link (see [Where the switches start](#where-the-switches-start)).
+
+If you shared a capture from somewhere else, such as the [browser extension](/use/browser-extension), the console or another computer, the desktop app finds that link too. It shows on the capture's row, and Insights open for it.
+
+### From the menu bar
+
+In the desktop app's menu bar window (the system tray on Windows and Linux), open a capture's menu and choose <BgStyledText>View insights</BgStyledText>, right after **Share via link…**. Hippius opens on the Captures page with that capture's Insights already open, ready for you to read the comments or make a link.
 
 <Screenshot src="/img/console/captures/captures-insights-button.png" alt="The Captures page in the console, with a 9 views button on a recording's row that opens its Insights" dark raw />
 
@@ -50,13 +64,21 @@ Screenshots and other pictures get views and viewers, but no completion or chart
 
 ## Comments and reactions
 
-When comments are on, people who open your link see the comments in a panel beside the screenshot or video (below it on a phone), with a box to add their own. Anyone with the link can read the comments, and posting one needs a Hippius account. Reactions work the same way: a bar of emoji under the file that anyone can see, and reacting needs an account. People can also reply to a comment, and a reply you post on your own link carries an **Owner** badge.
+When comments are on, people who open your link see the comments in a panel beside the screenshot or video (below it on a phone), with a box to add their own. Anyone with the link can read the comments, and posting one needs a Hippius account. People comment under their account's name. Someone who signs in with an access key has no name of their own, so they show as a short form of their account address, such as <code>5dsqam…sk63</code>, on the link's page and in your Insights. People can also reply to a comment, and a reply you post on your own link carries an **Owner** badge.
+
+Reactions sit in a row of chips under the file: all eight of them (👍 ❤️ 😂 😮 🎉 👏 🔥 🙌), always in the same order, each with how many people picked it once someone has. One tap adds your reaction, and tapping it again takes it back. Anyone with the link sees the counts, but not who reacted. Viewing the link needs no account, while reacting needs a sign-in, the same as commenting.
 
 A comment on a recording shows the moment in the video it was written at, so you know which part someone is talking about. On the link's page it also sits on the video's timeline, and clicking it plays the video from that moment.
 
 You stay in charge of what appears on your link. From a comment's menu in Insights you can delete it for everyone, or block its author from commenting and reacting on this link, and **Unblock** undoes it. Their earlier comments stay until you delete them.
 
 <Screenshot src="/img/console/captures/insights-comments.png" alt="The Comments tab of the console's Insights panel, with comments from Sam, Robin and Jordan at moments in the recording, a reply from the owner, and the reaction totals in the summary" dark raw />
+
+### Mention someone in a comment
+
+To get someone's attention in a comment or a reply, type `@` and pick them from the list that appears. You can tag the link's owner and anyone who has commented under a name. The owner shows as **Owner** until they've replied under their own name, and people who commented anonymously can't be tagged.
+
+When someone tags you as the owner, you see it in Insights, in the console and in the desktop app: the mention is highlighted, the comment says **Mentioned you**, and a **Mentions you** filter next to the sort shows only the comments that mention you. Who was tagged is sealed inside the encrypted comment along with the words, so Hippius can't see it either.
 
 ## Choose what each link collects
 
@@ -90,7 +112,7 @@ Choose them in the console under [Settings, Share link emails](/use/console/sett
 
 Share links are public: anyone who has the full link can open the file. Insights, comments and reactions follow the same idea, with as little as possible visible to Hippius.
 
-**Who can read comments.** Comments, and the names people comment under, are encrypted with the link's key, the part after the `#` that browsers never send to a server. Anyone with the link can read them, and Hippius can't. That's also why comment emails only tell you how many there are.
+**Who can read comments.** Comments, the names people comment under and who they tag are encrypted with the link's key, the part after the `#` that browsers never send to a server. Anyone with the link can read them, and Hippius can't. That's also why comment emails only tell you how many there are.
 
 **Reading them on a new device.** Hippius needs that key again before it can show you the comments. The console looks for it wherever your browser already has it: the tab you made the link in, your Drive if it's unlocked, another console tab you have open, or the browser extension when you open Insights from it. When it finds the key, the comments open straight away, with no password. Only when none of those has it does Insights ask for your [unlock password](/use/console/unlock-password), the same one that opens your Drive. The desktop app finds the key in your account by itself. If it can't, a comment shows as *This comment couldn't be read*, and opening the full link in your browser still shows every comment on the link's own page. Comments on a link with a password are only shown on that page, after the password.
 

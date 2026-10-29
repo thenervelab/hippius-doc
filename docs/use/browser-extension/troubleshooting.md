@@ -26,7 +26,7 @@ It's probably not pinned. Click the puzzle piece at the top right of your browse
 
 ### A shortcut does nothing
 
-It may have no keys, or another extension may use them. Open the keyboard panel in the popup and use <BgStyledText>Set</BgStyledText>, or see [Change a shortcut](/use/browser-extension/shortcuts#change-a-shortcut).
+It may have no keys, or another extension may use them. Open Settings in the popup and use <BgStyledText>Set</BgStyledText> under Keyboard shortcuts, or see [Change a shortcut](/use/browser-extension/shortcuts#change-a-shortcut).
 
 ## Connecting and your password
 
@@ -58,7 +58,7 @@ The extension is already connected to another Hippius account. Open the popup, d
 
 ### My camera isn't in my recording
 
-With **Screen**, your camera floats in a window of its own, so it's only in the video when you share your entire screen. Share a window or a tab and the bubble isn't recorded. To show your face with one tab, record with **This tab**. To show it with one window, record an **Area** drawn around that window. [Your camera with Screen](/use/browser-extension/recording#your-camera-with-screen) explains.
+Check that you're on version 0.3.0 or later: before it, a window or tab shared with **Screen** left your camera out. Now your camera is in every recording while it's on: drawn in the corner of a window or tab, over the floating window for an entire screen, and wherever you placed it in an area. If it's still missing, make sure you didn't hide it with the camera button in the controls. [Your camera with Screen](/use/browser-extension/recording#your-camera-with-screen) explains.
 
 ### My camera disappeared from a tab recording
 
@@ -70,7 +70,7 @@ Your browser no longer lets Hippius use them, for example because they were allo
 
 ### The sharing dialog lists no screens or windows (Mac)
 
-macOS needs to allow your browser to record the screen. Open **System Settings**, then **Privacy & Security**, then **Screen & System Audio Recording** (**Screen Recording** on older versions of macOS), turn your browser on, and restart it.
+macOS needs to allow your browser to record the screen, and Hippius tells you when it doesn't. Open **System Settings**, then **Privacy & Security**, then **Screen & System Audio Recording** (**Screen Recording** on older versions of macOS), turn your browser on, and restart it.
 
 ### Record says it couldn't count your recordings
 
@@ -82,9 +82,9 @@ On the Free plan, Hippius checks how many recordings you have before starting. W
 
 It couldn't be uploaded straight away, for example because you were offline, you weren't connected, or your Drive is full. It waits in your browser. Click <BgStyledText>Retry</BgStyledText> (or <BgStyledText>Save</BgStyledText>) on its row to open its card, which offers the next step. See [If a capture isn't saved yet](/use/browser-extension/captures#if-a-capture-isnt-saved-yet).
 
-### The popup says No plan
+### The popup says No storage plan yet
 
-Your account signs in with an access key and has no Drive plan, so there's nowhere to save captures. Click <BgStyledText>See plans</BgStyledText> to pick one. Anything you captured in the meantime saves when you click Retry. See [No plan](/use/browser-extension/plans#no-plan).
+Your account has no free storage, which is usual for accounts that sign in with an access key, so there's nowhere to save captures. Click <BgStyledText>Choose a plan</BgStyledText> to pick one. See [No plan](/use/browser-extension/plans#no-plan).
 
 ## Something else
 
