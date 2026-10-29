@@ -18,7 +18,7 @@ Hippius lets you share any file from your Drive as a public link. Recipients don
 
 Screenshots and recordings get a link automatically, and those links show up here too. See [Share links for captures](/use/captures/share-links).
 
-To share a file, go to **Drive**, open the menu on any file, and choose **Share via link**. Hippius creates a secure encrypted copy in your browser and generates a shareable URL.
+To share a file, go to **Drive**, open the menu on any file, and choose **Share via link**. Hippius creates a secure encrypted copy in your browser and generates a shareable URL. On a whole drive in **My Drives**, the same item is called **Share via public link**, to set it apart from **Share drive**, which invites people with an account (see [Shared Drives](/use/console/shared-drives)).
 
 After sharing, all your active links are tracked on the **Shared Links** page, reached from the <BgStyledText>Shared Links</BgStyledText> button in the Drive header (<BgStyledText>My Drives</BgStyledText>, under <BgStyledIconWithText text="Drive" icon="FolderOpen" /> in the sidebar). From there you can copy a link again, revoke access, and see a history of ended shares.
 
@@ -102,7 +102,7 @@ A link you create yourself gets an expiry, chosen before you create it:
 | **30 days** | One month after you create it. |
 | **Until I revoke it** | Never on its own. It stays live until you revoke it. |
 
-The share dialog has no silent default. It asks, because a link that quietly expired in a day was the behaviour people found surprising.
+The dialog starts on **24 hours**, so if the link should last longer, pick another option before you create it.
 
 :::info Links made for screenshots and recordings
 A [screenshot or screen recording](/use/captures) gets its share link automatically, the moment it is saved. That link is public and keeps working until you turn it off, so it is ready to paste straight away. It is listed here with your other links, and you revoke it the same way. See [Share links for captures](/use/captures/share-links).
@@ -155,19 +155,15 @@ The Active Shares table shows every share currently live on your account. It ref
 The table includes shares created from any device or the desktop app, not just this browser. This means you might see shares here that you created elsewhere.
 
 
-If a share was created on a different device or browser, the filename shows as `<created on another device>`, as the share key needed to decrypt it isn't available here.
+Every row shows the file's real name, wherever the link was made. Only an old entry in History can show `<created on another device>` instead.
 
 ### Copy link
 
 Click the three dot menu on any row and choose <BgStyledText>Copy link</BgStyledText> to copy the full share URL to your clipboard.
 
-**After a reload or on another device, unlock first.** The share URL includes the encryption key in the `#` fragment, and that key is not stored in readable form. For links made now, the row shows <BgStyledText>Unlock to copy link</BgStyledText> instead: enter your [unlock password](/use/console/unlock-password) and the console rebuilds the same link, in any session.
+**You can copy a link on any device, after you unlock.** The share URL includes the encryption key in the `#` fragment, and that key is kept in your account locked under your password. After a reload, or on another computer, the row shows <BgStyledText>Unlock to copy link</BgStyledText>: enter your [unlock password](/use/console/unlock-password) and the console rebuilds the same link. That works for links you made in the console, the desktop app or anywhere else.
 
-Some older links can only be copied in the browser session that created them. Their row reads **Not available in this session**. To share one of those again, revoke it and create a new share.
-
-:::tip Save your link when you create it
-Copying the URL straight after creating a share saves you the unlock step later.
-:::
+Some older links keep the old limit and can only be copied in the browser session that created them. Their row reads **Not available in this session**. To share one of those again, revoke it and create a new share.
 
 ### Revoke
 
@@ -178,7 +174,7 @@ A confirmation dialog will ask you to confirm before anything happens. When you 
 <Unordered>
   <li>The link stops working for anyone immediately, with no grace period.</li>
   <li>The encrypted copy stored on Hippius is deleted, freeing the storage.</li>
-  <li>The row moves to the History section with a "Revoked" status.</li>
+  <li>A file link moves to the History section with a "Revoked" status. A folder link stays in the table for a while, marked **Revoked**, before it's cleared away.</li>
   <li>This cannot be undone. If you want to share the file again, create a new share.</li>
 </Unordered>
 
@@ -224,7 +220,7 @@ When someone opens your share link, they land on a simple page in their browser 
 
 <Unordered>
   <li><strong>Images, videos, and PDFs</strong> up to 100 MB preview inline, full-page, so the recipient can view the file without downloading it.</li>
-  <li><strong>Documents</strong> preview inline too: Word documents (DOCX), presentations (PPTX), spreadsheets (XLSX, CSV), HTML, plain text, JSON, and Markdown.</li>
+  <li><strong>Documents</strong> preview inline too, each up to its own size: presentations (PPTX) up to 40 MB, Word documents (DOCX) and HTML up to 25 MB, spreadsheets (XLSX, CSV) up to 20 MB, plain text and JSON up to 2 MB, and Markdown up to 1 MB.</li>
   <li>Everything else, and any file too large to preview, shows a download card with the filename, the file size, and how much time is left before the link expires.</li>
 </Unordered>
 
@@ -240,7 +236,7 @@ If the link has been revoked or has expired, recipients see: _"This link has exp
 
 ## Views, Comments and Reactions
 
-Once a link exists, the share dialog shows three more switches under **Views, comments and reactions**: **Insights** counts views and watch time, **Comments** lets people comment, and **Reactions** lets them react with an emoji. On a paid Drive plan they start on for screenshots and recordings, and off for other files. On the Free plan they all start off, and turning one on shows an upgrade prompt instead. Recipients see a short note when views are counted, can read comments without an account, and need a Hippius account to post a comment or react.
+Once a file link exists, the share dialog shows three more switches under **Views, comments and reactions**: **Insights** counts views and watch time, **Comments** lets people comment, and **Reactions** lets them react with an emoji. On a paid Drive plan they start on for screenshots and recordings, and off for other files. On the Free plan they all start off, and turning one on shows an upgrade prompt instead. Recipients see a short note when views are counted, can read comments without an account, and need a Hippius account to post a comment or react. Folder links don't have these switches, so they never count views or take comments.
 
 <Screenshot src="/img/console/captures/share-dialog-switches.png" alt="The console share dialog after the link is made, with Show a preview in chats and the Insights, Comments and Reactions switches" dark raw />
 
@@ -275,7 +271,7 @@ The desktop app also has a Shared Links page with a few extra capabilities:
 | **Share from Finder** | ❌ Not available | ✅ macOS only |
 | **Choose an expiry** | ✅ 24h, 7d, 30d, or until revoked | ✅ Same options |
 | **Password-protected link** | ✅ Yes | ✅ Yes, in the app and from Finder |
-| **Change the expiry later** | ✅ Folder shares, from the session that created them | Uses Reshare instead |
+| **Change the expiry later** | ✅ Folder links, from any device | ✅ File and folder links, from the row's menu |
 | **How it reads the file** | Downloads and decrypts the Drive copy | Reads the local plaintext file directly from disk |
 | **Copy link (same session)** | ✅ Yes | ✅ Yes |
 | **Copy link after reload** | ✅ Yes, after you unlock (older links: no) | ✅ Yes, key is saved to a local database |
@@ -284,9 +280,9 @@ The desktop app also has a Shared Links page with a few extra capabilities:
 
 **How each app copies links after a reload:** The desktop app remembers each share's key on your computer. The console rebuilds the link once you unlock with your password.
 
-**Changing an expiry.** For a **folder** share, open its action menu on the Shared Links page and choose <BgStyledText>Change expiry</BgStyledText>. This works only in the session that created the share, because changing it needs the share token, which is held in memory there and nowhere else. A share created on another device shows the option greyed out, with a tooltip saying where to go.
+**Changing an expiry.** For a **folder** link, open its action menu on the Shared Links page and choose <BgStyledText>Change expiry</BgStyledText>. The link keeps its address, so nothing needs to be sent again.
 
-For a **file** share there is no expiry change. The desktop app's **Reshare** covers that case by revoking the old share and creating a fresh one for the same file, with a new key, a new link and a fresh expiry. That needs the original local file, so it only works on the device that created the share.
+In the console a **file** link's expiry can't be changed. The desktop app can: its Shared Links page offers **Expire in 24 hours**, **Expire in 7 days**, **Expire in 30 days** and **Never expire** in each link's menu, and the link stays the same.
 
 ## Limits
 
