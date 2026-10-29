@@ -61,7 +61,7 @@ On the Free plan, Insights show how many times a link was opened and by how many
 
 ## Storage
 
-A capture is a file, so it counts toward your storage like any other: 10 GB on the Free plan, or your paid plan's size. Its share link adds nothing while the capture is in your Drive; only a link whose capture you've deleted counts (see [Share links for captures](/use/captures/share-links#storage)).
+A capture is a file, so it counts toward your storage like any other: 10 GB on the Free plan, or your paid plan's size. Its share link keeps a separate encrypted copy, and that copy counts too, so a shared capture uses about twice its size until you turn the link off (see [Share links for captures](/use/captures/share-links#storage)).
 
 To see how much room you have, or to change plan, see [Billing in the console](/use/console/billing#drive-plans) or [in the desktop app](/use/desktop/billing).
 
