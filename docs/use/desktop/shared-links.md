@@ -64,7 +64,7 @@ The desktop reads your local file directly with no download required. For most f
 
 <Unordered>
   <li>Your original folder key stays private. Only the share key is used for the share upload.</li>
-  <li>Revoking a share deletes the encrypted copy and frees the storage.</li>
+  <li>Revoking a share deletes the encrypted copy, and its storage comes back within a few minutes.</li>
   <li>Sharing the same file twice creates two independent copies, each with its own key.</li>
   <li>Deleting a file does not end the links made from it. Each link is its own encrypted copy, so it keeps working until you revoke it or it expires. The delete confirmation reminds you of this.</li>
   <li>The server can never read the file, even while serving it to recipients. It only ever holds ciphertext.</li>
@@ -155,7 +155,7 @@ A confirmation dialog appears first. When you confirm:
 
 <Unordered>
   <li>The link stops working immediately for anyone who has it.</li>
-  <li>The encrypted copy on Hippius is deleted, freeing the storage.</li>
+  <li>The encrypted copy on Hippius is deleted, and the space comes back within a few minutes.</li>
   <li>The row moves to History as "Revoked."</li>
   <li>This cannot be undone.</li>
 </Unordered>
@@ -263,18 +263,22 @@ Open a link's **Insights** from its row in Shared Links, or from Captures, to se
 
 ## Storage Usage
 
-Every active share stores a separate encrypted copy of your file on Hippius:
+Every file link stores a separate encrypted copy of your file on Hippius. That copy:
 
 <Unordered>
-  <li><strong>Costs nothing extra while the file is still in your Drive.</strong> Your storage already counts that file, so the link adds nothing on top. If you delete the file and keep the link, the link's copy counts against your storage quota from then on, until you revoke the link or it expires.</li>
+  <li><strong>Counts toward your storage</strong>, on top of the file in your Drive. It's new data, encrypted with its own key, so it's never treated as a duplicate of the original. Sharing a 1 GB file uses another 1 GB while the link is live.</li>
   <li><strong>Is independent of your sync copy</strong>, using a different key and living in a different location on the network. Deleting or replacing the original leaves the link showing the file as it was when you shared it.</li>
-  <li><strong>Is deleted when you revoke or when it expires</strong>, so storage is freed automatically.</li>
+  <li><strong>Is deleted when you revoke the link or it expires</strong>, and the space comes back within a few minutes. A link set to never expire keeps using space until you revoke it.</li>
 </Unordered>
 
-Sharing the same file multiple times creates multiple separate copies. While the file is in your Drive, none of them adds to your storage.
+The chat preview picture doesn't count toward your storage. Before a link's copy is uploaded, the app checks that you have room. If you're at your plan's limit (10 GB on the Free plan), it tells you instead of creating the link: free up some space or upgrade, then try again.
 
-:::tip Revoke shares you no longer need
-A link whose file you've deleted uses storage quota. Revoke temporary shares when you're done with them.
+Sharing the same file several times creates several separate copies, and each one counts.
+
+**Folder links are different.** A link to a folder in your Drive doesn't upload anything: the people you send it to open the folder's own encrypted files, so it uses no extra storage. A folder shared from outside your drives (from Finder in the desktop app) is uploaded as a copy, and that copy counts like a file link's.
+
+:::tip Revoke links you no longer need
+Every live file link uses storage. Revoke temporary links when you're done with them.
 :::
 
 ## Desktop vs Console
