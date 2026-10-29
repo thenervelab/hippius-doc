@@ -13,7 +13,7 @@ import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import BgStyledText from '@site/src/components/BgStyledText';
 import Screenshot from '@site/src/components/Screenshot';
 
-The **Settings** page is organized into sections you can open from the left sidebar: **Sync & Storage**, **Screenshots & Recording**, **Security**, **Notifications**, **Appearance**, **API Token**, and **Customize RPC**. Each section has a short description and an info (ⓘ) tooltip next to its title.
+The **Settings** page is organized into sections you can open from the left sidebar: **Sync & Storage**, **Screenshots & Recording**, **Security**, **Notifications**, **Billing**, **Appearance**, **Updates**, and **Customize RPC**. Screenshots &amp; Recording only shows on a computer that can take captures. Billing has [its own page](/use/desktop/billing). Each section has a short description and an info (ⓘ) tooltip next to its title.
 
 <DocAccordion defaultValue="sync-storage">
 
@@ -278,7 +278,7 @@ Sync & Storage
     <p>The <strong>Email Notification</strong> card depends on how you signed in:</p>
     <Unordered>
       <li>If you signed in with an access key, the card reads "Sign in with Google, GitHub, or Email to manage email notifications." There is no email sign-in; the card means Google, GitHub or Apple.</li>
-      <li>If you signed in with Google, GitHub or Apple, a <strong>Receive Email Notifications</strong> toggle appears with sub-options: <strong>Low credit balance alerts</strong>, <strong>Zero balance alerts</strong>, and <strong>Marketing emails &amp; newsletter</strong>.</li>
+      <li>If you signed in with Google, GitHub or Apple, a <strong>Receive Email Notifications</strong> toggle appears with sub-options: <strong>Low account balance alerts</strong>, <strong>Zero balance alerts</strong>, and <strong>Marketing emails &amp; newsletter</strong>.</li>
     </Unordered>
 
     <p>After changing anything, click <BgStyledText>Save Changes</BgStyledText> (or <BgStyledText>Cancel</BgStyledText> to discard). These buttons stay disabled until you have unsaved changes.</p>
@@ -321,6 +321,22 @@ Sync & Storage
 </>
 </DocAccordionItem>
 
+## Updates
+
+<DocAccordionItem value="updates">
+  <>
+  Updates
+  </>
+  <>
+    <p>The <strong>Updates</strong> section shows which release channel this computer is on and lets you change it. Under <strong>Release channel</strong>, pick <strong>Stable</strong> (the default) or <strong>Beta</strong>, which gets new features first, before they are fully stabilized. Hippius asks you to confirm before it switches. See <a href="/use/desktop/beta-channel">Beta Channel</a> for what changes and what doesn't.</p>
+
+    <p>On macOS and Windows, Hippius downloads the new build and restarts. On Linux it can't install a new version by itself: it points you to the releases page, where you download the new package and install it with your package manager.</p>
+
+</>
+</DocAccordionItem>
+
+{/* The API Token section is hidden in the app for now. Restore this block when it comes back.
+
 ## API Token
 
 <DocAccordionItem value="api-token">
@@ -346,6 +362,8 @@ Sync & Storage
 
 </>
 </DocAccordionItem>
+
+*/}
 
 ## Customize RPC
 

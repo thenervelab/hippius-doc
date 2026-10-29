@@ -38,7 +38,9 @@ You do not need the beta for anything that has already been released. [Screensho
   <li>Read what the dialog tells you, then confirm.</li>
 </Ordered>
 
-Hippius downloads the beta build and restarts itself. That is the whole process; you do not need to uninstall anything or download a file by hand.
+On macOS and Windows, Hippius downloads the beta build and restarts itself. That is the whole process; you do not need to uninstall anything or download a file by hand.
+
+On Linux, the app can't install a new version by itself. The dialog tells you which file to get and opens the releases page, where you download the new package and install it with your package manager, the same way you installed Hippius. Stable updates on Linux work the same way.
 
 <Screenshot src="/img/desktop/beta-channel/explore-beta-menu.png" alt="Explore Beta in the address menu" dark />
 
@@ -54,10 +56,10 @@ Two ways, and they do the same thing:
 
 <Unordered>
   <li>Open the address menu again and choose <BgStyledText>Leave Beta</BgStyledText>. The menu item changes to this once you are on the beta channel.</li>
-  <li>Or open <BgStyledText>Settings</BgStyledText>, find the release channel section, and switch back from there. It also shows which channel you are currently running.</li>
+  <li>Or open <BgStyledText>Settings</BgStyledText> → <strong>Updates</strong> and pick <strong>Stable</strong> under <strong>Release channel</strong>. It also shows which channel you are currently running.</li>
 </Unordered>
 
-Hippius downloads the stable build and restarts, the same way joining did.
+Hippius downloads the stable build and restarts, the same way joining did (on Linux, you install the stable package by hand).
 
 <Screenshot src="/img/desktop/beta-channel/leave-beta.png" alt="Leaving the beta channel from Settings" dark />
 
