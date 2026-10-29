@@ -159,6 +159,8 @@ The runtime panel is labelled *As reported by the VM, not verified by Hippius*, 
 
 Open the app's **Compose** tab, paste or upload the new file, change secrets if needed, and click <BgStyledText>Update and relaunch</BgStyledText>.
 
+The compose update is the only way to change what a running app runs. App VMs are sealed: there is no SSH, terminal or other route into the VM to edit the compose or the containers.
+
 An update is a **relaunch**: the VM stops, then starts with the new compose. Volumes are kept, and the measurement changes. Expect downtime of about a reboot plus the image pulls. The app must be running to be updated, and only one update runs at a time.
 
 Secrets are merged: a value you enter replaces the stored one, an empty field keeps it, and a name the new compose no longer declares is dropped. To rotate a secret without changing the compose, enter only the new value and update.
@@ -199,6 +201,12 @@ The **Revisions** tab lists every launch and update with its status:
 
 <Screenshot src="/img/console/app-engine/update-rolled-back.png" alt="An app whose update #2 failed and was rolled back: the app still runs its previous compose" dark raw />
 
+## Backups and restore
+
+[VM backups](/use/compute/vm-backups) work for apps, from the VM page (**Resize and backups on the VM page** on the app's Overview). A backup holds the app's **volumes only**, not the images, which are pulled again at every boot.
+
+Restoring a backup brings the volumes back and relaunches the app with its compose. On every relaunch, after a restore, a stop and start, a resize or an update, the app re-joins its [private network](/use/compute/networking#your-private-network) automatically: there is nothing to reconfigure.
+
 ## Limits
 
 | Limit | Value |
@@ -211,4 +219,4 @@ The **Revisions** tab lists every launch and update with its status:
 | One secret value | 64 KiB |
 | Compose and secrets together | 256 KiB |
 | Images | Public registries, pinned by digest, pulled for `linux/amd64` at every boot |
-| Not supported in this phase | UDP, private registries, `build`, GPUs, SSH or a terminal on the VM |
+| Not supported in this phase | UDP, private registries, `build`, GPUs, SSH or a terminal on the VM, customer-held keys (they come later) |
