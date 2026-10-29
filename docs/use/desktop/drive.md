@@ -270,7 +270,7 @@ There are two ways to give someone your files, and they suit different jobs:
   <li><strong>A Hippius shared drive</strong> invites people into one of your drives with their own Hippius account and a role, so they can keep working in it with you. Choose <BgStyledText>Share drive…</BgStyledText> in a drive's menu, or <BgStyledText>Share folder</BgStyledText> on a folder inside it to share just that folder. See <a href="/use/desktop/shared-drives">Shared Drives</a>.</li>
 </Unordered>
 
-Drives and folders other people have shared with you are on the <strong>Shared Drives</strong> page in the sidebar, next to the drives you've shared yourself. You can open them from there, and sync a whole drive to this computer. Before desktop 0.6.16 they're listed under <strong>Shared with Me</strong>, below your own drives. See <a href="/use/desktop/shared-drives#drives-shared-with-you">The Shared Drives page</a>.
+Drives and folders other people have shared with you are on the <strong>Shared Drives</strong> page in the sidebar, next to the drives you've shared yourself. You can open them from there, and sync a whole drive to this computer. See <a href="/use/desktop/shared-drives#drives-shared-with-you">The Shared Drives page</a>.
 
 ## Searching Your Files
 

@@ -142,7 +142,7 @@ Sync & Storage
       <li><strong>Copy a share link after capture</strong>: each screenshot and recording gets a public link that is copied once it's uploaded. Turn it off and captures are only saved to your drive, so you can share them later. See <a href="/use/captures/share-links">Share links for captures</a>.</li>
       <li><strong>Open the link in your browser</strong>, while links are being made: opens each capture's link as soon as it's ready, so you can check it.</li>
       <li><strong>Show a preview in chats</strong>: when you paste a capture's link into a chat, it shows the screenshot or the recording's first frame. The preview picture and file name aren't encrypted. See <a href="/use/captures/share-links#a-preview-when-you-paste-the-link-in-a-chat">chat previews</a>.</li>
-      <li><strong>Track views, comments and reactions</strong>, coming in desktop 0.6.16: links to your screenshots and recordings count views and watch time and let viewers comment and react. You can still turn any of it off for a single link. On the Free plan it's marked as a paid feature and starts off. See <a href="/use/captures/insights">Insights, comments and reactions</a>.</li>
+      <li><strong>Track views, comments and reactions</strong>: links to your screenshots and recordings count views and watch time and let viewers comment and react. You can still turn any of it off for a single link. On the Free plan it's marked as a paid feature and starts off. See <a href="/use/captures/insights">Insights, comments and reactions</a>.</li>
       <li><strong>Recording countdown</strong>: none, 3 seconds or 5 seconds between pressing Record and the recording starting.</li>
       <li><strong>Record system audio</strong>: adds what your computer plays to recordings, where your computer supports it. With speakers your voice may be recorded twice, and headphones avoid that.</li>
     </Unordered>
@@ -287,7 +287,7 @@ Sync & Storage
 
     ### Emails about your links
 
-    <p>Arriving with <a href="/use/captures/insights">Insights</a> in version 0.6.16, which is on the <a href="/use/desktop/beta-channel">beta channel</a> now, this card lets Hippius email you about your share links: <strong>First views</strong> when a link is opened for the first time, <strong>New comments</strong> when people comment (the email says how many, since comments are encrypted), and a <strong>Summary</strong> of views and comments, daily, weekly or off. Until 0.6.16 reaches you, you can choose the same emails in the console. More in <a href="/use/captures/insights#emails-about-your-links">Emails about your links</a>.</p>
+    <p>This card lets Hippius email you about your share links and their <a href="/use/captures/insights">Insights</a>: <strong>First views</strong> when a link is opened for the first time, <strong>New comments</strong> when people comment (the email says how many, since comments are encrypted), and a <strong>Summary</strong> of views and comments, daily, weekly or off. You can choose the same emails in the console. More in <a href="/use/captures/insights#emails-about-your-links">Emails about your links</a>.</p>
 
     <Screenshot src="/img/desktop/captures/settings-link-emails.png" alt="Emails about your links with First views, New comments and a weekly Summary" dark raw />
 

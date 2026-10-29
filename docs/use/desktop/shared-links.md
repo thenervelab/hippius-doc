@@ -255,7 +255,7 @@ If the link has expired or been revoked, recipients see: _"This link has expired
 
 ## Views, Comments and Reactions
 
-You can see who opened a link, and let people comment and react under it. The **Share via link** dialog has **Insights**, **Comments** and **Reactions** switches for each file you share, next to **Show a preview in chats** for pictures and videos. On a paid Drive plan they start on for screenshots and recordings and off for other files; on the Free plan they start off and turning one on shows an upgrade prompt. These arrive in desktop 0.6.16, on the [beta channel](/use/desktop/beta-channel) now.
+You can see who opened a link, and let people comment and react under it. The **Share via link** dialog has **Insights**, **Comments** and **Reactions** switches for each file you share, next to **Show a preview in chats** for pictures and videos. On a paid Drive plan they start on for screenshots and recordings and off for other files; on the Free plan they start off and turning one on shows an upgrade prompt.
 
 <Screenshot src="/img/desktop/captures/share-dialog.png" alt="The desktop Share via link dialog with Show a preview in chats, Insights, Comments and Reactions switches" dark raw />
 
