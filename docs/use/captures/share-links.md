@@ -37,7 +37,7 @@ Previews are on for captures unless you turn off **Show a preview in chats**, in
 
 A capture link can also tell you who watched, and let people reply. You see how many people opened it and, on a paid plan, how far into a recording they got. Viewers can comment and react right on the link's page, beside the video or screenshot. Comments are end-to-end encrypted with the link's key, while reactions and view counts aren't.
 
-Each link has its own Insights, Comments and Reactions switches, in the share dialog and in the link's Insights. On paid Drive plans they start on for screenshots and recordings; on the Free plan they start off.
+Each link has its own Insights, Comments and Reactions switches, in the share dialog and in the link's Insights. On paid Drive plans they start on for screenshots and recordings; on the Free plan they start off. People need no account to open the link, and need to sign in to comment or react.
 
 <Screenshot src="/img/desktop/captures/share-dialog.png" alt="The Share via link dialog in the desktop app with Show a preview in chats, Insights, Comments and Reactions switches" dark raw />
 
@@ -60,6 +60,8 @@ This one surprises people, so it's worth spelling out. A share link is **its own
 
 The delete confirmation reminds you of this. If you want a capture gone for everyone, turn its link off in Shared Links as well as deleting the file. The order doesn't matter.
 
+The [browser extension](/use/browser-extension/captures#delete-a-capture) is the exception: deleting a capture from its popup turns off the capture's links first, wherever they were made, and then deletes the file.
+
 <Screenshot src="/img/console/captures/delete-dialog.png" alt="The Delete File dialog noting that share links made from the file keep working" dark raw />
 
 The same goes for edits. If you [edit a screenshot](/use/captures/edit) and replace the original, a link made before the edit keeps showing the old picture.
@@ -74,7 +76,7 @@ Sending something sensitive, or only for this week? Make a second link with an e
   <li>Send that link, and turn off the automatic one in Shared Links.</li>
 </Ordered>
 
-In the console every capture gets its link. In the desktop app you can stop links being made automatically: turn off **Copy a share link after capture** in the capture bar's <BgStyledText>Options</BgStyledText>, or in [Settings, Screenshots &amp; Recording](/use/desktop/settings#screenshots--recording). Your captures are then only saved to your drive, and you share the ones you choose, when you choose.
+In the console every capture gets its link. In the desktop app you can stop links being made automatically: turn off **Copy a share link after capture** in the capture bar's <BgStyledText>Options</BgStyledText>, or in [Settings, Screenshots &amp; Recording](/use/desktop/settings#screenshots--recording). Your captures are then only saved to your drive, and you share the ones you choose, when you choose. When you want a link for one, choose <BgStyledText>Share via link</BgStyledText> from its row menu, or open its Insights and click <BgStyledText>Create link</BgStyledText> (see [A capture without a link yet](/use/captures/insights#a-capture-without-a-link-yet)).
 
 ## Storage
 

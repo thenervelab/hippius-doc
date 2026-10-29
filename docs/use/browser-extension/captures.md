@@ -34,9 +34,9 @@ To see your captures outside the extension, sign in at [console.hippius.com](htt
 
 ## Delete a capture
 
-A share link keeps its own encrypted copy of the file, so on its own it would keep working after the file is deleted. To avoid that, <BgStyledText>Delete from Drive</BgStyledText> first turns off the links this browser made for the capture, then deletes it. The confirmation says so.
+A share link keeps its own encrypted copy of the file, so on its own it would keep working after the file is deleted. To avoid that, <BgStyledText>Delete from Drive</BgStyledText> first turns off the capture's share links, including ones made in the console, the desktop app or another browser, then deletes it. The confirmation says so, and nobody can open the capture from an old link afterwards.
 
-Links made somewhere else, in the console, the desktop app or another browser, stay on, because Hippius can't be sure they point to this file. The popup tells you how many there are and offers to turn them off too, and asks once more before it does.
+If a link can't be turned off, nothing is deleted and the popup tells you, with a way to try again.
 
 On the Free plan, deleting a recording gives you one of your 25 recordings back straight away.
 
@@ -48,8 +48,8 @@ Hippius tries again by itself when your connection comes back and whenever you o
 
 <Unordered>
   <li><BgStyledText>Retry</BgStyledText> when you were offline or Hippius couldn't be reached.</li>
-  <li><BgStyledText>Connect account</BgStyledText> when you're not connected, for example after a browser restart. Once you've connected, the capture saves.</li>
-  <li><BgStyledText>Upgrade</BgStyledText> and <BgStyledText>Retry</BgStyledText> when your Drive is full, or your account has no plan. Make room or pick a plan, then click Retry.</li>
+  <li><BgStyledText>Connect account</BgStyledText> when you're not connected, for example after a browser restart. Once you've connected, every capture that was waiting saves by itself, without a click on each one.</li>
+  <li><BgStyledText>Upgrade</BgStyledText> and <BgStyledText>Retry</BgStyledText> when your Drive is full, or <BgStyledText>Choose a plan</BgStyledText> when your account has no storage plan yet. Make room or pick a plan, then click Retry.</li>
   <li><BgStyledText>Create link</BgStyledText> when the file reached your Drive and only the link is missing.</li>
 </Unordered>
 
