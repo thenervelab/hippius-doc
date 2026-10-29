@@ -20,12 +20,6 @@ Every drive belongs to one person, its owner. The owner pays for its storage and
 
 Shared drives work the same way in the desktop app and in the [Hippius Console](/use/console/shared-drives), and you can use both. A drive you share from the app can be managed from the console, and the other way round.
 
-:::info New in desktop 0.6.16
-From version 0.6.16, shared drives have their own **Shared Drives** page in the sidebar, which this guide describes. You can use it now on the [beta channel](/use/desktop/beta-channel), and it comes to everyone with the next release. In earlier versions, drives shared with you are listed under **Shared with Me** on the Drive page, and **Share a drive** sits there too.
-:::
-
-{/* Remove the callout above, and this comment, once desktop 0.6.16 is on the main channel. */}
-
 ## Who Can Do What
 
 When you let someone into a drive, you give them one of three roles:
