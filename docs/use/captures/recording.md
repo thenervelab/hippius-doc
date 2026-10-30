@@ -70,7 +70,7 @@ Hover over Stop and it shows the keys.
 
 ### When you stop
 
-The recording is saved and uploaded, and a card shows the progress until it says **Link ready**. The link is copied for you, and from the card you can copy it again, open it, show the recording in Captures, see its [Insights](/use/captures/insights), or manage the link. Recordings start playing straight away for the people you send them to. They don't have to download the whole video first.
+The recording is saved and uploaded, and a card shows the progress until it says **Link ready** (**Public link copied** in the desktop app). The link is copied for you, and from the card you can copy it again, open it, show the recording in Captures, see its [Insights](/use/captures/insights), or manage the link. Recordings start playing straight away for the people you send them to. They don't have to download the whole video first.
 
 ## The camera bubble
 

@@ -18,7 +18,7 @@ With Hippius you can share a file as a link that anyone can open in a browser, w
 
 To share a file, right click it in the desktop app and choose **Share via link**. We create a secure encrypted copy and generate a shareable URL, then copy it to your clipboard for you. On macOS you can also share straight from Finder: just right click any file or folder and choose **Share with Hippius**.
 
-After sharing, all your active links are tracked on the **Shared Links** page. Open it with the <BgStyledText>Shared Links</BgStyledText> button in the top right of the <BgStyledIconWithText text="Drive" icon="Category" /> view header. From there you can copy a link again, revoke access, reshare a file, and see a history of ended shares.
+After sharing, all your active links are tracked on the **Shared Links** page. Open it with the <BgStyledText>Shared Links</BgStyledText> button in the top right of the <BgStyledIconWithText text="Drive" icon="Category" /> view header. From there you can copy a link again, change when it expires, revoke it, and see a history of ended shares.
 
 Screenshots and recordings get a link automatically, and those links show up here too. See [Share links for captures](/use/captures/share-links).
 
@@ -36,7 +36,7 @@ A share link is a read only copy for anyone, no account needed. If you want peop
 
 ### Every file on Hippius is encrypted
 
-All your files are encrypted end to end on your device before they are uploaded to the Hippius network. The Hippius network stores ciphertext only. Nobody else can read your files because nobody else has your key.
+All your files are encrypted end to end on your device before they are uploaded to the Hippius network. Nobody else can read what's in them, because nobody else has your key. A share link does keep a few details in plain text so its page can show them: the file's name, type and size, plus a small preview picture when [chat previews](/use/captures/share-links#a-preview-when-you-paste-the-link-in-a-chat) are on.
 
 ### How the desktop creates a share
 
@@ -52,7 +52,9 @@ When you right click a file and choose **Share via link**, the desktop:
   <li><strong>Shows the link in a modal</strong> and copies it to your clipboard automatically. The modal also shows when the link expires (for example, <em>Expires in 1d</em>). The link is live immediately.</li>
 </Ordered>
 
-The server stores the encrypted copy and returns a share token. It never learns the decryption key.
+The server stores the encrypted copy and returns a share token. It never learns the decryption key, so it can't read the file, though it does see the file's name, type and size.
+
+A file that isn't on this computer, such as one in a drive you haven't synced here, can be shared too. The app downloads and decrypts it first, then follows the same steps.
 
 <Screenshot src="/img/desktop/shared-links-create.png" alt="Share creation dialog" dark />
 
@@ -67,22 +69,22 @@ The desktop reads your local file directly with no download required. For most f
   <li>Revoking a share deletes the encrypted copy and frees the storage.</li>
   <li>Sharing the same file twice creates two independent copies, each with its own key.</li>
   <li>Deleting a file does not end the links made from it. Each link is its own encrypted copy, so it keeps working until you revoke it or it expires. The delete confirmation reminds you of this.</li>
-  <li>The server can never read the file, even while serving it to recipients. It only ever holds ciphertext.</li>
+  <li>The server can never read the file's contents, even while serving it to recipients. Only the name, type and size are stored in plain text.</li>
 </Unordered>
 
 ## Before You Share
 
 <Unordered>
-  <li><strong>The file must be in a synced folder.</strong> Shared Links only works for files in one of your Hippius sync folders.</li>
-  <li><strong>You need enough credits.</strong> Sharing uploads a new encrypted copy, which costs storage. The app checks your balance before starting. If you don't have enough, you'll see a credit error before the upload begins.</li>
+  <li><strong>The file doesn't have to be synced here.</strong> You can share any file in your drives, including one that only lives on Hippius. For files outside your drives, use <a href="/use/desktop/share-from-finder">Share from Finder</a> on macOS.</li>
+  <li><strong>You need room in your storage.</strong> Sharing a file uploads a new encrypted copy of it, and that copy counts toward your storage. The app checks before the upload starts, and if you're at your plan's limit it tells you instead of creating the link. Free up some space or upgrade, then try again.</li>
 </Unordered>
 
 ## Creating a Share
 
 <Ordered>
-  <li>In the <BgStyledIconWithText text="Drive" icon="Category" /> view, find the file you want to share. The file must be fully synced.</li>
+  <li>In the <BgStyledIconWithText text="Drive" icon="Category" /> view, find the file you want to share.</li>
   <li>Right click the file (or click the <BgStyledText>⋮</BgStyledText> menu on its row) and choose <BgStyledText>Share via link</BgStyledText>.</li>
-  <li>Choose when the link should expire, and optionally require a password. Both are described below.</li>
+  <li>Choose who can open it (<strong>Anyone with the link</strong> or <strong>Password protected</strong>) and when the link should expire. Both are described below.</li>
   <li>The share dialog runs the encrypt and upload steps automatically, showing <em>Encrypting and uploading…</em> while it works. You can press <BgStyledText>Cancel</BgStyledText> to stop before it finishes.</li>
   <li>When complete, the share URL is shown in the modal and copied to your clipboard automatically, along with when the link expires.</li>
   <li>Use the copy icon next to the URL to copy it again, <BgStyledText>Open in browser</BgStyledText> to preview the recipient page, or <BgStyledText>Revoke share</BgStyledText> to cancel the link right away. Click <BgStyledText>Done</BgStyledText> to close the dialog.</li>
@@ -107,13 +109,13 @@ A [screenshot or screen recording](/use/captures) gets its share link automatica
 
 ### Requiring a password
 
-Tick <BgStyledText>Require a password</BgStyledText> to lock the link. Recipients are asked for it before they see anything, and it must be at least 8 characters.
+Pick <BgStyledText>Password protected</BgStyledText> instead of **Anyone with the link** to lock the link. The app fills in a strong password for you, which you can change. Recipients are asked for it before they see anything, and it must be at least 8 characters. A password link never gets a chat preview, since the preview would show what the password protects.
 
 :::warning Send the password separately
 Send it through a different channel to the link itself. It cannot be recovered or changed later. If you lose it, revoke the share and create a new one.
 :::
 
-Both options are also available when you [share from Finder](/use/desktop/share-from-finder) on macOS.
+The same choices appear when you [share from Finder](/use/desktop/share-from-finder) on macOS.
 
 ### Sharing a folder
 
@@ -135,21 +137,17 @@ To share a file that isn't in a synced folder, use [Share from Finder](/use/desk
 
 The Active Shares table shows every share currently live on your account, refreshed from the server every few seconds. It includes shares created from any device or the console, not just this desktop install.
 
-If a share was created on a different device (or on the console), this device doesn't have the share key, so the filename shows as `<unknown>` and some actions are disabled.
+Every row shows the file's real name, wherever the link was made. A folder link shows the folder's name, with the part of the drive it opens underneath.
 
 ### Copy link
 
 Click <BgStyledText>Copy link</BgStyledText> from the row's action menu to copy the full recipient URL to your clipboard.
 
-**Copy link is only available on the device where the share was created.** The share URL includes the encryption key, which is saved in a local database on the creating device. On any other device, the key isn't there and the option is disabled.
+The share URL includes the encryption key. The app keeps the keys of links made on this computer, and fetches the keys of file links you made elsewhere (another computer or the console) from your account, so you can usually copy any file link from here. A link it can't rebuild, such as some older links, or a folder link made on another device, has Copy link greyed out with a note saying so. For a password link, the copied link still needs the password you set when you made it.
 
-### Reshare
+### Change the expiry
 
-Click <BgStyledText>Reshare</BgStyledText> from the row's action menu to create a fresh share for the same file with a new expiry and a new link.
-
-**Reshare is only available on the device that created the original share.** It requires both the share key and the source file's location in your sync folder. See [Reshare Mechanics](#reshare-mechanics) below for the full details.
-
-When reshare completes, the old link is immediately revoked and the new URL is copied to your clipboard automatically.
+A live link's menu offers <BgStyledText>Expire in 24 hours</BgStyledText>, <BgStyledText>Expire in 7 days</BgStyledText>, <BgStyledText>Expire in 30 days</BgStyledText> and <BgStyledText>Never expire</BgStyledText>. Pick one and the new expiry applies straight away. The link itself stays the same, so there's nothing to send again. A password can't be changed: to use a different one, revoke the link and create a new one.
 
 ### Revoke
 
@@ -170,38 +168,7 @@ There is no grace period. Anyone with the link loses access the moment you confi
 
 ### Shares from other devices
 
-If a share was created on a different device or on the console, this device doesn't have the share key. In that case:
-
-| Action        | Available         | Reason                                                                            |
-| ------------- | ----------------- | --------------------------------------------------------------------------------- |
-| **Name**      | Shows `<unknown>` | Filename is encrypted and decryption requires the key                             |
-| **Copy link** | ❌ Disabled       | The URL includes the key fragment and only the creating device can reconstruct it |
-| **Reshare**   | ❌ Disabled       | Requires the key and the source file location, both stored on the creating device |
-| **Revoke**    | ✅ Available      | Only needs the share token, which the server returns in the list                  |
-
-You can always revoke a share from any device, even if you didn't create it here.
-
-## Reshare Mechanics {#reshare-mechanics}
-
-**Reshare** replaces an existing file share with a fresh one, which is how you give a file share more time. It is still the route for a file share; a **folder** share can have its expiry changed directly from the Shared Links page in the console, without a new link.
-
-When you click Reshare:
-
-<Ordered>
-  <li>The old share token is revoked on the server. The old URL stops working immediately.</li>
-  <li>The desktop reads the source file from your local sync folder and creates a completely new share, with a new encrypted copy, a new key, and a fresh expiry.</li>
-  <li>The new recipient URL is copied to your clipboard automatically.</li>
-</Ordered>
-
-**Why Reshare requires the creating device:** The desktop needs to read the local plaintext file again to create the new encrypted copy. The source file's location (drive label and relative path) is stored in a local database on the device that created the original share. This information is not synced across devices.
-
-If the old token has already expired by the time you click Reshare, the revoke step is skipped and the desktop goes straight to creating the new share.
-
-:::info Reshare is not available on the console
-The console doesn't have access to your local files. It would need to download and decrypt the Drive copy to create a new share, which is a heavier operation. The desktop app can do this fast because the file is already on disk. Reshare is a desktop only feature.
-
-The console can still change a **folder** share's expiry directly, which needs no local file and mints no new link.
-:::
+Links you made on another computer or in the console are listed here too, by name. You can revoke them and change their expiry from this computer, and copy most file links (see [Copy link](#copy-link)).
 
 ## Share History
 
@@ -259,11 +226,11 @@ If the link has expired or been revoked, recipients see: _"This link has expired
 
 ## Views, Comments and Reactions
 
-You can see who opened a link, and let people comment and react under it. The **Share via link** dialog has **Insights**, **Comments** and **Reactions** switches for each file you share, next to **Show a preview in chats** for pictures and videos. On a paid Drive plan they start on for screenshots and recordings and off for other files; on the Free plan they start off and turning one on shows an upgrade prompt.
+You can see how many people opened a link, and let people comment and react under it. The **Share via link** dialog has **Insights**, **Comments** and **Reactions** switches for each file you share, next to **Show a preview in chats** for pictures and videos. On a paid Drive plan they start on for screenshots and recordings and off for other files; on the Free plan they start off and turning one on shows an upgrade prompt.
 
 <Screenshot src="/img/desktop/captures/share-dialog.png" alt="The desktop Share via link dialog with Show a preview in chats, Insights, Comments and Reactions switches" dark raw />
 
-Open a link's **Insights** from its row in Shared Links, or from Captures, to see who watched and read what they said. They open in a panel on the right, with Comments, Viewers and Reactions tabs, and the link's switches behind the gear at the top. In Captures every screenshot and recording offers Insights, and one without a link yet can get one there with **Create link**. A comment that tags you with `@` says **Mentioned you**, and the **Mentions you** filter shows only those. See [Insights, comments and reactions](/use/captures/insights).
+Open a link's **Insights** from its row in Shared Links, or from Captures, to see how many people watched and read what they said. They open in a panel on the right, with Comments, Viewers and Reactions tabs, and the link's switches behind the gear at the top. In Captures every screenshot and recording offers Insights, and one without a link yet can get one there with **Create link**. A comment that tags you with `@` says **Mentioned you**, and the **Mentions you** filter shows only those. See [Insights, comments and reactions](/use/captures/insights).
 
 ## Storage Usage
 
@@ -290,11 +257,10 @@ A link whose file you've deleted uses storage quota. Revoke temporary shares whe
 | **Share from Finder**        | ✅ macOS only                                        | ❌ Not available                                            |
 | **Choose an expiry**         | ✅ 24h, 7d, 30d, or until revoked                    | ✅ Same options                                              |
 | **Password-protected link**  | ✅ In the app and from Finder                        | ✅ Yes                                                       |
-| **How it reads the file**    | Local plaintext from sync folder, no download needed | Downloads and decrypts the Drive copy                        |
+| **How it reads the file**    | The file on this computer, or downloads it if needed | Downloads and decrypts the Drive copy                        |
 | **Copy link (same session)** | ✅ Yes                                               | ✅ Yes                                                       |
-| **Copy link after restart**  | ✅ Yes, key saved in local database                  | ❌ No, key is in memory only and lost on tab close or reload |
-| **Reshare** (file shares)    | ✅ On creating device                                | ❌ Not available                                             |
-| **Change expiry** (folders)  | ❌ Use Reshare                                       | ✅ From the session that created the share                   |
+| **Copy link later**          | ✅ Yes, the app keeps or fetches the key             | ✅ Yes, after you unlock (some older links: no)              |
+| **Change expiry**            | ✅ File and folder links, link stays the same        | ✅ Folder links only                                         |
 | **Revoke**                   | ✅ Any device                                        | ✅ Any device                                                |
 | **History**                  | ✅ Yes                                               | ✅ Yes                                                       |
 

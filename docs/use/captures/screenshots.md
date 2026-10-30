@@ -81,9 +81,9 @@ Once the link is ready, the console copies it and also opens it in a new tab so 
 
 ## When it's done
 
-A small card in the corner shows how the upload is going, then says the link is ready and copied, and who can open it. From the card you can copy the link again if something else has taken over your clipboard, jump to the screenshot in your Captures, or see what the people you send it to will see (<BgStyledText>Open</BgStyledText> in the console). Want to point at something or hide a password first? Open it in the [editor](/use/captures/edit). In the desktop app, just click the picture on the card.
+A small card in the corner shows how the upload is going, then says the link is ready and copied (**Public link copied** in the desktop app), and who can open it. From the card you can copy the link again if something else has taken over your clipboard, jump to the screenshot in your Captures, or see what the people you send it to will see (<BgStyledText>Open</BgStyledText> in the console). Want to point at something or hide a password first? Open it in the [editor](/use/captures/edit). In the desktop app, just click the picture on the card.
 
-The less common actions, like managing the link, its [Insights](/use/captures/insights) or turning it off, are under the card's **More** menu in the desktop app, next to Show in Finder (Show in Explorer on Windows). In the console, **View insights** is right on the card. See [Share links for captures](/use/captures/share-links) for everything you can do with the link.
+The less common actions are under the card's **More** menu in the desktop app: **Edit screenshot**, **Manage link**, **Insights** (see [Insights](/use/captures/insights)) and **Revoke link**, next to Show in Finder (Show in Explorer on Windows). In the console, **View insights** is right on the card. See [Share links for captures](/use/captures/share-links) for everything you can do with the link.
 
 <Screenshot src="/img/desktop/captures/capture-card.png" alt="The desktop app's card after a recording, saying Public link copied and Never expires, with its More menu open on Show in Finder, Manage link, Insights and Revoke link" raw />
 
