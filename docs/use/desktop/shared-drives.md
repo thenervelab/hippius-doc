@@ -83,8 +83,16 @@ On **By link**, pick the role the link gives and how long it lasts, then press <
 If you want several Managers, invite them as Editors and change their role afterwards.
 
 :::warning Treat an invite link like a password
-Anyone holding the full link can join. The part after the `#` carries the drive's key, and the app hides it on screen, but <strong>Copy</strong> copies the whole link. Send it only to the people it is meant for, and revoke it when you no longer need it.
+Anyone holding the full link can join. The secret that lets them in is in the part after the `#`. The app hides that part on screen, but <strong>Copy</strong> copies the whole link. Send it only to the people it is meant for, and revoke it when you no longer need it.
 :::
+
+### Replace old links that carry the drive key
+
+Invite links made now don't carry the drive's key. Older ones do: the part after the `#` is the key itself, so anyone who has ever held one holds the key to what it opens, even after the link stops working.
+
+In **Manage access**, those links have an **Old invite link** badge. Open the link's menu and choose <BgStyledText>Replace with a safer link</BgStyledText>. The app makes a new link with the same role and the time it had left, copies it for you, and turns the old one off. Send the new link instead. Public folder links made before this change get the same treatment on the Shared Links page (see [Sharing a folder](/use/desktop/shared-links#sharing-a-folder)).
+
+If you still use an old link, replace it. Turning an old link off stops it working, but it can't take the key back from anyone who already copied it.
 
 ## Keys Are Delivered for You {#keys-are-delivered-for-you}
 
@@ -129,7 +137,7 @@ If you own the drive or are one of its Managers, you can:
 
 <Unordered>
   <li><strong>Change someone's role</strong> from the menu beside their name. Changes apply right away.</li>
-  <li><strong>Remove someone</strong> with <BgStyledText>Remove access</BgStyledText> in the same menu. They lose access at once.</li>
+  <li><strong>Remove someone</strong> with <BgStyledText>Remove access</BgStyledText> in the same menu. They can't open the drive any more and it stops syncing to their computer. Files they already downloaded or synced stay on their computer.</li>
   <li><strong>Change which folders someone has</strong>, for a person you gave single folders to. Choose <BgStyledText>Change folders</BgStyledText> in the menu beside their name, then untick a folder to take it away, or type the path of another folder in the drive and pick Viewer or Editor to add it. Folders they already have keep their access. They must keep at least one folder; to take everything away, remove them instead.</li>
   <li><strong>Cancel an invite</strong> that hasn't been accepted, or <strong>approve</strong> one that is waiting for its key.</li>
   <li><strong>Copy or revoke a link.</strong> A revoked link lets nobody new in, and people who already joined keep their access.</li>
