@@ -23,7 +23,7 @@ A verdict proves **integrity of what runs, rooted in AMD**. It doesn't prove tha
 | Way | For | Needs | Independent of Hippius |
 |---|---|---|---|
 | [In the browser](#in-the-browser) | The app's owner, on the console | A console login on the app's account | The checks run in your browser, but the page itself comes from Hippius |
-| [The CLI, `hippius-app-verify`](#with-the-cli) | Anyone: owner, users, auditors, CI | The verifier, the app's public IP, the compose you expect | Yes |
+| [The CLI, `hippius-app-verify`](#with-the-cli) | Anyone: owner, users, auditors, CI | The verifier, the app's public IP, the compose you expect | Yes, apart from the release key you pin and, until the manifests are public, the manifest you fetch through the relay. With `--manifest` the CLI trusts that file by its SHA-256; with `--trust-index` it checks it against the release key |
 | [The raw API, with curl](#with-the-raw-api) | Scripts and AI agents that collect the inputs | An API token on the app's account | Collects inputs only: a verdict still needs a verifier |
 
 Hippius never computes a verdict. Anything the API or the console fetches for you from the VM is labelled **not verified by Hippius**. Only a verifier, in the browser or on the command line, turns those documents into a verdict.
