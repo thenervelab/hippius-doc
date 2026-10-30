@@ -225,9 +225,11 @@ Each control is a shortcut into the full app:
 <Unordered>
   <li>Click the <strong>Search Files</strong> box to open Hippius Desktop with the search bar focused, ready for you to find a file.</li>
   <li>Click the <strong>notification bell</strong> to open your <a href="/use/desktop/notifications">Notifications</a> in the app.</li>
-  <li>Click a screenshot, a recording or any file Hippius can preview to open it in the Hippius viewer. Point at a row for <strong>Copy link</strong> and <strong>Edit</strong>, or open its menu to view, download, share, rename or delete it, show it in Hippius or in your file manager, or, for a capture, see its <a href="/use/captures/insights#from-the-menu-bar">Insights</a>.</li>
+  <li>Click a screenshot, a recording or any file Hippius can preview to open it in the Hippius viewer. Point at a row for <strong>Copy link</strong> and <strong>Edit</strong>. Copy link reuses a public link this computer already made for the file, if it still has time left, or makes a new public link that never expires, and copies it. Right click a row, or open its menu, to view, download, share, rename or delete it, show it in Hippius or in your file manager, or, for a capture, see its <a href="/use/captures/insights#from-the-menu-bar">Insights</a>.</li>
   <li>Click <BgStyledText>Open Hippius →</BgStyledText> at the bottom to bring the full Hippius Desktop window to the front.</li>
 </Unordered>
+
+Right click the Hippius icon itself for a short menu: <strong>Open Drive</strong> and <strong>Quit Hippius</strong>. On Linux, where clicking the icon doesn't open the menu bar window, this menu also starts with <strong>Open Hippius</strong>.
 
 {/* The screenshot above shows an older layout of the menu bar window. Replace it with a capture of the current one. */}
 

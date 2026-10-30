@@ -53,6 +53,10 @@ For a password-protected link, we show you a generated **password** right next t
 We show the password **once**, right after you create the share. We don't keep it anywhere we can read, so it won't show up again on the Shared Links page later. Copy it before you close the dialog. If you lose it, no problem: just revoke the share and create a new one.
 :::
 
+## Turn the Finder item on or off
+
+**Share with Hippius** comes from a small Finder extension that Hippius installs. You can switch it on or off in <BgStyledText>Settings</BgStyledText> → **Sync &amp; Storage**, under **Finder**, with **Show "Share with Hippius" in Finder**. If the item is missing from Finder's menu, check that switch first.
+
 ## Manage your Finder shares
 
 Your Finder shares show up on the **Shared Links** page right alongside the ones you create from the Drive view, so you can copy the link, revoke it, and keep track of it the same way. Head over to [Shared Links](/use/desktop/shared-links) to manage them and view your history, or see [What recipients see](/use/desktop/shared-links#what-recipients-see) for how the link opens in someone's browser.

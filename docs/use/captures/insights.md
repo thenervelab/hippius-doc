@@ -68,6 +68,8 @@ Reactions sit in a row of chips under the file: all eight of them (👍 ❤️ �
 
 A comment on a recording shows the moment in the video it was written at, so you know which part someone is talking about. On the link's page it also sits on the video's timeline, and clicking it plays the video from that moment.
 
+Reactions on a recording keep their moment too. Other viewers see small marks on the video's timeline where people reacted, and each reaction floats up over the video as playback reaches it.
+
 You stay in charge of what appears on your link. From a comment's menu in Insights you can delete it for everyone, or block its author from commenting and reacting on this link, and **Unblock** undoes it. Their earlier comments stay until you delete them.
 
 <Screenshot src="/img/console/captures/insights-comments.png" alt="The Comments tab of the console's Insights panel, with comments from Sam, Robin and Jordan at moments in the recording, a reply from the owner, and the reaction totals in the summary" dark raw />
