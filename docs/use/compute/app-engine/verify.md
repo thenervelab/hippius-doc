@@ -62,7 +62,7 @@ The page runs the verifier, compiled to WebAssembly, in your browser. It shows e
 
 By default the page checks against the compose Hippius stored. For a check that doesn't take Hippius's copy of the compose, click **Use my own file** and drop in your own copy.
 
-Your browser can't reach the VM or AMD directly, so Hippius relays the documents: the evidence, the AMD certificates, the image index, the manifests and the firmware. The relays are **unverified**. The verifier checks every document against AMD's keys, the pinned release key or the SHA-256 that names it, so a relay that lied would make the check fail, never pass.
+Your browser can't reach the VM or AMD directly, so Hippius relays the documents: the evidence, the AMD certificates, the image index, the manifests and the firmware. The relays are **unverified**. The verifier checks every document against AMD's keys, the pinned release key or the SHA-256 that names it, so a relay that changed a document would make the check fail. One gap: the browser doesn't check revocation yet (below), so a relay could serve an older signed index that still lists a since-withdrawn image.
 
 What the browser check doesn't remove: the page, its pins and the WebAssembly file are served by Hippius. A check that trusts nothing from Hippius runs the [CLI](#with-the-cli) on your own machine.
 
@@ -97,7 +97,7 @@ hippius-app-verify http://203.0.113.7:9080 \
   --manifest app-manifest.json
 ```
 
-The console shows the first line, with the app's IP, on the app's **Verify** tab. The API gives it as `evidence.verify_command` on [the app](#2-get-the-app).
+The console shows this command without `--manifest`, with the app's IP, on the app's **Verify** tab. The API gives it as `evidence.verify_command` on [the app](#2-get-the-app). Add the manifests you trust, as below: without them no manifest matches and the check fails.
 
 The verifier prints the verdict as JSON on standard output, and a summary for a human on standard error. Add `--quiet` to drop the summary.
 
@@ -110,7 +110,7 @@ A verdict uses only the app image manifests you trust. There are two ways:
 | `--manifest <sha256 or file>` | Exactly the manifests you pin | Repeatable. A file is pinned by the SHA-256 of its bytes. The stronger choice. |
 | `--pin-file <file>` | The SHA-256 hashes in a file, one per line | `#` starts a comment. |
 | `--manifests <dir or url>` | Nothing on its own | Where pinned manifests are found: a folder of files, or a base URL serving `<sha256>.json`. |
-| `--trust-index <url or file>` with `--release-key <hex or file>` | Every manifest in the published index whose entry is signed by a release key you name | Weaker than pinning: any manifest Hippius ever signed is accepted. The summary names the one that matched first, and how to pin it. Needs the signed index head (`--index-head`). |
+| `--trust-index <url or file>` with `--release-key <hex or file>` | Every manifest in the published index whose entry is signed by a release key you name | Weaker than pinning: any manifest Hippius signed and hasn't withdrawn is accepted. The summary names the one that matched, and how to pin it. If several match, the check fails and asks you to pin one. Needs the signed index head (`--index-head`). With an index file rather than a URL, give the manifests with `--manifests <dir>`. |
 
 While the manifests are not public, the app's owner gets them through the [manifest relay](#5-get-the-app-image-manifest), and gives the file to `--manifest`. The firmware image the manifest names is then given with `--ovmf <file>`, from the [artefact relay](#6-get-the-firmware-image).
 
@@ -120,7 +120,7 @@ While the manifests are not public, the app's owner gets them through the [manif
 |---|---|
 | `--compose <file>` | The compose you expect, exact bytes. |
 | `--compose-sha256 <hex>` | Only the SHA-256 of the compose you expect. |
-| `--compose-from-evidence` | Shows whichever compose the VM measured (the app must set `publish_compose: true`). Proves which compose runs, not that it's one you chose. |
+| `--compose-from-evidence` | Shows whichever compose the VM measured (the app must set `x-hippius.publish_compose: true`). Proves which compose runs, not that it's one you chose. |
 | `--evidence <file> --nonce <hex>` | Verifies a recorded evidence document instead of asking the VM. Freshness is then whoever chose the nonce: the verdict says `nonce_source: "caller"`. |
 | `--ovmf <file>` | The firmware image, instead of fetching it from the manifest's URL. |
 | `--kds-url <url>` | AMD's certificate service, `https://kdsintf.amd.com` by default. |
@@ -153,7 +153,7 @@ verdict: RUNNING — not bound to this connection (phase 1)
   kernel <kernel release> (verifier-table)
   compose sha256 <compose sha256>
   2 measured launch VMSAs (vCPUs at launch; the host can add or drop CPUs later)
-  service web ghcr.io/acme/web@sha256:<digest> 8080:80
+  service web ghcr.io/acme/web@sha256:<digest> 8080:80/tcp
   residuals: host-acpi, interrupt-injection, network-operator-controlled
   nonce: fresh (drawn for this request)
   caveat: tcb-floor-provisional: ...
@@ -194,10 +194,10 @@ When the verifier shows the compose's values, `$$` stands for one literal `$`: `
 | `level` | Summary | Meaning |
 |---|---|---|
 | `running` | `RUNNING — not bound to this connection` | Everything in `launched`, and the measured runner's signed observation says your compose's containers were running, with its image digests and nothing else, when the report was made. |
-| `launched` | `LAUNCHED (not running)` | A report signed by the AMD chip says this VM booted the published app image with exactly your compose, byte for byte, and answered your nonce just now. `failed_step` is `running`, and `reason` says why. |
+| `launched` | `LAUNCHED (not running)` | A report signed by the AMD chip says this VM booted the published app image with exactly your compose, byte for byte, and answered your nonce (fresh when the verifier drew it: `nonce_source: "fresh"`). `failed_step` is `running`, and `reason` says why. |
 | `none` | `FAILED` | A check failed. The verifier names it. Don't trust the app then. |
 
-**Why "not bound to this connection".** The check proves that *some* VM runs your compose and answered your nonce. It doesn't bind the TCP connection you used: a relay could pass your request to a genuine VM and serve you something else. `facts.channel_bound` is `false`. Binding the connection to the attested VM comes in a later phase. Until then, every `running` reads **running — not bound to this connection**.
+**Why "not bound to this connection".** The check proves that *some* VM runs your compose and answered your nonce. It doesn't bind the TCP connection you used: a relay could pass your request to a genuine VM and serve you something else. `facts.channel_bound` is `false`. Binding the connection to the attested VM (RA-TLS, `hippius-app-verify tls://<ip>:<port>` for an app that sets `x-hippius.tls`) comes in a later phase; only then can a verdict say `channel_bound: true`. Until then, every `running` reads **running — not bound to this connection**.
 
 `launched` without `running` usually means the runner refused to start the compose, or hasn't finished. The observation's `state` says which: `starting`, or a failure code such as `lineage-refused`, `pull-failed:<image>` or `secret-missing:<NAME>`. The app's owner also sees it in the console: see [Deployment status and runtime status](/use/compute/app-engine/deploy#deployment-status-and-runtime-status).
 
@@ -290,7 +290,7 @@ The fields a verification uses:
 curl -s -H "$AUTH" -H "$UA" "$API/apps/$VM/runtime/"
 ```
 
-Hippius fetches the VM's `/status` and its evidence for a nonce Hippius drew. The answer is labelled `"verified": false`, with `evidence_state` (the observation's `state`), `compose_sha256_reported`, `raw_evidence`, the `nonce` it was asked with, and `error` (`null`, or a list such as `evidence:timeout`). Cached 15 seconds, 30 requests a minute.
+Hippius fetches the VM's `/status` and its evidence for a nonce Hippius drew. The answer is labelled `"verified": false`, with `evidence_state` (the observation's `state`), `compose_sha256_reported`, `raw_evidence`, the `nonce` it was asked with, and `error` (`null`, or one comma-separated string such as `"status:timeout,evidence:timeout"`). Cached 15 seconds, 30 requests a minute.
 
 Good for monitoring, not for trust: you didn't choose the nonce. Use the next step to verify.
 
@@ -341,10 +341,10 @@ The evidence document, `hippius.app-evidence.v1`:
 | `compose_sha256` | The SHA-256 of the compose in the measurement. |
 | `measured_cmdline` | The VM's measured kernel command line. |
 | `vcpus` | The vCPUs at launch. |
-| `manifest_sha256` | The app image manifest the VM says it booted. A hint: the verifier proves it. |
+| `manifest_sha256` | The app image manifest the VM says it booted. An unmeasured hint: the verifier uses the trusted manifest that reproduces the measurement, whatever the hint says. |
 | `report_b64` | The AMD SEV-SNP attestation report, base64. |
 | `certs` | Optional: `vcek_der_b64`, `ask_der_b64`, `ark_der_b64`. |
-| `compose_b64` | The compose itself, only with `publish_compose: true`. |
+| `compose_b64` | The compose itself, only with `x-hippius.publish_compose: true`. |
 | `observation_cbor_b64` | The runner's signed observation, CBOR: `state`, `runner`, `transform_v`, `services` (name, image digest, status), `foreign`. |
 
 ### 4. Get the image index
@@ -405,7 +405,7 @@ hippius-app-verify \
   --ovmf ovmf.fd
 ```
 
-The CLI fetches the VCEK from AMD itself unless you pass `--offline` with a filled cache. With recorded evidence, the verdict says `"nonce_source": "caller"`: it's fresh only because you drew the nonce just now. Against a VM with a public IP, prefer the live form, `hippius-app-verify http://<ip>:9080 ...`, which draws its own nonce.
+The CLI uses the VCEK the evidence carries, if any, and otherwise fetches it from AMD itself (not with `--offline`, unless it's cached). With recorded evidence, the verdict says `"nonce_source": "caller"`: it's fresh only because you drew the nonce just now. Against a VM with a public IP, prefer the live form, `hippius-app-verify http://<ip>:9080 ...`, which draws its own nonce.
 
 ### What to compare
 
@@ -459,11 +459,11 @@ Rules for the answer:
 
 <Unordered>
   <li>Exit code <code>0</code> and <code>level: "running"</code>: say "running — not bound to this connection", never just "verified".</li>
-  <li>Exit code <code>1</code>, <code>level: "launched"</code>: the right compose booted, but its containers aren't all running. Give the observation's <code>state</code>.</li>
+  <li>Exit code <code>1</code>, <code>level: "launched"</code>: the right compose booted, but the running check failed: the observation's <code>state</code> isn't <code>running</code>, or the services, image digests or other containers don't match. Give <code>reason</code> and the observation's <code>state</code>.</li>
   <li>Exit code <code>2</code>, <code>level: "none"</code>: tell the user not to trust the app, and why (<code>failed_step</code>, <code>reason</code>).</li>
   <li>Exit code <code>3</code>: the check didn't run. Report the error. It's not a verdict.</li>
   <li>Without the verifier, report only what you fetched, labelled "not verified". Never turn <code>runtime/</code>, <code>evidence_state</code> or matching hashes into a verdict.</li>
-  <li>Never claim confidentiality from Hippius, a binding to the connection, or a chain record.</li>
+  <li>Never claim confidentiality from Hippius or a chain record. Never claim a binding to the connection unless <code>facts.channel_bound</code> is <code>true</code>.</li>
 </Unordered>
 
 Endpoints, all under `https://api.hippius.com/api/compute/app-engine/` and with the token unless noted:
