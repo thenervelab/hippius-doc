@@ -3,7 +3,7 @@ id: overview
 title: Screenshots and Recording
 sidebar_label: Overview
 slug: /use/captures
-description: Take a screenshot or record your screen with Hippius and get a link to paste straight away. Every capture is encrypted on your computer and saved to your own captures drive, and you can see who watched and read their replies.
+description: Take a screenshot or record your screen with Hippius and get a link to paste straight away. Every capture is encrypted on your computer and saved to your own captures drive, and you can see how many people watched and read their replies.
 pagination_prev: null
 ---
 
@@ -89,17 +89,17 @@ In the console there's nothing to choose: your captures drive is made for you on
 
 ## Privacy and encryption
 
-Captures get the same protection as the rest of your Drive. Your screenshot or recording is encrypted on your computer, in the app or in your browser, before any of it is sent, and Hippius only ever stores the encrypted file.
+Captures get the same protection as the rest of your Drive. Your screenshot or recording is encrypted on your computer, in the app or in your browser, before any of it is sent, so Hippius never sees what's in it. Sharing adds a few details Hippius can read: a share link keeps the file's name, type and size in plain text, and when chat previews are on, a small preview picture that isn't encrypted. The table below lists them all.
 
 When you share it, the key that opens it sits at the end of the link, after the `#`. Browsers never send that part of an address to a server, so the key never reaches Hippius. That's also why the whole link matters: without the part after the `#`, the capture can't be opened.
 
 | | Encrypted so Hippius can't read it? |
 |---|---|
 | Your screenshots and recordings | Yes |
-| Comments on your share links, and the names people comment under | Yes, with the link's key, so only people who have the link can read them |
-| Reactions on your share links | No. Hippius can see which emoji were chosen, because it has to count them |
-| View counts and watch time | No. They're counted anonymously, with no account or IP address attached |
-| A shared capture's file name and size | No. The automatic names only say when it was taken, so rename a capture first if its name would say too much |
+| Comments on your share links, and the names people comment under | Yes, with the link's key, so only people who have the link can read them. Hippius does know which account posted each comment, even one posted as *Anonymous viewer* |
+| Reactions on your share links | No. Hippius can see which emoji were chosen and, on a recording, the moment each one was added, because it has to count them |
+| View counts and watch time | No. They're counted with a random ID kept in the viewer's browser, with no account or IP address attached. That browser uses the same ID on every link it opens |
+| A shared capture's file name, type and size | No. They're stored in plain text with the link. The automatic names only say when it was taken, so rename a capture first if its name would say too much |
 | The preview picture chat apps show | No, while [chat previews](/use/captures/share-links#a-preview-when-you-paste-the-link-in-a-chat) are on |
 
 Anyone who has the link can view the capture, so treat the link like the capture itself. If a link reaches someone it shouldn't, turn it off in Shared Links. See [Share links for captures](/use/captures/share-links). The details for comments and views are in [Insights, comments and reactions](/use/captures/insights#privacy).
@@ -111,7 +111,7 @@ Anyone who has the link can view the capture, so treat the link like the capture
   <li><a href="/use/captures/screenshots">Take a screenshot</a> in the desktop app or the console.</li>
   <li><a href="/use/captures/recording">Record your screen</a>, with your microphone, your camera and your computer's sound.</li>
   <li><a href="/use/captures/share-links">Share links for captures</a>: who can open them, and how to turn one off.</li>
-  <li><a href="/use/captures/insights">Insights, comments and reactions</a>: see who watched, and read what they said.</li>
+  <li><a href="/use/captures/insights">Insights, comments and reactions</a>: see how many people watched, and read what they said.</li>
   <li><a href="/use/captures/edit">Edit a screenshot</a> with arrows, text, blur and more.</li>
   <li><a href="/use/captures/plans">Free and paid plans</a>: what the Free plan includes.</li>
   <li><a href="/use/captures/troubleshooting">Troubleshooting &amp; FAQ</a> when something doesn't go to plan.</li>
