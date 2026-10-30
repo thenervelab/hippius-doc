@@ -35,7 +35,7 @@ Previews are on for captures unless you turn off **Show a preview in chats**, in
 
 ## Views, comments and reactions
 
-A capture link can also tell you who watched, and let people reply. You see how many people opened it and, on a paid plan, how far into a recording they got. Viewers can comment and react right on the link's page, beside the video or screenshot. Comments are end-to-end encrypted with the link's key, while reactions and view counts aren't.
+A capture link can also tell you how many people watched, and let people reply. You see how many people opened it and, on a paid plan, how far into a recording they got. Viewers can comment and react right on the link's page, beside the video or screenshot. Comments are end-to-end encrypted with the link's key, while reactions and view counts aren't.
 
 Each link has its own Insights, Comments and Reactions switches, in the share dialog and in the link's Insights. On paid Drive plans they start on for screenshots and recordings; on the Free plan they start off. People need no account to open the link, and need to sign in to comment or react.
 
@@ -53,6 +53,8 @@ When you no longer want people to open a capture, turn its link off. The button 
 </Ordered>
 
 The link stops working at once for everyone who has it, and its encrypted copy is deleted. You can turn a link off from any device, in the console or the desktop app, whichever one made it. While the desktop app's capture card is still on screen, **Revoke link** in its More menu does the same.
+
+Turning a link off also deletes its chat preview picture from Hippius. A chat app that already showed the preview keeps its own copy, though, and we can't reach it. If the preview itself shouldn't be seen, delete the message in the chat as well.
 
 ## Deleting a capture doesn't end its link
 
@@ -85,7 +87,7 @@ Like every share link, a capture link keeps its own encrypted copy of the file o
 ## Where to go next
 
 <Unordered>
-  <li><a href="/use/captures/insights">Insights, comments and reactions</a>: who watched, what they said, and what each link collects.</li>
+  <li><a href="/use/captures/insights">Insights, comments and reactions</a>: how many people watched, what they said, and what each link collects.</li>
   <li><a href="/use/console/shared-links">Shared Links in the console</a> and <a href="/use/desktop/shared-links">in the desktop app</a>: everything about managing links.</li>
   <li><a href="/use/captures/edit">Edit a screenshot</a> before you share it.</li>
   <li><a href="/use/captures/troubleshooting">Troubleshooting &amp; FAQ</a>, including custom domains for links.</li>
