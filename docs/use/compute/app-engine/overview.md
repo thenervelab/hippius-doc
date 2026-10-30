@@ -55,6 +55,6 @@ Power operations, resize and backups work as for other VMs. A reboot, a stop and
 
 <Unordered>
   <li><a href="/use/compute/app-engine/deploy">Deploying an app</a>: the compose requirements, secrets, the public IP, updates and status.</li>
-  <li><a href="/use/compute/app-engine/verify">Verifying an app</a>: the verifier, its verdicts and the residuals.</li>
+  <li><a href="/use/compute/app-engine/verify">Verifying an app</a>: in the browser, with the CLI or with the API, the verdicts and the residuals, and a procedure for AI agents.</li>
   <li><a href="/use/compute/app-engine/compose-rules">Compose rules reference</a>: every refusal code and what it means.</li>
 </Unordered>
