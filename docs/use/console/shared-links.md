@@ -130,6 +130,10 @@ A folder share behaves differently to a file share in one important way:
 Recipients always see the folder's **current** contents. Add a file to the folder tomorrow and everyone holding the link can see it. Remove one and it disappears for them too. If you want to share a fixed set of files, share them individually instead.
 :::
 
+:::warning Replace old folder links
+Folder links made now open only the folder you shared. Older ones carry your drive's key, and anyone who has the link holds that key, even after it stops working. On the Shared Links page they have an **Old link** badge. Choose <BgStyledText>Reshare without the drive key</BgStyledText> from the row's menu, pick an expiry (and a password, if you like) and send the new link. The old link is turned off once the new one exists. If you still use an old folder link, reshare it.
+:::
+
 ### What the recipient gets
 
 Someone opening a folder link can:

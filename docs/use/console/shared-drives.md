@@ -119,10 +119,20 @@ An invite link lets in whoever opens it, until it expires or is used up. On the 
 Manager and folder links are single use on purpose: they give a lot away, so each one is meant for one named person. If you want several Managers, invite them as Editors and change their role afterwards.
 
 :::warning Treat an invite link like a password
-Anyone holding the full link can join. The part after the `#` carries the drive's key. Your browser never sends that part to any server, and the console removes it from the address bar as soon as the page loads. Send the link only to the people it is meant for, and revoke it when you no longer need it.
+Anyone holding the full link can join. The secret that lets them in is in the part after the `#`. Your browser never sends that part to any server, and the console removes it from the address bar as soon as the page loads. Send the link only to the people it is meant for, and revoke it when you no longer need it.
 :::
 
 You can revoke any link from **Manage access**, and it stops working at once. People who already joined through it keep their access until you remove them.
+
+### Replace old links that carry the drive key
+
+Invite links made now don't carry the drive's key. Older ones do: the part after the `#` is the key itself, so anyone who has ever held one holds the key to what it opens, even after the link stops working. They'd still need the drive's encrypted files to use it, but it's a key you don't want lying around.
+
+Those older links have an **Old link** badge in **Manage access**. To swap one out, open its menu and choose <BgStyledText>Replace link</BgStyledText>. The console makes a new link with the same role, the same time left and the same number of joins left, copies it, and turns the old one off. Then send the new link to whoever should have it.
+
+The same goes for public folder links made before this change. On the Shared Links page they carry the same **Old link** badge, with <BgStyledText>Reshare without the drive key</BgStyledText> in their menu. See [Sharing a Folder](/use/console/shared-links#sharing-a-folder).
+
+If you still use an old link, replace it. Replacing or revoking stops the old link working, but it can't take the key back from anyone who already copied it, so the sooner the better.
 
 ## Joining a Shared Drive
 
@@ -190,7 +200,7 @@ If you own the drive or are one of its Managers, you can:
 
 <Unordered>
   <li><strong>Change someone's role</strong> with the menu beside their name. A change applies right away.</li>
-  <li><strong>Remove someone.</strong> They lose access at once, and the drive disappears from their list.</li>
+  <li><strong>Remove someone.</strong> They can't open the drive any more, it stops syncing to their computer, and it disappears from their list. Files they already downloaded, or synced with the desktop app, stay on their computer.</li>
   <li><strong>Cancel an invite</strong> that hasn't been accepted, or <strong>approve</strong> one that is waiting for its key.</li>
   <li><strong>Revoke a link</strong> so nobody new can join with it.</li>
   <li><strong>Invite more people</strong> with <BgStyledText>Invite</BgStyledText>, or make a new link with <BgStyledText>New link</BgStyledText>. Each opens the Share dialog on the matching tab.</li>
