@@ -94,6 +94,10 @@ Sync & Storage
 
     <p>The remote folder ⋮ menu also offers <strong>Browse Contents</strong> and <strong>Delete from Server</strong>.</p>
 
+    ### Finder
+
+    <p>On a Mac, the <strong>Finder</strong> card at the bottom of the section has a switch, <strong>Show "Share with Hippius" in Finder</strong>. Turn it on to share files straight from Finder's right-click menu (see <a href="/use/desktop/share-from-finder">Share from Finder</a>), or off to take the item out of the menu. If macOS doesn't let Hippius turn the Finder extension on, the app tells you.</p>
+
 </>
 </DocAccordionItem>
 
