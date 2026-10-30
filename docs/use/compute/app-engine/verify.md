@@ -77,15 +77,32 @@ If the panel says **Coming in phase 2**, the browser verifier isn't switched on 
 ### Install
 
 :::info Available at launch
-`hippius-app-verify` is published with the app engine launch. This section will then give the download links, the checksums and the source to build it from.
+`hippius-app-verify` and its source are published at the app engine launch, in the public `thenervelab/hippius-cvm` repository. Three forms are planned:
+
+<Unordered>
+  <li>Static binaries (Linux x86_64, possibly aarch64) on a GitHub release of that repository, with SHA-256 checksums and a cosign signature.</li>
+  <li><code>cargo install</code> from that repository, to build it yourself.</li>
+  <li>The npm package <code>@hippius/app-verify</code>: the same verifier compiled to WebAssembly, for browsers and Node.js.</li>
+</Unordered>
 :::
 
-<!--
-TODO(app-engine verifier release):
-- download links per platform, SHA-256 checksums, signature check
-- source repository and reproducible build instructions
-- the public manifest base URL, index URL and release key file, for --trust-index
--->
+### The release key
+
+Hippius signs the index of published app images with an Ed25519 release key. The verifier has no built-in release key: you pin it yourself. Pin this key:
+
+| | |
+|---|---|
+| Name | `v1` |
+| Raw Ed25519 public key (hex) | `06f598500e78f0241737184c7fb12516b38b55d2259d1a02c98371b99e53b128` |
+| `key_id` (SHA-256 of the raw key) | `59c8cc9dc60ab55578a7f03b4373f167b8cc42aecd02eb874abe7d691115eafe` |
+
+Check the `key_id` yourself:
+
+```bash
+echo -n 06f598500e78f0241737184c7fb12516b38b55d2259d1a02c98371b99e53b128 | xxd -r -p | sha256sum
+```
+
+The console pins the same key in the browser verifier.
 
 ### Run it
 
@@ -110,9 +127,9 @@ A verdict uses only the app image manifests you trust. There are two ways:
 | `--manifest <sha256 or file>` | Exactly the manifests you pin | Repeatable. A file is pinned by the SHA-256 of its bytes. The stronger choice. |
 | `--pin-file <file>` | The SHA-256 hashes in a file, one per line | `#` starts a comment. |
 | `--manifests <dir or url>` | Nothing on its own | Where pinned manifests are found: a folder of files, or a base URL serving `<sha256>.json`. |
-| `--trust-index <url or file>` with `--release-key <hex or file>` | Every manifest in the published index whose entry is signed by a release key you name | Weaker than pinning: any manifest Hippius signed and hasn't withdrawn is accepted. The summary names the one that matched, and how to pin it. If several match, the check fails and asks you to pin one. Needs the signed index head (`--index-head`). With an index file rather than a URL, give the manifests with `--manifests <dir>`. |
+| `--trust-index <url or file>` with `--release-key <hex or file>` | Every manifest in the published index whose entry is signed by a release key you name | Weaker than pinning: any manifest Hippius signed and hasn't withdrawn is accepted. The summary names the one that matched, and how to pin it. If several match, the check fails and asks you to pin one. Needs the signed index head (`--index-head`). With an index file rather than a URL, give the manifests with `--manifests <dir>`. Works once the manifests, the index and its head are public. |
 
-While the manifests are not public, the app's owner gets them through the [manifest relay](#5-get-the-app-image-manifest), and gives the file to `--manifest`. The firmware image the manifest names is then given with `--ovmf <file>`, from the [artefact relay](#6-get-the-firmware-image).
+`--trust-index` works once the manifests, the index and its head are public; you then pass the [release key](#the-release-key)'s hex with `--release-key`. Until then, the app's owner gets the manifests through the [manifest relay](#5-get-the-app-image-manifest), and gives the file to `--manifest`. The firmware image the manifest names is then given with `--ovmf <file>`, from the [artefact relay](#6-get-the-firmware-image).
 
 ### Other flags
 
@@ -353,7 +370,7 @@ The evidence document, `hippius.app-evidence.v1`:
 curl -s -H "$AUTH" -H "$UA" "$API/manifests/index.json" > index.json
 ```
 
-`hippius.app-image-index.v1`: `entries`, each with `manifest_sha256`, `key_id` and `signature_b64`. Each entry is a manifest Hippius published, signed by a release key. The release key `v1` has `key_id` `59c8cc9dc60ab55578a7f03b4373f167b8cc42aecd02eb874abe7d691115eafe`. A verifier takes release keys from its own pins, never from the index.
+`hippius.app-image-index.v1`: `entries`, each with `manifest_sha256`, `key_id` and `signature_b64`. Each entry is a manifest Hippius published, signed by a release key. The [release key](#the-release-key) `v1` has `key_id` `59c8cc9dc60ab55578a7f03b4373f167b8cc42aecd02eb874abe7d691115eafe`. A verifier takes release keys from its own pins, never from the index.
 
 ### 5. Get the app image manifest
 
