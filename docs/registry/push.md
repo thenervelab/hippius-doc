@@ -37,7 +37,13 @@ If the server answers that provisioning started in the background, the secret is
 The Free plan refuses namespace creation until the account holds a balance of at least **$10**. Top up on [Billing](/use/console/billing) first if the balance is zero.
 
 :::tip Save the robot secret
-The robot secret prints **once** at the bottom of `registry provision`. If you lose it, rotate with `hippius-hub registry rotate-token`: it issues a new secret and updates the local cache.
+The robot secret prints **once**, as the only line `registry provision` writes to stdout. Everything else goes to stderr. The CLI already caches the secret for `upload` / `download`. To keep a copy for docker or CI, run the provision step this way instead, so the secret goes to a private file and not your terminal:
+
+```bash
+(umask 077; hippius-hub registry provision my-models --docker-login > robot-secret.txt)
+```
+
+If you lose it, rotate with `hippius-hub registry rotate-token`: it issues a new secret, prints it the same way, and updates the local cache.
 :::
 
 ---
