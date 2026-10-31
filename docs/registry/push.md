@@ -27,7 +27,8 @@ Run these three commands in order, the first time only:
 ```bash
 hippius-hub registry plans                       # see pricing tiers
 hippius-hub registry check my-models             # is the name free?
-hippius-hub registry provision my-models --docker-login
+# The secret goes to a new private file, not your terminal (umask 077: mode 0600).
+(umask 077; hippius-hub registry provision my-models --docker-login > robot-secret.txt)
 ```
 
 `provision --docker-login` does three things in one shot: creates your namespace, mints docker credentials, and runs `docker login registry.hippius.com` for you (skipped with a message if `docker` is not on PATH). The CLI's own `upload` / `download` commands also start working immediately because the credentials are cached at `~/.cache/hippius/hub/token`.
@@ -37,11 +38,7 @@ If the server answers that provisioning started in the background, the secret is
 The Free plan refuses namespace creation until the account holds a balance of at least **$10**. Top up on [Billing](/use/console/billing) first if the balance is zero.
 
 :::tip Save the robot secret
-The robot secret prints **once**, as the only line `registry provision` writes to stdout. Everything else goes to stderr. The CLI already caches the secret for `upload` / `download`. To keep a copy for docker or CI, run the provision step this way instead, so the secret goes to a private file and not your terminal:
-
-```bash
-(umask 077; hippius-hub registry provision my-models --docker-login > robot-secret.txt)
-```
+The robot secret prints **once**, as the only line `registry provision` writes to stdout, which is why the command above sends stdout to `robot-secret.txt`. Everything else goes to stderr. The CLI already caches the secret for `upload` / `download`; the file is your copy for docker or CI. See [Keep a new secret out of your terminal](/registry/cli#keep-a-new-secret-out-of-your-terminal).
 
 If you lose it, rotate with `hippius-hub registry rotate-token`: it issues a new secret, prints it the same way, and updates the local cache.
 :::
@@ -182,10 +179,10 @@ Private namespaces: only you and the keys you issue can pull from them. Publicit
 ## Rotate credentials
 
 ```bash
-hippius-hub registry rotate-token --docker-login
+(umask 077; hippius-hub registry rotate-token --docker-login > robot-secret.txt)
 ```
 
-Issues a new docker secret and writes it to the local cache. **The old secret stops working immediately**, which matters for CI pipelines that hold a copy. Re-distribute before rotating. For CI, prefer a scoped key (`hippius-hub registry keys create … --role push`) over the namespace robot secret.
+Issues a new docker secret, prints it alone on stdout (here into `robot-secret.txt`), and writes it to the local cache. **The old secret stops working immediately**, which matters for CI pipelines that hold a copy. Re-distribute before rotating. For CI, prefer a scoped key (`hippius-hub registry keys create … --role push`) over the namespace robot secret.
 
 ---
 

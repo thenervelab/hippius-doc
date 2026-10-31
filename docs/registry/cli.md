@@ -47,13 +47,14 @@ hippius-hub login --username <you> --password-stdin < key.txt   # docker creds, 
 `registry provision`, `registry rotate-token`, `registry keys create` and `registry keys rotate` print the new secret alone on stdout, once. The login name and next steps go to stderr. Redirect stdout to a private file, then pass that file on stdin, so the secret never lands in your terminal, your shell history or an agent's transcript:
 
 ```bash
-# umask 077 creates key.txt readable by you only, with no window before a chmod.
-(umask 077; hippius-hub registry keys create agent-push --role push-delete --expires-days 1 > key.txt)
-hippius-hub login --username 'robot$myns+agent-push' --password-stdin < key.txt
-docker login registry.hippius.com -u 'robot$myns+agent-push' --password-stdin < key.txt
+# umask 077 creates a new key.txt readable by you only (an existing file keeps its mode).
+# && stops at a failed create: its error message would be in key.txt, not a secret.
+(umask 077; hippius-hub registry keys create agent-push --role push-delete --expires-days 1 > key.txt) &&
+  hippius-hub login --username 'robot$myns+agent-push' --password-stdin < key.txt &&
+  docker login registry.hippius.com -u 'robot$myns+agent-push' --password-stdin < key.txt
 ```
 
-Use the login name printed on stderr. `--password-stdin` reads one line and drops its trailing newline, and refuses an empty or multi-line file.
+Use the login name printed on stderr. `--password-stdin` reads one line and drops its trailing newline, and refuses an empty or multi-line file. Logging in with a scoped key replaces the robot credentials `provision` cached, so `upload` / `download` then run with that key's role until it expires.
 
 ---
 
