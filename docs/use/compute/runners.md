@@ -3,7 +3,7 @@ id: runners
 title: GitHub Actions Runners
 sidebar_label: GitHub Actions runners
 slug: /use/compute/runners
-description: Run your GitHub Actions jobs on single-use confidential Hippius VMs. Install the Hippius Runners GitHub App, link it to your account, use the hippius-small, hippius-medium and hippius-large labels (or their cheaper -ssd versions), configure limits, and understand job statuses and billing.
+description: Run your GitHub Actions jobs on single-use confidential Hippius VMs. Install the Hippius Runners GitHub App, link it to your account, use the hippius-small, hippius-medium and hippius-large labels (or their cheaper -ssd versions), configure limits, follow what your runners cost, set a monthly spend limit, and understand job statuses and billing.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -158,12 +158,51 @@ Refusals show on the Runners page only. On GitHub, the job just stays queued ("W
 | No access to runners on this account | Your access on a shared account doesn't include runners. Ask the owner. |
 | Runners need hourly compute billing | Contact support. |
 | Your account is being deleted | Nothing runs on an account being deleted. |
+| Monthly runner limit reached | Your [monthly limit](#monthly-limit) is reached and set to **Pause new jobs**. Raise or remove it, or wait for the 1st of next month (UTC). Then re-run the workflow. |
 
 ## Billing
 
-A runner VM is billed per second at the price of its label (size and tier) while the VM is billed, like any VM, with a minimum of one minute. That runs from one minute before the job starts (never before the VM was created) until the VM is torn down. Most of the boot is not billed, and a runner VM that never ran a job (cancelled while booting, or its job taken by another runner) costs nothing. The **Est. cost** column shows each job's billed time at today's price.
+A runner VM is billed per second at the price of its label (size and tier) while the VM is billed, like any VM, with a minimum of one minute. That runs from one minute before the job starts (never before the VM was created) until the VM is torn down. Most of the boot is not billed, and a runner VM that never ran a job (cancelled while booting, or its job taken by another runner) costs nothing. The **Est. cost** column shows each job's billed time at today's price; the **Spend** card shows what was billed (see [What your runners cost](#what-your-runners-cost)).
 
 Runner VMs don't appear in your VM list. They count against your **GitHub Actions runners** quota (3 at once on a new account) and against your vCPU, memory and disk quotas. The [24-hour balance requirement](/use/compute/billing#the-24-hour-balance-requirement) is checked for each job.
+
+## What your runners cost
+
+The **Spend** card shows what your runners cost over a period: **This month** (the default), **Last month**, **7 days**, **30 days**, or a **Custom** range of up to 366 days. Days are UTC days.
+
+<Unordered>
+  <li>The total in credits, the runner-minutes billed and the number of jobs billed.</li>
+  <li>For the current month, a projection of the month's total. It's linear: the month so far, scaled to the whole month. It appears once the month's first day has passed.</li>
+  <li>A bar chart of the credits spent each day. Click <BgStyledText>Show as table</BgStyledText> to read the same numbers as a table.</li>
+  <li>The spend by repository, by runner size and tier, and by workflow.</li>
+</Unordered>
+
+These amounts come from your hourly compute bill: each closed hour, the lines for your runner VMs (their time and their bandwidth). The hour that is not closed yet, usually the current one, is estimated from the runners' billed time at today's prices, and the card says so. It becomes the billed amount once the hour closes, a few minutes after it ends.
+
+In a project, the card shows the project's runners only.
+
+## Monthly limit
+
+The **Monthly limit** card caps what your runners spend in a calendar month, in credits. It's off until you set one.
+
+<Ordered>
+  <li>Enter the limit in credits.</li>
+  <li>Choose when to be emailed: by default at 50 %, 80 % and 100 % of the limit. 100 % is always on the list.</li>
+  <li>Choose what happens at 100 %: <strong>Alert only</strong> (an email, nothing stops) or <strong>Pause new jobs</strong>.</li>
+  <li>Click <BgStyledText>Save limit</BgStyledText>. <BgStyledText>Remove limit</BgStyledText> takes it off.</li>
+</Ordered>
+
+**The limit resets on the 1st of each month at 00:00 UTC**, whatever your time zone.
+
+**Pause new jobs.** Once the month's spend reaches the limit, every new job is refused with the reason **Monthly runner limit reached** and stays queued on GitHub. **Jobs already running are never stopped**: they finish and are billed, so the month can end a little above the limit. Runners start again on the 1st, or as soon as you raise or remove the limit. Re-run the workflows whose jobs were refused.
+
+**Emails.** Each threshold is emailed once a month. When the spend jumps past several at once, you get one email for the highest. A new limit starts the thresholds over. A change to the limit is confirmed by email too. They go to the account owner and, for a project, to the billing admins of the billing account that pays for it.
+
+A banner at the top of the Runners page says when a threshold is passed, when the limit is reached, and when new jobs are paused.
+
+:::note
+The limit weighs what is already billed. It's checked when a job is launched, against the spend at that moment (updated at most a minute late).
+:::
 
 ## Disconnect GitHub
 
