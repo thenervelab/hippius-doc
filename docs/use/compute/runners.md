@@ -179,6 +179,8 @@ The **Spend** card shows what your runners cost over a period: **This month** (t
 
 These amounts come from your hourly compute bill: each closed hour, the lines for your runner VMs (their time and their bandwidth). The hour that is not closed yet, usually the current one, is estimated from the runners' billed time at today's prices, and the card says so. It becomes the billed amount once the hour closes, a few minutes after it ends.
 
+**Compared to GitHub-hosted runners.** The card also says how much you saved against GitHub-hosted runners, this month and since Hippius started billing by the hour (late September 2026). For each job that finished in the period, it takes the job's run time, rounded up to the whole minute as GitHub bills it, at the per-minute price of the GitHub Linux runner with the same vCPU and memory: `hippius-small` against Linux 1-core (ubuntu-slim), `hippius-medium` against Linux 2-core, `hippius-large` against Linux 4-core. It then subtracts everything your runners were billed in the same period, including startup minutes, bandwidth and jobs still running. The info icon next to it gives the prices used and the date they were read from GitHub's pricing page. The line is hidden when GitHub would not have cost more.
+
 In a project, the card shows the project's runners only.
 
 ## Monthly limit
