@@ -3,7 +3,7 @@ id: runners
 title: GitHub Actions Runners
 sidebar_label: GitHub Actions runners
 slug: /use/compute/runners
-description: Run your GitHub Actions jobs on single-use confidential Hippius VMs. Install the Hippius Runners GitHub App, link it to your account, use the hippius-small, hippius-medium and hippius-large labels (or their cheaper -ssd versions), configure limits, and understand job statuses and billing.
+description: Run your GitHub Actions jobs on single-use confidential Hippius VMs. Install the Hippius Runners GitHub App, link it to your account, use the hippius-small, hippius-medium and hippius-large labels (or their cheaper -ssd versions), configure limits, follow what your runners cost against GitHub-hosted runners, and understand job statuses and billing.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -161,9 +161,26 @@ Refusals show on the Runners page only. On GitHub, the job just stays queued ("W
 
 ## Billing
 
-A runner VM is billed per second at the price of its label (size and tier) while the VM is billed, like any VM, with a minimum of one minute. That runs from one minute before the job starts (never before the VM was created) until the VM is torn down. Most of the boot is not billed, and a runner VM that never ran a job (cancelled while booting, or its job taken by another runner) costs nothing. The **Est. cost** column shows each job's billed time at today's price.
+A runner VM is billed per second at the price of its label (size and tier) while the VM is billed, like any VM, with a minimum of one minute. That runs from one minute before the job starts (never before the VM was created) until the VM is torn down. Most of the boot is not billed, and a runner VM that never ran a job (cancelled while booting, or its job taken by another runner) costs nothing. The **Est. cost** column shows each job's billed time at today's price; the **Spend** card shows what was billed (see [What your runners cost](#what-your-runners-cost)).
 
 Runner VMs don't appear in your VM list. They count against your **GitHub Actions runners** quota (3 at once on a new account) and against your vCPU, memory and disk quotas. The [24-hour balance requirement](/use/compute/billing#the-24-hour-balance-requirement) is checked for each job.
+
+## What your runners cost
+
+The **Spend** card shows what your runners cost over a period: **This month** (the default), **Last month**, **7 days**, **30 days**, or a **Custom** range of up to 366 days. Days are UTC days.
+
+<Unordered>
+  <li>The total in credits, the runner-minutes billed and the number of jobs billed.</li>
+  <li>For the current month, a projection of the month's total. It's linear: the month so far, scaled to the whole month. It appears once the month's first day has passed.</li>
+  <li>A bar chart of the credits spent each day. Click <BgStyledText>Show as table</BgStyledText> to read the same numbers as a table.</li>
+  <li>The spend by repository, by runner size and tier, and by workflow.</li>
+</Unordered>
+
+These amounts come from your hourly compute bill: each closed hour, the lines for your runner VMs (their time and their bandwidth). The hour that is not closed yet, usually the current one, is estimated from the runners' billed time at today's prices, and the card says so. It becomes the billed amount once the hour closes, a few minutes after it ends.
+
+**Compared to GitHub-hosted runners.** The card also says how much you saved against GitHub-hosted runners at GitHub's list prices, this month and since Hippius started billing by the hour (late September 2026). For each job, it takes the job's run time inside the period, rounded up to the whole minute as GitHub bills it, at the per-minute price of the GitHub Linux runner with the same vCPU and memory: `hippius-medium` against Linux 2-core, `hippius-large` against Linux 4-core, and `hippius-small` against Linux 1-core (ubuntu-slim), the cheapest GitHub runner. It then subtracts everything your runners were billed in the same period, including startup minutes, bandwidth and jobs still running. To stay on the safe side, it leaves out jobs from public repositories on the small and medium sizes (GitHub runs those free) and doesn't count the free minutes your GitHub plan may include. The info icon next to it lists the prices used and the date they were read from GitHub's pricing page. The line is hidden when GitHub would not have cost more.
+
+In a project, the card shows the project's runners only.
 
 ## Disconnect GitHub
 
