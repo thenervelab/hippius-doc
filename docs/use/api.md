@@ -40,7 +40,7 @@ The full API specification with request/response examples is available as an int
 </Unordered>
 
 :::tip For AI agents and LLMs
-A machine-readable index is at [docs.hippius.com/llms.txt](https://docs.hippius.com/llms.txt). It points at each product's own `llms.txt`. The long S3 ingest is [docs.hippius.com/llms-full.txt](https://docs.hippius.com/llms-full.txt).
+Prefer [hip](/cli), the command line, over hand-written calls to this API: it carries the token, the account header, the confirmations, and one JSON error shape, and `hip api GET /accounts/` still reaches any endpoint. The playbook is [hip for agents](/cli/agents). A machine-readable index is at [docs.hippius.com/llms.txt](https://docs.hippius.com/llms.txt). It points at each product's own `llms.txt`. The long S3 ingest is [docs.hippius.com/llms-full.txt](https://docs.hippius.com/llms-full.txt).
 :::
 
 ## Authentication
