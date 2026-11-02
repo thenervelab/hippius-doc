@@ -39,8 +39,22 @@ In practice the API token is all you save by hand. `hippius-hub registry provisi
 
 ```bash
 hippius-hub login --hippius-token <token>
-hippius-hub login --username <you> --password <secret>   # docker creds, manual path
+hippius-hub login --username <you> --password-stdin < key.txt   # docker creds, manual path
 ```
+
+### Keep a new secret out of your terminal
+
+`registry provision`, `registry rotate-token`, `registry keys create` and `registry keys rotate` print the new secret alone on stdout, once. The login name and next steps go to stderr. Redirect stdout to a private file, then pass that file on stdin, so the secret never lands in your terminal, your shell history or an agent's transcript:
+
+```bash
+# umask 077 creates a new key.txt readable by you only (an existing file keeps its mode).
+# && stops at a failed create: its error message would be in key.txt, not a secret.
+(umask 077; hippius-hub registry keys create agent-push --role push-delete --expires-days 1 > key.txt) &&
+  hippius-hub login --username 'robot$myns+agent-push' --password-stdin < key.txt &&
+  docker login registry.hippius.com -u 'robot$myns+agent-push' --password-stdin < key.txt
+```
+
+Use the login name printed on stderr. `--password-stdin` reads one line and drops its trailing newline, and refuses an empty or multi-line file. Logging in with a scoped key replaces the robot credentials `provision` cached, so `upload` / `download` then run with that key's role until it expires.
 
 ---
 
@@ -60,7 +74,7 @@ hippius-hub login --username <you> --password <secret>   # docker creds, manual 
 | `registry publicity public\|private` | Toggle anonymous-pull access (also resizes quota to the plan's tier) |
 | `registry rotate-token [--docker-login]` | Issue a new docker secret (old one stops working immediately) |
 | `registry keys list` | List scoped keys for the active project |
-| `registry keys create <name> --role read\|push\|push-delete\|admin [--expires-days N] [--docker-login]` | Issue a scoped key; secret printed once |
+| `registry keys create <name> --role read\|push\|push-delete\|admin [--expires-days N] [--docker-login]` | Issue a scoped key. The secret prints once, alone on stdout (`> key.txt`); see [above](#keep-a-new-secret-out-of-your-terminal) |
 | `registry keys show\|rotate\|revoke <key-id>` | Inspect, rotate the secret, or delete a key |
 | `revisions <repo> [--json]` | List a repository's revisions, newest first |
 
