@@ -10,7 +10,7 @@ The commands an agent can run are in Tools an agent can run. S3 is written out i
 
 - [S3 documentation map](#s3-documentation-map)
 - [What is Hippius?](#what-is-hippius)
-- [Tools an agent can run](#tools-an-agent-can-run), starting with `hipc`, the command line
+- [Tools an agent can run](#tools-an-agent-can-run), starting with `hipc`
 - [S3 Storage — Quickstart](#s3-storage--quickstart)
 - [S3 Storage — Advanced Usage](#s3-storage--advanced-usage)
 - [S3 Storage — Python](#s3-storage--python)
@@ -134,29 +134,21 @@ Open a support ticket with the account API token: POST https://api.hippius.com/a
 
 ## Tools an agent can run
 
-Start with `hipc`, the Hippius command line: it covers the account, billing and plans, S3 buckets and keys, Hub, compute, Kubernetes, databases, runners, CDN, the private network, and support, with one token and one error shape. S3 bytes use any S3 client, and that manual starts at S3 Storage — Quickstart; Hub blobs use `hippius-hub`. `hipc` and the storage commands in `pip install hippius` (up to 0.2.77) are deprecated. Do not use them. Chain registration still uses that `hippius` version.
+Use `hipc` first for anything on the account API: accounts, billing, storage keys and buckets, Hub, compute, CDN, network, and support. S3 bytes use any S3 client (S3 Storage — Quickstart below); Hub blobs use `hippius-hub`. The IPFS-era commands (`hipc storage`) and the storage commands of the old `hippius` Python package are deprecated; chain registration still uses `hippius==0.2.77`.
 
-An agent cannot create the account or approve a browser login. The user does that at https://console.hippius.com. The API token is on https://console.hippius.com/dashboard/settings
+An agent cannot create the account or approve a browser login. The user does that at https://console.hippius.com and gives the agent the API token from https://console.hippius.com/dashboard/settings
 
 ### hipc
 
-`hipc` is written for coding agents and for people: on a pipe, or with `CI` or `AI_AGENT=1`, it prints JSON, a failure is one JSON object on stderr, nothing prompts, and nothing pages. Playbook: https://docs.hippius.com/cli/agents (raw: https://raw.githubusercontent.com/thenervelab/hippius-cli/main/docs/agents.md). Source and contract: https://github.com/thenervelab/hippius-cli
+- Install: `curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh`, or `brew install thenervelab/tap/hipc`, or `pip install hippius`.
+- Log in: `hipc auth login --token-file -` (paste the token, Enter, Ctrl-D), then `hipc auth status`.
+- Run `hipc schema` to discover every command, its effect, confirmations and error codes.
+- Output is JSON on a pipe or with `AI_AGENT=1`.
+- `--dry-run` sends nothing. Writes need `--yes`; secrets need `--reveal`.
+- Exit 0 success, 1 the API or runtime failed, 2 fix the invocation (nothing sent). A failure is one JSON object on stderr.
+- Fallback: `hipc api <METHOD> <PATH>` before calling https://api.hippius.com directly.
 
-```bash
-curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh   # or: brew install thenervelab/tap/hipc (the formula hippius installs the command hipc)
-hipc auth login --token-file -        # paste the user's API token, press Enter, then Ctrl-D; never in argv
-hipc auth status
-hipc schema                           # every command, its effect, flags, confirmation, guards, and every error code; JSON, no network
-hipc account get
-hipc billing balance
-hipc s3 buckets create photos --dry-run     # the requests a real run would send; sends nothing
-hipc s3 buckets create photos --yes         # a write that spends, deletes, revokes, rotates, or cancels needs --yes
-hipc s3 tokens create --kind master --reveal --yes   # an answer that holds a secret needs --reveal; printed once
-hipc compute vms list --json
-hipc api GET /accounts/               # any endpoint hipc has no command for, same token and rules
-```
-
-Exit 0 is success (a dry run included), 1 the API or the runtime failed, 2 the invocation must change and nothing was sent. The error object is `{"error":{"code":...,"message":...,"hint":...,"retryable":...,"side_effects":...}}`; branch on `code`. A list is `{"items":[...],"next_page_token":null}`; `--all` follows every page. `CI` and `AI_AGENT` never confirm or reveal on their own. One token can act in a shared account: `hipc account list`, then `hipc account use <account_id>` or `--account <account_id>`.
+More: https://docs.hippius.com/cli/agents and https://docs.hippius.com/cli/commands
 
 ### Hub
 
@@ -203,20 +195,7 @@ A token and an address that do not belong together fail `whoami` with 403. Leave
 
 ### Console
 
-The console CLI is `hipc` (above). Sign-in, plan checkout in the browser, and anything that needs a wallet signature stay in https://console.hippius.com. After the user copies the API token and stores it with `hipc auth login --token-file -`, the account is a shell away:
-
-```bash
-hipc billing balance
-hipc hub namespace get
-hipc drive plans
-hipc s3 plans
-hipc hub plans
-hipc s3 tokens create --kind master --reveal --yes
-hipc s3 tokens rotate --kind master <token_id> --reveal --yes
-hipc s3 tokens revoke --kind master <token_id> --yes
-```
-
-The plan lists answer without a token. Only if hipc does not cover a route: `hipc api GET /billing/latest-tao-price/`, or `curl -sS -H "Authorization: Token $HIPPIUS_TOKEN" https://api.hippius.com/api/...`. The OpenAPI spec is https://api.hippius.com/openapi.json
+The console CLI is `hipc` (above). Sign-in, browser checkout, and anything that needs a wallet signature stay in https://console.hippius.com. Without hipc: `curl -sS -H "Authorization: Token $HIPPIUS_TOKEN" https://api.hippius.com/api/...`; plan lists answer without a token. The OpenAPI spec is https://api.hippius.com/openapi.json
 
 ### Desktop
 
@@ -657,7 +636,7 @@ Token types:
 
 ## Management API
 
-Prefer `hipc` (Tools an agent can run): every route below has a command or goes through `hipc api <METHOD> <PATH>` with the same token, account header, confirmations, and error object. The raw routes are for a client that cannot run a binary.
+Prefer `hipc` (Tools an agent can run); the raw routes below are for a client that cannot run a binary.
 
 Docs: https://docs.hippius.com/use/api
 Full OpenAPI spec: https://api.hippius.com/openapi.json

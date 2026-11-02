@@ -4,35 +4,25 @@
 
 Open only the file for the product you need. The long reference for the whole product, including the S3 manual, is [llms-full.txt](https://docs.hippius.com/llms-full.txt)
 
-## If you can run commands, start with hipc
+## If you can run commands, use hipc first
 
-`hipc` is the Hippius command line, written for coding agents and for people. It covers everything the console and the account API do: accounts, projects and teams, the balance and the plans, S3 buckets and tokens, Hub, confidential VMs, managed Kubernetes and PostgreSQL, GitHub Actions runners, CDN zones and WAF, the private network, and support tickets. Use it instead of calling https://api.hippius.com by hand: it carries the token, the account header, the confirmations, and one JSON error shape. It moves no data; S3 objects go through any S3 client, Hub blobs through `hippius-hub`.
+Use `hipc` first for anything on the account API: accounts, billing, storage keys and buckets, Hub, compute, CDN, network, and support.
 
-1. Install, no root, macOS and Linux: `curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh` (or `brew install thenervelab/tap/hipc`; the formula `hippius` installs the command `hipc`). Then `hipc version`. From 1.0.0 only: `pip install hippius` (or `uv tool install hippius`); before that the PyPI name is the old Python SDK, do not use it.
-2. Log in once with the token the user gives you. The user copies it from https://console.hippius.com/dashboard/settings; an agent cannot create the account or sign in. Run `hipc auth login --token-file -`, paste the token, press Enter, then Ctrl-D; or `hipc auth login --token-file <path>`. The token never goes in argv, and never into the chat. `hipc auth status` confirms it. For one run without storing it, set `HIPPIUS_TOKEN`.
-3. Learn it from the binary: `hipc schema` prints every command with its effect, flags, confirmation, guards, and every error code, as JSON, with no network; then `hipc <command> --help`.
+- Install: `curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh`, or `brew install thenervelab/tap/hipc`, or `pip install hippius`.
+- Log in with the token the user gives you: `hipc auth login --token-file -` (paste it, Enter, Ctrl-D), then `hipc auth status`.
+- Run `hipc schema` to discover every command, its effect, confirmations and error codes.
+- Output is JSON on a pipe or with `AI_AGENT=1`.
+- `--dry-run` sends nothing. Writes need `--yes`; secrets need `--reveal`.
+- Exit 0 success, 1 the API or runtime failed, 2 fix the invocation (nothing sent). A failure is one JSON object on stderr.
+- Fallback: `hipc api <METHOD> <PATH>` before calling https://api.hippius.com directly.
 
-Three commands:
-
-    hipc account get
-    hipc billing balance
-    hipc s3 buckets create photos --dry-run
-
-The contract, in five lines:
-
-- On a pipe, or with `CI` or `AI_AGENT=1`, output is JSON: the resource itself, or a list as `{"items":[...],"next_page_token":null}`; `--json` forces it.
-- A failure is one JSON object on stderr, `{"error":{"code":...,"message":...,"hint":...,"retryable":...,"side_effects":...}}`; branch on `code`.
-- Exit 0 is success (a dry run included), 1 the API or the runtime failed, 2 the invocation must change and nothing was sent.
-- A command that spends, deletes, revokes, rotates, or cancels needs `--yes`; a secret in the answer needs `--reveal`; `--dry-run` prints the requests and sends nothing. `CI` and `AI_AGENT` never confirm on their own.
-- `hipc api GET /accounts/` reaches any endpoint hipc has no command for, with the same rules.
-
-Playbook: [hipc for agents](https://docs.hippius.com/cli/agents), also raw at https://raw.githubusercontent.com/thenervelab/hippius-cli/main/docs/agents.md. Pages: [Get started](https://docs.hippius.com/cli), [Examples](https://docs.hippius.com/cli/examples), [Command reference](https://docs.hippius.com/cli/commands). Source: https://github.com/thenervelab/hippius-cli
+More: [For agents](https://docs.hippius.com/cli/agents), [Command reference](https://docs.hippius.com/cli/commands).
 
 ## Which file to open
 
 | Want to | Open |
 |---|---|
-| Manage the account, billing, plans, S3 buckets and keys, Hub, compute, Kubernetes, databases, runners, CDN, the private network, or support from a terminal or an agent | [hipc](https://docs.hippius.com/cli) and [hipc for agents](https://docs.hippius.com/cli/agents); install and log in as above, then `hipc schema` |
+| Manage the account, billing, plans, S3 buckets and keys, Hub, compute, Kubernetes, databases, runners, CDN, the private network, or support from a terminal or an agent | [hipc](https://docs.hippius.com/cli), as above |
 | Store or fetch files from code, rclone, or a backup tool | [hippius-s3 llms.txt](https://raw.githubusercontent.com/thenervelab/hippius-s3/staging/llms.txt) |
 | Store encrypted files in the browser (Drive) | [Drive guide](https://docs.hippius.com/use/drive) |
 | Publish or pull a model or a container image | [hippius-hub llms.txt](https://raw.githubusercontent.com/thenervelab/hippius-hub/main/llms.txt); the namespace, plan, and CI keys are also `hipc hub` |
@@ -56,7 +46,7 @@ Full console guide: [Console getting started](https://docs.hippius.com/use/conso
 Billing: [Billing guide](https://docs.hippius.com/use/console/billing)
 
 - One account covers the console, the desktop app, the mobile app, and `hipc`. Sign-in is Google, GitHub, Apple, or an existing 12-word access key. There is no email and password sign-in.
-- An agent cannot create the account or sign in. That happens in the user's browser or app. The agent gets the API token from the user and stores it with `hipc auth login --token-file -`.
+- An agent cannot create the account or sign in. That happens in the user's browser or app; the user gives the agent the API token.
 - A 12-word access key creates a wallet-only account. It has no real email address, so it gets no lifecycle mail. Drive has no free plan: subscribe before the first upload. S3 and Hub work the same as on any other account.
 - S3 endpoint is https://s3.hippius.com only. Keys (the access key id starts with `hip_`) are created with `hipc s3 tokens create --kind master --reveal --yes`, or on the console S3 page: https://docs.hippius.com/use/console/s3. `hipc s3 configure` writes an AWS CLI profile from one.
 - The API token for Hub, the account API, and `hipc` is on console Settings: https://console.hippius.com/dashboard/settings
@@ -72,15 +62,15 @@ Billing: [Billing guide](https://docs.hippius.com/use/console/billing)
 
 Hub Free plan: creating a namespace requires a balance of at least $10, a spam check. A zero balance is refused. The plan price stays zero. Top up, then provision. https://docs.hippius.com/use/console/hub
 
-## Only if hipc does not cover it: hipc api, or the raw API
+## Without hipc: the raw API
 
-`hipc api <METHOD> <PATH>` calls any endpoint of https://api.hippius.com with the same token, account header, confirmations, guards, and error object as every command: `hipc api GET /accounts/`, `hipc api POST /support/tickets/ --body-file ticket.json --yes`. The OpenAPI spec is https://api.hippius.com/swagger.json. Without hipc: header `Authorization: Token YOUR_TOKEN`, plus `X-Hippius-Account: acct_...` for a shared account (ids from GET https://api.hippius.com/api/accounts/). Subscribe routes: POST https://api.hippius.com/api/drive/subscription/ with `{"plan":"solo","period":"monthly","payment":"credits"}`; POST https://api.hippius.com/api/s3/subscription/ with `{"plan":"pro","rail":"credits"}`; GET https://api.hippius.com/api/registry/plans/ then POST https://api.hippius.com/api/registry/subscribe/ with `{"plan_id": 2}` (the API requires `plan_id`, not a name; Builder is id 2). 201 if the balance covers the plan. Support: POST https://api.hippius.com/api/support/tickets/ with subject, priority, category, and description. Send your own User-Agent: some default ones (Python urllib) are blocked with 403 error 1010.
+The OpenAPI spec is https://api.hippius.com/swagger.json. Header `Authorization: Token YOUR_TOKEN`, plus `X-Hippius-Account: acct_...` for a shared account (ids from GET https://api.hippius.com/api/accounts/). Subscribe routes: POST https://api.hippius.com/api/drive/subscription/ with `{"plan":"solo","period":"monthly","payment":"credits"}`; POST https://api.hippius.com/api/s3/subscription/ with `{"plan":"pro","rail":"credits"}`; GET https://api.hippius.com/api/registry/plans/ then POST https://api.hippius.com/api/registry/subscribe/ with `{"plan_id": 2}` (the API requires `plan_id`, not a name; Builder is id 2). 201 if the balance covers the plan. Support: POST https://api.hippius.com/api/support/tickets/ with subject, priority, category, and description. Send your own User-Agent: some default ones (Python urllib) are blocked with 403 error 1010.
 
 ## Deprecated
 
-`hipc`, the IPFS-era command line that the hippius-cli repository held before `hipc`, `homebrew-tap`'s `hipc` formula, `hippius-sdk`, `hippius-sdk-ts`, `hippius-sdk-rust`, `hippius-rust-sdk`, `hippius-sync-engine`, `hippius-storage-miner`, the storage commands of the Python package `hippius` up to 0.2.77, and anything else IPFS-related, are deprecated. Hippius switched from IPFS to Arion. https://docs.hippius.com/cli/usage
+The IPFS-era command line (its `hipc storage` commands; the name `hipc` now belongs to the new CLI above), `hippius-sdk`, `hippius-sdk-ts`, `hippius-sdk-rust`, `hippius-rust-sdk`, `hippius-sync-engine`, `hippius-storage-miner`, the storage commands of the Python package `hippius` up to 0.2.77, and anything else IPFS-related, are deprecated. Hippius switched from IPFS to Arion. https://docs.hippius.com/cli/usage
 
-Chain registration still installs the Python package `hippius` (pin `hippius==0.2.77`; from 1.0.0 the name ships `hipc`): https://docs.hippius.com/earn/register-in-blockchain
+Chain registration still uses the Python package `hippius` pinned to `hippius==0.2.77`: https://docs.hippius.com/earn/register-in-blockchain
 
 ## Compute
 
@@ -112,7 +102,7 @@ The Kubernetes cluster key is generated in the user's browser, and database cred
 ## Documentation
 
 - [Home](https://docs.hippius.com)
-- [hipc, the command line](https://docs.hippius.com/cli), [for agents](https://docs.hippius.com/cli/agents), [examples](https://docs.hippius.com/cli/examples), [command reference](https://docs.hippius.com/cli/commands)
+- [hipc, the command line](https://docs.hippius.com/cli)
 - [S3 quickstart](https://docs.hippius.com/use/quickstart)
 - [Hub quickstart](https://docs.hippius.com/registry)
 - [Desktop](https://docs.hippius.com/use/desktop/getting-started)
