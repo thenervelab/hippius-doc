@@ -45,7 +45,7 @@ Check it with `hipc version`.
 
 ## Log in
 
-Create a token in the console at [console.hippius.com/dashboard/settings](https://console.hippius.com/dashboard/settings), then:
+Sign in at [console.hippius.com](https://console.hippius.com), copy your API token from [Settings](https://console.hippius.com/dashboard/settings), then:
 
 ```bash
 hipc auth login --token-file -    # paste the token, press Enter, then Ctrl-D
@@ -64,7 +64,7 @@ hipc s3 buckets create photos --dry-run
 ```
 
 - `--dry-run` shows the requests and sends nothing.
-- A command that spends or deletes asks first, and needs `--yes` outside a terminal.
+- A command that spends, deletes, revokes, rotates or cancels asks first, and needs `--yes` outside a terminal.
 - A command that prints a secret needs `--reveal`.
 - Every `--help` ends with examples.
 

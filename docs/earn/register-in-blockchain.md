@@ -1,6 +1,6 @@
 # Registering in the Hippius Blockchain
 
-After setting up your validator or storage miner node, you need to register it in the Hippius blockchain to start participating in the network and earning rewards. This guide walks you through the updated registration process using the new Hippius CLI Python tool, which is now the primary method for node registration. The old Polkadot.js Apps method is still available but has been deprecated in favor of this streamlined CLI approach.
+After setting up your validator or storage miner node, you need to register it in the Hippius blockchain to start participating in the network and earning rewards. This guide walks you through the updated registration process using the Hippius registration tool (`hippius==0.2.77`), which is now the primary method for node registration. The old Polkadot.js Apps method is still available but has been deprecated in favor of this tool.
 
 ## Prerequisites
 
@@ -9,17 +9,17 @@ Before registering, ensure you have:
 - A running validator or storage miner node
 - Node keys properly configured (see [Installing Validator](installing-validator.md) or [Storage Miner](storage-miner.md) guides)
 - Python 3.7+ installed on your system
-- Access to the Hippius CLI Python package (`hippius` version `0.2.49` or later)
+- The Hippius registration tool (`hippius==0.2.77`)
 - Alpha tokens for registration fees and staking
 - Arion miner set up and configured (if applicable)
 
 ---
 
-## Updated Registration Process Using Hippius CLI (Python)
+## Updated Registration Process Using the Registration Tool
 
 ### 1: Create and Activate Python Virtual Environment
 
-It is recommended to create a clean Python environment for the Hippius CLI tool.
+It is recommended to create a clean Python environment for the registration tool.
 
 ```bash
 python3 -m venv hippius-env
@@ -32,7 +32,7 @@ On Windows use:
 hippius-env\Scripts\activate
 ```
 
-### 2: Install and login to Hippius CLI
+### 2: Install and log in to the registration tool
 
 ```bash
 # the chain registration tool is version 0.2.77; the unpinned name installs hipc instead

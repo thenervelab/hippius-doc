@@ -18,7 +18,6 @@ hipc --help
 hipc auth status                      # exit 1 `auth` until a token is stored
 hipc auth login --token-file -        # paste the token, press Enter, then Ctrl-D
 hipc auth status
-hipc auth logout --yes
 ```
 
 ## 2. Account and billing

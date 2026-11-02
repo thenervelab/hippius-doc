@@ -17,3 +17,5 @@ What replaces them:
 - **Models and container images**: [`hippius-hub`](/registry/cli), with docker and oras.
 - **Chain registration for a miner or a validator**: the pinned Python package in [Registering in the Hippius blockchain](/earn/register-in-blockchain).
 - **Miner operations**: the [miner guide](/earn/arion/running-miner) and the `miner` binary from the [arion](https://github.com/thenervelab/arion) repository.
+
+If you have the IPFS-era `hipc` from Homebrew, `brew upgrade hipc` replaces it.
