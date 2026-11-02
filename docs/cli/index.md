@@ -40,9 +40,14 @@ brew install thenervelab/tap/hippius
 </TabItem>
 <TabItem value="pypi" label="PyPI">
 
-From 1.0.0, for a machine that already has Python. The wheels hold the same binary. The package `hippius` was the Python SDK up to 0.2.77; pin `hippius==0.2.77` if your code imports it.
+:::caution Available from hip 1.0.0
+Until then `pip install hippius` installs the old Python SDK (0.2.77), whose `hippius` command is the deprecated IPFS-era CLI. Use the curl or Homebrew tab today.
+:::
+
+From 1.0.0, for a machine that already has Python; the wheels hold the same binary. Pin `hippius==0.2.77` if your code imports the old SDK.
 
 ```bash
+# from hip 1.0.0
 pip install hippius
 ```
 
@@ -86,7 +91,7 @@ hip compute vms list --json                # JSON at a terminal too; a pipe, CI=
 hip s3 buckets create photos --dry-run     # the requests a real run would send; sends nothing, needs no token, exit 0
 hip s3 buckets create photos --yes         # confirms a command that spends, deletes, revokes, rotates, or cancels
 # exit 0: done; 1: the API or the runtime failed; 2: the invocation must change, nothing was sent
-# a failure is one JSON object on stderr: {"error":{"code":...,"hint":...,"retryable":...,"side_effects":...}}
+# a failure is one JSON object on stderr: {"error":{"code":...,"message":...,"request_id":...,"hint":...,"retryable":...,"side_effects":...,"http_status":...,"retry_after_ms":...,"details":...}}
 ```
 
 [hip for agents](/cli/agents) is the playbook, written to be pasted into an agent's context.

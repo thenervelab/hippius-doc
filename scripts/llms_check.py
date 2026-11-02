@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1] / "static" / "llms.txt"
 URL_RE = re.compile(r"https://[^\s)>\]]+")
 
 ROOT_FACTS = (
-    "https://docs.hippius.com/cli",
+    "(https://docs.hippius.com/cli)",
     "hip auth login --token-file -",
     "hip schema",
     "https://s3.hippius.com",
@@ -102,12 +102,22 @@ def host_of(url: str) -> str:
 DOCS = ROOT.parents[1] / "docs"
 SITE = "https://docs.hippius.com"
 
-# The hip repository is public from the 1.0 flip; until then its pages answer 404 to an
-# anonymous client. Lenient mode warns on them; strict mode fails until the flip is done.
-PENDING_PUBLIC = (
+# The hip repository (thenervelab/hippius-cli) exists, but its hip content, releases, and
+# docs land with the public flip; until then those URLs answer 404. Lenient mode warns on
+# them while the flip is pending, which it reads from the latest release's install.sh
+# answering 404 (the releases page itself answers 200 with no release), so the leniency
+# expires by itself with the first public release. Strict mode fails until then. Remove
+# this block after the flip.
+HIP_REPO_URLS = (
     "https://github.com/thenervelab/hippius-cli",
     "https://raw.githubusercontent.com/thenervelab/hippius-cli/",
 )
+HIP_INSTALL_URL = "https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh"
+
+
+def hip_flip_pending() -> bool:
+    code, _, _ = curl(HIP_INSTALL_URL)
+    return code == 404
 
 
 def page_in_tree(url: str) -> bool:
@@ -141,6 +151,7 @@ def main() -> None:
     text = ROOT.read_text()
     failures = []
     warnings = []
+    flip_pending = mode == "lenient" and hip_flip_pending()
 
     for fact in ROOT_FACTS:
         if fact not in text:
@@ -172,8 +183,8 @@ def main() -> None:
                 warnings.append(message + " (leaf not merged yet)")
             elif code == 404 and mode == "lenient" and page_in_tree(url):
                 warnings.append(message + " (page in this checkout, not deployed yet)")
-            elif code == 404 and mode == "lenient" and url.startswith(PENDING_PUBLIC):
-                warnings.append(message + " (repository not public yet)")
+            elif code == 404 and flip_pending and url.startswith(HIP_REPO_URLS):
+                warnings.append(message + " (hip content lands with the public flip)")
             else:
                 failures.append(message)
             continue

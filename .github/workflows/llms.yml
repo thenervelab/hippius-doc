@@ -33,6 +33,7 @@ on:
       - "static/llms-full.txt"
       - "docs/**"
       - "scripts/llms_check.py"
+      - "scripts/sync_hip_agents.py"
       - "scripts/llms_agent_eval.py"
       - "scripts/llms_live_smoke.py"
       - ".github/workflows/llms.yml"
@@ -54,6 +55,15 @@ jobs:
       - name: Check links (strict once the leaves are merged)
         if: github.event_name != 'pull_request'
         run: python scripts/llms_check.py --mode strict
+      # docs/cli/agents.md mirrors docs/agents.md of the hip repository; the check fails
+      # when the page differs from the regenerated one. Lenient warns while the hip content
+      # has not landed (the latest release's install.sh answers 404), strict fails.
+      - name: Check the hip agents page is in sync (lenient on pull requests)
+        if: github.event_name == 'pull_request'
+        run: python scripts/sync_hip_agents.py --check --mode lenient
+      - name: Check the hip agents page is in sync (strict)
+        if: github.event_name != 'pull_request'
+        run: python scripts/sync_hip_agents.py --check --mode strict
 
   agent:
     if: github.event_name != 'pull_request'

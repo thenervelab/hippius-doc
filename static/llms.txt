@@ -8,7 +8,7 @@ Open only the file for the product you need. The long reference for the whole pr
 
 `hip` is the Hippius command line, written for coding agents and for people. It covers everything the console and the account API do: accounts, projects and teams, the balance and the plans, S3 buckets and tokens, Hub, confidential VMs, managed Kubernetes and PostgreSQL, GitHub Actions runners, CDN zones and WAF, the private network, and support tickets. Use it instead of calling https://api.hippius.com by hand: it carries the token, the account header, the confirmations, and one JSON error shape. It moves no data; S3 objects go through any S3 client, Hub blobs through `hippius-hub`.
 
-1. Install, no root, macOS and Linux: `curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh` (or `brew install thenervelab/tap/hippius`, the formula `hippius` installs the command `hip`; or `pip install hippius` from 1.0.0). Then `hip version`.
+1. Install, no root, macOS and Linux: `curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh` (or `brew install thenervelab/tap/hippius`; the formula `hippius` installs the command `hip`). Then `hip version`. From 1.0.0 only: `pip install hippius` (or `uv tool install hippius`); before that the PyPI name is the old Python SDK, do not use it.
 2. Log in once with the token the user gives you. The user copies it from https://console.hippius.com/dashboard/settings; an agent cannot create the account or sign in. Run `hip auth login --token-file -`, paste the token, press Enter, then Ctrl-D; or `hip auth login --token-file <path>`. The token never goes in argv, and never into the chat. `hip auth status` confirms it. For one run without storing it, set `HIPPIUS_TOKEN`.
 3. Learn it from the binary: `hip schema` prints every command with its effect, flags, confirmation, guards, and every error code, as JSON, with no network; then `hip <command> --help`.
 
@@ -60,7 +60,7 @@ Billing: [Billing guide](https://docs.hippius.com/use/console/billing)
 - A 12-word access key creates a wallet-only account. It has no real email address, so it gets no lifecycle mail. Drive has no free plan: subscribe before the first upload. S3 and Hub work the same as on any other account.
 - S3 endpoint is https://s3.hippius.com only. Keys (the access key id starts with `hip_`) are created with `hip s3 tokens create --kind master --reveal --yes`, or on the console S3 page: https://docs.hippius.com/use/console/s3. `hip s3 configure` writes an AWS CLI profile from one.
 - The API token for Hub, the account API, and `hip` is on console Settings: https://console.hippius.com/dashboard/settings
-- Hub has a second credential, the registry robot login, created when the namespace is provisioned (`hip hub namespace provision --reveal --yes`, or `hippius-hub`).
+- Hub has a second credential, the registry robot login, created when the namespace is provisioned (`hip hub namespace provision <namespace> --reveal --yes`, or `hippius-hub`).
 - Drive encryption uses an unlock password and a 12-word recovery seed. Never ask the user to paste either into chat.
 - 1 USDC adds one dollar to your balance. Topping up fills the balance. It does not add storage. Subscribe to a plan for that. https://docs.hippius.com/use/console/billing
 - Top up on Billing in one of five ways. Card, through Stripe, from $10 to $10,000, or a monthly auto reload (`hip billing top-up --amount 10 --method card --yes` prints the checkout URL; `hip billing auto-reload update`). Bitcoin, on-chain or Lightning, from $20 to $100,000. Lightning lands in seconds; on-chain after one confirmation. USDC on Base from a browser wallet, from $5 to $10,000; 1 USDC adds one dollar to your balance. TAO, from a connected wallet or by sending to the TAO deposit address (Manually tab), at least $20 per transfer; never send TAO to the Hippius account address, which is not credited. A transfer cannot be reversed. hAlpha (Hippius native token), on the Hippius tab: credits = hAlpha × the on-chain hAlpha price, 1% slippage protection by default, final on chain with no refund. https://docs.hippius.com/use/console/billing
@@ -107,7 +107,7 @@ Prices per 730-hour month, on the default NVMe OS disk: vCPU $18, memory $2.50/G
 - Compute prices, management fees, quotas and unpaid balance: https://docs.hippius.com/use/compute/billing
 - Refusals and troubleshooting: https://docs.hippius.com/use/compute/troubleshooting
 
-The Kubernetes cluster key is generated in the user's browser, and database credentials are returned once at creation (`hip compute databases create --reveal --yes` writes them to files only the user can read); never ask the user to paste either into chat.
+The Kubernetes cluster key is generated in the user's browser, and database credentials are returned once at creation: `hip compute databases create --tier starter --size s --engine-version 17 --reveal --yes` prints the password, the backup passphrase, and the TLS files on stdout, in that one answer, and the server keeps no copy; with `--credentials-dir <dir>` the three TLS files go to new 0600 files there instead, while the password and passphrase still print. Save the answer at once (for example with `--json` to a private file); never ask the user to paste either secret into chat.
 
 ## Documentation
 

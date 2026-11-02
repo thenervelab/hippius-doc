@@ -26,9 +26,9 @@ hip schema | jq '.commands[] | select(.path == ["s3", "buckets", "create"])'
 hip schema | jq '.errors'
 ```
 
-## The groups
+## The groups, in short
 
-From `hip --help`:
+One line per top-level command; `hip --help` has the binary's own words.
 
 | Command | What it holds |
 | --- | --- |

@@ -7,7 +7,7 @@ description: The hip playbook for coding agents, written to be pasted into an ag
 ---
 
 :::info Source
-This page mirrors [docs/agents.md](https://github.com/thenervelab/hippius-cli/blob/main/docs/agents.md) in the hip repository, which is the version tests hold to the binary. When the two differ, that file wins. The raw file, for pasting into a context, is https://raw.githubusercontent.com/thenervelab/hippius-cli/main/docs/agents.md.
+This page is [docs/agents.md](https://github.com/thenervelab/hippius-cli/blob/main/docs/agents.md) of the hip repository, which tests hold to the binary, with its relative links rewritten to point at this site and at the repository; `scripts/sync_hip_agents.py` regenerates it and a check fails when the two drift. When they differ, that file wins. The raw file, for pasting into a context, is https://raw.githubusercontent.com/thenervelab/hippius-cli/main/docs/agents.md.
 :::
 
 This page is written to be pasted into an agent's context. It says how to learn `hip`, how to read what it prints, what it asks for before a write, and what it refuses. The contract behind it is [TENETS.md](https://github.com/thenervelab/hippius-cli/blob/main/TENETS.md); the machine-readable half of that contract is `hip schema`, which every rule below points back to.
@@ -85,7 +85,7 @@ A command that spends money, deletes, revokes, rotates, cancels, or opens a supp
 Some writes need a second flag that names their risk. `--yes` does not imply it, and it does not imply `--yes`:
 
 - `--reveal`: the answer holds a secret.
-- `--remove-others`: a list replace (firewall rules, CDN cache and WAF rules, a WAF list's items, a member's grants) would drop an entry that exists now.
+- `--remove-others`: a list replace (firewall rules, CDN cache rules, WAF rules and rate limits, a WAF list's items, a member's grants) would drop an entry that exists now.
 - `--public`: a CDN zone may publish a private bucket.
 - `--replace`: a Hub subscribe while a paid plan is active.
 
@@ -117,7 +117,7 @@ One token can act in the user's own account and in any shared account they are a
 
 ## Secrets
 
-A command whose answer holds a secret needs `--reveal`: creating or rotating an S3 token or a Hub key, provisioning a Hub namespace, creating or restoring a database, reading Kubernetes backups, presigning an S3 URL. The secret is printed once, on stdout, in the resource; a later `get` shows a preview and `secret: null`, and the recovery is a rotate. Write it where the user asked and nowhere else. `--debug` redacts headers, tokens, and query values, so its lines are safe to show.
+A command whose answer holds a secret needs `--reveal`: creating or rotating an S3 token or a Hub key, provisioning a Hub namespace, creating or restoring a database, reading Kubernetes backups, presigning an S3 URL. The secret is printed once, on stdout, in the resource; a later `get` shows a preview and `secret: null`, and the recovery is a rotate. Write it where the user asked and nowhere else. `--debug` prints only each request's method, its URL with the query values redacted, and its status, never a header or a body, so its lines are safe to show.
 
 ## Idempotency
 
@@ -173,7 +173,7 @@ hip api GET /compute/vms/ --all
 hip api POST /cdn/zones/ --body-file zone.json --yes
 ```
 
-A method other than `GET` or `HEAD` needs `--yes`, a route whose answer holds a secret needs `--reveal`, and `--dry-run` works as everywhere. Four things are never sent, whatever the flags: an account deletion request, a read of a Kubernetes cluster's sealed secrets, a CDN hostname's DNS setup, and anything to another origin. `hip api --help` and `refused_when` on `api` in `hip schema` list them.
+A method other than `GET` or `HEAD` needs `--yes`, and so does `GET` or `HEAD` of `/network/me/`, whose first call creates the account's network; a route whose answer holds a secret needs `--reveal`; `--dry-run` works as everywhere. Three requests are never sent, whatever the flags: an account deletion request, a read of a Kubernetes cluster's sealed secrets, and a CDN hostname's DNS setup. A full URL on another origin is sent, but without the token and the account header. `hip api --help`, and `refused_when` and `confirmation_when` on `api` in `hip schema`, say all of this.
 
 ## Where to read next
 

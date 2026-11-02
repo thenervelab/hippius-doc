@@ -16,4 +16,4 @@ What replaces them:
 - **File storage**: any S3 client against `https://s3.hippius.com`. Start with the [S3 quickstart](/use/quickstart).
 - **Models and container images**: [`hippius-hub`](/registry/cli), with docker and oras.
 - **Chain registration for a miner or a validator**: still the Python package `hippius`, as [Registering in the Hippius blockchain](/earn/register-in-blockchain) describes. From 1.0.0 that PyPI name ships `hip`; pin `hippius==0.2.77` for the registration tool.
-- **Miner operations**: the [miner guide](/earn/arion/running-miner) and `miner-cli` from the [arion](https://github.com/thenervelab/arion) repository.
+- **Miner operations**: the [miner guide](/earn/arion/running-miner) and the `miner` binary from the [arion](https://github.com/thenervelab/arion) repository.

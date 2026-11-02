@@ -85,7 +85,7 @@ hip hub artifacts list <repository>
 hip hub keys list
 hip hub subscription subscribe --plan Builder --dry-run
 hip hub keys create --name ci-pull --role read --expires-in 30 --reveal --yes > ~/hub-key.json
-docker login registry.hippius.com -u <login> --password-stdin < <(jq -r .secret ~/hub-key.json)
+jq -r .secret ~/hub-key.json | docker login registry.hippius.com -u <login> --password-stdin
 hip hub keys delete <key_id> --yes
 ```
 
