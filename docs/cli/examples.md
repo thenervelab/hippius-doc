@@ -6,9 +6,9 @@ slug: /cli/examples
 description: Twelve hipc journeys as copyable snippets, from the first login to an agent loop. Account and billing, Drive, S3 with an AWS profile, Hub with a CI key, compute with an SSH key, CDN, the private network and Kubernetes, the team, support, automation, and token hygiene.
 ---
 
-Each block is one journey, in the order a person or a program runs it. Reads change nothing. A write is shown with `--dry-run` first, which prints the requests it would send and sends nothing; run it again with `--yes` to do it. Replace `<...>` with an id or a name from an earlier answer.
+Each block is one journey, in order. Reads change nothing. A write is shown with `--dry-run` first (sends nothing); run it again with `--yes` to do it. Replace `<...>` with an id or name from an earlier answer.
 
-These are the scenarios of [docs/user-journeys.md](https://github.com/thenervelab/hippius-cli/blob/main/docs/user-journeys.md) in the repository, which a maintainer runs against the live API before each release.
+They come from [docs/user-journeys.md](https://github.com/thenervelab/hippius-cli/blob/main/docs/user-journeys.md), run against the live API before each release.
 
 ## 1. First run and login
 
@@ -162,7 +162,7 @@ hipc support tickets create --subject 'VM will not start' --body-file ~/ticket.t
 
 ## 11. Agent and automation
 
-A program learns `hipc` from its schema, reads JSON, and branches on error codes. [hipc for agents](/cli/agents) is the full playbook.
+A program learns `hipc` from its schema, reads JSON, and branches on error codes. Full playbook: [For agents](/cli/agents).
 
 ```bash
 hipc schema | jq -r '.commands[] | select(.effect != "read_only") | .path | join(" ")'
