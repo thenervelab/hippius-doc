@@ -22,7 +22,7 @@ When a person and a program want different things, the program wins: on a pipe, 
 <Tabs groupId="install">
 <TabItem value="curl" label="curl">
 
-The install script downloads the release for your machine into `~/.local/bin` (or `$HIP_INSTALL_DIR`), with no root. It checks the tarball against the release's `SHA256SUMS`, and the Sigstore signature of `SHA256SUMS` when `cosign` is on `PATH`.
+The install script downloads the release for your machine into `~/.local/bin` (or `$HIP_INSTALL_DIR`), with no root. It checks the tarball against the release's `SHA256SUMS`, and the Sigstore signature of `SHA256SUMS` when `cosign` is on `PATH`; with `HIP_INSTALL_REQUIRE_SIGNATURE=1` it fails instead when `cosign` is absent. To uninstall, remove `$HIP_INSTALL_DIR/hip` (by default `~/.local/bin/hip`); `hip` keeps its config in `~/.hippius`.
 
 ```bash
 curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh
@@ -31,10 +31,10 @@ curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/i
 </TabItem>
 <TabItem value="brew" label="Homebrew">
 
-On macOS and Linux:
+On macOS and Linux. The formula is `hippius`; the command it installs is `hip`.
 
 ```bash
-brew install thenervelab/tap/hip
+brew install thenervelab/tap/hippius
 ```
 
 </TabItem>

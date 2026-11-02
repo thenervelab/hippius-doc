@@ -143,7 +143,7 @@ An agent cannot create the account or approve a browser login. The user does tha
 `hip` is written for coding agents and for people: on a pipe, or with `CI` or `AI_AGENT=1`, it prints JSON, a failure is one JSON object on stderr, nothing prompts, and nothing pages. Playbook: https://docs.hippius.com/cli/agents (raw: https://raw.githubusercontent.com/thenervelab/hippius-cli/main/docs/agents.md). Source and contract: https://github.com/thenervelab/hippius-cli
 
 ```bash
-curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh   # or: brew install thenervelab/tap/hip
+curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh   # or: brew install thenervelab/tap/hippius (the formula hippius installs the command hip)
 hip auth login --token-file -        # paste the user's API token, press Enter, then Ctrl-D; never in argv
 hip auth status
 hip schema                           # every command, its effect, flags, confirmation, guards, and every error code; JSON, no network
