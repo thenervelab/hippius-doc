@@ -93,7 +93,11 @@ TAO transfers are final. TAO sent to anyone else's address can't be recovered.
 
 If you hold hAlpha, the Hippius network's token, choose the <BgStyledText>Hippius</BgStyledText> tab to convert it into balance. The conversion happens on the Hippius chain, at the chain's hAlpha price: you get the amount of hAlpha times that price, in dollars.
 
-The tab shows the live price (**Price**, in dollars per hAlpha), what you receive (**You receive**), and the smallest amount you can convert (**Min**). The price is read again every few seconds while the tab is open. You can get hAlpha from Alpha on Bittensor with the [bridge](/use/console/bridge).
+The tab shows the live price (**Price**, in dollars per hAlpha), how long ago that price was set on chain (**Price set on chain**), what you receive (**You receive**), and the smallest amount you can convert (**Min**). The price is read again every few seconds while the tab is open. You can get hAlpha from Alpha on Bittensor with the [bridge](/use/console/bridge).
+
+:::danger Send hAlpha on the Hippius network only
+Your Hippius account address also works on Bittensor, because both networks use the same address format. Alpha or TAO sent to it on Bittensor stays on Bittensor and never reaches your balance. Bridge Alpha to hAlpha first. [Fund Your Account with Alpha](/use/console/fund-with-alpha) covers the whole route.
+:::
 
 How you convert depends on how you sign in.
 
@@ -105,6 +109,8 @@ How you convert depends on how you sign in.
 </Ordered>
 
 **With an access key or a wallet.** You hold your own key, so you sign the purchase yourself. Under **Sign with**, pick this session (your 12-word access key) or the wallet extension account that is your Hippius account, enter the amount and click <BgStyledText>Sign and buy</BgStyledText>. With a wallet extension, your wallet asks you to confirm one transaction.
+
+Once you enter an amount, **Transaction details** (collapsed) lists the exact amounts sent for the conversion, in the chain's base units, for anyone who wants to check or script it.
 
 Either way, the conversion is protected against price moves. **Slippage tolerance** is 1% by default; you can choose 0.5%, 1% or 3%. **At least** is the smallest amount you accept. If the price moves past it before the purchase lands, the conversion is refused and your hAlpha isn't converted. If the chain refused it, the network fee is still charged.
 
