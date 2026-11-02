@@ -37,7 +37,7 @@ TASKS = [
         "prompt": "I have never used Hippius. Show me how to upload one file with the AWS CLI. Start at the URL I give you. Only open links you have seen.",
         "must_fetch": ["hippius-s3"],
         "must_say": ["s3.hippius.com", "hip_"],
-        "must_not": ["eu-central-1", "us-east-1.hippius.com", "hipc storage upload", "hipc storage pin"],
+        "must_not": ["eu-central-1", "us-east-1.hippius.com", "hipc storage pin", "hipc storage unpin"],
     },
     {
         "id": "hub",
@@ -51,7 +51,7 @@ TASKS = [
         "prompt": "Help me install the Hippius desktop app and sign in. Start at the URL I give you. Only open links you have seen.",
         "must_fetch": ["hippius-desktop"],
         "must_say": ["desktop"],
-        "must_not": ["send me your seed", "send me the recovery", "hipc storage upload", "hipc storage pin"],
+        "must_not": ["send me your seed", "send me the recovery", "hipc storage pin", "hipc storage unpin"],
     },
     {
         "id": "console",
@@ -65,7 +65,7 @@ TASKS = [
         "prompt": "How do I get Hippius on my phone? Start at the URL I give you. Only open links you have seen.",
         "must_fetch": ["docs.hippius.com/use/mobile/getting-started"],
         "must_say": ["Play"],
-        "must_not": ["hipc storage upload", "hipc storage pin"],
+        "must_not": ["hipc storage pin", "hipc storage unpin"],
     },
     {
         "id": "miner",
@@ -73,7 +73,7 @@ TASKS = [
         "must_fetch": ["running-miner", "arion"],
         "must_fetch_mode": "any",
         "must_say": ["arion"],
-        "must_not": ["hipc storage upload", "hipc storage pin"],
+        "must_not": ["hipc storage pin", "hipc storage unpin"],
     },
 ]
 
