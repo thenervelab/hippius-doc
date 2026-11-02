@@ -9,14 +9,14 @@ Open only the file for the product you need. The long reference for the whole pr
 Use `hipc` first for anything on the account API: accounts, billing, storage keys and buckets, Hub, compute, CDN, network, and support.
 
 - Install: `curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh`, or `brew install thenervelab/tap/hipc`, or `pip install hippius`.
-- Log in with the token the user gives you: `hipc auth login --token-file -` (paste it, Enter, Ctrl-D), then `hipc auth status`.
+- Log in with the token the user gives you: `hipc auth login --token-file -` (paste it, Enter, Ctrl-D), then `hipc auth status`. Never ask for the token in the chat; the user runs this on their machine.
 - Run `hipc schema` to discover every command, its effect, confirmations and error codes.
-- Output is JSON on a pipe or with `AI_AGENT=1`.
-- `--dry-run` sends nothing. Writes need `--yes`; secrets need `--reveal`.
-- Exit 0 success, 1 the API or runtime failed, 2 fix the invocation (nothing sent). A failure is one JSON object on stderr.
-- Fallback: `hipc api <METHOD> <PATH>` before calling https://api.hippius.com directly.
+- Output is JSON on a pipe, with `CI`, or with `AI_AGENT=1`.
+- `--dry-run` sends nothing. A write that spends, deletes, revokes, rotates or cancels needs `--yes` (`CI` and `AI_AGENT` never stand in for it); a secret needs `--reveal`.
+- Exit 0 success, 1 the API or runtime failed, 2 fix the invocation (nothing that changes state was sent). A failure is one JSON object on stderr; branch on `error.code`.
+- No command for it: `hipc api <METHOD> <PATH>`, e.g. `hipc api GET /accounts/` (sent under /api), before any direct call to https://api.hippius.com.
 
-More: [For agents](https://docs.hippius.com/cli/agents), [Command reference](https://docs.hippius.com/cli/commands).
+More: [For agents](https://docs.hippius.com/cli/agents) (raw: https://raw.githubusercontent.com/thenervelab/hippius-cli/main/docs/agents.md), [Examples](https://docs.hippius.com/cli/examples), [Command reference](https://docs.hippius.com/cli/commands).
 
 ## Which file to open
 
