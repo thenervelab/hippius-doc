@@ -10,10 +10,11 @@ name: llms
 # hippius-validator has no agent file. The index points at the
 # installing-validator guide.
 # Deprecated tools are named in static/llms.txt and have no llms.txt:
-#   hipc (the IPFS-era CLI the hippius-cli repository held before hip), the
-#   hipc Homebrew formula, hippius-storage-miner, the hippius SDKs (Python,
-#   TypeScript, Rust), hippius-sync-engine, and other IPFS-era tools. The
-#   hippius-cli repository now holds hip; its agent file is docs/agents.md.
+#   the IPFS-era CLI the hippius-cli repository held before (its commands,
+#   such as `hipc storage`, are gone; the name hipc now belongs to the new
+#   CLI), hippius-storage-miner, the hippius SDKs (Python, TypeScript, Rust),
+#   hippius-sync-engine, and other IPFS-era tools. The hippius-cli repository
+#   now holds hipc; its agent file is docs/agents.md.
 # Hippius VMs are listed under Coming soon. hippius-cvm is not client-facing
 # and is not in the index.
 # The agent eval and the live smoke also wait for that, and they no-op with a
@@ -55,13 +56,13 @@ jobs:
       - name: Check links (strict once the leaves are merged)
         if: github.event_name != 'pull_request'
         run: python scripts/llms_check.py --mode strict
-      # docs/cli/agents.md mirrors docs/agents.md of the hip repository; the check fails
-      # when the page differs from the regenerated one. Lenient warns while the hip content
+      # docs/cli/agents.md mirrors docs/agents.md of the CLI repository; the check fails
+      # when the page differs from the regenerated one. Lenient warns while the hipc content
       # has not landed (the latest release's install.sh answers 404), strict fails.
-      - name: Check the hip agents page is in sync (lenient on pull requests)
+      - name: Check the hipc agents page is in sync (lenient on pull requests)
         if: github.event_name == 'pull_request'
         run: python scripts/sync_hip_agents.py --check --mode lenient
-      - name: Check the hip agents page is in sync (strict)
+      - name: Check the hipc agents page is in sync (strict)
         if: github.event_name != 'pull_request'
         run: python scripts/sync_hip_agents.py --check --mode strict
 

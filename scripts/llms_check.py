@@ -20,8 +20,8 @@ URL_RE = re.compile(r"https://[^\s)>\]]+")
 
 ROOT_FACTS = (
     "(https://docs.hippius.com/cli)",
-    "hip auth login --token-file -",
-    "hip schema",
+    "hipc auth login --token-file -",
+    "hipc schema",
     "https://s3.hippius.com",
     "hip_",
     "balance of at least $10",
@@ -102,7 +102,7 @@ def host_of(url: str) -> str:
 DOCS = ROOT.parents[1] / "docs"
 SITE = "https://docs.hippius.com"
 
-# The hip repository (thenervelab/hippius-cli) exists, but its hip content, releases, and
+# The CLI repository (thenervelab/hippius-cli) exists, but its hipc content, releases, and
 # docs land with the public flip; until then those URLs answer 404. Lenient mode warns on
 # them while the flip is pending, which it reads from the latest release's install.sh
 # answering 404 (the releases page itself answers 200 with no release), so the leniency
@@ -112,11 +112,11 @@ HIP_REPO_URLS = (
     "https://github.com/thenervelab/hippius-cli",
     "https://raw.githubusercontent.com/thenervelab/hippius-cli/",
 )
-HIP_INSTALL_URL = "https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh"
+HIPC_INSTALL_URL = "https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh"
 
 
 def hip_flip_pending() -> bool:
-    code, _, _ = curl(HIP_INSTALL_URL)
+    code, _, _ = curl(HIPC_INSTALL_URL)
     return code == 404
 
 
@@ -184,7 +184,7 @@ def main() -> None:
             elif code == 404 and mode == "lenient" and page_in_tree(url):
                 warnings.append(message + " (page in this checkout, not deployed yet)")
             elif code == 404 and flip_pending and url.startswith(HIP_REPO_URLS):
-                warnings.append(message + " (hip content lands with the public flip)")
+                warnings.append(message + " (hipc content lands with the public flip)")
             else:
                 failures.append(message)
             continue

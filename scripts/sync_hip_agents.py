@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Keep docs/cli/agents.md equal to docs/agents.md of the hip repository.
+"""Keep docs/cli/agents.md equal to docs/agents.md of the CLI repository.
 
-The hip repository's docs/agents.md is the source: tests there run every command it shows
+The CLI repository's docs/agents.md is the source: tests there run every command it shows
 against the binary. This page is that file with five links rewritten for the site (TENETS,
 the command reference, the user journeys) and a front matter plus an admonition prepended.
 
@@ -9,10 +9,14 @@ the command reference, the user journeys) and a front matter plus an admonition 
     python3 scripts/sync_hip_agents.py --check --mode lenient  # pull requests
     python3 scripts/sync_hip_agents.py --check --mode strict   # the Monday run
 
---check exits 1 when the page differs from the regenerated one. While the hip repository's
+--check exits 1 when the page differs from the regenerated one. While the CLI repository's
 content has not landed (the latest release's install.sh answers 404), lenient mode prints a
 warning and exits 0, because the source cannot be fetched yet; strict mode fails. That
 leniency expires by itself with the first public release.
+
+The binary was renamed from hip to hipc. This page was renamed by hand ahead of the CLI
+repository's own rename; a --write before that rename lands would bring the old name back,
+and a strict --check fails until it lands.
 """
 
 import sys
@@ -27,14 +31,14 @@ INSTALL_URL = "https://github.com/thenervelab/hippius-cli/releases/latest/downlo
 
 HEAD = f"""---
 id: agents
-title: hip for agents
+title: hipc for agents
 sidebar_label: For agents
 slug: /cli/agents
-description: The hip playbook for coding agents, written to be pasted into an agent's context. Discovery with hip schema, the JSON output and error contract, exit codes, confirmations and guards, dry runs, pagination, selectors, secrets, idempotency, a worked loop, and when to use hip api.
+description: The hipc playbook for coding agents, written to be pasted into an agent's context. Discovery with hipc schema, the JSON output and error contract, exit codes, confirmations and guards, dry runs, pagination, selectors, secrets, idempotency, a worked loop, and when to use hipc api.
 ---
 
 :::info Source
-This page is [docs/agents.md]({REPO}/docs/agents.md) of the hip repository, which tests hold to the binary, with its relative links rewritten to point at this site and at the repository; `scripts/sync_hip_agents.py` regenerates it and a check fails when the two drift. When they differ, that file wins. The raw file, for pasting into a context, is {RAW}.
+This page is [docs/agents.md]({REPO}/docs/agents.md) of the CLI repository, which tests hold to the binary, with its relative links rewritten to point at this site and at the repository; `scripts/sync_hip_agents.py` regenerates it and a check fails when the two drift. When they differ, that file wins. The raw file, for pasting into a context, is {RAW}.
 :::
 
 """
@@ -50,7 +54,7 @@ def fetch(url: str) -> tuple[int, str]:
 
 
 def render(source: str) -> str:
-    body = source.replace("# hip for agents\n\n", "", 1)
+    body = source.replace("# hipc for agents\n\n", "", 1)
     body = body.replace("(../TENETS.md#", f"({REPO}/TENETS.md#")
     body = body.replace("(../TENETS.md)", f"({REPO}/TENETS.md)")
     body = body.replace("[commands.md](commands.md)", "[Command reference](/cli/commands)")
@@ -73,7 +77,7 @@ def main() -> None:
         pending = mode == "lenient" and fetch(INSTALL_URL)[0] == 404
         message = f"{code} {RAW}"
         if pending:
-            print(f"WARNING {message} (hip content lands with the public flip)")
+            print(f"WARNING {message} (hipc content lands with the public flip)")
             return
         raise SystemExit(f"FAIL {message}")
 
@@ -84,7 +88,7 @@ def main() -> None:
         return
     if PAGE.read_text() != page:
         raise SystemExit(
-            "FAIL docs/cli/agents.md differs from the hip repository's docs/agents.md: "
+            "FAIL docs/cli/agents.md differs from the CLI repository's docs/agents.md: "
             "run `python3 scripts/sync_hip_agents.py --write`"
         )
     print("agents page in sync")

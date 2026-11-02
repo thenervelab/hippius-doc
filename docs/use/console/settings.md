@@ -34,7 +34,7 @@ Authorization: Token <your-token>
 
 See [Hippius API](/use/api) for available endpoints.
 
-From a terminal, or for a coding agent, install [hip](/cli) and store the token once with `hip auth login --token-file -`: paste it, press Enter, then Ctrl-D. `hip auth status` confirms it, and every `hip` command then carries it for you.
+From a terminal, or for a coding agent, install [hipc](/cli) and store the token once with `hipc auth login --token-file -`: paste it, press Enter, then Ctrl-D. `hipc auth status` confirms it, and every `hipc` command then carries it for you.
 
 :::warning Keep this token private
 Anyone with this token has full access to your account. Never paste it into public documents, repositories, screenshots, or chat messages. If you believe it has been compromised, contact our support team immediately.

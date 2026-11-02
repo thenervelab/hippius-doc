@@ -10,7 +10,7 @@ The commands an agent can run are in Tools an agent can run. S3 is written out i
 
 - [S3 documentation map](#s3-documentation-map)
 - [What is Hippius?](#what-is-hippius)
-- [Tools an agent can run](#tools-an-agent-can-run), starting with `hip`, the command line
+- [Tools an agent can run](#tools-an-agent-can-run), starting with `hipc`, the command line
 - [S3 Storage — Quickstart](#s3-storage--quickstart)
 - [S3 Storage — Advanced Usage](#s3-storage--advanced-usage)
 - [S3 Storage — Python](#s3-storage--python)
@@ -70,11 +70,11 @@ Hippius is a distributed cloud. Store encrypted files, serve objects over S3, an
 | Hub | Models and container images. Command: `hippius-hub`. Creating a namespace needs a balance of at least $10, a spam check. The plan price stays zero. | https://docs.hippius.com/registry |
 | Desktop | Sync folders on macOS, Windows, and Linux. There is no CLI. The agent file is on the staging branch. | https://raw.githubusercontent.com/thenervelab/hippius-desktop/staging/llms.txt |
 | Mobile | Drive on Android, on Google Play. The iPhone app is not released. There is no CLI. | https://docs.hippius.com/use/mobile/getting-started |
-| Console | Sign up, pay, API token, Drive and S3 keys. Command: `hip`, the Hippius command line, drives everything the console manages with the account token; install and log in as in Tools an agent can run. | https://docs.hippius.com/cli |
+| Console | Sign up, pay, API token, Drive and S3 keys. Command: `hipc`, the Hippius command line, drives everything the console manages with the account token; install and log in as in Tools an agent can run. | https://docs.hippius.com/cli |
 | Drive SDK | Script Drive with encryption on the client. Command: `hippius-drive`. Install from git, not PyPI. | https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt |
 | Bridge | No CLI. The user signs each step in a browser wallet. Alpha and hAlpha are pegged 1:1. Minimum 15. | https://docs.hippius.com/use/console/bridge |
-| Compute | Confidential VMs, managed PostgreSQL, managed Kubernetes and GitHub Actions runners, in the console and with `hip compute`. Open to every account, billed hourly from the balance. | https://docs.hippius.com/use/compute |
-| Shared accounts | An owner invites members by email with Viewer, Operator or Admin access per product (VMs, databases, Kubernetes, runners, S3, CDN). The owner pays. Drive is not included. `hip account list` and `hip account use <account_id>`; API header `X-Hippius-Account`. | https://docs.hippius.com/use/console/team |
+| Compute | Confidential VMs, managed PostgreSQL, managed Kubernetes and GitHub Actions runners, in the console and with `hipc compute`. Open to every account, billed hourly from the balance. | https://docs.hippius.com/use/compute |
+| Shared accounts | An owner invites members by email with Viewer, Operator or Admin access per product (VMs, databases, Kubernetes, runners, S3, CDN). The owner pays. Drive is not included. `hipc account list` and `hipc account use <account_id>`; API header `X-Hippius-Account`. | https://docs.hippius.com/use/console/team |
 
 ### Authentication
 
@@ -134,29 +134,29 @@ Open a support ticket with the account API token: POST https://api.hippius.com/a
 
 ## Tools an agent can run
 
-Start with `hip`, the Hippius command line: it covers the account, billing and plans, S3 buckets and keys, Hub, compute, Kubernetes, databases, runners, CDN, the private network, and support, with one token and one error shape. S3 bytes use any S3 client, and that manual starts at S3 Storage — Quickstart; Hub blobs use `hippius-hub`. `hipc` and the storage commands in `pip install hippius` (up to 0.2.77) are deprecated. Do not use them. Chain registration still uses that `hippius` version.
+Start with `hipc`, the Hippius command line: it covers the account, billing and plans, S3 buckets and keys, Hub, compute, Kubernetes, databases, runners, CDN, the private network, and support, with one token and one error shape. S3 bytes use any S3 client, and that manual starts at S3 Storage — Quickstart; Hub blobs use `hippius-hub`. `hipc` and the storage commands in `pip install hippius` (up to 0.2.77) are deprecated. Do not use them. Chain registration still uses that `hippius` version.
 
 An agent cannot create the account or approve a browser login. The user does that at https://console.hippius.com. The API token is on https://console.hippius.com/dashboard/settings
 
-### hip
+### hipc
 
-`hip` is written for coding agents and for people: on a pipe, or with `CI` or `AI_AGENT=1`, it prints JSON, a failure is one JSON object on stderr, nothing prompts, and nothing pages. Playbook: https://docs.hippius.com/cli/agents (raw: https://raw.githubusercontent.com/thenervelab/hippius-cli/main/docs/agents.md). Source and contract: https://github.com/thenervelab/hippius-cli
+`hipc` is written for coding agents and for people: on a pipe, or with `CI` or `AI_AGENT=1`, it prints JSON, a failure is one JSON object on stderr, nothing prompts, and nothing pages. Playbook: https://docs.hippius.com/cli/agents (raw: https://raw.githubusercontent.com/thenervelab/hippius-cli/main/docs/agents.md). Source and contract: https://github.com/thenervelab/hippius-cli
 
 ```bash
-curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh   # or: brew install thenervelab/tap/hippius (the formula hippius installs the command hip)
-hip auth login --token-file -        # paste the user's API token, press Enter, then Ctrl-D; never in argv
-hip auth status
-hip schema                           # every command, its effect, flags, confirmation, guards, and every error code; JSON, no network
-hip account get
-hip billing balance
-hip s3 buckets create photos --dry-run     # the requests a real run would send; sends nothing
-hip s3 buckets create photos --yes         # a write that spends, deletes, revokes, rotates, or cancels needs --yes
-hip s3 tokens create --kind master --reveal --yes   # an answer that holds a secret needs --reveal; printed once
-hip compute vms list --json
-hip api GET /accounts/               # any endpoint hip has no command for, same token and rules
+curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh   # or: brew install thenervelab/tap/hipc (the formula hippius installs the command hipc)
+hipc auth login --token-file -        # paste the user's API token, press Enter, then Ctrl-D; never in argv
+hipc auth status
+hipc schema                           # every command, its effect, flags, confirmation, guards, and every error code; JSON, no network
+hipc account get
+hipc billing balance
+hipc s3 buckets create photos --dry-run     # the requests a real run would send; sends nothing
+hipc s3 buckets create photos --yes         # a write that spends, deletes, revokes, rotates, or cancels needs --yes
+hipc s3 tokens create --kind master --reveal --yes   # an answer that holds a secret needs --reveal; printed once
+hipc compute vms list --json
+hipc api GET /accounts/               # any endpoint hipc has no command for, same token and rules
 ```
 
-Exit 0 is success (a dry run included), 1 the API or the runtime failed, 2 the invocation must change and nothing was sent. The error object is `{"error":{"code":...,"message":...,"hint":...,"retryable":...,"side_effects":...}}`; branch on `code`. A list is `{"items":[...],"next_page_token":null}`; `--all` follows every page. `CI` and `AI_AGENT` never confirm or reveal on their own. One token can act in a shared account: `hip account list`, then `hip account use <account_id>` or `--account <account_id>`.
+Exit 0 is success (a dry run included), 1 the API or the runtime failed, 2 the invocation must change and nothing was sent. The error object is `{"error":{"code":...,"message":...,"hint":...,"retryable":...,"side_effects":...}}`; branch on `code`. A list is `{"items":[...],"next_page_token":null}`; `--all` follows every page. `CI` and `AI_AGENT` never confirm or reveal on their own. One token can act in a shared account: `hipc account list`, then `hipc account use <account_id>` or `--account <account_id>`.
 
 ### Hub
 
@@ -203,20 +203,20 @@ A token and an address that do not belong together fail `whoami` with 403. Leave
 
 ### Console
 
-The console CLI is `hip` (above). Sign-in, plan checkout in the browser, and anything that needs a wallet signature stay in https://console.hippius.com. After the user copies the API token and stores it with `hip auth login --token-file -`, the account is a shell away:
+The console CLI is `hipc` (above). Sign-in, plan checkout in the browser, and anything that needs a wallet signature stay in https://console.hippius.com. After the user copies the API token and stores it with `hipc auth login --token-file -`, the account is a shell away:
 
 ```bash
-hip billing balance
-hip hub namespace get
-hip drive plans
-hip s3 plans
-hip hub plans
-hip s3 tokens create --kind master --reveal --yes
-hip s3 tokens rotate --kind master <token_id> --reveal --yes
-hip s3 tokens revoke --kind master <token_id> --yes
+hipc billing balance
+hipc hub namespace get
+hipc drive plans
+hipc s3 plans
+hipc hub plans
+hipc s3 tokens create --kind master --reveal --yes
+hipc s3 tokens rotate --kind master <token_id> --reveal --yes
+hipc s3 tokens revoke --kind master <token_id> --yes
 ```
 
-The plan lists answer without a token. Only if hip does not cover a route: `hip api GET /billing/latest-tao-price/`, or `curl -sS -H "Authorization: Token $HIPPIUS_TOKEN" https://api.hippius.com/api/...`. The OpenAPI spec is https://api.hippius.com/openapi.json
+The plan lists answer without a token. Only if hipc does not cover a route: `hipc api GET /billing/latest-tao-price/`, or `curl -sS -H "Authorization: Token $HIPPIUS_TOKEN" https://api.hippius.com/api/...`. The OpenAPI spec is https://api.hippius.com/openapi.json
 
 ### Desktop
 
@@ -242,7 +242,7 @@ Alpha to hAlpha needs 3 signatures, or 4 when the Alpha must first be moved onto
 
 ### Compute
 
-Compute is open to every account, in the console under Confidential Computing and from the terminal with `hip compute`: `hip compute flavors`, `hip compute quota`, `hip compute ssh-keys create --name laptop --public-key-file ~/.ssh/id_ed25519.pub --yes`, `hip compute vms create --flavor small --name web-1 --ssh-key-id <key_id> --yes`, `hip compute vms get <vm_id>`, `hip compute public-ip create <vm_id> --yes`, `hip compute firewall update`, and the `databases`, `kubernetes`, and `runners` groups. Run a write with `--dry-run` first. Guide: https://docs.hippius.com/use/compute
+Compute is open to every account, in the console under Confidential Computing and from the terminal with `hipc compute`: `hipc compute flavors`, `hipc compute quota`, `hipc compute ssh-keys create --name laptop --public-key-file ~/.ssh/id_ed25519.pub --yes`, `hipc compute vms create --flavor small --name web-1 --ssh-key-id <key_id> --yes`, `hipc compute vms get <vm_id>`, `hipc compute public-ip create <vm_id> --yes`, `hipc compute firewall update`, and the `databases`, `kubernetes`, and `runners` groups. Run a write with `--dry-run` first. Guide: https://docs.hippius.com/use/compute
 
 Billing: metered per second (one-minute minimum per VM and public IPv4), charged hourly on the Hippius chain from the balance. A VM is billed running or stopped until it is deleted. A launch needs a balance covering 24 hours of the account's compute plus the launch. Quotas apply: new accounts start on the Starter tier (3 VMs, 8 vCPU) and move up automatically with their charged usage.
 
@@ -657,7 +657,7 @@ Token types:
 
 ## Management API
 
-Prefer `hip` (Tools an agent can run): every route below has a command or goes through `hip api <METHOD> <PATH>` with the same token, account header, confirmations, and error object. The raw routes are for a client that cannot run a binary.
+Prefer `hipc` (Tools an agent can run): every route below has a command or goes through `hipc api <METHOD> <PATH>` with the same token, account header, confirmations, and error object. The raw routes are for a client that cannot run a binary.
 
 Docs: https://docs.hippius.com/use/api
 Full OpenAPI spec: https://api.hippius.com/openapi.json
@@ -725,7 +725,7 @@ Sign `message` verbatim: signature = EIP-191 personal_sign by the Ethereum key (
 - Website: https://hippius.com
 - Console: https://console.hippius.com
 - Documentation: https://docs.hippius.com
-- hip, the command line: https://docs.hippius.com/cli (for agents: https://docs.hippius.com/cli/agents)
+- hipc, the command line: https://docs.hippius.com/cli (for agents: https://docs.hippius.com/cli/agents)
 - Docs for agents: https://docs.hippius.com/llms.txt
 - Full docs for agents: https://docs.hippius.com/llms-full.txt
 - Getting Started: https://docs.hippius.com/use/quickstart

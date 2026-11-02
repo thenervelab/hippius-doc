@@ -37,11 +37,11 @@ const sidebars: SidebarsConfig = {
       label: "Use",
       collapsed: false,
       items: [
-        // hip spans every product, so it sits above them: the one command for the
+        // hipc spans every product, so it sits above them: the one command for the
         // whole account, and the path a coding agent takes.
         {
           type: "category",
-          label: "Command line (hip)",
+          label: "Command line (hipc)",
           collapsed: true,
           items: ["cli/index", "cli/agents", "cli/examples", "cli/commands"],
         },
