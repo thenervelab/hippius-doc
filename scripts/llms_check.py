@@ -19,6 +19,9 @@ ROOT = Path(__file__).resolve().parents[1] / "static" / "llms.txt"
 URL_RE = re.compile(r"https://[^\s)>\]]+")
 
 ROOT_FACTS = (
+    "https://docs.hippius.com/cli",
+    "hip auth login --token-file -",
+    "hip schema",
     "https://s3.hippius.com",
     "hip_",
     "balance of at least $10",
@@ -96,6 +99,30 @@ def host_of(url: str) -> str:
     return url.split("://", 1)[1].split("/", 1)[0].split(":", 1)[0]
 
 
+DOCS = ROOT.parents[1] / "docs"
+SITE = "https://docs.hippius.com"
+
+# The hip repository is public from the 1.0 flip; until then its pages answer 404 to an
+# anonymous client. Lenient mode warns on them; strict mode fails until the flip is done.
+PENDING_PUBLIC = (
+    "https://github.com/thenervelab/hippius-cli",
+    "https://raw.githubusercontent.com/thenervelab/hippius-cli/",
+)
+
+
+def page_in_tree(url: str) -> bool:
+    """Whether a docs.hippius.com URL is a page of this checkout, by its slug front matter.
+
+    A page added in the same pull request as its llms.txt link answers 404 until the site
+    deploys; lenient mode warns on it instead of failing.
+    """
+    if not url.startswith(SITE + "/"):
+        return False
+    slug = url[len(SITE):].split("#", 1)[0].rstrip("/")
+    needle = f"\nslug: {slug}\n"
+    return any(needle in page.read_text()[:1000] for page in DOCS.rglob("*.md"))
+
+
 def repo_of(url: str) -> str | None:
     marker = "https://raw.githubusercontent.com/thenervelab/"
     if not url.startswith(marker) or not url.endswith("/llms.txt"):
@@ -143,6 +170,10 @@ def main() -> None:
             message = f"{code} {url}"
             if leaf and mode == "lenient":
                 warnings.append(message + " (leaf not merged yet)")
+            elif code == 404 and mode == "lenient" and page_in_tree(url):
+                warnings.append(message + " (page in this checkout, not deployed yet)")
+            elif code == 404 and mode == "lenient" and url.startswith(PENDING_PUBLIC):
+                warnings.append(message + " (repository not public yet)")
             else:
                 failures.append(message)
             continue
