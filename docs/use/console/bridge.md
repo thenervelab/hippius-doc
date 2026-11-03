@@ -23,7 +23,7 @@ Before you start, here is what we ask of every bridge:
 
 | | |
 |---|---|
-| **Minimum amount** | 1 Alpha to bridge in, 15 hAlpha to bridge out |
+| **Minimum amount** | 15 Alpha, or 15 hAlpha |
 | **Estimated time (Alpha to hAlpha)** | Usually 3 to 10 minutes after your deposit lands on Bittensor |
 | **Estimated time (hAlpha to Alpha)** | Usually 1 to 3 minutes after your withdrawal lands on Hippius |
 | **What you pay** | Network gas only. TAO on the Bittensor side, hAlpha on ours |
@@ -52,7 +52,7 @@ This is the more involved direction, because the work happens on Bittensor and n
 <Ordered>
   <li>Click <BgStyledText>Bridge Tokens</BgStyledText> on the Wallet page.</li>
   <li>Choose <strong>Bridge Alpha to hAlpha</strong>.</li>
-  <li>Enter the amount. It must be at least 1 Alpha.</li>
+  <li>Enter the amount. It must be at least 15 Alpha.</li>
   <li>Click <BgStyledText>Bridge</BgStyledText>.</li>
   <li>Read the <strong>Before you bridge</strong> panel and tick <BgStyledText>I understand and accept these risks</BgStyledText>. We ask for this on every single bridge, not just the first.</li>
   <li>Click <BgStyledText>Confirm Bridge</BgStyledText>.</li>
@@ -124,7 +124,7 @@ Only your transferable balance can leave the network. Unstake first, wait out th
 We check these before anything reaches the chain:
 
 <Unordered>
-  <li><strong>Minimum</strong>: 1 Alpha to bridge in, 15 hAlpha to bridge out. These are the limits the bridge itself enforces (the contract on Bittensor and the bridge pallet on Hippius), and the form shows the current figure as <strong>Min</strong>.</li>
+  <li><strong>Minimum</strong>: 15 Alpha or 15 hAlpha. Below that we show <em>"Minimum bridge amount is 15.00 ..."</em>.</li>
   <li><strong>Maximum</strong>: 1,000,000 tokens per bridge.</li>
   <li><strong>Your balance</strong>: we reject an amount larger than the source balance.</li>
 </Unordered>

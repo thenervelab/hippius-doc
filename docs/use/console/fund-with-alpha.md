@@ -69,13 +69,13 @@ You can also send hAlpha on the Hippius network from anywhere else to the addres
 
 ## Minimums
 
-| What | Smallest amount | Where it is enforced |
+| What | Smallest amount | Notes |
 |---|---|---|
-| **Bridge Alpha to hAlpha** | 1 Alpha | The bridge contract on Bittensor (`min_deposit_amount`) |
+| **Bridge Alpha to hAlpha** | 15 Alpha | Smaller deposits can fail, so the console does not accept less |
 | **Bridge hAlpha back to Alpha** | 15 hAlpha | The bridge pallet on Hippius (`AlphaBridge.MinWithdrawalAmount`) |
 | **Convert hAlpha to balance** | Shown as **Min** on the Hippius tab | Our API sets it. The chain itself refuses anything under 0.01 hAlpha (`Marketplace.MinBuyAlpha`) |
 
-These are read from the chains, so they can change. The console reads them live and shows the current figure on each form.
+Each form shows its minimum as **Min**. If you script the bridge yourself, keep deposits at 15 Alpha or more.
 
 ## How long it takes
 
@@ -134,7 +134,6 @@ The messages a funder needs. `Balance` is a `u64` in Alpha's smallest unit (1 Al
 | Message | Selector | Arguments | Returns |
 |---|---|---|---|
 | `deposit` | `0x2d10c9bd` | `amount: Balance`, `hotkey: AccountId` | Writes a deposit request |
-| `min_deposit_amount` | `0x6894756f` | none | `Balance` |
 | `is_paused` | `0xfa7d505b` | none | `bool` |
 | `approve_threshold` | `0x8cd59c44` | none | `u16` |
 | `next_deposit_nonce` | `0xfd648c34` | none | `u64` |

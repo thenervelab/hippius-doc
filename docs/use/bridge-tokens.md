@@ -48,7 +48,7 @@ This direction locks your Alpha tokens on the Bittensor network. Hippius guardia
 ![Bridge Tokens](/img/wallet/bridge-tokens.png)
 
 :::note
-The smallest deposit is 1 Alpha. You pay the gas in TAO, and your wallet shows it before you confirm. Once the deposit is in a Bittensor block, the hAlpha usually arrives 3 to 10 minutes later.
+The smallest deposit is 15 Alpha. You pay the gas in TAO, and your wallet shows it before you confirm. Once the deposit is in a Bittensor block, the hAlpha usually arrives 3 to 10 minutes later.
 :::
 
 ## Bridging hAlpha → Alpha
