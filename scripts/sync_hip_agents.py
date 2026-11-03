@@ -14,9 +14,9 @@ content has not landed (the latest release's install.sh answers 404), lenient mo
 warning and exits 0, because the source cannot be fetched yet; strict mode fails. That
 leniency expires by itself with the first public release.
 
-The binary was renamed from hip to hipc. This page was renamed by hand ahead of the CLI
-repository's own rename; a --write before that rename lands would bring the old name back,
-and a strict --check fails until it lands.
+This page was rendered from the CLI's docs as they read for its first public release, ahead
+of that release; a --write before the release lands would bring older content back, and a
+strict --check fails until it lands.
 """
 
 import sys
