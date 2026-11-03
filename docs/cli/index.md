@@ -9,13 +9,20 @@ description: Install hipc, the Hippius command line for coding agents and people
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-`hipc` is the Hippius command line, for people and coding agents. It drives everything the console manages: accounts and teams, billing and plans, S3 buckets and tokens, Hub, VMs, Kubernetes, PostgreSQL, GitHub Actions runners, CDN and WAF, the private network, and support. It does not move data: use an S3 client for objects and `hippius-hub` for Hub blobs. Source: [github.com/thenervelab/hippius-cli](https://github.com/thenervelab/hippius-cli).
+`hipc` is the Hippius command line, for people and coding agents. It drives everything the console manages: accounts, projects and teams, billing and plans, S3 buckets and tokens, Hub, VMs and App Engine apps, Kubernetes, PostgreSQL, GitHub Actions runners, CDN and WAF, the private network, and support. It does not move data: use an S3 client for objects and `hippius-hub` for Hub blobs. Source: [github.com/thenervelab/hippius-cli](https://github.com/thenervelab/hippius-cli).
 
 ## Install
 
 macOS and Linux, x86_64 and arm64.
 
 <Tabs groupId="install">
+<TabItem value="brew" label="Homebrew">
+
+```bash
+brew install thenervelab/tap/hipc
+```
+
+</TabItem>
 <TabItem value="curl" label="curl">
 
 Installs to `~/.local/bin` (or `$HIPC_INSTALL_DIR`), no root, and checks the release checksum.
@@ -25,14 +32,9 @@ curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/i
 ```
 
 </TabItem>
-<TabItem value="brew" label="Homebrew">
-
-```bash
-brew install thenervelab/tap/hipc
-```
-
-</TabItem>
 <TabItem value="pypi" label="PyPI">
+
+Coming right after the first release; it installs the same `hipc` binary.
 
 ```bash
 pip install hippius
