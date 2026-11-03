@@ -32,7 +32,7 @@ Full console guide: [Console getting started](https://docs.hippius.com/use/conso
 Billing: [Billing guide](https://docs.hippius.com/use/console/billing)
 
 - One account covers the console, the desktop app, and the mobile app. Sign-in is Google, GitHub, Apple, or an existing 12-word access key. There is no email and password sign-in.
-- An agent that holds its own 12-word access key opens the account and signs in with POST https://api.hippius.com/api/auth/mnemonic/ and POST https://api.hippius.com/api/auth/verify/. Steps: https://docs.hippius.com/use/wallet-login. Google, GitHub, and Apple sign-in stays in the user's browser.
+- An agent that holds its own 12-word access key opens the account and signs in with POST /api/auth/mnemonic/ and POST /api/auth/verify/ on api.hippius.com. Steps: https://docs.hippius.com/use/wallet-login. Google, GitHub, and Apple sign-in stays in the user's browser.
 - A 12-word access key creates a wallet-only account. It has no real email address, so it gets no lifecycle mail. Drive has no free plan: subscribe before the first upload. S3 and Hub work the same as on any other account.
 - S3 endpoint is https://s3.hippius.com only. Keys (the access key id starts with `hip_`) are created on the console S3 page: https://docs.hippius.com/use/console/s3
 - The API token for Hub and the account API is on console Settings: https://console.hippius.com/dashboard/settings
