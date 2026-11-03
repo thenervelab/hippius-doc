@@ -37,15 +37,15 @@ One line per top-level command; `hipc --help` has the binary's own words.
 | `hipc schema` | Every command with its effect, as JSON in every output mode |
 | `hipc completions` | A shell completion script for bash, zsh, fish, elvish, or powershell |
 | `hipc auth` | Store, check, or remove the console API token |
-| `hipc account` | The accounts the token can act in, members, invites, projects, and billing accounts |
+| `hipc account` | The accounts the token can act in, members, invites, projects and their budgets, quotas, and transfers, billing accounts, and referral links |
 | `hipc billing` | The balance, compute burn rate and usage, every plan in one view, transactions, invoices, the billing profile, auto-reload, and top-ups |
 | `hipc drive` | Drive plans and the Drive subscription |
 | `hipc s3` | S3 plans, buckets, their objects' listing and presigned URLs, tokens, and an AWS CLI profile for s3.hippius.com |
-| `hipc hub` | Hub plans, the Hub subscription, the registry namespace, its usage, its repositories and artifacts, and its CI keys |
-| `hipc compute` | Virtual machines, their catalog and quota, public IPv4 and firewall, backups, SSH keys, managed databases, Kubernetes, and GitHub Actions runners |
+| `hipc hub` | Hub plans, the Hub subscription, the registry namespace (public or private) and its robot login, its usage, repositories, artifacts, models, audit events, and CI keys |
+| `hipc compute` | Virtual machines, their catalog and quota, public IPv4 and firewall, backups, SSH keys, App Engine (check and fix a compose file, launch and read apps, their runtime report), managed databases, Kubernetes, and GitHub Actions runners |
 | `hipc cdn` | CDN zones that serve an S3 bucket, their spend cap, custom hostnames, cache purges, cache rules, traffic, and WAF |
-| `hipc support` | Support tickets: open one, list them, read one, and reply |
-| `hipc network` | The account's private network: its peers, groups, access policies, and VPC networks |
+| `hipc support` | Support tickets: open one, list them, read one, reply, read its messages, and close it |
+| `hipc network` | The account's private network: create it, its peers, groups, access policies, and VPC networks |
 | `hipc api` | Any console API endpoint, with the same token, account rules, confirmations, and error object |
 
 ## How a help page reads
