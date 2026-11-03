@@ -3,7 +3,7 @@ id: runners
 title: GitHub Actions Runners
 sidebar_label: GitHub Actions runners
 slug: /use/compute/runners
-description: Run your GitHub Actions jobs on single-use confidential Hippius VMs. Install the Hippius Runners GitHub App, link it to your account, use the hippius-small, hippius-medium and hippius-large labels (or their cheaper -ssd versions), configure limits, follow what your runners cost against GitHub-hosted runners, and understand job statuses and billing.
+description: Run your GitHub Actions jobs on single-use confidential Hippius VMs. Install the Hippius Runners GitHub App, link it to your account, use the hippius-small, hippius-medium and hippius-large labels (or their cheaper -ssd versions), configure limits, follow what your runners cost, set a monthly spend limit, and understand job statuses and billing.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -158,6 +158,7 @@ Refusals show on the Runners page only. On GitHub, the job just stays queued ("W
 | No access to runners on this account | Your access on a shared account doesn't include runners. Ask the owner. |
 | Runners need hourly compute billing | Contact support. |
 | Your account is being deleted | Nothing runs on an account being deleted. |
+| Monthly runner limit reached | Your [monthly limit](#monthly-limit) is reached and set to **Pause new jobs**. Raise or remove it, or wait for the 1st of next month (UTC). Then re-run the workflow. |
 
 ## Billing
 
@@ -181,6 +182,29 @@ These amounts come from your hourly compute bill: each closed hour, the lines fo
 **Compared to GitHub-hosted runners.** The card also says how much you saved against GitHub-hosted runners at GitHub's list prices, this month and since Hippius started billing by the hour (late September 2026). For each job, it takes the job's run time inside the period, rounded up to the whole minute as GitHub bills it, at the per-minute price of the GitHub Linux runner with the same vCPU and memory: `hippius-medium` against Linux 2-core, `hippius-large` against Linux 4-core, and `hippius-small` against Linux 1-core (ubuntu-slim), the cheapest GitHub runner. It then subtracts everything your runners were billed in the same period, including startup minutes, bandwidth and jobs still running. To stay on the safe side, it leaves out jobs from public repositories on the small and medium sizes (GitHub runs those free) and doesn't count the free minutes your GitHub plan may include. The info icon next to it lists the prices used and the date they were read from GitHub's pricing page. The line is hidden when GitHub would not have cost more.
 
 In a project, the card shows the project's runners only.
+
+## Monthly limit
+
+The **Monthly limit** card caps what your runners spend in a calendar month, in credits. It's off until you set one.
+
+<Ordered>
+  <li>Enter the limit in credits.</li>
+  <li>Choose when to be emailed: by default at 50 %, 80 % and 100 % of the limit. 100 % is always on the list.</li>
+  <li>Choose what happens at 100 %: <strong>Alert only</strong> (an email, nothing stops) or <strong>Pause new jobs</strong>.</li>
+  <li>Click <BgStyledText>Save limit</BgStyledText>. <BgStyledText>Remove limit</BgStyledText> takes it off.</li>
+</Ordered>
+
+**The limit resets on the 1st of each month at 00:00 UTC**, whatever your time zone.
+
+**Pause new jobs.** Once the month's spend reaches the limit, every new job is refused with the reason **Monthly runner limit reached** and stays queued on GitHub. **Jobs already running are never stopped**: they finish and are billed, so the month can end a little above the limit. Runners start again on the 1st, or as soon as you raise or remove the limit. Re-run the workflows whose jobs were refused.
+
+**Emails.** Each threshold is emailed once a month. When the spend jumps past several at once, you get one email for the highest. A new limit starts the thresholds over. A change to the limit is confirmed by email too. They go to the account owner and, for a project, to the billing admins of the billing account that pays for it.
+
+A banner at the top of the Runners page says when a threshold is passed, when the limit is reached, and when new jobs are paused.
+
+:::note
+The limit weighs what is already billed. It's checked when a job is launched, against the spend at that moment (updated at most a minute late).
+:::
 
 ## Disconnect GitHub
 
