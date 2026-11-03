@@ -2,9 +2,12 @@
 # Docs: /storage/s3/python
 
 import os
+import time
+
 from dotenv import load_dotenv
 import boto3
 from botocore.config import Config
+from botocore.exceptions import ClientError
 
 load_dotenv()
 
@@ -21,39 +24,62 @@ s3 = boto3.client(
     ),
 )
 
-import time
 bucket_name = f"hippius-demo-py-{int(time.time())}"
 file_key = "greeting.txt"
 
-# 2. Create bucket
-print(f"Creating bucket: {bucket_name}")
-s3.create_bucket(Bucket=bucket_name)
 
-# 3. Upload string
-print(f"Uploading file: {file_key}")
-s3.put_object(
-    Bucket=bucket_name,
-    Key=file_key,
-    Body=b"Welcome to Hippius S3 Storage!",
-)
+def delete_if_present(call, **params):
+    """Run a delete, ignoring an object or bucket that is already gone."""
+    try:
+        call(**params)
+    except ClientError as err:
+        if err.response["Error"]["Code"] not in ("NoSuchKey", "NoSuchBucket"):
+            raise
 
-# 4. List objects
-print("Listing objects:")
-response = s3.list_objects_v2(Bucket=bucket_name)
-for obj in response.get("Contents", []):
-    print(f"  {obj['Key']} ({obj['Size']} bytes)")
 
-# 5. Download file
-print("Downloading file:")
-response = s3.get_object(Bucket=bucket_name, Key=file_key)
-content = response["Body"].read().decode("utf-8")
-print(f"  Content: {content}")
+bucket_created = False
+uploaded = False
 
-# 6. Generate presigned URL
-print("Generating presigned URL:")
-url = s3.generate_presigned_url(
-    "get_object",
-    Params={"Bucket": bucket_name, "Key": file_key},
-    ExpiresIn=3600,
-)
-print(f"  URL: {url}")
+try:
+    # 2. Create bucket
+    print(f"Creating bucket: {bucket_name}")
+    s3.create_bucket(Bucket=bucket_name)
+    bucket_created = True
+
+    # 3. Upload string
+    print(f"Uploading file: {file_key}")
+    s3.put_object(
+        Bucket=bucket_name,
+        Key=file_key,
+        Body=b"Welcome to Hippius S3 Storage!",
+    )
+    uploaded = True
+
+    # 4. List objects
+    print("Listing objects:")
+    response = s3.list_objects_v2(Bucket=bucket_name)
+    for obj in response.get("Contents", []):
+        print(f"  {obj['Key']} ({obj['Size']} bytes)")
+
+    # 5. Download file
+    print("Downloading file:")
+    response = s3.get_object(Bucket=bucket_name, Key=file_key)
+    content = response["Body"].read().decode("utf-8")
+    print(f"  Content: {content}")
+
+    # 6. Generate presigned URL
+    print("Generating presigned URL:")
+    url = s3.generate_presigned_url(
+        "get_object",
+        Params={"Bucket": bucket_name, "Key": file_key},
+        ExpiresIn=3600,
+    )
+    print(f"  URL: {url}")
+finally:
+    # 7. Clean up. A real app would keep its bucket; this example deletes
+    # what it created so it can be rerun without leaving buckets behind.
+    if bucket_created:
+        if uploaded:
+            delete_if_present(s3.delete_object, Bucket=bucket_name, Key=file_key)
+        delete_if_present(s3.delete_bucket, Bucket=bucket_name)
+        print(f"Cleaned up {bucket_name}")
