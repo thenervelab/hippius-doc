@@ -72,13 +72,15 @@ Hippius is a distributed cloud. Store encrypted files, serve objects over S3, an
 | Mobile | Drive on Android, on Google Play. The iPhone app is not released. There is no CLI. | https://docs.hippius.com/use/mobile/getting-started |
 | Console | Sign up, pay, API token, Drive and S3 keys. There is no CLI. The agent calls https://api.hippius.com with the account token. | https://docs.hippius.com/use/console/getting-started |
 | Drive SDK | Script Drive with encryption on the client. Command: `hippius-drive`. Install from git, not PyPI. | https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt |
-| Bridge | No CLI. The user signs each step in a browser wallet. Alpha and hAlpha are pegged 1:1. Minimum 15. | https://docs.hippius.com/use/console/bridge |
+| Bridge | No CLI. An agent that holds the key signs the steps. Alpha and hAlpha are pegged 1:1. Minimum 15. | https://docs.hippius.com/use/console/fund-with-alpha |
 | Compute | Confidential VMs, managed PostgreSQL, managed Kubernetes and GitHub Actions runners, in the console. Open to every account, billed hourly from the balance. No CLI. | https://docs.hippius.com/use/compute |
 | Shared accounts | An owner invites members by email with Viewer, Operator or Admin access per product (VMs, databases, Kubernetes, runners, S3, CDN). The owner pays. Drive is not included. API header `X-Hippius-Account`. | https://docs.hippius.com/use/console/team |
 
 ### Authentication
 
-Sign in at https://console.hippius.com with Google, GitHub, Apple, or an existing 12-word access key. There is no email and password sign-in. An agent cannot create the account. That happens in the browser or the app.
+Sign in at https://console.hippius.com with Google, GitHub, Apple, or a 12-word access key. There is no email and password sign-in.
+
+An agent that holds its own 12-word access key opens the account and signs in with POST https://api.hippius.com/api/auth/mnemonic/ and POST https://api.hippius.com/api/auth/verify/. The first verify for a new Substrate address creates the account. Steps: https://docs.hippius.com/use/wallet-login. Google, GitHub, and Apple sign-in stays in the user's browser. Do not ask the user to paste a recovery phrase.
 
 A 12-word access key creates a wallet-only account. It has no real email address, so it gets no lifecycle mail. Drive has no free plan: subscribe before the first upload. S3 and Hub work the same as on any other account.
 
@@ -95,6 +97,8 @@ Five top-up methods, on Billing:
 - USDC on Base, from a browser wallet, from $5 to $10,000. 1 USDC adds one dollar to your balance.
 - TAO, from a connected wallet or by sending to the TAO deposit address (Manually tab). At least $20 per transfer. Never send TAO to the Hippius account address (Wallet → Receive): it is not credited. A transfer cannot be reversed.
 - hAlpha, the Hippius native token, on the Hippius tab. Credits = hAlpha × the on-chain hAlpha price. Slippage protection 1% by default. Final on chain, no refund. Not invoiced.
+
+An access-key account buys that balance by signing Marketplace.buy_credits on wss://rpc.hippius.network. Read GET https://api.hippius.com/api/billing/native/quote/ first. Credits minted are alpha_amount * alpha_price / 10^18, rounded down. One credit is one dollar. Set min_credits to floor(credits * 9900 / 10000). Leave the referral code unset. The quote's min_alpha is the smallest buy the API accepts. The chain floor is 0.01 hAlpha. POST https://api.hippius.com/api/billing/native/buy/ is for an account whose key the API holds, and returns 409 self_sign for an access-key account. https://docs.hippius.com/use/console/fund-with-alpha
 
 An agent with enough balance subscribes without a browser. Do not send a funded agent to Stripe Checkout.
 
@@ -136,7 +140,7 @@ Open a support ticket with the account API token: POST https://api.hippius.com/a
 
 `hipc` and the storage commands in `pip install hippius` are deprecated. Do not use them. Chain registration still uses `hippius`. S3 uses any S3 client, and that manual starts at S3 Storage — Quickstart. The tools below are the other products.
 
-An agent cannot create the account or approve a browser login. The user does that at https://console.hippius.com. The API token is on https://console.hippius.com/dashboard/settings
+An agent that holds its own 12-word access key opens the account at https://docs.hippius.com/use/wallet-login and calls the API with the returned token. Google, GitHub, and Apple sign-in stays in the browser at https://console.hippius.com. The API token for an account opened in the browser is on https://console.hippius.com/dashboard/settings
 
 ### Hub
 
@@ -183,7 +187,7 @@ A token and an address that do not belong together fail `whoami` with 403. Leave
 
 ### Console
 
-There is no console CLI. Sign-in, plan checkout in the browser, and anything that needs a wallet signature stay in https://console.hippius.com. After the user copies the API token, call https://api.hippius.com with `Authorization: Token <token>`.
+There is no console CLI. Card checkout stays in the browser at https://console.hippius.com. An agent that holds the key signs the hAlpha buy and the bridge: https://docs.hippius.com/use/console/fund-with-alpha. Call https://api.hippius.com with `Authorization: Token <token>`.
 
 ```bash
 curl -sS -H "Authorization: Token $HIPPIUS_TOKEN" https://api.hippius.com/api/billing/credits/balance/
@@ -212,11 +216,18 @@ Agent file: https://raw.githubusercontent.com/thenervelab/hippius-desktop/stagin
 
 ### Bridge
 
-There is no bridge CLI. The user opens Wallet in the console and uses Bridge Tokens. Guide: https://docs.hippius.com/use/console/bridge
+There is no bridge CLI. An agent that holds the Bittensor coldkey signs the steps. A user who keeps the key in a browser wallet approves them in the console. Guide: https://docs.hippius.com/use/console/fund-with-alpha. The console dialog is https://docs.hippius.com/use/console/bridge.
 
-The bridge moves Alpha on Bittensor and hAlpha on Hippius. They are pegged 1:1. The minimum is 15 Alpha or 15 hAlpha. It takes about 120 seconds. The only cost is network gas: TAO on the Bittensor side, hAlpha on Hippius.
+The bridge moves Alpha on Bittensor subnet 75 and hAlpha on Hippius. They are pegged 1:1. The minimum is 15 Alpha or 15 hAlpha. A deposit usually becomes hAlpha in 3 to 10 minutes. Fees are TAO on Bittensor and hAlpha on Hippius. Adding the escrow as a proxy reserves 0.093 TAO until the proxy is removed.
 
-Alpha to hAlpha needs 3 signatures, or 4 when the Alpha must first be moved onto the Hippius validator. hAlpha to Alpha needs 1 signature. The user approves each signature in a browser wallet extension. An agent cannot approve those signatures.
+The stake has to sit on hotkey 5G1Qj93Fy22grpiGKq6BEvqqmS2HVRs3jaEdMhq9absQzs6g. Stake anywhere else fails the deposit. The escrow contract is 5CtJ99rm9ze4QA523ieagy3vJ9D1A69tDcEUae3Q7g5RVykh.
+
+1. SubtensorModule.move_stake onto that hotkey, netuid 75 on both sides, amount in rao. Skip this when the hotkey already holds the amount.
+2. Proxy.add_proxy of the contract, proxy type Any, delay 0.
+3. Contract deposit(amount, hotkey), amount in rao, hotkey the validator.
+4. Proxy.remove_proxy with the same arguments.
+
+hAlpha to Alpha needs 1 signature. The minimum is 15 hAlpha. Multiply the rao amount by 10^9 to get hAlpha planck. The call data and how to follow a deposit are on the funding guide.
 
 ### Compute
 
@@ -687,12 +698,12 @@ Docs: https://docs.hippius.com/use/api-prices
     GET  https://api.hippius.com/api/s3/plans/ · /api/drive/plans/ · /api/registry/plans/
 Compute public prices are credits (1 credit = 1 USD) as decimal strings; monthly = hourly x 730, to the cent. null means the catalogue has no price yet, never free. Cache-Control: public, max-age=60 (flavors 300), Vary: Authorization. 300 requests/min per client address on the compute and CDN lists, then 429.
 
-### Access key sign-in (for apps, not agents)
+### Access key sign-in
 
 Docs: https://docs.hippius.com/use/wallet-login
     POST https://api.hippius.com/api/auth/mnemonic/  {"address": "0x...", "substrate_address": "5..."}  -> challenge, message, expires_in (300)
     POST https://api.hippius.com/api/auth/verify/    {"address", "substrate_address", "challenge", "signature", "substrate_signature"} -> token
-Sign `message` verbatim: signature = EIP-191 personal_sign by the Ethereum key (m/44'/60'/0'/0/0); substrate_signature = sr25519 by the Substrate key (no derivation path) over the raw message bytes. A signature over the polkadot.js <Bytes> wrapping (browser extension signRaw) is refused: 401 code substrate_signature_invalid. Missing proof on a new or never-proven account: 401 code substrate_signature_required. Never ask a user to paste their 12 words into chat.
+Sign `message` verbatim: signature = EIP-191 personal_sign by the Ethereum key (m/44'/60'/0'/0/0); substrate_signature = sr25519 by the Substrate key (no derivation path) over the raw message bytes. A signature over the polkadot.js <Bytes> wrapping (browser extension signRaw) is refused: 401 code substrate_signature_invalid. Missing proof on a new or never-proven account: 401 code substrate_signature_required. The first verify for a new Substrate address creates the account. An agent that holds the phrase uses this. Never ask a user to paste their 12 words into chat.
 
 ---
 
