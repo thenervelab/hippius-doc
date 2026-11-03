@@ -161,6 +161,7 @@ const sidebars: SidebarsConfig = {
             "use/console/virtual-machines",
             "use/console/hub",
             "use/console/billing",
+            "use/console/fund-with-alpha",
             "use/console/wallet",
             "use/console/staking",
             "use/console/bridge",

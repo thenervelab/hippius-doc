@@ -53,7 +53,7 @@ This direction locks your Alpha tokens on the Bittensor network. Hippius guardia
 <Screenshot src="/img/desktop/wallet/bridge-alpha-halpha.png" alt="Bridge Alpha to hAlpha" dark />
 
 :::note
-A minimum bridge amount applies. The gas fee is shown before you confirm. The bridge process typically takes 1–3 minutes depending on network conditions.
+A minimum bridge amount applies. The gas fee is shown before you confirm. Once the deposit is in a Bittensor block, the hAlpha usually arrives 3 to 10 minutes later.
 :::
 
 ## Bridging hAlpha → Alpha
@@ -220,7 +220,7 @@ The bridge is secured by multiple layers:
 
 ### 1. How long does bridging take?
 
-Most bridges complete within 1–3 minutes. The exact time depends on network congestion, guardian availability, and the number of confirmations required.
+Alpha to hAlpha usually takes 3 to 10 minutes after the deposit lands on Bittensor, because three guardians each have to confirm it before hAlpha is minted. See [How long it takes](/use/console/fund-with-alpha#how-long-it-takes) for the measured figures.
 
 ### 2. What are the fees?
 
