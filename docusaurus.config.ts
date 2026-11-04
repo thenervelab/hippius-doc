@@ -19,7 +19,7 @@ const inlineFont = (family: string, file: string, weight: string) => {
 
 const config: Config = {
   title: "Hippius Docs - Learn, use, earn and develop with Hippius",
-  tagline: "Encrypted storage, S3 and an AI model Hub",
+  tagline: "Encrypted Drive, Object Storage and an AI model Hub",
   favicon: "img/favicon.ico",
 
   url: "https://docs.hippius.com",
@@ -239,7 +239,7 @@ const config: Config = {
               to: "/use/quickstart",
             },
             {
-              label: "S3 Advanced Usage",
+              label: "Object Storage Advanced Usage",
               to: "/storage/s3/advanced",
             },
             {

@@ -9,7 +9,7 @@ import Unordered from '@site/src/components/Unordered';
 
 # S3 Compatibility Matrix
 
-Hippius S3 is S3-compatible with a focused feature set. If you already have S3 code, you only need to change three things: **endpoint URL**, **region**, and **credentials**. Everything else stays the same.
+Hippius Object Storage is S3-compatible with a focused feature set. If you already have S3 code, you only need to change three things: **endpoint URL**, **region**, and **credentials**. Everything else stays the same.
 
 This page lists every S3 API operation and whether we support it.
 
@@ -22,7 +22,7 @@ This page lists every S3 API operation and whether we support it.
 | **Signature** | AWS Signature V4 |
 | **Addressing** | Path-style (`s3.hippius.com/bucket/key`) |
 
-Same values as the [S3 Quickstart](/use/quickstart#connection-details). Always use `https://s3.hippius.com`.
+Same values as the [Object Storage Quickstart](/use/quickstart#connection-details). Always use `https://s3.hippius.com`.
 
 ## Bucket Operations
 
@@ -118,7 +118,7 @@ Both are supported. Object Lock gives you write-once-read-many (WORM) retention 
 
 ## What's Different
 
-Hippius S3 is S3-compatible but not a clone of any other provider. Here's what to keep in mind:
+Hippius Object Storage is S3-compatible but not a clone of any other provider. Here's what to keep in mind:
 
 <Unordered>
   <li><strong>Path-style only.</strong> Virtual-hosted style (<code>bucket.s3.hippius.com</code>) is not supported. Always use <code>forcePathStyle: true</code> or <code>addressing_style: "path"</code>.</li>
@@ -134,7 +134,7 @@ Hippius S3 is S3-compatible but not a clone of any other provider. Here's what t
 
 ## Tested Clients
 
-These S3 clients are tested and confirmed to work with Hippius S3:
+These S3 clients are tested and confirmed to work with Hippius Object Storage:
 
 | Client | Language | Guide |
 |--------|----------|-------|
@@ -148,10 +148,10 @@ These S3 clients are tested and confirmed to work with Hippius S3:
 ## Further Reading
 
 <Unordered>
-  <li><a href="/use/quickstart">S3 Quickstart</a>: first upload</li>
+  <li><a href="/use/quickstart">Object Storage Quickstart</a>: first upload</li>
   <li><a href="/storage/s3/advanced">Advanced Usage</a> — presigned URLs, ACLs, public buckets, sub-tokens</li>
   <li><a href="/storage/s3/object-lock">Object Lock (WORM)</a> — retention and legal holds</li>
-  <li><a href="https://s3.hippius.com/veggies/s3/benchmark.html">Hippius S3 Benchmarks</a> — live performance benchmarks</li>
+  <li><a href="https://s3.hippius.com/veggies/s3/benchmark.html">Hippius Object Storage Benchmarks</a> — live performance benchmarks</li>
   <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html">S3 API reference</a> — any operation marked "Supported" above works identically</li>
   <li><a href="https://github.com/thenervelab/hippius-s3">hippius-s3 on GitHub</a> — report issues or request features</li>
   <li><a href="https://docs.hippius.com/llms.txt">llms.txt</a> — machine-readable docs for AI agents</li>

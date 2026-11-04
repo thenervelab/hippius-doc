@@ -7,7 +7,7 @@ slug: /storage/s3/javascript
 
 # JavaScript / Node.js
 
-Use the [AWS SDK v3](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/) or the [MinIO SDK](https://github.com/minio/minio-js) to interact with Hippius S3 from Node.js or the browser.
+Use the [AWS SDK v3](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/) or the [MinIO SDK](https://github.com/minio/minio-js) to interact with Hippius Object Storage from Node.js or the browser.
 
 Connection details: [Getting Started](/use/quickstart#connection-details). Presigned PUT, ACLs, public buckets, and sub-tokens: [Advanced Usage](/storage/s3/advanced).
 

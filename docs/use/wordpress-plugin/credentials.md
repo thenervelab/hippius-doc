@@ -29,7 +29,7 @@ No wallet, no seed phrase, no browser extension.
 
 ## Step 2: Add funds to your account balance
 
-Your storage is paid from your account balance, or with an S3 plan. Downloads are free, only storage is billed, so visitors loading your images never add to the bill.
+Your storage is paid from your account balance, or with an Object Storage plan. Downloads are free, only storage is billed, so visitors loading your images never add to the bill.
 
 <Ordered>
   <li>Open <BgStyledText>Billing</BgStyledText> in the console.</li>
@@ -39,14 +39,14 @@ Your storage is paid from your account balance, or with an S3 plan. Downloads ar
 
 <Screenshot src="/img/console/billing/overview.png" alt="Billing page, to top up your account balance" dark raw />
 
-Storing several terabytes? A monthly S3 plan costs less than pay as you go. See [S3 plans](/use/console/billing#s3-plans-and-pay-as-you-go), and [Console Billing](/use/console/billing) for the full walkthrough.
+Storing several terabytes? A monthly Object Storage plan costs less than pay as you go. See [Object Storage plans](/use/console/billing#s3-plans-and-pay-as-you-go), and [Console Billing](/use/console/billing) for the full walkthrough.
 
 ## Step 3: Create your S3 access keys
 
 The plugin uses a pair of S3 access keys to upload your media, the same kind any S3 tool uses.
 
 <Ordered>
-  <li>In the console, open <BgStyledText>S3</BgStyledText> → <BgStyledText>S3 Buckets</BgStyledText>.</li>
+  <li>In the console, open <BgStyledText>Object Storage</BgStyledText> → <BgStyledText>Buckets</BgStyledText>.</li>
   <li>Click <BgStyledText>+ Create Master Token</BgStyledText>.</li>
   <li>Give the token a name you'll recognise later, such as <em>WordPress</em>, and pick how long it lasts.</li>
   <li>Click <BgStyledText>Create Master Token</BgStyledText>, then save your <strong>Access Key ID</strong> (it starts with <code>hip_</code>) and your <strong>Secret Key</strong> somewhere safe.</li>
@@ -69,7 +69,7 @@ The plugin doesn't create a bucket for you yet, so create your bucket in the con
 Bucket names on Hippius are **globally unique**, like on AWS: once anyone has taken a name, nobody else can use it. The settings page suggests `wordpress-media`, but that name is almost certainly taken, so pick your own. Including your site's name works well, for example `myshop-wordpress-media`.
 
 <Ordered>
-  <li>In <BgStyledText>S3 Buckets</BgStyledText>, click <BgStyledText>+ Create Bucket</BgStyledText>.</li>
+  <li>In <BgStyledText>Object Storage</BgStyledText>, click <BgStyledText>+ Create Bucket</BgStyledText>.</li>
   <li>Enter your bucket name. Use lowercase letters, numbers, dashes and dots, 3 to 63 characters, starting and ending with a letter or number. Two dots in a row, or a dot next to a dash, aren't allowed.</li>
   <li>Click <BgStyledText>Create Bucket</BgStyledText>, and note the exact name for the plugin settings.</li>
 </Ordered>

@@ -45,7 +45,7 @@ You choose **PostgreSQL 18**, **17** or **16** at creation. 18 is the default. A
   <li><strong>Choose a plan</strong>: Starter, Production or High availability.</li>
   <li><strong>Choose a size</strong>.</li>
   <li><strong>Name it</strong> (optional, up to 64 characters). If you leave it empty, a name is chosen for you.</li>
-  <li><strong>Backups</strong>: nothing to set. The database backs itself up to a new bucket in your Hippius S3 account. If you don't have an S3 account yet, <a href="/use/console/s3">set one up first</a>, or the database runs without backups.</li>
+  <li><strong>Backups</strong>: nothing to set. The database backs itself up to a new bucket in your Hippius Object Storage account. If you don't have an Object Storage account yet, <a href="/use/console/s3">set one up first</a>, or the database runs without backups.</li>
   <li><strong>Your credentials</strong>: tick <strong>I understand: I will download and store the credentials when they are shown</strong>.</li>
   <li>Check the <strong>Summary</strong> and click <BgStyledText>Create database</BgStyledText>.</li>
 </Ordered>
@@ -140,7 +140,7 @@ To close it, click <BgStyledText>Unexpose</BgStyledText> and confirm. Clients co
 
 ## Backups
 
-Backups go to a bucket the database creates in your own Hippius S3 account, named `hippius-db-ID-backups`. They are encrypted before they leave the database, with the backup key from your credentials.
+Backups go to a bucket the database creates in your own Hippius Object Storage account, named `hippius-db-ID-backups`. They are encrypted before they leave the database, with the backup key from your credentials.
 
 <Unordered>
   <li>A full backup every night, starting between 03:00 and 03:30 (UTC).</li>
@@ -151,7 +151,7 @@ Backups go to a bucket the database creates in your own Hippius S3 account, name
 
 The first full backup runs right after the database is created. The database page's **Backups** panel shows the last full and differential backups, the repository size, and how far the write-ahead log is archived.
 
-Backups are billed as S3 storage in your account, at your S3 price. The bucket is managed by the database, so you can't delete it from the console while the database exists.
+Backups are billed as Object Storage in your account, at your Object Storage price. The bucket is managed by the database, so you can't delete it from the console while the database exists.
 
 ## Restore a database
 
@@ -194,10 +194,10 @@ The **Cluster** panel shows each instance, its role and how far behind it is. Th
 
 **Restart** restarts PostgreSQL. Open connections are closed; the data is untouched. On High availability, only the leader is restarted, without a failover. The restart begins within a minute.
 
-**Delete** destroys the instances and their data. This can't be undone. If the backup bucket holds backups, it is **kept** in your S3 account, and billed as S3 storage, so that you can still read your data with your backup key.
+**Delete** destroys the instances and their data. This can't be undone. If the backup bucket holds backups, it is **kept** in your Object Storage account, and billed as Object Storage, so that you can still read your data with your backup key.
 
 ## Billing
 
-A database is billed for the VMs it runs on, per second at their hourly price, plus a management fee of 25% of that VM price: one instance on Starter and Production, three on High availability. The smallest database, Starter on Small, is $32 + $8 = $40 a month; High availability on Small is $96 + $24 = $120 a month. The create form shows the VMs, the fee and the total. Backups are billed as S3 storage in your account, at your S3 price. See [Management fees](/use/compute/billing#management-fees) and the [live price list](https://console.hippius.com/dashboard/billing/compute#prices).
+A database is billed for the VMs it runs on, per second at their hourly price, plus a management fee of 25% of that VM price: one instance on Starter and Production, three on High availability. The smallest database, Starter on Small, is $32 + $8 = $40 a month; High availability on Small is $96 + $24 = $120 a month. The create form shows the VMs, the fee and the total. Backups are billed as Object Storage in your account, at your Object Storage price. See [Management fees](/use/compute/billing#management-fees) and the [live price list](https://console.hippius.com/dashboard/billing/compute#prices).
 
 If your compute usage stays unpaid, see [If your balance runs out](/use/compute/billing#if-your-balance-runs-out).

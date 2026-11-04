@@ -57,7 +57,7 @@ While a bulk migration runs, the Error Log shows the reason for each file that f
   <li>The file is corrupted or can't be read off the local disk.</li>
   <li>The upload hit a network timeout. Retry just that file with <BgStyledText>Migrate to Hippius</BgStyledText> in the Media Library list view, or start the bulk migration again: only files that aren't migrated yet are picked up.</li>
   <li>The file type isn't supported. These files show as <strong>Unsupported</strong> in the Media Library and stay local. See the file types question below.</li>
-  <li>Your account balance ran out. If you pay as you go and your balance stays empty, S3 turns read only after 7 days, so uploads fail even though your settings still save. Top up on the Billing page in the Hippius console. See <a href="/use/console/billing#if-your-balance-runs-out">If your balance runs out</a>.</li>
+  <li>Your account balance ran out. If you pay as you go and your balance stays empty, Object Storage turns read only after 7 days, so uploads fail even though your settings still save. Top up on the Billing page in the Hippius console. See <a href="/use/console/billing#if-your-balance-runs-out">If your balance runs out</a>.</li>
 </Unordered>
 
 Once you've dealt with the errors, <BgStyledText>Clear Error Log</BgStyledText> empties the list so new problems are easy to spot. To find every file that's still waiting, filter the Media Library list view to <strong>Local Only</strong>.
@@ -114,7 +114,7 @@ Your pages load each image straight from its Hippius URL, and visitors' browsers
 
 **What does it cost?**
 
-Your storage is paid from your account balance, or with an S3 plan. Downloads are free, only storage is billed. You can top up your account balance by card, Bitcoin, USDC, TAO or Hippius tokens (hAlpha). See [Console Billing](/use/console/billing).
+Your storage is paid from your account balance, or with an Object Storage plan. Downloads are free, only storage is billed. You can top up your account balance by card, Bitcoin, USDC, TAO or Hippius tokens (hAlpha). See [Console Billing](/use/console/billing).
 
 **Where are my credentials stored?**
 

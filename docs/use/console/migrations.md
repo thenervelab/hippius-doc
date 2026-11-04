@@ -3,7 +3,7 @@ id: migrations
 title: S3 Migrations
 sidebar_label: S3 Migrations
 slug: /use/console/migrations
-description: Move your existing object storage into Hippius S3 from Storj, Amazon S3, Google Cloud Storage, Cloudflare R2, Backblaze B2, DigitalOcean Spaces, Wasabi, or any S3-compatible provider.
+description: Move your existing object storage into Hippius Object Storage from Storj, Amazon S3, Google Cloud Storage, Cloudflare R2, Backblaze B2, DigitalOcean Spaces, Wasabi, or any S3-compatible provider.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -18,7 +18,7 @@ If your files already live with another storage provider, you do not have to dow
 
 We can read from Storj, Amazon S3, Google Cloud Storage, Cloudflare R2, Backblaze B2, DigitalOcean Spaces, Wasabi, and anything else that speaks S3.
 
-Find it in the sidebar at <BgStyledIconWithText text="S3 Migrations" icon="Global" />.
+Find it in the sidebar at <BgStyledIconWithText text="Object Storage" icon="SidebarStorage" /> → <BgStyledIconWithText text="Migrations" icon="Global" />.
 
 :::info
 Your files are only ever read from the source. Nothing is moved, renamed or deleted there, so the originals stay exactly as they are and you can run the same migration again if you want to.
@@ -86,14 +86,14 @@ Two things are worth understanding when it finishes:
 
 Starting a migration creates a dedicated S3 token so we can write into your account, and it expires by itself after 30 days. Once everything has arrived you can revoke it under **S3 tokens** rather than waiting.
 
-Your files are now ordinary Hippius S3 objects. Use them with the same tools and access keys as anything else you store with us, and browse them under **S3 Buckets**.
+Your files are now ordinary Hippius Object Storage objects. Use them with the same tools and access keys as anything else you store with us, and browse them under **Object Storage**.
 
 Your original provider is untouched, so keep it or close the account in your own time once you are happy everything arrived.
 
 ## Where to next
 
 <Unordered>
-  <li><a href="/use/console/s3">S3 Buckets</a>: browse your buckets and manage access keys.</li>
-  <li><a href="/use/quickstart">S3 Quickstart</a>: endpoints, SDKs and first upload.</li>
+  <li><a href="/use/console/s3">Object Storage</a>: browse your buckets and manage access keys.</li>
+  <li><a href="/use/quickstart">Object Storage Quickstart</a>: endpoints, SDKs and first upload.</li>
   <li><a href="/storage/s3/advanced">Advanced Usage</a>: presigned URLs, ACLs, and public buckets.</li>
 </Unordered>

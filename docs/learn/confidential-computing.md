@@ -127,13 +127,13 @@ Every compute product runs on confidential VMs. What changes is who holds which 
 
 <Unordered>
   <li><a href="/use/compute/vm-backups">VM backups</a> are copies of the VM's encrypted disk, stored by Hippius. Only that VM's disk key opens them.</li>
-  <li><a href="/use/compute/databases#backups">Database backups</a> are encrypted inside the database, with the backup key, before they reach a bucket in your own Hippius S3 account.</li>
-  <li><a href="/use/compute/kubernetes-backups">Kubernetes backups</a> are encrypted inside the cluster, with keys sealed to your cluster key, before they reach your Hippius S3 account.</li>
+  <li><a href="/use/compute/databases#backups">Database backups</a> are encrypted inside the database, with the backup key, before they reach a bucket in your own Hippius Object Storage account.</li>
+  <li><a href="/use/compute/kubernetes-backups">Kubernetes backups</a> are encrypted inside the cluster, with keys sealed to your cluster key, before they reach your Hippius Object Storage account.</li>
 </Unordered>
 
 ### Managed CDN
 
-The [Hippius CDN](/use/cdn) is open to every account and serves from France and Australia. Only Hippius S3 buckets, public or private, can be origins. It is built so that:
+The [Hippius CDN](/use/cdn) is open to every account and serves from France and Australia. Only Hippius Object Storage buckets, public or private, can be origins. It is built so that:
 
 <Unordered>
   <li>cache nodes are SEV-SNP confidential VMs, so a miner can't read cached content or certificate keys;</li>
