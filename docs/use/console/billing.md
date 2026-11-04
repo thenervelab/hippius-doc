@@ -3,7 +3,7 @@ id: billing
 title: Billing
 sidebar_label: Billing
 slug: /use/console/billing
-description: How paying for Hippius works. Add money to your balance by card, Bitcoin, USDC, TAO or Hippius tokens (hAlpha), choose a plan for Drive, S3 and Hub, and keep track of what you are charged.
+description: How paying for Hippius works. Add money to your balance by card, Bitcoin, USDC, TAO or Hippius tokens (hAlpha), choose a plan for Drive, Object Storage and Hub, and keep track of what you are charged.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -16,9 +16,9 @@ import Screenshot from '@site/src/components/Screenshot';
 
 There are two things to know about: your **balance** and your **plans**.
 
-Your balance is money you keep on your account, in dollars. A plan is what gives a product its storage. Drive, S3 and Hub each have their own plan, so you can be on a free Drive plan, pay for a large S3 plan and never touch Hub at all.
+Your balance is money you keep on your account, in dollars. A plan is what gives a product its storage. Drive, Object Storage and Hub each have their own plan, so you can be on a free Drive plan, pay for a large Object Storage plan and never touch Hub at all.
 
-Your balance pays for plans that renew from it each month (plans paid by card are charged to the card), and for anything you use by the hour, such as S3 on pay as you go and [Compute](/use/compute/billing). Topping up on its own does not give you more space. It keeps your plans paid.
+Your balance pays for plans that renew from it each month (plans paid by card are charged to the card), and for anything you use by the hour, such as Object Storage on pay as you go and [Compute](/use/compute/billing). Topping up on its own does not give you more space. It keeps your plans paid.
 
 You'll find all of this under <BgStyledIconWithText text="Billing" icon="Billing" /> in the sidebar.
 
@@ -26,7 +26,7 @@ You'll find all of this under <BgStyledIconWithText text="Billing" icon="Billing
 
 ## Add money to your balance
 
-You can top up by card, with Bitcoin, with USDC, with TAO, or with Hippius tokens (hAlpha). Whichever you pick, the money lands on your balance and stays there until a plan, S3 usage or compute usage draws on it.
+You can top up by card, with Bitcoin, with USDC, with TAO, or with Hippius tokens (hAlpha). Whichever you pick, the money lands on your balance and stays there until a plan, Object Storage usage or compute usage draws on it.
 
 ### By card
 
@@ -149,7 +149,7 @@ A Drive plan sets how much encrypted storage your Drive has. These are the plans
 
 <Screenshot src="/img/console/billing/drive-plans.png" alt="Drive storage plans" dark raw />
 
-**Who gets the free plan.** If you sign in with Google, GitHub, or Apple, your account comes with the Free Drive Plan, and you fall back to it if you ever cancel a paid plan. An **access key** creates a wallet-only account. It has no real email address, so it gets no lifecycle mail, and it does not include free storage, so you'll need to pick a Drive plan before your first upload. S3 and Hub work the same as on any other account.
+**Who gets the free plan.** If you sign in with Google, GitHub, or Apple, your account comes with the Free Drive Plan, and you fall back to it if you ever cancel a paid plan. An **access key** creates a wallet-only account. It has no real email address, so it gets no lifecycle mail, and it does not include free storage, so you'll need to pick a Drive plan before your first upload. Object Storage and Hub work the same as on any other account.
 
 **Subscribing** takes a minute. Pick a plan and confirm. On an account with no plan at all, such as an access key account, you choose how to pay: **Card** (Stripe checkout, and the card is kept for renewals) or **Account balance**. After a card payment the console shows the plan activating. That usually finishes in under a minute, and you can leave the page while it does. In the rare case a card payment goes through but the plan does not activate, the money stays on your balance and you can subscribe from there.
 
@@ -183,9 +183,9 @@ Starter and Plus stop uploads as soon as they are full. An account with no plan 
 
 When your Drive is full, uploads stop and the console offers a bigger plan. You can also delete something and try again.
 
-### S3 plans {#s3-plans-and-pay-as-you-go}
+### Object Storage plans {#s3-plans-and-pay-as-you-go}
 
-S3 can be paid for in two ways.
+Object Storage can be paid for in two ways.
 
 **Pay as you go** is where everyone starts. You pay **$6 per TB per month** for what you actually store, charged by the hour from your balance, with no cap and no commitment. There is nothing to sign up for.
 
@@ -193,11 +193,11 @@ S3 can be paid for in two ways.
 
 | Plan              | Storage | Price        | Per TB | Saving vs pay as you go |
 | ----------------- | ------- | ------------ | ------ | ----------------------- |
-| **S3 Pro**        | 10 TB   | $53 / month  | $5.30  | 12%                     |
-| **S3 Business**   | 50 TB   | $245 / month | $4.90  | 18%                     |
-| **S3 Enterprise** | 100 TB  | $465 / month | $4.65  | 22%                     |
+| **Pro**           | 10 TB   | $53 / month  | $5.30  | 12%                     |
+| **Business**      | 50 TB   | $245 / month | $4.90  | 18%                     |
+| **Enterprise**    | 100 TB  | $465 / month | $4.65  | 22%                     |
 
-<Screenshot src="/img/console/billing/s3-plans.png" alt="S3 storage plans and pay as you go" dark raw />
+<Screenshot src="/img/console/billing/s3-plans.png" alt="Object Storage plans and pay as you go" dark raw />
 
 The plans page works out what you'd save based on what you store today.
 
@@ -211,22 +211,22 @@ Switching to a plan doesn't touch your buckets or access keys, so there's nothin
 
 Changing plan resets your [storage limit](#s3-storage-limit) to the new plan's default.
 
-**Filling your plan.** The plan's storage is included, not a hard stop. Storage above it is billed by the hour at your plan's own rate, the plan price divided by its storage: $5.30 per TB per month on S3 Pro, $4.90 on Business and $4.65 on Enterprise. You only pay for what you store above the plan, for the hours you store it, up to your storage limit.
+**Filling your plan.** The plan's storage is included, not a hard stop. Storage above it is billed by the hour at your plan's own rate, the plan price divided by its storage: $5.30 per TB per month on Pro, $4.90 on Business and $4.65 on Enterprise. You only pay for what you store above the plan, for the hours you store it, up to your storage limit.
 
 #### Storage limit {#s3-storage-limit}
 
-A **storage limit** protects you from a runaway bill. It caps the total you can store, and it starts at **twice your plan's storage** (20 TB on S3 Pro). You can change it on the S3 plans page, under **Storage limit**:
+A **storage limit** protects you from a runaway bill. It caps the total you can store, and it starts at **twice your plan's storage** (20 TB on Pro). You can change it on the Object Storage plans page, under **Storage limit**:
 
 - The lowest limit is your plan's storage. At that setting there is no overage at all, and uploads pause at your plan's size.
 - A limit below what you already store deletes nothing: uploads pause right away, and what is above your plan is still billed until you free up space.
-- There is no fixed maximum. The page shows the most a month of overage could cost at the limit you pick: (limit − plan storage) × your plan's rate, for example (30 TB − 10 TB) × $5.30 = $106 a month on S3 Pro. It is a ceiling, not a forecast. You are billed by the hour for what you actually store.
+- There is no fixed maximum. The page shows the most a month of overage could cost at the limit you pick: (limit − plan storage) × your plan's rate, for example (30 TB − 10 TB) × $5.30 = $106 a month on Pro. It is a ceiling, not a forecast. You are billed by the hour for what you actually store.
 - **At the limit, writes pause and reads keep working.** You can still list and download everything, but nothing new can be uploaded. Writes resume on their own as soon as you free up space or raise the limit.
 - We email you at 80% of the limit, when you reach it, and when writes resume.
-- Only the account owner can change the limit. Team members with S3 access can see it.
+- Only the account owner can change the limit. Team members with Object Storage access can see it.
 
 ### Hub plans
 
-Hub plans set how much you can store in your Hub namespace. Everyone starts on the free plan (25 GB private, 100 GB public), and paid plans start at $5 a month. Hub works a little differently from Drive and S3 when you switch or cancel, so the full details are on the [Hub page](/use/console/hub#hub-plans).
+Hub plans set how much you can store in your Hub namespace. Everyone starts on the free plan (25 GB private, 100 GB public), and paid plans start at $5 a month. Hub works a little differently from Drive and Object Storage when you switch or cancel, so the full details are on the [Hub page](/use/console/hub#hub-plans).
 
 ## Keep track of what you pay
 
@@ -247,11 +247,11 @@ An invoice is issued for each payment, a few minutes after the money comes in: c
 
 ## If your balance runs out
 
-Your balance pays for renewals and for S3 pay as you go, so running dry affects both:
+Your balance pays for renewals and for Object Storage pay as you go, so running dry affects both:
 
 <Unordered>
-  <li>A Hub plan that can't renew is marked <strong>past due</strong>, and the console asks you to top up. A Drive plan ends instead, and your Drive goes back to the Free Drive Plan. An S3 plan ends too, and your storage goes back to pay as you go.</li>
-  <li>S3 on pay as you go becomes <strong>read only</strong> after 7 days. You can still download, but nothing new can be written. 7 days later S3 is <strong>suspended</strong> and your buckets can't be reached. After 37 days of unpaid storage the data may be <strong>deleted</strong>, with a final notice a week before. Any top up that covers your usage puts everything back.</li>
+  <li>A Hub plan that can't renew is marked <strong>past due</strong>, and the console asks you to top up. A Drive plan ends instead, and your Drive goes back to the Free Drive Plan. An Object Storage plan ends too, and your storage goes back to pay as you go.</li>
+  <li>Object Storage on pay as you go becomes <strong>read only</strong> after 7 days. You can still download, but nothing new can be written. 7 days later Object Storage is <strong>suspended</strong> and your buckets can't be reached. After 37 days of unpaid storage the data may be <strong>deleted</strong>, with a final notice a week before. Any top up that covers your usage puts everything back.</li>
 </Unordered>
 
 Topping up puts everything back. To avoid it altogether, turn on **Low balance alerts** in [Settings](/use/console/settings), or turn on [auto-reload](#auto-reload).
@@ -264,7 +264,7 @@ Before plans existed, the monthly top-up now called [Monthly reload](#by-card) w
 
 <Unordered>
   <li><a href="/use/console/drive">Drive</a>: start uploading once you have a plan.</li>
-  <li><a href="/use/console/s3">S3 Buckets</a>: create buckets and access keys.</li>
+  <li><a href="/use/console/s3">Object Storage</a>: create buckets and access keys.</li>
   <li><a href="/use/console/hub">Hub</a>: your container images and AI models.</li>
   <li><a href="/use/console/settings">Settings</a>: low balance alerts.</li>
   <li><a href="/use/compute/billing">Compute billing</a>: what VMs, databases and clusters cost by the hour.</li>

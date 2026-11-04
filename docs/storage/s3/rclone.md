@@ -1,15 +1,15 @@
 ---
 id: rclone
-title: Using rclone with Hippius S3
+title: Using rclone with Hippius Object Storage
 sidebar_label: rclone
 slug: /storage/s3/rclone
 ---
 
 import Unordered from '@site/src/components/Unordered';
 
-# Using rclone with Hippius S3
+# Using rclone with Hippius Object Storage
 
-[rclone](https://rclone.org/) is a command-line tool for managing files across cloud storage. Use it to sync folders, copy files, or mount Hippius S3 as a local drive.
+[rclone](https://rclone.org/) is a command-line tool for managing files across cloud storage. Use it to sync folders, copy files, or mount Hippius Object Storage as a local drive.
 
 ## Prerequisites
 
@@ -90,7 +90,7 @@ rclone copy hippius:my-bucket/my-folder ./local-folder
 
 ## Mount as a local drive
 
-Mount Hippius S3 as a local filesystem (macOS/Linux):
+Mount Hippius Object Storage as a local filesystem (macOS/Linux):
 
 ```bash
 mkdir -p ~/hippius-mount

@@ -17,7 +17,7 @@ The Hippius CDN serves the objects of one of your S3 buckets from cache nodes cl
 A **zone** is a CDN in front of one bucket, or one folder (prefix) of it. As soon as you create it, the zone is served over HTTPS on its default hostname, `ZONE_ID.c.hipcdn.net`. You can add your own domains to it.
 
 <Unordered>
-  <li><strong>Origins.</strong> Hippius S3 buckets, public or private. Other web servers (HTTP(S) origins) aren't supported yet.</li>
+  <li><strong>Origins.</strong> Hippius Object Storage buckets, public or private. Other web servers (HTTP(S) origins) aren't supported yet.</li>
   <li><strong>Regions.</strong> Cache nodes serve from France (FR) and Australia (AU). Visitors in Oceania are sent to AU (or to FR if AU has no node up), everyone else to FR. The <strong>shield region</strong> of a zone is the cache the other regions fill from: pick the one nearest the bucket. FR is the default.</li>
   <li><strong>Limits.</strong> 10 zones per account and 20 custom domains per zone. Each cache node serves a zone up to 20,000 requests per second and 2,000 Mbit/s: above that, new requests get <code>503</code> with <code>Retry-After</code>, and aren't billed.</li>
 </Unordered>
@@ -31,7 +31,7 @@ A **zone** is a CDN in front of one bucket, or one folder (prefix) of it. As soo
   <li>Create it. The default hostname serves within a few seconds.</li>
 </Ordered>
 
-A zone in front of a private bucket creates a read-only key on that bucket for the cache nodes, so creating one needs admin access to S3 as well as to CDN on a [shared account](/use/console/team).
+A zone in front of a private bucket creates a read-only key on that bucket for the cache nodes, so creating one needs admin access to Object Storage as well as to CDN on a [shared account](/use/console/team).
 
 :::warning A zone makes a private bucket public
 With a private bucket, every object under `<bucket>/<prefix>` becomes publicly readable through the zone. Use a prefix that holds only what you want to publish.
@@ -42,7 +42,7 @@ With a private bucket, every object under `<bucket>/<prefix>` becomes publicly r
 <Unordered>
   <li><strong>HTTPS.</strong> Plain HTTP requests are redirected to HTTPS (301), unless you turn that off in the zone's settings.</li>
   <li><strong>GET and HEAD only.</strong> Other methods get 405, and so does <code>OPTIONS</code> unless the zone has a CORS policy. Range requests work.</li>
-  <li><strong>Content type.</strong> Each object is served with the <code>Content-Type</code> stored in S3. Only when it has none, or a generic one (<code>application/octet-stream</code>), is it guessed from the extension, and only for images, audio, video, fonts, CSS, JavaScript, JSON, WebAssembly and plain text. HTML, SVG and XML are never guessed: upload them with an explicit `Content-Type`. <code>X-Content-Type-Options: nosniff</code> is always sent.</li>
+  <li><strong>Content type.</strong> Each object is served with the <code>Content-Type</code> stored in Object Storage. Only when it has none, or a generic one (<code>application/octet-stream</code>), is it guessed from the extension, and only for images, audio, video, fonts, CSS, JavaScript, JSON, WebAssembly and plain text. HTML, SVG and XML are never guessed: upload them with an explicit `Content-Type`. <code>X-Content-Type-Options: nosniff</code> is always sent.</li>
   <li><strong>HTML on the default hostname is sandboxed.</strong> On <code>ZONE_ID.c.hipcdn.net</code>, HTML, SVG and other XML get <code>Content-Security-Policy: sandbox allow-scripts</code>. On your own domains they don't, so serve a website from a custom domain.</li>
   <li><strong>CORS only when you turn it on.</strong> By default the CDN adds no <code>Access-Control-*</code> headers, so a page served from another origin can't read the zone's files with <code>fetch</code> or XHR, or load web fonts from it. To allow it, set a CORS policy on the zone (see <a href="#allow-cross-origin-requests-cors">Allow cross-origin requests (CORS)</a>). On the default hostname, HTML is sandboxed, so even same-host requests count as cross-origin.</li>
   <li><strong>Headers passed through</strong> from the object: <code>Content-Type</code>, <code>Content-Length</code>, <code>Content-Range</code>, <code>Content-Encoding</code>, <code>Content-Language</code>, <code>Content-Disposition</code>, <code>ETag</code>, <code>Last-Modified</code> and <code>Accept-Ranges</code>.</li>
@@ -76,7 +76,7 @@ To publish a new version, purge `/index.html` (or a prefix that contains it, suc
 
 Cache rules on a static-site zone match the object path that is served: the home page matches `/index.html`, not `/`.
 
-The zone's **Origin** section on the same tab changes its bucket or prefix, for example to switch to a new build folder. The whole zone is purged at once, so nothing from the previous origin is served again. Moving to a private bucket needs admin access to S3, as at creation.
+The zone's **Origin** section on the same tab changes its bucket or prefix, for example to switch to a new build folder. The whole zone is purged at once, so nothing from the previous origin is served again. Moving to a private bucket needs admin access to Object Storage, as at creation.
 
 ## Allow cross-origin requests (CORS)
 
@@ -285,7 +285,7 @@ The account owner is emailed when a zone reaches 80% of its cap, is paused by it
 
 <Unordered>
   <li><a href="/use/cdn/firewall">WAF</a>: block, allow or rate-limit requests to a zone with firewall rules.</li>
-  <li><a href="/use/console/s3">S3 Buckets</a>: create the bucket that serves as your origin.</li>
+  <li><a href="/use/console/s3">Object Storage</a>: create the bucket that serves as your origin.</li>
   <li><a href="/use/compute/billing">Billing and quotas</a>: how hourly usage is charged.</li>
   <li><a href="/use/console/team">Shared accounts</a>: give team members access to your CDN.</li>
 </Unordered>

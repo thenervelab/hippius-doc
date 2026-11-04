@@ -3,7 +3,7 @@ id: projects
 title: Projects and Billing Accounts
 sidebar_label: Projects and billing accounts
 slug: /use/console/projects
-description: Organise your Hippius compute, S3 and CDN into projects, pay for them from separate billing accounts, give team members access per project, follow costs per project, set budgets and quotas, and transfer a project to another account.
+description: Organise your Hippius compute, Object Storage and CDN into projects, pay for them from separate billing accounts, give team members access per project, follow costs per project, set budgets and quotas, and transfer a project to another account.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -41,19 +41,19 @@ Pick a project in the project switcher, or choose **Open** next to it on the **P
   <li><strong>Archive</strong> a project once it is empty, with <strong>Archive</strong> on the <strong>Projects</strong> page or in the project switcher. A project that still owns anything (a VM, a database, a cluster, a public IP, a runner, an S3 bucket or key, a CDN zone) cannot be archived: delete its resources first. The dialog lists what it still owns.</li>
 </Unordered>
 
-## S3 and the CDN in projects
+## Object Storage and the CDN in projects {#s3-and-the-cdn-in-projects}
 
-Buckets, S3 access keys and CDN zones belong to the project they are created in, so you see and manage them per project, and team members can be given S3 or CDN access for one project only.
+Buckets, S3 access keys and CDN zones belong to the project they are created in, so you see and manage them per project, and team members can be given Object Storage or CDN access for one project only.
 
 <Unordered>
-  <li><strong>S3 storage is paid at the account level.</strong> The bytes of every project add up under your account: your account's S3 plan covers them first, then pay-as-you-go from your Default billing account. A project's billing account never pays for its S3, and S3 plans are bought, changed and cancelled by the account owner only.</li>
+  <li><strong>Object Storage is paid at the account level.</strong> The bytes of every project add up under your account: your account's Object Storage plan covers them first, then pay-as-you-go from your Default billing account. A project's billing account never pays for its Object Storage, and Object Storage plans are bought, changed and cancelled by the account owner only.</li>
   <li><strong>CDN traffic follows the project.</strong> A zone's traffic and custom domains are charged to the project's billing account, hour by hour, like its compute.</li>
   <li><strong>Access keys in a project are object keys.</strong> A project has no master key. Its access keys work on named buckets of the project only: a key for every bucket, or one that can list or manage all buckets, is refused. Your own account-level keys (from the Default project) still see every project's buckets.</li>
   <li><strong>A CDN zone serves a bucket of its own project.</strong> A bucket that a CDN zone serves cannot be deleted: delete the zone first.</li>
   <li><strong>S3 migrations</strong> stay at the account level, as before.</li>
 </Unordered>
 
-In a project other than the Default one, the S3 page says that the project's storage is covered by the account's S3 plan and billed on the Default billing account, and the migrations page says that migrations import into the Default project's S3. A team member with S3 access to the project can see the account's S3 plan there. Uploads and deletions you start in a project stay in that project, even if you switch projects before they finish.
+In a project other than the Default one, the Object Storage page says that the project's storage is covered by the account's Object Storage plan and billed on the Default billing account, and the migrations page says that migrations import into the Default project's Object Storage. A team member with Object Storage access to the project can see the account's Object Storage plan there. Uploads and deletions you start in a project stay in that project, even if you switch projects before they finish.
 
 ## Billing accounts
 
@@ -93,7 +93,7 @@ A team manager can only give access they hold themselves, project by project. Wh
 
 Each billing account has a **Costs** tab on its page (also reachable with **Costs** next to it on the **Billing Accounts** page, the Default billing account included): what it paid, per project, per kind of usage (VM time, public IP, bandwidth, backup storage, database and Kubernetes management fees, CDN traffic, requests and custom domains) and per day, for any period up to a year. Choose the days with **From** and **To**, the breakdown with **Split by** (**Project**, **Kind**, **Day**), and download it with **Download CSV** for your own reporting.
 
-Costs show the hours charged or about to be charged. A project that moved to another billing account appears on each billing account for the hours that one paid. Each project's S3 storage is shown for information: it is paid at the account level (see above).
+Costs show the hours charged or about to be charged. A project that moved to another billing account appears on each billing account for the hours that one paid. Each project's Object Storage usage is shown for information: it is paid at the account level (see above).
 
 ## Budgets
 
@@ -129,7 +129,7 @@ From the transfer:
 ## Known limitations
 
 <Unordered>
-  <li>Backups of a database or cluster in a project are kept in your account's S3.</li>
+  <li>Backups of a database or cluster in a project are kept in your account's Object Storage.</li>
   <li>A project that only has CDN zones (and no VMs) is not stopped for unpaid usage of its billing account.</li>
   <li><strong>Native-token and x402 top-ups</strong> are not available on a billing account. Use a card or Bitcoin.</li>
   <li>Drive is not part of projects or shared accounts.</li>

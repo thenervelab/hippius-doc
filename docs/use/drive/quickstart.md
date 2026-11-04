@@ -14,8 +14,8 @@ import Screenshot from '@site/src/components/Screenshot';
 
 Drive is your private, end-to-end encrypted file storage. This guide gets your first file into it using the [Hippius Console](https://console.hippius.com) in your browser, with nothing to install. It takes about five minutes.
 
-:::tip Looking for S3?
-Drive is for your own files. To connect apps, scripts or backup tools over the S3 API, follow the [S3 Quickstart](/use/quickstart) instead.
+:::tip Looking for Object Storage?
+Drive is for your own files. To connect apps, scripts or backup tools over the S3 API, follow the [Object Storage Quickstart](/use/quickstart) instead.
 :::
 
 ## 1. Sign in

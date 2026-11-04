@@ -1,15 +1,15 @@
 ---
 id: aws-cli
-title: Using AWS CLI with Hippius S3
+title: Using AWS CLI with Hippius Object Storage
 sidebar_label: AWS CLI
 slug: /storage/s3/aws-cli
 ---
 
 import Unordered from '@site/src/components/Unordered';
 
-# Using AWS CLI with Hippius S3
+# Using AWS CLI with Hippius Object Storage
 
-The AWS CLI works out of the box with Hippius S3. All standard `aws s3` and `aws s3api` commands are supported.
+The AWS CLI works out of the box with Hippius Object Storage. All standard `aws s3` and `aws s3api` commands are supported.
 
 ## Prerequisites
 

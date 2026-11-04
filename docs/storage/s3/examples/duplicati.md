@@ -1,14 +1,14 @@
 ---
-title: "Example: Duplicati with Hippius S3"
+title: "Example: Duplicati with Hippius Object Storage"
 sidebar_label: Duplicati
 slug: /storage/s3/examples/duplicati
 ---
 
 import Unordered from '@site/src/components/Unordered';
 
-# Duplicati with Hippius S3
+# Duplicati with Hippius Object Storage
 
-Use Hippius S3 as the backup destination for [Duplicati](https://github.com/duplicati/duplicati), an open-source backup tool with encryption, compression, and scheduling built in. Unlike file sync tools like rclone, Duplicati creates deduplicated, optionally encrypted backup archives — ideal for automated, set-and-forget backups.
+Use Hippius Object Storage as the backup destination for [Duplicati](https://github.com/duplicati/duplicati), an open-source backup tool with encryption, compression, and scheduling built in. Unlike file sync tools like rclone, Duplicati creates deduplicated, optionally encrypted backup archives — ideal for automated, set-and-forget backups.
 
 Connection details: [Getting Started](/use/quickstart#connection-details). Always use `https://s3.hippius.com`.
 
