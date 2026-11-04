@@ -3,7 +3,7 @@ id: uploads
 title: Uploads
 sidebar_label: Uploads
 slug: /use/console/uploads
-description: How uploads to Drive and S3 work in the console. The 100 MB limit, the shared queue, the progress widget, and what to do when a file fails.
+description: How uploads to Drive and Object Storage work in the console. The 100 MB limit, the shared queue, the progress widget, and what to do when a file fails.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -21,13 +21,13 @@ This page explains the full upload flow from start to finish.
 ## File Size Limit
 
 :::warning 100 MB per file
-The **maximum file size for a single upload via the console is 100 MB**, for both Drive and S3.
+The **maximum file size for a single upload via the console is 100 MB**, for both Drive and Object Storage.
 
 If you need to upload larger files:
 
 <Unordered>
   <li><strong>Drive</strong>: install the <a href="/use/desktop/getting-started">Hippius Desktop App</a>, which uses incremental sync with no browser size cap.</li>
-  <li><strong>S3</strong>: use any S3 client that supports multipart uploads (the AWS CLI and every official SDK do). See <a href="/use/quickstart">S3 Quickstart</a>.</li>
+  <li><strong>Object Storage</strong>: use any S3 client that supports multipart uploads (the AWS CLI and every official SDK do). See <a href="/use/quickstart">Object Storage Quickstart</a>.</li>
 </Unordered>
 :::
 
@@ -35,7 +35,7 @@ If you need to upload larger files:
 
 | Where you are           | How to open the upload dialog                                      |
 | ----------------------- | ------------------------------------------------------------------ |
-| **Drive**               | Click <BgStyledText>+ New File</BgStyledText> in the page header.  |
+| **Drive**               | Click <BgStyledText>Upload File</BgStyledText> (shown as **File**, with an upload arrow) in the page header. |
 | **Inside an S3 bucket** | Click <BgStyledText>+ Upload Object</BgStyledText> in the bucket toolbar. |
 
 You can also drag files from your file manager (Finder, Explorer) directly onto the Drive page or inside an open S3 bucket. A full page drop zone appears and the dialog opens with your files already loaded.
@@ -51,7 +51,7 @@ You can also drag files from your file manager (Finder, Explorer) directly onto 
 
 <Screenshot src="/img/console/uploads/drive-dialog.png" alt="Drive upload dialog" dark />
 
-### The S3 Upload Dialog
+### The Object Storage Upload Dialog {#the-s3-upload-dialog}
 
 <Ordered>
   <li><strong>Save Location</strong>: pre filled with the folder you navigated to inside the bucket. Click to pick a different sub folder.</li>
@@ -60,7 +60,7 @@ You can also drag files from your file manager (Finder, Explorer) directly onto 
   <li>Click <BgStyledText>Continue With 1 File</BgStyledText> (the count follows your selection) to start.</li>
 </Ordered>
 
-<Screenshot src="/img/console/uploads/s3-dialog.png" alt="S3 upload dialog" dark />
+<Screenshot src="/img/console/uploads/s3-dialog.png" alt="Object Storage upload dialog" dark />
 
 ## Upload Security
 
@@ -75,9 +75,9 @@ Every Drive upload is encrypted in your browser **before any bytes leave your de
   <li>Only the resulting ciphertext is uploaded. Hippius nodes never see your files in plaintext.</li>
 </Ordered>
 
-### S3
+### Object Storage {#s3}
 
-Your S3 buckets are **private by default**. Files are only accessible using your master or sub tokens, so nobody else can read, list, or download your objects. Use sub tokens to grant scoped, time limited access to specific buckets without sharing your master credentials. See [S3 Buckets → Sub Tokens](/use/console/s3#sub-tokens).
+Your S3 buckets are **private by default**. Files are only accessible using your master or sub tokens, so nobody else can read, list, or download your objects. Use sub tokens to grant scoped, time limited access to specific buckets without sharing your master credentials. See [Object Storage → Sub Tokens](/use/console/s3#sub-tokens).
 
 S3 objects are encrypted at rest on the server, with keys that Hippius holds. Only Drive is encrypted on your device before upload.
 
@@ -120,7 +120,7 @@ Common failure reasons:
 | ------------------------- | ------------------------------------------------------------------------- |
 | **Network error**         | Check your connection and add the file again.                             |
 | **413 Too Large** (Drive) | The file is over 100 MB. Use the desktop app.                             |
-| **Auth error** (S3)       | Your master or sub token has expired or been revoked. Generate a new one. |
+| **Auth error** (Object Storage) | Your master or sub token has expired or been revoked. Generate a new one. |
 | **Out of storage**        | Your plan is full. The console catches this before the upload starts (see below). |
 
 ## Out of Storage
@@ -128,15 +128,15 @@ Common failure reasons:
 Uploads are limited by your plan, not by your balance.
 
 <Unordered>
-  <li><strong>Drive</strong>: if the upload would go over your Drive plan, <strong>You're out of storage</strong> appears before the queue starts. Click <BgStyledText>View plans</BgStyledText> to upgrade.</li>
-  <li><strong>S3 on a plan</strong>: an upload that would go past your plan's cap is stopped before it starts, with an <BgStyledText>Upgrade</BgStyledText> button. On pay as you go there is no cap.</li>
+  <li><strong>Drive</strong>: if the upload would go over your Drive plan, <strong>You're out of storage</strong> appears before the queue starts. Click <BgStyledText>View plans</BgStyledText> to upgrade. On Max and Scale, the limit is your <a href="/use/console/billing#drive-storage-cap">storage cap</a> rather than the plan's size.</li>
+  <li><strong>Object Storage on a plan</strong>: an upload that would go past your plan's cap is stopped before it starts, with an <BgStyledText>Upgrade</BgStyledText> button. On pay as you go there is no cap.</li>
 </Unordered>
 
 After upgrading, start the upload again. See [Billing](/use/console/billing) for the plans.
 
 ## Limits
 
-| Limit                         | Drive                        | S3                           |
+| Limit                         | Drive                        | Object Storage               |
 | ----------------------------- | ---------------------------- | ---------------------------- |
 | **Max file size via console** | 100 MB                       | 100 MB                       |
 | **Max files per batch**       | 1000                         | 1000                         |
@@ -147,7 +147,7 @@ After upgrading, start the upload again. See [Billing](/use/console/billing) for
 
 <Unordered>
   <li><a href="/use/console/drive">Drive</a>: your personal encrypted file storage.</li>
-  <li><a href="/use/console/s3">S3 Buckets</a>: S3 compatible bucket storage.</li>
+  <li><a href="/use/console/s3">Object Storage</a>: S3 compatible bucket storage.</li>
   <li><a href="/use/desktop/getting-started">Hippius Desktop App</a>: uploads beyond the 100 MB console limit.</li>
   <li><a href="/use/console/billing">Billing</a>: move to a bigger plan when you need more space.</li>
 </Unordered>

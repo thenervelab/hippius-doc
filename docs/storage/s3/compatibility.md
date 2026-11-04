@@ -9,7 +9,7 @@ import Unordered from '@site/src/components/Unordered';
 
 # S3 Compatibility Matrix
 
-Hippius S3 is S3-compatible with a focused feature set. If you already have S3 code, you only need to change three things: **endpoint URL**, **region**, and **credentials**. Everything else stays the same.
+Hippius Object Storage is S3-compatible with a focused feature set. If you already have S3 code, you only need to change three things: **endpoint URL**, **region**, and **credentials**. Everything else stays the same.
 
 This page lists every S3 API operation and whether we support it.
 
@@ -22,7 +22,7 @@ This page lists every S3 API operation and whether we support it.
 | **Signature** | AWS Signature V4 |
 | **Addressing** | Path-style (`s3.hippius.com/bucket/key`) |
 
-Same values as the [S3 Quickstart](/use/quickstart#connection-details). Always use `https://s3.hippius.com`.
+Same values as the [Object Storage Quickstart](/use/quickstart#connection-details). Always use `https://s3.hippius.com`.
 
 ## Bucket Operations
 
@@ -35,9 +35,9 @@ Same values as the [S3 Quickstart](/use/quickstart#connection-details). Always u
 | `GetBucketLocation` | ✅ Supported | Returns `us-east-1`. Clients still sign with region `decentralized` |
 | `PutBucketAcl` | ✅ Supported | `private`, `public-read`, `public-read-write`, `authenticated-read` |
 | `GetBucketAcl` | ✅ Supported | |
-| `PutBucketPolicy` | ⚠️ Partial | Accepts a standard public-read policy only, and marks the bucket public. Other statements are rejected |
-| `GetBucketPolicy` | ✅ Supported | Returns the policy for public buckets; `404 NoSuchBucketPolicy` on private buckets |
-| `DeleteBucketPolicy` | ❌ Not supported | Returns `501 NotImplemented`. Set the bucket ACL back to `private` instead |
+| `PutBucketPolicy` | ⚠️ Partial | Anonymous `s3:GetObject` only, on the whole bucket or on up to 32 prefixes (`arn:aws:s3:::bucket/prefix/*`). Other statements are rejected with `InvalidPolicyDocument` |
+| `GetBucketPolicy` | ✅ Supported | Returns the policy in force, including a public-read ACL; `404 NoSuchBucketPolicy` when nothing is public |
+| `DeleteBucketPolicy` | ✅ Supported | `409 InvalidBucketState` while the bucket ACL grants public read: set the ACL to `private` instead |
 | `PutBucketTagging` | ✅ Supported | |
 | `GetBucketTagging` | ✅ Supported | |
 | `DeleteBucketTagging` | ✅ Supported | |
@@ -101,7 +101,8 @@ Both are supported. Object Lock gives you write-once-read-many (WORM) retention 
 | Operation | Status | Notes |
 |-----------|--------|-------|
 | `CreateMultipartUpload` | ✅ Supported | Accepts `x-amz-object-lock-*` headers |
-| `UploadPart` | ✅ Supported | |
+| `UploadPart` | ✅ Supported | Up to 512 MiB per part, part numbers 1 to 10,000 |
+| `UploadPartCopy` | ✅ Supported | Cross-bucket. A copied range is at most 512 MiB |
 | `CompleteMultipartUpload` | ✅ Supported | |
 | `AbortMultipartUpload` | ✅ Supported | |
 | `ListMultipartUploads` | ✅ Supported | |
@@ -117,7 +118,7 @@ Both are supported. Object Lock gives you write-once-read-many (WORM) retention 
 
 ## What's Different
 
-Hippius S3 is S3-compatible but not a clone of any other provider. Here's what to keep in mind:
+Hippius Object Storage is S3-compatible but not a clone of any other provider. Here's what to keep in mind:
 
 <Unordered>
   <li><strong>Path-style only.</strong> Virtual-hosted style (<code>bucket.s3.hippius.com</code>) is not supported. Always use <code>forcePathStyle: true</code> or <code>addressing_style: "path"</code>.</li>
@@ -127,13 +128,13 @@ Hippius S3 is S3-compatible but not a clone of any other provider. Here's what t
   <li><strong>No S3 Select.</strong> You can't query inside objects. Download the object and process it locally.</li>
   <li><strong>No event notifications.</strong> There's no equivalent of S3 Event Notifications.</li>
   <li><strong>Lifecycle rules do nothing yet.</strong> The configuration is accepted so that clients don't fail, but no object is expired or transitioned.</li>
-  <li><strong>Bucket policies are a public-read switch.</strong> Only the standard public-read policy is accepted. Use ACLs and sub-tokens for everything else.</li>
+  <li><strong>Bucket policies only publish reads.</strong> A policy can make the whole bucket or some prefixes anonymously readable, nothing else. Use ACLs and sub-tokens for everything else.</li>
   <li><strong>Replication is automatic.</strong> The Hippius network handles data replication across miners. You don't need to configure cross-region replication.</li>
 </Unordered>
 
 ## Tested Clients
 
-These S3 clients are tested and confirmed to work with Hippius S3:
+These S3 clients are tested and confirmed to work with Hippius Object Storage:
 
 | Client | Language | Guide |
 |--------|----------|-------|
@@ -147,10 +148,10 @@ These S3 clients are tested and confirmed to work with Hippius S3:
 ## Further Reading
 
 <Unordered>
-  <li><a href="/use/quickstart">S3 Quickstart</a>: first upload</li>
+  <li><a href="/use/quickstart">Object Storage Quickstart</a>: first upload</li>
   <li><a href="/storage/s3/advanced">Advanced Usage</a> — presigned URLs, ACLs, public buckets, sub-tokens</li>
   <li><a href="/storage/s3/object-lock">Object Lock (WORM)</a> — retention and legal holds</li>
-  <li><a href="https://s3.hippius.com/veggies/s3/benchmark.html">Hippius S3 Benchmarks</a> — live performance benchmarks</li>
+  <li><a href="https://s3.hippius.com/veggies/s3/benchmark.html">Hippius Object Storage Benchmarks</a> — live performance benchmarks</li>
   <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html">S3 API reference</a> — any operation marked "Supported" above works identically</li>
   <li><a href="https://github.com/thenervelab/hippius-s3">hippius-s3 on GitHub</a> — report issues or request features</li>
   <li><a href="https://docs.hippius.com/llms.txt">llms.txt</a> — machine-readable docs for AI agents</li>

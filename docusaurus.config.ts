@@ -19,10 +19,10 @@ const inlineFont = (family: string, file: string, weight: string) => {
 
 const config: Config = {
   title: "Hippius Docs - Learn, use, earn and develop with Hippius",
-  tagline: "Encrypted storage, S3 and an AI model Hub",
+  tagline: "Encrypted Drive, Object Storage and an AI model Hub",
   favicon: "img/favicon.ico",
 
-  url: "https://docs.hippius.io",
+  url: "https://docs.hippius.com",
   baseUrl: "/",
 
   organizationName: "thenervelab",
@@ -104,7 +104,7 @@ const config: Config = {
     },
   ],
   themeConfig: {
-    image: "img/meta-image.png",
+    image: "img/docs-meta.jpg",
     metadata: [
       {
         name: "description",
@@ -118,7 +118,7 @@ const config: Config = {
       },
       {
         property: "og:image",
-        content: "https://docs.hippius.com/img/meta-image.png",
+        content: "https://docs.hippius.com/img/docs-meta.jpg",
       },
       {
         property: "og:image:width",
@@ -130,7 +130,7 @@ const config: Config = {
       },
       {
         property: "og:image:type",
-        content: "image/png",
+        content: "image/jpeg",
       },
       {
         name: "twitter:description",
@@ -139,7 +139,7 @@ const config: Config = {
       },
       {
         name: "twitter:image",
-        content: "https://docs.hippius.com/img/meta-image.png",
+        content: "https://docs.hippius.com/img/docs-meta.jpg",
       },
       {
         name: "twitter:card",
@@ -157,7 +157,8 @@ const config: Config = {
       title: "Hippius",
       logo: {
         alt: "Hippius Logo",
-        src: "img/logo.svg",
+        src: "img/logo-flat.svg",
+        srcDark: "img/logo-flat-dark.svg",
       },
       items: [
         // {
@@ -238,7 +239,7 @@ const config: Config = {
               to: "/use/quickstart",
             },
             {
-              label: "S3 Advanced Usage",
+              label: "Object Storage Advanced Usage",
               to: "/storage/s3/advanced",
             },
             {

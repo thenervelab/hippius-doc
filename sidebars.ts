@@ -37,6 +37,11 @@ const sidebars: SidebarsConfig = {
       label: "Use",
       collapsed: false,
       items: [
+        {
+          type: "html",
+          value: "<span style=\"font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;opacity:0.6\">Products</span>",
+          defaultStyle: true,
+        },
         // Product-level entry point for Drive. The per-app Drive guides stay
         // under Desktop App, Mobile App and Console and are linked from these
         // pages, not listed here, so only one sidebar section is active at a time.
@@ -48,7 +53,7 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "category",
-          label: "S3 Storage",
+          label: "Object Storage",
           collapsed: true,
           items: [
             "use/quickstart",
@@ -66,6 +71,15 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "category",
+          label: "CDN",
+          collapsed: true,
+          items: [
+            { type: "doc", id: "use/cdn", label: "Overview" },
+            "use/cdn-firewall",
+          ],
+        },
+        {
+          type: "category",
           label: "Hub",
           collapsed: true,
           items: [
@@ -74,6 +88,61 @@ const sidebars: SidebarsConfig = {
             "registry/push",
             "registry/cli",
           ],
+        },
+        {
+          type: "category",
+          label: "Confidential Compute",
+          collapsed: true,
+          items: [
+            "use/compute/overview",
+            {
+              type: "category",
+              label: "Virtual Machines",
+              collapsed: true,
+              items: [
+                "use/compute/virtual-machines",
+                "use/compute/networking",
+                "use/compute/resize",
+                "use/compute/vm-backups",
+                "use/compute/vm-failover",
+                "use/compute/dedicated-disks",
+              ],
+            },
+            "use/compute/databases",
+            {
+              type: "category",
+              label: "Kubernetes",
+              collapsed: true,
+              items: [
+                "use/compute/kubernetes",
+                "use/compute/kubernetes-worker-pools",
+                "use/compute/kubernetes-backups",
+              ],
+            },
+            "use/compute/runners",
+            // ⚠️ App engine (beta) pages are `unlisted: true` until the beta
+            // opens: reachable by direct link (the console links to
+            // /use/compute/app-engine/verify), not indexed, not in the sidebar.
+            // To publish, drop `unlisted` from the four pages and enable this:
+            // {
+            //   type: "category",
+            //   label: "App engine (Beta)",
+            //   collapsed: true,
+            //   items: [
+            //     "use/compute/app-engine/overview",
+            //     "use/compute/app-engine/deploy",
+            //     "use/compute/app-engine/verify",
+            //     "use/compute/app-engine/compose-rules",
+            //   ],
+            // },
+            "use/compute/billing",
+            "use/compute/troubleshooting",
+          ],
+        },
+        {
+          type: "html",
+          value: "<span style=\"font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;opacity:0.6\">Apps</span>",
+          defaultStyle: true,
         },
         {
           type: "category",
@@ -98,6 +167,8 @@ const sidebars: SidebarsConfig = {
             "use/console/bridge",
             "use/console/referrals",
             "use/console/settings",
+            "use/console/team",
+            "use/console/projects",
             "use/console/support",
           ],
         },
@@ -190,12 +261,12 @@ const sidebars: SidebarsConfig = {
             "use/wordpress-plugin/troubleshooting",
           ],
         },
-        "use/hippius-api",
         {
           type: "link",
           label: "Pricing",
           href: "https://hippius.com/pricing",
-        },],
+        },
+      ],
     },
 
     // ══ EARN ═══════════════════════════════════════════════════════
@@ -204,6 +275,8 @@ const sidebars: SidebarsConfig = {
       label: "Earn",
       collapsed: true,
       items: [
+        "operators/getting-started",
+        "operators/launch-error-codes",
         {
           type: "category",
           label: "Run a Miner",
@@ -234,6 +307,9 @@ const sidebars: SidebarsConfig = {
       label: "Develop",
       collapsed: true,
       items: [
+        "use/hippius-api",
+        "use/api-prices",
+        "use/wallet-login",
         "blockchain/api",
         {
           type: "category",

@@ -28,7 +28,7 @@ Installing the plugin takes a minute. Before you do, it helps to check your site
 
 <Unordered>
   <li>A Hippius account (free to create at <a href="https://console.hippius.com">console.hippius.com</a>).</li>
-  <li>Money on your account balance to cover storage. You can top up your account balance by card, TAO, Bitcoin or USDC.</li>
+  <li>Money on your account balance to cover storage. You can top up your account balance by card, Bitcoin, USDC, TAO or Hippius tokens (hAlpha).</li>
   <li>An S3 Access Key ID (it starts with <code>hip_</code>) and its S3 Secret Access Key.</li>
   <li>A bucket with a name of your own, created in the Hippius Console.</li>
   <li>A Hippius API token. This one is optional, only needed to show your account balance in the dashboard.</li>

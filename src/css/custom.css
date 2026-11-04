@@ -509,19 +509,28 @@ article .theme-doc-breadcrumbs {
   }
 }
 
-/* Hippius logo: slightly smaller than default so it balances the wordmark,
-   with a drop-shadow so the 2-tone mark pops on the light navbar */
+/* Hippius lockup, sized like the website's nav: a 26 by 22 mark (the SVGs
+   are cropped to the mark, no padding), 6px from the name. The flat mark
+   swaps to a lighter blue on dark via the navbar's `srcDark`. Flex so the
+   <img> is blockified: Docusaurus' themed image is `display: initial`
+   (inline), which sat it on the text baseline, below the name's centre. */
 .navbar__logo {
-  height: 1.6rem;
+  display: flex;
+  height: 22px;
+  margin-right: 6px;
 }
 
-.navbar__logo img {
-  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.3));
-}
-
-/* Hippius wordmark in brand blue (matches the console). --primary-50 stays
-   #3167DD in both light and dark mode, and the navbar background is light/dark
-   (never blue), so the blue title reads in both themes. */
+/* Hippius wordmark in black, white on dark (brand kit, matches the console
+   and the website). Docusaurus renders the title as a <b>, so the weight
+   is set back to the website's 557. */
 .navbar__brand .navbar__title {
-  color: rgb(var(--primary-50));
+  color: rgb(var(--grey-10));
+  font-size: 18px;
+  font-weight: 557;
+  letter-spacing: -0.04em;
+  line-height: normal;
+}
+
+[data-theme="dark"] .navbar__brand .navbar__title {
+  color: #fff;
 }

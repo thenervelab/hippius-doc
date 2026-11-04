@@ -52,8 +52,8 @@ The **TAO Deposit Address** card shows your **SS58 Bittensor Chain** address. Se
 
 Click the **copy** button beside the address to copy the whole value. The address is shortened in the middle to fit the card, so copy it rather than typing what you see.
 
-:::warning TAO transfers cannot be undone
-Once a TAO transaction confirms on chain it is final. Check the destination address before you send. We cannot recover funds sent to the wrong address.
+:::warning Send TAO only to this address
+Once a TAO transaction confirms on chain it is final. Don't send TAO to the **Deposit Address** in your Wallet: that one is your Hippius address, for hAlpha, and TAO sent there is not added to your balance until [support](/use/console/support) recovers it. TAO sent to anyone else's address can't be recovered.
 :::
 
 ## Storage plans
@@ -124,7 +124,7 @@ Card is selected by default, because it works whatever your balance is.
 
 Choosing it opens **Stripe Checkout in your browser**. The app shows a "Finish your payment in the browser" card while you are away, which you can close at any time: the payment is not tied to that dialog. Once Stripe takes the payment, the amount lands on your balance, the plan is bought with it, and your subscription appears in the app on its own.
 
-Your card is kept at Stripe and funds future renewals.
+Your card is kept at Stripe and each renewal is charged to it, so your balance stays untouched. If the card can't be charged, the renewal is paid from your balance when it covers it.
 
 ### Paying from your balance
 
@@ -144,7 +144,7 @@ If the chain is slow, the app stops waiting after a minute and tells you it will
 
 To move to a different size, click <BgStyledText>Upgrade</BgStyledText> or <BgStyledText>Downgrade</BgStyledText> on the plan you want and confirm.
 
-A change is made against the subscription you already have, so there is no payment chooser: it settles from your balance, the same way the existing plan is paid.
+A change is made against the subscription you already have, so there is no payment chooser: it is always paid from your balance, even if your renewals are charged to a card.
 
 :::warning A downgrade has to fit
 We refuse a downgrade if you are already storing more than the smaller plan holds. Remove enough files to get under the new limit first, then downgrade.

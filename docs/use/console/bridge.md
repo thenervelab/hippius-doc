@@ -15,7 +15,7 @@ import Screenshot from '@site/src/components/Screenshot';
 
 The bridge moves tokens between the **Bittensor** network (Alpha) and the **Hippius** network (hAlpha). The two are pegged 1:1, so bridging changes which network holds your tokens, not how many you have.
 
-You bridge from the **Bridge Tokens** panel at the bottom of the Stake card on the [Wallet](/use/console/wallet) page.
+You bridge from the **Bridge Tokens** panel on the [Wallet](/use/console/wallet) page, above **Stake hAlpha**.
 
 <Screenshot src="/img/console/wallet/bridge-dialog.png" alt="Bridge dialog" dark />
 

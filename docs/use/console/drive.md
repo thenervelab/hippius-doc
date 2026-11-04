@@ -75,7 +75,7 @@ Active filters show as chips above the table. Click the X on a chip to remove it
 
 ## Uploading Files
 
-Click <BgStyledText>+ New File</BgStyledText> in the page header to open the upload dialog.
+Click <BgStyledText>Upload File</BgStyledText> in the page header to open the upload dialog. To save space the button reads **File**, next to an upload arrow. <BgStyledText>Upload Folder</BgStyledText> beside it uploads a whole folder, and <BgStyledText>New Folder</BgStyledText> creates one.
 
 The first time you upload in a session, the console will ask for your **unlock password** to encrypt the file. After that, the key is cached for the rest of the session.
 
@@ -219,7 +219,8 @@ How much you can upload depends on your **Drive plan**, not on your balance.
 
 <Unordered>
   <li>If an upload would go over your plan, <strong>You're out of storage</strong> appears. Click <BgStyledText>View plans</BgStyledText> to move to a bigger plan, or free up space and try again.</li>
-  <li>If your account has no plan at all, <BgStyledText>+ New File</BgStyledText> asks you to pick one first, and a banner says that nothing new can be uploaded until you subscribe.</li>
+  <li>On <strong>Max</strong> and <strong>Scale</strong>, uploads keep going past the plan's storage, billed by the hour, until they reach your <a href="/use/console/billing#drive-storage-cap">storage cap</a>.</li>
+  <li>If your account has no plan at all, <BgStyledText>Upload File</BgStyledText> asks you to pick one first, and a banner says that nothing new can be uploaded until you subscribe.</li>
 </Unordered>
 
 See [Billing → Drive plans](/use/console/billing#drive-plans) for the plans and what happens without one.
@@ -261,6 +262,6 @@ The two folder download limits come from the zip format itself, not from Hippius
   <li><a href="/use/console/shared-drives">Shared Drives</a>: share a drive or a folder with people who have a Hippius account, and work in drives shared with you.</li>
   <li><a href="/use/captures">Screenshots and Recording</a>: capture your screen and share it with a link.</li>
   <li><a href="/use/console/uploads">Console Uploads</a>: full reference for the upload queue, progress widget, and error handling.</li>
-  <li><a href="/use/console/s3">S3 Buckets</a>: S3 compatible storage for use with any S3 client.</li>
+  <li><a href="/use/console/s3">Object Storage</a>: S3 compatible storage for use with any S3 client.</li>
   <li><a href="/use/desktop/getting-started">Hippius Desktop App</a>: real time folder sync and uploads beyond the 100 MB cap.</li>
 </Unordered>
