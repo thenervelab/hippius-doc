@@ -114,7 +114,7 @@ Your pages load each image straight from its Hippius URL, and visitors' browsers
 
 **What does it cost?**
 
-Your storage is paid from your account balance, or with an S3 plan. Downloads are free, only storage is billed. You can top up your account balance by card, TAO, Bitcoin or USDC. See [Console Billing](/use/console/billing).
+Your storage is paid from your account balance, or with an S3 plan. Downloads are free, only storage is billed. You can top up your account balance by card, Bitcoin, USDC, TAO or Hippius tokens (hAlpha). See [Console Billing](/use/console/billing).
 
 **Where are my credentials stored?**
 

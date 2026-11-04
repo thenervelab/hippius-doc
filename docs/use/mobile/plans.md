@@ -99,7 +99,7 @@ Both happen on the console's **Storage Plans** page. Open **Billing**. While you
 The app picks up either change the next time you open it.
 
 :::warning Access key accounts without a plan cannot upload
-Only access key accounts can end up with no plan, because every other account falls back to the Free Drive Plan. Without a plan, the account can't upload anything new. The files already in its Drive stay readable and are not deleted. Subscribe to any plan to upload again.
+Only access key accounts can end up with no plan, because every other account falls back to the Free Drive Plan. Without a plan, the account can't upload anything new. The files already in its Drive stay readable for a grace period and may then be removed; contact support if you need more time. Subscribe to any plan to upload again.
 :::
 
 ## When your storage is full {#when-your-storage-is-full}

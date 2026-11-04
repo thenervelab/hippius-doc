@@ -35,9 +35,9 @@ Same values as the [S3 Quickstart](/use/quickstart#connection-details). Always u
 | `GetBucketLocation` | ✅ Supported | Returns `us-east-1`. Clients still sign with region `decentralized` |
 | `PutBucketAcl` | ✅ Supported | `private`, `public-read`, `public-read-write`, `authenticated-read` |
 | `GetBucketAcl` | ✅ Supported | |
-| `PutBucketPolicy` | ⚠️ Partial | Accepts a standard public-read policy only, and marks the bucket public. Other statements are rejected |
-| `GetBucketPolicy` | ✅ Supported | Returns the policy for public buckets; `404 NoSuchBucketPolicy` on private buckets |
-| `DeleteBucketPolicy` | ❌ Not supported | Returns `501 NotImplemented`. Set the bucket ACL back to `private` instead |
+| `PutBucketPolicy` | ⚠️ Partial | Anonymous `s3:GetObject` only, on the whole bucket or on up to 32 prefixes (`arn:aws:s3:::bucket/prefix/*`). Other statements are rejected with `InvalidPolicyDocument` |
+| `GetBucketPolicy` | ✅ Supported | Returns the policy in force, including a public-read ACL; `404 NoSuchBucketPolicy` when nothing is public |
+| `DeleteBucketPolicy` | ✅ Supported | `409 InvalidBucketState` while the bucket ACL grants public read: set the ACL to `private` instead |
 | `PutBucketTagging` | ✅ Supported | |
 | `GetBucketTagging` | ✅ Supported | |
 | `DeleteBucketTagging` | ✅ Supported | |
@@ -101,7 +101,8 @@ Both are supported. Object Lock gives you write-once-read-many (WORM) retention 
 | Operation | Status | Notes |
 |-----------|--------|-------|
 | `CreateMultipartUpload` | ✅ Supported | Accepts `x-amz-object-lock-*` headers |
-| `UploadPart` | ✅ Supported | |
+| `UploadPart` | ✅ Supported | Up to 512 MiB per part, part numbers 1 to 10,000 |
+| `UploadPartCopy` | ✅ Supported | Cross-bucket. A copied range is at most 512 MiB |
 | `CompleteMultipartUpload` | ✅ Supported | |
 | `AbortMultipartUpload` | ✅ Supported | |
 | `ListMultipartUploads` | ✅ Supported | |
@@ -127,7 +128,7 @@ Hippius S3 is S3-compatible but not a clone of any other provider. Here's what t
   <li><strong>No S3 Select.</strong> You can't query inside objects. Download the object and process it locally.</li>
   <li><strong>No event notifications.</strong> There's no equivalent of S3 Event Notifications.</li>
   <li><strong>Lifecycle rules do nothing yet.</strong> The configuration is accepted so that clients don't fail, but no object is expired or transitioned.</li>
-  <li><strong>Bucket policies are a public-read switch.</strong> Only the standard public-read policy is accepted. Use ACLs and sub-tokens for everything else.</li>
+  <li><strong>Bucket policies only publish reads.</strong> A policy can make the whole bucket or some prefixes anonymously readable, nothing else. Use ACLs and sub-tokens for everything else.</li>
   <li><strong>Replication is automatic.</strong> The Hippius network handles data replication across miners. You don't need to configure cross-region replication.</li>
 </Unordered>
 

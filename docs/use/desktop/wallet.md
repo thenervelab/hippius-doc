@@ -236,6 +236,10 @@ A progress toast appears in the corner while the transfer is processed, followed
 
 Your deposit address is an SS58-encoded Substrate address, compatible with Polkadot and other Substrate-based chains.
 
+:::warning This address is for hAlpha only
+Don't send TAO to it: TAO sent there is not added to your balance. To pay with TAO, use the address on the **TAO Deposit Address** card in [Billing](/use/desktop/billing#tao-deposit-address).
+:::
+
 ## Staking
 
 The **Stake hAlpha** card is where you stake, unstake, and withdraw. Staking locks hAlpha; unstaking begins an **unbonding** period after which the tokens become **redeemable** and can be withdrawn back to your transferable balance.

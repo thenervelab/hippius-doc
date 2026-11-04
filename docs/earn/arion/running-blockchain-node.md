@@ -267,6 +267,10 @@ Follow the dedicated guide: use the **Hippius CLI** with the **peer ID** from yo
 Pallet-level behavior (challenge domain, storage maps) is summarized in **[Registration pallet](/pallets/registration)**.
 
 :::tip
+You can also create your storage family from the provider dashboard, signing everything in your wallet extension: see **[Create your family](/operators/getting-started#create-your-family-arion-storage)**.
+:::
+
+:::tip
 Use the same **coldkey** account you use in the CLI (`hippius account login`) and whose keys you inserted via RPC in **Section 3** above, so the node can sign on-chain operations consistently.
 :::
 

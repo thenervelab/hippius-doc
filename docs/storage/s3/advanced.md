@@ -122,7 +122,18 @@ policy = {
 s3.put_bucket_policy(Bucket="my-bucket", Policy=json.dumps(policy))
 ```
 
-Only this public-read policy is accepted. Any other statement is rejected with `MalformedPolicy`, and there is no `DeleteBucketPolicy`: to make the bucket private again, set its ACL back to `private`.
+This policy publishes anonymous `GET` and `HEAD` of every object, but not the bucket listing. The `public-read` ACL above publishes the listing too.
+
+**One folder (prefix) only:** aim the same statement at `arn:aws:s3:::my-bucket/public/*`. Only objects under `public/` become readable; the rest of the bucket stays private. A policy can list up to 32 prefixes, but it can't mix a prefix with the whole bucket.
+
+```python
+policy["Statement"][0]["Resource"] = ["arn:aws:s3:::my-bucket/public/*"]
+s3.put_bucket_policy(Bucket="my-bucket", Policy=json.dumps(policy))
+```
+
+Only these `Allow`, `Principal: "*"`, `s3:GetObject` statements are accepted. Anything else (another action, a `Deny`, a condition, a specific principal) is rejected with `400 InvalidPolicyDocument`. A prefix policy on a bucket that is already public returns `409 PolicyAlreadyExists`.
+
+`DeleteBucketPolicy` removes the policy. On a bucket made public with the ACL it returns `409 InvalidBucketState`: set the ACL back to `private` instead.
 
 **One object, bucket stays private:**
 
@@ -188,7 +199,7 @@ Do not hand a master token to a backup script, a CDN, or a contractor. Create a 
 
 Create them in the console: [S3 Buckets → Sub Tokens](/use/console/s3#sub-tokens). Pick **Object Read Only** or **Object Read & Write**, all buckets or specific ones, and a lifespan (Forever, 7 days, 30 days, 1 year, or a custom date). The secret is shown once.
 
-Rotate keeps the same Access Key ID and issues a new secret. Revoke is immediate and cannot be undone.
+Rotate issues a new Access Key ID and secret with the same permissions, and revokes the old pair. Revoke is immediate and cannot be undone.
 
 Programmatic create / list / rotate / revoke: [Management API](/use/api).
 
@@ -212,7 +223,7 @@ client.fput_object(
 )
 ```
 
-Objects can go up to ~5 TiB via multipart. See [Troubleshooting](/use/troubleshooting) if transfers are slow.
+A part can be up to 512 MiB, and an upload up to 10,000 parts, so objects can go up to ~5 TiB via multipart. See [Troubleshooting](/use/troubleshooting) if transfers are slow.
 
 ## Tag buckets and objects {#tag-buckets-and-objects}
 
@@ -253,7 +264,7 @@ Video tags work the same way. Hippius supports HTTP range requests, so browsers 
 </video>
 ```
 
-For a private video, inject a [presigned GET](#share-a-time-limited-download) into the `src`. There is no custom-domain support yet.
+For a private video, inject a [presigned GET](#share-a-time-limited-download) into the `src`. To serve a bucket on your own domain, put the [Hippius CDN](/use/cdn) in front of it.
 
 ## Stop a version being deleted {#stop-a-version-being-deleted}
 

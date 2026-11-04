@@ -34,7 +34,7 @@ Your storage is paid from your account balance, or with an S3 plan. Downloads ar
 <Ordered>
   <li>Open <BgStyledText>Billing</BgStyledText> in the console.</li>
   <li>Click <BgStyledText>+ Top up</BgStyledText>.</li>
-  <li>Top up your account balance by card, TAO, Bitcoin or USDC. A card payment runs through Stripe. The other three land on your account balance once the payment confirms.</li>
+  <li>Top up your account balance by card, Bitcoin, USDC, TAO or Hippius tokens (hAlpha). A card payment runs through Stripe. The others land on your account balance once the payment confirms.</li>
 </Ordered>
 
 <Screenshot src="/img/console/billing/overview.png" alt="Billing page, to top up your account balance" dark raw />
@@ -70,7 +70,7 @@ Bucket names on Hippius are **globally unique**, like on AWS: once anyone has ta
 
 <Ordered>
   <li>In <BgStyledText>S3 Buckets</BgStyledText>, click <BgStyledText>+ Create Bucket</BgStyledText>.</li>
-  <li>Enter your bucket name. Use lowercase letters, numbers and dashes, 3 to 63 characters, starting and ending with a letter or number.</li>
+  <li>Enter your bucket name. Use lowercase letters, numbers, dashes and dots, 3 to 63 characters, starting and ending with a letter or number. Two dots in a row, or a dot next to a dash, aren't allowed.</li>
   <li>Click <BgStyledText>Create Bucket</BgStyledText>, and note the exact name for the plugin settings.</li>
 </Ordered>
 

@@ -22,10 +22,10 @@ You can now set it up in the console itself. You no longer need to install the d
 The console offers this the first time you do something that needs your encryption key.
 
 <Ordered>
-  <li>The console checks whether your account already uses an encryption seed.</li>
-  <li>If it does not, you are shown a new 12 word recovery seed. Write it down before continuing.</li>
-  <li>Choose an unlock password of at least 10 characters. The strength meter must read <strong>Strong</strong> before <BgStyledText>Save Password</BgStyledText> turns on.</li>
+  <li><strong>Protect Your Account</strong>: choose an unlock password of at least 10 characters. The strength meter must read <strong>Strong</strong> before <BgStyledText>Save Password</BgStyledText> turns on.</li>
+  <li>The console checks whether your account already uses an encryption seed. If you signed in with an access key, it may ask you to <strong>Confirm Your Access Key</strong> instead, because your access key is your seed.</li>
   <li>The console encrypts your seed with that password and saves it.</li>
+  <li><strong>Save Your Recovery Seed</strong>: if you signed in with Google, GitHub or Apple and the console created a new seed, it shows you the 12 words once. Write them down and confirm you have saved them.</li>
 </Ordered>
 
 <Screenshot src="/img/console/unlock-password/setup.png" alt="Setting up an unlock password" dark />
@@ -39,6 +39,8 @@ Those 12 words are the only way back into your files if you forget your unlock p
 An account that already holds encrypted files or shared drives already has a seed, and creating a second one would strand everything encrypted under the first.
 
 So if the console finds existing data, it does not create a seed. It asks for your original recovery seed instead, and verifies it by actually decrypting one of your files before saving anything. If the seed you enter does not open your files, nothing is changed.
+
+If your account already has a seed but no file the console can check it against, the console can't verify it and shows **Finish Setup on Desktop**. Set up your unlock password in the [desktop app](/use/desktop/getting-started) instead.
 
 ## If You Forget Your Password
 

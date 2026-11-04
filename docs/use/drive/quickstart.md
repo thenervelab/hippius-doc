@@ -65,7 +65,7 @@ Already set an unlock password in the desktop or mobile app? The console skips t
 
 <Ordered>
   <li>Click your new folder to open it.</li>
-  <li>Click <BgStyledText>+ New File</BgStyledText>, or drag files from your computer onto the page.</li>
+  <li>Click <BgStyledText>Upload File</BgStyledText> (shown as **File**, with an upload arrow), or drag files from your computer onto the page.</li>
   <li>In <strong>Upload Files</strong>, drop your files or click to pick them. <strong>Upload to folder</strong> shows where they will go.</li>
   <li>Click <BgStyledText>Upload File</BgStyledText>.</li>
 </Ordered>
@@ -100,7 +100,7 @@ Sign in to the apps with the **same** Google, GitHub or Apple account, or the sa
 
 <Unordered>
   <li><strong>Desktop App</strong> for Windows, macOS and Linux: <a href="/use/desktop/getting-started#installing-the-desktop-app">install it</a> and sign in. Then click <BgStyledText>Add Folder</BgStyledText> to keep a folder on your computer in sync with Drive. See <a href="/use/desktop/using-the-app#set-up-your-first-sync-folder">Set Up Your First Sync Folder</a>.</li>
-  <li><strong>Mobile App</strong> for Android: <a href="/use/mobile/getting-started#install-android">install Hippius from Google Play</a> and sign in. Turn on <a href="/use/mobile/camera-uploads">Camera Uploads</a> to back up your photos and videos automatically.</li>
+  <li><strong>Mobile App</strong> for Android: <a href="/use/mobile/getting-started#install-android">install Hippius from Google Play</a> and sign in. Turn on <a href="/use/mobile/camera-uploads">Camera Uploads</a> to back up your photos and videos automatically. The iPhone version is coming soon to the App Store.</li>
 </Unordered>
 
 ## Where to next

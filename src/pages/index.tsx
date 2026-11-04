@@ -29,7 +29,7 @@ export const CATEGORIES: (SmallCardInfo & {
   },
   {
     title: "Use",
-    description: "Drive, S3 Storage and Hub, from the console, desktop and mobile apps.",
+    description: "Drive, S3 Compatible, CDN, Hub and Confidential Compute, from the console, desktop and mobile apps.",
     icon: <Icons.Cursor className="text-primary-50 relative size-6" />,
     cta: {
       label: "Use",
@@ -72,7 +72,7 @@ export const SMARTER_CLOUD: SmallCardInfo[] = [
   {
     title: "Encrypted",
     description:
-      "Drive encrypts on your device, only you hold the key. S3 encrypts at rest, every object under its own key. Hub keeps private repositories private.",
+      "Drive encrypts on your device, only you hold the key. S3 encrypts at rest, every chunk under its own key. Hub keeps private repositories private.",
     icon: <Icons.SheildTick className="text-primary-50 relative size-7" />,
   },
 ];
@@ -98,9 +98,9 @@ export const PRODUCTS: (SmallCardInfo & {
   {
     title: "CDN",
     description:
-      "Serve the files in your buckets from edge locations, with your own domain, cache rules and a spend cap.",
+      "Serve the files in your S3 buckets from edge locations in France and Australia, over HTTPS, on your own domain.",
     icon: <Icons.Lightning className="text-primary-50 relative size-7" />,
-    cta: { label: "Create your first zone", href: "https://docs.hippius.com/use/cdn" },
+    cta: { label: "Create your first zone", href: "/use/cdn" },
   },
   {
     title: "Hub",
@@ -114,7 +114,7 @@ export const PRODUCTS: (SmallCardInfo & {
     description:
       "VMs, databases, Kubernetes and runners in hardware-encrypted memory. The host can't read them.",
     icon: <Icons.SheildTick className="text-primary-50 relative size-7" />,
-    cta: { label: "How it works", href: "/learn/confidential-computing" },
+    cta: { label: "Launch your first VM", href: "/use/compute" },
   },
 ];
 
@@ -284,7 +284,7 @@ function HomepageFeatures() {
                 <P className="mt-4 whitespace-nowrap text-center" size="lg">
                   {product.title}
                 </P>
-                <P className="mt-2 text-grey-50 text-center" size="sm">
+                <P className="mt-2 text-grey-50 text-center flex-1" size="sm">
                   {product.description}
                 </P>
                 <Link
@@ -370,7 +370,7 @@ function HomepageFeatures() {
 
 export default function Home(): ReactNode {
   return (
-    <Layout>
+    <Layout description="Hippius docs: Drive, S3 Compatible, CDN, Hub and Confidential Compute, one account and one balance.">
       <main>
         <HomepageHeader />
         <HomepageFeatures />

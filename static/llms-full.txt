@@ -65,19 +65,22 @@ Hippius is a distributed cloud. Store encrypted files, serve objects over S3, an
 | Product | What an agent needs | Open |
 |---|---|---|
 | Drive | Encrypted files in the browser. Not S3. Files do not cross between them. | https://docs.hippius.com/use/drive |
-| Shared drives | A Drive someone else owns and invited you into. They pay for the storage. It appears in the console under Storage after the invite. There is no published guide yet. | |
+| Shared drives | A Drive someone else owns and invited you into. They pay for the storage. | https://docs.hippius.com/use/console/shared-drives |
 | S3 | S3-compatible API. Endpoint https://s3.hippius.com only. Region `decentralized`. Path-style. Access key ids start with `hip_`. | https://docs.hippius.com/use/quickstart |
-| Hub | Models and container images. Command: `hippius-hub`. Creating a namespace needs at least 10 credits (`REGISTRY_MIN_CREDITS`). The plan price stays zero. | https://docs.hippius.com/registry |
+| Hub | Models and container images. Command: `hippius-hub`. Creating a namespace needs a balance of at least $10, a spam check. The plan price stays zero. | https://docs.hippius.com/registry |
 | Desktop | Sync folders on macOS, Windows, and Linux. There is no CLI. The agent file is on the staging branch. | https://raw.githubusercontent.com/thenervelab/hippius-desktop/staging/llms.txt |
 | Mobile | Drive on Android, on Google Play. The iPhone app is not released. There is no CLI. | https://docs.hippius.com/use/mobile/getting-started |
 | Console | Sign up, pay, API token, Drive and S3 keys. There is no CLI. The agent calls https://api.hippius.com with the account token. | https://docs.hippius.com/use/console/getting-started |
 | Drive SDK | Script Drive with encryption on the client. Command: `hippius-drive`. Install from git, not PyPI. | https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt |
-| Bridge | No CLI. The user signs each step in a browser wallet. Alpha and hAlpha are pegged 1:1. Minimum 15. | https://docs.hippius.com/use/console/bridge |
-| Compute | No CLI and no public API. Not offered yet. | https://docs.hippius.com/use/console/virtual-machines |
+| Bridge | No CLI. An agent that holds the key signs the steps. Alpha and hAlpha are pegged 1:1. Minimum 15. | https://docs.hippius.com/use/console/fund-with-alpha |
+| Compute | Confidential VMs, managed PostgreSQL, managed Kubernetes and GitHub Actions runners, in the console. Open to every account, billed hourly from the balance. No CLI. | https://docs.hippius.com/use/compute |
+| Shared accounts | An owner invites members by email with Viewer, Operator or Admin access per product (VMs, databases, Kubernetes, runners, S3, CDN). The owner pays. Drive is not included. API header `X-Hippius-Account`. | https://docs.hippius.com/use/console/team |
 
 ### Authentication
 
-Sign in at https://console.hippius.com with Google, GitHub, Apple, or an existing 12-word access key. There is no email and password sign-in. An agent cannot create the account. That happens in the browser or the app.
+Sign in at https://console.hippius.com with Google, GitHub, Apple, or a 12-word access key. There is no email and password sign-in.
+
+An agent that holds its own 12-word access key opens the account and signs in with POST https://api.hippius.com/api/auth/mnemonic/ and POST https://api.hippius.com/api/auth/verify/. The first verify for a new Substrate address creates the account. Steps: https://docs.hippius.com/use/wallet-login. Google, GitHub, and Apple sign-in stays in the user's browser. Do not ask the user to paste a recovery phrase.
 
 A 12-word access key creates a wallet-only account. It has no real email address, so it gets no lifecycle mail. Drive has no free plan: subscribe before the first upload. S3 and Hub work the same as on any other account.
 
@@ -85,18 +88,49 @@ S3 access keys (`hip_*`) are created in the console and used with any S3 client.
 
 ### Paying
 
-Top up the balance, then subscribe to a plan. A top-up does not add storage. 1 credit = 1 USD. https://docs.hippius.com/use/console/billing
+Top up the balance, then subscribe to a plan. A top-up does not add storage. 1 USDC adds one dollar to your balance. https://docs.hippius.com/use/console/billing
 
-Four top-up methods, on Billing:
+Five top-up methods, on Billing:
 
 - Card, through Stripe, from $10 to $10,000, or a monthly auto reload.
-- Bitcoin, on-chain or Lightning, from $20 to $10,000. Lightning is credited in seconds. On-chain waits for one confirmation.
-- USDC on Base, from a browser wallet, from $5 to $10,000. 1 USDC is 1 credit.
-- TAO, from a connected wallet or by sending to the deposit address. Minimum $20. A transfer cannot be reversed.
+- Bitcoin, on-chain or Lightning, from $20 to $100,000. Lightning lands in seconds. On-chain waits for one confirmation.
+- USDC on Base, from a browser wallet, from $5 to $10,000. 1 USDC adds one dollar to your balance.
+- TAO, from a connected wallet or by sending to the TAO deposit address (Manually tab). At least $20 per transfer. Never send TAO to the Hippius account address (Wallet → Receive): it is not credited. A transfer cannot be reversed.
+- hAlpha, the Hippius native token, on the Hippius tab. Dollars added = hAlpha × the on-chain hAlpha price. Slippage protection 1% by default. Final on chain, no refund. Not invoiced.
 
-Subscribe from that product's plans page. A card payment lands on the balance and the plan is paid from it. A plan can also be paid from the balance already there. Hub plans are paid from the balance only.
+An access-key account buys that balance by signing Marketplace.buy_credits on wss://rpc.hippius.network. Read GET https://api.hippius.com/api/billing/native/quote/ first. Credits minted are alpha_amount * alpha_price / 10^18, rounded down. One credit is one dollar. Set min_credits to floor(credits * 9900 / 10000). Leave the referral code unset. The quote's min_alpha is the smallest buy the API accepts. The chain floor is 0.01 hAlpha. POST https://api.hippius.com/api/billing/native/buy/ is for an account whose key the API holds, and returns 409 self_sign for an access-key account. https://docs.hippius.com/use/console/fund-with-alpha
 
-Google, GitHub, and Apple accounts include the Free Drive Plan (10 GB). S3 starts on pay as you go at $6 per TB per month. A plan is optional.
+An agent with enough balance subscribes without a browser. Do not send a funded agent to Stripe Checkout.
+
+Drive (codes `solo` Starter, `duo` Plus, `max`, `scale`; Free needs no subscribe):
+
+    curl -X POST https://api.hippius.com/api/drive/subscription/ \
+      -H "Authorization: Token YOUR_TOKEN" \
+      -H "Content-Type: application/json" \
+      -d '{"plan":"solo","period":"monthly","payment":"credits"}'
+    # 201 if the balance covers the plan. `payment` JSON value `credits` means pay from the existing balance.
+
+S3 (codes `pro`, `business`, `enterprise`; otherwise pay as you go at $6/TB-month):
+
+    curl -X POST https://api.hippius.com/api/s3/subscription/ \
+      -H "Authorization: Token YOUR_TOKEN" \
+      -H "Content-Type: application/json" \
+      -d '{"plan":"pro","rail":"credits"}'
+
+Hub (names Free, Builder, Pro, Team; paid from the balance only; top up by card, Bitcoin, USDC or TAO first):
+
+    curl -sS https://api.hippius.com/api/registry/plans/   # id, name, quotas
+    curl -X POST https://api.hippius.com/api/registry/subscribe/ \
+      -H "Authorization: Token YOUR_TOKEN" \
+      -H "Content-Type: application/json" \
+      -d '{"plan_id":2}'
+    # Requires plan_id (Builder is 2). {"plan":"Builder"} returns 400.
+
+Catalogs (no auth): GET https://api.hippius.com/api/drive/plans/ · GET https://api.hippius.com/api/s3/plans/ · GET https://api.hippius.com/api/registry/plans/
+
+Plan prices, monthly (the catalogs above are always current): Drive Free 10 GB $0, Starter 500 GB $4, Plus 2 TB $7, Max 10 TB $22, Scale 25 TB $50 (Max and Scale bill storage above the plan hourly, $2.20 and $2.00 per TB per month, up to a storage cap that defaults to twice the plan; Drive plans are monthly only, a downgrade or cancel takes effect at the end of the period). S3 Pro 10 TB $53, Business 50 TB $245, Enterprise 100 TB $465. Hub Free $0, Builder $5, Pro $19, Team $99.
+
+Google, GitHub, and Apple accounts include the Free Drive Plan (10 GB). S3 starts on pay as you go at $6 per TB per month. A plan is optional. Creating a Hub namespace needs a balance of at least $10.
 
 Open a support ticket with the account API token: POST https://api.hippius.com/api/support/tickets/ with subject, priority, category, and description.
 
@@ -106,7 +140,7 @@ Open a support ticket with the account API token: POST https://api.hippius.com/a
 
 `hipc` and the storage commands in `pip install hippius` are deprecated. Do not use them. Chain registration still uses `hippius`. S3 uses any S3 client, and that manual starts at S3 Storage — Quickstart. The tools below are the other products.
 
-An agent cannot create the account or approve a browser login. The user does that at https://console.hippius.com. The API token is on https://console.hippius.com/dashboard/settings
+An agent that holds its own 12-word access key opens the account at https://docs.hippius.com/use/wallet-login and calls the API with the returned token. Google, GitHub, and Apple sign-in stays in the browser at https://console.hippius.com. The API token for an account opened in the browser is on https://console.hippius.com/dashboard/settings
 
 ### Hub
 
@@ -120,7 +154,7 @@ hippius-hub registry provision my-models --docker-login
 hippius-hub upload my-models/qwen-7b ./qwen-7b --revision v1
 ```
 
-Creating a namespace needs at least 10 credits on the account. A zero balance is refused. The plan price stays zero. Top up, then provision.
+Creating a namespace needs a balance of at least $10 on the account. A zero balance is refused. The plan price stays zero. Top up, then provision.
 
 Two logins. `hippius-hub registry` and `hippius-hub models` use the API token saved by `login --hippius-token`. `upload`, `download`, `docker`, and `oras` use the registry robot secret that `provision` prints once. Lost that secret: `hippius-hub registry rotate-token --docker-login`. The old secret stops working immediately.
 
@@ -153,7 +187,7 @@ A token and an address that do not belong together fail `whoami` with 403. Leave
 
 ### Console
 
-There is no console CLI. Sign-in, plan checkout in the browser, and anything that needs a wallet signature stay in https://console.hippius.com. After the user copies the API token, call https://api.hippius.com with `Authorization: Token <token>`.
+There is no console CLI. Card checkout stays in the browser at https://console.hippius.com. An agent that holds the key signs the hAlpha buy and the bridge: https://docs.hippius.com/use/console/fund-with-alpha. Call https://api.hippius.com with `Authorization: Token <token>`.
 
 ```bash
 curl -sS -H "Authorization: Token $HIPPIUS_TOKEN" https://api.hippius.com/api/billing/credits/balance/
@@ -164,7 +198,7 @@ curl -sS https://api.hippius.com/api/registry/plans/
 curl -sS https://api.hippius.com/api/billing/latest-tao-price/
 ```
 
-The plan lists and the TAO price answer without a token. Balance and `registry/me` need one. S3 key create, rotate, and revoke are in Management API. The OpenAPI spec is https://api.hippius.com/?format=openapi
+The plan lists and the TAO price answer without a token. Balance and `registry/me` need one. S3 key create, rotate, and revoke are in Management API. The OpenAPI spec is https://api.hippius.com/openapi.json
 
 ### Desktop
 
@@ -182,17 +216,32 @@ Agent file: https://raw.githubusercontent.com/thenervelab/hippius-desktop/stagin
 
 ### Bridge
 
-There is no bridge CLI. The user opens Wallet in the console and uses Bridge Tokens. Guide: https://docs.hippius.com/use/console/bridge
+There is no bridge CLI. An agent that holds the Bittensor coldkey signs the steps. A user who keeps the key in a browser wallet approves them in the console. Guide: https://docs.hippius.com/use/console/fund-with-alpha. The console dialog is https://docs.hippius.com/use/console/bridge.
 
-The bridge moves Alpha on Bittensor and hAlpha on Hippius. They are pegged 1:1. The minimum is 15 Alpha or 15 hAlpha. It takes about 120 seconds. The only cost is network gas: TAO on the Bittensor side, hAlpha on Hippius.
+The bridge moves Alpha on Bittensor subnet 75 and hAlpha on Hippius. They are pegged 1:1. The minimum is 15 Alpha or 15 hAlpha. A deposit usually becomes hAlpha in 3 to 10 minutes. Fees are TAO on Bittensor and hAlpha on Hippius. Adding the escrow as a proxy reserves 0.093 TAO until the proxy is removed.
 
-Alpha to hAlpha needs 3 signatures, or 4 when the Alpha must first be moved onto the Hippius validator. hAlpha to Alpha needs 1 signature. The user approves each signature in a browser wallet extension. An agent cannot approve those signatures.
+The stake has to sit on hotkey 5G1Qj93Fy22grpiGKq6BEvqqmS2HVRs3jaEdMhq9absQzs6g. Stake anywhere else fails the deposit. The escrow contract is 5CtJ99rm9ze4QA523ieagy3vJ9D1A69tDcEUae3Q7g5RVykh.
+
+1. SubtensorModule.move_stake onto that hotkey, netuid 75 on both sides, amount in rao. Skip this when the hotkey already holds the amount.
+2. Proxy.add_proxy of the contract, proxy type Any, delay 0.
+3. Contract deposit(amount, hotkey), amount in rao, hotkey the validator.
+4. Proxy.remove_proxy with the same arguments.
+
+hAlpha to Alpha needs 1 signature. The minimum is 15 hAlpha. Multiply the rao amount by 10^9 to get hAlpha planck. The call data and how to follow a deposit are on the funding guide.
 
 ### Compute
 
-There is no compute CLI and no public VM API. Hippius VMs are not offered yet: https://docs.hippius.com/use/console/virtual-machines
+Compute is open to every account, in the console under Confidential Computing. There is no compute CLI. Guide: https://docs.hippius.com/use/compute
 
-Prices and launch steps are not published. Hub stores images. It does not run them.
+Billing: metered per second (one-minute minimum per VM and public IPv4), charged hourly on the Hippius chain from the balance. A VM is billed running or stopped until it is deleted. A launch needs a balance covering 24 hours of the account's compute plus the launch. Quotas apply: new accounts start on the Starter tier (3 VMs, 8 vCPU) and move up automatically with their charged usage.
+
+Prices per 730-hour month, on the default NVMe OS disk: vCPU $18, memory $2.50/GB, disk $0.10/GB. Small (1 vCPU, 4 GB, 40 GB) $32 ($0.0438/h), Medium $64, Large $128, X-Large $256, 2X-Large $512, 4X-Large $1024. OS disk tier chosen at launch, fixed: SSD (disk $0.06/GB; Small $27.60, Medium $55.20, Large $110.40, X-Large $220.80, 2X-Large $441.60, 4X-Large $883.20) or HDD, slow, for dev and test, up to Large (disk $0.03/GB; Small $17.16, Medium $34.32, Large $68.64). Managed databases and Kubernetes nodes run on NVMe. Dedicated disks: whole physical disks for one VM, up to 8, at least 1,000 GiB, exact tier, $2.50 HDD / $5 SSD / $8 NVMe per TiB-month, billed while stopped; the VM is pinned (no backups, migration or failover) and counts against a dedicated-disk quota (4 TiB Starter, 16 TiB Standard, 64 TiB Business): https://docs.hippius.com/use/compute/dedicated-disks. Public IPv4 $0.005/h (~$3.65/month). VM backups $6 per TB-month. Outbound bandwidth metered per region, not charged today; inbound free. Managed databases: their VMs plus 25%. Kubernetes: its VMs plus $15 per cluster per month. Database and Kubernetes backups go to the user's own S3, at S3 prices. The live price list wins: https://console.hippius.com/dashboard/billing/compute#prices. Details: https://docs.hippius.com/use/compute/billing
+
+CDN prices, billed hourly from the balance like compute: data out $0.010 per GB billed in FR, $0.060 per GB billed in AU (each byte at the cheaper of the serving and the visitor's region), $0.002 per 10,000 requests, $1 per custom domain per month; the default hostname is included. Each zone has a monthly spend cap ($20 by default, $1 to $100,000): at the cap the zone is paused and answers 503 on every hostname, unbilled and with no fallback to the bucket, until the cap is raised or the next month (UTC) starts. Emails at 80%, at the cap and on resume. Details: https://docs.hippius.com/use/cdn
+
+CDN WAF (available on every zone, from its Security tab): per-zone custom rules (Cloudflare-style expressions), rate limits answered 429 and counted per cache node, IP/ASN/country lists, log-only mode, versions with rollback. Standard $5 per zone per month (25 rules, 5 rate limits), Advanced $20 (100 rules, 25 rate limits, regex, 7-day events), billed per second while the mode is not off; blocked requests are never billed. Details: https://docs.hippius.com/use/cdn
+
+Hub stores images. It does not run them.
 
 ---
 
@@ -210,7 +259,7 @@ Step 2: Top up on Billing by card, Bitcoin, USDC, or TAO, then subscribe if the 
 Step 3: Create credentials — Console > S3 Storage > Create Master Token
 Step 4: Save Access Key ID (hip_...) and Secret Key — the secret cannot be retrieved after creation
 
-IMPORTANT: ETH wallets, TAO wallets, and Polkadot browser extensions are NOT used for S3 access. Card, Bitcoin, USDC, and TAO pay for credits. They do not authenticate S3 requests.
+IMPORTANT: ETH wallets, TAO wallets, and Polkadot browser extensions are NOT used for S3 access. Card, Bitcoin, USDC, and TAO add to the balance. They do not authenticate S3 requests.
 
 ### First upload (Python)
 
@@ -272,12 +321,13 @@ Master keys bypass ACLs. Sub-tokens need an explicit grant unless scoped to that
 
 Scoped credentials: per-bucket, read-only or read/write, optional expiry.
 Create in Console > S3 Buckets (https://docs.hippius.com/use/console/s3) or via Management API.
-Rotate keeps the Access Key ID and issues a new secret. Revoke is immediate.
+Rotate issues a new Access Key ID and secret with the same permissions and revokes the old pair. Revoke is immediate.
 
     curl -X POST https://api.hippius.com/api/objectstore/sub-tokens/ \
       -H "Authorization: Token YOUR_BEARER_TOKEN" \
       -H "Content-Type: application/json" \
-      -d '{"name": "read-only-backup", "permissions": ["read"]}'
+      -d '{"name": "read-only-backup", "scope_type": "single_bucket", "bucket_names": ["my-bucket"], "actions": ["read"]}'
+    # scope_type: single_bucket, multi_bucket or global. actions: ["read"] or ["read", "write"]
 
     curl -X POST https://api.hippius.com/api/objectstore/master-tokens/{id}/revoke/ \
       -H "Authorization: Token YOUR_BEARER_TOKEN"
@@ -287,7 +337,7 @@ Rotate keeps the Access Key ID and issues a new secret. Revoke is immediate.
 
 ### Large files
 
-Console upload cap is 100 MB. Use multipart via AWS CLI / SDKs for larger objects (up to ~5 TiB).
+Console upload cap is 100 MB. Use multipart via AWS CLI / SDKs for larger objects: parts up to 512 MiB, at most 10,000 parts (~5 TiB).
 
 ### Object Lock
 
@@ -449,14 +499,14 @@ Supported operations:
 - Bucket: CreateBucket, DeleteBucket, ListBuckets, HeadBucket, GetBucketLocation
 - Object: PutObject, GetObject, HeadObject, DeleteObject, CopyObject
 - List: ListObjects, ListObjectsV2
-- Multipart: InitiateMultipartUpload, UploadPart, CompleteMultipartUpload, AbortMultipartUpload (up to ~5 TiB)
+- Multipart: InitiateMultipartUpload, UploadPart, UploadPartCopy, CompleteMultipartUpload, AbortMultipartUpload, ListParts, ListMultipartUploads (parts up to 512 MiB, at most 10,000 parts, ~5 TiB)
 - Tags: PutObjectTagging, GetObjectTagging, DeleteObjectTagging, PutBucketTagging, GetBucketTagging
 - ACL: PutBucketAcl, GetBucketAcl, PutObjectAcl, GetObjectAcl
-- Policy: PutBucketPolicy, GetBucketPolicy, DeleteBucketPolicy
+- Policy: PutBucketPolicy, GetBucketPolicy, DeleteBucketPolicy. A policy may only allow anonymous s3:GetObject, on the whole bucket or on up to 32 prefixes (arn:aws:s3:::bucket/prefix/*); anything else is 400 InvalidPolicyDocument. DeleteBucketPolicy returns 409 while the bucket ACL is public-read
 - Versioning: PutBucketVersioning (Enabled only; Suspended returns 501), GetBucketVersioning, ListObjectVersions
 - Object Lock: Put/Get ObjectLockConfiguration, Retention, LegalHold (GOVERNANCE and COMPLIANCE)
 - Presigned URLs GET/PUT/DELETE (max 7 days), range requests, video streaming
-- Lifecycle: basic expiration rules only
+- Lifecycle: configuration accepted but not applied; nothing expires
 
 Not supported: S3 Select, POST Object, virtual-hosted style, event notifications, S3 Batch Operations, cross-region replication (network replicates automatically)
 
@@ -474,7 +524,7 @@ Public URL format: https://s3.hippius.com/{bucket-name}/{object-key}
 
 ### Rate limits
 
-100 requests per minute per account
+No fixed per-account request limit. Under load the gateway answers 503 SlowDown (retryable, sometimes with Retry-After): retry with backoff, as the AWS SDKs do.
 
 ---
 
@@ -597,7 +647,7 @@ Token types:
 ## Management API
 
 Docs: https://docs.hippius.com/use/api
-Full OpenAPI spec: https://api.hippius.com/?format=openapi
+Full OpenAPI spec: https://api.hippius.com/openapi.json
 
 Auth: account API token from https://console.hippius.com/dashboard/settings
 Header: Authorization: Token <token>
@@ -611,8 +661,21 @@ Token management:
     POST https://api.hippius.com/api/objectstore/master-tokens/{id}/rotate/
     GET/POST https://api.hippius.com/api/objectstore/sub-tokens/
 
-Billing:
+Balance (path still says credits):
     GET  https://api.hippius.com/api/billing/credits/balance/
+
+Subscribe from the existing balance (201). Do not use Stripe Checkout when the balance already covers the plan:
+    POST https://api.hippius.com/api/drive/subscription/     {"plan":"solo","period":"monthly","payment":"credits"}
+                                                             Drive codes: solo, duo, max, scale
+    POST https://api.hippius.com/api/s3/subscription/        {"plan":"pro","rail":"credits"}
+                                                             S3 codes: pro, business, enterprise
+    POST https://api.hippius.com/api/registry/subscribe/     {"plan_id":2}
+                                                             Hub names: Free, Builder, Pro, Team. Requires plan_id from GET /api/registry/plans/. {"plan":"Builder"} returns 400.
+    GET  https://api.hippius.com/api/drive/plans/
+    GET  https://api.hippius.com/api/s3/plans/
+    GET  https://api.hippius.com/api/registry/plans/
+
+Top up (browser or wallet, not subscribe):
     GET  https://api.hippius.com/api/billing/latest-tao-price/
     POST https://api.hippius.com/api/billing/stripe/create-checkout-session/
     POST https://api.hippius.com/api/billing/stripe/create-subscription/
@@ -625,6 +688,22 @@ Billing:
 
 Support:
     POST https://api.hippius.com/api/support/tickets/
+
+### Public prices (no auth)
+
+Docs: https://docs.hippius.com/use/api-prices
+    GET  https://api.hippius.com/api/compute/public-prices/   everything compute sells: os_disk_tiers[] (tier, disk_gb rate, max_flavor, flavors[]), dedicated_disks[] (size_class_gb, regions[] free stock per size), public_ip, backup_storage, managed_database, managed_kubernetes, runners[], runner_tiers[] (nvme, ssd), bandwidth_per_gb, bandwidth_by_region
+    GET  https://api.hippius.com/api/compute/flavors/         VM sizes, price_credits_monthly (NVMe)
+    GET  https://api.hippius.com/api/cdn/prices/              base units (divide by 10^18 for credits)
+    GET  https://api.hippius.com/api/s3/plans/ · /api/drive/plans/ · /api/registry/plans/
+Compute public prices are credits (1 credit = 1 USD) as decimal strings; monthly = hourly x 730, to the cent. null means the catalogue has no price yet, never free. Cache-Control: public, max-age=60 (flavors 300), Vary: Authorization. 300 requests/min per client address on the compute and CDN lists, then 429.
+
+### Access key sign-in
+
+Docs: https://docs.hippius.com/use/wallet-login
+    POST https://api.hippius.com/api/auth/mnemonic/  {"address": "0x...", "substrate_address": "5..."}  -> challenge, message, expires_in (300)
+    POST https://api.hippius.com/api/auth/verify/    {"address", "substrate_address", "challenge", "signature", "substrate_signature"} -> token
+Sign `message` verbatim: signature = EIP-191 personal_sign by the Ethereum key (m/44'/60'/0'/0/0); substrate_signature = sr25519 by the Substrate key (no derivation path) over the raw message bytes. A signature over the polkadot.js <Bytes> wrapping (browser extension signRaw) is refused: 401 code substrate_signature_invalid. Missing proof on a new or never-proven account: 401 code substrate_signature_required. The first verify for a new Substrate address creates the account. An agent that holds the phrase uses this. Never ask a user to paste their 12 words into chat.
 
 ---
 

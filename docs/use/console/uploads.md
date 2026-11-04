@@ -35,7 +35,7 @@ If you need to upload larger files:
 
 | Where you are           | How to open the upload dialog                                      |
 | ----------------------- | ------------------------------------------------------------------ |
-| **Drive**               | Click <BgStyledText>+ New File</BgStyledText> in the page header.  |
+| **Drive**               | Click <BgStyledText>Upload File</BgStyledText> (shown as **File**, with an upload arrow) in the page header. |
 | **Inside an S3 bucket** | Click <BgStyledText>+ Upload Object</BgStyledText> in the bucket toolbar. |
 
 You can also drag files from your file manager (Finder, Explorer) directly onto the Drive page or inside an open S3 bucket. A full page drop zone appears and the dialog opens with your files already loaded.
@@ -128,7 +128,7 @@ Common failure reasons:
 Uploads are limited by your plan, not by your balance.
 
 <Unordered>
-  <li><strong>Drive</strong>: if the upload would go over your Drive plan, <strong>You're out of storage</strong> appears before the queue starts. Click <BgStyledText>View plans</BgStyledText> to upgrade.</li>
+  <li><strong>Drive</strong>: if the upload would go over your Drive plan, <strong>You're out of storage</strong> appears before the queue starts. Click <BgStyledText>View plans</BgStyledText> to upgrade. On Max and Scale, the limit is your <a href="/use/console/billing#drive-storage-cap">storage cap</a> rather than the plan's size.</li>
   <li><strong>S3 on a plan</strong>: an upload that would go past your plan's cap is stopped before it starts, with an <BgStyledText>Upgrade</BgStyledText> button. On pay as you go there is no cap.</li>
 </Unordered>
 

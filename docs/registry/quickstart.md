@@ -23,7 +23,7 @@ It has two faces:
 | **Model Registry** | A drop-in replacement for [Hugging Face Hub](https://huggingface.co). Same Python API ([`hf_hub_download`](https://huggingface.co/docs/huggingface_hub/guides/download#download-a-single-file), [`snapshot_download`](https://huggingface.co/docs/huggingface_hub/guides/download#download-an-entire-repository), [`from_pretrained`](https://huggingface.co/docs/transformers/main_classes/model#transformers.PreTrainedModel.from_pretrained)), backed by an OCI registry instead of huggingface.co. | ML engineers loading models with `transformers`, `diffusers`, or any library that uses [`huggingface_hub`](https://huggingface.co/docs/huggingface_hub/index) under the hood. |
 | **Container Registry** | A standard OCI registry. Push and pull Docker images, ORAS artifacts, and raw OCI blobs against `registry.hippius.com`. | Anyone running `docker push` / `docker pull`, plus power users with `oras` for non-image artifacts. |
 
-Both faces share the same authentication, the same backing storage, and the same endpoint.
+Both faces share the same authentication and the same endpoint (`registry.hippius.com`).
 
 ---
 
@@ -32,12 +32,12 @@ Both faces share the same authentication, the same backing storage, and the same
 | Purpose | URL |
 | --- | --- |
 | OCI registry (Docker, ORAS, `hippius-hub`) | `registry.hippius.com` |
-| Web UI (browse models & containers) | [`hub.hippius.com`](https://hub.hippius.com) |
+| Web UI | [`hub.hippius.com`](https://hub.hippius.com): public model and container browse, per-repo pull commands, a Docs page, and [`/llms.txt`](https://hub.hippius.com/llms.txt) |
 | Source / issues | [`github.com/thenervelab/hippius-hub`](https://github.com/thenervelab/hippius-hub) |
 
-Models are indexed server-side by format, architecture, parameter count, and quantization — so search on [hub.hippius.com](https://hub.hippius.com) works the way you'd expect.
+Models are indexed server-side by format, architecture, parameter count, and quantization, so search on [hub.hippius.com](https://hub.hippius.com) works the way you'd expect.
 
-Private repositories: only you and the keys you issue can pull them.
+Private namespaces: only you and the keys you issue can pull from them. Publicity is per namespace, not per repository.
 
 ---
 
@@ -66,14 +66,20 @@ hippius-hub registry provision my-models --docker-login
 hippius-hub upload my-models/qwen-7b ./qwen-7b --revision v1
 ```
 
-Pulling from Python is a one-line import swap — your existing `transformers` / `diffusers` code keeps working:
+Pulling from Python is a one-line import swap in *your* code:
 
 ```python
-import hippius_hub as huggingface_hub
+from hippius_hub import snapshot_download, hf_hub_download
 from transformers import AutoModel
 
-model = AutoModel.from_pretrained("my-models/qwen-7b")
+snapshot_download(repo_id="my-models/qwen-7b", revision="v1")
+model = AutoModel.from_pretrained(
+    "my-models/qwen-7b",
+    cache_dir="~/.cache/hippius/hub",
+)
 ```
+
+`import hippius_hub as huggingface_hub` only aliases the name in that file. `transformers` still imports the real `huggingface_hub` package, so point `from_pretrained` at the Hippius cache (or at a local folder from `snapshot_download`) after you have downloaded.
 
 </TabItem>
 <TabItem value="docker" label="Containers (Docker)">
@@ -103,7 +109,7 @@ docker pull registry.hippius.com/my-models/my-app:v1
 </Tabs>
 
 :::tip Same Python API as Hugging Face
-The Model Registry is a drop-in for [`huggingface_hub`](https://huggingface.co/docs/huggingface_hub/index). Same cache layout, same function signatures, same exception classes — so `transformers.from_pretrained(...)` and any other code that uses `huggingface_hub` under the hood works without modification. See [Pull](/registry/pull) for the full Python surface.
+The Model Registry is a drop-in for [`huggingface_hub`](https://huggingface.co/docs/huggingface_hub/index): same cache layout, same function signatures, same exception classes. Replace `from huggingface_hub import ...` with `from hippius_hub import ...`. See [Pull](/registry/pull) for the full Python surface and how `from_pretrained` finds the files.
 :::
 
 ---
@@ -123,6 +129,6 @@ The full walkthrough is on the [Hub console page](/use/console/hub). Pricing is 
 
 ## Where to next
 
-- [**Pull**](/registry/pull) — download a single file or a whole repo from Python, the CLI, or `docker pull`.
-- [**Push**](/registry/push) — provision a namespace, push artifacts, manage credentials.
-- [**CLI reference**](/registry/cli) — the `hippius-hub` command surface, grouped by goal.
+- [**Pull**](/registry/pull): download a single file or a whole repo from Python, the CLI, or `docker pull`.
+- [**Push**](/registry/push): provision a namespace, push artifacts, manage credentials.
+- [**CLI reference**](/registry/cli): the `hippius-hub` command surface, grouped by goal.

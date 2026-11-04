@@ -98,7 +98,7 @@ The selector in the top right shows your connected account. Click it to open the
 
 <Ordered>
   <li>Find the account you want to use.</li>
-  <li>Click <BgStyledText>Select Wallet</BgStyledText> next to it.</li>
+  <li>Click <BgStyledText>Switch wallet</BgStyledText> next to it. The account in use is marked <strong>Active wallet</strong>.</li>
 </Ordered>
 
 Hover a truncated address to see it in full. Click the copy icon to copy it, or the link icon to open it on [hipstats.com](https://hipstats.com). We remember your choice across sessions.
@@ -127,12 +127,16 @@ Your spendable balance excludes anything staking is holding: staked, unstaking, 
 
 <Ordered>
   <li>Click <BgStyledText>Receive</BgStyledText> below the balance chart.</li>
-  <li>We show your deposit address as a QR code and as plain text.</li>
+  <li>We show your Hippius address, labelled <strong>Deposit Address</strong>, as a QR code and as plain text.</li>
   <li>Share the QR code with the sender, or click the copy icon to grab the address.</li>
   <li>The new balance appears within a block or two of the transfer confirming.</li>
 </Ordered>
 
 <Screenshot src="/img/console/wallet/receive.png" alt="Receive dialog" dark />
+
+:::warning This address is for hAlpha only
+Don't send TAO to it: TAO sent there is not added to your balance. To pay with TAO, use the TAO deposit address in [Billing](/use/console/billing#with-tao).
+:::
 
 ### Sending hAlpha
 
