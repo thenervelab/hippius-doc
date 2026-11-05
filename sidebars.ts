@@ -95,6 +95,7 @@ const sidebars: SidebarsConfig = {
             "registry/pull",
             "registry/push",
             "registry/cli",
+            "registry/ci",
           ],
         },
         {

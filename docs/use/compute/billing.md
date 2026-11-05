@@ -183,6 +183,25 @@ If an hour of usage can't be paid from your balance, it is recorded as **Unpaid*
 
 Services aren't stopped for an unpaid balance today. If that changes, you will always get an email at least 24 hours before anything of yours is stopped.
 
+## Limit what compute can cost
+
+Your balance is not a spending cap: as above, an hour it can't pay becomes debt, and your VMs keep running. To keep a month's compute under a limit, use a [project budget](/use/console/projects#budgets):
+
+<Unordered>
+  <li>You get an email at each share of the limit you choose.</li>
+  <li>With <strong>Refuse new launches over the limit</strong>, nothing new that costs money starts in the project once the limit is reached.</li>
+  <li>What already runs keeps running and is billed. A budget doesn't stop or delete a VM, so the month can end above the limit. Stop or delete what you don't need yourself.</li>
+</Unordered>
+
+From the command line, with the project id from `hipc account projects list`:
+
+```bash
+hipc account projects budget update PROJECT_ID --monthly-limit 25 --alert-at 50 --alert-at 90 --block-launches true --yes
+hipc account projects budget get PROJECT_ID
+```
+
+`hipc compute charge-cap` shows something else: the most the chain charges the account per hour, a safety limit rather than a monthly budget. Per-product caps exist for the [CDN](/use/cdn#monthly-spend-cap), per zone.
+
 ## Where to next
 
 <Unordered>

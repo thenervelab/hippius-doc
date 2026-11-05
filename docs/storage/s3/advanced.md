@@ -184,7 +184,7 @@ aws s3api put-bucket-acl --bucket my-bucket \
   --endpoint-url https://s3.hippius.com
 ```
 
-Master keys bypass ACLs. Sub-tokens need an explicit grant unless you created them with access to that bucket in the console.
+Master keys bypass ACLs. A sub-token needs an explicit grant unless it was scoped to that bucket when it was created, in the console, with `hipc s3 tokens create --bucket`, or through the API.
 
 ## Give an app scoped credentials {#give-an-app-scoped-credentials}
 
@@ -202,6 +202,55 @@ Create them in the console: [S3 Buckets → Sub Tokens](/use/console/s3#sub-toke
 Rotate issues a new Access Key ID and secret with the same permissions, and revokes the old pair. Revoke is immediate and cannot be undone.
 
 Programmatic create / list / rotate / revoke: [Management API](/use/api).
+
+### From the command line
+
+With [hipc](/cli), create a sub-token for one bucket and turn it into an AWS CLI profile. The answer holds the secret, so it goes straight to a private file, which you delete once the profile is written:
+
+```bash
+(umask 077; hipc --json s3 tokens create --kind sub --name backup-job \
+  --scope-type single-bucket --bucket my-bucket --action read --action write \
+  --expires-at 2027-01-01T00:00:00Z --reveal --yes > token.json)
+hipc s3 configure --from-token-file token.json --aws-profile backup-job
+rm token.json
+```
+
+Run it with `--dry-run` in place of `--yes` first to see the request. Leave out `--action write` for a read-only token, and `--expires-at` for one that never expires. `hipc s3 tokens list` shows your tokens, `hipc s3 tokens rotate --kind sub TOKEN_ID --reveal --yes` rotates one, and `hipc s3 tokens revoke --kind sub TOKEN_ID --yes` revokes it. Create the bucket before the token. To change a token's buckets, create a new token and revoke the old one.
+
+## Separate production and staging {#separate-production-and-staging}
+
+Give each environment its own bucket and its own sub-token, so a staging bug can never touch production data:
+
+```bash
+hipc s3 buckets create app-prod --yes
+hipc s3 buckets create app-staging --yes
+(umask 077; hipc --json s3 tokens create --kind sub --name app-prod --scope-type single-bucket --bucket app-prod --action read --action write --reveal --yes > app-prod.json)
+(umask 077; hipc --json s3 tokens create --kind sub --name app-staging --scope-type single-bucket --bucket app-staging --action read --action write --reveal --yes > app-staging.json)
+hipc s3 configure --from-token-file app-prod.json --aws-profile app-prod
+hipc s3 configure --from-token-file app-staging.json --aws-profile app-staging
+rm app-prod.json app-staging.json
+```
+
+Then check the isolation. The staging key must be refused on the production bucket:
+
+```bash
+echo test > hello.txt
+aws s3 cp hello.txt s3://app-staging/hello.txt --profile app-staging   # works
+aws s3 cp hello.txt s3://app-prod/hello.txt --profile app-staging      # must fail: Access Denied
+```
+
+Each application server signs its [presigned URLs](#share-a-time-limited-download) with its own environment's key, so a browser never sees either secret. Older AWS CLI versions ignore the profile's `endpoint_url`: see [AWS CLI](/storage/s3/aws-cli#shortcut-hipc-s3-configure).
+
+## Share a bucket with many clients {#share-a-bucket-with-many-clients}
+
+When many machines write to or read from one bucket, such as the nodes of a network publishing datasets:
+
+<Unordered>
+  <li><strong>One sub-token per writer</strong>, scoped to the bucket with <code>--action read --action write</code>. Revoking one writer then leaves the others working.</li>
+  <li><strong>Readers</strong> share one read-only sub-token (<code>--action read</code>), or, for data anyone may read, the bucket is <a href="#make-a-bucket-or-object-public">made public</a> and they need no key at all.</li>
+  <li><strong>Changing a shared key without a gap.</strong> Rotate revokes the old key at once, so every client using it fails until it has the new one. To move many clients, create a second token, hand it out, then revoke the first.</li>
+  <li><strong>Load.</strong> There is no fixed request limit per account. Under load the gateway answers <code>503 SlowDown</code>, sometimes with <code>Retry-After</code>: retry with backoff, as the AWS SDKs do.</li>
+</Unordered>
 
 ## Upload large files {#upload-large-files}
 

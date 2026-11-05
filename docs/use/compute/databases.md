@@ -18,7 +18,7 @@ Open it from the sidebar: **Confidential Computing** → **Databases**. Managed 
 
 | Plan | Instances | Backups |
 |---|---|---|
-| **Starter** | 1 | Automatic backups. |
+| **Starter** | 1 | Continuous backup and point-in-time restore. |
 | **Production** | 1 | Continuous backup and point-in-time restore. |
 | **High availability** | 3 | Continuous backup, and automatic failover to another instance if the leader fails. |
 
@@ -76,6 +76,25 @@ The user and the database are both named `app`. The `app` user can create databa
 :::
 
 The console only lets you continue once every item has been saved and you tick **I have stored these credentials somewhere safe**.
+
+### From the command line
+
+[hipc](/cli) creates a database too. Its answer is the one-time credentials, so `--reveal` is required and the answer goes straight to a private file. `--credentials-dir` writes `ca.crt`, `client.crt` and `client.key` there as private files; the password and the backup key stay in the answer:
+
+```bash
+mkdir -m 700 ~/db-staging
+(umask 077; hipc --json compute databases create --tier starter --size s --engine-version 17 \
+  --name staging --reveal --yes --credentials-dir ~/db-staging > ~/db-staging/answer.json)
+hipc compute databases get DATABASE_ID     # until it is running: the host, port and database
+```
+
+Run it with `--dry-run` in place of `--yes` first. hipc writes no `.env` or `credentials.json`: read the user, password and backup key from `answer.json` with `jq`, and keep that file, it is the only copy. Connect with libpq:
+
+```bash
+psql "host=PRIVATE_ADDRESS port=5432 dbname=app user=app sslmode=verify-ca sslrootcert=$HOME/db-staging/ca.crt sslcert=$HOME/db-staging/client.crt sslkey=$HOME/db-staging/client.key"
+```
+
+`psql` asks for the password. In a connection URL (`postgresql://app:PASSWORD@host:5432/app?...`), percent-encode the password first: it can hold characters such as `@`, `/` or `#` that break a URL.
 
 ## Connect from your private network
 
@@ -136,7 +155,20 @@ From one of your own VMs, the private address above needs no edge and works with
 There is no address allow list on the public edge. The password and TLS protect the database, so use a strong password store and unexpose the database when you no longer need it.
 :::
 
+From the command line: `hipc compute databases exposure create DATABASE_ID --yes`, and `hipc compute databases exposure delete DATABASE_ID --yes` to close it.
+
 To close it, click <BgStyledText>Unexpose</BgStyledText> and confirm. Clients connected through the hostname lose access immediately. Clients on your private network are not affected.
+
+## Reach it from your laptop or CI
+
+A database has no address allow list, so there are two ways in from outside your private network:
+
+<Unordered>
+  <li><strong>Through one of your VMs.</strong> Forward a local port over SSH to a VM on the same private network, then connect to <code>localhost</code> with <code>sslmode=verify-ca</code>: <code>ssh -N -L 5432:PRIVATE_ADDRESS:5432 ubuntu@VM_PUBLIC_IP</code>. Nothing is exposed to the internet.</li>
+  <li><strong>Through the public edge.</strong> <a href="#expose-a-database-on-a-public-hostname">Expose</a> the database and connect to its hostname from anywhere, with a PostgreSQL 17 or newer client. Anyone can then reach the port, and only TLS and the password protect it.</li>
+</Unordered>
+
+[Hippius runners](/use/compute/runners) never join your private network, so a workflow on them uses the public edge, or a VM as above.
 
 ## Backups
 
@@ -157,7 +189,16 @@ Backups are billed as S3 storage in your account, at your S3 price. The bucket i
 
 A restore creates a **new database** from the backups of an existing one. The original keeps running and is never written to. You can restore to the latest point in the backups, or to a point in time.
 
-Restore isn't in the console yet. It is available through the API, with your account's API token from [Settings](/use/console/settings):
+Restore isn't in the console yet. Use [hipc](/cli), whose answer is the new database's one-time credentials, sent straight to a private file:
+
+```bash
+mkdir -m 700 ~/db-restored
+(umask 077; hipc --json compute databases restore DATABASE_ID --target-time 2026-10-05T09:30:00Z \
+  --reveal --yes --credentials-dir ~/db-restored > ~/db-restored/answer.json)
+hipc compute databases get NEW_DATABASE_ID
+```
+
+Or call the API, with your account's API token from [Settings](/use/console/settings):
 
 ```bash
 curl -X POST https://api.hippius.com/api/databases/DATABASE_ID/restore/ \
@@ -195,6 +236,15 @@ The **Cluster** panel shows each instance, its role and how far behind it is. Th
 **Restart** restarts PostgreSQL. Open connections are closed; the data is untouched. On High availability, only the leader is restarted, without a failover. The restart begins within a minute.
 
 **Delete** destroys the instances and their data. This can't be undone. If the backup bucket holds backups, it is **kept** in your S3 account, and billed as S3 storage, so that you can still read your data with your backup key.
+
+:::danger Before you delete
+<Unordered>
+  <li><strong>Take a dump first.</strong> A deleted database can't be restored, from the console or with hipc. Run <code>pg_dump -Fc -f staging.dump "host=... dbname=app user=app ..."</code> and check the file before you delete.</li>
+  <li><strong>What stays behind.</strong> The backup bucket <code>hippius-db-ID-backups</code> and the S3 sub-token <code>db-ID-backup-writer</code> that wrote to it are kept, and the bucket is billed as S3 storage. When you no longer need them, empty the bucket with an S3 client, delete it with <code>hipc s3 buckets delete hippius-db-ID-backups --yes</code>, and revoke the token with <code>hipc s3 tokens revoke --kind sub TOKEN_ID --yes</code> (its id is in <code>hipc s3 tokens list</code>).</li>
+</Unordered>
+:::
+
+From the command line: `hipc compute databases restart DATABASE_ID --yes` and `hipc compute databases delete DATABASE_ID --yes`.
 
 ## Billing
 

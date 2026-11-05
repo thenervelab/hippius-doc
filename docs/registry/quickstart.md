@@ -132,3 +132,4 @@ The full walkthrough is on the [Hub console page](/use/console/hub). Pricing is 
 - [**Pull**](/registry/pull): download a single file or a whole repo from Python, the CLI, or `docker pull`.
 - [**Push**](/registry/push): provision a namespace, push artifacts, manage credentials.
 - [**CLI reference**](/registry/cli): the `hippius-hub` command surface, grouped by goal.
+- [**GitHub Actions**](/registry/ci): publish from CI with a scoped key.

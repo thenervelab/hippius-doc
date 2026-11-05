@@ -24,7 +24,7 @@ hipc auth status
 
 ```bash
 hipc account get
-hipc account notifications
+hipc account notifications get
 hipc account members list
 hipc billing balance
 hipc billing subscriptions
@@ -51,7 +51,7 @@ hipc drive subscription cancel --dry-run
 
 ## 4. S3, with an AWS profile
 
-Create a bucket, a sub token scoped to it, and an AWS CLI profile from that token; the objects themselves move with `aws s3 cp`.
+Create a bucket, a sub token scoped to it, and an AWS CLI profile from that token; the objects themselves move with `aws s3 cp`. A command that prints a secret writes it to a file here: `umask 077` makes that file private (mode 0600), and the file is deleted once it has been used.
 
 ```bash
 hipc s3 plans
@@ -63,8 +63,9 @@ hipc s3 tokens list
 hipc s3 subscription subscribe --plan pro --dry-run
 hipc s3 buckets create photos --yes
 hipc s3 buckets acl get photos
-hipc s3 tokens create --kind sub --name photos-ci --bucket photos --reveal --yes > ~/s3-token.json
+(umask 077; hipc --json s3 tokens create --kind sub --name photos-ci --scope-type single-bucket --bucket photos --action read --action write --reveal --yes > ~/s3-token.json)
 hipc s3 configure --from-token-file ~/s3-token.json --aws-profile hippius
+rm ~/s3-token.json
 aws --profile hippius s3 ls s3://photos
 hipc s3 tokens revoke --kind sub <token_id> --yes
 hipc s3 buckets delete photos --yes
@@ -72,19 +73,23 @@ hipc s3 buckets delete photos --yes
 
 ## 5. Hub, with a CI key
 
+A key's login contains a `$` (such as `robot$my-team+ci`), so it is single-quoted. For a GitHub Actions workflow, see [Publish from GitHub Actions](/registry/ci).
+
 ```bash
 hipc hub plans
 hipc hub subscription get
 hipc hub namespace status
 hipc hub namespace get
-hipc hub namespace robot
+hipc hub namespace robot get
 hipc hub usage
 hipc hub repositories list
 hipc hub artifacts list <repository>
 hipc hub keys list
 hipc hub subscription subscribe --plan Builder --dry-run
-hipc hub keys create --name ci-pull --role read --expires-in 30 --reveal --yes > ~/hub-key.json
-jq -r .secret ~/hub-key.json | docker login registry.hippius.com -u <login> --password-stdin
+(umask 077; hipc --json hub keys create --name ci --role push --expires-in 30 --reveal --yes > ~/hub-key.json)
+jq -r .login ~/hub-key.json                   # robot$<namespace>+ci
+jq -r .secret ~/hub-key.json | docker login registry.hippius.com -u '<login>' --password-stdin
+rm ~/hub-key.json
 hipc hub keys delete <key_id> --yes
 ```
 
@@ -106,6 +111,13 @@ hipc compute vms create --flavor small --name web-1 --ssh-key-id <key_id> --dry-
 hipc compute vms create --flavor small --name web-1 --ssh-key-id <key_id> --yes
 hipc compute public-ip create <vm_id> --dry-run
 hipc compute vms get <vm_id>
+cat > ~/firewall.json <<'EOF'
+{"rules": [
+  {"protocol": "tcp", "ports": ["22"], "source_cidrs": ["203.0.113.7/32"], "description": "ssh from my address"},
+  {"protocol": "tcp", "ports": ["80", "443"], "description": "web"}
+]}
+EOF
+hipc compute firewall update <vm_id> --rules-file ~/firewall.json --dry-run
 hipc compute vms stop <vm_id> --yes
 hipc compute vms delete <vm_id> --yes
 ```

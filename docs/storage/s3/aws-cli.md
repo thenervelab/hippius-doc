@@ -43,10 +43,23 @@ export AWS_SECRET_ACCESS_KEY="YOUR_SECRET_KEY"
 export AWS_DEFAULT_REGION="decentralized"
 ```
 
+## Shortcut: hipc s3 configure {#shortcut-hipc-s3-configure}
+
+[hipc](/cli), the Hippius command line, writes the whole profile for you from a token it creates: the key pair, `region = decentralized`, path-style addressing and `endpoint_url = https://s3.hippius.com`.
+
+```bash
+(umask 077; hipc --json s3 tokens create --kind sub --name laptop --scope-type single-bucket \
+  --bucket my-bucket --action read --action write --reveal --yes > token.json)
+hipc s3 configure --from-token-file token.json --aws-profile hippius
+rm token.json
+```
+
+For an existing key, pass `--access-key-id hip_... --secret-key-file -` and paste the secret on stdin instead. AWS CLI 2.13 and 1.29 and later read `endpoint_url` from the profile, so `--profile hippius` alone is enough. Older versions ignore it: pass `--endpoint-url` as below.
+
 ## The Endpoint URL
 
-:::warning Mandatory for every command
-You **must** pass `--endpoint-url https://s3.hippius.com` to every command. Without it, the AWS CLI sends requests to Amazon's servers and they will fail.
+:::warning Needed unless your profile sets it
+Pass `--endpoint-url https://s3.hippius.com` to every command, unless your profile carries `endpoint_url` and your AWS CLI reads it (see above). Without it, the AWS CLI sends requests to Amazon's servers and they will fail.
 :::
 
 Connection details: [Getting Started](/use/quickstart#connection-details). Always use `https://s3.hippius.com`. ACLs and presigned URLs: [Advanced Usage](/storage/s3/advanced).

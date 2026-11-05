@@ -121,6 +121,37 @@ To close SSH completely, delete the rule, or untick **Enabled**. You can still o
 
 If you attach an address later, no SSH rule is created for you. Add one yourself, with your own address as the source.
 
+## From the command line
+
+With [hipc](/cli), the firewall is a JSON file that replaces the VM's whole rule list. A VM launched with `hipc compute vms create --public-ip` has no rule at all, unlike a console launch with **Open SSH**, so nothing reaches its address until you add one. This file opens SSH to your own address and the web ports to everyone:
+
+```json title="firewall.json"
+{"rules": [
+  {"protocol": "tcp", "ports": ["22"], "source_cidrs": ["203.0.113.7/32"], "description": "ssh from my address"},
+  {"protocol": "tcp", "ports": ["80", "443"], "description": "web"}
+]}
+```
+
+A rule has `protocol` (`tcp`, `udp` or `icmp`), `ports` (strings, a port or a range such as `"8000-8080"`; empty for every port, and always empty for `icmp`), `source_cidrs` (IPv4 ranges; empty or left out for any source), an optional `description` and `enabled` (`true` when left out).
+
+```bash
+hipc compute firewall get VM_ID
+hipc compute firewall update VM_ID --rules-file firewall.json --dry-run
+hipc compute firewall update VM_ID --rules-file firewall.json --yes
+```
+
+An update that drops a rule the VM has now, or changes its protocol, ports, sources or enabled flag, is refused unless you pass `--remove-others`. To start from the current rules, save `hipc compute firewall get VM_ID` to a file and edit it.
+
+The rest of this page from the command line:
+
+```bash
+hipc compute public-ip availability             # free addresses and the price, per region
+hipc compute public-ip create VM_ID --yes        # attach
+hipc compute public-ip delete VM_ID --yes        # detach
+hipc compute exposures create VM_ID --port 8080 --yes   # publish a port on an HTTPS address
+hipc compute exposures list VM_ID
+```
+
 ## If inbound traffic doesn't arrive
 
 If the panel says **Inbound traffic to this IP is blocked inside the VM**, a small agent inside the VM that lets public traffic through the VM's own private-network firewall isn't running. VMs created before 24 September 2026 don't have it. Outbound traffic still works.

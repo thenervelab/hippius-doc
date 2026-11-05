@@ -24,7 +24,7 @@ All changes save automatically. There is no save button anywhere on this page.
 
 ## API Token
 
-Your **API Token** lets you make direct API calls to Hippius on your behalf, for example in a script or integration. This section is shown when you signed in with Google, GitHub or Apple.
+Your **API Token** lets you make direct API calls to Hippius on your behalf, for example in a script or integration. This section is shown when you signed in with Google, GitHub or Apple. If you sign in with a 12-word access key, get a token with the [access key sign-in flow](/use/wallet-login) instead.
 
 The token is hidden by default. Click the **eye** icon to reveal it, then the **copy** icon to copy it to your clipboard. Click the eye again to hide it.
 

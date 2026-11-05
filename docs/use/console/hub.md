@@ -120,6 +120,23 @@ hippius-hub registry rotate-token --docker-login
 Anything still using it, such as a CI pipeline or a server, can't push until you log it in again with the new one.
 :::
 
+## From the command line
+
+Everything on this page except pushing is also in [hipc](/cli), with your account's API token. Run a write with `--dry-run` first to see the request it would send:
+
+```bash
+hipc hub plans                                   # needs no token
+hipc hub namespace availability my-team          # is the name free?
+(umask 077; hipc hub namespace create my-team --reveal --yes > robot.json)
+hipc hub namespace update --visibility private --yes
+hipc hub repositories list
+hipc hub usage
+(umask 077; hipc --json hub keys create --name ci --role push --reveal --yes > key.json)
+hipc hub subscription subscribe --plan Builder --yes
+```
+
+Each command that prints a secret needs `--reveal`, and its answer goes to a private file here, so the secret never shows on screen. A key's answer holds its `login` and `secret`: log in with `jq -r .secret key.json | docker login registry.hippius.com -u '<login>' --password-stdin`, then delete `key.json`. For a CI pipeline, see [Publish from GitHub Actions](/registry/ci). The [CLI reference](/registry/cli#same-tasks-with-hipc) maps every `hippius-hub` command to its `hipc` one.
+
 ## Hub plans
 
 Your plan sets how much you can store and how many projects you can have. These are the plans at the time of writing. The console always shows the current ones.

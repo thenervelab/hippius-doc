@@ -201,3 +201,4 @@ Inference Endpoints, Spaces, Webhooks, Collections, and Discussions raise `NotIm
 
 - [**Pull**](/registry/pull): download from Python, CLI, or `docker pull`.
 - [**CLI reference**](/registry/cli): every `hippius-hub` command, grouped by goal.
+- [**GitHub Actions**](/registry/ci): push an image and upload a model on each release, with a scoped CI key.

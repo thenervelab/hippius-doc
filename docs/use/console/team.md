@@ -112,6 +112,8 @@ The invitation is for one address. Accepting it checks that this address is one 
 
 Once you have joined, choose **Open this account** to switch to it now, or **Stay in your own account**.
 
+**No Hippius login yet?** Open the link and sign up with the address the invitation was sent to, with Google, GitHub or Apple, then accept it.
+
 A link that was already used, withdrawn or older than 7 days no longer works. Ask the person who invited you for a new one.
 
 ## Switch accounts
@@ -130,6 +132,41 @@ While you work in another account:
 A page that belongs to your own account, such as Drive, says **Not part of this account**. Switch back from the profile menu to open it.
 
 When you launch a VM in another account with Virtual Machines **Admin**, you can pick your own SSH keys or the owner's, listed as **Keys of** the account.
+
+## From the command line
+
+Inviting, accepting, changing members and switching accounts are also in [hipc](/cli), the Hippius command line. Run each write with `--dry-run` in place of `--yes` first.
+
+Invite a member. Each `--grant` is `SCOPE=LEVEL`: the scopes are `vms`, `databases`, `kubernetes`, `runners`, `s3`, `cdn`, `network`, and the groups `compute:*` and `storage:*`; the levels are `viewer`, `operator` and `admin`. An invitation with no `--grant` gives no access.
+
+```bash
+hipc account invites create --email teammate@example.com --grant s3=admin --grant cdn=admin --yes
+hipc account invites list                  # the invitations this account sent
+hipc account invites revoke INVITE_ID --yes
+hipc account members list
+hipc account members update MEMBER_ID --grant vms=operator --grant s3=viewer --remove-others --yes
+hipc account members delete MEMBER_ID --yes
+```
+
+`members update` replaces the member's whole grant list, so pass every grant they should keep. `--manage-team true` and `--billing-permission true` give the two permissions.
+
+Accept an invitation. The invite token is the last part of the link in the email; save it to a file, preview it, then accept:
+
+```bash
+hipc account invites preview --token-file invite.txt
+hipc account invites accept --token-file invite.txt --yes
+```
+
+`accept` works only when the invited address is a verified email of the account you are signed in with. A 12-word access key login has none, so accept in the console instead, as described in [Accept an invitation](#accept-an-invitation). An invitation sent to you isn't listed by `hipc account invites list`: it is only in your email.
+
+Switch accounts. Every later command then acts in that account, until you switch back:
+
+```bash
+hipc account list                          # your account, then each one you belong to
+hipc account use acct_0a1b2c3d4e5f60718293
+hipc account use self                      # back to your own
+hipc --account acct_0a1b2c3d4e5f60718293 compute vms list   # one command only
+```
 
 ## Change or remove a member
 

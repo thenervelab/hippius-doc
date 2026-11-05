@@ -110,6 +110,14 @@ Send the token as `Authorization: Token YOUR_TOKEN` on the [Management API](/use
 The server needs `substrate_signature` to open an account, and on every login until the account has given one once. It is also how an account moves to another Ethereum key. Sending it on every login, as the Hippius apps do, avoids all three refusals.
 :::
 
+## Use the token in a terminal, an agent or CI
+
+Store the token, not the key. On the user's own machine, pipe it to [hipc](/cli) with `hipc auth login --token-file -`, and every `hipc` command then carries it. Never paste the 12 words into a chat with an agent.
+
+For CI or a server, sign in once on a machine you trust and store only the token, for example as the CI secret `HIPPIUS_TOKEN`. Never put the 12 words on a runner: they control the whole account and its funds, and a leaked token is easier to replace than a leaked key.
+
+**Revoking tokens.** If a token leaks, [contact support](/use/console/support). Moving the account to another Ethereum key (see `evm_key_mismatch` below) revokes everything issued before at once: every API token, S3 key and SSH key, and the linked Google, GitHub and Apple sign-ins.
+
 ## Errors
 
 | Status | Body | Meaning |
