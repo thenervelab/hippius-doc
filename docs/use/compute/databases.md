@@ -165,7 +165,7 @@ A database has no address allow list, so there are two ways in from outside your
 
 <Unordered>
   <li><strong>Through one of your VMs.</strong> Forward a local port over SSH to a VM on the same private network, then connect to <code>localhost</code> with <code>sslmode=verify-ca</code>: <code>ssh -N -L 5432:PRIVATE_ADDRESS:5432 ubuntu@VM_PUBLIC_IP</code>. Nothing is exposed to the internet.</li>
-  <li><strong>Through the public edge.</strong> <a href="#expose-a-database-on-a-public-hostname">Expose</a> the database and connect to its hostname from anywhere, with a PostgreSQL 17 or newer client. Anyone can then reach the port, and only TLS and the password protect it.</li>
+  <li><strong>Through the public edge.</strong> <a href="#expose-a-database-on-a-public-hostname">Expose</a> the database and connect to its hostname from anywhere, with a PostgreSQL 17 or newer client and <code>sslnegotiation=direct</code>. Anyone can then reach the port, and only TLS and the password protect it.</li>
 </Unordered>
 
 [Hippius runners](/use/compute/runners) never join your private network, so a workflow on them uses the public edge, or a VM as above.

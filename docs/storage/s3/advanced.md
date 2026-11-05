@@ -215,7 +215,15 @@ hipc s3 configure --from-token-file token.json --aws-profile backup-job
 rm token.json
 ```
 
-Run it with `--dry-run` in place of `--yes` first to see the request. Leave out `--action write` for a read-only token, and `--expires-at` for one that never expires. `hipc s3 tokens list` shows your tokens, `hipc s3 tokens rotate --kind sub TOKEN_ID --reveal --yes` rotates one, and `hipc s3 tokens revoke --kind sub TOKEN_ID --yes` revokes it. Create the bucket before the token. To change a token's buckets, create a new token and revoke the old one.
+Run it with `--dry-run` in place of `--yes` first to see the request. Leave out `--action write` for a read-only token, and `--expires-at` for one that never expires. `hipc s3 tokens list` shows your tokens, and `hipc s3 tokens revoke --kind sub TOKEN_ID --yes` revokes one. To rotate one, send the new pair to a private file and rewrite the profile, which still holds the old pair (`--yes` because the profile exists):
+
+```bash
+(umask 077; hipc --json s3 tokens rotate --kind sub TOKEN_ID --reveal --yes > token.json)
+hipc s3 configure --from-token-file token.json --aws-profile backup-job --yes
+rm token.json
+```
+
+ Create the bucket before the token. To change a token's buckets, create a new token and revoke the old one.
 
 ## Separate production and staging {#separate-production-and-staging}
 

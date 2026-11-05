@@ -101,11 +101,11 @@ The runner VM has internet access, but no public IP address and no SSH access, a
 
 ### Move jobs from GitHub-hosted runners
 
-Change the job's `runs-on` to the Hippius label with the same or more vCPUs and memory:
+Change the job's `runs-on` to the Hippius label with the same number of vCPUs:
 
 | GitHub-hosted (Linux x64) | Hippius |
 |---|---|
-| Linux 1-core (`ubuntu-slim`) | `hippius-small` |
+| Linux 1-core (`ubuntu-slim`) | `hippius-small` (4 GB memory; `hippius-medium` for a job that needs more) |
 | Linux 2-core (`ubuntu-latest` on a private repository) | `hippius-medium` |
 | Linux 4-core (`ubuntu-latest` on a public repository) | `hippius-large` |
 
@@ -114,7 +114,6 @@ Some jobs have to stay on GitHub:
 <Unordered>
   <li>macOS and Windows jobs, and Linux arm64 jobs: Hippius runners are Linux x64 only.</li>
   <li>Jobs that need a GPU.</li>
-  <li>Jobs that run longer than 6 hours (see <a href="#follow-your-jobs">the 6-hour limit</a>).</li>
   <li>Jobs that rely on a tool preinstalled in GitHub's image, unless you add a <code>setup-*</code> action or a container for it.</li>
 </Unordered>
 

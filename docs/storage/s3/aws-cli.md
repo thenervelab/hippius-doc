@@ -54,7 +54,7 @@ hipc s3 configure --from-token-file token.json --aws-profile hippius
 rm token.json
 ```
 
-For an existing key, pass `--access-key-id hip_... --secret-key-file -` and paste the secret on stdin instead. AWS CLI 2.13 and 1.29 and later read `endpoint_url` from the profile, so `--profile hippius` alone is enough. Older versions ignore it: pass `--endpoint-url` as below.
+For an existing key, pass `--access-key-id YOUR_ACCESS_KEY --secret-key-file -` and paste the secret on stdin instead. AWS CLI 2.13 and 1.29 and later read `endpoint_url` from the profile, so `--profile hippius` alone is enough. Older versions ignore it: pass `--endpoint-url` as below.
 
 ## The Endpoint URL
 

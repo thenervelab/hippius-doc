@@ -135,7 +135,7 @@ hipc hub usage
 hipc hub subscription subscribe --plan Builder --yes
 ```
 
-Each command that prints a secret needs `--reveal`, and its answer goes to a private file here, so the secret never shows on screen. A key's answer holds its `login` and `secret`: log in with `jq -r .secret key.json | docker login registry.hippius.com -u '<login>' --password-stdin`, then delete `key.json`. For a CI pipeline, see [Publish from GitHub Actions](/registry/ci). The [CLI reference](/registry/cli#same-tasks-with-hipc) maps every `hippius-hub` command to its `hipc` one.
+Each command that prints a secret needs `--reveal`, and its answer goes to a private file here, so the secret never shows on screen. Delete `robot.json` and `key.json` once you have stored the secrets. A key's answer holds its `login` and `secret`: log in with `jq -r .secret key.json | docker login registry.hippius.com -u '<login>' --password-stdin`, then delete `key.json`. For a CI pipeline, see [Publish from GitHub Actions](/registry/ci). The [CLI reference](/registry/cli#same-tasks-with-hipc) maps every `hippius-hub` command to its `hipc` one.
 
 ## Hub plans
 

@@ -44,7 +44,7 @@ hippius-hub login --username '<login>' --password-stdin < key.txt   # registry c
 
 Keep the registry secret off the command line: pass it on stdin, as above, so it never shows in your shell history or in `ps`. Quote the login in single quotes: it contains a `$`, such as `robot$my-models+ci`.
 
-For CI, don't share the namespace's own login. Create a scoped key (`hippius-hub registry keys create ci --role push`, or `hipc hub keys create --name ci --role push --reveal --yes`) and log docker and `hippius-hub` in with its login and `--password-stdin`. `registry rotate-token` replaces the secret that every other login of the namespace uses. A full workflow is on [Publish from GitHub Actions](/registry/ci).
+For CI, don't share the namespace's own login. Create a scoped key (`hippius-hub registry keys create ci --role push > key.txt`, or `(umask 077; hipc --json hub keys create --name ci --role push --reveal --yes > key.json)`) and log docker and `hippius-hub` in with its login and `--password-stdin`. `registry rotate-token` replaces the namespace login's secret, so everything logged in with that login has to log in again; CI keys keep working. A full workflow is on [Publish from GitHub Actions](/registry/ci).
 
 ---
 

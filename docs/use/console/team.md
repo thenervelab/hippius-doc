@@ -137,7 +137,7 @@ When you launch a VM in another account with Virtual Machines **Admin**, you can
 
 Inviting, accepting, changing members and switching accounts are also in [hipc](/cli), the Hippius command line. Run each write with `--dry-run` in place of `--yes` first.
 
-Invite a member. Each `--grant` is `SCOPE=LEVEL`: the scopes are `vms`, `databases`, `kubernetes`, `runners`, `s3`, `cdn`, `network`, and the groups `compute:*` and `storage:*`; the levels are `viewer`, `operator` and `admin`. An invitation with no `--grant` gives no access.
+Invite a member. Each `--grant` is `SCOPE=LEVEL`: the scopes are `vms`, `databases`, `kubernetes`, `runners`, `s3`, `cdn`, `network`, the groups `compute:*` and `storage:*`, and `billing`; the levels are `viewer`, `operator` and `admin` (`viewer` or `admin` for `billing`). Add `@PROJECT_ID`, such as `vms=operator@proj_...`, to limit a grant to one project. An invitation with no `--grant` gives no access.
 
 ```bash
 hipc account invites create --email teammate@example.com --grant s3=admin --grant cdn=admin --yes
@@ -150,11 +150,11 @@ hipc account members delete MEMBER_ID --yes
 
 `members update` replaces the member's whole grant list, so pass every grant they should keep. `--manage-team true` and `--billing-permission true` give the two permissions.
 
-Accept an invitation. The invite token is the last part of the link in the email; save it to a file, preview it, then accept:
+Accept an invitation. The invite token is the last part of the link in the email. Paste it on stdin (Enter, then Ctrl-D), so it is never stored in a file or your shell history:
 
 ```bash
-hipc account invites preview --token-file invite.txt
-hipc account invites accept --token-file invite.txt --yes
+hipc account invites preview --token-file -
+hipc account invites accept --token-file - --yes
 ```
 
 `accept` works only when the invited address is a verified email of the account you are signed in with. A 12-word access key login has none, so accept in the console instead, as described in [Accept an invitation](#accept-an-invitation). An invitation sent to you isn't listed by `hipc account invites list`: it is only in your email.

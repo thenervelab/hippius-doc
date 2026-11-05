@@ -326,7 +326,9 @@ Rotate issues a new Access Key ID and secret with the same permissions and revok
     (umask 077; hipc --json s3 tokens create --kind sub --name app-prod --scope-type single-bucket --bucket app-prod --action read --action write --reveal --yes > app-prod.json)
     hipc s3 configure --from-token-file app-prod.json --aws-profile app-prod
     rm app-prod.json
-    hipc s3 tokens rotate --kind sub <token_id> --reveal --yes
+    (umask 077; hipc --json s3 tokens rotate --kind sub <token_id> --reveal --yes > app-prod.json)
+    hipc s3 configure --from-token-file app-prod.json --aws-profile app-prod --yes
+    rm app-prod.json
     hipc s3 tokens revoke --kind sub <token_id> --yes
 
     curl -X POST https://api.hippius.com/api/objectstore/sub-tokens/ \

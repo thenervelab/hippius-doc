@@ -19,7 +19,7 @@ You need a namespace first: see [Push](/registry/push#provision-a-namespace).
 A CI key is a registry login with one role. `push` can pull and push; it can't delete anything. Create it with [hipc](/cli) and send the answer straight to a private file, so the secret never shows in your terminal:
 
 ```bash
-(umask 077; hipc --json hub keys create --name ci --role push --expires-in 365 --reveal --yes > hub-key.json)
+(umask 077; hipc --json hub keys create --name ci --role push --expires-in 365 --reveal --yes > ~/hub-key.json)
 ```
 
 Run it with `--dry-run` in place of `--yes` first to see the request. The answer holds the key's `id`, its `login` (such as `robot$my-team+ci`) and its `secret`. The secret is shown once.
@@ -31,9 +31,9 @@ You can also create the key with `hippius-hub registry keys create ci --role pus
 With the [GitHub CLI](https://cli.github.com), in the repository:
 
 ```bash
-jq -r .login hub-key.json | gh secret set HIPPIUS_HUB_USER
-jq -r .secret hub-key.json | gh secret set HIPPIUS_HUB_PASS
-rm hub-key.json
+jq -r .login ~/hub-key.json | gh secret set HIPPIUS_HUB_USER
+jq -r .secret ~/hub-key.json | gh secret set HIPPIUS_HUB_PASS
+rm ~/hub-key.json
 ```
 
 `gh secret set` reads the value from stdin, so it never appears in your shell history. Or paste both values in the repository's **Settings** → **Secrets and variables** → **Actions**.
@@ -62,6 +62,10 @@ jobs:
           printf '%s' "$HUB_PASS" | docker login registry.hippius.com -u "$HUB_USER" --password-stdin
           docker build -t "registry.hippius.com/my-team/app:$TAG" .
           docker push "registry.hippius.com/my-team/app:$TAG"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
       - name: Upload the model
         run: |
