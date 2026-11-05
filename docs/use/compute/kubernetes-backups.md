@@ -3,25 +3,25 @@ id: kubernetes-backups
 title: Kubernetes Backups
 sidebar_label: Backups
 slug: /use/compute/kubernetes-backups
-description: Automatic backups of a Hippius managed Kubernetes cluster. etcd snapshots sealed to your cluster key and daily Velero backups encrypted in the cluster, both stored in your own Hippius S3. Download and decrypt snapshots, and restore Velero backups into any cluster.
+description: Automatic backups of a Hippius managed Kubernetes cluster. etcd snapshots sealed to your cluster key and daily Velero backups encrypted in the cluster, both stored in your own Hippius Object Storage. Download and decrypt snapshots, and restore Velero backups into any cluster.
 ---
 
 import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 
-A managed cluster can back itself up automatically into your own Hippius S3 account: snapshots of its etcd database, and Velero backups of your workloads and their volumes. Both are encrypted inside the cluster, with keys only you hold, before they reach S3. This page explains what is backed up, and how to get your data back.
+A managed cluster can back itself up automatically into your own Hippius Object Storage account: snapshots of its etcd database, and Velero backups of your workloads and their volumes. Both are encrypted inside the cluster, with keys only you hold, before they reach Object Storage. This page explains what is backed up, and how to get your data back.
 
 ## Turn on backups
 
-Backups are chosen when you create the cluster: **Automatic backups to your Hippius S3** in the **Add-ons** step, on by default. **They can only be turned on at creation.** A cluster created without them can't get them later: back up your workloads yourself, or create a new cluster with backups on.
+Backups are chosen when you create the cluster: **Automatic backups to your Hippius Object Storage** in the **Add-ons** step, on by default. **They can only be turned on at creation.** A cluster created without them can't get them later: back up your workloads yourself, or create a new cluster with backups on.
 
-Backups need a Hippius S3 account. If you don't have one, [set it up first](/use/console/s3). The cluster creates two buckets in it, one for etcd snapshots and one for Velero, named like `hippius-k8s-ID-xxxxxxxx-etcd` and `hippius-k8s-ID-xxxxxxxx-velero`. You can't delete them while the cluster can still write to them.
+Backups need a Hippius Object Storage account. If you don't have one, [set it up first](/use/console/s3). The cluster creates two buckets in it, one for etcd snapshots and one for Velero, named like `hippius-k8s-ID-xxxxxxxx-etcd` and `hippius-k8s-ID-xxxxxxxx-velero`. You can't delete them while the cluster can still write to them.
 
-Backups are billed as S3 storage in your account, on top of the cluster's compute.
+Backups are billed as Object Storage in your account, on top of the cluster's compute.
 
 :::info Why Hippius can't read your backups
-The buckets are in your S3 account, which Hippius operates. What protects your backups is the encryption done inside the cluster's confidential VMs, with keys sealed to your cluster key. Without your key file, nobody can open them.
+The buckets are in your Object Storage account, which Hippius operates. What protects your backups is the encryption done inside the cluster's confidential VMs, with keys sealed to your cluster key. Without your key file, nobody can open them.
 :::
 
 ## What is backed up
@@ -31,7 +31,7 @@ The buckets are in your S3 account, which Hippius operates. What protects your b
 | **Contents** | The cluster's state: every Kubernetes object, including Secrets. | Your workloads in every namespace except Velero's own, with their persistent volumes. |
 | **Schedule** | Every 6 hours. The first about 15 minutes after the cluster is ready. | Daily at 03:00 UTC. |
 | **Kept** | The newest 14. | 7 days each. |
-| **Encryption** | Each snapshot has its own random key, sealed to your cluster key, and is signed by the cluster. | Contents and names are encrypted in the cluster before they reach S3. |
+| **Encryption** | Each snapshot has its own random key, sealed to your cluster key, and is signed by the cluster. | Contents and names are encrypted in the cluster before they reach Object Storage. |
 | **To open it** | Your cluster key file, in the console. | The backup keys file, which only your cluster key can open. |
 
 The **Backups** panel on the cluster's page shows both, and lists a problem if one needs attention, for example **the last etcd snapshot failed** or **Velero is not backing up**.
@@ -74,7 +74,7 @@ You need:
 
 <Unordered>
   <li>the backup keys file, <code>NAME-velero-keys.json</code>;</li>
-  <li>an S3 access key and secret of yours with access to the bucket (<code>YOUR_ACCESS_KEY</code>, <code>YOUR_SECRET_KEY</code>), from the <a href="/use/console/s3">S3 page</a>;</li>
+  <li>an S3 access key and secret of yours with access to the bucket (<code>YOUR_ACCESS_KEY</code>, <code>YOUR_SECRET_KEY</code>), from the <a href="/use/console/s3">Object Storage page</a>;</li>
   <li>a recent <a href="https://rclone.org/downloads/">rclone</a>, <code>kubectl</code>, and Velero or its Helm chart.</li>
 </Unordered>
 
@@ -153,7 +153,7 @@ velero restore create --from-backup BACKUP_NAME
 
 ## After you delete a cluster
 
-When you delete a cluster, the access keys its masters used to write to the backup buckets are revoked. Empty buckets are deleted. **Buckets that hold backups are kept in your S3 account** and billed as S3 storage until you delete them.
+When you delete a cluster, the access keys its masters used to write to the backup buckets are revoked. Empty buckets are deleted. **Buckets that hold backups are kept in your Object Storage account** and billed as Object Storage until you delete them.
 
 :::warning Download what you need before you delete
 The console opens snapshots and the backup keys from the cluster's page, which is gone once the cluster is deleted. Before you delete a cluster, download its Velero backup keys and any etcd snapshot you want to keep. With the keys file, you can restore the retained Velero backups with the steps above at any time.

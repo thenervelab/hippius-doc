@@ -53,7 +53,7 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "category",
-          label: "S3 Storage",
+          label: "Object Storage",
           collapsed: true,
           items: [
             "use/quickstart",

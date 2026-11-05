@@ -1,6 +1,6 @@
 ---
 id: troubleshooting
-title: Troubleshooting S3
+title: Troubleshooting Object Storage
 sidebar_label: Troubleshooting
 slug: /use/troubleshooting
 ---
@@ -8,9 +8,9 @@ slug: /use/troubleshooting
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 
-# Troubleshooting S3
+# Troubleshooting Object Storage
 
-If you encounter issues while using Hippius S3, check this guide for common errors and their solutions.
+If you encounter issues while using Hippius Object Storage, check this guide for common errors and their solutions.
 
 ## Authentication errors
 
@@ -38,7 +38,7 @@ If you can connect but cannot read or write objects:
 
 <Unordered>
   <li><strong>Sub-token permissions:</strong> confirm the token is Object Read Only or Object Read &amp; Write, matching the operation you are trying.</li>
-  <li><strong>Account read only or suspended:</strong> on pay as you go, an unpaid balance turns S3 read only after 7 days and suspends it after 14. Top up in <BgStyledText>Billing</BgStyledText>. See <a href="/use/console/billing#s3-plans-and-pay-as-you-go">S3 plans and pay as you go</a>.</li>
+  <li><strong>Account read only or suspended:</strong> on pay as you go, an unpaid balance turns Object Storage read only after 7 days and suspends it after 14. Top up in <BgStyledText>Billing</BgStyledText>. See <a href="/use/console/billing#s3-plans-and-pay-as-you-go">Object Storage plans and pay as you go</a>.</li>
   <li><strong>Bucket scope:</strong> confirm the sub-token was granted access to this specific bucket. See <a href="/storage/s3/advanced#give-an-app-scoped-credentials">Give an app scoped credentials</a>.</li>
 </Unordered>
 
@@ -65,7 +65,7 @@ If your client talks to the default S3 endpoint instead of Hippius, or reports a
   <li><strong>Addressing style:</strong> use <strong>path-style</strong> addressing (<code>forcePathStyle: true</code> or equivalent). Virtual-hosted style is not supported.</li>
 </Unordered>
 
-Connection details are in the [S3 Quickstart](/use/quickstart#connection-details).
+Connection details are in the [Object Storage Quickstart](/use/quickstart#connection-details).
 
 ## Deleting a bucket and all its contents
 

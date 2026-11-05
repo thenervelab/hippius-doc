@@ -53,7 +53,7 @@ Because it's plain S3 underneath, any S3 tool works with Hippius too. The [S3 co
 
 ## What it costs
 
-Your storage is paid from your account balance, or with an S3 plan. Downloads are free, only storage is billed. You can top up your account balance by card, Bitcoin, USDC, TAO or Hippius tokens (hAlpha). See [Console Billing](/use/console/billing) for prices and plans.
+Your storage is paid from your account balance, or with an Object Storage plan. Downloads are free, only storage is billed. You can top up your account balance by card, Bitcoin, USDC, TAO or Hippius tokens (hAlpha). See [Console Billing](/use/console/billing) for prices and plans.
 
 ## Where to go next
 

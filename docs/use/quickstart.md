@@ -5,9 +5,9 @@ import Unordered from '@site/src/components/Unordered';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# S3 Quickstart: Store Your First Object
+# Object Storage Quickstart: Store Your First Object
 
-Hippius S3 is a distributed, S3-compatible storage service. This guide takes you from zero to your first file upload in under 5 minutes.
+Hippius Object Storage is a distributed, S3-compatible storage service. This guide takes you from zero to your first file upload in under 5 minutes.
 
 ## Create an Account
 
@@ -20,19 +20,19 @@ No browser extension required.
 
 ## Top Up Your Balance
 
-S3 starts on **pay as you go**: $6 per TB per month, charged hourly from your account balance on what you store. So before you upload, add some money to your balance.
+Object Storage starts on **pay as you go**: $6 per TB per month, charged hourly from your account balance on what you store. So before you upload, add some money to your balance.
 
 <Ordered>
   <li>In the console, go to <BgStyledText>Billing</BgStyledText>.</li>
   <li>Click <BgStyledText>+ Top up</BgStyledText> and pay by <strong>card</strong> (min $10), <strong>Bitcoin</strong> (min $20), <strong>USDC</strong> on Base (min $5) or <strong>TAO</strong> (min $20).</li>
 </Ordered>
 
-Storing a lot? A monthly S3 plan covers a block of storage for a flat price, up to 22% cheaper per TB. See [S3 plans and pay as you go](/use/console/billing#s3-plans-and-pay-as-you-go).
+Storing a lot? A monthly Object Storage plan covers a block of storage for a flat price, up to 22% cheaper per TB. See [Object Storage plans and pay as you go](/use/console/billing#s3-plans-and-pay-as-you-go).
 
 ## Create S3 Credentials
 
 <Ordered>
-  <li>In the console, go to <BgStyledText>S3</BgStyledText> → <BgStyledText>S3 Buckets</BgStyledText></li>
+  <li>In the console, go to <BgStyledText>Object Storage</BgStyledText> → <BgStyledText>Buckets</BgStyledText></li>
   <li>Click <BgStyledText>+ Create Master Token</BgStyledText></li>
   <li>Save your <strong>Access Key ID</strong> (starts with <code>hip_</code>) and <strong>Secret Key</strong></li>
 </Ordered>

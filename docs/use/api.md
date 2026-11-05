@@ -18,7 +18,7 @@ The Management API handles everything outside of the S3 data plane:
 | Area | What you can do |
 |------|----------------|
 | **Token management** | Create, list, rotate, and revoke master and sub tokens |
-| **Billing** | Check the balance, top up, subscribe to Drive / S3 / Hub plans from the existing balance |
+| **Billing** | Check the balance, top up, subscribe to Drive / Object Storage / Hub plans from the existing balance |
 | **Account** | Manage account settings and access keys |
 | **Compute** | Create and manage VMs, managed databases and Kubernetes clusters. See [Compute API](#compute-api) |
 
@@ -40,7 +40,7 @@ The full API specification with request/response examples is available as an int
 </Unordered>
 
 :::tip For AI agents and LLMs
-A machine-readable index is at [docs.hippius.com/llms.txt](https://docs.hippius.com/llms.txt). It points at each product's own `llms.txt`. The long S3 ingest is [docs.hippius.com/llms-full.txt](https://docs.hippius.com/llms-full.txt).
+A machine-readable index is at [docs.hippius.com/llms.txt](https://docs.hippius.com/llms.txt). It points at each product's own `llms.txt`. The long Object Storage ingest is [docs.hippius.com/llms-full.txt](https://docs.hippius.com/llms-full.txt).
 :::
 
 ## Authentication
@@ -104,7 +104,7 @@ Some HTTP clients' default `User-Agent` is blocked in front of the API, with `40
 <Unordered>
   <li><a href="/use/api-prices">Public Price API</a>: compute, CDN and plan prices without a token</li>
   <li><a href="/use/wallet-login">Access Key Sign-In API</a>: sign users in with their 12-word key</li>
-  <li><a href="/use/quickstart">S3 Quickstart</a>: first upload</li>
+  <li><a href="/use/quickstart">Object Storage Quickstart</a>: first upload</li>
   <li><a href="/storage/s3/advanced">Advanced Usage</a> — Presigned URLs, ACLs, public buckets, sub-tokens</li>
   <li><a href="/storage/s3/compatibility">S3 Compatibility Matrix</a> — Supported S3 operations</li>
 </Unordered>
