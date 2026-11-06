@@ -155,7 +155,7 @@ hipc compute app-engine apps runtime VM_ID                    # the containers, 
 <Unordered>
   <li><code>validate</code> checks the file against grammar v1 and names each rule it breaks. <code>fix</code> rewrites it into the grammar where it can, writes the result to a new file, and lists each change, the image digests it looked up, and what it could not fix. Review a change that alters what runs before you use the copy.</li>
   <li><code>secrets.json</code> is a JSON object of each name in <code>x-hippius.secrets</code> to its value, such as <code>{"{"}"DB_PASSWORD": "..."{"}"}</code>. It must be yours, mode 0600 (<code>chmod 600 secrets.json</code>), in a directory no one else can write. The dry run shows a placeholder, never the value.</li>
-  <li>An app launched with hipc always gets a public IPv4. The file is sent as it is; the app engine accepts at most 64 KiB.</li>
+  <li>An app launched with hipc always gets a public IPv4. The file is sent as it is. hipc reads up to 1 MiB, but the app engine takes a smaller file: at most `max_compose_bytes` from `hipc compute app-engine get`.</li>
   <li>An app is a VM: <code>hipc compute app-engine apps list</code> lists them, and <code>hipc compute vms delete VM_ID --yes</code> deletes one.</li>
 </Unordered>
 

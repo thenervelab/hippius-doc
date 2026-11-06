@@ -141,7 +141,7 @@ Invite a member. Each `--grant` is `SCOPE=LEVEL`: the scopes are `vms`, `databas
 
 ```bash
 hipc account invites create --email teammate@example.com --grant s3=admin --grant cdn=admin --yes
-hipc account invites list                  # the invitations this account sent
+hipc account invites list                  # only the pending invitations this account sent
 hipc account invites revoke INVITE_ID --yes
 hipc account members list
 hipc account members update MEMBER_ID --grant vms=operator --grant s3=viewer --remove-others --yes
@@ -150,7 +150,7 @@ hipc account members delete MEMBER_ID --yes
 
 `members update` replaces the member's whole grant list, so pass every grant they should keep. `--manage-team true` and `--billing-permission true` give the two permissions.
 
-Accept an invitation. The invite token is the last part of the link in the email. Paste it on stdin (Enter, then Ctrl-D), so it is never stored in a file or your shell history:
+Accept an invitation. An invitation sent to you is not in `hipc account invites list`: it is only in the email it came in. The invite token is the last part of the link in that email. Paste it on stdin (Enter, then Ctrl-D), so it is never stored in a file or your shell history:
 
 ```bash
 hipc account invites preview --token-file -

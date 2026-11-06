@@ -266,7 +266,7 @@ hipc compute vms create --flavor small --name web-1 --image IMAGE --region FR \
 hipc compute vms get VM_ID              # until status is running and network_ready is true
 ```
 
-Without `--image`, the size's default image is used. The SSH user is the image's `default_user` from `hipc compute images`. `--os-disk-tier ssd` or `hdd` picks a cheaper OS disk, fixed for the VM's life; HDD is slow shared storage for development and test, not for production or databases, and offered only up to the Large size (`max_flavor` in `hipc compute public-prices`).
+Flavor codes are lowercase (`small`, not `SMALL`, which hipc refuses before sending anything). Without `--image`, the size's default image is used; pass one to know which image, and so which SSH user, the VM gets. The image names and each one's `default_user` are in `hipc compute images`. `--os-disk-tier ssd` or `hdd` picks a cheaper OS disk, fixed for the VM's life; HDD is slow shared storage for development and test, not for production or databases, and offered only up to the Large size (`max_flavor` in `hipc compute public-prices`).
 
 :::warning hipc opens no port
 A VM launched with `--public-ip` from hipc gets no firewall rule: SSH is closed until you add one. See [Public IPv4 and firewall: From the command line](/use/compute/networking#from-the-command-line) for the rules file.
