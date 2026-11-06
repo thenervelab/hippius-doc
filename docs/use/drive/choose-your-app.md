@@ -66,4 +66,4 @@ If you forget it, your 12-word recovery seed restores access. The [Console](/use
 
 ## One plan for every app
 
-Your Drive plan covers your whole account. Everything you upload from any app counts toward the same storage. You can subscribe, change or cancel a plan in the [console](/use/console/billing#drive-plans) or the [desktop app](/use/desktop/billing). The mobile app shows your plan but can't change it.
+Your Drive plan covers your whole account. Everything you upload from any app counts toward the same storage. You can subscribe, change or cancel a plan in the [console](/use/console/billing#drive-plans) or the [desktop app](/use/desktop/billing). The mobile app shows your storage but can't change your plan.
