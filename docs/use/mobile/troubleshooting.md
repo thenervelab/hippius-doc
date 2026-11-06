@@ -138,21 +138,46 @@ Camera Uploads backs each photo up once, and doesn't upload it again when you ed
 
 ### My storage is full {#storage-full}
 
-When your Drive is full, uploads and backups stop. Delete files you no longer need, or move to a bigger plan in the console, then retry what failed. See [When your storage is full](/use/mobile/plans#when-your-storage-is-full).
+When your Drive is full, uploads and backups stop. Delete files you no longer need, or [get more storage in the console](#get-more-storage), then retry what failed. See [When your storage is full](/use/mobile/plans#when-your-storage-is-full).
 
 ## Plans and storage {#plans-and-storage}
 
-### I subscribed in the console but the app still shows my old plan {#old-plan-showing}
+### How do I subscribe or get more storage? {#get-more-storage}
+
+You can't subscribe or buy storage in the app, on iPhone or Android, and the app won't show you a way to. You do it in the Hippius Console, in a web browser. The browser on your phone works too.
+
+<Ordered>
+  <li>Open <a href="https://console.hippius.com">console.hippius.com</a> and sign in <strong>the same way you sign in to the app</strong>: the same Google, GitHub or Apple account, or the same access key.</li>
+  <li>Open <strong>Billing</strong> from the sidebar.</li>
+  <li>On the <strong>Drive</strong> card, click <BgStyledText>Subscribe</BgStyledText> or <BgStyledText>Upgrade</BgStyledText>. On a paid plan it reads <BgStyledText>Manage plan</BgStyledText>.</li>
+  <li>Pick a plan, then pay by card or from your account balance.</li>
+  <li>Go back to the app. Your new storage shows within a few seconds.</li>
+</Ordered>
+
+[Subscribing to a plan](/use/mobile/plans#subscribing-to-a-plan) has every step, and [Changing or cancelling your plan](/use/mobile/plans#changing-or-cancelling-your-plan) covers moving between plans.
+
+### The app says No Storage or Storage Full {#no-storage-message}
+
+The app tells you what is wrong with your storage, but not how to get more. Here is what each message means:
+
+| What you see | What it means | What to do |
+| --- | --- | --- |
+| **No Storage**, or **0 GB left** on the Storage card | The account has no storage. This only happens on an access key account without a plan. | [Subscribe in the console](#get-more-storage). |
+| **Storage Full**, or **over limit** on the Storage card | The account has used all of its storage. New files can't be uploaded, and your files stay available. | Delete files you no longer need, or [get more storage](#get-more-storage). |
+| **There's no storage left on this account, so this file wasn't uploaded.** | A file was refused because the account is out of storage. | The same as **Storage Full**, then retry it from **Your Uploads**. |
+
+### I subscribed in the console but the app still shows my old plan or storage {#old-plan-showing}
 
 <Unordered>
   <li>Switch away from the app and back again. It checks your plan whenever it comes back to the screen.</li>
+  <li>On iPhone, check the total on the <strong>Storage</strong> card, because the app doesn't show a plan name.</li>
   <li>Make sure you subscribed on the <strong>same account</strong> you use in the app: the same Google, GitHub or Apple account, or the same access key. A different one is a different Hippius account.</li>
   <li>After a card payment the plan can take up to a minute to activate. Check that it shows as active on <strong>Billing</strong> in the console.</li>
 </Unordered>
 
 ### Uploads fail on an access key account {#access-key-no-plan}
 
-Accounts that sign in with an access key don't include the free 10 GB, so their uploads and backups are refused until the account has a plan. Subscribe to one in the console. See [Subscribing to a plan](/use/mobile/plans#subscribing-to-a-plan).
+Accounts that sign in with an access key don't include the free 10 GB, so their uploads and backups are refused until the account has a plan, and the app shows **No Storage**. Subscribe to one in the console. See [Subscribing to a plan](/use/mobile/plans#subscribing-to-a-plan).
 
 ## Signing in and unlocking {#signing-in-and-unlocking}
 
