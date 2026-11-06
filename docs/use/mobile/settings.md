@@ -74,17 +74,13 @@ If turning it on doesn't work, the app tells you why:
   <li><strong>Too many failed attempts.</strong> Your phone has locked the sensor for a while. Choose <BgStyledText>Use passcode</BgStyledText> and confirm your phone's PIN, pattern or password to unlock it.</li>
 </Unordered>
 
-{/* iOS START: hidden until the App Store release. To show it again, close this comment at the end of this line and reopen it at the start of the iOS END line.
-
 ### On iPhone {#biometric-lock-iphone}
 
-The line under the switch reads **Use Face ID to open Hippius app**.
+The line under the switch reads **Use Face ID to open Hippius app**, or **Use Touch ID to open Hippius app** on an iPhone with Touch ID.
 
-The first time you turn it on, iOS asks whether Hippius may use Face ID. Tap **OK**. If you chose **Don't Allow**, the app says **Face ID unavailable** and offers <BgStyledText>Open Settings</BgStyledText>. Turn on **Face ID** under **Settings → Hippius**, then try again.
+With Face ID, the first time you turn it on, iOS asks whether Hippius may use it. Tap **OK**. If you chose **Don't Allow**, the app says **Face ID unavailable** and offers <BgStyledText>Open Settings</BgStyledText>. Turn on **Face ID** under **Settings → Hippius**, then try again.
 
 After too many failed attempts, iOS locks Face ID for a while. Choose <BgStyledText>Use passcode</BgStyledText> and enter your iPhone passcode to unlock it.
-
-iOS END */}
 
 ## Security
 
@@ -237,7 +233,7 @@ On by default. When a Camera Uploads backup finishes, the app tells you, both in
 
 This switch doesn't affect the quiet notification Android shows while a backup is running in the background. That one is required by Android and goes away when the backup is done.
 
-Your phone also has to allow Hippius to send notifications. The app asks after you first sign in, and on Android asks again when you turn on Camera Uploads if you haven't allowed it yet. See [Permissions](/use/mobile/permissions#notifications).
+Your phone also has to allow Hippius to send notifications. On Android, the app asks after you first sign in, and again when you turn on Camera Uploads if you haven't allowed it yet. On iPhone, it asks when you turn on Camera Uploads or **Backup notifications**. See [Permissions](/use/mobile/permissions#notifications).
 
 ## Appearance
 
