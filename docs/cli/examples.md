@@ -51,7 +51,7 @@ hipc drive subscription cancel --dry-run
 
 ## 4. S3, with an AWS profile
 
-Create a bucket, a sub token scoped to it, and an AWS CLI profile from that token; the objects themselves move with `aws s3 cp`. A command that issues a secret writes it to a file here: `--secret-file` creates a new file of mode 0600 that holds the secret alone, the JSON on stdout names that file as `secret_file` in place of the secret, and the file is deleted once it has been used.
+Create a bucket, a sub token scoped to it, and an AWS CLI profile from that token; the objects themselves move with `aws s3 cp`. A command that issues a secret writes it to a file here: `--secret-file` creates a new file of mode 0600 that holds the secret alone, the JSON on stdout names that file as `secret_file` in place of the secret, and the file is deleted once it has been used. `hipc s3 configure --from-token-file` reads the secret from the file `secret_file` names, a relative path from the current directory, so run both commands from the same directory.
 
 ```bash
 hipc s3 plans
@@ -63,9 +63,9 @@ hipc s3 tokens list
 hipc s3 subscription subscribe --plan pro --dry-run
 hipc s3 buckets create photos --yes
 hipc s3 buckets acl get photos
-hipc --json s3 tokens create --kind sub --name photos-ci --scope-type single-bucket --bucket photos --action read --action write --secret-file ~/s3.secret --reveal --yes > ~/s3-token.json
-hipc s3 configure --aws-profile hippius --access-key-id "$(jq -r .access_key_id ~/s3-token.json)" --secret-key-file ~/s3.secret
-rm ~/s3.secret ~/s3-token.json
+hipc --json s3 tokens create --kind sub --name photos-ci --scope-type single-bucket --bucket photos --action read --action write --secret-file s3.secret --reveal --yes > s3-token.json
+hipc s3 configure --aws-profile hippius --from-token-file s3-token.json
+rm s3.secret s3-token.json
 aws --profile hippius s3 ls s3://photos
 hipc s3 tokens revoke --kind sub <token_id> --yes
 hipc s3 buckets delete photos --yes

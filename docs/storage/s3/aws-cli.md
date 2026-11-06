@@ -50,12 +50,11 @@ export AWS_DEFAULT_REGION="decentralized"
 ```bash
 hipc --json s3 tokens create --kind sub --name laptop --scope-type single-bucket \
   --bucket my-bucket --action read --action write --secret-file token.secret --reveal --yes > token.json
-hipc s3 configure --aws-profile hippius \
-  --access-key-id "$(jq -r .access_key_id token.json)" --secret-key-file token.secret
+hipc s3 configure --aws-profile hippius --from-token-file token.json
 rm token.secret token.json
 ```
 
-`--secret-file` writes the secret alone to a new file of mode 0600, so it never shows on screen, and the answer on stdout names that file in place of the secret.
+`--secret-file` writes the secret alone to a new file of mode 0600, so it never shows on screen, and the answer on stdout names that file in place of the secret. `hipc s3 configure --from-token-file` reads the secret from the file `secret_file` names, a relative path from the current directory, so run both commands from the same directory.
 
 For an existing key, pass `--access-key-id YOUR_ACCESS_KEY --secret-key-file -` and paste the secret on stdin instead. AWS CLI 2.13 and 1.29 and later read `endpoint_url` from the profile, so `--profile hippius` alone is enough. Older versions ignore it: pass `--endpoint-url` as below.
 

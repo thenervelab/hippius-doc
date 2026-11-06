@@ -256,7 +256,7 @@ Always use https://s3.hippius.com. Do not point clients at other hostnames.
 
 Step 1: Create an account at https://console.hippius.com (Google, GitHub, Apple, or a 12-word access key)
 Step 2: Top up on Billing by card, Bitcoin, USDC, or TAO, then subscribe if the product needs a plan. https://docs.hippius.com/use/console/billing
-Step 3: Create credentials. For an app, a sub token scoped to its bucket: Console > S3 Storage > Sub Tokens, or `hipc --json s3 tokens create --kind sub --name app --scope-type single-bucket --bucket my-bucket --action read --action write --secret-file s3.secret --reveal --yes > token.json` (the secret goes alone to the new mode-0600 file s3.secret, and token.json names it as `secret_file`) and `hipc s3 configure --access-key-id "$(jq -r .access_key_id token.json)" --secret-key-file s3.secret`, then delete s3.secret and token.json. A master token (Create Master Token) reaches every bucket and bypasses ACLs.
+Step 3: Create credentials. For an app, a sub token scoped to its bucket: Console > S3 Storage > Sub Tokens, or `hipc --json s3 tokens create --kind sub --name app --scope-type single-bucket --bucket my-bucket --action read --action write --secret-file s3.secret --reveal --yes > token.json` (the secret goes alone to the new mode-0600 file s3.secret, and token.json names it as `secret_file`) and `hipc s3 configure --from-token-file token.json` from the same directory (it reads the secret from `secret_file`, a path relative to the current directory), then delete s3.secret and token.json. A master token (Create Master Token) reaches every bucket and bypasses ACLs.
 Step 4: Save Access Key ID (hip_...) and Secret Key — the secret cannot be retrieved after creation
 
 IMPORTANT: ETH wallets, TAO wallets, and Polkadot browser extensions are NOT used for S3 access. Card, Bitcoin, USDC, and TAO add to the balance. They do not authenticate S3 requests.
@@ -324,10 +324,10 @@ Create in Console > S3 Buckets (https://docs.hippius.com/use/console/s3), with h
 Rotate issues a new Access Key ID and secret with the same permissions and revokes the old pair. Revoke is immediate. To hand a new key to many clients without a gap, create a second token, move the clients to it, then revoke the first.
 
     hipc --json s3 tokens create --kind sub --name app-prod --scope-type single-bucket --bucket app-prod --action read --action write --secret-file app-prod.secret --reveal --yes > app-prod.json
-    hipc s3 configure --aws-profile app-prod --access-key-id "$(jq -r .access_key_id app-prod.json)" --secret-key-file app-prod.secret
+    hipc s3 configure --aws-profile app-prod --from-token-file app-prod.json
     rm app-prod.secret app-prod.json
     hipc --json s3 tokens rotate --kind sub <token_id> --secret-file app-prod.secret --reveal --yes > app-prod.json
-    hipc s3 configure --aws-profile app-prod --yes --access-key-id "$(jq -r .access_key_id app-prod.json)" --secret-key-file app-prod.secret
+    hipc s3 configure --aws-profile app-prod --yes --from-token-file app-prod.json
     rm app-prod.secret app-prod.json
     hipc s3 tokens revoke --kind sub <token_id> --yes
 

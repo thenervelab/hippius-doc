@@ -205,14 +205,13 @@ Programmatic create / list / rotate / revoke: [Management API](/use/api).
 
 ### From the command line
 
-With [hipc](/cli), create a sub-token for one bucket and turn it into an AWS CLI profile. `--secret-file` writes the secret alone to a new private file (mode 0600, no newline; the path must not exist yet), so it never shows on screen; the answer names that file as `secret_file` and keeps the `access_key_id`. Delete the file once the profile is written:
+With [hipc](/cli), create a sub-token for one bucket and turn it into an AWS CLI profile. `--secret-file` writes the secret alone to a new private file (mode 0600, no newline; the path must not exist yet), so it never shows on screen; the answer names that file as `secret_file` and keeps the `access_key_id`. `hipc s3 configure --from-token-file` reads the secret from the file `secret_file` names, a relative path from the current directory, so run both commands from the same directory. Delete both files once the profile is written:
 
 ```bash
 hipc --json s3 tokens create --kind sub --name backup-job \
   --scope-type single-bucket --bucket my-bucket --action read --action write \
   --expires-at 2027-01-01T00:00:00Z --secret-file token.secret --reveal --yes > token.json
-hipc s3 configure --aws-profile backup-job \
-  --access-key-id "$(jq -r .access_key_id token.json)" --secret-key-file token.secret
+hipc s3 configure --aws-profile backup-job --from-token-file token.json
 rm token.secret token.json
 ```
 
@@ -220,8 +219,7 @@ Run it with `--dry-run` in place of `--yes` first to see the request. Leave out 
 
 ```bash
 hipc --json s3 tokens rotate --kind sub TOKEN_ID --secret-file token.secret --reveal --yes > token.json
-hipc s3 configure --aws-profile backup-job --yes \
-  --access-key-id "$(jq -r .access_key_id token.json)" --secret-key-file token.secret
+hipc s3 configure --aws-profile backup-job --yes --from-token-file token.json
 rm token.secret token.json
 ```
 
@@ -237,8 +235,7 @@ hipc s3 buckets create app-staging --yes
 for env in prod staging; do
   hipc --json s3 tokens create --kind sub --name "app-$env" --scope-type single-bucket --bucket "app-$env" \
     --action read --action write --secret-file "app-$env.secret" --reveal --yes > "app-$env.json"
-  hipc s3 configure --aws-profile "app-$env" \
-    --access-key-id "$(jq -r .access_key_id "app-$env.json")" --secret-key-file "app-$env.secret"
+  hipc s3 configure --aws-profile "app-$env" --from-token-file "app-$env.json"
 done
 rm app-prod.secret app-staging.secret app-prod.json app-staging.json
 ```
