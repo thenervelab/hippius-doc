@@ -47,14 +47,15 @@ Check it with `hipc version`.
 
 ## Log in
 
-Sign in at [console.hippius.com](https://console.hippius.com), copy your API token from [Settings](https://console.hippius.com/dashboard/settings), then:
+Sign in at [console.hippius.com](https://console.hippius.com) with Google, GitHub, or Apple and copy your API token from [Settings](https://console.hippius.com/dashboard/settings). If you sign in with a 12-word access key, Settings shows no token: get one by scripting the [access-key sign-in](/use/wallet-login) once on a machine you trust, and pipe it to `hipc auth login --token-file -`. Then:
 
 ```bash
-hipc auth login --token-file -    # paste the token, press Enter, then Ctrl-D
+hipc auth login                   # at a terminal: paste the token at the prompt; it is not shown
+hipc auth login --token-file -    # in a script: the token on stdin
 hipc auth status
 ```
 
-Or pass a file path instead of `-`. The token never goes on the command line. `HIPPIUS_TOKEN` sets a token for a single run.
+Or pass a file path instead of `-`. The token never goes on the command line. `HIPPIUS_TOKEN` sets a token for a single run. For CI, sign in once on a machine you trust and store only the token as the runner's `HIPPIUS_TOKEN` secret; never put the 12 words on a runner, since they control the whole account.
 
 ## First commands
 

@@ -10,7 +10,7 @@ Use `hipc` first for anything on the account API: accounts and projects, billing
 
 - Install: `brew install thenervelab/tap/hipc`, or `curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh`. `pip install hippius` follows right after the first release; until then that command installs the old IPFS-era SDK (0.2.x), not hipc.
 - Log in with the token the user gives you: `hipc auth login --token-file -` (paste it, Enter, Ctrl-D), then `hipc auth status`. At their own terminal the user can also run plain `hipc auth login`, which asks for the token without showing it. Never ask for the token in the chat; the user runs this on their machine. Where the token comes from: Account, sign-in, and paying, below.
-- Run `hipc schema` to discover every command, its effect, confirmations and error codes.
+- Run `hipc schema` to discover every command, its effect, confirmations and error codes. The whole document is large (about 160 KB): `hipc schema <path…>`, such as `hipc schema compute vms` or `hipc schema s3 buckets create`, lists only the commands under that path, in the same shape.
 - Output is JSON on a pipe, with `CI`, or with `AI_AGENT=1`.
 - `--dry-run` sends nothing. A write that spends, deletes, revokes, rotates or cancels needs `--yes` (`CI` and `AI_AGENT` never stand in for it); a secret needs `--reveal`.
 - Exit 0 success, 1 the API or runtime failed, 2 fix the invocation (nothing that changes state was sent). A failure is one JSON object on stderr; branch on `error.code`.
