@@ -176,7 +176,7 @@ hipc s3 tokens create --kind sub --bucket photos --action read --action write --
 hipc hub keys create --name ci --role push --secret-file ci.secret --reveal --yes
 ```
 
-Pass the file `--secret-file` writes to `s3 configure` as its `--secret-key-file`, or on stdin to `docker login --password-stdin`. Delete it once the secret is stored where it is used. Without these flags, redirect stdout to a file only the user can read, such as `(umask 077; set -o noclobber; hipc hub keys rotate 7 --reveal --yes > key.json)`, which refuses a file that exists, and delete that file after use.
+For S3, save the JSON document of `hipc s3 tokens create` run with `--secret-file` and pass it to `hipc s3 configure --from-token-file token.json`, which reads the secret from the file its `secret_file` names (a relative path from the current directory, as the create wrote it, so run both from the same directory); or pass the secret file as `--secret-key-file` beside `--access-key-id`. For the Hub, pass the secret file on stdin to `docker login --password-stdin`. Delete the secret file, and the token document, once the secret is stored where it is used. Without these flags, redirect stdout to a file only the user can read, such as `(umask 077; set -o noclobber; hipc hub keys rotate 7 --reveal --yes > key.json)`, which refuses a file that exists, and delete that file after use.
 
 Write a secret where the user asked and nowhere else. `--debug` prints only each request's method, its URL with the query values redacted, and its status, never a header or a body, so its lines are safe to show.
 
