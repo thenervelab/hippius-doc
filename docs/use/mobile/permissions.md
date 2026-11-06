@@ -146,19 +146,17 @@ Some phones also let you lock an app on the recent apps screen, often with a pad
 
 Even so, some phones still close apps in the background. For a big backup, keep your phone on Wi-Fi and plugged in, and open Hippius now and then to keep it moving.
 
-{/* iOS START: hidden until the App Store release. To show it again, close this comment at the end of this line and reopen it at the start of the iOS END line.
-
 ## iPhone permissions {#iphone}
 
 ### What the app asks for {#what-the-app-asks-for-iphone}
 
 | Permission        | When it is asked                                                      | What it is for                                                        | If you say no                                                                   |
 | ----------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| **Photos**        | When you set up Camera Uploads, or first choose **Upload Photos**     | Finding the photos and videos to back up, and keeping Live Photos' motion | Camera Uploads can't run. Upload Photos still works, but Live Photos upload as stills. |
+| **Photos**        | When you set up Camera Uploads                                        | Finding the photos and videos to back up, and keeping Live Photos' motion | Camera Uploads can't run. Upload Photos still works, but Live Photos upload as stills. |
 | **Add to Photos** | The first time you save a downloaded photo or video                   | Saving downloads to the Photos app                                    | Photos and videos can't be saved to the Photos app.                             |
 | **Camera**        | When you choose **Take photo or video**                               | Taking a photo or video to upload straight away                       | Upload photos you have already taken instead.                                   |
 | **Microphone**    | The first time you record a video                                     | Recording sound with your video                                       | Videos may be recorded without sound.                                           |
-| **Notifications** | After you first sign in                                               | Telling you when a backup finishes                                    | Backups still run. You just aren't told when they finish.                       |
+| **Notifications** | When you turn on Camera Uploads or **Backup notifications**           | Telling you when a backup finishes                                    | Backups still run. You just aren't told when they finish.                       |
 | **Face ID**       | When you turn on **Biometric lock**                                   | Unlocking the app                                                     | The lock can't be turned on.                                                    |
 
 You can change any of these later under **Settings → Hippius** on your iPhone.
@@ -169,13 +167,13 @@ When you set up Camera Uploads, iOS asks whether Hippius may access your photos:
 
 <Unordered>
   <li><strong>Allow Full Access</strong> lets Hippius see your whole library. Choose this for Camera Uploads.</li>
-  <li><strong>Limit Access</strong> lets Hippius see only the photos you pick, so only those are backed up. The app warns you with <strong>Limited photo access</strong> and offers <strong>Select Photos…</strong> to change the selection, or <strong>Allow Full Access</strong>.</li>
+  <li><strong>Limit Access</strong> lets Hippius see only the photos you pick, so only those are backed up. The <strong>Upload from</strong> sheet says so, and <strong>Change selection</strong> lets you pick different photos.</li>
   <li><strong>Don't Allow</strong> gives no access. Camera Uploads can't be turned on.</li>
 </Unordered>
 
 To change it later, open the iPhone **Settings → Hippius → Photos** and choose **Full Access**.
 
-The first time you choose **Upload Photos**, iOS asks for photo access too. Full access is what lets a Live Photo keep its motion. With limited access, Live Photos upload as stills, and the app tells you that **Live Photos need full photo access**.
+**Upload Photos** doesn't ask for photo access. Full access is what lets a Live Photo keep its motion, so without it, Live Photos upload as stills.
 
 When you save a downloaded photo or video, iOS separately asks whether Hippius may add it to your library.
 
@@ -203,8 +201,6 @@ iOS gives apps very little time in the background, and it decides when:
 </Unordered>
 
 The fastest way through a big backup on iPhone is to keep Hippius open on screen, on Wi-Fi and plugged in.
-
-iOS END */}
 
 ## Where to next
 

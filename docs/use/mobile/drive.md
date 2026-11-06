@@ -91,11 +91,7 @@ Tap <BgStyledText>+</BgStyledText> in the bottom bar and choose what to add:
 
 **On Android**, **Take photo or video** first asks whether you want to **Take Photo** or **Record Video**, then opens the camera for that.
 
-{/* iOS START: hidden until the App Store release. To show it again, close this comment at the end of this line and reopen it at the start of the iOS END line.
-
 **On iPhone**, the camera opens straight away. Switch between photo and video in the camera itself.
-
-iOS END */}
 
 <Screenshot src="/img/mobile/drive/add-menu.png" alt="The + menu with the ways to add files" dark raw phone />
 
@@ -133,13 +129,9 @@ Some phones save photos in a space-saving format called **HEIC**. If any photo y
   <li><strong>HEIC</strong> keeps the original file.</li>
 </Unordered>
 
-{/* iOS START: hidden until the App Store release. To show it again, close this comment at the end of this line and reopen it at the start of the iOS END line.
-
 ### Live Photos on iPhone {#live-photos}
 
 When you pick a Live Photo, **Image preferences** also has a **Live on** chip. Keep **Live Photo** to upload the image and its motion together, or choose **Still image** to upload just the photo. Live Photos take up more storage. Keeping the motion needs full photo access. See [Permissions and Background Backups](/use/mobile/permissions#iphone-photos).
-
-iOS END */}
 
 ### Your first upload {#your-first-upload}
 
@@ -196,11 +188,7 @@ These file types open in the app:
 
 Older Office files (DOC, XLS and PPT), audio and code files don't preview, and neither do very large files. Tapping one of those tells you it can't be previewed. Download it to open it in another app.
 
-{/* iOS START: hidden until the App Store release. To show it again, close this comment at the end of this line and reopen it at the start of the iOS END line.
-
 **On iPhone**, older Word files (DOC) preview as well, and a Live Photo shows a **LIVE** button. Tap it to play the motion.
-
-iOS END */}
 
 <Screenshot src="/img/mobile/drive/preview.png" alt="A photo open in the full-screen preview" dark raw phone />
 
@@ -219,16 +207,12 @@ Where the file goes depends on your phone and the kind of file.
   <li><strong>Everything else</strong>: Android asks which folder to save it in, for example <strong>Documents</strong>. Choose a folder, tap <strong>Use this folder</strong>, then <strong>Allow</strong>.</li>
 </Unordered>
 
-{/* iOS START: hidden until the App Store release. To show it again, close this comment at the end of this line and reopen it at the start of the iOS END line.
-
 ### On iPhone {#saving-on-iphone}
 
 <Unordered>
   <li><strong>Photos and videos</strong> are saved to the <strong>Photos</strong> app. The first time, iOS asks whether Hippius may add to your photos. A Live Photo is saved as a Live Photo.</li>
   <li><strong>Everything else</strong> opens the share sheet. Tap <strong>Save to Files</strong> to keep it on your iPhone, or send it to another app.</li>
 </Unordered>
-
-iOS END */}
 
 ## File details {#file-details}
 
