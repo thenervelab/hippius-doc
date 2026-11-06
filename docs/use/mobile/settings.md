@@ -32,7 +32,7 @@ The screen opens with two cards, followed by your preferences, then help and app
 | **Confirm before deleting** | Asks every time before something is deleted.                            | On      |
 | **Backup notifications**    | Tells you when a Camera Uploads backup finishes.                        | On      |
 | **Appearance**              | Light, dark, or following your phone. The row shows your choice.        | System  |
-| **Contact support**         | Opens Hippius support in the console.                                   |         |
+| **Contact support**         | Opens an email to support@hippius.com.                                  |         |
 | **App version**             | The version installed on this phone.                                    |         |
 | **Check for Updates**       | Checks whether a newer version of the app is available.                 |         |
 | **Terms of Service**        | Opens our terms in your browser.                                        |         |
@@ -250,7 +250,7 @@ The change applies straight away, and the Appearance row shows which one you pic
 ## Help and app information {#help-and-app-information}
 
 <Unordered>
-  <li><strong>Contact support</strong> opens Hippius support in the console, in your browser. Sign in there with the same account to open a ticket. See <a href="/use/console/support">Help &amp; Support</a>.</li>
+  <li><strong>Contact support</strong> opens a new email to <strong>support@hippius.com</strong> in your mail app. If you have no mail app set up, the app shows the address instead.</li>
   <li><strong>App version</strong> shows the version installed on this phone. Support may ask you for it.</li>
   <li><strong>Check for Updates</strong> checks for a newer version straight away. If there is one, you can install it from there. Otherwise it says <strong>You're up to date</strong>. The app also checks by itself when it opens, but only this button tells you when you are already on the latest version. See <a href="/use/mobile/getting-started#updates">Keeping the app up to date</a>.</li>
   <li><strong>Terms of Service</strong> and <strong>Privacy Policy</strong> open in your browser.</li>
@@ -275,17 +275,17 @@ From Overview, tap the **Storage** card, or the same card at the top of Settings
 
 ## Your account
 
-Open **Account** from the **Account** card at the top of Settings, or from the **Plan** card on Overview. It shows:
+Open **Account** from the **Account** card at the top of Settings, or on Android from the **Plan** card on Overview. It shows:
 
 <Unordered>
   <li><strong>Who you are signed in as.</strong> If you signed in with Google, GitHub or Apple, you see your name and email. Your <strong>wallet address</strong> is shown too, with a button to copy it.</li>
-  <li><strong>Your current plan</strong> and how much storage it gives you. This is read only.</li>
+  <li><strong>Your current plan</strong> and how much storage it gives you. This is read only. On iPhone, the <strong>Storage</strong> card takes its place.</li>
 </Unordered>
 
 Your mnemonic seed is not shown here. It lives in your phone's secure storage, and the only place the app reveals it is the deliberate backup flow under [Security](#mnemonic-seed).
 
 :::info
-Managing subscriptions isn't available in the Hippius mobile app. The Account screen only shows which plan you are on.
+Managing subscriptions isn't available in the Hippius mobile app.
 :::
 
 ### Logging out {#logging-out}
@@ -309,6 +309,8 @@ Your files, buckets, container images, subscriptions and remaining balance all g
 The first step is not a warning, it is an **inventory**. The app reads your account live and lists what is actually there, in six groups: **Storage**, **Compute**, **Registry and network**, **Subscriptions**, **Credits**, and **Access and account**.
 
 Only groups that hold something get a checkbox to tick. A group that is empty collapses to a single grey line, so you are only asked to confirm what you actually have. The app has no virtual machines or databases of its own, so unless you run them from the console, **Compute** will simply read "No VMs or databases".
+
+On iPhone, **Compute** and **Registry and network** only appear if they hold something, **Storage allowance** takes the place of **Subscriptions**, and there is no **Credits** group. The **Access and account** checkbox covers any remaining balance.
 
 If you do have a **running** VM or managed database, that blocks the request until it is decommissioned from the console.
 

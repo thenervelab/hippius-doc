@@ -109,7 +109,7 @@ Overview shows, from top to bottom:
 
 <Unordered>
   <li><strong>Recents</strong>: the files you added most recently. Tap the arrow to go to Drive.</li>
-  <li>The <strong>Storage</strong> and <strong>Plan</strong> cards: how full your Drive is, and which plan you are on. See <a href="/use/mobile/plans#what-the-app-shows">Plans and Storage</a>.</li>
+  <li>The <strong>Storage</strong> and <strong>Plan</strong> cards: how full your Drive is, and which plan you are on. On iPhone there is only the <strong>Storage</strong> card. See <a href="/use/mobile/plans#what-the-app-shows">Plans and Storage</a>.</li>
   <li><strong>Save your recovery phrase</strong>, only for a new Google, GitHub or Apple account after its first upload. Tap <BgStyledText>View phrase</BgStyledText> to back the phrase up. <BgStyledText>Later</BgStyledText> hides the card for good, so only tap it once the phrase is safe.</li>
   <li>A card to set up <a href="/use/mobile/camera-uploads">Camera Uploads</a>. Once you have set it up, it is replaced by <strong>Storage Distribution</strong>, a breakdown of what is using your storage.</li>
 </Unordered>
@@ -211,7 +211,7 @@ If you turn on **Biometric lock** in Settings, the app asks for your fingerprint
 
 ## Your plan
 
-The app shows which Drive plan you are on and how much storage it gives you, on the Overview **Plan** card and on your **Account** screen. **Managing subscriptions is not available in the mobile app.** You subscribe, change or cancel a plan in the [Hippius Console](https://console.hippius.com) in a browser, signed in with the same account.
+On Android, the app shows which Drive plan you are on and how much storage it gives you, on the Overview **Plan** card and on your **Account** screen. On iPhone, it shows your storage rather than your plan, on the **Storage** card. **Managing subscriptions is not available in the mobile app.** You subscribe, change or cancel a plan in the [Hippius Console](https://console.hippius.com) in a browser, signed in with the same account.
 
 Once you subscribe in the console, the app picks the plan up on its own. There is nothing to enter twice. [Plans and Storage](/use/mobile/plans) walks through it step by step, and shows what the app looks like before and after.
 

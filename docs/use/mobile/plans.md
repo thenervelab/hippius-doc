@@ -15,7 +15,7 @@ import Screenshot from '@site/src/components/Screenshot';
 
 Your Drive plan sets how much encrypted storage your account has. One plan covers your whole account, on every device. Files you upload by hand, photos backed up by Camera Uploads, and anything you add from the console or the desktop app all count toward it.
 
-The app shows which plan you are on and how much of it you have used. To subscribe to a plan, change it or cancel it, use the [Hippius Console](https://console.hippius.com) in a web browser. The app picks up the change by itself.
+On Android, the app shows which plan you are on and how much of it you have used. On iPhone, it shows how much storage you have and how much you have used, without naming your plan. To subscribe to a plan, change it or cancel it, use the [Hippius Console](https://console.hippius.com) in a web browser. The app picks up the change by itself.
 
 ## Which plan you start with
 
@@ -32,7 +32,7 @@ When you need more space, paid plans go up to many terabytes and are billed mont
 
 ## What the app shows {#what-the-app-shows}
 
-Two cards on **Overview** sum up your plan and your storage. Tap either one for more detail.
+Two cards on **Overview** sum up your plan and your storage. Tap either one for more detail. On iPhone there is only the **Storage** card.
 
 <Screenshot src="/img/mobile/plan-card.png" alt="The Storage and Plan cards on the Overview screen" dark raw phone />
 
@@ -40,9 +40,11 @@ Two cards on **Overview** sum up your plan and your storage. Tap either one for 
 
 The **Plan** card shows your plan's name, for example **Free** or **Plus**, and how much storage it gives you, such as **≈ 2 TB Storage**.
 
-Tap it to open the **Account** screen. You can also get there from the **Account** card in Settings. Its **Current Plan** card shows your plan's full name, for example **Free Drive Plan**, and its storage. Underneath, the app notes that managing subscriptions isn't available in the Hippius mobile app.
+Tap it to open the **Account** screen. You can also get there from the **Account** card in Settings. Its **Current Plan** card shows your plan's full name, for example **Free Drive Plan**, and its storage.
 
 <Screenshot src="/img/mobile/plans/account.png" alt="The Account screen with the Current Plan card" dark raw phone />
+
+On iPhone there is no **Plan** card, and the **Account** screen shows the **Storage** card in place of **Current Plan**.
 
 ### Your storage {#your-storage-in-the-app}
 
@@ -80,12 +82,12 @@ You subscribe in the console, in your phone's browser or on a computer. It is th
   <li>Pick the plan you want and click <BgStyledText>Subscribe</BgStyledText> on its card.</li>
   <li>Choose how to pay: <strong>Card</strong>, through Stripe, or <strong>Account balance</strong>, if you have already topped up your balance.</li>
   <li>Click <BgStyledText>Make Payment</BgStyledText> and finish paying. After a card payment the console shows the plan activating, which usually takes under a minute.</li>
-  <li>Go back to the Hippius app. It checks your plan again whenever it comes back to the screen, so the <strong>Plan</strong> and <strong>Storage</strong> cards update within a few seconds.</li>
+  <li>Go back to the Hippius app. It checks your plan again whenever it comes back to the screen, so the <strong>Storage</strong> card, and the <strong>Plan</strong> card on Android, update within a few seconds.</li>
 </Ordered>
 
 <Screenshot src="/img/console/billing/drive-plans.png" alt="The Storage Plans page in the Hippius Console" dark raw />
 
-Your files stay where they are, and nothing is uploaded again. The new plan only changes how much you can store: the **Plan** card shows its name, and the **Storage** card measures your usage against the new total.
+Your files stay where they are, and nothing is uploaded again. The new plan only changes how much you can store: the **Storage** card measures your usage against the new total, and on Android the **Plan** card shows its name.
 
 ## Changing or cancelling your plan {#changing-or-cancelling-your-plan}
 
