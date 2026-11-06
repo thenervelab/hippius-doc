@@ -69,7 +69,7 @@ Hippius is a distributed cloud. Store encrypted files, serve objects over S3, an
 | Object Storage | S3-compatible API. Endpoint https://s3.hippius.com only. Region `decentralized`. Path-style. Access key ids start with `hip_`. | https://docs.hippius.com/use/quickstart |
 | Hub | Models and container images. Command: `hippius-hub`. Creating a namespace needs a balance of at least $10, a spam check. The plan price stays zero. | https://docs.hippius.com/registry |
 | Desktop | Sync folders on macOS, Windows, and Linux. There is no CLI. The agent file is on the staging branch. | https://raw.githubusercontent.com/thenervelab/hippius-desktop/staging/llms.txt |
-| Mobile | Drive on Android, on Google Play. The iPhone app is not released. There is no CLI. | https://docs.hippius.com/use/mobile/getting-started |
+| Mobile | Drive on iPhone, on the App Store, and on Android, on Google Play. There is no CLI. | https://docs.hippius.com/use/mobile/getting-started |
 | Console | Sign up, pay, API token, Drive and S3 keys. There is no CLI. The agent calls https://api.hippius.com with the account token. | https://docs.hippius.com/use/console/getting-started |
 | Drive SDK | Script Drive with encryption on the client. Command: `hippius-drive`. Install from git, not PyPI. | https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt |
 | Bridge | No CLI. An agent that holds the key signs the steps. Alpha and hAlpha are pegged 1:1. Minimum 15. | https://docs.hippius.com/use/console/fund-with-alpha |
@@ -162,7 +162,7 @@ Namespace names are lowercase letters, digits, and dashes, 1 to 63 characters. A
 
 ### Drive
 
-`hippius-drive` reads and writes the same encrypted Drive as the console, the desktop app, and the Android app. It is alpha. It is not Object Storage: a file put here does not appear in a bucket. Full command list: https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/docs/cli.md
+`hippius-drive` reads and writes the same encrypted Drive as the console, the desktop app, and the mobile app. It is alpha. It is not Object Storage: a file put here does not appear in a bucket. Full command list: https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/docs/cli.md
 
 The package name `hippius-drive` is not on PyPI. Python 3.10 to 3.13.
 

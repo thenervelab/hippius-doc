@@ -82,8 +82,6 @@ Camera Uploads starts with everything already on your phone, oldest first, so th
 
 The first time you open that folder, Android may warn that **Camera uploads may stop syncing**. Tap <BgStyledText>Stop optimising</BgStyledText> and allow Hippius to run in the background. It is the single most useful thing you can do to keep backups going. See [Battery optimization](/use/mobile/permissions#battery-optimization).
 
-{/* iOS START: hidden until the App Store release. To show it again, close this comment at the end of this line and reopen it at the start of the iOS END line.
-
 ### On iPhone {#turning-it-on-iphone}
 
 <Ordered>
@@ -92,12 +90,11 @@ The first time you open that folder, Android may warn that **Camera uploads may 
   <li><strong>Choose what to back up.</strong> The <strong>Upload from</strong> sheet opens with <strong>Camera Roll</strong> selected, which is everything. Keep it, or pick smart albums. Tap <BgStyledText>Save selection</BgStyledText>.</li>
   <li><strong>Check the options.</strong> The <strong>Camera Uploads</strong> screen opens. Check where backups go (<strong>Back up to</strong>), whether to <strong>Include videos</strong>, and how <a href="#heic-and-live-photos">HEIC and Live Photos</a> are uploaded.</li>
   <li>Tap <BgStyledText>Turn on Camera uploads</BgStyledText>.</li>
+  <li>If iOS asks whether Hippius may send notifications, choose <strong>Allow</strong>, so you are told when a backup finishes.</li>
   <li>The app opens your backup folder in Drive and starts. A notice at the bottom of the screen reads <strong>Keep Hippius open while your photos back up. Backup may pause shortly after you leave the app.</strong></li>
 </Ordered>
 
 iOS gives apps very little time in the background, so a backup goes fastest while the app is open. Keep **Background App Refresh** on for Hippius, so it can carry on by itself later. See [How iOS runs backups in the background](/use/mobile/permissions#ios-background).
-
-iOS END */}
 
 ## Choosing what to back up {#upload-from}
 
@@ -126,8 +123,6 @@ Camera Uploads can only back up what Android lets Hippius see.
 
 To change it later, open your phone's **Settings → Apps → Hippius → Permissions → Photos and videos**. [Permissions and Background Backups](/use/mobile/permissions#android-photos) has the details.
 
-{/* iOS START: hidden until the App Store release. To show it again, close this comment at the end of this line and reopen it at the start of the iOS END line.
-
 ### On iPhone {#upload-from-iphone}
 
 <Unordered>
@@ -150,8 +145,6 @@ Camera Uploads can only back up what iOS lets Hippius see.
 </Unordered>
 
 To change it later, open the iPhone **Settings → Hippius → Photos**. [Permissions and Background Backups](/use/mobile/permissions#iphone-photos) has the details.
-
-iOS END */}
 
 ## Choosing where backups go {#back-up-to}
 
@@ -197,8 +190,6 @@ This row appears on Android only. It shows whether Android's battery optimizatio
 
 See [Battery optimization](/use/mobile/permissions#battery-optimization) for why this matters.
 
-{/* iOS START: hidden until the App Store release. To show it again, close this comment at the end of this line and reopen it at the start of the iOS END line.
-
 ## HEIC and Live Photos (iPhone) {#heic-and-live-photos}
 
 iPhones save photos in a format called **HEIC**, and can save **Live Photos**, a still with a few seconds of motion. On iPhone, the Camera Uploads screen has two extra rows for them. They do not appear on Android.
@@ -218,8 +209,6 @@ iPhones save photos in a format called **HEIC**, and can save **Live Photos**, a
 </Unordered>
 
 A change applies to photos backed up from then on. Photos already in your Drive stay as they are.
-
-iOS END */}
 
 ## Following the backup {#following-the-backup}
 
@@ -272,11 +261,7 @@ Open <BgStyledText>Settings</BgStyledText> → <BgStyledText>Camera Uploads</BgS
 | **Include videos**            | Whether videos are backed up as well as photos.                              |
 | **Continuous camera uploads** | Whether Android lets backups run in the background. Android only.            |
 
-{/* iOS START: hidden until the App Store release. To show it again, close this comment at the end of this line and reopen it at the start of the iOS END line.
-
 **On iPhone**, the screen has **Upload HEIC photos as** and **Upload Live Photos as** in place of **Continuous camera uploads**. See [HEIC and Live Photos](#heic-and-live-photos).
-
-iOS END */}
 
 The **Upload from** row also warns you when your phone limits what Hippius can see. It reads **Limited access**, **No photos selected** or **Not allowed** instead of your selection. Tap it to fix it.
 
@@ -303,11 +288,7 @@ They land in the Drive folder you chose, like anything else you upload. Browse t
   <li><strong>Each photo once.</strong> A photo that is in several of the folders you picked is still backed up only once.</li>
 </Unordered>
 
-{/* iOS START: hidden until the App Store release. To show it again, close this comment at the end of this line and reopen it at the start of the iOS END line.
-
 **On iPhone**, HEIC photos and Live Photos are uploaded the way you chose under [HEIC and Live Photos](#heic-and-live-photos). A photo that is in several smart albums is still backed up only once.
-
-iOS END */}
 
 ### Good to know {#good-to-know}
 
@@ -340,13 +321,9 @@ Whatever stopped a backup, opening Hippius picks it up again from where it stopp
 Even with both of these done, some Android phones stop Hippius in the background anyway, often within about 15 minutes of leaving the app. Many phone makers add a battery manager of their own on top of Android's, and it can close apps whatever you have allowed. The backup may then wait until you open Hippius again. Your phone's own battery settings can help. See [When your phone stops backups anyway](/use/mobile/permissions#phone-battery-managers).
 :::
 
-{/* iOS START: hidden until the App Store release. To show it again, close this comment at the end of this line and reopen it at the start of the iOS END line.
-
 ### On iPhone {#keeping-it-running-iphone}
 
 iOS pauses a backup shortly after you leave the app, and gives Hippius time in the background only when it chooses, often hours later. Keep **Background App Refresh** on for Hippius, keep **Low Power Mode** off, and don't swipe Hippius away in the app switcher. For a big backup, keep the app open on screen. See [How iOS runs backups in the background](/use/mobile/permissions#ios-background).
-
-iOS END */}
 
 ## Where to next
 
