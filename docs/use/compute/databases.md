@@ -79,22 +79,33 @@ The console only lets you continue once every item has been saved and you tick *
 
 ### From the command line
 
-[hipc](/cli) creates a database too. Its answer is the one-time credentials, so `--reveal` is required and the answer goes straight to a private file. `--credentials-dir` writes `ca.crt`, `client.crt` and `client.key` there as private files; the password and the backup key stay in the answer:
+[hipc](/cli) creates a database too. Its answer is the one-time credentials, so `--reveal` is required. `--credentials-dir` writes every credential to new private files (mode 0600) in a directory that exists, isn't writable by others and doesn't hold any of these names yet:
+
+| File | What it is |
+|---|---|
+| `.env` | The libpq settings `PGUSER`, `PGPASSWORD`, `PGDATABASE`, `PGSSLMODE`, and `PGSSLROOTCERT`, `PGSSLCERT`, `PGSSLKEY` with absolute paths; `PGHOST` and `PGPORT` too when the answer has them. |
+| `credentials.json` | The whole credentials object as the server answered it, the password and the backup key included. |
+| `ca.crt` | The certificate authority. |
+| `client.crt`, `client.key` | The client certificate and its key. |
+
+What hipc prints on stdout then keeps only the user name, the database name, `shown_once`, and the paths of these files, so no secret reaches your terminal:
 
 ```bash
 mkdir -m 700 ~/db-staging
-(umask 077; hipc --json compute databases create --tier starter --size s --engine-version 17 \
-  --name staging --reveal --yes --credentials-dir ~/db-staging > ~/db-staging/answer.json)
-hipc compute databases get DATABASE_ID     # until it is running: the host, port and database
+hipc compute databases create --tier starter --size s --engine-version 17 \
+  --name staging --reveal --yes --credentials-dir ~/db-staging
+hipc compute databases get DATABASE_ID     # until it is running: the host and port
 ```
 
-Run it with `--dry-run` in place of `--yes` first. hipc writes no `.env` or `credentials.json`: read the user, password and backup key from `answer.json` with `jq`, and keep that file, it is the only copy. Connect with libpq:
+Run it with `--dry-run` in place of `--yes` first. Keep the directory: it is the only copy. Once the database is running, connect with libpq, adding the host when `.env` doesn't set it:
 
 ```bash
-psql "host=PRIVATE_ADDRESS port=5432 dbname=app user=app sslmode=verify-ca sslrootcert=$HOME/db-staging/ca.crt sslcert=$HOME/db-staging/client.crt sslkey=$HOME/db-staging/client.key"
+cd ~/db-staging
+set -a; . ./.env; set +a
+psql "host=PRIVATE_ADDRESS port=5432"
 ```
 
-`psql` asks for the password. In a connection URL (`postgresql://app:PASSWORD@host:5432/app?...`), percent-encode the password first: it can hold characters such as `@`, `/` or `#` that break a URL.
+In a connection URL (`postgresql://app:PASSWORD@host:5432/app?...`), percent-encode the password first: it can hold characters such as `@`, `/` or `#` that break a URL.
 
 ## Connect from your private network
 
@@ -189,12 +200,12 @@ Backups are billed as S3 storage in your account, at your S3 price. The bucket i
 
 A restore creates a **new database** from the backups of an existing one. The original keeps running and is never written to. You can restore to the latest point in the backups, or to a point in time.
 
-Restore isn't in the console yet. Use [hipc](/cli), whose answer is the new database's one-time credentials, sent straight to a private file:
+Restore isn't in the console yet. Use [hipc](/cli), whose answer is the new database's one-time credentials. `--credentials-dir` writes them to the same five private files as [a create](#from-the-command-line) (`.env`, `credentials.json`, `ca.crt`, `client.crt`, `client.key`), and stdout names the files:
 
 ```bash
 mkdir -m 700 ~/db-restored
-(umask 077; hipc --json compute databases restore DATABASE_ID --target-time 2026-10-05T09:30:00Z \
-  --reveal --yes --credentials-dir ~/db-restored > ~/db-restored/answer.json)
+hipc compute databases restore DATABASE_ID --target-time 2026-10-05T09:30:00Z \
+  --reveal --yes --credentials-dir ~/db-restored
 hipc compute databases get NEW_DATABASE_ID
 ```
 
