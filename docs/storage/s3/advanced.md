@@ -59,6 +59,8 @@ aws s3 presign s3://my-bucket/hello.txt \
 
 Anyone with the link can download until it expires. No cleanup job needed.
 
+With [hipc](/cli), `hipc s3 buckets objects presign my-bucket hello.txt --expires-in 86400 --reveal` prints a download URL. `--expires-in` takes 1 to 604800 seconds (7 days); a longer expiry exits 2 and sends nothing. Without it the server's default is one hour. The URL is a secret: anyone holding it can read the object.
+
 Client setup: [Python](/storage/s3/python), [JavaScript](/storage/s3/javascript), [AWS CLI](/storage/s3/aws-cli).
 
 ## Let a browser upload without keys {#let-a-browser-upload-without-keys}
