@@ -93,8 +93,9 @@ Branch on `code`, never on `message`. The codes are a closed set, listed with th
 | `partial_failure` | 1 | part of a multi-call command failed; stdout holds what was done |
 | `internal` | 1 | run again with `--debug` and report it at https://github.com/thenervelab/hippius-cli/issues; with `side_effects: partial`, check whether the change was made first, since running it again could repeat the write |
 
-Two refusals to recognise:
+Three refusals to recognise:
 
+- A command line that stops before a subcommand, or names one the group does not hold, is `usage`: the message lists the commands that group holds, and for an unknown name the hint runs `--help` on the nearest command or group, at that place or deeper, so a lone `vm` is pointed at the compute VM commands.
 - A network command on an account with no private network is `permission` (403) with the message `the private network is not set up for this account`; the hint is `hipc network create --yes`. Ask the user before creating it.
 - A refused compose (`hipc compute app-engine validate`) is `validation` with every problem in `details.issues`, each with its `rule`, `line`, `column`, `message`, and `hint`, so one pass can fix the file.
 
@@ -133,6 +134,8 @@ So a chain whose later steps need what an earlier step makes cannot be previewed
 - A file the command reads must exist. `hipc s3 configure --from-token-file token.json --dry-run` exits 2 while `token.json` is missing, so dry-run it after the step that writes the file, or with a file of the same shape.
 
 The document is `{"dry_run": true, "requests": [...]}`, with one entry per request, a single request included. Each entry carries `method`, `url`, `account_header`, `project_header`, `billing_header`, and `body`; the three headers are always present, `null` when the request goes out without one. A command that only changes a local file (`hipc auth login`, `hipc account use`, `hipc s3 configure`) sends nothing: its dry run names the `action` and the `profile` (or `aws_profile`) it would change.
+
+A dry run checks nothing on the server. To have the server check a file without changing anything, use the command that does so: `hipc compute app-engine validate --compose-file compose.yaml` for a compose, and `--check` on `hipc cdn waf rules update` and `hipc cdn waf rate-limits update`, which answers `valid`, `size`, and `limit` and publishes nothing; an invalid list exits 1 `validation`, with the answer in `details`.
 
 ## Pagination
 
