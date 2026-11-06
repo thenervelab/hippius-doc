@@ -266,13 +266,13 @@ hipc compute vms create --flavor small --name web-1 --image IMAGE --region FR \
 hipc compute vms get VM_ID              # until status is running and network_ready is true
 ```
 
-Without `--image`, the size's default image is used. The SSH user is the image's `default_user` from `hipc compute images`. `--os-disk-tier ssd` or `hdd` picks a cheaper OS disk, fixed for the VM's life; HDD is slow, meant for dev and test, and offered only up to the Large size.
+Without `--image`, the size's default image is used. The SSH user is the image's `default_user` from `hipc compute images`. `--os-disk-tier ssd` or `hdd` picks a cheaper OS disk, fixed for the VM's life; HDD is slow shared storage for development and test, not for production or databases, and offered only up to the Large size (`max_flavor` in `hipc compute public-prices`).
 
 :::warning hipc opens no port
 A VM launched with `--public-ip` from hipc gets no firewall rule: SSH is closed until you add one. See [Public IPv4 and firewall: From the command line](/use/compute/networking#from-the-command-line) for the rules file.
 :::
 
-A VM is billed from its first run until it is deleted, stopped or not. Stop, start and delete it with `hipc compute vms stop VM_ID --yes`, `hipc compute vms start VM_ID` and `hipc compute vms delete VM_ID --yes`.
+A VM is billed from its launch until it is deleted, running or stopped. Stop, start and delete it with `hipc compute vms stop VM_ID --yes`, `hipc compute vms start VM_ID` and `hipc compute vms delete VM_ID --yes`.
 
 ## Where to next
 
