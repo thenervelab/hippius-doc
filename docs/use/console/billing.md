@@ -116,6 +116,19 @@ A conversion is an on-chain transaction. Once it is final it can't be reversed, 
 
 If the Top up dialog has no **Hippius** tab, buying with hAlpha is paused for now. The other ways to pay still work.
 
+### From the command line
+
+[hipc](/cli) starts a card or Bitcoin top-up and prints its checkout URL. Nothing is paid until a person pays at that URL; `hipc billing balance` then shows the new balance:
+
+```bash
+hipc billing balance
+hipc billing top-up --amount 50 --method card --yes       # $10 to $10,000
+hipc billing top-up --amount 50 --method bitcoin --yes    # $20 to $100,000, on-chain or Lightning
+hipc billing auto-reload get
+```
+
+USDC, TAO and hAlpha top-ups are wallet steps in the console, which a person approves, so a script or an agent can't fund the balance with them on its own.
+
 ## Choose a plan
 
 Each product has its own plans page. You can get there from the product's card on Billing, or from the Upgrade and Subscribe buttons around the console.

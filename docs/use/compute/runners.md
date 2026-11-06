@@ -213,7 +213,7 @@ Runner VMs don't appear in your VM list. They count against your **GitHub Action
 The **Spend** card shows what your runners cost over a period: **This month** (the default), **Last month**, **7 days**, **30 days**, or a **Custom** range of up to 366 days. Days are UTC days.
 
 <Unordered>
-  <li>The total in credits, the runner-minutes billed and the number of jobs billed.</li>
+  <li>The total in credits (1 credit = $1), the runner-minutes billed and the number of jobs billed.</li>
   <li>For the current month, a projection of the month's total. It's linear: the month so far, scaled to the whole month. It appears once the month's first day has passed.</li>
   <li>A bar chart of the credits spent each day. Click <BgStyledText>Show as table</BgStyledText> to read the same numbers as a table.</li>
   <li>The spend by repository, by runner size and tier, and by workflow.</li>
