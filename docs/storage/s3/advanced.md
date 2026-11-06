@@ -205,22 +205,24 @@ Programmatic create / list / rotate / revoke: [Management API](/use/api).
 
 ### From the command line
 
-With [hipc](/cli), create a sub-token for one bucket and turn it into an AWS CLI profile. The answer holds the secret, so it goes straight to a private file, which you delete once the profile is written:
+With [hipc](/cli), create a sub-token for one bucket and turn it into an AWS CLI profile. `--secret-file` writes the secret alone to a new private file (mode 0600, no newline; the path must not exist yet), so it never shows on screen; the answer names that file as `secret_file` and keeps the `access_key_id`. Delete the file once the profile is written:
 
 ```bash
-(umask 077; hipc --json s3 tokens create --kind sub --name backup-job \
+hipc --json s3 tokens create --kind sub --name backup-job \
   --scope-type single-bucket --bucket my-bucket --action read --action write \
-  --expires-at 2027-01-01T00:00:00Z --reveal --yes > token.json)
-hipc s3 configure --from-token-file token.json --aws-profile backup-job
-rm token.json
+  --expires-at 2027-01-01T00:00:00Z --secret-file token.secret --reveal --yes > token.json
+hipc s3 configure --aws-profile backup-job \
+  --access-key-id "$(jq -r .access_key_id token.json)" --secret-key-file token.secret
+rm token.secret token.json
 ```
 
-Run it with `--dry-run` in place of `--yes` first to see the request. Leave out `--action write` for a read-only token, and `--expires-at` for one that never expires. `hipc s3 tokens list` shows your tokens, and `hipc s3 tokens revoke --kind sub TOKEN_ID --yes` revokes one. To rotate one, send the new pair to a private file and rewrite the profile, which still holds the old pair (`--yes` because the profile exists):
+Run it with `--dry-run` in place of `--yes` first to see the request. Leave out `--action write` for a read-only token, and `--expires-at` for one that never expires. `hipc s3 tokens list` shows your tokens, and `hipc s3 tokens revoke --kind sub TOKEN_ID --yes` revokes one. To rotate one, write the new secret to a private file and rewrite the profile, which still holds the old pair (`--yes` because the profile exists):
 
 ```bash
-(umask 077; hipc --json s3 tokens rotate --kind sub TOKEN_ID --reveal --yes > token.json)
-hipc s3 configure --from-token-file token.json --aws-profile backup-job --yes
-rm token.json
+hipc --json s3 tokens rotate --kind sub TOKEN_ID --secret-file token.secret --reveal --yes > token.json
+hipc s3 configure --aws-profile backup-job --yes \
+  --access-key-id "$(jq -r .access_key_id token.json)" --secret-key-file token.secret
+rm token.secret token.json
 ```
 
  Create the bucket before the token. To change a token's buckets, create a new token and revoke the old one.
@@ -232,11 +234,13 @@ Give each environment its own bucket and its own sub-token, so a staging bug can
 ```bash
 hipc s3 buckets create app-prod --yes
 hipc s3 buckets create app-staging --yes
-(umask 077; hipc --json s3 tokens create --kind sub --name app-prod --scope-type single-bucket --bucket app-prod --action read --action write --reveal --yes > app-prod.json)
-(umask 077; hipc --json s3 tokens create --kind sub --name app-staging --scope-type single-bucket --bucket app-staging --action read --action write --reveal --yes > app-staging.json)
-hipc s3 configure --from-token-file app-prod.json --aws-profile app-prod
-hipc s3 configure --from-token-file app-staging.json --aws-profile app-staging
-rm app-prod.json app-staging.json
+for env in prod staging; do
+  hipc --json s3 tokens create --kind sub --name "app-$env" --scope-type single-bucket --bucket "app-$env" \
+    --action read --action write --secret-file "app-$env.secret" --reveal --yes > "app-$env.json"
+  hipc s3 configure --aws-profile "app-$env" \
+    --access-key-id "$(jq -r .access_key_id "app-$env.json")" --secret-key-file "app-$env.secret"
+done
+rm app-prod.secret app-staging.secret app-prod.json app-staging.json
 ```
 
 Then check the isolation. The staging key must be refused on the production bucket:

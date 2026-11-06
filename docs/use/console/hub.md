@@ -127,15 +127,15 @@ Everything on this page except pushing is also in [hipc](/cli), with your accoun
 ```bash
 hipc hub plans                                   # needs no token
 hipc hub namespace availability my-team          # is the name free?
-(umask 077; hipc hub namespace create my-team --reveal --yes > robot.json)
+hipc --json hub namespace create my-team --secret-file robot.secret --reveal --yes > robot.json
 hipc hub namespace update --visibility private --yes
 hipc hub repositories list
 hipc hub usage
-(umask 077; hipc --json hub keys create --name ci --role push --reveal --yes > key.json)
+hipc --json hub keys create --name ci --role push --secret-file key.secret --reveal --yes > key.json
 hipc hub subscription subscribe --plan Builder --yes
 ```
 
-Each command that prints a secret needs `--reveal`, and its answer goes to a private file here, so the secret never shows on screen. Delete `robot.json` and `key.json` once you have stored the secrets. A key's answer holds its `login` and `secret`: log in with `jq -r .secret key.json | docker login registry.hippius.com -u '<login>' --password-stdin`, then delete `key.json`. For a CI pipeline, see [Publish from GitHub Actions](/registry/ci). The [CLI reference](/registry/cli#same-tasks-with-hipc) maps every `hippius-hub` command to its `hipc` one.
+Each command that issues a secret needs `--reveal`. `--secret-file` writes the secret alone, with no newline, to a new file of mode 0600 (the path must not exist yet), so it never shows on screen; the answer names that file as `robot_secret_file` or `secret_file` in place of the secret, and holds the `login` and a `docker_login_command` that reads the secret on stdin. Log in with `docker login registry.hippius.com -u '<login>' --password-stdin < key.secret`, then delete the `.secret` files once you have stored the secrets. `hipc hub namespace robot rotate --secret-file robot.secret --reveal --yes` issues a new robot password the same way. For a CI pipeline, see [Publish from GitHub Actions](/registry/ci). The [CLI reference](/registry/cli#same-tasks-with-hipc) maps every `hippius-hub` command to its `hipc` one.
 
 ## Hub plans
 

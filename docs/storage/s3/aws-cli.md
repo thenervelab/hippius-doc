@@ -48,11 +48,14 @@ export AWS_DEFAULT_REGION="decentralized"
 [hipc](/cli), the Hippius command line, writes the whole profile for you from a token it creates: the key pair, `region = decentralized`, path-style addressing and `endpoint_url = https://s3.hippius.com`.
 
 ```bash
-(umask 077; hipc --json s3 tokens create --kind sub --name laptop --scope-type single-bucket \
-  --bucket my-bucket --action read --action write --reveal --yes > token.json)
-hipc s3 configure --from-token-file token.json --aws-profile hippius
-rm token.json
+hipc --json s3 tokens create --kind sub --name laptop --scope-type single-bucket \
+  --bucket my-bucket --action read --action write --secret-file token.secret --reveal --yes > token.json
+hipc s3 configure --aws-profile hippius \
+  --access-key-id "$(jq -r .access_key_id token.json)" --secret-key-file token.secret
+rm token.secret token.json
 ```
+
+`--secret-file` writes the secret alone to a new file of mode 0600, so it never shows on screen, and the answer on stdout names that file in place of the secret.
 
 For an existing key, pass `--access-key-id YOUR_ACCESS_KEY --secret-key-file -` and paste the secret on stdin instead. AWS CLI 2.13 and 1.29 and later read `endpoint_url` from the profile, so `--profile hippius` alone is enough. Older versions ignore it: pass `--endpoint-url` as below.
 

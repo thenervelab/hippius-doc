@@ -16,13 +16,13 @@ You need a namespace first: see [Push](/registry/push#provision-a-namespace).
 
 ## 1. Create a CI key
 
-A CI key is a registry login with one role. `push` can pull and push; it can't delete anything. Create it with [hipc](/cli) and send the answer straight to a private file, so the secret never shows in your terminal:
+A CI key is a registry login with one role. `push` can pull and push; it can't delete anything. Create it with [hipc](/cli) and write the secret straight to a private file, so it never shows in your terminal:
 
 ```bash
-(umask 077; hipc --json hub keys create --name ci --role push --expires-in 365 --reveal --yes > ~/hub-key.json)
+hipc --json hub keys create --name ci --role push --expires-in 365 --secret-file ~/hub-key.secret --reveal --yes > ~/hub-key.json
 ```
 
-Run it with `--dry-run` in place of `--yes` first to see the request. The answer holds the key's `id`, its `login` (such as `robot$my-team+ci`) and its `secret`. The secret is shown once.
+Run it with `--dry-run` in place of `--yes` first to see the request. `--secret-file` writes the secret alone, with no newline, to a new file of mode 0600; the path must not exist yet. The answer on stdout holds the key's `id`, its `login` (such as `robot$my-team+ci`), and `secret_file`, the path of that file, in place of the secret. The secret is shown once.
 
 You can also create the key with `hippius-hub registry keys create ci --role push` or on the console's Hub page.
 
@@ -32,8 +32,8 @@ With the [GitHub CLI](https://cli.github.com), in the repository:
 
 ```bash
 jq -r .login ~/hub-key.json | gh secret set HIPPIUS_HUB_USER
-jq -r .secret ~/hub-key.json | gh secret set HIPPIUS_HUB_PASS
-rm ~/hub-key.json
+gh secret set HIPPIUS_HUB_PASS < ~/hub-key.secret
+rm ~/hub-key.secret ~/hub-key.json
 ```
 
 `gh secret set` reads the value from stdin, so it never appears in your shell history. Or paste both values in the repository's **Settings** → **Secrets and variables** → **Actions**.
@@ -85,7 +85,7 @@ A CI key's login looks like `robot$my-team+ci`. GitHub pastes every `${{ ... }}`
 ## Expiry and rotation
 
 - **Expiry.** The key above stops working after 365 days. Without `--expires-in` it never expires. When it expires, logins fail: create a new key, update both secrets, then delete the old key with `hipc hub keys delete KEY_ID --yes`.
-- **Rotation.** `hipc hub keys rotate KEY_ID --reveal --yes` replaces the secret, and the old one stops working at once. Redirect it to a private file as in step 1, then set `HIPPIUS_HUB_PASS` again. The login stays the same. `hipc hub keys list` shows the key ids.
+- **Rotation.** `hipc hub keys rotate KEY_ID --secret-file ~/hub-key.secret --reveal --yes` replaces the secret, and the old one stops working at once. It writes the new secret to that file, as in step 1; then run `gh secret set HIPPIUS_HUB_PASS < ~/hub-key.secret` and delete the file. The login stays the same. `hipc hub keys list` shows the key ids.
 - **Leaked key.** Delete it, or rotate it. Only that key is affected: the namespace login and your other keys keep working.
 
 Don't use `hippius-hub registry rotate-token` for CI. It replaces the namespace's own login, which breaks everything else that uses it.
