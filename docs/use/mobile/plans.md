@@ -15,7 +15,11 @@ import Screenshot from '@site/src/components/Screenshot';
 
 Your Drive plan sets how much encrypted storage your account has. One plan covers your whole account, on every device. Files you upload by hand, photos backed up by Camera Uploads, and anything you add from the console or the desktop app all count toward it.
 
-On Android, the app shows which plan you are on and how much of it you have used. On iPhone, it shows how much storage you have and how much you have used, without naming your plan. To subscribe to a plan, change it or cancel it, use the [Hippius Console](https://console.hippius.com) in a web browser. The app picks up the change by itself.
+On Android, the app shows which plan you are on and how much of it you have used. To subscribe to a plan, change it or cancel it, use the [Hippius Console](https://console.hippius.com) in a web browser. The app picks up the change by itself.
+
+:::info On iPhone
+The iPhone app talks about storage, not plans. It shows how much storage your account has and how much of it is used, but no plan name, and it doesn't mention plans or subscriptions anywhere. Your account still has a plan, and you choose and pay for it in the console, as this page describes.
+:::
 
 ## Which plan you start with
 
@@ -56,7 +60,7 @@ The **Storage** card is on Overview, and again at the top of Settings. It shows:
   <li>A bar that turns <strong>amber</strong> when you have used 80% of your storage and <strong>red</strong> at 95%.</li>
 </Unordered>
 
-While the numbers load, the card reads **Calculating storage..**. If they can't be read, for example while you are offline, it reads **Usage unavailable** rather than guessing.
+While the numbers load, the card reads **Calculating storage..**. If they can't be read, for example while you are offline, it reads **Usage unavailable** rather than guessing. An account with no storage reads **0 GB left**, and one past its limit shows how far over it is, for example **2.5GB over limit**.
 
 Tap the card to open the **Storage** screen, which shows what is using your space:
 
@@ -73,7 +77,7 @@ It is the quickest way to see whether photos or videos are filling your Drive.
 
 ## Subscribing to a plan {#subscribing-to-a-plan}
 
-You subscribe in the console, in your phone's browser or on a computer. It is the same account either way.
+You can't subscribe in the app, on iPhone or Android, and the app doesn't point you anywhere to do it. You subscribe in the console, in your phone's browser or on a computer. It is the same account either way.
 
 <Ordered>
   <li>Open <a href="https://console.hippius.com">console.hippius.com</a> in a web browser.</li>
@@ -108,11 +112,11 @@ Only access key accounts can end up with no plan, because every other account fa
 
 The app warns you before you run out. The **Storage** bar turns amber at 80% and red at 95%, and the Storage screen shows how much space is left.
 
-When your Drive is full, new uploads and Camera Uploads stop. To carry on, either:
+When your Drive is full, new uploads and Camera Uploads stop, and the app shows **Storage Full**. Your files stay available. The app only suggests deleting files, because you can't get more storage in it. To carry on, either:
 
 <Unordered>
   <li><strong>Free up space.</strong> Delete files you no longer need. See <a href="/use/mobile/drive#deleting">Deleting</a>.</li>
-  <li><strong>Get more space.</strong> Move to a bigger plan in the console. See <a href="#changing-or-cancelling-your-plan">Changing or cancelling your plan</a>.</li>
+  <li><strong>Get more space.</strong> Subscribe, or move to a bigger plan, in the console. See <a href="#subscribing-to-a-plan">Subscribing to a plan</a> or <a href="#changing-or-cancelling-your-plan">Changing or cancelling your plan</a>.</li>
 </Unordered>
 
 Then retry anything that failed from **Your Uploads**. See [Following the backup](/use/mobile/camera-uploads#following-the-backup).

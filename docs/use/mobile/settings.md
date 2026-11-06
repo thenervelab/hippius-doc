@@ -285,7 +285,7 @@ Open **Account** from the **Account** card at the top of Settings, or on Android
 Your mnemonic seed is not shown here. It lives in your phone's secure storage, and the only place the app reveals it is the deliberate backup flow under [Security](#mnemonic-seed).
 
 :::info
-Managing subscriptions isn't available in the Hippius mobile app.
+You can't subscribe or change a plan in the Hippius mobile app. See [How do I subscribe or get more storage?](/use/mobile/troubleshooting#get-more-storage)
 :::
 
 ### Logging out {#logging-out}
