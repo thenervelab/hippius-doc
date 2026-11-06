@@ -18,11 +18,12 @@ hipc s3 --help                   # one group
 hipc s3 buckets create --help    # one command: what it sends, what it refuses, examples
 ```
 
-For a program, `hipc schema` is the same tree as JSON: every command with its `effect`, `confirmation`, `reveal`, `pagination`, `guards`, `args`, and `flags`, the global options once, and every error code with its exit code. It is JSON in every mode and never touches the network.
+For a program, `hipc schema` is the same tree as JSON: every command with its `effect`, `confirmation`, `reveal`, `pagination`, `guards`, `args`, and `flags`, the global options once, and every error code with its exit code. It is JSON in every mode and never touches the network. Followed by a command path, such as `hipc schema compute vms` or `hipc schema s3 buckets create`, it lists only the commands under that path, in a document of the same shape.
 
 ```bash
 hipc schema | jq -r '.commands[] | .path | join(" ")'
-hipc schema | jq '.commands[] | select(.path == ["s3", "buckets", "create"])'
+hipc schema compute vms | jq -r '.commands[] | .path | join(" ")'
+hipc schema s3 buckets create | jq '.commands[0]'
 hipc schema | jq '.errors'
 ```
 
@@ -34,7 +35,7 @@ One line per top-level command; `hipc --help` has the binary's own words.
 | --- | --- |
 | `hipc version` | The version; does not touch the network |
 | `hipc status` | The state of each product for the signed-in user: Hub, Drive, S3, and compute |
-| `hipc schema` | Every command with its effect, as JSON in every output mode |
+| `hipc schema` | Every command with its effect, or only the commands under a path, as JSON in every output mode |
 | `hipc completions` | A shell completion script for bash, zsh, fish, elvish, or powershell |
 | `hipc auth` | Store, check, or remove the console API token |
 | `hipc account` | The accounts the token can act in, members, invites, projects and their budgets, quotas, and transfers, billing accounts, and referral links |
