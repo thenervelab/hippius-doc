@@ -200,7 +200,7 @@ hipc account projects budget update PROJECT_ID --monthly-limit 25 --alert-at 50 
 hipc account projects budget get PROJECT_ID
 ```
 
-`hipc compute charge-cap` shows something else: the most the chain charges the account per hour, a safety limit rather than a monthly budget. Per-product caps exist for the [CDN](/use/cdn#monthly-spend-cap), per zone.
+`--alert-at` mails you at each share of the limit, and `--block-launches true` makes the server refuse new launches that add cost once the limit is reached; neither stops a VM that runs. `hipc account projects budget get` reads the amounts back in credits (1 credit = $1). `hipc compute charge-cap` shows something else: the most the chain charges the account per hour, a per-hour safety limit rather than a monthly budget. Per-product caps exist for the [CDN](/use/cdn#monthly-spend-cap), per zone.
 
 ## Where to next
 

@@ -146,7 +146,7 @@ hipc compute runners settings update --max-concurrent 2 --allowed-size small --a
 
 ## Spend limit
 
-A monthly spend limit for runners isn't enabled yet: `hipc compute runners limit get` answers 404, and so does an update. Until it is, bound what runners can cost with the settings above:
+A monthly spend limit for runners isn't enabled on api.hippius.com yet: `hipc compute runners limit get` and `hipc compute runners limit update` both answer 404, and nothing is written. A dry run sends nothing, so it exits 0 either way and doesn't tell you whether the limit is on. Until it is, bound what runners can cost with `hipc compute runners settings update --max-concurrent` and `--allowed-size`, the settings above:
 
 <Unordered>
   <li><strong>Runners at once</strong> caps how many run together, and <strong>Allowed sizes</strong> caps how big each one is.</li>
