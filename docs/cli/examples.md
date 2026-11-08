@@ -95,7 +95,7 @@ hipc hub keys delete <key_id> --yes
 
 ## 6. Compute, with an SSH key
 
-A VM launched by hipc has no firewall rules, so every port of its public IPv4 is closed until `hipc compute firewall update` opens one (a console launch opens 22 by default). The file below opens SSH to one address and the web to everyone.
+A VM launched by hipc has no firewall rules, so every port of its public IPv4 is closed (a console launch opens 22 by default). `hipc compute vms create … --public-ip --open-ssh --yes` opens SSH at launch, and `--open-port 443` another TCP port; both accept every IPv4 address. To limit the sources, use `hipc compute firewall update`: the file below opens SSH to one address and the web to everyone.
 
 ```bash
 hipc compute regions

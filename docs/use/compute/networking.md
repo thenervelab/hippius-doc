@@ -123,7 +123,7 @@ If you attach an address later, no SSH rule is created for you. Add one yourself
 
 ## From the command line
 
-With [hipc](/cli), the firewall is a JSON file that replaces the VM's whole rule list. A VM launched with `hipc compute vms create --public-ip` has no rule at all, unlike a console launch with **Open SSH**, so nothing reaches its address until you add one. This file opens SSH to your own address and the web ports to everyone:
+With [hipc](/cli), the firewall is a JSON file that replaces the VM's whole rule list. A VM launched with `hipc compute vms create --public-ip` has no rule at all, unlike a console launch with **Open SSH**, so nothing reaches its address until you add one. `--open-ssh` and `--open-port PORT` on `vms create` open TCP ports to every IPv4 address right after the launch; a rules file limits the sources. This file opens SSH to your own address and the web ports to everyone:
 
 ```json title="firewall.json"
 {"rules": [
