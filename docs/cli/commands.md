@@ -51,6 +51,6 @@ One line per top-level command; `hipc --help` has the binary's own words.
 
 ## How a help page reads
 
-The first line says what the command does and, when it needs one, the flag it needs: `Create a bucket; needs --yes`. The paragraph under it says what the command sends, what it reads first, and what it refuses. Then the usage line, the arguments, the command's own options, the global options, and at the end the examples, each one a line you can run.
+The first line says what the command does and, when it needs one, the flag it needs: `Create a bucket; needs --yes`. The paragraph under it says what the command sends, what it reads first, and what it refuses. Then the usage line, the arguments, the command's own options, and the examples, each one a line you can run. Every page but `hipc --help` ends with `Global options: see hipc --help`: the global options work after any command, and only the root help (and `global_flags` in `hipc schema`) lists them.
 
 Three things hold on every page: a command that spends, deletes, revokes, rotates, or cancels needs `--yes` outside a terminal; a command whose answer holds a secret needs `--reveal`, or `--secret-file` or `--credentials-dir`, which count as the reveal and write the secret to private files instead; and `--dry-run` prints the requests a real run would send, sends nothing, and exits 0. [hipc for agents](/cli/agents) has the rest of the contract.
