@@ -195,7 +195,7 @@ Refusals show on the Runners page only. On GitHub, the job just stays queued ("W
 | Runner tier not offered | The `-ssd` tier isn't sold right now. Use the label without `-ssd`. |
 | Conflicting labels | The job asks for both an NVMe and an SSD runner. Keep one. |
 | Over your compute quota | Runners count against your compute quotas. Free some resources, or contact support. |
-| Balance too low for the runway | Top up: your balance must cover 24 hours of your compute, including the runner. |
+| Balance too low for the runway | Top up: your balance must cover [24 hours](/use/compute/billing#the-24-hour-balance-requirement) of your compute, including the runner. `hipc billing summary` shows the balance and the burn rate. |
 | Unpaid compute usage | Top up to settle what your account owes. |
 | Runners are turned off on Hippius | Runners are paused on our side. Try again later. |
 | No access to runners on this account | Your access on a shared account doesn't include runners. Ask the owner. |

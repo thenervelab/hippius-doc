@@ -171,6 +171,8 @@ The create forms show what your current compute needs for 24 hours, and what the
 
 If the console says **Your balance could not be read just now**, nothing was launched. Try again in a moment.
 
+From the command line, `hipc billing summary` shows `balance`, in dollars, and `burn_rate_per_hour`, what your compute costs per hour now, in base units (10^18 = $1; text mode shows it in credits). A launch passes when the balance covers the runway hours `hipc compute quota` shows (24) at the burn rate plus the new item's hourly price from `hipc compute prices`: balance ≥ 24 × (burn rate + new price). A launch refused for the balance answers 402, and its hint names both commands.
+
 ## If your balance runs out
 
 If an hour of usage can't be paid from your balance, it is recorded as **Unpaid**, and your account owes it. Compute Usage shows a banner with the amount and since when.
