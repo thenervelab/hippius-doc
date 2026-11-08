@@ -49,7 +49,7 @@ export AWS_DEFAULT_REGION="decentralized"
 
 ```bash
 hipc --json s3 tokens create --kind sub --name laptop --scope-type single-bucket \
-  --bucket my-bucket --action read --action write --secret-file token.secret --reveal --yes > token.json
+  --bucket my-bucket --action read --action write --secret-file token.secret --yes > token.json
 hipc s3 configure --aws-profile hippius --from-token-file token.json
 rm token.secret token.json
 ```

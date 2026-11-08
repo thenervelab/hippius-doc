@@ -68,7 +68,7 @@ hipc s3 buckets create photos --dry-run
 
 - `--dry-run` shows the requests and sends nothing.
 - A command that spends, deletes, revokes, rotates or cancels asks first, and needs `--yes` outside a terminal.
-- A command that prints a secret needs `--reveal`.
+- A command that issues a secret needs `--reveal`, or `--secret-file` (or `--credentials-dir` for a database), which writes it to a new private file instead. `--secret-file` and `--credentials-dir` count as the reveal; `--reveal` alone prints the secret on stdout.
 - Every `--help` ends with examples.
 
 ## Next

@@ -63,7 +63,7 @@ hipc s3 tokens list
 hipc s3 subscription subscribe --plan pro --dry-run
 hipc s3 buckets create photos --yes
 hipc s3 buckets acl get photos
-hipc --json s3 tokens create --kind sub --name photos-ci --scope-type single-bucket --bucket photos --action read --action write --secret-file s3.secret --reveal --yes > s3-token.json
+hipc --json s3 tokens create --kind sub --name photos-ci --scope-type single-bucket --bucket photos --action read --action write --secret-file s3.secret --yes > s3-token.json
 hipc s3 configure --aws-profile hippius --from-token-file s3-token.json
 rm s3.secret s3-token.json
 aws --profile hippius s3 ls s3://photos
@@ -86,7 +86,7 @@ hipc hub repositories list
 hipc hub artifacts list <repository>
 hipc hub keys list
 hipc hub subscription subscribe --plan Builder --dry-run
-hipc --json hub keys create --name ci --role push --expires-in 30 --secret-file ~/hub-key.secret --reveal --yes > ~/hub-key.json
+hipc --json hub keys create --name ci --role push --expires-in 30 --secret-file ~/hub-key.secret --yes > ~/hub-key.json
 jq -r .login ~/hub-key.json                   # robot$<namespace>+ci
 docker login registry.hippius.com -u '<login>' --password-stdin < ~/hub-key.secret
 rm ~/hub-key.secret ~/hub-key.json

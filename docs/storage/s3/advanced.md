@@ -212,7 +212,7 @@ With [hipc](/cli), create a sub-token for one bucket and turn it into an AWS CLI
 ```bash
 hipc --json s3 tokens create --kind sub --name backup-job \
   --scope-type single-bucket --bucket my-bucket --action read --action write \
-  --expires-at 2027-01-01T00:00:00Z --secret-file token.secret --reveal --yes > token.json
+  --expires-at 2027-01-01T00:00:00Z --secret-file token.secret --yes > token.json
 hipc s3 configure --aws-profile backup-job --from-token-file token.json
 rm token.secret token.json
 ```
@@ -220,7 +220,7 @@ rm token.secret token.json
 Run it with `--dry-run` in place of `--yes` first to see the request. Leave out `--action write` for a read-only token, and `--expires-at` for one that never expires. `hipc s3 tokens list` shows your tokens, and `hipc s3 tokens revoke --kind sub TOKEN_ID --yes` revokes one. To rotate one, write the new secret to a private file and rewrite the profile, which still holds the old pair (`--yes` because the profile exists):
 
 ```bash
-hipc --json s3 tokens rotate --kind sub TOKEN_ID --secret-file token.secret --reveal --yes > token.json
+hipc --json s3 tokens rotate --kind sub TOKEN_ID --secret-file token.secret --yes > token.json
 hipc s3 configure --aws-profile backup-job --yes --from-token-file token.json
 rm token.secret token.json
 ```
@@ -236,7 +236,7 @@ hipc s3 buckets create app-prod --yes
 hipc s3 buckets create app-staging --yes
 for env in prod staging; do
   hipc --json s3 tokens create --kind sub --name "app-$env" --scope-type single-bucket --bucket "app-$env" \
-    --action read --action write --secret-file "app-$env.secret" --reveal --yes > "app-$env.json"
+    --action read --action write --secret-file "app-$env.secret" --yes > "app-$env.json"
   hipc s3 configure --aws-profile "app-$env" --from-token-file "app-$env.json"
 done
 rm app-prod.secret app-staging.secret app-prod.json app-staging.json

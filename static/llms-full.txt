@@ -152,7 +152,7 @@ An agent cannot create a Google, GitHub or Apple account or approve a browser lo
 - Log in with the token the user gives you: `hipc auth login --token-file -` (paste it, Enter, Ctrl-D), then `hipc auth status`. At their own terminal the user can also run plain `hipc auth login`, which asks for the token without showing it. Never ask for the token in the chat; the user runs this on their machine.
 - Run `hipc schema` to discover every command, its effect, confirmations and error codes. The whole document is large (about 160 KB): `hipc schema <path…>`, such as `hipc schema compute vms` or `hipc schema s3 buckets create`, lists only the commands under that path, in the same shape.
 - Output is JSON on a pipe, with `CI`, or with `AI_AGENT=1`.
-- `--dry-run` sends nothing. A write that spends, deletes, revokes, rotates or cancels needs `--yes` (`CI` and `AI_AGENT` never stand in for it); a secret needs `--reveal`.
+- `--dry-run` sends nothing. A write that spends, deletes, revokes, rotates or cancels needs `--yes` (`CI` and `AI_AGENT` never stand in for it); a secret needs `--reveal`, or a flag that writes it to a private file: `--secret-file` and `--credentials-dir` count as the reveal; `--reveal` alone prints the secret on stdout.
 - Exit 0 success, 1 the API or runtime failed, 2 fix the invocation (nothing that changes state was sent). A failure is one JSON object on stderr; branch on `error.code`.
 - No command for it: `hipc api <METHOD> <PATH>`, e.g. `hipc api GET /accounts/` (sent under /api), before any direct call to https://api.hippius.com.
 
@@ -256,7 +256,7 @@ Always use https://s3.hippius.com. Do not point clients at other hostnames.
 
 Step 1: Create an account at https://console.hippius.com (Google, GitHub, Apple, or a 12-word access key)
 Step 2: Top up on Billing by card, Bitcoin, USDC, or TAO, then subscribe if the product needs a plan. https://docs.hippius.com/use/console/billing
-Step 3: Create credentials. For an app, a sub token scoped to its bucket: Console > S3 Storage > Sub Tokens, or `hipc --json s3 tokens create --kind sub --name app --scope-type single-bucket --bucket my-bucket --action read --action write --secret-file s3.secret --reveal --yes > token.json` (the secret goes alone to the new mode-0600 file s3.secret, and token.json names it as `secret_file`) and `hipc s3 configure --from-token-file token.json` from the same directory (it reads the secret from `secret_file`, a path relative to the current directory), then delete s3.secret and token.json. A master token (Create Master Token) reaches every bucket and bypasses ACLs.
+Step 3: Create credentials. For an app, a sub token scoped to its bucket: Console > S3 Storage > Sub Tokens, or `hipc --json s3 tokens create --kind sub --name app --scope-type single-bucket --bucket my-bucket --action read --action write --secret-file s3.secret --yes > token.json` (the secret goes alone to the new mode-0600 file s3.secret, and token.json names it as `secret_file`) and `hipc s3 configure --from-token-file token.json` from the same directory (it reads the secret from `secret_file`, a path relative to the current directory), then delete s3.secret and token.json. A master token (Create Master Token) reaches every bucket and bypasses ACLs.
 Step 4: Save Access Key ID (hip_...) and Secret Key — the secret cannot be retrieved after creation
 
 IMPORTANT: ETH wallets, TAO wallets, and Polkadot browser extensions are NOT used for S3 access. Card, Bitcoin, USDC, and TAO add to the balance. They do not authenticate S3 requests.
@@ -323,10 +323,10 @@ Scoped credentials: per-bucket, read-only or read/write, optional expiry.
 Create in Console > S3 Buckets (https://docs.hippius.com/use/console/s3), with hipc, or via Management API.
 Rotate issues a new Access Key ID and secret with the same permissions and revokes the old pair. Revoke is immediate. To hand a new key to many clients without a gap, create a second token, move the clients to it, then revoke the first.
 
-    hipc --json s3 tokens create --kind sub --name app-prod --scope-type single-bucket --bucket app-prod --action read --action write --secret-file app-prod.secret --reveal --yes > app-prod.json
+    hipc --json s3 tokens create --kind sub --name app-prod --scope-type single-bucket --bucket app-prod --action read --action write --secret-file app-prod.secret --yes > app-prod.json
     hipc s3 configure --aws-profile app-prod --from-token-file app-prod.json
     rm app-prod.secret app-prod.json
-    hipc --json s3 tokens rotate --kind sub <token_id> --secret-file app-prod.secret --reveal --yes > app-prod.json
+    hipc --json s3 tokens rotate --kind sub <token_id> --secret-file app-prod.secret --yes > app-prod.json
     hipc s3 configure --aws-profile app-prod --yes --from-token-file app-prod.json
     rm app-prod.secret app-prod.json
     hipc s3 tokens revoke --kind sub <token_id> --yes

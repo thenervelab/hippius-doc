@@ -79,7 +79,7 @@ The console only lets you continue once every item has been saved and you tick *
 
 ### From the command line
 
-[hipc](/cli) creates a database too. Its answer is the one-time credentials, so `--reveal` is required. `--credentials-dir` writes every credential to new private files (mode 0600) in a directory that exists, isn't writable by others and doesn't hold any of these names yet:
+[hipc](/cli) creates a database too. Its answer is the one-time credentials, so it needs `--reveal` or `--credentials-dir`: `--secret-file` and `--credentials-dir` count as the reveal; `--reveal` alone prints the secret on stdout. `--credentials-dir` writes every credential to new private files (mode 0600) in a directory that exists, isn't writable by others and doesn't hold any of these names yet:
 
 | File | What it is |
 |---|---|
@@ -93,7 +93,7 @@ What hipc prints on stdout then keeps only the user name, the database name, `sh
 ```bash
 mkdir -m 700 ~/db-staging
 hipc compute databases create --tier starter --size s --engine-version 17 \
-  --name staging --reveal --yes --credentials-dir ~/db-staging
+  --name staging --yes --credentials-dir ~/db-staging
 hipc compute databases get DATABASE_ID     # until it is running: the host and port
 ```
 
@@ -205,7 +205,7 @@ Restore isn't in the console yet. Use [hipc](/cli), whose answer is the new data
 ```bash
 mkdir -m 700 ~/db-restored
 hipc compute databases restore DATABASE_ID --target-time 2026-10-05T09:30:00Z \
-  --reveal --yes --credentials-dir ~/db-restored
+  --yes --credentials-dir ~/db-restored
 hipc compute databases get NEW_DATABASE_ID
 ```
 
