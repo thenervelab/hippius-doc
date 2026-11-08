@@ -127,7 +127,14 @@ hipc billing top-up --amount 50 --method bitcoin --yes    # $20 to $100,000, on-
 hipc billing auto-reload get
 ```
 
-USDC, TAO and hAlpha top-ups are wallet steps in the console, which a person approves, so a script or an agent can't fund the balance with them on its own.
+It can also convert hAlpha into credits, when the API signs the account's buys (`custodial` is true in `hipc billing native-quote`):
+
+```bash
+hipc billing native-quote                                 # price, min_alpha, native_balance, custodial
+hipc billing top-up --method halpha --alpha 1.5 --yes      # at least 0.01 hAlpha
+```
+
+The question names the credits the quote gives and the minimum it accepts, 1% less; a price that falls further makes the chain refuse the buy. 0.01 hAlpha is kept for the fee. A conversion is final and can't be undone. An account that signs its own buys (`custodial` false, such as an access-key account) still converts in the console, as above. USDC and TAO top-ups are wallet steps in the console, which a person approves, so a script or an agent can't fund the balance with them on its own.
 
 ## Choose a plan
 
