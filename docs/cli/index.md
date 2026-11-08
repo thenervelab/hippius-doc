@@ -34,10 +34,10 @@ curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/i
 </TabItem>
 <TabItem value="pypi" label="PyPI">
 
-Coming right after the first release; it installs the same `hipc` binary.
+Coming right after the first release, as the package `hippius-cli`; it installs the same `hipc` binary. `pip install hippius` is the Python SDK, not hipc.
 
 ```bash
-pip install hippius
+pip install hippius-cli
 ```
 
 </TabItem>
@@ -47,7 +47,7 @@ Check it with `hipc version`.
 
 ## Log in
 
-Sign in at [console.hippius.com](https://console.hippius.com) with Google, GitHub, or Apple and copy your API token from [Settings](https://console.hippius.com/dashboard/settings). If you sign in with a 12-word access key, Settings shows no token: get one by scripting the [access-key sign-in](/use/wallet-login) once on a machine you trust, and pipe it to `hipc auth login --token-file -`. Then:
+Sign in at [console.hippius.com](https://console.hippius.com) with Google, GitHub, or Apple and copy your API token from [Settings](https://console.hippius.com/dashboard/settings). If you sign in with a 12-word access key, Settings shows no token: run `hipc auth login --access-key`, which asks for the 12 words at a prompt that doesn't show them, signs in and stores only the token (`--access-key-file <path|->` reads them from a file of mode 0600 or stdin; the [access-key sign-in API](/use/wallet-login) is the alternative for an app). With a token:
 
 ```bash
 hipc auth login                   # at a terminal: paste the token at the prompt; it is not shown

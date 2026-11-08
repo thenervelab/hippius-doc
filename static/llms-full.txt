@@ -83,7 +83,7 @@ Sign in at https://console.hippius.com with Google, GitHub, Apple, or an existin
 How the API token is obtained depends on the sign-in:
 
 - Google, GitHub or Apple: the user copies the token from console Settings, https://console.hippius.com/dashboard/settings, and stores it with `hipc auth login` (a prompt that does not echo) or `hipc auth login --token-file -`.
-- A 12-word access key: Settings does not show a token for this sign-in. The access-key sign-in flow (Access key sign-in, below, and https://docs.hippius.com/use/wallet-login) signs a challenge with the key and returns a token; the first verify for a new key creates the account. Run it on the user's own machine and pipe the token to `hipc auth login --token-file -`. Never ask for the 12 words in chat.
+- A 12-word access key: Settings does not show a token for this sign-in. The access-key sign-in (Access key sign-in, below, and https://docs.hippius.com/use/wallet-login) signs a challenge with the key and returns a token; the first verify for a new key creates the account. Run `hipc auth login --access-key` on the user's own machine (it asks for the 12 words at a prompt that does not show them, or reads them with `--access-key-file <path|->`), which signs the challenge and stores only the token; the API flow is the alternative for an app. Never ask for the 12 words in chat.
 - CI and servers: sign in once on a machine you trust and store only the token (for example as the CI secret `HIPPIUS_TOKEN`). Never put the 12 words on a runner: they control the whole account and its funds.
 
 A 12-word access key creates a wallet-only account. It has no real email address, so it gets no lifecycle mail. Drive has no free plan: subscribe before the first upload. S3 and Hub work the same as on any other account.
@@ -102,7 +102,7 @@ Five top-up methods, on Billing:
 - TAO, from a connected wallet or by sending to the TAO deposit address (Manually tab). At least $20 per transfer. Never send TAO to the Hippius account address (Wallet → Receive): it is not credited. A transfer cannot be reversed.
 - hAlpha, the Hippius native token, on the Hippius tab. Credits = hAlpha × the on-chain hAlpha price. Slippage protection 1% by default. Final on chain, no refund. Not invoiced.
 
-`hipc billing top-up --amount <usd> --method card|bitcoin --yes` starts a card or Bitcoin top-up and prints the checkout URL a person pays. USDC, TAO and hAlpha top-ups are browser wallet steps a person approves; an agent cannot fund the balance with them on its own.
+`hipc billing top-up --amount <usd> --method card|bitcoin --yes` starts a card or Bitcoin top-up and prints the checkout URL a person pays. `hipc billing native-quote` shows the hAlpha price, `min_alpha`, `native_balance`, and `custodial`. When `custodial` is true (the API signs the account's buys), `hipc billing top-up --method halpha --alpha 1.5 --yes` converts hAlpha into credits on chain: at least 0.01 hAlpha, with a minimum of 1% less than the quoted credits, and it cannot be undone. An account that signs its own buys (`custodial` false, such as an access-key account) still buys in the console, and USDC and TAO stay in the console. Those are browser wallet steps a person approves; an agent cannot fund the balance with them on its own.
 
 An agent with enough balance subscribes without a browser. Do not send a funded agent to Stripe Checkout. With hipc: `hipc drive subscription subscribe --plan solo --yes` buys a plan for an account on Free or no plan; to move a paid plan to another, use `hipc drive subscription change --plan duo --yes` (S3: `hipc s3 subscription subscribe` and `change`). Run each with `--dry-run` first.
 
@@ -144,11 +144,11 @@ Open a support ticket with the account API token: POST https://api.hippius.com/a
 
 Use `hipc` first for anything on the account API: accounts and projects, billing, storage keys and buckets, Hub, compute and App Engine, CDN, network, and support. S3 bytes use any S3 client (S3 Storage — Quickstart below); Hub blobs use `hippius-hub`. The IPFS-era commands (`hipc storage`) and the storage commands of the old `hippius` Python package are deprecated; chain registration still uses `hippius==0.2.77`.
 
-An agent cannot create a Google, GitHub or Apple account or approve a browser login. The user signs in at https://console.hippius.com and stores the API token from https://console.hippius.com/dashboard/settings with `hipc auth login`. An access-key account gets its token from the access-key sign-in flow instead (see Authentication).
+An agent cannot create a Google, GitHub or Apple account or approve a browser login. The user signs in at https://console.hippius.com and stores the API token from https://console.hippius.com/dashboard/settings with `hipc auth login`. An access-key account signs in with `hipc auth login --access-key` instead (see Authentication).
 
 ### hipc
 
-- Install: `brew install thenervelab/tap/hipc`, or `curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh`. `pip install hippius` follows right after the first release; until then that command installs the old IPFS-era SDK (0.2.x), not hipc.
+- Install: `brew install thenervelab/tap/hipc`, or `curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh`. A PyPI package, `pip install hippius-cli`, follows right after the first release. `pip install hippius` is the Python SDK (today the old IPFS-era 0.2.x), not hipc.
 - Log in with the token the user gives you: `hipc auth login --token-file -` (paste it, Enter, Ctrl-D), then `hipc auth status`. At their own terminal the user can also run plain `hipc auth login`, which asks for the token without showing it. Never ask for the token in the chat; the user runs this on their machine.
 - Run `hipc schema` to discover every command, its effect, confirmations and error codes. The whole document is large (about 160 KB): `hipc schema <path…>`, such as `hipc schema compute vms` or `hipc schema s3 buckets create`, lists only the commands under that path, in the same shape.
 - Output is JSON on a pipe, with `CI`, or with `AI_AGENT=1`.
