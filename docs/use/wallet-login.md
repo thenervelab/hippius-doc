@@ -12,6 +12,22 @@ import Unordered from '@site/src/components/Unordered';
 
 This page is for developers building an app that signs a user in to Hippius with their 12-word access key, the way the console's **Continue with Access Key** does. The key never leaves the device: your app derives two keys from it, signs a server challenge with both, and gets back an API token.
 
+## From a terminal: hipc
+
+To sign yourself in from a terminal, you don't need to script this flow. [hipc](/cli) does it:
+
+```bash
+hipc auth login --access-key                  # type the 12 words at a prompt that doesn't show them
+hipc auth login --access-key-file key.txt     # or read them from a file of mode 0600, or - for stdin
+hipc auth status
+```
+
+hipc derives both keys, signs the challenge, checks the token it gets back, and stores only that token; the 12 words are never stored, sent or printed. `--access-key` asks only a person at a terminal. A phrase the API hasn't seen opens a new account, and `is_new` says so. `--dry-run` prints the three requests and signs, sends and stores nothing.
+
+For CI, sign in once this way on a machine you trust and keep only the token, as the runner's `HIPPIUS_TOKEN` secret. Never put the 12 words on a runner.
+
+The rest of this page is the API flow, for an app of your own.
+
 :::warning Raw Substrate signatures only
 Since 2026-10-27 the Substrate signature must be over the challenge's raw bytes. A signature over the `<Bytes>...</Bytes>` wrapping that the polkadot.js browser extension's `signRaw` adds is refused with `401 substrate_signature_invalid`. Sign with the key itself, as below, not through a browser extension.
 :::
@@ -112,7 +128,7 @@ The server needs `substrate_signature` to open an account, and on every login un
 
 ## Use the token in a terminal, an agent or CI
 
-Store the token, not the key. On the user's own machine, pipe it to [hipc](/cli) with `hipc auth login --token-file -`, and every `hipc` command then carries it. Never paste the 12 words into a chat with an agent.
+Store the token, not the key. On the user's own machine, `hipc auth login --access-key` does the whole sign-in and stores the token; a token your app already has goes to [hipc](/cli) with `hipc auth login --token-file -`. Every `hipc` command then carries it. Never paste the 12 words into a chat with an agent.
 
 For CI or a server, sign in once on a machine you trust and store only the token, for example as the CI secret `HIPPIUS_TOKEN`. Never put the 12 words on a runner: they control the whole account and its funds, and a leaked token is easier to replace than a leaked key.
 
