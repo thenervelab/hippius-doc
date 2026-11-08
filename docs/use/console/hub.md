@@ -50,12 +50,14 @@ If you already created a namespace from the CLI and the console says the name is
 
 Once your namespace exists, the console shows the exact commands for your account, with your namespace already filled in. You can copy them from the Hub page, or follow the short version here.
 
-The quickest route is the `hippius-hub` CLI, which sets up Docker for you:
+From a terminal, create the namespace and a push key with [hipc](/cli), which reads your API token at a prompt rather than from the command line, then log Docker in with the key's secret on stdin:
 
 ```bash
-pip install hippius_hub
-hippius-hub login --hippius-token <your-api-token>
-hippius-hub registry provision <your-namespace> --docker-login
+hipc auth login
+hipc hub namespace create <your-namespace> --secret-file robot.secret --yes
+hipc --json hub keys create --name dev --role push --secret-file key.txt --yes > key.json
+jq -r .login key.json
+docker login registry.hippius.com -u '<login>' --password-stdin < key.txt
 
 docker tag my-app:v1 registry.hippius.com/<your-namespace>/my-app:v1
 docker push registry.hippius.com/<your-namespace>/my-app:v1

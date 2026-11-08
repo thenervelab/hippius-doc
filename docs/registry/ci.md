@@ -74,7 +74,7 @@ jobs:
           hippius-hub upload my-team/my-model ./model --revision "$TAG"
 ```
 
-Replace `my-team` with your namespace, and `app`, `my-model` and `./model` with your repositories and folder.
+Replace `my-team` with your namespace, which `hipc hub namespace get` shows, and `app`, `my-model` and `./model` with your repositories and folder.
 
 :::warning The login contains a `$`
 A CI key's login looks like `robot$my-team+ci`. GitHub pastes every `${{ ... }}` expression into the script as text before the shell runs it, so `-u "${{ secrets.HIPPIUS_HUB_USER }}"` becomes `-u "robot$my-team+ci"`, and the shell replaces `$my` with nothing. Both logins then fail. Map each secret to an environment variable under `env:`, as above, and use `"$HUB_USER"` in the script. Pass the secret on stdin with `--password-stdin`, never as an argument.

@@ -46,7 +46,7 @@ Private namespaces: only you and the keys you issue can pull from them. Publicit
 Pick the flow that matches what you're shipping. The CLI install and namespace provisioning are the same either way.
 
 :::info A $10 balance before the first namespace
-The Free plan can create a namespace only when the account holds a balance of at least **$10**. A zero balance is refused. Top up on [Billing](/use/console/billing) before `hippius-hub registry provision`. The plan itself stays free.
+The Free plan can create a namespace only when the account holds a balance of at least **$10**. A zero balance is refused. Top up on [Billing](/use/console/billing) before `hipc hub namespace create` (or `hippius-hub registry provision`). The plan itself stays free.
 :::
 
 <Tabs groupId="registry-flow">
@@ -55,16 +55,23 @@ The Free plan can create a namespace only when the account holds a balance of at
 ```bash
 # 1. Install the unified CLI (also the Python library)
 pip install hippius_hub
+brew install thenervelab/tap/hipc
 
-# 2. Save your API token from https://console.hippius.com/dashboard/settings
-hippius-hub login --hippius-token <paste-token-here>
+# 2. Store your API token from https://console.hippius.com/dashboard/settings in hipc
+#    (https://docs.hippius.com/cli); the prompt does not show it
+hipc auth login
 
-# 3. Provision a namespace + run docker login in one shot
-hippius-hub registry provision my-models --docker-login
+# 3. Create the namespace, then a push key whose secret goes to a private file
+hipc hub namespace create my-models --secret-file robot.secret --yes
+hipc --json hub keys create --name dev --role push --secret-file key.txt --yes > key.json
+jq -r .login key.json      # such as robot$my-models+dev
 
-# 4. Push a model folder as :v1
+# 4. Log in with the key, the secret on stdin, then push a model folder as :v1
+hippius-hub login --username '<login>' --password-stdin < key.txt
 hippius-hub upload my-models/qwen-7b ./qwen-7b --revision v1
 ```
+
+Delete `key.txt` and `robot.secret` once the secrets are stored where you use them. The login contains a `$`, so keep it in single quotes. Your API token never goes on the command line: `hipc` reads it at a prompt or from `--token-file -`.
 
 Pulling from Python is a one-line import swap in *your* code:
 
@@ -87,17 +94,24 @@ model = AutoModel.from_pretrained(
 ```bash
 # 1. Install the CLI for namespace provisioning + credential helpers
 pip install hippius_hub
+brew install thenervelab/tap/hipc
 
-# 2. Save your API token from https://console.hippius.com/dashboard/settings
-hippius-hub login --hippius-token <paste-token-here>
+# 2. Store your API token from https://console.hippius.com/dashboard/settings in hipc
+#    (https://docs.hippius.com/cli); the prompt does not show it
+hipc auth login
 
-# 3. Provision a namespace and run docker login in one shot
-hippius-hub registry provision my-models --docker-login
+# 3. Create the namespace, then a push key whose secret goes to a private file
+hipc hub namespace create my-models --secret-file robot.secret --yes
+hipc --json hub keys create --name dev --role push --secret-file key.txt --yes > key.json
+jq -r .login key.json      # such as robot$my-models+dev
 
-# 4. Tag and push an image
+# 4. Log docker in with the key, the secret on stdin, then tag and push an image
+docker login registry.hippius.com -u '<login>' --password-stdin < key.txt
 docker tag my-app:latest registry.hippius.com/my-models/my-app:v1
 docker push registry.hippius.com/my-models/my-app:v1
 ```
+
+Delete `key.txt` and `robot.secret` once the secrets are stored where you use them, and keep the login in single quotes: it contains a `$`.
 
 Pulling a public image needs no login:
 
