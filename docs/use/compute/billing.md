@@ -195,9 +195,11 @@ Your balance is not a spending cap: as above, an hour it can't pay becomes debt,
   <li>What already runs keeps running and is billed. A budget doesn't stop or delete a VM, so the month can end above the limit. Stop or delete what you don't need yourself.</li>
 </Unordered>
 
-From the command line, with the project id from `hipc account projects list`:
+The Default project has no budget. To cap what launches spend in a month, create a project, launch in it with `--project PROJECT_ID` (or after `hipc account projects use PROJECT_ID`), then set its budget. From the command line, with the project id from the create answer or `hipc account projects list`:
 
 ```bash
+hipc account projects create --name api
+hipc account projects use PROJECT_ID
 hipc account projects budget update PROJECT_ID --monthly-limit 25 --alert-at 50 --alert-at 90 --block-launches true --yes
 hipc account projects budget get PROJECT_ID
 ```
