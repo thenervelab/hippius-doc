@@ -247,8 +247,8 @@ Deleting is permanent:
 
 <Unordered>
   <li>The encrypted disk is crypto-erased. The data can't be recovered.</li>
-  <li>The VM's public IPv4, if it has one, goes back to the pool. You may not get the same address again.</li>
-  <li>Billing stops when you ask to delete, not when the teardown finishes.</li>
+  <li>The VM's public IPv4, if it has one, is released with the VM and goes back to the pool, so you don't need to detach it first. It is billed until then. You may not get the same address again.</li>
+  <li>Billing for the VM stops when you ask to delete, not when the teardown finishes. Stored backups stay billed until they are removed.</li>
 </Unordered>
 
 You can't delete a VM while it is being resized. Wait for the resize to finish.
@@ -272,7 +272,7 @@ Flavor codes are lowercase (`small`, not `SMALL`, which hipc refuses before send
 A VM launched with `--public-ip` from hipc gets no firewall rule, so every port is closed. `--open-ssh` opens port 22 right after the launch, as above, and `--open-port 443` (repeat it for more) opens another TCP port. Both accept every IPv4 address. To limit who can connect, leave them out and use `hipc compute firewall update` with a rules file: see [Public IPv4 and firewall: From the command line](/use/compute/networking#from-the-command-line).
 :::
 
-A VM is billed from its launch until it is deleted, running or stopped. Stop, start and delete it with `hipc compute vms stop VM_ID --yes`, `hipc compute vms start VM_ID` and `hipc compute vms delete VM_ID --yes`.
+A VM is billed from its launch until it is deleted, running or stopped. Stop, start and delete it with `hipc compute vms stop VM_ID --yes`, `hipc compute vms start VM_ID` and `hipc compute vms delete VM_ID --yes`. A delete releases the public IPv4 with the VM, with no detach first; stored backups stay billed until they are removed.
 
 ## Where to next
 

@@ -94,7 +94,7 @@ Some examples:
 
 **Stopped VMs.** A stopped VM keeps its server capacity reserved, so it is billed at its full price. Delete a VM to stop paying for it. A VM whose boot stalled, shown as failed, stops being billed when the stall is detected. It still counts against your quotas until you delete it.
 
-**Deleting.** Billing stops when you ask to delete a VM, database or cluster, not when the teardown finishes.
+**Deleting.** Billing stops when you ask to delete a VM, database or cluster, not when the teardown finishes. A VM's public IPv4 is released with it, so it needs no detach first. Stored VM backups stay billed until they are removed.
 
 **Shared accounts.** What a team member runs in your account is billed to your account and counts against its quotas. See [Shared accounts](/use/console/team#billing-and-quotas).
 

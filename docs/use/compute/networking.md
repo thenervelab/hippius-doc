@@ -55,7 +55,7 @@ A public IPv4 costs **$0.005 an hour** (about $3.65 a month), billed per second 
 
 Click **Detach** in **Public IP & Firewall** and confirm. The address stops reaching your VM and goes back to the pool: you may not get it back. Outbound traffic goes out through NAT on the server the VM runs on again.
 
-Your firewall rules are kept. They apply again as soon as you attach a new address. Deleting the VM releases its address too.
+Your firewall rules are kept. They apply again as soon as you attach a new address. Deleting the VM releases its address too, so you don't need to detach it first; the address is billed until the VM is deleted.
 
 ### Bandwidth
 
