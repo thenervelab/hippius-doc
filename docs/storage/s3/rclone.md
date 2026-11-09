@@ -30,7 +30,6 @@ access_key_id = YOUR_ACCESS_KEY
 secret_access_key = YOUR_SECRET_KEY
 endpoint = https://s3.hippius.com
 region = decentralized
-acl = private
 force_path_style = true
 ```
 
@@ -41,6 +40,14 @@ rclone ls hippius:
 ```
 
 Connection details: [Getting Started](/use/quickstart#connection-details). Always use `https://s3.hippius.com`.
+
+:::warning Do not set `acl`
+
+Leave the `acl` option out of the remote. Hippius buckets use `BucketOwnerEnforced` Object Ownership, so ACLs are disabled and any `x-amz-acl` header on a bucket or object write is refused. With `acl = private` in the config, rclone also sends it as the bucket ACL (`bucket_acl` falls back to `acl`), so creating a bucket — `rclone mkdir hippius:my-bucket`, or any `rclone copy`/`sync` to a bucket that does not exist yet — fails with `400 InvalidBucketAclWithObjectOwnership`.
+
+Buckets are private by default, so nothing is lost by omitting it. To make one public, see [Make a bucket or object public](/storage/s3/advanced#make-a-bucket-or-object-public).
+
+:::
 
 ## Common operations
 

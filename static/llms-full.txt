@@ -477,7 +477,6 @@ Server generates presigned PUT URL, browser uses it — no credentials in the br
     secret_access_key = your_secret
     endpoint = https://s3.hippius.com
     region = decentralized
-    acl = private
 
     rclone lsd hippius:                                  # list buckets
     rclone ls hippius:my-bucket                          # list files
