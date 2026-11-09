@@ -21,8 +21,7 @@ Everything is encrypted on your phone before it leaves it, so what travels to th
 
 ## Installing the app
 
-{/* When the App Store version is live, change the next line to name both stores. */}
-Hippius is on **Google Play** for Android phones. The iPhone version is coming soon to the **App Store**.
+Hippius is on **Google Play** for Android phones and the **App Store** for iPhones.
 
 ### On Android {#install-android}
 
@@ -34,17 +33,15 @@ Hippius is on **Google Play** for Android phones. The iPhone version is coming s
 
 The app needs Android 7.0 or later.
 
-{/* iOS START: hidden until the App Store release. To show it again, close this comment at the end of this line and reopen it at the start of the iOS END line.
-
 ### On iPhone {#install-iphone}
 
 <Ordered>
-  <li>On your iPhone, open the <strong>App Store</strong> and search for <strong>Hippius</strong>.</li>
+  <li>On your iPhone, open <a href="https://apps.apple.com/app/hippius/id6794237382">Hippius on the App Store</a>, or search for <strong>Hippius</strong> in the App Store.</li>
   <li>Tap <BgStyledText>Get</BgStyledText>, and confirm if your iPhone asks.</li>
   <li>Open the app when it has finished installing.</li>
 </Ordered>
 
-iOS END */}
+The app needs iOS 15.1 or later.
 
 ## Signing in
 
@@ -112,7 +109,7 @@ Overview shows, from top to bottom:
 
 <Unordered>
   <li><strong>Recents</strong>: the files you added most recently. Tap the arrow to go to Drive.</li>
-  <li>The <strong>Storage</strong> and <strong>Plan</strong> cards: how full your Drive is, and which plan you are on. See <a href="/use/mobile/plans#what-the-app-shows">Plans and Storage</a>.</li>
+  <li>The <strong>Storage</strong> and <strong>Plan</strong> cards: how full your Drive is, and which plan you are on. On iPhone there is only the <strong>Storage</strong> card. See <a href="/use/mobile/plans#what-the-app-shows">Plans and Storage</a>.</li>
   <li><strong>Save your recovery phrase</strong>, only for a new Google, GitHub or Apple account after its first upload. Tap <BgStyledText>View phrase</BgStyledText> to back the phrase up. <BgStyledText>Later</BgStyledText> hides the card for good, so only tap it once the phrase is safe.</li>
   <li>A card to set up <a href="/use/mobile/camera-uploads">Camera Uploads</a>. Once you have set it up, it is replaced by <strong>Storage Distribution</strong>, a breakdown of what is using your storage.</li>
 </Unordered>
@@ -165,8 +162,6 @@ It keeps updating while Camera Uploads runs in the background. Tap it to open **
 
 <Screenshot src="/img/mobile/widgets/android.png" dark="/img/mobile/widgets/android.png" alt="The Upload & Backup, Storage and Quick Actions widgets on an Android home screen" raw phone />
 
-{/* iOS START: hidden until the App Store release. To show it again, close this comment at the end of this line and reopen it at the start of the iOS END line.
-
 ### On iPhone {#iphone-widgets}
 
 To add one, press and hold an empty spot on your Home Screen until the apps jiggle, tap **Edit**, then **Add Widget**. Search for **Hippius**, pick a widget and tap **Add Widget**.
@@ -183,8 +178,6 @@ iPhone widgets are shortcuts. Each one opens the app straight into an action:
 
 There is no upload progress or storage widget on iPhone. To follow a backup, open the app and tap the upload button at the top.
 
-iOS END */}
-
 ## Keeping the app up to date {#updates}
 
 The app checks for a new version by itself shortly after it opens. If there is one, it tells you and offers to update. Tap <BgStyledText>Not now</BgStyledText> to be reminded a day later.
@@ -197,13 +190,9 @@ Small updates install inside the app. Tap <BgStyledText>Update now</BgStyledText
 
 Bigger updates come from Google Play. Tap <BgStyledText>Update now</BgStyledText> and Google Play installs the new version for you without leaving the app. If it can't, the button reads <BgStyledText>Open Play Store</BgStyledText> instead. It takes you to Hippius on Google Play, where you tap **Update**.
 
-{/* iOS START: hidden until the App Store release. To show it again, close this comment at the end of this line and reopen it at the start of the iOS END line.
-
 ### On iPhone {#updates-iphone}
 
 Bigger updates come from the App Store. Tap <BgStyledText>Open App Store</BgStyledText>, then tap **Update** on the Hippius page.
-
-iOS END */}
 
 ## What you can do
 
@@ -222,7 +211,7 @@ If you turn on **Biometric lock** in Settings, the app asks for your fingerprint
 
 ## Your plan
 
-The app shows which Drive plan you are on and how much storage it gives you, on the Overview **Plan** card and on your **Account** screen. **Managing subscriptions is not available in the mobile app.** You subscribe, change or cancel a plan in the [Hippius Console](https://console.hippius.com) in a browser, signed in with the same account.
+On Android, the app shows which Drive plan you are on and how much storage it gives you, on the Overview **Plan** card and on your **Account** screen. On iPhone, it shows your storage rather than your plan, on the **Storage** card. **Managing subscriptions is not available in the mobile app.** You subscribe, change or cancel a plan in the [Hippius Console](https://console.hippius.com) in a browser, signed in with the same account.
 
 Once you subscribe in the console, the app picks the plan up on its own. There is nothing to enter twice. [Plans and Storage](/use/mobile/plans) walks through it step by step, and shows what the app looks like before and after.
 

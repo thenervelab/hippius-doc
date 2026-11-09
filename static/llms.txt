@@ -17,7 +17,7 @@ Open only the file for the product you need. The long reference for the whole pr
 | Script Drive with encryption on the client | [hippius-drive-sdk llms.txt](https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt) |
 | Sign up, pay, get an API token, or manage Drive and S3 keys in the browser | [Console getting started](https://docs.hippius.com/use/console/getting-started) |
 | Bridge Alpha on subnet 75 to hAlpha, then buy balance with it | [Fund with Alpha](https://docs.hippius.com/use/console/fund-with-alpha) |
-| Use Drive on an Android phone | [Mobile getting started](https://docs.hippius.com/use/mobile/getting-started) |
+| Use Drive on an iPhone or Android phone | [Mobile getting started](https://docs.hippius.com/use/mobile/getting-started) |
 | Run a VM, managed PostgreSQL, managed Kubernetes or GitHub Actions runners (Compute) | [Compute guide](https://docs.hippius.com/use/compute) |
 | Serve an S3 bucket through the CDN (zones on <zone>.c.hipcdn.net or your own domain; FR $0.010/GB, AU $0.060/GB, $0.002 per 10,000 requests, $1/month per custom domain) | [CDN guide](https://docs.hippius.com/use/cdn) |
 | Filter requests to a CDN zone with a WAF: custom rules, rate limits, IP/ASN/country lists (every zone, Security tab; Standard $5, Advanced $20 per zone per month) | [CDN guide](https://docs.hippius.com/use/cdn) |
@@ -86,7 +86,7 @@ The Kubernetes cluster key is generated in the user's browser, and database cred
 - [Object Storage quickstart](https://docs.hippius.com/use/quickstart)
 - [Hub quickstart](https://docs.hippius.com/registry)
 - [Desktop](https://docs.hippius.com/use/desktop/getting-started)
-- [Mobile](https://docs.hippius.com/use/mobile/getting-started): Android on Google Play, iPhone not released
+- [Mobile](https://docs.hippius.com/use/mobile/getting-started): iPhone on the App Store, Android on Google Play
 - [Console](https://docs.hippius.com/use/console/getting-started)
 - [Drive](https://docs.hippius.com/use/drive)
 - [Compute](https://docs.hippius.com/use/compute)
