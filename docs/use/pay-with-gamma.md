@@ -33,7 +33,7 @@ curl -s https://api.hippius.com/api/billing/gamma/ \
   -H "Authorization: Token YOUR_TOKEN"
 ```
 
-The answer's `spender` is the account a deposit must name, and `service_hotkey` the hotkey our service is published under, which names that spender. It also says whether the feature is on (`enabled`) and ready to convert (`available`). `hipc billing gamma get` prints the same. Then mint subnet 75 gamma into your fresh hotkey, passing `service_hotkey` as it is in the answer:
+The answer's `spender` is the account a deposit must name, and `service_hotkey` the hotkey our service is published under, which names that spender. `available` says whether Hippius has its spender configured; it does not check the chain or the price, which a conversion checks. `hipc billing gamma get` prints the same. Then mint subnet 75 gamma into your fresh hotkey, passing `service_hotkey` as it is in the answer:
 
 ```bash
 btcli gamma mint --netuid 75 --hotkey <YOUR_GAMMA_HOTKEY> --amount-tao 10 --service-hotkey <service_hotkey from the answer>
@@ -77,7 +77,7 @@ hotkey = Keypair.create_from_mnemonic(HOTKEY_WORDS)
 signature = "0x" + hotkey.sign(challenge["message"]).hex()
 ```
 
-A challenge is valid for 5 minutes and works once, even if the link fails. An account can link up to 10 hotkeys. `hipc billing gamma hotkeys delete <hotkey>` or `DELETE /api/billing/gamma/hotkeys/<hotkey>/` unlinks one (`204`, or `404 gamma_hotkey_not_found` when it is not linked to your account); its gamma stays in the deposit.
+A challenge is valid for 5 minutes and works once, even if the link fails. An account can link up to 10 hotkeys. `hipc billing gamma hotkeys delete <hotkey>` or `DELETE /api/billing/gamma/hotkeys/<hotkey>/` unlinks one (`204`, or `404 gamma_hotkey_not_found` when it is not linked to your account); its gamma stays in the deposit. Unlinking cancels nothing: a conversion already accepted still runs, so wait until it is `spent`, `skipped` or `failed`. The deposit still names our spender on chain; to take that away, set another spender with `set_gamma_deposit_spender`.
 
 ## 3. Check the deposit
 
@@ -117,13 +117,15 @@ Or `GET /api/billing/gamma/conversions/<id>/`, and `GET /api/billing/gamma/conve
 |---|---|
 | `pending` | Accepted, not yet sent to the chain |
 | `submitting`, `submitted` | The spend is signed and being sent, or sent; waiting for a finalized block. A new conversion is refused while this one is in flight |
-| `spent` | The spend is final and your balance has the credits. `transaction_id` is the payment |
+| `spent` | The spend is final and the payment is recorded: the credits are added to your balance like any top-up, normally within minutes. `transaction_id` is the payment |
 | `skipped` | The chain skipped the spend, for example because the gamma was moved away (`skip_reason`). Nothing was spent or credited |
 | `failed` | Never spent. Nothing was credited |
 
 You are credited only once the spend is in a finalized block, and never twice. The conversion's `reference` is repeated in the chain's `GammaSpent` event, so you can match the spend on chain.
 
 ## Limits
+
+These are today's limits; Hippius may change them, and `min_amount` in the overview is the current minimum.
 
 - A conversion is at least **0.1 gamma** and at most **10,000 gamma**.
 - Each account can convert up to **10,000 gamma in any 24 hours**, and all accounts together up to 50,000. The window is the last 24 hours, not a calendar day: `daily_cap` answers with what is `remaining` in it.
@@ -138,7 +140,7 @@ You are credited only once the spend is in a finalized block, and never twice. T
 
 ## Error codes
 
-Errors answer `{"code": "…", "detail": "…"}`.
+The gamma routes answer their errors as `{"code": "…", "detail": "…"}`. A missing or invalid token is refused first (`401`), as on every route.
 
 | HTTP | Code | What to do |
 |---|---|---|
