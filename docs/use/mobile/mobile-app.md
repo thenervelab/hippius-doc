@@ -51,7 +51,7 @@ If you have used Hippius before, sign in with the same details you use everywher
 
 <Ordered>
   <li>Open the app and go through the short introduction. Tap <BgStyledText>Continue</BgStyledText>, then <BgStyledText>Proceed to log in</BgStyledText>.</li>
-  <li>On <strong>Log In to Hippius</strong>, choose how you want to continue: <BgStyledText>Continue with Google</BgStyledText>, <BgStyledText>Continue with Github</BgStyledText>, <BgStyledText>Continue with Apple</BgStyledText>, or <BgStyledText>Continue with Access Key</BgStyledText>. All four work on Android.</li>
+  <li>On <strong>Log In to Hippius</strong>, choose how you want to continue: <BgStyledText>Continue with Google</BgStyledText>, <BgStyledText>Continue with Github</BgStyledText>, <BgStyledText>Continue with Apple</BgStyledText>, or <BgStyledText>Continue with Access Key</BgStyledText>. All four work on iPhone and Android.</li>
   <li>Google, GitHub, and Apple open a browser sheet where you approve the sign-in and come straight back to the app.</li>
   <li>For an access key, type or paste your recovery phrase from an existing Hippius account under <strong>Access Key</strong> and tap <BgStyledText>Log In</BgStyledText>. Use this if you already have one.</li>
 </Ordered>
