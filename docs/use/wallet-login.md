@@ -22,7 +22,7 @@ hipc auth login --access-key-file key.txt     # or read them from a file of mode
 hipc auth status
 ```
 
-hipc derives both keys, signs the challenge, checks the token it gets back, and stores only that token; the 12 words are never stored, sent or printed. `--access-key` asks only a person at a terminal. A phrase the API hasn't seen opens a new account, and `is_new` says so. `--dry-run` prints the three requests and signs, sends and stores nothing.
+hipc derives both keys, signs the challenge, checks the token it gets back, and stores only that token; the 12 words are never stored, sent or printed. `--access-key` asks only a person at a terminal. A phrase the API has not seen opens a new, empty account, and so does one mistyped word: when the verify answers `is_new`, `hipc auth login` exits 2 and stores no token, but the server has already opened that empty account. Pass `--new-account` when a new account is meant. A later login with the same words logs in to the account the server opened. `--dry-run` prints the three requests and signs, sends and stores nothing.
 
 For CI, sign in once this way on a machine you trust and keep only the token, as the runner's `HIPPIUS_TOKEN` secret. Never put the 12 words on a runner.
 
