@@ -20,7 +20,7 @@ There is no console page for gamma. You use the [Hippius API](/use/api) or the `
 
 You need:
 
-- A Hippius API token, from [Settings](https://console.hippius.com/dashboard/settings). Every request sends `Authorization: Token YOUR_TOKEN`.
+- A Hippius API token, from [Settings](https://console.hippius.com/dashboard/settings). Every request sends `Authorization: Token YOUR_TOKEN`. Gamma always pays for the token owner's own account: send no account, project or billing header.
 - A Bittensor coldkey with TAO or subnet 75 stake, and `btcli`.
 - A **fresh hotkey** used only for this deposit. It does not need to be registered or funded. Never use a staking hotkey, and never give anyone, `hipc` included, your **coldkey** words: Hippius never needs them.
 
@@ -33,13 +33,13 @@ curl -s https://api.hippius.com/api/billing/gamma/ \
   -H "Authorization: Token YOUR_TOKEN"
 ```
 
-The answer's `spender` is the account a deposit must name (written `<HIPPIUS_SPENDER>` below). It also says whether the feature is on (`enabled`) and ready to convert (`available`). Then mint subnet 75 gamma into your fresh hotkey, naming `<HIPPIUS_SPENDER>` as the deposit's spender. With `btcli`, that goes through our published service:
+The answer's `spender` is the account a deposit must name, and `service_hotkey` the hotkey our service is published under, which names that spender. It also says whether the feature is on (`enabled`) and ready to convert (`available`). `hipc billing gamma get` prints the same. Then mint subnet 75 gamma into your fresh hotkey, passing `service_hotkey` as it is in the answer:
 
 ```bash
-btcli gamma mint --netuid 75 --hotkey <YOUR_GAMMA_HOTKEY> --amount-tao 10 --service-hotkey <HIPPIUS_SERVICE_HOTKEY>
+btcli gamma mint --netuid 75 --hotkey <YOUR_GAMMA_HOTKEY> --amount-tao 10 --service-hotkey <service_hotkey from the answer>
 ```
 
-`<HIPPIUS_SERVICE_HOTKEY>` will be published on this page at launch. A script can call `mint_gamma` directly and pass `<HIPPIUS_SPENDER>` as its `spender`. If you already hold a deposit, set its spender with `set_gamma_deposit_spender` instead. A daily spend cap on the deposit is respected: we can only spend what the cap allows at that moment.
+`service_hotkey` is `null` until our service is published at launch: do not mint before then. A script can call `mint_gamma` directly and pass `spender` from the answer as its `spender`. If you already hold a deposit, set its spender with `set_gamma_deposit_spender` instead. A daily spend cap on the deposit is respected: we can only spend what the cap allows at that moment.
 
 ## 2. Link the hotkey to your account (once)
 
@@ -77,7 +77,7 @@ hotkey = Keypair.create_from_mnemonic(HOTKEY_WORDS)
 signature = "0x" + hotkey.sign(challenge["message"]).hex()
 ```
 
-A challenge is valid for 5 minutes and works once, even if the link fails. An account can link up to 10 hotkeys. `hipc billing gamma hotkeys delete <hotkey>` or `DELETE /api/billing/gamma/hotkeys/<hotkey>/` unlinks one (`204`, or `404` when it is not linked to your account); its gamma stays in the deposit.
+A challenge is valid for 5 minutes and works once, even if the link fails. An account can link up to 10 hotkeys. `hipc billing gamma hotkeys delete <hotkey>` or `DELETE /api/billing/gamma/hotkeys/<hotkey>/` unlinks one (`204`, or `404 gamma_hotkey_not_found` when it is not linked to your account); its gamma stays in the deposit.
 
 ## 3. Check the deposit
 
@@ -111,7 +111,7 @@ hipc billing gamma conversions get <id>
 hipc billing gamma conversions list
 ```
 
-Or `GET /api/billing/gamma/conversions/<id>/` and `GET /api/billing/gamma/conversions/`, which answers `{"results": [...]}`, newest first, up to 50. Check every few seconds; a conversion normally settles within a minute or two.
+Or `GET /api/billing/gamma/conversions/<id>/`, and `GET /api/billing/gamma/conversions/`, newest first and paginated like the other lists of the API: `{"count", "next", "previous", "results"}`, with `page` (from 1) and `page_size` (default 100, at most 500). Follow `next` until it is `null`; `hipc billing gamma conversions list --all` does it for you. Check every few seconds; a conversion normally settles within a minute or two.
 
 | Status | What it means |
 |---|---|
@@ -138,7 +138,7 @@ You are credited only once the spend is in a finalized block, and never twice. T
 
 ## Error codes
 
-Errors answer `{"code": "…", "detail": "…"}`, except the plain `404` at the end.
+Errors answer `{"code": "…", "detail": "…"}`.
 
 | HTTP | Code | What to do |
 |---|---|---|
@@ -154,4 +154,8 @@ Errors answer `{"code": "…", "detail": "…"}`, except the plain `404` at the 
 | 409 | `conversion_in_flight` | Wait for the previous conversion to finish |
 | 429 | `daily_cap`, `global_daily_cap` | Convert less, or wait for older conversions to leave the 24-hour window |
 | 503 | `oracle_deviation`, `oracle_unavailable`, `price_unavailable`, `chain_unavailable`, `unavailable` | Try again later |
-| 404 | (no body) | Gamma payments are not enabled yet, or the hotkey or conversion is not your account's |
+| 400 | `gamma_personal_only` | Gamma pays for your own account only: drop the `X-Hippius-Account` (unless it names your own account), `X-Hippius-Project` and `X-Hippius-Billing` headers. To fund a shared account, its owner converts with their own token |
+| 404 | `gamma_unavailable` | Gamma payments are not enabled yet |
+| 404 | `gamma_hotkey_not_found` | The hotkey is not linked to your account (`hipc billing gamma get` lists yours) |
+| 404 | `gamma_conversion_not_found` | No such conversion on your account |
+| 404 | `gamma_page_not_found` | The page is past the end of the list |
