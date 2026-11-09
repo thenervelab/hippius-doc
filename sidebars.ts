@@ -310,6 +310,7 @@ const sidebars: SidebarsConfig = {
         "use/hippius-api",
         "use/api-prices",
         "use/wallet-login",
+        "use/pay-with-gamma",
         "blockchain/api",
         {
           type: "category",
