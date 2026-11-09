@@ -34,7 +34,7 @@ curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/i
 </TabItem>
 <TabItem value="pypi" label="PyPI">
 
-Coming right after the first release, as the package `hippius-cli`; it installs the same `hipc` binary. `pip install hippius` is the Python SDK, not hipc.
+PyPI follows the first release, once publishing to it is turned on: `pip install hippius-cli` (or `uv tool install hippius-cli`) will install the same `hipc` binary; the `hippius` package on PyPI is the Python SDK, a different project.
 
 ```bash
 pip install hippius-cli
