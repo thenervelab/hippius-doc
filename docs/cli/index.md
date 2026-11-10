@@ -34,7 +34,7 @@ curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/i
 </TabItem>
 <TabItem value="pypi" label="PyPI">
 
-The package on PyPI is `hippius` and the command it installs is `hipc`, the same binary. `uv tool install hippius` or `pipx install hippius` works too.
+The package on PyPI is `hippius` and the command it installs is `hipc`, the same command the other installs give. `uv tool install hippius` or `pipx install hippius` works too.
 
 ```bash
 pip install hippius
