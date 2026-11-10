@@ -25,6 +25,8 @@ An agent does not sign in: the person it works for does, once, on the machine th
 brew install thenervelab/tap/hipc
 # or
 curl -q --proto '=https' --tlsv1.2 -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh
+# or the PyPI package `hippius`, which installs the command `hipc`
+pip install hippius                 # or: uv tool install hippius, pipx install hippius
 hipc auth login                     # paste the token at the prompt; it is not shown
 hipc auth status
 ```

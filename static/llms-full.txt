@@ -148,7 +148,7 @@ An agent cannot create a Google, GitHub or Apple account or approve a browser lo
 
 ### hipc
 
-- Install: `brew install thenervelab/tap/hipc`, or `curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh`. PyPI follows the first release, once publishing to it is turned on: `pip install hippius-cli` (or `uv tool install hippius-cli`) will install the same `hipc` binary; the `hippius` package on PyPI is the Python SDK, a different project. Today `pip install hippius` installs the old IPFS-era SDK (0.2.x).
+- Install: `brew install thenervelab/tap/hipc`, or `curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh`. On PyPI the package is `hippius` and the command it installs is `hipc`: `pip install hippius`, `uv tool install hippius`, or `pipx install hippius` installs the same binary.
 - Log in with the token the user gives you: `hipc auth login --token-file -` (paste it, Enter, Ctrl-D), then `hipc auth status`. At their own terminal the user can also run plain `hipc auth login`, which asks for the token without showing it. Never ask for the token in the chat; the user runs this on their machine.
 - Run `hipc schema` to discover every command, its effect, confirmations and error codes. The whole document is large (about 160 KB): `hipc schema <path…>`, such as `hipc schema compute vms` or `hipc schema s3 buckets create`, lists only the commands under that path, in the same shape.
 - Output is JSON on a pipe, with `CI`, or with `AI_AGENT=1`.
