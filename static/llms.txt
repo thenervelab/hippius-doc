@@ -17,7 +17,7 @@ Open only the file for the product you need. The long reference for the whole pr
 | Script Drive with encryption on the client | [hippius-drive-sdk llms.txt](https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt) |
 | Sign up, pay, get an API token, or manage Drive and S3 keys in the browser | [Console getting started](https://docs.hippius.com/use/console/getting-started) |
 | Bridge Alpha on subnet 75 to hAlpha, then buy balance with it | [Fund with Alpha](https://docs.hippius.com/use/console/fund-with-alpha) |
-| Understand paying with Bittensor subnet 75 gamma through the API or `hipc` (not live yet) | [Pay with Gamma](https://docs.hippius.com/use/pay-with-gamma) |
+| Understand paying with Bittensor subnet 75 gamma through the API (not live yet) | [Pay with Gamma](https://docs.hippius.com/use/pay-with-gamma) |
 | Use Drive on an iPhone or Android phone | [Mobile getting started](https://docs.hippius.com/use/mobile/getting-started) |
 | Run a VM, managed PostgreSQL, managed Kubernetes or GitHub Actions runners (Compute) | [Compute guide](https://docs.hippius.com/use/compute) |
 | Serve an S3 bucket through the CDN (zones on <zone>.c.hipcdn.net or your own domain; FR $0.010/GB, AU $0.060/GB, $0.002 per 10,000 requests, $1/month per custom domain) | [CDN guide](https://docs.hippius.com/use/cdn) |
