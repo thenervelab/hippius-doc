@@ -3,7 +3,7 @@ id: pay-with-gamma
 title: Pay with Gamma (Subnet 75)
 sidebar_label: Pay with Gamma
 slug: /use/pay-with-gamma
-description: Coming soon. How Bittensor subnet 75 gamma will turn into Hippius balance through the API or the hipc CLI. Link a hotkey, convert gamma into credits, check the status, and the limits and risks.
+description: Coming soon. How Bittensor subnet 75 gamma will turn into Hippius balance through the API. Link a hotkey, convert gamma into credits, check the status, and the limits and risks.
 ---
 
 # Pay with Gamma (Subnet 75)
@@ -14,7 +14,7 @@ Paying with gamma is **not available today**. It becomes available once gamma is
 
 [Gamma](https://www.bittensor.com/docs/guides/gamma) is a subnet's prepaid credit on Bittensor. It is minted by burning that subnet's alpha, and **one gamma is worth one US dollar**. Once live, Hippius will accept the gamma of subnet 75: we burn gamma from a deposit you hold and add the same number of dollars to your Hippius balance.
 
-There is no console page for gamma. You use the [Hippius API](/use/api) or the `hipc` command line. A conversion counts as a payment like a card or USDC top-up: it is added to your balance as credits and appears on your invoices.
+There is no console page for gamma. You use the [Hippius API](/use/api) with `curl` or any HTTP client. A conversion counts as a payment like a card or USDC top-up: it is added to your balance as credits and appears on your invoices.
 
 ## Before you start
 
@@ -22,7 +22,7 @@ You need:
 
 - A Hippius API token, from [Settings](https://console.hippius.com/dashboard/settings). Every request sends `Authorization: Token YOUR_TOKEN`. Gamma always pays for the token owner's own account: send no account, project or billing header.
 - A Bittensor coldkey with TAO or subnet 75 stake, and `btcli`.
-- A **fresh hotkey** used only for this deposit. It does not need to be registered or funded. Never use a staking hotkey, and never give anyone, `hipc` included, your **coldkey** words: Hippius never needs them.
+- A **fresh hotkey** used only for this deposit. It does not need to be registered or funded. Never use a staking hotkey, and never give anyone your **coldkey** words: Hippius never needs them.
 
 ## 1. Mint gamma into a deposit that names Hippius
 
@@ -33,7 +33,7 @@ curl -s https://api.hippius.com/api/billing/gamma/ \
   -H "Authorization: Token YOUR_TOKEN"
 ```
 
-The answer's `spender` is the account a deposit must name, and `service_hotkey` the hotkey our service is published under, which names that spender. `available` says whether Hippius has its spender configured; it does not check the chain or the price, which a conversion checks. `hipc billing gamma get` prints the same. Then mint subnet 75 gamma into your fresh hotkey, passing `service_hotkey` as it is in the answer:
+The answer's `spender` is the account a deposit must name, and `service_hotkey` the hotkey our service is published under, which names that spender. `available` says whether Hippius has its spender configured; it does not check the chain or the price, which a conversion checks. Then mint subnet 75 gamma into your fresh hotkey, passing `service_hotkey` as it is in the answer:
 
 ```bash
 btcli gamma mint --netuid 75 --hotkey <YOUR_GAMMA_HOTKEY> --amount-tao 10 --service-hotkey <service_hotkey from the answer>
@@ -45,17 +45,9 @@ btcli gamma mint --netuid 75 --hotkey <YOUR_GAMMA_HOTKEY> --amount-tao 10 --serv
 
 A hotkey pays for one Hippius account. You prove you hold it by signing a challenge with it.
 
-**With hipc**, pass the hotkey's words on stdin, best straight from your password manager's command line:
+You sign the challenge on your own machine and send only the signature. Anyone who holds the hotkey's words can link it to their own account, so keep them as private as any other key, and keep nothing but this deposit on that hotkey.
 
-```bash
-<your password manager prints the hotkey words> | hipc billing gamma hotkeys create --hotkey-file -
-```
-
-`--hotkey-file <path>` reads a file instead, which must be yours with mode `0600`. A file is not encrypted: delete it once the hotkey is linked. `hipc` asks for the challenge, checks that it is a link of that hotkey, signs it with the hotkey's key and sends only the signature. The words never leave your machine.
-
-Anyone who holds the hotkey's words can link it to their own account, so keep them as private as any other key, and keep nothing but this deposit on that hotkey.
-
-**With the API**, ask for a challenge, sign its `message` with the hotkey, and send the signature:
+Ask for a challenge, sign its `message` with the hotkey, and send the signature:
 
 ```bash
 curl -s -X POST https://api.hippius.com/api/billing/gamma/hotkeys/challenge/ \
@@ -77,23 +69,18 @@ hotkey = Keypair.create_from_mnemonic(HOTKEY_WORDS)
 signature = "0x" + hotkey.sign(challenge["message"]).hex()
 ```
 
-A challenge is valid for 5 minutes and works once, even if the link fails. An account can link up to 10 hotkeys. `hipc billing gamma hotkeys delete <hotkey>` or `DELETE /api/billing/gamma/hotkeys/<hotkey>/` unlinks one (`204`, or `404 gamma_hotkey_not_found` when it is not linked to your account); its gamma stays in the deposit. Unlinking cancels nothing: a conversion already accepted still runs, so wait until it is `spent`, `skipped` or `failed`. The deposit still names our spender on chain; to take that away, set another spender with `set_gamma_deposit_spender`.
+A challenge is valid for 5 minutes and works once, even if the link fails. An account can link up to 10 hotkeys. `DELETE /api/billing/gamma/hotkeys/<hotkey>/` unlinks one (`204`, or `404 gamma_hotkey_not_found` when it is not linked to your account); its gamma stays in the deposit. Unlinking cancels nothing: a conversion already accepted still runs, so wait until it is `spent`, `skipped` or `failed`. The deposit still names our spender on chain; to take that away, set another spender with `set_gamma_deposit_spender`.
 
 ## 3. Check the deposit
 
 ```bash
-hipc billing gamma get
+curl -s https://api.hippius.com/api/billing/gamma/ \
+  -H "Authorization: Token YOUR_TOKEN"
 ```
 
 Each linked hotkey shows its deposit: `balance`, `spendable` (the balance as the daily cap limits it now), and `names_hippius`. If `names_hippius` is `false`, the deposit names another spender and we cannot spend it. `deposit` is `null` when the hotkey has no gamma on subnet 75, or when the chain could not be read: then the top-level `chain` is `unavailable`, so check again later.
 
 ## 4. Convert gamma into credits
-
-```bash
-hipc billing gamma conversions create --hotkey <YOUR_GAMMA_HOTKEY> --amount 10 --yes
-```
-
-Or with the API:
 
 ```bash
 curl -s -X POST https://api.hippius.com/api/billing/gamma/conversions/ \
@@ -102,24 +89,35 @@ curl -s -X POST https://api.hippius.com/api/billing/gamma/conversions/ \
 # 202 {"id": "6f0b…", "status": "pending", "amount": "10.000000000", "reference": "0x9a…", …}
 ```
 
-`amount` is gamma, with at most 9 decimals. We add the same amount in US dollars to your balance. Only one conversion of yours can be in flight at a time.
+`amount` is gamma, with at most 9 decimals. We add one US dollar per gamma the chain actually spent (`spent` on the conversion, normally the amount you asked). Only one conversion of yours can be in flight at a time.
 
 ## 5. Check the status
 
 ```bash
-hipc billing gamma conversions get <id>
-hipc billing gamma conversions list
+curl -s https://api.hippius.com/api/billing/gamma/conversions/<id>/ \
+  -H "Authorization: Token YOUR_TOKEN"
 ```
 
-Or `GET /api/billing/gamma/conversions/<id>/`, and `GET /api/billing/gamma/conversions/`, newest first and paginated like the other lists of the API: `{"count", "next", "previous", "results"}`, with `page` (from 1) and `page_size` (default 100, at most 500). Follow `next` until it is `null`; `hipc billing gamma conversions list --all` does it for you. Check every few seconds; a conversion normally settles within a minute or two.
+The list is newest first and paginated like the other lists of the API: `{"count", "next", "previous", "results"}`, with `page` (from 1) and `page_size` (default 100, at most 500). Follow `next` until it is `null`. With `jq`, this prints every conversion:
+
+```bash
+url="https://api.hippius.com/api/billing/gamma/conversions/?page_size=500"
+while [ -n "$url" ] && [ "$url" != "null" ]; do
+  page=$(curl -s "$url" -H "Authorization: Token YOUR_TOKEN")
+  echo "$page" | jq -r '.results[] | [.id, .amount, .status] | @tsv'
+  url=$(echo "$page" | jq -r '.next')
+done
+```
+
+Check every few seconds; a conversion normally settles within a minute or two.
 
 | Status | What it means |
 |---|---|
 | `pending` | Accepted, not yet sent to the chain |
-| `submitting`, `submitted` | The spend is signed and being sent, or sent; waiting for a finalized block. A new conversion is refused while this one is in flight |
+| `submitting`, `submitted` | The spend is signed and being sent, or sent; waiting for a finalized block. A new conversion is refused while this one is in flight. A spend that is not seen stays here for a few more minutes before `failed` |
 | `spent` | The spend is final and the payment is recorded: the credits are added to your balance like any top-up, normally within minutes. `transaction_id` is the payment |
 | `skipped` | The chain skipped the spend, for example because the gamma was moved away (`skip_reason`). Nothing was spent or credited |
-| `failed` | Never spent. Nothing was credited |
+| `failed` | Never spent. Nothing was credited, and nothing will be: you can convert again |
 
 You are credited only once the spend is in a finalized block, and never twice. The conversion's `reference` is repeated in the chain's `GammaSpent` event, so you can match the spend on chain.
 
@@ -146,6 +144,7 @@ The gamma routes answer their errors as `{"code": "…", "detail": "…"}`. A mi
 |---|---|---|
 | 400 | `invalid_amount` | Send a positive number of gamma with at most 9 decimals |
 | 400 | `amount_too_low`, `amount_too_high` | Convert at least 0.1 and at most 10,000 gamma |
+| 400 | `invalid_body` | Send a JSON object as the body |
 | 400 | `invalid_hotkey` | Send the hotkey as an SS58 address |
 | 400 | `invalid_challenge`, `challenge_expired` | Ask for a new challenge; each works once, for 5 minutes |
 | 400 | `invalid_signature` | Sign the exact `message` with the hotkey's sr25519 key, as `0x` and 128 hex digits |
@@ -158,6 +157,6 @@ The gamma routes answer their errors as `{"code": "…", "detail": "…"}`. A mi
 | 503 | `oracle_deviation`, `oracle_unavailable`, `price_unavailable`, `chain_unavailable`, `unavailable` | Try again later |
 | 400 | `gamma_personal_only` | Gamma pays for your own account only: drop the `X-Hippius-Account` (unless it names your own account), `X-Hippius-Project` and `X-Hippius-Billing` headers. To fund a shared account, its owner converts with their own token |
 | 404 | `gamma_unavailable` | Gamma payments are not enabled yet |
-| 404 | `gamma_hotkey_not_found` | The hotkey is not linked to your account (`hipc billing gamma get` lists yours) |
+| 404 | `gamma_hotkey_not_found` | The hotkey is not linked to your account (`GET /api/billing/gamma/` lists yours) |
 | 404 | `gamma_conversion_not_found` | No such conversion on your account |
 | 404 | `gamma_page_not_found` | The page is past the end of the list |
