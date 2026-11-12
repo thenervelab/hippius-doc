@@ -1,56 +1,37 @@
 ---
 id: commands
-title: hipc command reference
-sidebar_label: Command reference
+title: Finding a command
+sidebar_label: Finding a command
 slug: /cli/commands
-description: Where the hipc command reference lives, how it is generated from the binary, and how to read a command's help and the machine-readable schema.
+description: There is no command list to read on this site. The installed hipc answers for its own version, with --help at every level and hipc schema for a path.
 ---
 
-The reference is the help. Every page of `hipc --help`, the top level, each group, and each command, is rendered into one Markdown file in the repository, [docs/commands.md](https://github.com/thenervelab/hippius-cli/blob/main/docs/commands.md), by a script that runs the built binary. A test fails while the page differs from the binary, so what you read there is what the installed version says. It is not copied here, so there is one source of truth.
+These docs don't list `hipc` commands or their flags. The installed binary describes itself, for its own version, so ask it.
 
-## Read it from the binary
+## Walk the help
 
-The installed version is the one that answers. Three ways in:
-
-```bash
-hipc --help                      # the groups, the global options, the exit codes
-hipc s3 --help                   # one group
-hipc s3 buckets create --help    # one command: what it sends, what it refuses, examples
-```
-
-For a program, `hipc schema` is the same tree as JSON: every command with its `effect`, `confirmation`, `reveal`, `pagination`, `guards`, `args`, and `flags`, the global options once, and every error code with its exit code. It is JSON in every mode and never touches the network. Followed by a command path, such as `hipc schema compute vms` or `hipc schema s3 buckets create`, it lists only the commands under that path, in a document of the same shape.
+The grammar is service, then resource, then verb, as in `hipc compute vms list`. Each help page lists what it holds, one line each, and ends with examples you can run:
 
 ```bash
-hipc schema | jq -r '.commands[] | .path | join(" ")'
-hipc schema compute vms | jq -r '.commands[] | .path | join(" ")'
-hipc schema s3 buckets create | jq '.commands[0]'
-hipc schema | jq '.errors'
+hipc --help                       # the services, the global options, the exit codes
+hipc s3 --help                    # the resources of one service
+hipc s3 buckets --help            # the verbs of one resource
+hipc s3 buckets create --help     # one command: what it sends, reads first, refuses; examples
 ```
 
-## The groups, in short
+A help line that ends in "needs --yes" spends, deletes, or can't be undone. The global options are listed only in `hipc --help`; they work after any command.
 
-One line per top-level command; `hipc --help` has the binary's own words.
+A wrong name is cheap: it exits 2 `usage`, sends nothing, and the message lists the names that exist at that level.
 
-| Command | What it holds |
-| --- | --- |
-| `hipc version` | The version; does not touch the network |
-| `hipc status` | The state of each product for the signed-in user: Hub, Drive, S3, and compute |
-| `hipc schema` | Every command with its effect, or only the commands under a path, as JSON in every output mode |
-| `hipc completions` | A shell completion script for bash, zsh, fish, elvish, or powershell |
-| `hipc auth` | Store, check, or remove the console API token |
-| `hipc account` | The accounts the token can act in, members, invites, projects and their budgets, quotas, and transfers, billing accounts, and referral links |
-| `hipc billing` | The balance, compute burn rate and usage, every plan in one view, transactions, invoices, the billing profile, auto-reload, and top-ups |
-| `hipc drive` | Drive plans and the Drive subscription |
-| `hipc s3` | S3 plans, buckets, their objects' listing and presigned URLs, tokens, and an AWS CLI profile for s3.hippius.com |
-| `hipc hub` | Hub plans, the Hub subscription, the registry namespace (public or private) and its robot login, its usage, repositories, artifacts, models, audit events, and CI keys |
-| `hipc compute` | Virtual machines, their catalog and quota, public IPv4 and firewall, backups, SSH keys, App Engine (check and fix a compose file, launch and read apps, their runtime report), managed databases, Kubernetes, and GitHub Actions runners |
-| `hipc cdn` | CDN zones that serve an S3 bucket, their spend cap, custom hostnames, cache purges, cache rules, traffic, and WAF |
-| `hipc support` | Support tickets: open one, list them, read one, reply, read its messages, and close it |
-| `hipc network` | The account's private network: create it, its peers, groups, access policies, and VPC networks |
-| `hipc api` | Any console API endpoint, with the same token, account rules, confirmations, and error object |
+## Ask the schema
 
-## How a help page reads
+`hipc schema` is the same tree as JSON, with no network call. The whole document is about 190 KB, so pass a path to keep it small:
 
-The first line says what the command does and, when it needs one, the flag it needs: `Create a bucket; needs --yes`. The paragraph under it says what the command sends, what it reads first, and what it refuses. Then the usage line, the arguments, the command's own options, and the examples, each one a line you can run. Every page but `hipc --help` ends with `Global options: see hipc --help`: the global options work after any command, and only the root help (and `global_flags` in `hipc schema`) lists them.
+```bash
+hipc schema s3 buckets | jq -r '.commands[] | .path | join(" ")'
+hipc schema s3 buckets create | jq '.commands[0] | {about, effect, confirmation}'
+```
 
-Three things hold on every page: a command that spends, deletes, revokes, rotates, or cancels needs `--yes` outside a terminal; a command whose answer holds a secret needs `--reveal`, or `--secret-file` or `--credentials-dir`, which count as the reveal and write the secret to private files instead; and `--dry-run` prints the requests a real run would send, sends nothing, and exits 0. [hipc for agents](/cli/agents) has the rest of the contract.
+Each command carries its `effect` (`read_only`, `idempotent`, or `non_idempotent`), `confirmation`, `guards`, `args`, and `flags`. The document also holds `global_flags` and `errors`, every error code with its exit code.
+
+[hipc for agents](/cli/agents) has the rest: the dry-run and `--yes` loop, the output and error contract, and the safety rules.

@@ -73,6 +73,6 @@ hipc s3 buckets create photos --dry-run
 
 ## Next
 
-- [For agents](/cli/agents): the JSON and error contract, written to paste into an agent's context. Start with `hipc schema`.
+- [For agents](/cli/agents): the one page a coding agent reads first: how to find a command, the dry-run and `--yes` loop, the JSON and error contract, and the safety rules.
 - [Examples](/cli/examples): twelve journeys as copyable snippets.
-- [Command reference](/cli/commands): every `--help` page.
+- [Finding a command](/cli/commands): `--help` at every level, and `hipc schema` for a path.
