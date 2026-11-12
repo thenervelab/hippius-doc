@@ -47,7 +47,7 @@ Check it with `hipc version`.
 
 ## Log in
 
-Sign in at [console.hippius.com](https://console.hippius.com) with Google, GitHub, or Apple and copy your API token from [Settings](https://console.hippius.com/dashboard/settings). If you sign in with a 12-word access key, Settings shows no token: run `hipc auth login --access-key`, which asks for the 12 words at a prompt that doesn't show them, signs in and stores only the token. A phrase the API has not seen opens a new, empty account, and so does one mistyped word: when the verify answers `is_new`, `hipc auth login` exits 2 and stores no token, but the server has already opened that empty account. Pass `--new-account` when a new account is meant. A later login with the same words logs in to the account the server opened. `--access-key-file <path|->` reads the words from a file of mode 0600 or stdin, and the [access-key sign-in API](/use/wallet-login) is the alternative for an app. With a token:
+Sign in at [console.hippius.com](https://console.hippius.com) with Google, GitHub, or Apple and copy your API token from [Settings](https://console.hippius.com/dashboard/settings). If you sign in with a 12-word access key, Settings shows no token: get one from the [access-key sign-in](/use/wallet-login). `hipc` never takes the 12 words. Then:
 
 ```bash
 hipc auth login                   # at a terminal: paste the token at the prompt; it is not shown
