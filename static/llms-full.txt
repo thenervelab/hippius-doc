@@ -104,11 +104,11 @@ Five top-up methods, on Billing:
 - TAO, from a connected wallet or by sending to the TAO deposit address (Manually tab). At least $20 per transfer. Never send TAO to the Hippius account address (Wallet → Receive): it is not credited. A transfer cannot be reversed.
 - hAlpha, the Hippius native token, on the Hippius tab. Credits = hAlpha × the on-chain hAlpha price. Slippage protection 1% by default. Final on chain, no refund. Not invoiced.
 
-`hipc billing top-up` starts a card or Bitcoin top-up and prints the checkout URL a person pays. When the account is custodial (the API signs its buys; `hipc billing native-quote` says so), it also converts hAlpha into credits on chain: at least 0.01 hAlpha, and it cannot be undone. An account that signs its own buys (`custodial` false, such as an access-key account) buys hAlpha in the console, or an agent that holds its key signs the buy itself, as below. USDC and TAO stay in the console: those are browser wallet steps a person approves.
+`hipc billing top-up` starts a card or Bitcoin top-up and prints the checkout URL a person pays. When the account is custodial (the API signs its buys; `hipc billing native-quote` says so), it also converts hAlpha into credits on chain: at least 0.01 hAlpha, and it cannot be undone. An account that signs its own buys (`custodial` false, such as an access-key account) converts hAlpha into credits in the console, or an agent that holds its key signs `Marketplace.buy_credits` itself, as below. Getting hAlpha from subnet 75 Alpha is the bridge: https://docs.hippius.com/use/console/fund-with-alpha. USDC and TAO stay in the console: those are browser wallet steps a person approves.
 
 An access-key account buys that balance by signing Marketplace.buy_credits on wss://rpc.hippius.network. Read GET https://api.hippius.com/api/billing/native/quote/ first. Credits minted are alpha_amount * alpha_price / 10^18, rounded down. One credit is one dollar. Set min_credits to floor(credits * 9900 / 10000). Leave the referral code unset. The quote's min_alpha is the smallest buy the API accepts. The chain floor is 0.01 hAlpha. POST https://api.hippius.com/api/billing/native/buy/ is for an account whose key the API holds, and returns 409 self_sign for an access-key account. https://docs.hippius.com/use/console/fund-with-alpha
 
-An agent with enough balance subscribes without a browser. Do not send a funded agent to Stripe Checkout. With hipc: `hipc drive subscription` and `hipc s3 subscription` subscribe an account on Free or no plan, and change a paid plan to another. Run each with `--dry-run` first, and ask the user before the `--yes`.
+An agent with enough balance subscribes without a browser. Do not send a funded agent to Stripe Checkout. With hipc: `hipc drive subscription` and `hipc s3 subscription` subscribe an account on Free or no plan, and change a paid plan to another; `hipc hub subscription` buys or cancels a Hub plan (Hub has no plan change: cancel, then subscribe). Run each with `--dry-run` first, and ask the user before the `--yes`.
 
 Drive (codes `solo` Starter, `duo` Plus, `max`, `scale`; Free needs no subscribe):
 
@@ -155,7 +155,7 @@ An agent cannot create a Google, GitHub or Apple account or approve a browser lo
 Instructions for agents:
 
 - If you can run commands, install `hipc` and use it instead of calling https://api.hippius.com directly.
-- The user runs `hipc auth login` in their own terminal. Never ask for the API token, a 12-word key, or a password in the chat.
+- The user runs `hipc auth login` in their own terminal. Never ask for the API token, a 12-word key, or a password in the chat. An agent that holds its own 12-word access key signs in itself instead (Authentication, below) and stores the returned token with `hipc auth login` the same way.
 - Read https://docs.hippius.com/cli/agents once before the first command (raw Markdown: https://raw.githubusercontent.com/thenervelab/hippius-cli/main/docs/agents.md). Topic pages, read only when a task needs one: https://docs.hippius.com/cli/agents/accounts, https://docs.hippius.com/cli/agents/secrets, https://docs.hippius.com/cli/agents/hub, https://docs.hippius.com/cli/agents/api
 - Find a command with `hipc --help`, one level at a time, or `hipc schema <path>`, such as `hipc schema s3 buckets` (the whole schema is about 190 KB; pass a path). Don't recall flags from memory or from a web page: the installed binary is the reference for its own version.
 - Run every write with `--dry-run` first, and ask the user before adding `--yes`.
@@ -188,7 +188,7 @@ The package name `hippius-drive` is not on PyPI. Python 3.10 to 3.13.
 
 ```bash
 pip install "git+https://github.com/thenervelab/hippius-drive-sdk"
-export HIPPIUS_TOKEN=...            # console Settings
+export HIPPIUS_TOKEN=...            # console Settings, or the access-key sign-in
 export HIPPIUS_ACCOUNT_SS58=...     # the account that token belongs to
 export HIPPIUS_PASSWORD=...         # unlock password. Prompted on a terminal. Required when there is no terminal.
 hippius-drive init --mnemonic "$RECOVERY_PHRASE"
@@ -207,7 +207,7 @@ A token and an address that do not belong together fail `whoami` with 403. Leave
 
 ### Console
 
-The console CLI is `hipc` (above). Sign-in and card checkout stay in https://console.hippius.com. An agent that holds the key signs the hAlpha buy and the bridge: https://docs.hippius.com/use/console/fund-with-alpha. Without hipc, call https://api.hippius.com with `Authorization: Token <token>`.
+The console CLI is `hipc` (above). Google, GitHub and Apple sign-in and card checkout stay in https://console.hippius.com; access-key sign-in is an API call (Authentication). An agent that holds the key signs the hAlpha buy and the bridge: https://docs.hippius.com/use/console/fund-with-alpha. Without hipc, call https://api.hippius.com with `Authorization: Token <token>`.
 
 ```bash
 curl -sS -H "Authorization: Token $HIPPIUS_TOKEN" https://api.hippius.com/api/billing/credits/balance/
@@ -680,7 +680,8 @@ Prefer `hipc` (Tools an agent can run); the raw routes below are for a client th
 Docs: https://docs.hippius.com/use/api
 Full OpenAPI spec: https://api.hippius.com/openapi.json
 
-Auth: account API token from https://console.hippius.com/dashboard/settings
+Auth: account API token from https://console.hippius.com/dashboard/settings (Google, GitHub or Apple sign-in) or from the access-key sign-in below
+Send your own User-Agent: some default ones (Python urllib) are blocked with 403 error 1010.
 Header: Authorization: Token <token>
 Browser OAuth handoff, not the agent path: POST https://api.hippius.com/api/auth/exchange/ with JSON {"code": "..."}
 
