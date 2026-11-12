@@ -28,4 +28,4 @@ Read this when the user mentions Hippius Hub, a container registry namespace, or
 | `subscribe PLAN` | `hipc hub subscription subscribe --plan Builder --yes` |
 | `subscriptions` | `hipc hub subscription get` |
 
-The keys the console calls CI keys are the keys group, as in `hipc hub keys list`. Creating a namespace needs a positive balance. A second paid plan needs `--replace`.
+The keys the console calls CI keys are the keys group, as in `hipc hub keys list`. Creating a namespace needs a positive balance, and a new namespace is public: anyone can pull until `hipc hub namespace update --visibility private --yes`. Subscribing while a paid plan is active needs `--replace`, which cancels the active paid plans first. To push images, pass a key's secret file to `docker login --password-stdin`; `hippius-hub` ignores `HIPPIUS_TOKEN` for registry calls.

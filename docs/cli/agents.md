@@ -42,30 +42,30 @@ A wrong guess is cheap: an unknown name exits 2 `usage`, and the message lists t
 hipc schema s3 buckets create | jq '.commands[0] | {about, effect, confirmation}'
 hipc s3 buckets create photos --dry-run
 hipc s3 buckets create photos --yes
-hipc s3 buckets list | jq -r '.items[].name'
+hipc s3 buckets list | jq -r '.items[].bucket_name'
 ```
 
 ## Output
 
-- When stdout is not a terminal, or `AI_AGENT` or `CI` is set, output is JSON. `--json` forces it.
+- Output is JSON when stdout is not a terminal, when `CI` is set, or when `AI_AGENT` is set to anything but empty, `0`, `false`, `no`, or `off`. `--json` forces it.
 - Success is exit 0, and stdout is the resource itself, with no wrapper. A list is `{"items":[...],"next_page_token":null}`; pass `--page-token` to get the next page, or `--all` for every page as one array.
 - Fields are only added. Ignore the ones you don't know.
 - `next_step`, when present, is the `hipc` command to run after the user finishes something in a browser, such as a card checkout.
-- Billing amounts in JSON are base units (`10^18` is $1) unless the field says dollars.
+- Money units differ by command: `hipc billing summary` and `hipc billing usage` give base units (`10^18` is $1), while a balance and the `--amount` of a top-up are dollars. Each command's `--help` names its unit.
 - `warnings`, when present, holds texts the user should see.
 
 ## Errors
 
-A failure prints one JSON object as the last line of stderr: `{"error":{"code","message","hint","retryable","side_effects","details",...}}`. Branch on `code`, never on `message`, and follow the `hint`: it names the command or flag that fixes the problem. `hipc schema` lists every code under `errors`.
+A failure prints one JSON object as the last line of stderr: `{"error":{"code","message","hint","retryable","side_effects","details",...}}`. Branch on `code`, never on `message`, and follow the `hint`: it names the command or flag that fixes the problem. The table has the codes met most; `hipc schema` lists every one under `errors`.
 
 | Exit | Codes | What to do |
 | --- | --- | --- |
 | 2 | `usage` | Fix the command line. Nothing was sent. |
 | 2 | `confirmation_required` | Nothing was sent. Ask the user, then add `--yes`. |
-| 2 | `reveal_required`, `public_required`, `remove_others_required`, `replace_required` | A second risk needs its own flag. See below. |
+| 2 | `reveal_required`, `public_required`, `remove_others_required`, `replace_required`, `change_isolation_required` | A second risk needs its own flag. See below. |
 | 2 | `account_scope_unsupported`, `project_scope_unsupported`, `billing_scope_unsupported` | This command can't act in the selected account, project, or billing account. Drop that selector. |
-| 1 | `auth` | No token. The user runs `hipc auth login` in their own terminal. |
-| 1 | `not_found`, `conflict`, `validation`, `permission`, `payment_required` | The server refused. `details` holds its answer. |
+| 1 | `auth` | No token for this API origin, or a 401. Follow the hint; for no token, the user runs `hipc auth login` in their own terminal. |
+| 1 | `not_found`, `conflict`, `validation`, `permission`, `payment_required`, and the membership codes such as `owner_only` | The server refused. `details` holds its answer. |
 | 1 | `rate_limited`, `unavailable`, `timeout` | Retry only if `retryable` is true, after `retry_after_ms`. |
 | 1 | `partial_failure`, `internal` | Read stdout and `side_effects` first. |
 
@@ -73,12 +73,13 @@ When a failed command still printed a document on stdout, keep it: it is what wa
 
 ## Safety rules
 
-- **The user signs in, not you.** `hipc auth login` asks for an API token at a hidden prompt, in the user's own terminal. Never ask for the token, a 12-word access key, a seed phrase, or a password in the chat, and never put one on a command line. `hipc` refuses a command line that holds one. In CI, the token is the runner's `HIPPIUS_TOKEN` secret.
+- **The user signs in, not you.** `hipc auth login` asks for an API token at a hidden prompt, in the user's own terminal. Never ask for the token, a 12-word access key, a seed phrase, or a password in the chat, and never put one on a command line, where it lands in the shell history. `hipc` refuses a seed phrase, and a token it already holds, on its command line; don't rely on that. In CI, the token is the runner's `HIPPIUS_TOKEN` secret.
 - **Second flags name a second risk.** `--yes` doesn't imply them:
   - `--reveal` prints a one-time secret;
   - `--public` may make a bucket or a namespace readable by anyone;
   - `--remove-others` lets a list replace drop entries that exist now;
-  - `--replace` replaces a paid plan.
+  - `--replace` replaces a paid plan;
+  - `--change-isolation`, on `hipc api` only, changes which network peers can reach each other.
 
   Pass one only when the user asked for exactly that.
 - **Keep secrets out of the transcript.** Commands that issue a secret take `--secret-file` or `--credentials-dir`, which write it to new private files and print their paths instead. Prefer those over `--reveal`. A secret is shown once; the recovery is a rotate. See [secrets](/cli/agents/secrets).
@@ -94,7 +95,7 @@ hipc account list                                      # the accounts this token
 hipc billing balance
 hipc billing top-up --amount 25 --method card --dry-run
 hipc drive subscription get
-hipc s3 tokens create --kind sub --bucket photos --action read --secret-file s3.secret --yes
+hipc s3 tokens create --kind sub --bucket photos --action read --secret-file s3.secret --yes > token.json
 hipc s3 configure --from-token-file token.json --aws-profile hippius
 hipc hub keys create --name ci --role push --secret-file ci.secret --yes
 hipc compute vms create --flavor small --ssh-key-id 123 --open-ssh --dry-run
@@ -106,6 +107,8 @@ hipc support tickets list
 `hipc api GET /accounts/` calls a console route that no command covers yet, with the same token, confirmations, and errors. Prefer a command when one exists. See [hipc api](/cli/agents/api).
 
 ## Read on only when the task needs it
+
+- The product guides at https://docs.hippius.com explain each service with step-by-step recipes (S3, CDN, compute, Hub); its index for agents is https://docs.hippius.com/llms.txt.
 
 - [Accounts, projects, and billing accounts](/cli/agents/accounts): acting in a shared account or a project, and the `*_scope_unsupported` refusals.
 - [Secrets](/cli/agents/secrets): S3 and Hub keys, database credentials, and DNS and App Engine secrets.

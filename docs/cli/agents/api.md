@@ -18,7 +18,7 @@ hipc api POST /cdn/zones/ --body-file zone.json --dry-run
 
 What it asks for:
 
-- Every method other than `GET` and `HEAD` needs `--yes`.
+- Every method other than `GET` and `HEAD` needs `--yes`, and so does a `GET` or `HEAD` of `/network/me/`, which may create the account's network.
 - A route whose answer holds a secret needs `--reveal`. So does a `GET` of a route `hipc` doesn't know, since its answer may hold one.
 - A guarded write needs the same flag as its command, whatever the method or the path's letter case: `--public`, `--remove-others`, or `--change-isolation` for a change to which network peers can reach each other.
 - `--dry-run` works as everywhere.
