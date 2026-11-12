@@ -175,7 +175,7 @@ hipc support tickets create --subject 'VM will not start' --body-file ~/ticket.t
 
 ## 11. Agent and automation
 
-A program learns `hipc` from its schema, reads JSON, and branches on error codes. Full playbook: [For agents](/cli/agents).
+A program finds a command with `--help` or `hipc schema <path>`, reads JSON, and branches on error codes. The whole schema is about 190 KB, so filter it, as below, before it reaches a context. Full playbook: [For agents](/cli/agents).
 
 ```bash
 hipc schema | jq -r '.commands[] | select(.effect != "read_only") | .path | join(" ")'
