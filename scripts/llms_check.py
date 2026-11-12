@@ -20,7 +20,10 @@ URL_RE = re.compile(r"https://[^\s)>\]]+")
 
 ROOT_FACTS = (
     "(https://docs.hippius.com/cli)",
-    "hipc auth login --token-file -",
+    "## Instructions for agents",
+    "hipc auth login",
+    "https://docs.hippius.com/cli/agents",
+    "hipc --help",
     "hipc schema",
     "https://s3.hippius.com",
     "hip_",
@@ -46,7 +49,8 @@ ROOT_FACTS = (
     "https://www.linkedin.com/company/hippius",
 )
 
-ROOT_FORBIDDEN = ("eu-central-1", "us-east-1.hippius.com")
+# hipc 0.16.0 removed the access-key login; the index must not send an agent to it.
+ROOT_FORBIDDEN = ("eu-central-1", "us-east-1.hippius.com", "--access-key", "--new-account")
 
 # Facts that must stay in the leaf file once it is on the default branch.
 LEAF_FACTS = {
