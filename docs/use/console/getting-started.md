@@ -3,7 +3,7 @@ id: getting-started
 title: Getting Started
 sidebar_label: Getting Started
 slug: /use/console/getting-started
-description: Sign in to the Hippius Console with Google, GitHub, Apple or an access key, choose your mode, and find Drive, S3, Hub and Billing in the sidebar.
+description: Sign in to the Hippius Console with Google, GitHub, Apple or an access key, choose your mode, and find Drive, Object Storage, Hub and Billing in the sidebar.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -29,7 +29,7 @@ Go to [console.hippius.com](https://console.hippius.com) and choose how you want
 
 <Unordered>
   <li><strong>Google, GitHub, or Apple</strong>: click the button and you'll be taken to that provider's login page, then brought back to the console automatically.</li>
-  <li><strong>Access Key</strong>: enter your <strong>12-word recovery phrase</strong> and click <BgStyledText>Log In</BgStyledText>. Use the eye icon to show or hide the words as you type. This creates a wallet-only account. It has no real email address, so it gets no lifecycle mail. Drive has no free plan on that account: subscribe before the first upload. S3 and Hub work the same as on any other account.</li>
+  <li><strong>Access Key</strong>: enter your <strong>12-word recovery phrase</strong> and click <BgStyledText>Log In</BgStyledText>. Use the eye icon to show or hide the words as you type. This creates a wallet-only account. It has no real email address, so it gets no lifecycle mail. Drive has no free plan on that account: subscribe before the first upload. Object Storage and Hub work the same as on any other account.</li>
 </Unordered>
 
 If this is your first time signing in, your account is created automatically. There is no separate sign up step.
@@ -46,7 +46,7 @@ The first time you sign in, a screen titled **Choose your mode** asks you to pic
 
 **I just want the basics.** (Normal) gives you a clean, focused dashboard. You'll see your most recent file uploads, your current balance, and your storage usage. It's ideal if you're just getting started or mainly use Hippius for personal file storage.
 
-**I'm a pro.** (Pro) expands the dashboard to show your Drive and S3 sections side by side, along with detailed storage and balance charts. It's the better choice if you're actively managing multiple services and want everything at a glance.
+**I'm a pro.** (Pro) expands the dashboard to show your Drive and Object Storage sections side by side, along with detailed storage and balance charts. It's the better choice if you're actively managing multiple services and want everything at a glance.
 
 You can switch between Normal and Pro at any time from [Settings](/use/console/settings).
 
@@ -60,7 +60,7 @@ The **sidebar on the left** is how you move between sections. It's organised int
   <li><strong>Overview</strong>: your <a href="/use/console/overview">home page</a>.</li>
   <li><strong>Infrastructure</strong>, with one entry per product:
   <strong>Drive</strong> (My Drives for your encrypted files, Shared Drives, and Captures, where your <a href="/use/captures">screenshots and recordings</a> live),
-  <strong>S3</strong> (S3 Buckets and S3 Migrations),
+  <strong>Object Storage</strong> (Buckets and Migrations),
   <strong>CDN</strong> (shown only to accounts in the CDN beta),
   <strong>Confidential Computing</strong> (Virtual Machines, Compute Usage, Databases, Kubernetes and Runners)
   and <strong>Hub</strong> (your container images and AI models).</li>
@@ -83,6 +83,6 @@ The console automatically follows your system's dark or light mode. If you'd pre
   <li><a href="/use/console/overview">Overview</a>: a tour of your dashboard home page.</li>
   <li><a href="/use/console/billing">Billing</a>: pick a plan and top up your balance. Accounts signed in with an access key need a Drive plan before they can upload.</li>
   <li><a href="/use/console/drive">Drive</a>: upload and manage your personal encrypted files.</li>
-  <li><a href="/use/console/s3">S3 Buckets</a>: set up S3 compatible storage and manage access tokens.</li>
+  <li><a href="/use/console/s3">Object Storage</a>: set up S3 compatible storage and manage access tokens.</li>
   <li><a href="/cli">Command line</a>: copy your API token from <a href="/use/console/settings">Settings</a>, install <code>hipc</code>, then run <code>hipc auth login --token-file -</code> once, and drive the whole account from a terminal or a coding agent.</li>
 </Unordered>

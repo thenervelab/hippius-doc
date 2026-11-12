@@ -29,7 +29,7 @@ export const CATEGORIES: (SmallCardInfo & {
   },
   {
     title: "Use",
-    description: "Drive, S3 Compatible, CDN, Hub and Confidential Compute, from the console, desktop and mobile apps.",
+    description: "Drive, Object Storage, CDN, Hub and Confidential Compute, from the console, desktop and mobile apps.",
     icon: <Icons.Cursor className="text-primary-50 relative size-6" />,
     cta: {
       label: "Use",
@@ -72,7 +72,7 @@ export const SMARTER_CLOUD: SmallCardInfo[] = [
   {
     title: "Encrypted",
     description:
-      "Drive encrypts on your device, only you hold the key. S3 encrypts at rest, every chunk under its own key. Hub keeps private repositories private.",
+      "Drive encrypts on your device, only you hold the key. Object Storage encrypts at rest, every chunk under its own key. Hub keeps private repositories private.",
     icon: <Icons.SheildTick className="text-primary-50 relative size-7" />,
   },
 ];
@@ -89,7 +89,7 @@ export const PRODUCTS: (SmallCardInfo & {
     cta: { label: "Store your first file", href: "/use/drive" },
   },
   {
-    title: "S3 Compatible",
+    title: "Object Storage",
     description:
       "Any S3 client, endpoint s3.hippius.com, no egress fees. Migrate from any S3 provider in one click.",
     icon: <Icons.Strongbox className="text-primary-50 relative size-7" />,
@@ -371,7 +371,7 @@ function HomepageFeatures() {
 
 export default function Home(): ReactNode {
   return (
-    <Layout description="Hippius docs: Drive, S3 Compatible, CDN, Hub and Confidential Compute, one account and one balance.">
+    <Layout description="Hippius docs: Drive, Object Storage, CDN, Hub and Confidential Compute, one account and one balance.">
       <main>
         <HomepageHeader />
         <HomepageFeatures />

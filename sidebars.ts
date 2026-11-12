@@ -77,7 +77,7 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "category",
-          label: "S3 Storage",
+          label: "Object Storage",
           collapsed: true,
           items: [
             "use/quickstart",
@@ -186,6 +186,7 @@ const sidebars: SidebarsConfig = {
             "use/console/virtual-machines",
             "use/console/hub",
             "use/console/billing",
+            "use/console/fund-with-alpha",
             "use/console/wallet",
             "use/console/staking",
             "use/console/bridge",
@@ -334,6 +335,7 @@ const sidebars: SidebarsConfig = {
         "use/hippius-api",
         "use/api-prices",
         "use/wallet-login",
+        "use/pay-with-gamma",
         "blockchain/api",
         {
           type: "category",

@@ -7,7 +7,7 @@ slug: /storage/s3/python
 
 # Python
 
-Two libraries work well with Hippius S3: **boto3** (AWS SDK) and **minio** (MinIO SDK). Both are fully supported.
+Two libraries work well with Hippius Object Storage: **boto3** (AWS SDK) and **minio** (MinIO SDK). Both are fully supported.
 
 Connection details: [Getting Started](/use/quickstart#connection-details). Presigned PUT, ACLs, public buckets, and sub-tokens: [Advanced Usage](/storage/s3/advanced).
 

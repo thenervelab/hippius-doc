@@ -3,7 +3,7 @@ id: api-prices
 title: Public Price API
 sidebar_label: Public Price API
 slug: /use/api-prices
-description: Read Hippius compute, CDN, S3, Drive and Hub prices from the API without an account.
+description: Read Hippius compute, CDN, Object Storage, Drive and Hub prices from the API without an account.
 ---
 
 import Unordered from '@site/src/components/Unordered';
@@ -21,7 +21,7 @@ All are `GET` on `https://api.hippius.com`, with no authentication.
 | `/api/compute/public-prices/` | Everything compute sells: VM sizes per disk tier, dedicated disks and their free stock per region, public IPv4, backups, managed database and Kubernetes fees, runners per tier, bandwidth | Credits, decimal strings |
 | `/api/compute/flavors/` | VM sizes with their monthly price on NVMe | Credits, numbers |
 | `/api/cdn/prices/` | CDN egress per region, requests, custom domains | Base units, strings |
-| `/api/s3/plans/` | S3 plans and the pay-as-you-go rate | Credits, numbers |
+| `/api/s3/plans/` | Object Storage plans and the pay-as-you-go rate | Credits, numbers |
 | `/api/drive/plans/` | Drive plans, monthly and annual | Credits, numbers |
 | `/api/registry/plans/` | Hub plans, with the `id` that subscribing needs | Credits, numbers |
 
@@ -112,7 +112,7 @@ The anonymous responses carry `Cache-Control: public` and `Vary: Authorization`.
 `/api/compute/public-prices/`, `/api/compute/flavors/` and `/api/cdn/prices/` allow 300 anonymous requests per minute per client address. Past that they answer `429` with a `Retry-After` header. `/api/cdn/prices/` answers `503` while the CDN is switched off.
 
 :::note Signed-in callers
-The compute price list, the CDN prices, the S3 plans and the Hub plans ignore any `Authorization` header: everyone gets the same body. `/api/compute/flavors/` and `/api/drive/plans/` answer a signed-in caller for that account, without the cache headers: the flavors add `default_image`, and the Free Drive plan shows `available: false` for an account made with an access key.
+The compute price list, the CDN prices, the Object Storage plans and the Hub plans ignore any `Authorization` header: everyone gets the same body. `/api/compute/flavors/` and `/api/drive/plans/` answer a signed-in caller for that account, without the cache headers: the flavors add `default_image`, and the Free Drive plan shows `available: false` for an account made with an access key.
 :::
 
 ## Related

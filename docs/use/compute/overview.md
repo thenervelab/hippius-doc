@@ -21,7 +21,7 @@ Everything lives in the console under **Confidential Computing** in the sidebar.
 | Product | What it is | Guide |
 |---|---|---|
 | **Virtual Machines** | Linux VMs you reach over SSH, from a list of distributions or ready-made applications. | [Virtual machines](/use/virtual-machines) |
-| **Databases** | Managed PostgreSQL 16, 17 or 18, on one or three instances, backed up to your own S3. | [Managed PostgreSQL](/use/compute/databases) |
+| **Databases** | Managed PostgreSQL 16, 17 or 18, on one or three instances, backed up to your own Object Storage. | [Managed PostgreSQL](/use/compute/databases) |
 | **Kubernetes** | Managed Kubernetes (RKE2) with three confidential control-plane nodes and worker pools. | [Managed Kubernetes](/use/compute/kubernetes) |
 | **Runners** | Single-use VMs for your GitHub Actions jobs. | [GitHub Actions runners](/use/compute/runners) |
 | **Compute Usage** | What your compute costs, hour by hour, and the current price list. | [Billing and quotas](/use/compute/billing) |

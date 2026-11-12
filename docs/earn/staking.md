@@ -81,7 +81,7 @@ Use the [Token Bridge](/use/bridge) to move between the two.
 ## FAQ
 
 **Can I stake and store files with the same account?**
-Yes. Your staking wallet and your S3 access keys are separate — staking uses your on-chain account, S3 uses `hip_*` keys.
+Yes. Your staking wallet and your S3 access keys are separate — staking uses your on-chain account, Object Storage uses `hip_*` keys.
 
 **What happens if my nominated validator goes offline?**
 Your stake is not slashed for validator downtime on Hippius (unlike some other chains). You can re-nominate at any time.

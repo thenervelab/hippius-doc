@@ -837,7 +837,10 @@ Retrieves all referral codes owned by a specific account.
 
 #### Description
 
-Retrieves all batches associated with a specific user account.
+Retrieves the batches associated with a specific user account that can still
+pay or still release alpha. Fully spent batches (no remaining credits, no
+remaining alpha, and no pending alpha) are no longer returned; use
+[`get_batch_by_id`](#26-get_batch_by_id) to look one of those up by id.
 
 #### Parameters
 

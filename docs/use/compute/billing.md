@@ -87,7 +87,7 @@ Some examples:
 | **VM backups** | Per GB of backup storage per hour, $6 per TB-month: each full backup at the disk's full size, each incremental at what changed, and older chains for 7 days. See [VM backups](/use/compute/vm-backups#what-backups-cost). |
 | **Databases** | Their VMs, like any VM, plus the [management fee](#management-fees). |
 | **Kubernetes clusters** | Their masters, workers and the masters' public IPv4, like any VM, plus the [management fee](#management-fees). |
-| **Database and Kubernetes backups** | As S3 storage in your account, at your S3 price. |
+| **Database and Kubernetes backups** | As Object Storage in your account, at your Object Storage price. |
 | **GitHub Actions runners** | Per second while each runner VM is billed, like any VM. See [Runners billing](/use/compute/runners#billing). |
 
 **One-minute minimum.** Each VM, and each public IPv4 address, is billed for at least one minute.

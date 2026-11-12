@@ -17,7 +17,11 @@ The Hippius Bridge allows you to transfer tokens between the Bittensor network (
 - **Alpha → hAlpha**: Lock your Alpha tokens on Bittensor and receive hAlpha on Hippius
 - **hAlpha → Alpha**: Burn your hAlpha tokens on Hippius and receive Alpha on Bittensor
 
-Bridging takes approximately 120 seconds and is processed by a distributed network of Hippius guardians.
+Bridging is processed by a distributed network of Hippius guardians. Alpha to hAlpha usually takes 3 to 10 minutes once your deposit lands on Bittensor (see [How long it takes](/use/console/fund-with-alpha#how-long-it-takes) for the measured figures).
+
+:::danger Send hAlpha on the Hippius network only
+Your Hippius address also works on Bittensor. Alpha sent to it on Bittensor stays there as stake and never reaches your Hippius balance: use the bridge instead. See [Fund Your Account with Alpha](/use/console/fund-with-alpha).
+:::
 
 ## Accessing the Bridge
 
@@ -44,7 +48,7 @@ This direction locks your Alpha tokens on the Bittensor network. Hippius guardia
 ![Bridge Tokens](/img/wallet/bridge-tokens.png)
 
 :::note
-A minimum bridge amount applies. The gas fee is shown before you confirm. The bridge process takes approximately 120 seconds.
+The smallest deposit is 15 Alpha. You pay the gas in TAO, and your wallet shows it before you confirm. Once the deposit is in a Bittensor block, the hAlpha usually arrives 3 to 10 minutes later.
 :::
 
 ## Bridging hAlpha → Alpha

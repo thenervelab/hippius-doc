@@ -3,7 +3,7 @@ id: advanced
 title: Advanced Usage
 sidebar_label: Advanced Usage
 slug: /storage/s3/advanced
-description: Presigned URLs, public buckets, ACLs, sub-tokens, and multipart uploads for Hippius S3.
+description: Presigned URLs, public buckets, ACLs, sub-tokens, and multipart uploads for Hippius Object Storage.
 ---
 
 import Unordered from '@site/src/components/Unordered';
@@ -199,7 +199,7 @@ Do not hand a master token to a backup script, a CDN, or a contractor. Create a 
 | Time limited | Vendor access that expires in a week |
 | Easy revoke | Kill that integration without rotating the master |
 
-Create them in the console: [S3 Buckets → Sub Tokens](/use/console/s3#sub-tokens). Pick **Object Read Only** or **Object Read & Write**, all buckets or specific ones, and a lifespan (Forever, 7 days, 30 days, 1 year, or a custom date). The secret is shown once.
+Create them in the console: [Object Storage → Sub Tokens](/use/console/s3#sub-tokens). Pick **Object Read Only** or **Object Read & Write**, all buckets or specific ones, and a lifespan (Forever, 7 days, 30 days, 1 year, or a custom date). The secret is shown once.
 
 Rotate issues a new Access Key ID and secret with the same permissions, and revokes the old pair. Revoke is immediate and cannot be undone.
 
@@ -338,7 +338,7 @@ Full guide: [Object Lock (WORM)](/storage/s3/object-lock).
   <li><a href="/storage/s3/compatibility">Compatibility matrix</a> — every operation and its status</li>
   <li><a href="/use/troubleshooting">Troubleshooting</a> — auth, endpoint, and upload errors</li>
   <li><a href="/storage/s3/examples/nextcloud">Nextcloud</a> and <a href="/storage/s3/examples/duplicati">Duplicati</a> — product-specific setups</li>
-  <li><a href="/use/console/s3">Console S3 Buckets</a> — manage buckets and tokens in the browser</li>
+  <li><a href="/use/console/s3">Console Object Storage</a> — manage buckets and tokens in the browser</li>
   <li><a href="/use/console/migrations">S3 Migrations</a>: copy from any S3-compatible provider</li>
   <li><a href="/use/api">Management API</a> — tokens and billing from your backend</li>
 </Unordered>

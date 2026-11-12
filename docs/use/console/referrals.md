@@ -74,7 +74,7 @@ Email addresses in that list are masked. You can see that someone signed up and 
 
 You earn **5%**, and the rate is set on chain rather than in the console.
 
-It applies to everything the people you refer pay for, both **subscriptions and hourly usage**. Someone who never buys a plan and only ever pays by the hour, on S3 for example, still earns you commission on what they spend.
+It applies to everything the people you refer pay for, both **subscriptions and hourly usage**. Someone who never buys a plan and only ever pays by the hour, on Object Storage for example, still earns you commission on what they spend.
 
 Attribution happens the moment someone signs up through your link. It is recorded then and does not change afterwards, so it stays credited to you no matter which of your links they used or how long they stay.
 

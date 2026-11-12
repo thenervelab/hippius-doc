@@ -41,7 +41,7 @@ Click <BgStyledText>+ New Ticket</BgStyledText> in the top right corner to open 
 
 <Unordered>
   <li><strong>Drive</strong> and <strong>Shared drives</strong>: uploads, downloads, encryption, sync and sharing problems.</li>
-  <li><strong>S3</strong>: buckets, tokens and S3 client errors.</li>
+  <li><strong>Object Storage</strong>: buckets, tokens and S3 client errors.</li>
   <li><strong>Hub</strong>: namespaces, pushes and pulls.</li>
   <li><strong>Credits & payments</strong> and <strong>Subscription</strong>: top ups, charges and plans.</li>
   <li><strong>Account & sign in</strong>: access to your account.</li>
@@ -113,5 +113,5 @@ For quick questions, community discussion, or contributing to open source Hippiu
 
 <Unordered>
   <li><a href="/use/console/getting-started">Getting Started</a>: signing in and navigating the console.</li>
-  <li><a href="/use/troubleshooting">S3 Troubleshooting</a>: common S3 client errors and self serve fixes.</li>
+  <li><a href="/use/troubleshooting">Object Storage Troubleshooting</a>: common S3 client errors and self serve fixes.</li>
 </Unordered>

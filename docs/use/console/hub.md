@@ -154,7 +154,7 @@ Your plan sets how much you can store and how many projects you can have. These 
 
 **Paying.** Hub plans are paid from your [account balance](/use/console/billing) and renew monthly. Paying a Hub plan by card directly is not available yet, so top up first if your balance is short, by card, Bitcoin, USDC or TAO. Subscribing takes a few seconds to confirm. If it takes longer, give it a moment and refresh rather than subscribing again. Your namespace and login stay exactly as they were.
 
-Live extras on the catalog: multi-region edge cache (EU + US), vulnerability scanning on push, audit log API on Pro and above, priority support on paid plans. Scoped CI keys already ship (`hippius-hub registry keys`). The catalog still lists "CI/CD-scoped pull tokens" as coming soon; that is a different product line.
+Live extras on the catalog: multi-region edge cache (EU + US), vulnerability scanning on push, audit log API on Pro and above, priority support on paid plans. Scoped CI keys already ship (`hippius-hub registry keys`).
 
 **Switching plans.** Hub has no one-step upgrade or downgrade. The console warns that confirming a second subscribe while a paid plan is active can create a second subscription and bill you for both. Cancel the current plan first, then subscribe to the new one. Do not subscribe twice.
 

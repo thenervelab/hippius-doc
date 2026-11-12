@@ -1,14 +1,14 @@
 ---
-title: "Example: Nextcloud with Hippius S3"
+title: "Example: Nextcloud with Hippius Object Storage"
 sidebar_label: Nextcloud
 slug: /storage/s3/examples/nextcloud
 ---
 
 import Unordered from '@site/src/components/Unordered';
 
-# Nextcloud with Hippius S3
+# Nextcloud with Hippius Object Storage
 
-Use Hippius S3 as the primary storage backend for [Nextcloud](https://nextcloud.com/).
+Use Hippius Object Storage as the primary storage backend for [Nextcloud](https://nextcloud.com/).
 
 Connection details: [Getting Started](/use/quickstart#connection-details). Always use `https://s3.hippius.com`.
 
@@ -50,10 +50,10 @@ Start it up:
 docker compose up -d
 ```
 
-Then open `http://localhost:8080`, create an admin account, and select SQLite as the database. Nextcloud will automatically use Hippius S3 for all file storage.
+Then open `http://localhost:8080`, create an admin account, and select SQLite as the database. Nextcloud will automatically use Hippius Object Storage for all file storage.
 
 :::warning use_path_style is required
-Hippius S3 does not support virtual-hosted style addressing. `OBJECTSTORE_S3_USEPATH_STYLE=true` must be set or Nextcloud will fail to connect.
+Hippius Object Storage does not support virtual-hosted style addressing. `OBJECTSTORE_S3_USEPATH_STYLE=true` must be set or Nextcloud will fail to connect.
 :::
 
 ## Verify

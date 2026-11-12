@@ -4,20 +4,20 @@
 
 This file is the long reference for the whole product.
 The short index is https://docs.hippius.com/llms.txt
-The commands an agent can run are in Tools an agent can run. S3 is written out in full after that.
+The commands an agent can run are in Tools an agent can run. Object Storage is written out in full after that.
 
 ## Table of Contents
 
-- [S3 documentation map](#s3-documentation-map)
+- [Object Storage documentation map](#object-storage-documentation-map)
 - [What is Hippius?](#what-is-hippius)
 - [Tools an agent can run](#tools-an-agent-can-run), starting with `hipc`
-- [S3 Storage — Quickstart](#s3-storage--quickstart)
-- [S3 Storage — Advanced Usage](#s3-storage--advanced-usage)
-- [S3 Storage — Python](#s3-storage--python)
-- [S3 Storage — JavaScript](#s3-storage--javascript)
-- [S3 Storage — AWS CLI](#s3-storage--aws-cli)
-- [S3 Storage — rclone](#s3-storage--rclone)
-- [S3 Storage — Compatibility](#s3-storage--compatibility)
+- [Object Storage — Quickstart](#object-storage--quickstart)
+- [Object Storage — Advanced Usage](#object-storage--advanced-usage)
+- [Object Storage — Python](#object-storage--python)
+- [Object Storage — JavaScript](#object-storage--javascript)
+- [Object Storage — AWS CLI](#object-storage--aws-cli)
+- [Object Storage — rclone](#object-storage--rclone)
+- [Object Storage — Compatibility](#object-storage--compatibility)
 - [Storage Architecture](#storage-architecture)
 - [Run a Miner](#run-a-miner)
 - [Miner CLI](#miner-cli)
@@ -26,7 +26,7 @@ The commands an agent can run are in Tools an agent can run. S3 is written out i
 
 ---
 
-## S3 documentation map
+## Object Storage documentation map
 
 Canonical docs URLs. Prefer these when linking or fetching.
 
@@ -42,7 +42,7 @@ Canonical docs URLs. Prefer these when linking or fetching.
 - Nextcloud: https://docs.hippius.com/storage/s3/examples/nextcloud
 - Duplicati: https://docs.hippius.com/storage/s3/examples/duplicati
 - Management API: https://docs.hippius.com/use/api
-- Console S3 Buckets: https://docs.hippius.com/use/console/s3
+- Console Object Storage: https://docs.hippius.com/use/console/s3
 - Console S3 Migrations: https://docs.hippius.com/use/console/migrations
 - Product index: https://docs.hippius.com/llms.txt
 
@@ -64,17 +64,17 @@ Hippius is a distributed cloud. Store encrypted files, serve objects over S3, an
 
 | Product | What an agent needs | Open |
 |---|---|---|
-| Drive | Encrypted files in the browser. Not S3. Files do not cross between them. | https://docs.hippius.com/use/drive |
+| Drive | Encrypted files in the browser. Not Object Storage. Files do not cross between them. | https://docs.hippius.com/use/drive |
 | Shared drives | A Drive someone else owns and invited you into. They pay for the storage. | https://docs.hippius.com/use/console/shared-drives |
-| S3 | S3-compatible API. Endpoint https://s3.hippius.com only. Region `decentralized`. Path-style. Access key ids start with `hip_`. | https://docs.hippius.com/use/quickstart |
+| Object Storage | S3-compatible API. Endpoint https://s3.hippius.com only. Region `decentralized`. Path-style. Access key ids start with `hip_`. | https://docs.hippius.com/use/quickstart |
 | Hub | Models and container images. Command: `hippius-hub`. Creating a namespace needs a balance of at least $10, a spam check. The plan price stays zero. | https://docs.hippius.com/registry |
 | Desktop | Sync folders on macOS, Windows, and Linux. There is no CLI. The agent file is on the staging branch. | https://raw.githubusercontent.com/thenervelab/hippius-desktop/staging/llms.txt |
-| Mobile | Drive on Android, on Google Play. The iPhone app is not released. There is no CLI. | https://docs.hippius.com/use/mobile/getting-started |
+| Mobile | Drive on iPhone, on the App Store, and on Android, on Google Play. There is no CLI. | https://docs.hippius.com/use/mobile/getting-started |
 | Console | Sign up, pay, API token, Drive and S3 keys. Command: `hipc`, the Hippius command line, drives everything the console manages with the account token; install and log in as in Tools an agent can run. | https://docs.hippius.com/cli |
 | Drive SDK | Script Drive with encryption on the client. Command: `hippius-drive`. Install from git, not PyPI. | https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt |
-| Bridge | No CLI. The user signs each step in a browser wallet. Alpha and hAlpha are pegged 1:1. Minimum 15. | https://docs.hippius.com/use/console/bridge |
+| Bridge | No CLI. An agent that holds the key signs the steps. Alpha and hAlpha are pegged 1:1. Minimum 15. | https://docs.hippius.com/use/console/fund-with-alpha |
 | Compute | Confidential VMs, managed PostgreSQL, managed Kubernetes and GitHub Actions runners, in the console and with `hipc compute`. Open to every account, billed hourly from the balance. | https://docs.hippius.com/use/compute |
-| Shared accounts | An owner invites members by email with Viewer, Operator or Admin access per product (VMs, databases, Kubernetes, runners, S3, CDN). The owner pays. Drive is not included. `hipc account list` and `hipc account use <account_id>`; API header `X-Hippius-Account`. | https://docs.hippius.com/use/console/team |
+| Shared accounts | An owner invites members by email with Viewer, Operator or Admin access per product (VMs, databases, Kubernetes, runners, Object Storage, CDN). The owner pays. Drive is not included. `hipc account list` and `hipc account use <account_id>`; API header `X-Hippius-Account`. | https://docs.hippius.com/use/console/team |
 
 ### Authentication
 
@@ -83,10 +83,12 @@ Sign in at https://console.hippius.com with Google, GitHub, Apple, or an existin
 How the API token is obtained depends on the sign-in:
 
 - Google, GitHub or Apple: the user copies the token from console Settings, https://console.hippius.com/dashboard/settings, and stores it with `hipc auth login` (a prompt that does not echo) or `hipc auth login --token-file -`.
-- A 12-word access key: Settings does not show a token for this sign-in. The access-key sign-in (Access key sign-in, below, and https://docs.hippius.com/use/wallet-login) signs a challenge with the key and returns a token; the first verify for a new key creates the account. One mistyped word therefore opens a new, empty account. `hipc` never takes the 12 words: the token that sign-in returns goes to `hipc auth login`. Never ask for the 12 words in chat.
+- A 12-word access key: Settings does not show a token for this sign-in. The access-key sign-in (Access key sign-in, below, and https://docs.hippius.com/use/wallet-login) signs a challenge with the key and returns a token; the first verify for a new key creates the account. One mistyped word therefore opens a new, empty account. An agent that holds its own key does this sign-in itself. `hipc` never takes the 12 words: the token that sign-in returns goes to `hipc auth login`. Never ask for the 12 words in chat.
 - CI and servers: sign in once on a machine you trust and store only the token (for example as the CI secret `HIPPIUS_TOKEN`). Never put the 12 words on a runner: they control the whole account and its funds.
 
-A 12-word access key creates a wallet-only account. It has no real email address, so it gets no lifecycle mail. Drive has no free plan: subscribe before the first upload. S3 and Hub work the same as on any other account.
+An agent that holds its own 12-word access key opens the account and signs in with POST https://api.hippius.com/api/auth/mnemonic/ and POST https://api.hippius.com/api/auth/verify/. The first verify for a new Substrate address creates the account. Steps: https://docs.hippius.com/use/wallet-login. Google, GitHub, and Apple sign-in stays in the user's browser. Do not ask the user to paste a recovery phrase.
+
+A 12-word access key creates a wallet-only account. It has no real email address, so it gets no lifecycle mail. Drive has no free plan: subscribe before the first upload. Object Storage and Hub work the same as on any other account.
 
 S3 access keys (`hip_*`) are created in the console or with `hipc s3 tokens create`, and used with any S3 client. For an app, use a sub token scoped to its bucket, not a master token.
 
@@ -102,7 +104,9 @@ Five top-up methods, on Billing:
 - TAO, from a connected wallet or by sending to the TAO deposit address (Manually tab). At least $20 per transfer. Never send TAO to the Hippius account address (Wallet → Receive): it is not credited. A transfer cannot be reversed.
 - hAlpha, the Hippius native token, on the Hippius tab. Credits = hAlpha × the on-chain hAlpha price. Slippage protection 1% by default. Final on chain, no refund. Not invoiced.
 
-`hipc billing top-up` starts a card or Bitcoin top-up and prints the checkout URL a person pays. When the account is custodial (the API signs its buys; `hipc billing native-quote` says so), it also converts hAlpha into credits on chain: at least 0.01 hAlpha, and it cannot be undone. An account that signs its own buys (`custodial` false, such as an access-key account) still buys in the console, and USDC and TAO stay in the console. Those are browser wallet steps a person approves; an agent cannot fund the balance with them on its own.
+`hipc billing top-up` starts a card or Bitcoin top-up and prints the checkout URL a person pays. When the account is custodial (the API signs its buys; `hipc billing native-quote` says so), it also converts hAlpha into credits on chain: at least 0.01 hAlpha, and it cannot be undone. An account that signs its own buys (`custodial` false, such as an access-key account) buys hAlpha in the console, or an agent that holds its key signs the buy itself, as below. USDC and TAO stay in the console: those are browser wallet steps a person approves.
+
+An access-key account buys that balance by signing Marketplace.buy_credits on wss://rpc.hippius.network. Read GET https://api.hippius.com/api/billing/native/quote/ first. Credits minted are alpha_amount * alpha_price / 10^18, rounded down. One credit is one dollar. Set min_credits to floor(credits * 9900 / 10000). Leave the referral code unset. The quote's min_alpha is the smallest buy the API accepts. The chain floor is 0.01 hAlpha. POST https://api.hippius.com/api/billing/native/buy/ is for an account whose key the API holds, and returns 409 self_sign for an access-key account. https://docs.hippius.com/use/console/fund-with-alpha
 
 An agent with enough balance subscribes without a browser. Do not send a funded agent to Stripe Checkout. With hipc: `hipc drive subscription` and `hipc s3 subscription` subscribe an account on Free or no plan, and change a paid plan to another. Run each with `--dry-run` first, and ask the user before the `--yes`.
 
@@ -114,7 +118,7 @@ Drive (codes `solo` Starter, `duo` Plus, `max`, `scale`; Free needs no subscribe
       -d '{"plan":"solo","period":"monthly","payment":"credits"}'
     # 201 if the balance covers the plan. `payment` JSON value `credits` means pay from the existing balance.
 
-S3 (codes `pro`, `business`, `enterprise`; otherwise pay as you go at $6/TB-month):
+Object Storage (codes `pro`, `business`, `enterprise`; otherwise pay as you go at $6/TB-month):
 
     curl -X POST https://api.hippius.com/api/s3/subscription/ \
       -H "Authorization: Token YOUR_TOKEN" \
@@ -132,9 +136,9 @@ Hub (names Free, Builder, Pro, Team; paid from the balance only; top up by card,
 
 Catalogs (no auth): GET https://api.hippius.com/api/drive/plans/ · GET https://api.hippius.com/api/s3/plans/ · GET https://api.hippius.com/api/registry/plans/
 
-Plan prices, monthly (the catalogs above are always current): Drive Free 10 GB $0, Starter 500 GB $4, Plus 2 TB $7, Max 10 TB $22, Scale 25 TB $50 (Max and Scale bill storage above the plan hourly, $2.20 and $2.00 per TB per month, up to a storage cap that defaults to twice the plan; Drive plans are monthly only, a downgrade or cancel takes effect at the end of the period). S3 Pro 10 TB $53, Business 50 TB $245, Enterprise 100 TB $465. Hub Free $0, Builder $5, Pro $19, Team $99.
+Plan prices, monthly (the catalogs above are always current): Drive Free 10 GB $0, Starter 500 GB $4, Plus 2 TB $7, Max 10 TB $22, Scale 25 TB $50 (Max and Scale bill storage above the plan hourly, $2.20 and $2.00 per TB per month, up to a storage cap that defaults to twice the plan; Drive plans are monthly only, a downgrade or cancel takes effect at the end of the period). Object Storage Pro 10 TB $53, Business 50 TB $245, Enterprise 100 TB $465. Hub Free $0, Builder $5, Pro $19, Team $99.
 
-Google, GitHub, and Apple accounts include the Free Drive Plan (10 GB). S3 starts on pay as you go at $6 per TB per month. A plan is optional. Creating a Hub namespace needs a balance of at least $10.
+Google, GitHub, and Apple accounts include the Free Drive Plan (10 GB). Object Storage starts on pay as you go at $6 per TB per month. A plan is optional. Creating a Hub namespace needs a balance of at least $10.
 
 Open a support ticket with the account API token: POST https://api.hippius.com/api/support/tickets/ with subject, priority, category, and description.
 
@@ -142,9 +146,9 @@ Open a support ticket with the account API token: POST https://api.hippius.com/a
 
 ## Tools an agent can run
 
-Use `hipc` first for anything on the account API: accounts and projects, billing, storage keys and buckets, Hub, compute and App Engine, CDN, network, and support. S3 bytes use any S3 client (S3 Storage — Quickstart below); Hub blobs use `hippius-hub`. The IPFS-era commands (`hipc storage`) and the storage commands of the old `hippius` Python package are deprecated; chain registration still uses `hippius==0.2.77`.
+Use `hipc` first for anything on the account API: accounts and projects, billing, storage keys and buckets, Hub, compute and App Engine, CDN, network, and support. S3 bytes use any S3 client (Object Storage — Quickstart below); Hub blobs use `hippius-hub`. The IPFS-era commands (`hipc storage`) and the storage commands of the old `hippius` Python package are deprecated; chain registration still uses `hippius==0.2.77`.
 
-An agent cannot create a Google, GitHub or Apple account or approve a browser login. The user signs in at https://console.hippius.com and stores the API token from https://console.hippius.com/dashboard/settings with `hipc auth login`. An access-key account gets its token from the access-key sign-in (see Authentication) and stores it with `hipc auth login` the same way; `hipc` never takes the 12 words.
+An agent cannot create a Google, GitHub or Apple account or approve a browser login. The user signs in at https://console.hippius.com and stores the API token from https://console.hippius.com/dashboard/settings with `hipc auth login`. An access-key account gets its token from the access-key sign-in (see Authentication; an agent that holds its own key does it itself, https://docs.hippius.com/use/wallet-login) and stores it with `hipc auth login` the same way; `hipc` never takes the 12 words.
 
 ### hipc
 
@@ -178,7 +182,7 @@ Namespace names are lowercase letters, digits, and dashes, 1 to 63 characters. A
 
 ### Drive
 
-`hippius-drive` reads and writes the same encrypted Drive as the console, the desktop app, and the Android app. It is alpha. It is not S3: a file put here does not appear in a bucket. Full command list: https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/docs/cli.md
+`hippius-drive` reads and writes the same encrypted Drive as the console, the desktop app, and the mobile app. It is alpha. It is not Object Storage: a file put here does not appear in a bucket. Full command list: https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/docs/cli.md
 
 The package name `hippius-drive` is not on PyPI. Python 3.10 to 3.13.
 
@@ -203,7 +207,18 @@ A token and an address that do not belong together fail `whoami` with 403. Leave
 
 ### Console
 
-The console CLI is `hipc` (above). Sign-in, browser checkout, and anything that needs a wallet signature stay in https://console.hippius.com. Without hipc: `curl -sS -H "Authorization: Token $HIPPIUS_TOKEN" https://api.hippius.com/api/...`; plan lists answer without a token. The OpenAPI spec is https://api.hippius.com/openapi.json
+The console CLI is `hipc` (above). Sign-in and card checkout stay in https://console.hippius.com. An agent that holds the key signs the hAlpha buy and the bridge: https://docs.hippius.com/use/console/fund-with-alpha. Without hipc, call https://api.hippius.com with `Authorization: Token <token>`.
+
+```bash
+curl -sS -H "Authorization: Token $HIPPIUS_TOKEN" https://api.hippius.com/api/billing/credits/balance/
+curl -sS -H "Authorization: Token $HIPPIUS_TOKEN" https://api.hippius.com/api/registry/me/
+curl -sS https://api.hippius.com/api/drive/plans/
+curl -sS https://api.hippius.com/api/s3/plans/
+curl -sS https://api.hippius.com/api/registry/plans/
+curl -sS https://api.hippius.com/api/billing/latest-tao-price/
+```
+
+The plan lists and the TAO price answer without a token. Balance and `registry/me` need one. S3 key create, rotate, and revoke are in Management API. The OpenAPI spec is https://api.hippius.com/openapi.json
 
 ### Desktop
 
@@ -221,11 +236,18 @@ Agent file: https://raw.githubusercontent.com/thenervelab/hippius-desktop/stagin
 
 ### Bridge
 
-There is no bridge CLI. The user opens Wallet in the console and uses Bridge Tokens. Guide: https://docs.hippius.com/use/console/bridge
+There is no bridge CLI. An agent that holds the Bittensor coldkey signs the steps. A user who keeps the key in a browser wallet approves them in the console. Guide: https://docs.hippius.com/use/console/fund-with-alpha. The console dialog is https://docs.hippius.com/use/console/bridge.
 
-The bridge moves Alpha on Bittensor and hAlpha on Hippius. They are pegged 1:1. The minimum is 15 Alpha or 15 hAlpha. It takes about 120 seconds. The only cost is network gas: TAO on the Bittensor side, hAlpha on Hippius.
+The bridge moves Alpha on Bittensor subnet 75 and hAlpha on Hippius. They are pegged 1:1. The minimum is 15 Alpha or 15 hAlpha. A deposit usually becomes hAlpha in 3 to 10 minutes. Fees are TAO on Bittensor and hAlpha on Hippius. Adding the escrow as a proxy reserves 0.093 TAO until the proxy is removed.
 
-Alpha to hAlpha needs 3 signatures, or 4 when the Alpha must first be moved onto the Hippius validator. hAlpha to Alpha needs 1 signature. The user approves each signature in a browser wallet extension. An agent cannot approve those signatures.
+The stake has to sit on hotkey 5G1Qj93Fy22grpiGKq6BEvqqmS2HVRs3jaEdMhq9absQzs6g. Stake anywhere else fails the deposit. The escrow contract is 5CtJ99rm9ze4QA523ieagy3vJ9D1A69tDcEUae3Q7g5RVykh.
+
+1. SubtensorModule.move_stake onto that hotkey, netuid 75 on both sides, amount in rao. Skip this when the hotkey already holds the amount.
+2. Proxy.add_proxy of the contract, proxy type Any, delay 0.
+3. Contract deposit(amount, hotkey), amount in rao, hotkey the validator.
+4. Proxy.remove_proxy with the same arguments.
+
+hAlpha to Alpha needs 1 signature. The minimum is 15 hAlpha. Multiply the rao amount by 10^9 to get hAlpha planck. The call data and how to follow a deposit are on the funding guide.
 
 ### Compute
 
@@ -235,7 +257,7 @@ Billing: metered per second (one-minute minimum per VM and public IPv4), charged
 
 An hour the balance cannot pay is recorded as unpaid debt the account owes, and VMs keep running: the balance is not a spending cap. A project budget limits a month (`hipc account projects`): it mails at each alert share and can refuse new launches that add cost once the limit is reached. What already runs keeps running and is billed. The compute charge cap is the most the chain charges the account per hour, a safety limit, not a monthly budget. Details: https://docs.hippius.com/use/compute/billing
 
-Prices per 730-hour month, on the default NVMe OS disk: vCPU $18, memory $2.50/GB, disk $0.10/GB. Small (1 vCPU, 4 GB, 40 GB) $32 ($0.0438/h), Medium $64, Large $128, X-Large $256, 2X-Large $512, 4X-Large $1024. OS disk tier chosen at launch, fixed: SSD (disk $0.06/GB; Small $27.60, Medium $55.20, Large $110.40, X-Large $220.80, 2X-Large $441.60, 4X-Large $883.20) or HDD, slow, for dev and test, up to Large (disk $0.03/GB; Small $17.16, Medium $34.32, Large $68.64). Managed databases and Kubernetes nodes run on NVMe. Dedicated disks: whole physical disks for one VM, up to 8, at least 1,000 GiB, exact tier, $2.50 HDD / $5 SSD / $8 NVMe per TiB-month, billed while stopped; the VM is pinned (no backups, migration or failover) and counts against a dedicated-disk quota (4 TiB Starter, 16 TiB Standard, 64 TiB Business): https://docs.hippius.com/use/compute/dedicated-disks. Public IPv4 $0.005/h (~$3.65/month). VM backups $6 per TB-month. Outbound bandwidth metered per region, not charged today; inbound free. Managed databases: their VMs plus 25%. Kubernetes: its VMs plus $15 per cluster per month. Database and Kubernetes backups go to the user's own S3, at S3 prices. The live price list wins: https://console.hippius.com/dashboard/billing/compute#prices. Details: https://docs.hippius.com/use/compute/billing
+Prices per 730-hour month, on the default NVMe OS disk: vCPU $18, memory $2.50/GB, disk $0.10/GB. Small (1 vCPU, 4 GB, 40 GB) $32 ($0.0438/h), Medium $64, Large $128, X-Large $256, 2X-Large $512, 4X-Large $1024. OS disk tier chosen at launch, fixed: SSD (disk $0.06/GB; Small $27.60, Medium $55.20, Large $110.40, X-Large $220.80, 2X-Large $441.60, 4X-Large $883.20) or HDD, slow, for dev and test, up to Large (disk $0.03/GB; Small $17.16, Medium $34.32, Large $68.64). Managed databases and Kubernetes nodes run on NVMe. Dedicated disks: whole physical disks for one VM, up to 8, at least 1,000 GiB, exact tier, $2.50 HDD / $5 SSD / $8 NVMe per TiB-month, billed while stopped; the VM is pinned (no backups, migration or failover) and counts against a dedicated-disk quota (4 TiB Starter, 16 TiB Standard, 64 TiB Business): https://docs.hippius.com/use/compute/dedicated-disks. Public IPv4 $0.005/h (~$3.65/month). VM backups $6 per TB-month. Outbound bandwidth metered per region, not charged today; inbound free. Managed databases: their VMs plus 25%. Kubernetes: its VMs plus $15 per cluster per month. Database and Kubernetes backups go to the user's own Object Storage, at Object Storage prices. The live price list wins: https://console.hippius.com/dashboard/billing/compute#prices. Details: https://docs.hippius.com/use/compute/billing
 
 CDN prices, billed hourly from the balance like compute: data out $0.010 per GB billed in FR, $0.060 per GB billed in AU (each byte at the cheaper of the serving and the visitor's region), $0.002 per 10,000 requests, $1 per custom domain per month; the default hostname is included. Each zone has a monthly spend cap ($20 by default, $1 to $100,000): at the cap the zone is paused and answers 503 on every hostname, unbilled and with no fallback to the bucket, until the cap is raised or the next month (UTC) starts. The cap is per zone; there is no account-wide CDN cap. Emails at 80%, at the cap and on resume. Details: https://docs.hippius.com/use/cdn
 
@@ -245,7 +267,7 @@ Hub stores images. It does not run them.
 
 ---
 
-## S3 Storage — Quickstart
+## Object Storage — Quickstart
 
 Endpoint: https://s3.hippius.com
 Region: decentralized
@@ -256,7 +278,7 @@ Always use https://s3.hippius.com. Do not point clients at other hostnames.
 
 Step 1: Create an account at https://console.hippius.com (Google, GitHub, Apple, or a 12-word access key)
 Step 2: Top up on Billing by card, Bitcoin, USDC, or TAO, then subscribe if the product needs a plan. https://docs.hippius.com/use/console/billing
-Step 3: Create credentials. For an app, a sub token scoped to its bucket: Console > S3 Storage > Sub Tokens, or `hipc --json s3 tokens create --kind sub --name app --scope-type single-bucket --bucket my-bucket --action read --action write --secret-file s3.secret --yes > token.json` (the secret goes alone to the new mode-0600 file s3.secret, and token.json names it as `secret_file`) and `hipc s3 configure --from-token-file token.json` from the same directory (it reads the secret from `secret_file`, a path relative to the current directory), then delete s3.secret and token.json. A master token (Create Master Token) reaches every bucket and bypasses ACLs.
+Step 3: Create credentials. For an app, a sub token scoped to its bucket: Console > Object Storage > Manage > Sub Tokens, or `hipc --json s3 tokens create --kind sub --name app --scope-type single-bucket --bucket my-bucket --action read --action write --secret-file s3.secret --yes > token.json` (the secret goes alone to the new mode-0600 file s3.secret, and token.json names it as `secret_file`) and `hipc s3 configure --from-token-file token.json` from the same directory (it reads the secret from `secret_file`, a path relative to the current directory), then delete s3.secret and token.json. A master token (Create Master Token) reaches every bucket and bypasses ACLs.
 Step 4: Save Access Key ID (hip_...) and Secret Key — the secret cannot be retrieved after creation
 
 IMPORTANT: ETH wallets, TAO wallets, and Polkadot browser extensions are NOT used for S3 access. Card, Bitcoin, USDC, and TAO add to the balance. They do not authenticate S3 requests.
@@ -281,7 +303,7 @@ IMPORTANT: ETH wallets, TAO wallets, and Polkadot browser extensions are NOT use
 
 ---
 
-## S3 Storage — Advanced Usage
+## Object Storage — Advanced Usage
 
 Docs: https://docs.hippius.com/storage/s3/advanced
 
@@ -320,7 +342,7 @@ Master keys bypass ACLs. Sub-tokens need an explicit grant unless scoped to that
 ### Sub-tokens
 
 Scoped credentials: per-bucket, read-only or read/write, optional expiry.
-Create in Console > S3 Buckets (https://docs.hippius.com/use/console/s3), with hipc, or via Management API.
+Create in Console > Object Storage (https://docs.hippius.com/use/console/s3), with hipc, or via Management API.
 Rotate issues a new Access Key ID and secret with the same permissions and revokes the old pair. Revoke is immediate. To hand a new key to many clients without a gap, create a second token, move the clients to it, then revoke the first.
 
     hipc --json s3 tokens create --kind sub --name app-prod --scope-type single-bucket --bucket app-prod --action read --action write --secret-file app-prod.secret --yes > app-prod.json
@@ -356,7 +378,7 @@ HCFS S3-compatible gateway (https://docs.hippius.com/hcfs/api/s3-gateway) is NOT
 
 ---
 
-## S3 Storage — Python
+## Object Storage — Python
 
 ### boto3
 
@@ -417,7 +439,7 @@ HCFS S3-compatible gateway (https://docs.hippius.com/hcfs/api/s3-gateway) is NOT
 
 ---
 
-## S3 Storage — JavaScript
+## Object Storage — JavaScript
 
 ### AWS SDK v3
 
@@ -456,7 +478,7 @@ Server generates presigned PUT URL, browser uses it — no credentials in the br
 
 ---
 
-## S3 Storage — AWS CLI
+## Object Storage — AWS CLI
 
     # Install: https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html
     aws configure --profile hippius
@@ -474,7 +496,7 @@ Server generates presigned PUT URL, browser uses it — no credentials in the br
 
 ---
 
-## S3 Storage — rclone
+## Object Storage — rclone
 
     # Install: https://rclone.org/install/
     # ~/.config/rclone/rclone.conf
@@ -485,7 +507,6 @@ Server generates presigned PUT URL, browser uses it — no credentials in the br
     secret_access_key = your_secret
     endpoint = https://s3.hippius.com
     region = decentralized
-    acl = private
 
     rclone lsd hippius:                                  # list buckets
     rclone ls hippius:my-bucket                          # list files
@@ -499,7 +520,7 @@ Server generates presigned PUT URL, browser uses it — no credentials in the br
 
 ---
 
-## S3 Storage — Compatibility
+## Object Storage — Compatibility
 
 Docs: https://docs.hippius.com/storage/s3/compatibility
 
@@ -708,12 +729,12 @@ Docs: https://docs.hippius.com/use/api-prices
     GET  https://api.hippius.com/api/s3/plans/ · /api/drive/plans/ · /api/registry/plans/
 Compute public prices are credits (1 credit = 1 USD) as decimal strings; monthly = hourly x 730, to the cent. null means the catalogue has no price yet, never free. Cache-Control: public, max-age=60 (flavors 300), Vary: Authorization. 300 requests/min per client address on the compute and CDN lists, then 429.
 
-### Access key sign-in (apps, and agents or CI with an access-key account)
+### Access key sign-in
 
 Docs: https://docs.hippius.com/use/wallet-login
     POST https://api.hippius.com/api/auth/mnemonic/  {"address": "0x...", "substrate_address": "5..."}  -> challenge, message, expires_in (300)
     POST https://api.hippius.com/api/auth/verify/    {"address", "substrate_address", "challenge", "signature", "substrate_signature"} -> token
-Sign `message` verbatim: signature = EIP-191 personal_sign by the Ethereum key (m/44'/60'/0'/0/0); substrate_signature = sr25519 by the Substrate key (no derivation path) over the raw message bytes. A signature over the polkadot.js <Bytes> wrapping (browser extension signRaw) is refused: 401 code substrate_signature_invalid. Missing proof on a new or never-proven account: 401 code substrate_signature_required. Never ask a user to paste their 12 words into chat. For CI, sign in once on a trusted machine and keep only the token: never put the 12 words on a runner.
+Sign `message` verbatim: signature = EIP-191 personal_sign by the Ethereum key (m/44'/60'/0'/0/0); substrate_signature = sr25519 by the Substrate key (no derivation path) over the raw message bytes. A signature over the polkadot.js <Bytes> wrapping (browser extension signRaw) is refused: 401 code substrate_signature_invalid. Missing proof on a new or never-proven account: 401 code substrate_signature_required. The first verify for a new Substrate address creates the account. An agent that holds the phrase uses this. Never ask a user to paste their 12 words into chat. For CI, sign in once on a trusted machine and keep only the token: never put the 12 words on a runner.
 
 ---
 

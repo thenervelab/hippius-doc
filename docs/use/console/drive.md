@@ -262,6 +262,6 @@ The two folder download limits come from the zip format itself, not from Hippius
   <li><a href="/use/console/shared-drives">Shared Drives</a>: share a drive or a folder with people who have a Hippius account, and work in drives shared with you.</li>
   <li><a href="/use/captures">Screenshots and Recording</a>: capture your screen and share it with a link.</li>
   <li><a href="/use/console/uploads">Console Uploads</a>: full reference for the upload queue, progress widget, and error handling.</li>
-  <li><a href="/use/console/s3">S3 Buckets</a>: S3 compatible storage for use with any S3 client.</li>
+  <li><a href="/use/console/s3">Object Storage</a>: S3 compatible storage for use with any S3 client.</li>
   <li><a href="/use/desktop/getting-started">Hippius Desktop App</a>: real time folder sync and uploads beyond the 100 MB cap.</li>
 </Unordered>

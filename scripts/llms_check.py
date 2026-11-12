@@ -176,9 +176,9 @@ def main() -> None:
         if code == 401 and host_of(url) == "api.hippius.com":
             print(f"ok 401 {url}")
             continue
-        # LinkedIn rate-limits datacenter clients. 429 and 999 mean the company
-        # page refused the runner. A missing page still fails.
-        if code in (429, 999) and host_of(url) == "www.linkedin.com":
+        # LinkedIn rate-limits datacenter clients. 403, 429 and 999 mean the
+        # company page refused the runner (its bot wall). A missing page still fails.
+        if code in (403, 429, 999) and host_of(url) == "www.linkedin.com":
             print(f"ok {code} {url}")
             continue
         if code != 200:

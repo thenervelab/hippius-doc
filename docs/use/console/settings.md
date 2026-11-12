@@ -89,7 +89,7 @@ Choose between two dashboard layouts:
 
 **Normal** gives you a focused overview: your recent uploads, balance, and storage usage. Best if you're mainly using Hippius for personal file storage.
 
-**Pro** expands the dashboard with your Drive and S3 sections side by side, detailed storage and balance charts, and recent uploads. Best if you actively manage multiple services.
+**Pro** expands the dashboard with your Drive and Object Storage sections side by side, detailed storage and balance charts, and recent uploads. Best if you actively manage multiple services.
 
 The change takes effect the next time you load the Overview page (or immediately if you're already on it).
 
@@ -99,7 +99,7 @@ The **Unlock Password** row shows <BgStyledText>Set Password</BgStyledText> if y
 
 ## Table Text Size
 
-Choose the text size of every table in the console: **8px**, **10px**, **12px** (the default), **14px** or **16px**. Drive, S3, and Billing tabs all follow this setting. It is saved in this browser.
+Choose the text size of every table in the console: **8px**, **10px**, **12px** (the default), **14px** or **16px**. Drive, Object Storage, and Billing tabs all follow this setting. It is saved in this browser.
 
 A preview row at the top of this section updates live as you switch options, so you can see the difference before committing.
 
@@ -128,7 +128,7 @@ The first screen of the dialog is not a warning, it is an **inventory**. It read
 | **Storage**              | Everything in Drive and in your S3 buckets.                     |
 | **Compute**              | Virtual machines and managed databases.                         |
 | **Hub and network**      | Hub projects and images, and your network peers.                 |
-| **Subscriptions**        | Any active Drive, S3 or Hub plan, which is cancelled.           |
+| **Subscriptions**        | Any active Drive, Object Storage or Hub plan, which is cancelled. |
 | **Account balance**      | Your remaining balance, which is forfeited, and any saved card. |
 | **Access and account**   | API tokens, S3 keys, SSH keys and every way of signing in.      |
 
@@ -162,7 +162,7 @@ You are not dropped back at a login form. The console takes you to a page headed
 Behind that, three things have happened at once:
 
 <Ordered>
-  <li>Your account is <strong>locked</strong>. Drive and S3 are suspended, and every API token and session is revoked, including the one you were just using, which is why you are signed out. Scripts and integrations stop working straight away.</li>
+  <li>Your account is <strong>locked</strong>. Drive and Object Storage are suspended, and every API token and session is revoked, including the one you were just using, which is why you are signed out. Scripts and integrations stop working straight away.</li>
   <li>The deletion is scheduled for 7 days later.</li>
   <li>If the account has an email address, the cancel link is sent to it.</li>
 </Ordered>

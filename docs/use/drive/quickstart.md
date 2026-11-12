@@ -14,8 +14,8 @@ import Screenshot from '@site/src/components/Screenshot';
 
 Drive is your private, end-to-end encrypted file storage. This guide gets your first file into it using the [Hippius Console](https://console.hippius.com) in your browser, with nothing to install. It takes about five minutes.
 
-:::tip Looking for S3?
-Drive is for your own files. To connect apps, scripts or backup tools over the S3 API, follow the [S3 Quickstart](/use/quickstart) instead.
+:::tip Looking for Object Storage?
+Drive is for your own files. To connect apps, scripts or backup tools over the S3 API, follow the [Object Storage Quickstart](/use/quickstart) instead.
 :::
 
 ## 1. Sign in
@@ -100,7 +100,7 @@ Sign in to the apps with the **same** Google, GitHub or Apple account, or the sa
 
 <Unordered>
   <li><strong>Desktop App</strong> for Windows, macOS and Linux: <a href="/use/desktop/getting-started#installing-the-desktop-app">install it</a> and sign in. Then click <BgStyledText>Add Folder</BgStyledText> to keep a folder on your computer in sync with Drive. See <a href="/use/desktop/using-the-app#set-up-your-first-sync-folder">Set Up Your First Sync Folder</a>.</li>
-  <li><strong>Mobile App</strong> for Android: <a href="/use/mobile/getting-started#install-android">install Hippius from Google Play</a> and sign in. Turn on <a href="/use/mobile/camera-uploads">Camera Uploads</a> to back up your photos and videos automatically. The iPhone version is coming soon to the App Store.</li>
+  <li><strong>Mobile App</strong> for iPhone and Android: install Hippius from the <a href="/use/mobile/getting-started#install-iphone">App Store</a> or <a href="/use/mobile/getting-started#install-android">Google Play</a> and sign in. Turn on <a href="/use/mobile/camera-uploads">Camera Uploads</a> to back up your photos and videos automatically.</li>
 </Unordered>
 
 ## Where to next

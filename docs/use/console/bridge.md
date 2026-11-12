@@ -24,12 +24,17 @@ Before you start, here is what we ask of every bridge:
 | | |
 |---|---|
 | **Minimum amount** | 15 Alpha, or 15 hAlpha |
-| **Estimated time** | Around 120 seconds |
+| **Estimated time (Alpha to hAlpha)** | Usually 3 to 10 minutes after your deposit lands on Bittensor |
+| **Estimated time (hAlpha to Alpha)** | Usually 1 to 3 minutes after your withdrawal lands on Hippius |
 | **What you pay** | Network gas only. TAO on the Bittensor side, hAlpha on ours |
 | **Signatures (Alpha to hAlpha)** | 3, or 4 if a stake move is needed first |
 | **Signatures (hAlpha to Alpha)** | 1 |
 
 The bridge does not take a cut. Tokens are pegged 1:1, so what you send is what you receive, and the only cost is the network gas for the transactions you sign.
+
+:::tip Funding your account with Alpha?
+Bridging is the first half. [Fund Your Account with Alpha](/use/console/fund-with-alpha) walks through the whole route, including which network and address to send to, and how long each part takes.
+:::
 
 ## Choosing a Direction
 
@@ -128,6 +133,8 @@ We check these before anything reaches the chain:
 
 While a bridge runs we show each step as it completes, with a **Step X/Y** counter. You can minimize the dialog and keep working.
 
+Bridging Alpha to hAlpha, the dialog keeps going after your last signature. It follows the deposit on Hippius and shows where it is: waiting for the guardians, confirmed by some of them (with a count out of three), and finally minted as hAlpha. That last part usually takes 3 to 10 minutes. See [How long it takes](/use/console/fund-with-alpha#how-long-it-takes) for the measured figures.
+
 Once it finishes, every bridge operation appears in the **Bridge Transactions** tab at the bottom of the Wallet page. Filter it with **All**, **Deposit** or **Withdrawal**, each showing a count.
 
 A bridge touches two chains, so each row carries a status, block and extrinsic for **both** Bittensor and Hippius, alongside the amount, direction and date. A bridge is only done when both sides have settled.
@@ -154,7 +161,7 @@ Regular hAlpha transfers are not shown here. Those live in the **Transaction His
 
 **The bridge failed partway through.** We report which step failed. Because **Add Proxy** and **Remove Proxy** are separate transactions, a failure between them can leave the proxy in place. Retrying is safe, we re-run the flow from the start.
 
-**Nothing arrived after the estimated time.** Check the **Bridge Transactions** tab. If the Bittensor side settled but VOTES is below 3, guardians are still confirming. If the Bittensor side never settled, the deposit did not go through and nothing was taken.
+**Nothing arrived after 10 minutes.** Check the **Bridge Transactions** tab. If the Bittensor side settled but VOTES is below 3, guardians are still confirming. If the Bittensor side never settled, the deposit did not go through and nothing was taken.
 
 **My Alpha is not where I expected it.** Bridging hAlpha out returns Alpha as stake on Bittensor. There is no free Alpha balance on Bittensor, so unstake it there if you need it liquid.
 

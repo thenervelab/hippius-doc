@@ -80,7 +80,7 @@ Click <BgStyledText>New cluster</BgStyledText>. The form is one page in five ste
   <li><strong>Control plane.</strong> Choose <strong>Compact</strong> or <strong>Standard</strong>, and the <strong>Master size</strong>. Prices are for the three masters and their three public IPv4 addresses.</li>
   <li><strong>API access.</strong> Add the IPv4 ranges allowed to reach the Kubernetes API. See <a href="#restrict-api-access">Restrict API access</a>.</li>
   <li><strong>Cluster key.</strong> Click <BgStyledText>Download hippius-cluster-NAME.key</BgStyledText>, store the file, and tick the box to confirm you stored it.</li>
-  <li><strong>Add-ons.</strong> Leave <strong>Automatic backups to your Hippius S3</strong> on, unless you have your own backups. Backups can only be turned on at creation. They need an S3 account; see <a href="/use/compute/kubernetes-backups">Kubernetes backups</a>.</li>
+  <li><strong>Add-ons.</strong> Leave <strong>Automatic backups to your Hippius Object Storage</strong> on, unless you have your own backups. Backups can only be turned on at creation. They need an Object Storage account; see <a href="/use/compute/kubernetes-backups">Kubernetes backups</a>.</li>
 </Ordered>
 
 Check the **Summary** and click <BgStyledText>Create cluster</BgStyledText>. Worker pools are added after the cluster is running; see [Worker pools](/use/compute/kubernetes-worker-pools).
@@ -138,11 +138,11 @@ It can't be revoked or reissued yet. Anyone who has it, and can reach the API fr
 
 On the cluster's page, click <BgStyledText>Delete</BgStyledText>, type the cluster's name and click <BgStyledText>Delete cluster</BgStyledText>. The three masters, the workers and everything running on them are destroyed. This can't be undone. Billing stops when you ask to delete.
 
-Backup buckets that hold backups are kept in your S3 account; see [After you delete a cluster](/use/compute/kubernetes-backups#after-you-delete-a-cluster).
+Backup buckets that hold backups are kept in your Object Storage account; see [After you delete a cluster](/use/compute/kubernetes-backups#after-you-delete-a-cluster).
 
 ## Billing
 
-A cluster costs its VMs, like any VM, plus a management fee of $15 per cluster per month, whatever its size or number of workers. The VMs are the three masters at their size's price, their three public IPv4 addresses at $0.005 an hour each, and each worker at its size's price. The smallest control plane, three Medium masters, comes to $192 + about $11 for the addresses + $15 = about $218 a month, before workers. Backups are billed as S3 storage in your account, at your S3 price. See [Management fees](/use/compute/billing#management-fees) and the [live price list](https://console.hippius.com/dashboard/billing/compute#prices).
+A cluster costs its VMs, like any VM, plus a management fee of $15 per cluster per month, whatever its size or number of workers. The VMs are the three masters at their size's price, their three public IPv4 addresses at $0.005 an hour each, and each worker at its size's price. The smallest control plane, three Medium masters, comes to $192 + about $11 for the addresses + $15 = about $218 a month, before workers. Backups are billed as Object Storage in your account, at your Object Storage price. See [Management fees](/use/compute/billing#management-fees) and the [live price list](https://console.hippius.com/dashboard/billing/compute#prices).
 
 If your compute usage stays unpaid, see [If your balance runs out](/use/compute/billing#if-your-balance-runs-out).
 
