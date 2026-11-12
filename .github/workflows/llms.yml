@@ -56,9 +56,9 @@ jobs:
       - name: Check links (strict once the leaves are merged)
         if: github.event_name != 'pull_request'
         run: python scripts/llms_check.py --mode strict
-      # docs/cli/agents.md mirrors docs/agents.md of the CLI repository; the check fails
-      # when the page differs from the regenerated one. Lenient warns while the hipc content
-      # has not landed (the latest release's install.sh answers 404), strict fails.
+      # docs/cli/agents.md and docs/cli/agents/*.md mirror docs/agents.md and docs/agents/*.md
+      # of the CLI repository; the check fails when a page differs from the regenerated one.
+      # Lenient warns while a source page is not on the CLI repository's main yet, strict fails.
       - name: Check the hipc agents page is in sync (lenient on pull requests)
         if: github.event_name == 'pull_request'
         run: python scripts/sync_hip_agents.py --check --mode lenient

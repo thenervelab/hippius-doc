@@ -43,7 +43,23 @@ const sidebars: SidebarsConfig = {
           type: "category",
           label: "Command line (hipc)",
           collapsed: true,
-          items: ["cli/index", "cli/agents", "cli/examples", "cli/commands"],
+          items: [
+            "cli/index",
+            {
+              type: "category",
+              label: "For agents",
+              collapsed: true,
+              link: { type: "doc", id: "cli/agents" },
+              items: [
+                "cli/agents/accounts",
+                "cli/agents/secrets",
+                "cli/agents/hub",
+                "cli/agents/api",
+              ],
+            },
+            "cli/examples",
+            "cli/commands",
+          ],
         },
         {
           type: "html",
