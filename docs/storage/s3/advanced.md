@@ -59,6 +59,8 @@ aws s3 presign s3://my-bucket/hello.txt \
 
 Anyone with the link can download until it expires. No cleanup job needed.
 
+With [hipc](/cli), `hipc s3 buckets objects presign my-bucket hello.txt --expires-in 86400 --reveal` prints a download URL. `--expires-in` takes 1 to 604800 seconds (7 days); a longer expiry exits 2 and sends nothing. Without it the server's default is one hour. The URL is a secret: anyone holding it can read the object.
+
 Client setup: [Python](/storage/s3/python), [JavaScript](/storage/s3/javascript), [AWS CLI](/storage/s3/aws-cli).
 
 ## Let a browser upload without keys {#let-a-browser-upload-without-keys}
@@ -184,7 +186,7 @@ aws s3api put-bucket-acl --bucket my-bucket \
   --endpoint-url https://s3.hippius.com
 ```
 
-Master keys bypass ACLs. Sub-tokens need an explicit grant unless you created them with access to that bucket in the console.
+Master keys bypass ACLs. A sub-token needs an explicit grant unless it was scoped to that bucket when it was created, in the console, with `hipc s3 tokens create --bucket`, or through the API.
 
 ## Give an app scoped credentials {#give-an-app-scoped-credentials}
 
@@ -202,6 +204,64 @@ Create them in the console: [Object Storage → Sub Tokens](/use/console/s3#sub-
 Rotate issues a new Access Key ID and secret with the same permissions, and revokes the old pair. Revoke is immediate and cannot be undone.
 
 Programmatic create / list / rotate / revoke: [Management API](/use/api).
+
+### From the command line
+
+With [hipc](/cli), create a sub-token for one bucket and turn it into an AWS CLI profile. `--secret-file` writes the secret alone to a new private file (mode 0600, no newline; the path must not exist yet), so it never shows on screen; the answer names that file as `secret_file` and keeps the `access_key_id`. `hipc s3 configure --from-token-file` reads the secret from the file `secret_file` names, a relative path from the current directory, so run both commands from the same directory. Delete both files once the profile is written:
+
+```bash
+hipc --json s3 tokens create --kind sub --name backup-job \
+  --scope-type single-bucket --bucket my-bucket --action read --action write \
+  --expires-at 2027-01-01T00:00:00Z --secret-file token.secret --yes > token.json
+hipc s3 configure --aws-profile backup-job --from-token-file token.json
+rm token.secret token.json
+```
+
+Run it with `--dry-run` in place of `--yes` first to see the request. Leave out `--action write` for a read-only token, and `--expires-at` for one that never expires. `hipc s3 tokens list` shows your tokens, and `hipc s3 tokens revoke --kind sub TOKEN_ID --yes` revokes one. To rotate one, write the new secret to a private file and rewrite the profile, which still holds the old pair (`--yes` because the profile exists):
+
+```bash
+hipc --json s3 tokens rotate --kind sub TOKEN_ID --secret-file token.secret --yes > token.json
+hipc s3 configure --aws-profile backup-job --yes --from-token-file token.json
+rm token.secret token.json
+```
+
+ Create the bucket before the token. To change a token's buckets, create a new token and revoke the old one.
+
+## Separate production and staging {#separate-production-and-staging}
+
+Give each environment its own bucket and its own sub-token, so a staging bug can never touch production data:
+
+```bash
+hipc s3 buckets create app-prod --yes
+hipc s3 buckets create app-staging --yes
+for env in prod staging; do
+  hipc --json s3 tokens create --kind sub --name "app-$env" --scope-type single-bucket --bucket "app-$env" \
+    --action read --action write --secret-file "app-$env.secret" --yes > "app-$env.json"
+  hipc s3 configure --aws-profile "app-$env" --from-token-file "app-$env.json"
+done
+rm app-prod.secret app-staging.secret app-prod.json app-staging.json
+```
+
+Then check the isolation. The staging key must be refused on the production bucket:
+
+```bash
+echo test > hello.txt
+aws s3 cp hello.txt s3://app-staging/hello.txt --profile app-staging   # works
+aws s3 cp hello.txt s3://app-prod/hello.txt --profile app-staging      # must fail: Access Denied
+```
+
+Each application server signs its [presigned URLs](#share-a-time-limited-download) with its own environment's key, so a browser never sees either secret. Older AWS CLI versions ignore the profile's `endpoint_url`: see [AWS CLI](/storage/s3/aws-cli#shortcut-hipc-s3-configure).
+
+## Share a bucket with many clients {#share-a-bucket-with-many-clients}
+
+When many machines write to or read from one bucket, such as the nodes of a network publishing datasets:
+
+<Unordered>
+  <li><strong>One sub-token per writer</strong>, scoped to the bucket with <code>--action read --action write</code>. Revoking one writer then leaves the others working.</li>
+  <li><strong>Readers</strong> share one read-only sub-token (<code>--action read</code>), or, for data anyone may read, the bucket is <a href="#make-a-bucket-or-object-public">made public</a> and they need no key at all.</li>
+  <li><strong>Changing a shared key without a gap.</strong> Rotate revokes the old key at once, so every client using it fails until it has the new one. To move many clients, create a second token, hand it out, then revoke the first.</li>
+  <li><strong>Load.</strong> There is no fixed request limit per account. Under load the gateway answers <code>503 SlowDown</code>, sometimes with <code>Retry-After</code>: retry with backoff, as the AWS SDKs do.</li>
+</Unordered>
 
 ## Upload large files {#upload-large-files}
 

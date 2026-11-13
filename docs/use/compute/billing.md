@@ -94,7 +94,7 @@ Some examples:
 
 **Stopped VMs.** A stopped VM keeps its server capacity reserved, so it is billed at its full price. Delete a VM to stop paying for it. A VM whose boot stalled, shown as failed, stops being billed when the stall is detected. It still counts against your quotas until you delete it.
 
-**Deleting.** Billing stops when you ask to delete a VM, database or cluster, not when the teardown finishes.
+**Deleting.** Billing stops when you ask to delete a VM, database or cluster, not when the teardown finishes. A VM's public IPv4 is released with it, so it needs no detach first. Stored VM backups stay billed until they are removed.
 
 **Shared accounts.** What a team member runs in your account is billed to your account and counts against its quotas. See [Shared accounts](/use/console/team#billing-and-quotas).
 
@@ -171,6 +171,8 @@ The create forms show what your current compute needs for 24 hours, and what the
 
 If the console says **Your balance could not be read just now**, nothing was launched. Try again in a moment.
 
+From the command line, `hipc billing summary` shows `balance`, in dollars, and `burn_rate_per_hour`, what your compute costs per hour now, in base units (10^18 = $1; text mode shows it in credits). A launch passes when the balance covers the runway hours `hipc compute quota` shows (24) at the burn rate plus the new item's hourly price from `hipc compute prices`: balance ≥ 24 × (burn rate + new price). A launch refused for the balance answers 402, and its hint names both commands.
+
 ## If your balance runs out
 
 If an hour of usage can't be paid from your balance, it is recorded as **Unpaid**, and your account owes it. Compute Usage shows a banner with the amount and since when.
@@ -182,6 +184,27 @@ If an hour of usage can't be paid from your balance, it is recorded as **Unpaid*
 </Unordered>
 
 Services aren't stopped for an unpaid balance today. If that changes, you will always get an email at least 24 hours before anything of yours is stopped.
+
+## Limit what compute can cost
+
+Your balance is not a spending cap: as above, an hour it can't pay becomes debt, and your VMs keep running. To keep a month's compute under a limit, use a [project budget](/use/console/projects#budgets):
+
+<Unordered>
+  <li>You get an email at each share of the limit you choose.</li>
+  <li>With <strong>Refuse new launches over the limit</strong>, nothing new that costs money starts in the project once the limit is reached.</li>
+  <li>What already runs keeps running and is billed. A budget doesn't stop or delete a VM, so the month can end above the limit. Stop or delete what you don't need yourself.</li>
+</Unordered>
+
+The Default project has no budget. To cap what launches spend in a month, create a project, launch in it with `--project PROJECT_ID` (or after `hipc account projects use PROJECT_ID`), then set its budget. From the command line, with the project id from the create answer or `hipc account projects list`:
+
+```bash
+hipc account projects create --name api
+hipc account projects use PROJECT_ID
+hipc account projects budget update PROJECT_ID --monthly-limit 25 --alert-at 50 --alert-at 90 --block-launches true --yes
+hipc account projects budget get PROJECT_ID
+```
+
+`--alert-at` mails you at each share of the limit, and `--block-launches true` makes the server refuse new launches that add cost once the limit is reached; neither stops a VM that runs. `hipc account projects budget get` reads the amounts back in credits (1 credit = $1). `hipc compute charge-cap` shows something else: the most the chain charges the account per hour, a per-hour safety limit rather than a monthly budget. Per-product caps exist for the [CDN](/use/cdn#monthly-spend-cap), per zone.
 
 ## Where to next
 

@@ -24,7 +24,7 @@ All changes save automatically. There is no save button anywhere on this page.
 
 ## API Token
 
-Your **API Token** lets you make direct API calls to Hippius on your behalf, for example in a script or integration. This section is shown when you signed in with Google, GitHub or Apple.
+Your **API Token** lets you make direct API calls to Hippius on your behalf, for example in a script or integration. This section is shown when you signed in with Google, GitHub or Apple. If you sign in with a 12-word access key, get a token through the [access key sign-in API](/use/wallet-login), then store it for [hipc](/cli) with `hipc auth login`; `hipc` never takes the 12 words.
 
 The token is hidden by default. Click the **eye** icon to reveal it, then the **copy** icon to copy it to your clipboard. Click the eye again to hide it.
 
@@ -33,6 +33,8 @@ Authorization: Token <your-token>
 ```
 
 See [Hippius API](/use/api) for available endpoints.
+
+From a terminal, or for a coding agent, install [hipc](/cli) and store the token once with `hipc auth login --token-file -`: paste it, press Enter, then Ctrl-D. `hipc auth status` confirms it, and every `hipc` command then carries it for you.
 
 :::warning Keep this token private
 Anyone with this token has full access to your account. Never paste it into public documents, repositories, screenshots, or chat messages. If you believe it has been compromised, contact our support team immediately.

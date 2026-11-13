@@ -40,12 +40,12 @@ The full API specification with request/response examples is available as an int
 </Unordered>
 
 :::tip For AI agents and LLMs
-A machine-readable index is at [docs.hippius.com/llms.txt](https://docs.hippius.com/llms.txt). It points at each product's own `llms.txt`. The long Object Storage ingest is [docs.hippius.com/llms-full.txt](https://docs.hippius.com/llms-full.txt).
+Prefer [hipc](/cli), the command line, over hand-written calls to this API: it carries the token, the account header, the confirmations, and one JSON error shape, and `hipc api GET /accounts/` still reaches any endpoint. The playbook is [hipc for agents](/cli/agents). A machine-readable index is at [docs.hippius.com/llms.txt](https://docs.hippius.com/llms.txt). It points at each product's own `llms.txt`. The long Object Storage ingest is [docs.hippius.com/llms-full.txt](https://docs.hippius.com/llms-full.txt).
 :::
 
 ## Authentication
 
-Management API requests need an access token. Generate one in the [Hippius Console](https://console.hippius.com) under Settings, and send it in the `Authorization` header:
+Management API requests need an access token. If you sign in with Google, GitHub or Apple, generate one in the [Hippius Console](https://console.hippius.com) under Settings. Settings shows no token for an account that signs in with a 12-word access key: that account gets its token from the [access-key sign-in](/use/wallet-login). Send the token in the `Authorization` header:
 
 ```bash
 curl -H "Authorization: Token YOUR_TOKEN" https://api.hippius.com/api/accounts/

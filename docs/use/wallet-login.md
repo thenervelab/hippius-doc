@@ -12,6 +12,20 @@ import Unordered from '@site/src/components/Unordered';
 
 This page is for developers building an app that signs a user in to Hippius with their 12-word access key, the way the console's **Continue with Access Key** does. The key never leaves the device: your app derives two keys from it, signs a server challenge with both, and gets back an API token.
 
+## Then: hipc
+
+[hipc](/cli) does not take the 12 words. Run this flow (or your app) on your own machine to get an API token, then store the token, not the key:
+
+```bash
+hipc auth login                   # paste the token at a prompt that doesn't show it
+hipc auth login --token-file -    # or pipe it in on stdin
+hipc auth status
+```
+
+For CI, keep only the token, as the runner's `HIPPIUS_TOKEN` secret. Never put the 12 words on a runner.
+
+The rest of this page is the API flow, for an app of your own.
+
 :::warning Raw Substrate signatures only
 Since 2026-10-27 the Substrate signature must be over the challenge's raw bytes. A signature over the `<Bytes>...</Bytes>` wrapping that the polkadot.js browser extension's `signRaw` adds is refused with `401 substrate_signature_invalid`. Sign with the key itself, as below, not through a browser extension.
 :::
@@ -109,6 +123,14 @@ Send the token as `Authorization: Token YOUR_TOKEN` on the [Management API](/use
 :::tip Always send substrate_signature
 The server needs `substrate_signature` to open an account, and on every login until the account has given one once. It is also how an account moves to another Ethereum key. Sending it on every login, as the Hippius apps do, avoids all three refusals.
 :::
+
+## Use the token in a terminal, an agent or CI
+
+Store the token, not the key. A token your app has goes to [hipc](/cli) with `hipc auth login --token-file -`, or at the user's own terminal with `hipc auth login`, which asks for it at a prompt that doesn't show it. Every `hipc` command then carries it. Never paste the 12 words into a chat with an agent.
+
+For CI or a server, sign in once on a machine you trust and store only the token, for example as the CI secret `HIPPIUS_TOKEN`. Never put the 12 words on a runner: they control the whole account and its funds, and a leaked token is easier to replace than a leaked key.
+
+**Revoking tokens.** If a token leaks, [contact support](/use/console/support). Moving the account to another Ethereum key (see `evm_key_mismatch` below) revokes everything issued before at once: every API token, S3 key and SSH key, and the linked Google, GitHub and Apple sign-ins.
 
 ## Errors
 

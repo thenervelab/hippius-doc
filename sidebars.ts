@@ -37,6 +37,30 @@ const sidebars: SidebarsConfig = {
       label: "Use",
       collapsed: false,
       items: [
+        // hipc spans every product, so it sits above them: the one command for the
+        // whole account, and the path a coding agent takes.
+        {
+          type: "category",
+          label: "Command line (hipc)",
+          collapsed: true,
+          items: [
+            "cli/index",
+            {
+              type: "category",
+              label: "For agents",
+              collapsed: true,
+              link: { type: "doc", id: "cli/agents" },
+              items: [
+                "cli/agents/accounts",
+                "cli/agents/secrets",
+                "cli/agents/hub",
+                "cli/agents/api",
+              ],
+            },
+            "cli/examples",
+            "cli/commands",
+          ],
+        },
         {
           type: "html",
           value: "<span style=\"font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;opacity:0.6\">Products</span>",
@@ -87,6 +111,7 @@ const sidebars: SidebarsConfig = {
             "registry/pull",
             "registry/push",
             "registry/cli",
+            "registry/ci",
           ],
         },
         {

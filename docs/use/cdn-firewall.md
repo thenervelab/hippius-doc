@@ -10,7 +10,7 @@ import Ordered from '@site/src/components/Ordered';
 import Unordered from '@site/src/components/Unordered';
 import BgStyledText from '@site/src/components/BgStyledText';
 
-The WAF decides on each cache node which requests to a [CDN zone](/use/cdn) are served. Use it to block scrapers or whole countries, restrict an admin path to your office's addresses, or slow down a client that hammers the zone. It runs before CORS, the HTTPS redirect, the cache and the bucket, so a blocked request never reaches any of them, and it is never billed.
+The WAF decides on each cache node which requests to a [CDN zone](/use/cdn) are served. Use it to block scrapers or whole countries, restrict an admin path to your office's addresses, or slow down a client that hammers the zone. It runs before CORS, the HTTPS redirect, the cache and the bucket, so a blocked request never reaches any of them, and a blocked request is never billed. The WAF itself is a paid add-on: see [Tiers and prices](#tiers-and-prices).
 
 The WAF is available on every CDN zone, from the zone's **Security** tab.
 
@@ -101,6 +101,26 @@ A rate limit counts the requests that match its expression, and acts once there 
 :::note Rate limits are approximate
 Each cache node counts on its own, in fixed windows. A client whose requests reach several cache nodes can go above the limit before every node blocks it.
 :::
+
+### Rate limits from the command line {#rate-limits-from-the-command-line}
+
+With [hipc](/cli), rate limits are a JSON file, and an update replaces the zone's whole list. There is no create: to add one rate limit, send the whole list with it. Read the list with `hipc cdn waf rate-limits get ZONE_ID`, edit it, and send it back. This file bans for 10 minutes any client IP that sends more than 300 requests a minute to `/api`:
+
+```json title="rate-limits.json"
+{"rules": [
+  {"description": "API scrapers", "enabled": true, "action": "block",
+   "expression": "http.request.uri.path starts_with \"/api\"",
+   "key": "ip", "period": 60, "requests": 300, "timeout": 600}
+]}
+```
+
+```bash
+hipc cdn waf rate-limits update ZONE_ID --rules-file rate-limits.json --check   # the server checks it, nothing is published
+hipc cdn waf rate-limits update ZONE_ID --rules-file rate-limits.json --dry-run
+hipc cdn waf rate-limits update ZONE_ID --rules-file rate-limits.json --yes
+```
+
+`--check` has the server compile the list and answer `valid`, `size` and the tier's `limit`, publishing nothing, and needs no `--yes`. An invalid list exits 1 (`validation`), with the server's answer in `error.details`. The keys are described under [API](#api). An update that drops or changes a rate limit the zone has now is refused unless you pass `--remove-others`. Custom rules work the same way, with `hipc cdn waf rules get` and `hipc cdn waf rules update` (which takes `--check` too), and `hipc cdn waf test ZONE_ID --request-file request.json --expression '...'` tries an expression without publishing it.
 
 ## Lists
 

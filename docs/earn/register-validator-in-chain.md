@@ -19,7 +19,7 @@ Before proceeding, ensure you have:
 ![Validator Configuration Screen](/img/vali_register.png)
 
 :::tip Simpler coldkey registration (CLI / SDK)
-Submitting **`registerNodeWithColdkey`** from Polkadot.js Apps means filling **`challengeBytes`**, signatures, and related fields by hand. For a **simpler** flow, use the **Hippius CLI** (and related SDK-style tooling): see **[Hippius CLI & SDK](/cli/usage)** and the commands in **[Registering in the Hippius Blockchain](/earn/register-in-blockchain)** — for validators, pass **`--node-type Validator`**.
+Submitting **`registerNodeWithColdkey`** from Polkadot.js Apps means filling **`challengeBytes`**, signatures, and related fields by hand. For a **simpler** flow, use the **Hippius registration tool** (the Python package `hippius`, pinned to 0.2.77): see the commands in **[Registering in the Hippius Blockchain](/earn/register-in-blockchain)** — for validators, pass **`--node-type Validator`**.
 
 Where we explain how **coldkey (main) node** registration fits into the Hippius setup and where to go next for the full on-chain registration process, see **[Running a Hippius blockchain node — Section 4: Register your node on-chain](/earn/arion/running-blockchain-node#4-register-your-node-on-chain)**.
 :::

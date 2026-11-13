@@ -55,7 +55,7 @@ A public IPv4 costs **$0.005 an hour** (about $3.65 a month), billed per second 
 
 Click **Detach** in **Public IP & Firewall** and confirm. The address stops reaching your VM and goes back to the pool: you may not get it back. Outbound traffic goes out through NAT on the server the VM runs on again.
 
-Your firewall rules are kept. They apply again as soon as you attach a new address. Deleting the VM releases its address too.
+Your firewall rules are kept. They apply again as soon as you attach a new address. Deleting the VM releases its address too, so you don't need to detach it first; the address is billed until the VM is deleted.
 
 ### Bandwidth
 
@@ -120,6 +120,37 @@ If you launched the VM with **Open SSH (port 22) to the internet**, it has a rul
 To close SSH completely, delete the rule, or untick **Enabled**. You can still open a shell from the browser with the **Console** tab.
 
 If you attach an address later, no SSH rule is created for you. Add one yourself, with your own address as the source.
+
+## From the command line
+
+With [hipc](/cli), the firewall is a JSON file that replaces the VM's whole rule list. A VM launched with `hipc compute vms create --public-ip` has no rule at all, unlike a console launch with **Open SSH**, so nothing reaches its address until you add one. `--open-ssh` and `--open-port PORT` on `vms create` open TCP ports to every IPv4 address right after the launch; a rules file limits the sources. This file opens SSH to your own address and the web ports to everyone:
+
+```json title="firewall.json"
+{"rules": [
+  {"protocol": "tcp", "ports": ["22"], "source_cidrs": ["203.0.113.7/32"], "description": "ssh from my address"},
+  {"protocol": "tcp", "ports": ["80", "443"], "description": "web"}
+]}
+```
+
+A rule has `protocol` (`tcp`, `udp` or `icmp`), `ports` (strings, a port or a range such as `"8000-8080"`; empty for every port, and always empty for `icmp`), `source_cidrs` (IPv4 ranges; empty or left out for any source), an optional `description` and `enabled` (`true` when left out).
+
+```bash
+hipc compute firewall get VM_ID
+hipc compute firewall update VM_ID --rules-file firewall.json --dry-run
+hipc compute firewall update VM_ID --rules-file firewall.json --yes
+```
+
+An update that drops a rule the VM has now, or changes its protocol, ports, sources or enabled flag, is refused unless you pass `--remove-others`. To start from the current rules, save `hipc compute firewall get VM_ID` to a file and edit it.
+
+The rest of this page from the command line:
+
+```bash
+hipc compute public-ip availability             # free addresses and the price, per region
+hipc compute public-ip create VM_ID --yes        # attach
+hipc compute public-ip delete VM_ID --yes        # detach
+hipc compute exposures create VM_ID --port 8080 --yes   # publish a port on an HTTPS address
+hipc compute exposures list VM_ID
+```
 
 ## If inbound traffic doesn't arrive
 

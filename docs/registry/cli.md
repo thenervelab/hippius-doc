@@ -39,8 +39,12 @@ In practice the API token is all you save by hand. `hippius-hub registry provisi
 
 ```bash
 hippius-hub login --hippius-token <token>
-hippius-hub login --username <you> --password <secret>   # docker creds, manual path
+hippius-hub login --username '<login>' --password-stdin < key.txt   # registry creds, manual path
 ```
+
+Keep the registry secret off the command line: pass it on stdin, as above, so it never shows in your shell history or in `ps`. Quote the login in single quotes: it contains a `$`, such as `robot$my-models+ci`.
+
+For CI, don't share the namespace's own login. Create a scoped key (`hippius-hub registry keys create ci --role push > key.txt`, or `hipc --json hub keys create --name ci --role push --secret-file key.txt --yes > key.json`, which writes the secret alone to `key.txt` and the `login` to `key.json`) and log docker and `hippius-hub` in with its login and `--password-stdin`. The `hipc` answer holds the key's `id`, `name`, `role`, `login`, its `secret` (or `secret_file` with `--secret-file`), and `docker_login_command`, which reads the secret on stdin. Without `--secret-file`, pipe the secret straight into a CI secret: `hipc hub keys create --name ci --role push --reveal --yes | jq -r .secret | gh secret set HUB_SECRET`. `registry rotate-token`, like `hipc hub namespace robot rotate`, replaces the namespace's docker secret, which every other login with that namespace login uses, so all of them have to log in again; CI keys keep working. A new namespace is public: anyone can pull from it. To keep it private, run `hipc hub namespace update --visibility private --yes` before the first push. A full workflow is on [Publish from GitHub Actions](/registry/ci).
 
 ---
 
@@ -63,6 +67,33 @@ hippius-hub login --username <you> --password <secret>   # docker creds, manual 
 | `registry keys create <name> --role read\|push\|push-delete\|admin [--expires-days N] [--docker-login]` | Issue a scoped key; secret printed once |
 | `registry keys show\|rotate\|revoke <key-id>` | Inspect, rotate the secret, or delete a key |
 | `revisions <repo> [--json]` | List a repository's revisions, newest first |
+
+---
+
+## Same tasks with hipc
+
+[`hipc`](/cli), the Hippius command line, manages the namespace, the plan and the keys with your account token. Moving bytes (upload, download, `docker push`) stays with `hippius-hub` and `docker`.
+
+| `hippius-hub` | `hipc` |
+| --- | --- |
+| `registry plans` | `hipc hub plans` |
+| `registry check <name>` | `hipc hub namespace availability <name>` |
+| `registry provision <ns>` | `hipc hub namespace create <ns> --reveal --yes` |
+| `registry status` | `hipc hub namespace status` |
+| `registry me` | `hipc hub namespace get`, and `hipc hub namespace robot get` for the login |
+| `registry repos` | `hipc hub repositories list` |
+| `registry artifacts <repo>` | `hipc hub artifacts list <ns>/<repo>` |
+| `registry usage` | `hipc hub usage` |
+| `registry publicity public\|private` | `hipc hub namespace update --visibility public --public --yes`, or `--visibility private --yes` |
+| `registry rotate-token` | `hipc hub namespace robot rotate --reveal --yes` |
+| `registry keys list` | `hipc hub keys list` |
+| `registry keys create <name> --role push --expires-days N` | `hipc hub keys create --name <name> --role push --expires-in N --reveal --yes` |
+| `registry keys show\|rotate\|revoke <key-id>` | `hipc hub keys get\|rotate\|delete <key-id>` (`rotate` needs `--reveal --yes`, `delete` needs `--yes`) |
+| `registry subscribe Builder` | `hipc hub subscription subscribe --plan Builder --yes` |
+| `registry subscriptions` | `hipc hub subscription get` |
+| `registry unsubscribe <sub-id>` | `hipc hub subscription cancel <sub-id> --yes` |
+
+Every `hipc` command that prints a secret needs `--reveal`. `hub namespace create`, `hub namespace robot rotate`, and `hub keys create` and `rotate` also take `--secret-file <path>`, which counts as the reveal and writes the secret alone, with no newline, to a new file of mode 0600 instead of stdout; `--reveal` alone prints the secret on stdout. The answer then names that file as `secret_file` (`robot_secret_file` for the namespace robot) in place of the secret, and keeps the `login` and a `docker_login_command` that reads the secret on stdin: for example `hipc --json hub keys create --name ci --role push --secret-file key.txt --yes > key.json`, then `docker login registry.hippius.com -u '<login>' --password-stdin < key.txt`. Run any write with `--dry-run` first to see the request.
 
 ---
 

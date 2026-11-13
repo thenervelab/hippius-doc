@@ -84,4 +84,5 @@ The console automatically follows your system's dark or light mode. If you'd pre
   <li><a href="/use/console/billing">Billing</a>: pick a plan and top up your balance. Accounts signed in with an access key need a Drive plan before they can upload.</li>
   <li><a href="/use/console/drive">Drive</a>: upload and manage your personal encrypted files.</li>
   <li><a href="/use/console/s3">Object Storage</a>: set up S3 compatible storage and manage access tokens.</li>
+  <li><a href="/cli">Command line</a>: copy your API token from <a href="/use/console/settings">Settings</a> (an Access Key account gets its token from the <a href="/use/wallet-login">access-key sign-in</a> instead), install <code>hipc</code>, then run <code>hipc auth login --token-file -</code> once, and drive the whole account from a terminal or a coding agent.</li>
 </Unordered>

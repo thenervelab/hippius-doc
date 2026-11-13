@@ -29,6 +29,8 @@ The connection link works for one hour, for the Hippius account that started it.
 
 **Who can link an installation.** For a user account, the GitHub user who comes back must be that account. For an organisation, they must be one of its **owners**. If you ask to install the App on an organisation you don't own, GitHub sends the request to its owners. Once one approves it, connect GitHub again from the Runners page.
 
+From the command line, `hipc compute runners connect` prints the install URL and how many seconds it stays valid (`expires_in`). Open it in a browser and finish on GitHub: the console completes the link, which hipc can't do. `hipc compute runners installations list` then shows the installation.
+
 An installation belongs to one Hippius account at a time. Each linked installation is listed in the **GitHub** card, with **Manage on GitHub** and **Disconnect**. Click <BgStyledText>Connect another</BgStyledText> to link more.
 
 ### What the App can do
@@ -97,6 +99,26 @@ It isn't a copy of GitHub's hosted runner image: language toolchains aren't prei
 
 The runner VM has internet access, but no public IP address and no SSH access, and it is never added to your private network, so a workflow can't reach your other Hippius machines.
 
+### Move jobs from GitHub-hosted runners
+
+Change the job's `runs-on` to the Hippius label with the same number of vCPUs:
+
+| GitHub-hosted (Linux x64) | Hippius |
+|---|---|
+| Linux 1-core (`ubuntu-slim`) | `hippius-small` (4 GB memory; `hippius-medium` for a job that needs more) |
+| Linux 2-core (`ubuntu-latest` on a private repository) | `hippius-medium` |
+| Linux 4-core (`ubuntu-latest` on a public repository) | `hippius-large` |
+
+Some jobs have to stay on GitHub:
+
+<Unordered>
+  <li>macOS and Windows jobs, and Linux arm64 jobs: Hippius runners are Linux x64 only.</li>
+  <li>Jobs that need a GPU.</li>
+  <li>Jobs that rely on a tool preinstalled in GitHub's image, unless you add a <code>setup-*</code> action or a container for it.</li>
+</Unordered>
+
+Each job also waits 3 to 5 minutes for its VM to boot, so very short jobs take longer than on GitHub.
+
 ## Settings
 
 The **Settings** card applies to every installation you have linked. Click <BgStyledText>Save settings</BgStyledText> after a change.
@@ -104,7 +126,7 @@ The **Settings** card applies to every installation you have linked. Click <BgSt
 | Setting | Default | What it does |
 |---|---|---|
 | **Run jobs on Hippius** | On | Off: new `hippius-*` jobs are refused and stay queued on GitHub. |
-| **Runners at once** | 5 | How many jobs run at the same time. More jobs wait for a free slot. Your runners [quota](/use/compute/billing#quotas) caps it: 3 on a new account. |
+| **Runners at once** | Your runners quota, at most 5 | How many jobs run at the same time. More jobs wait for a free slot. Your runners [quota](/use/compute/billing#quotas) caps it, so it is 3 on a new account. |
 | **Allowed sizes** | All three | A job asking for another size is refused. |
 | **Default region** | Any | The country used when a label has none. A label with a country wins over it. |
 | **Allow public repositories** | Off | Whether jobs from public repositories run. |
@@ -112,6 +134,25 @@ The **Settings** card applies to every installation you have linked. Click <BgSt
 :::danger Think before you allow public repositories
 Anyone can open a pull request on a public repository, and the workflow run for it would launch a VM billed to your account. That is why public repositories are off by default. Before you turn it on, require approval for workflow runs from outside collaborators on GitHub: in the repository, **Settings** → **Actions** → **General**.
 :::
+
+From the command line, `hipc compute runners settings get` reads the settings, and `hipc compute runners settings update` changes the ones you pass:
+
+```bash
+hipc compute runners settings update --max-concurrent 2 --allowed-size small --allowed-size medium --dry-run
+hipc compute runners settings update --max-concurrent 2 --allowed-size small --allowed-size medium --yes
+```
+
+`--allowed-size` replaces the whole list. A change that can only spend less, such as a lower `--max-concurrent`, needs no `--yes`.
+
+## Spend limit
+
+A monthly spend limit for runners isn't enabled on api.hippius.com yet: `hipc compute runners limit get` and `hipc compute runners limit update` both answer 404, and nothing is written. A dry run sends nothing, so it exits 0 either way and doesn't tell you whether the limit is on. Until it is, bound what runners can cost with `hipc compute runners settings update --max-concurrent` and `--allowed-size`, the settings above:
+
+<Unordered>
+  <li><strong>Runners at once</strong> caps how many run together, and <strong>Allowed sizes</strong> caps how big each one is.</li>
+  <li>The most they can cost in a month is runners at once × the hourly price of the largest allowed size × 730 hours. With 2 runners on <code>hippius-medium</code>, that is 2 × $0.0795 × 730 ≈ $116, if both run all month.</li>
+  <li>A <a href="/use/compute/billing#limit-what-compute-can-cost">project budget</a> emails you as the month's spend reaches the shares you choose.</li>
+</Unordered>
 
 ## Follow your jobs
 
@@ -136,6 +177,8 @@ The **Jobs** table lists each job with its repository, workflow, size and region
 
 A job that waits 24 hours without getting a slot is cancelled.
 
+From the command line: `hipc compute runners jobs` lists the jobs, and `hipc compute runners usage` the spend.
+
 ## Why a job is refused
 
 Refusals show on the Runners page only. On GitHub, the job just stays queued ("Waiting for a runner") until another runner takes it or you cancel it. Re-running the workflow creates a new job.
@@ -152,7 +195,7 @@ Refusals show on the Runners page only. On GitHub, the job just stays queued ("W
 | Runner tier not offered | The `-ssd` tier isn't sold right now. Use the label without `-ssd`. |
 | Conflicting labels | The job asks for both an NVMe and an SSD runner. Keep one. |
 | Over your compute quota | Runners count against your compute quotas. Free some resources, or contact support. |
-| Balance too low for the runway | Top up: your balance must cover 24 hours of your compute, including the runner. |
+| Balance too low for the runway | Top up: your balance must cover [24 hours](/use/compute/billing#the-24-hour-balance-requirement) of your compute, including the runner. `hipc billing summary` shows the balance and the burn rate. |
 | Unpaid compute usage | Top up to settle what your account owes. |
 | Runners are turned off on Hippius | Runners are paused on our side. Try again later. |
 | No access to runners on this account | Your access on a shared account doesn't include runners. Ask the owner. |
@@ -170,7 +213,7 @@ Runner VMs don't appear in your VM list. They count against your **GitHub Action
 The **Spend** card shows what your runners cost over a period: **This month** (the default), **Last month**, **7 days**, **30 days**, or a **Custom** range of up to 366 days. Days are UTC days.
 
 <Unordered>
-  <li>The total in credits, the runner-minutes billed and the number of jobs billed.</li>
+  <li>The total in credits (1 credit = $1), the runner-minutes billed and the number of jobs billed.</li>
   <li>For the current month, a projection of the month's total. It's linear: the month so far, scaled to the whole month. It appears once the month's first day has passed.</li>
   <li>A bar chart of the credits spent each day. Click <BgStyledText>Show as table</BgStyledText> to read the same numbers as a table.</li>
   <li>The spend by repository, by runner size and tier, and by workflow.</li>
@@ -184,4 +227,4 @@ In a project, the card shows the project's runners only.
 
 ## Disconnect GitHub
 
-Click **Disconnect** on an installation and confirm. Jobs still waiting are cancelled and runners that haven't taken a job yet are stopped. Running jobs finish. The App stays installed on GitHub: to remove it, uninstall it there (**Manage on GitHub**).
+Click **Disconnect** on an installation and confirm, or run `hipc compute runners installations delete INSTALLATION_ID --yes`. Jobs still waiting are cancelled and runners that haven't taken a job yet are stopped. Running jobs finish. The App stays installed on GitHub: to remove it, uninstall it there (**Manage on GitHub**).

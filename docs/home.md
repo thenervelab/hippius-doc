@@ -13,8 +13,21 @@ Hippius is a **transparent, distributed, anonymous cloud storage platform** buil
 
 - **Learn**: Understand Hippius and web3 basics in our [Learn section](/learn/intro).
 - **Use**: Get started storing files with our [Quickstart guide](/use/quickstart).
+- **Terminal**: Install [hipc](/cli), the command line for coding agents and people, and drive the whole account from a shell.
 - **Earn**: Run miners to contribute and earn rewards in our [Earn section](/earn/storage-miner).
 - **Develop**: Build on Hippius with our [Develop section](/blockchain/intro) and [API](https://api.hippius.com/).
+
+## From the terminal, for agents too
+
+`hipc` is one command for everything the console manages: accounts, billing, S3, Hub, compute and App Engine, Kubernetes, CDN, the private network, and support. On a pipe it speaks JSON, an error is one JSON object, and nothing prompts, so a coding agent drives it as easily as a person does.
+
+```bash
+brew install thenervelab/tap/hipc   # or the install script on the hipc page
+hipc auth login --token-file -      # paste the API token from console Settings, Enter, Ctrl-D
+hipc account get
+```
+
+Start at [hipc](/cli); agents start at [hipc for agents](/cli/agents) or [llms.txt](https://docs.hippius.com/llms.txt).
 
 ## Join the Community
 
