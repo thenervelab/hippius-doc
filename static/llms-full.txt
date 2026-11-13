@@ -125,7 +125,7 @@ Object Storage (codes `pro`, `business`, `enterprise`; otherwise pay as you go a
       -H "Content-Type: application/json" \
       -d '{"plan":"pro","rail":"credits"}'
 
-Hub (names Free, Builder, Pro, Team; paid from the balance only; top up by card, Bitcoin, USDC or TAO first):
+Hub (names Free, Builder, Pro, Team; paid from the balance only; top up by card, Bitcoin, USDC, TAO or hAlpha first):
 
     curl -sS https://api.hippius.com/api/registry/plans/   # id, name, quotas
     curl -X POST https://api.hippius.com/api/registry/subscribe/ \
@@ -277,11 +277,11 @@ Addressing style: path-style
 Always use https://s3.hippius.com. Do not point clients at other hostnames.
 
 Step 1: Create an account at https://console.hippius.com (Google, GitHub, Apple, or a 12-word access key)
-Step 2: Top up on Billing by card, Bitcoin, USDC, or TAO, then subscribe if the product needs a plan. https://docs.hippius.com/use/console/billing
+Step 2: Top up on Billing by card, Bitcoin, USDC, TAO, or hAlpha, then subscribe if the product needs a plan. https://docs.hippius.com/use/console/billing
 Step 3: Create credentials. For an app, a sub token scoped to its bucket: Console > Object Storage > Manage > Sub Tokens, or `hipc --json s3 tokens create --kind sub --name app --scope-type single-bucket --bucket my-bucket --action read --action write --secret-file s3.secret --yes > token.json` (the secret goes alone to the new mode-0600 file s3.secret, and token.json names it as `secret_file`) and `hipc s3 configure --from-token-file token.json` from the same directory (it reads the secret from `secret_file`, a path relative to the current directory), then delete s3.secret and token.json. A master token (Create Master Token) reaches every bucket and bypasses ACLs.
 Step 4: Save Access Key ID (hip_...) and Secret Key — the secret cannot be retrieved after creation
 
-IMPORTANT: ETH wallets, TAO wallets, and Polkadot browser extensions are NOT used for S3 access. Card, Bitcoin, USDC, and TAO add to the balance. They do not authenticate S3 requests.
+IMPORTANT: ETH wallets, TAO wallets, and Polkadot browser extensions are NOT used for S3 access. Card, Bitcoin, USDC, TAO, and hAlpha add to the balance. They do not authenticate S3 requests.
 
 ### First upload (Python)
 
@@ -668,8 +668,8 @@ Hippius uses Nominated Proof of Stake (NPoS). Stake hAlpha tokens to nominate va
 - Rewards distributed per era (~24 hours)
 
 Token types:
-- Alpha: native Hippius chain, used for staking and governance
-- hAlpha: EVM-compatible, used for DeFi and exchanges
+- hAlpha: the native token of the Hippius network. It is what you stake, and what converts into balance (Paying, above).
+- Alpha: the Bittensor subnet 75 token. It does not reach Hippius directly: the bridge turns it into hAlpha 1:1 (minimum 15). https://docs.hippius.com/use/console/fund-with-alpha
 
 ---
 
