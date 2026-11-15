@@ -12,10 +12,10 @@ The IPFS-era command line (its `hipc storage` and other IPFS commands) and the s
 
 What replaces them:
 
-- **The account, from a terminal or a coding agent**: [hipc](/cli). `brew install thenervelab/tap/hipc`, or the install script on that page. It manages accounts and projects, billing, S3, Hub, compute and App Engine, Kubernetes, CDN, the private network, and support.
-- **File storage**: any S3 client against `https://s3.hippius.com`. Start with the [S3 quickstart](/use/quickstart).
+- **The account, from a terminal or a coding agent**: [hipc](/cli), installed with the script on that page. It manages accounts and projects, billing, S3, Hub, compute and App Engine, Kubernetes, CDN, the private network, and support.
+- **File storage**: any S3 client against `https://s3.hippius.com`. Start with the [Object Storage quickstart](/use/quickstart).
 - **Models and container images**: [`hippius-hub`](/registry/cli), with docker and oras.
 - **Chain registration for a miner or a validator**: the pinned Python package in [Registering in the Hippius blockchain](/earn/register-in-blockchain).
 - **Miner operations**: the [miner guide](/earn/arion/running-miner) and the `miner` binary from the [arion](https://github.com/thenervelab/arion) repository.
 
-If you have the IPFS-era `hipc` from Homebrew, `brew upgrade hipc` replaces it.
+If you have the IPFS-era `hipc` from Homebrew, remove it with `brew uninstall hipc` before you run the install script, so the old command does not come first on your `PATH`. The Homebrew formula of the new `hipc` is not published yet.

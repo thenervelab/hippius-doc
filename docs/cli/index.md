@@ -6,42 +6,21 @@ slug: /cli
 description: Install hipc, the Hippius command line for coding agents and people, log in once, and drive accounts, billing, S3, Hub, compute, Kubernetes, CDN and support from a terminal.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 `hipc` is the Hippius command line, for people and coding agents. It drives everything the console manages: accounts, projects and teams, billing and plans, S3 buckets and tokens, Hub, VMs and App Engine apps, Kubernetes, PostgreSQL, GitHub Actions runners, CDN and WAF, the private network, and support. It does not move data: use an S3 client for objects and `hippius-hub` for Hub blobs. Source: [github.com/thenervelab/hippius-cli](https://github.com/thenervelab/hippius-cli).
 
 ## Install
 
 macOS and Linux, x86_64 and arm64.
 
-<Tabs groupId="install">
-<TabItem value="brew" label="Homebrew">
-
-```bash
-brew install thenervelab/tap/hipc
-```
-
-</TabItem>
-<TabItem value="curl" label="curl">
-
-Installs to `~/.local/bin` (or `$HIPC_INSTALL_DIR`), no root, and checks the release checksum.
+The install script puts `hipc` in `~/.local/bin` (or `$HIPC_INSTALL_DIR`), needs no root, and checks the release checksum, and the signature too when `cosign` is installed:
 
 ```bash
 curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh
 ```
 
-</TabItem>
-<TabItem value="pypi" label="PyPI">
-
-The package on PyPI is `hippius` and the command it installs is `hipc`, the same command the other installs give. `uv tool install hippius` or `pipx install hippius` works too.
-
-```bash
-pip install hippius
-```
-
-</TabItem>
-</Tabs>
+:::warning Homebrew and PyPI are not published yet
+Until they are, `brew install thenervelab/tap/hipc` installs the old IPFS-era `hipc` 0.0.7, and `pip install hippius` installs the old Hippius Python SDK, not this command. Use the install script above, or a tarball from the [releases page](https://github.com/thenervelab/hippius-cli/releases).
+:::
 
 Check it with `hipc version`.
 

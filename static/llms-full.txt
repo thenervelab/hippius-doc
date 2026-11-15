@@ -72,7 +72,7 @@ Hippius is a distributed cloud. Store encrypted files, serve objects over S3, an
 | Mobile | Drive on iPhone, on the App Store, and on Android, on Google Play. There is no CLI. | https://docs.hippius.com/use/mobile/getting-started |
 | Console | Sign up, pay, API token, Drive and S3 keys. Command: `hipc`, the Hippius command line, drives everything the console manages with the account token; install and log in as in Tools an agent can run. | https://docs.hippius.com/cli |
 | Drive SDK | Script Drive with encryption on the client. Command: `hippius-drive`. Install from git, not PyPI. | https://raw.githubusercontent.com/thenervelab/hippius-drive-sdk/main/llms.txt |
-| Bridge | No CLI. An agent that holds the key signs the steps. Alpha and hAlpha are pegged 1:1. Minimum 15. | https://docs.hippius.com/use/console/fund-with-alpha |
+| Bridge | No CLI. The user approves each step in the console with their wallet. Alpha and hAlpha are pegged 1:1. Minimum 15. | https://docs.hippius.com/use/console/fund-with-alpha |
 | Compute | Confidential VMs, managed PostgreSQL, managed Kubernetes and GitHub Actions runners, in the console and with `hipc compute`. Open to every account, billed hourly from the balance. | https://docs.hippius.com/use/compute |
 | Shared accounts | An owner invites members by email with Viewer, Operator or Admin access per product (VMs, databases, Kubernetes, runners, Object Storage, CDN). The owner pays. Drive is not included. `hipc account list` and `hipc account use <account_id>`; API header `X-Hippius-Account`. | https://docs.hippius.com/use/console/team |
 
@@ -83,10 +83,10 @@ Sign in at https://console.hippius.com with Google, GitHub, Apple, or an existin
 How the API token is obtained depends on the sign-in:
 
 - Google, GitHub or Apple: the user copies the token from console Settings, https://console.hippius.com/dashboard/settings, and stores it with `hipc auth login` (a prompt that does not echo) or `hipc auth login --token-file -`.
-- A 12-word access key: Settings does not show a token for this sign-in. The access-key sign-in (Access key sign-in, below, and https://docs.hippius.com/use/wallet-login) signs a challenge with the key and returns a token; the first verify for a new key creates the account. One mistyped word therefore opens a new, empty account. An agent that holds its own key does this sign-in itself. `hipc` never takes the 12 words: the token that sign-in returns goes to `hipc auth login`. Never ask for the 12 words in chat.
+- A 12-word access key: Settings does not show a token for this sign-in. The access-key sign-in (Access key sign-in, below, and https://docs.hippius.com/use/wallet-login) signs a challenge with the key and returns a token; the first verify for a new key creates the account. One mistyped word therefore opens a new, empty account. The user signs in with the key on their own device; `hipc` never takes the 12 words, and an agent receives only the token. Never ask for the 12 words in chat.
 - CI and servers: sign in once on a machine you trust and store only the token (for example as the CI secret `HIPPIUS_TOKEN`). Never put the 12 words on a runner: they control the whole account and its funds.
 
-An agent that holds its own 12-word access key opens the account and signs in with POST https://api.hippius.com/api/auth/mnemonic/ and POST https://api.hippius.com/api/auth/verify/. The first verify for a new Substrate address creates the account. Steps: https://docs.hippius.com/use/wallet-login. Google, GitHub, and Apple sign-in stays in the user's browser. Do not ask the user to paste a recovery phrase.
+Every sign-in, Google, GitHub, Apple, or a 12-word access key, happens in the user's browser or app. An agent never signs with a 12-word key and never asks the user to paste one.
 
 A 12-word access key creates a wallet-only account. It has no real email address, so it gets no lifecycle mail. Drive has no free plan: subscribe before the first upload. Object Storage and Hub work the same as on any other account.
 
@@ -104,9 +104,7 @@ Five top-up methods, on Billing:
 - TAO, from a connected wallet or by sending to the TAO deposit address (Manually tab). At least $20 per transfer. Never send TAO to the Hippius account address (Wallet → Receive): it is not credited. A transfer cannot be reversed.
 - hAlpha, the Hippius native token, on the Hippius tab. Credits = hAlpha × the on-chain hAlpha price. Slippage protection 1% by default. Final on chain, no refund. Not invoiced.
 
-`hipc billing top-up` starts a card or Bitcoin top-up and prints the checkout URL a person pays. When the account is custodial (the API signs its buys; `hipc billing native-quote` says so), it also converts hAlpha into credits on chain: at least 0.01 hAlpha, and it cannot be undone. An account that signs its own buys (`custodial` false, such as an access-key account) converts hAlpha into credits in the console, or an agent that holds its key signs `Marketplace.buy_credits` itself, as below. Getting hAlpha from subnet 75 Alpha is the bridge: https://docs.hippius.com/use/console/fund-with-alpha. USDC and TAO stay in the console: those are browser wallet steps a person approves.
-
-An access-key account buys that balance by signing Marketplace.buy_credits on wss://rpc.hippius.network. Read GET https://api.hippius.com/api/billing/native/quote/ first. Credits minted are alpha_amount * alpha_price / 10^18, rounded down. One credit is one dollar. Set min_credits to floor(credits * 9900 / 10000). Leave the referral code unset. The quote's min_alpha is the smallest buy the API accepts. The chain floor is 0.01 hAlpha. POST https://api.hippius.com/api/billing/native/buy/ is for an account whose key the API holds, and returns 409 self_sign for an access-key account. https://docs.hippius.com/use/console/fund-with-alpha
+`hipc billing top-up` starts a card or Bitcoin top-up and prints the checkout URL a person pays. When the account is custodial (the API signs its buys; `hipc billing native-quote` says so), it also converts hAlpha into credits on chain: at least 0.01 hAlpha, and it cannot be undone. An account that signs its own buys (`custodial` false, such as an access-key account) converts hAlpha into credits in the console, where the person signs; `hipc billing top-up` refuses it, and POST https://api.hippius.com/api/billing/native/buy/ answers 409 `self_sign`. Getting hAlpha from subnet 75 Alpha is the bridge, also in the console: https://docs.hippius.com/use/console/fund-with-alpha. USDC and TAO stay in the console: those are browser wallet steps a person approves.
 
 An agent with enough balance subscribes without a browser. Do not send a funded agent to Stripe Checkout. With hipc: `hipc drive subscription` and `hipc s3 subscription` subscribe an account on Free or no plan, and change a paid plan to another; `hipc hub subscription` buys or cancels a Hub plan (Hub has no plan change: cancel, then subscribe). Run each with `--dry-run` first, and ask the user before the `--yes`.
 
@@ -148,19 +146,19 @@ Open a support ticket with the account API token: POST https://api.hippius.com/a
 
 Use `hipc` first for anything on the account API: accounts and projects, billing, storage keys and buckets, Hub, compute and App Engine, CDN, network, and support. S3 bytes use any S3 client (Object Storage — Quickstart below); Hub blobs use `hippius-hub`. The IPFS-era commands (`hipc storage`) and the storage commands of the old `hippius` Python package are deprecated; chain registration still uses `hippius==0.2.77`.
 
-An agent cannot create a Google, GitHub or Apple account or approve a browser login. The user signs in at https://console.hippius.com and stores the API token from https://console.hippius.com/dashboard/settings with `hipc auth login`. An access-key account gets its token from the access-key sign-in (see Authentication; an agent that holds its own key does it itself, https://docs.hippius.com/use/wallet-login) and stores it with `hipc auth login` the same way; `hipc` never takes the 12 words.
+An agent cannot create a Google, GitHub or Apple account or approve a browser login. The user signs in at https://console.hippius.com and stores the API token from https://console.hippius.com/dashboard/settings with `hipc auth login`. An access-key account signs in on the user's own device and the user stores the token with `hipc auth login` the same way; `hipc` never takes the 12 words.
 
 ### hipc
 
 Instructions for agents:
 
 - If you can run commands, install `hipc` and use it instead of calling https://api.hippius.com directly.
-- The user runs `hipc auth login` in their own terminal. Never ask for the API token, a 12-word key, or a password in the chat. An agent that holds its own 12-word access key signs in itself instead (Authentication, below) and stores the returned token with `hipc auth login` the same way.
+- The user runs `hipc auth login` in their own terminal. Never ask for the API token, a 12-word key, or a password in the chat. An agent never signs with a 12-word key: it does not sign in with one, buy with one, or bridge with one.
 - Read https://docs.hippius.com/cli/agents once before the first command (raw Markdown: https://raw.githubusercontent.com/thenervelab/hippius-cli/main/docs/agents.md). Topic pages, read only when a task needs one: https://docs.hippius.com/cli/agents/accounts, https://docs.hippius.com/cli/agents/secrets, https://docs.hippius.com/cli/agents/hub, https://docs.hippius.com/cli/agents/api
 - Find a command with `hipc --help`, one level at a time, or `hipc schema <path>`, such as `hipc schema s3 buckets` (the whole schema is about 190 KB; pass a path). Don't recall flags from memory or from a web page: the installed binary is the reference for its own version.
 - Run every write with `--dry-run` first, and ask the user before adding `--yes`.
 
-Install: `brew install thenervelab/tap/hipc`, or `curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh`, or `pip install hippius` (the PyPI package `hippius` installs the same `hipc` command).
+Install: `curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh`. Homebrew and PyPI are not published yet: `brew install thenervelab/tap/hipc` installs the old IPFS-era `hipc` 0.0.7, and `pip install hippius` the old Python SDK.
 
 ### Hub
 
@@ -207,7 +205,7 @@ A token and an address that do not belong together fail `whoami` with 403. Leave
 
 ### Console
 
-The console CLI is `hipc` (above). Google, GitHub and Apple sign-in and card checkout stay in https://console.hippius.com; access-key sign-in is an API call (Authentication). An agent that holds the key signs the hAlpha buy and the bridge: https://docs.hippius.com/use/console/fund-with-alpha. Without hipc, call https://api.hippius.com with `Authorization: Token <token>`.
+The console CLI is `hipc` (above). Sign-in, card checkout, the hAlpha conversion of an account that signs its own buys, and the bridge stay in https://console.hippius.com: https://docs.hippius.com/use/console/fund-with-alpha. Without hipc, call https://api.hippius.com with `Authorization: Token <token>`.
 
 ```bash
 curl -sS -H "Authorization: Token $HIPPIUS_TOKEN" https://api.hippius.com/api/billing/credits/balance/
@@ -236,7 +234,7 @@ Agent file: https://raw.githubusercontent.com/thenervelab/hippius-desktop/stagin
 
 ### Bridge
 
-There is no bridge CLI. An agent that holds the Bittensor coldkey signs the steps. A user who keeps the key in a browser wallet approves them in the console. Guide: https://docs.hippius.com/use/console/fund-with-alpha. The console dialog is https://docs.hippius.com/use/console/bridge.
+There is no bridge CLI: the user approves each step in the console with their wallet. Guide: https://docs.hippius.com/use/console/fund-with-alpha. The console dialog is https://docs.hippius.com/use/console/bridge.
 
 The bridge moves Alpha on Bittensor subnet 75 and hAlpha on Hippius. They are pegged 1:1. The minimum is 15 Alpha or 15 hAlpha. A deposit usually becomes hAlpha in 3 to 10 minutes. Fees are TAO on Bittensor and hAlpha on Hippius. Adding the escrow as a proxy reserves 0.093 TAO until the proxy is removed.
 
@@ -345,12 +343,15 @@ Scoped credentials: per-bucket, read-only or read/write, optional expiry.
 Create in Console > Object Storage (https://docs.hippius.com/use/console/s3), with hipc, or via Management API.
 Rotate issues a new Access Key ID and secret with the same permissions and revokes the old pair. Revoke is immediate. To hand a new key to many clients without a gap, create a second token, move the clients to it, then revoke the first.
 
+    # create a sub token and an AWS CLI profile for it
     hipc --json s3 tokens create --kind sub --name app-prod --scope-type single-bucket --bucket app-prod --action read --action write --secret-file app-prod.secret --yes > app-prod.json
     hipc s3 configure --aws-profile app-prod --from-token-file app-prod.json
     rm app-prod.secret app-prod.json
+    # rotate: the old pair stops at once, so every client needs the new one
     hipc --json s3 tokens rotate --kind sub <token_id> --secret-file app-prod.secret --yes > app-prod.json
     hipc s3 configure --aws-profile app-prod --yes --from-token-file app-prod.json
     rm app-prod.secret app-prod.json
+    # revoke: the token stops at once
     hipc s3 tokens revoke --kind sub <token_id> --yes
 
     curl -X POST https://api.hippius.com/api/objectstore/sub-tokens/ \
@@ -732,6 +733,7 @@ Compute public prices are credits (1 credit = 1 USD) as decimal strings; monthly
 
 ### Access key sign-in
 
+For an app that signs a person in on their own device, as the console does. Not an agent path: an agent never signs with a 12-word key.
 Docs: https://docs.hippius.com/use/wallet-login
     POST https://api.hippius.com/api/auth/mnemonic/  {"address": "0x...", "substrate_address": "5..."}  -> challenge, message, expires_in (300)
     POST https://api.hippius.com/api/auth/verify/    {"address", "substrate_address", "challenge", "signature", "substrate_signature"} -> token

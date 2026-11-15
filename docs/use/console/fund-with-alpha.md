@@ -75,7 +75,7 @@ You can also send hAlpha on the Hippius network from anywhere else to the addres
 | **Bridge hAlpha back to Alpha** | 15 hAlpha | The bridge pallet on Hippius (`AlphaBridge.MinWithdrawalAmount`) |
 | **Convert hAlpha to balance** | Shown as **Min** on the Hippius tab | Our API sets it. The chain itself refuses anything under 0.01 hAlpha (`Marketplace.MinBuyAlpha`) |
 
-Each form shows its minimum as **Min**. If you script the bridge yourself, keep deposits at 15 Alpha or more.
+Each form shows its minimum as **Min**.
 
 ## How long it takes
 
@@ -104,7 +104,7 @@ If nothing has arrived after 15 minutes, check the deposit as described below. A
 
 ## Technical reference
 
-This section is for people scripting the route, or building an agent that funds an account. Everything here is public on chain.
+This section describes what the console does on chain, so you can check a deposit or a conversion yourself. Everything here is public on chain. Bridge and convert in the console: an agent or a script never signs these steps with an account's key.
 
 ### Networks
 
@@ -182,7 +182,7 @@ You receive `alpha_amount × Credits.AlphaPrice / 10^18` credits. The console se
 
 The call is refused while `Marketplace.BuyCreditsEnabled` is false, or when `Credits.AlphaPrice` was last updated more than `Credits.MaxAlphaPriceAge` blocks ago (28,800 blocks, about 48 hours). It keeps the signer's account alive, so leave a little hAlpha for the fee.
 
-Who signs depends on the account. An access-key or wallet account signs `buy_credits` itself, from its own address. For a Google, GitHub or Apple account, Hippius holds the key: send hAlpha to the account's address, then ask our API to convert it. The console reads `GET https://api.hippius.com/api/billing/native/quote/` for the price, the account address, whether it is managed (`custodial`) and the smallest amount (`min_alpha`), and converts with `POST https://api.hippius.com/api/billing/native/buy/` and a body of `{"alpha_amount": "...", "min_credits": "..."}`, both as 18-decimal integer strings.
+Who signs depends on the account. An access-key or wallet account signs `buy_credits` in the console, from its own address. For a Google, GitHub or Apple account, Hippius holds the key: send hAlpha to the account's address, then ask our API to convert it. The console reads `GET https://api.hippius.com/api/billing/native/quote/` for the price, the account address, whether it is managed (`custodial`) and the smallest amount (`min_alpha`), and converts with `POST https://api.hippius.com/api/billing/native/buy/` and a body of `{"alpha_amount": "...", "min_credits": "..."}`, both as 18-decimal integer strings.
 
 ## Where to next
 
