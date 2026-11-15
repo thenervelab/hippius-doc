@@ -83,7 +83,7 @@ Sign in at https://console.hippius.com with Google, GitHub, Apple, or an existin
 How the API token is obtained depends on the sign-in:
 
 - Google, GitHub or Apple: the user copies the token from console Settings, https://console.hippius.com/dashboard/settings, and stores it with `hipc auth login` (a prompt that does not echo) or `hipc auth login --token-file -`.
-- A 12-word access key: Settings does not show a token for this sign-in. The access-key sign-in (Access key sign-in, below, and https://docs.hippius.com/use/wallet-login) signs a challenge with the key and returns a token; the first verify for a new key creates the account. One mistyped word therefore opens a new, empty account. The user signs in with the key on their own device; `hipc` never takes the 12 words, and an agent receives only the token. Never ask for the 12 words in chat.
+- A 12-word access key: Settings does not show a token for this sign-in. The person signs in with the key on their own device, in the console or an app (the app path is Access key sign-in, below, and https://docs.hippius.com/use/wallet-login), and gets a token; the first verify for a new key creates the account. One mistyped word therefore opens a new, empty account. The user signs in with the key on their own device; `hipc` never takes the 12 words, and an agent receives only the token. Never ask for the 12 words in chat.
 - CI and servers: sign in once on a machine you trust and store only the token (for example as the CI secret `HIPPIUS_TOKEN`). Never put the 12 words on a runner: they control the whole account and its funds.
 
 Every sign-in, Google, GitHub, Apple, or a 12-word access key, happens in the user's browser or app. An agent never signs with a 12-word key and never asks the user to paste one.
@@ -144,7 +144,7 @@ Open a support ticket with the account API token: POST https://api.hippius.com/a
 
 ## Tools an agent can run
 
-Use `hipc` first for anything on the account API: accounts and projects, billing, storage keys and buckets, Hub, compute and App Engine, CDN, network, and support. S3 bytes use any S3 client (Object Storage — Quickstart below); Hub blobs use `hippius-hub`. The IPFS-era commands (`hipc storage`) and the storage commands of the old `hippius` Python package are deprecated; chain registration still uses `hippius==0.2.77`.
+Use `hipc` first for anything on the account API: accounts and projects, billing, storage keys and buckets, Hub, compute and App Engine, CDN, network, and support. S3 bytes use any S3 client (Object Storage — Quickstart below); Hub blobs use `hippius-hub`. The IPFS-era commands (`hipc storage`) and the storage commands of the old `hippius` Python package are deprecated; chain registration still uses `hippius==0.2.77`, installed in its own virtual environment so it never replaces `hipc` (https://docs.hippius.com/earn/register-in-blockchain).
 
 An agent cannot create a Google, GitHub or Apple account or approve a browser login. The user signs in at https://console.hippius.com and stores the API token from https://console.hippius.com/dashboard/settings with `hipc auth login`. An access-key account signs in on the user's own device and the user stores the token with `hipc auth login` the same way; `hipc` never takes the 12 words.
 
@@ -186,7 +186,7 @@ The package name `hippius-drive` is not on PyPI. Python 3.10 to 3.13.
 
 ```bash
 pip install "git+https://github.com/thenervelab/hippius-drive-sdk"
-export HIPPIUS_TOKEN=...            # console Settings, or the access-key sign-in
+export HIPPIUS_TOKEN=...            # the token the user stored; never sign in with the 12 words
 export HIPPIUS_ACCOUNT_SS58=...     # the account that token belongs to
 export HIPPIUS_PASSWORD=...         # unlock password. Prompted on a terminal. Required when there is no terminal.
 hippius-drive init --mnemonic "$RECOVERY_PHRASE"
@@ -240,12 +240,7 @@ The bridge moves Alpha on Bittensor subnet 75 and hAlpha on Hippius. They are pe
 
 The stake has to sit on hotkey 5G1Qj93Fy22grpiGKq6BEvqqmS2HVRs3jaEdMhq9absQzs6g. Stake anywhere else fails the deposit. The escrow contract is 5CtJ99rm9ze4QA523ieagy3vJ9D1A69tDcEUae3Q7g5RVykh.
 
-1. SubtensorModule.move_stake onto that hotkey, netuid 75 on both sides, amount in rao. Skip this when the hotkey already holds the amount.
-2. Proxy.add_proxy of the contract, proxy type Any, delay 0.
-3. Contract deposit(amount, hotkey), amount in rao, hotkey the validator.
-4. Proxy.remove_proxy with the same arguments.
-
-hAlpha to Alpha needs 1 signature. The minimum is 15 hAlpha. Multiply the rao amount by 10^9 to get hAlpha planck. The call data and how to follow a deposit are on the funding guide.
+The console asks the user's wallet to approve 3 or 4 transactions for a deposit, and 1 for hAlpha back to Alpha (minimum 15 hAlpha). An agent never signs them. How to follow a deposit on chain is on the funding guide.
 
 ### Compute
 
@@ -701,7 +696,7 @@ Subscribe from the existing balance (201). Do not use Stripe Checkout when the b
     POST https://api.hippius.com/api/drive/subscription/     {"plan":"solo","period":"monthly","payment":"credits"}
                                                              Drive codes: solo, duo, max, scale
     POST https://api.hippius.com/api/s3/subscription/        {"plan":"pro","rail":"credits"}
-                                                             S3 codes: pro, business, enterprise
+                                                             Object Storage codes: pro, business, enterprise
     POST https://api.hippius.com/api/registry/subscribe/     {"plan_id":2}
                                                              Hub names: Free, Builder, Pro, Team. Requires plan_id from GET /api/registry/plans/. {"plan":"Builder"} returns 400.
     GET  https://api.hippius.com/api/drive/plans/
@@ -737,7 +732,7 @@ For an app that signs a person in on their own device, as the console does. Not 
 Docs: https://docs.hippius.com/use/wallet-login
     POST https://api.hippius.com/api/auth/mnemonic/  {"address": "0x...", "substrate_address": "5..."}  -> challenge, message, expires_in (300)
     POST https://api.hippius.com/api/auth/verify/    {"address", "substrate_address", "challenge", "signature", "substrate_signature"} -> token
-Sign `message` verbatim: signature = EIP-191 personal_sign by the Ethereum key (m/44'/60'/0'/0/0); substrate_signature = sr25519 by the Substrate key (no derivation path) over the raw message bytes. A signature over the polkadot.js <Bytes> wrapping (browser extension signRaw) is refused: 401 code substrate_signature_invalid. Missing proof on a new or never-proven account: 401 code substrate_signature_required. The first verify for a new Substrate address creates the account. An agent that holds the phrase uses this. Never ask a user to paste their 12 words into chat. For CI, sign in once on a trusted machine and keep only the token: never put the 12 words on a runner.
+Sign `message` verbatim: signature = EIP-191 personal_sign by the Ethereum key (m/44'/60'/0'/0/0); substrate_signature = sr25519 by the Substrate key (no derivation path) over the raw message bytes. A signature over the polkadot.js <Bytes> wrapping (browser extension signRaw) is refused: 401 code substrate_signature_invalid. Missing proof on a new or never-proven account: 401 code substrate_signature_required. The first verify for a new Substrate address creates the account. Never ask a user to paste their 12 words into chat. For CI, the person signs in on their own device and stores only the token as `HIPPIUS_TOKEN`: never put the 12 words on a runner.
 
 ---
 

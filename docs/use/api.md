@@ -35,7 +35,7 @@ The full API specification with request/response examples is available as an int
 <Unordered>
   <li><strong>CI/CD pipelines</strong> — Create short-lived sub tokens scoped to a single bucket for deployments, then revoke them automatically</li>
   <li><strong>Multi-tenant apps</strong> — Provision a bucket and scoped token per customer from your backend</li>
-  <li><strong>Billing automation</strong> — Check the balance, top up, and subscribe to a plan without a browser</li>
+  <li><strong>Billing automation</strong> — Check the balance, start a top-up, and subscribe to a plan from the balance without a browser</li>
   <li><strong>AI agents &amp; LLMs</strong> — Automate storage operations end-to-end without manual console interaction</li>
 </Unordered>
 
@@ -45,7 +45,7 @@ Prefer [hipc](/cli), the command line, over hand-written calls to this API: it c
 
 ## Authentication
 
-Management API requests need an access token. If you sign in with Google, GitHub or Apple, generate one in the [Hippius Console](https://console.hippius.com) under Settings. Settings shows no token for an account that signs in with a 12-word access key: that account gets its token from the [access-key sign-in](/use/wallet-login). Send the token in the `Authorization` header:
+Management API requests need an access token. If you sign in with Google, GitHub or Apple, generate one in the [Hippius Console](https://console.hippius.com) under Settings. Settings shows no token for an account that signs in with a 12-word access key: for that account, the person runs the [access-key sign-in](/use/wallet-login) on their own device and keeps only the token; an agent never runs it. Send the token in the `Authorization` header:
 
 ```bash
 curl -H "Authorization: Token YOUR_TOKEN" https://api.hippius.com/api/accounts/

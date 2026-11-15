@@ -3,7 +3,7 @@ id: fund-with-alpha
 title: Fund Your Account with Alpha
 sidebar_label: Fund with Alpha
 slug: /use/console/fund-with-alpha
-description: Turn Bittensor subnet 75 Alpha into Hippius balance. Which network and address to send to, the bridge steps, the minimums, how long it takes, how to check a deposit, and the contract and call details for scripts.
+description: Turn Bittensor subnet 75 Alpha into Hippius balance. Which network and address to send to, the bridge steps, the minimums, how long it takes, how to check a deposit, and what the console submits on chain.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -142,9 +142,9 @@ The messages a funder needs. `Balance` is a `u64` in Alpha's smallest unit (1 Al
 
 A successful `deposit` emits `DepositRequestCreated { deposit_nonce, sender, amount, deposit_request_id }`. The `deposit_request_id` is the key you follow on Hippius.
 
-### The bridge, as extrinsics
+### What the console submits
 
-All on Bittensor, all signed by the coldkey that holds the Alpha:
+All on Bittensor. The console asks the wallet that holds the Alpha to approve each one:
 
 <Ordered>
   <li><strong>Only if needed</strong>: <code>SubtensorModule.move_stake(origin_hotkey, destination_hotkey, origin_netuid, destination_netuid, alpha_amount)</code>, with the Hippius validator hotkey as the destination and 75 as both netuids. Needed when less than the amount you are bridging sits on the validator hotkey.</li>
