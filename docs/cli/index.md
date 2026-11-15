@@ -18,8 +18,8 @@ The install script puts `hipc` in `~/.local/bin` (or `$HIPC_INSTALL_DIR`), needs
 curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh
 ```
 
-:::warning Homebrew and PyPI are not published yet
-Until they are, `brew install thenervelab/tap/hipc` installs the old IPFS-era `hipc` 0.0.7, and `pip install hippius` installs the old Hippius Python SDK, not this command. Use the install script above, or a tarball from the [releases page](https://github.com/thenervelab/hippius-cli/releases).
+:::warning Homebrew and PyPI
+Each is published by a release once its switch is on. Until then, `brew install thenervelab/tap/hipc` installs the IPFS-era `hipc` 0.0.7, and `pip install hippius` (or `uv tool install hippius`, or `pipx install hippius`) installs the old Hippius Python SDK, not this command. Use the install script above, or a tarball from the [releases page](https://github.com/thenervelab/hippius-cli/releases). If the IPFS-era `hipc` from Homebrew is installed, remove it first with `brew uninstall hipc`, so it does not come first on your `PATH`.
 :::
 
 Check it with `hipc version`.

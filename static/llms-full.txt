@@ -158,7 +158,7 @@ Instructions for agents:
 - Find a command with `hipc --help`, one level at a time, or `hipc schema <path>`, such as `hipc schema s3 buckets` (the whole schema is about 190 KB; pass a path). Don't recall flags from memory or from a web page: the installed binary is the reference for its own version.
 - Run every write with `--dry-run` first, and ask the user before adding `--yes`.
 
-Install: `curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh`. Homebrew and PyPI are not published yet: `brew install thenervelab/tap/hipc` installs the old IPFS-era `hipc` 0.0.7, and `pip install hippius` the old Python SDK.
+Install: `curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh`. Until a release publishes them, `brew install thenervelab/tap/hipc` installs the IPFS-era `hipc` 0.0.7, and `pip`, `uv tool`, or `pipx install hippius` the old Python SDK: check `hipc version` after any of them.
 
 ### Hub
 

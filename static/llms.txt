@@ -12,7 +12,7 @@ Open only the file for the product you need. The long reference for the whole pr
 - Find a command with `hipc --help`, one level at a time, or `hipc schema <path>`, such as `hipc schema s3 buckets`; don't recall flags from memory or from a web page.
 - Run every write with `--dry-run` first, and ask the user before adding `--yes`.
 
-Install: `curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh`. Homebrew and PyPI are not published yet: `brew install thenervelab/tap/hipc` installs the old IPFS-era `hipc` 0.0.7, and `pip install hippius` the old Python SDK.
+Install: `curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh`. Until a release publishes them, `brew install thenervelab/tap/hipc` installs the IPFS-era `hipc` 0.0.7, and `pip`, `uv tool`, or `pipx install hippius` the old Python SDK: check `hipc version` after any of them.
 
 - [hipc for agents](https://docs.hippius.com/cli/agents): the one page to read first; raw Markdown at https://raw.githubusercontent.com/thenervelab/hippius-cli/main/docs/agents.md
 - [Accounts and projects](https://docs.hippius.com/cli/agents/accounts), [Secrets](https://docs.hippius.com/cli/agents/secrets), [Hub](https://docs.hippius.com/cli/agents/hub), [hipc api](https://docs.hippius.com/cli/agents/api): read one only when the task needs it

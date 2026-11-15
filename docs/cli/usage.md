@@ -18,4 +18,4 @@ What replaces them:
 - **Chain registration for a miner or a validator**: the pinned Python package, in its own virtual environment so it never replaces `hipc`, in [Registering in the Hippius blockchain](/earn/register-in-blockchain).
 - **Miner operations**: the [miner guide](/earn/arion/running-miner) and the `miner` binary from the [arion](https://github.com/thenervelab/arion) repository.
 
-If you have the IPFS-era `hipc` from Homebrew, remove it with `brew uninstall hipc` before you run the install script, so the old command does not come first on your `PATH`. The Homebrew formula of the new `hipc` is not published yet.
+If you have the IPFS-era `hipc` from Homebrew, remove it with `brew uninstall hipc` before you run the install script, so the old command does not come first on your `PATH`. Until a release publishes the new formula, the tap still holds the IPFS-era one.
