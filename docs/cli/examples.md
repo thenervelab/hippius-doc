@@ -28,7 +28,7 @@ hipc account notifications get
 hipc account members list
 hipc billing balance
 hipc billing subscriptions
-hipc billing transactions --limit 5
+hipc billing transactions list --limit 5
 hipc billing summary
 hipc billing usage
 hipc billing invoices list --limit 5
