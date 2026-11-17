@@ -49,7 +49,7 @@ const sidebars: SidebarsConfig = {
           type: "category",
           label: "Drive",
           collapsed: true,
-          items: ["use/drive/quickstart", "use/drive/choose-your-app"],
+          items: ["use/drive/quickstart", "use/drive/choose-your-app", "use/drive/agents"],
         },
         {
           type: "category",
