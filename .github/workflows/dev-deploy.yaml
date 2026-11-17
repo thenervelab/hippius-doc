@@ -58,7 +58,7 @@ jobs:
       uses: azure/setup-kubectl@v3
 
     - name: Kubernetes credentials (OpenBao kube-broker, 15 min)
-      uses: thenervelab/ci-actions/kube-login@4f368c284a7d95663d5808690edb9cd1aee6f762
+      uses: ./.github/actions/kube-login
       with:
         scope: hippius-doc-dev
 

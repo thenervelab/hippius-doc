@@ -1,0 +1,77 @@
+name: kube-login
+description: >
+  Short-lived kubeconfig for a kube-broker scope: GitHub OIDC -> OpenBao (auth/github role
+  kube-<scope>) -> OpenBao identity token -> kube-broker -> 15-min cluster-scoped Rancher token.
+  The job needs `permissions: id-token: write`. Exports KUBECONFIG (cluster/context "rancher").
+inputs:
+  scope:
+    description: kube-broker scope (OpenBao role kube-<scope>)
+    required: true
+  bao-addr:
+    description: OpenBao address
+    default: https://bao.hippius.network:8200
+  broker-url:
+    description: kube-broker URL
+    default: https://kube-broker-yuxvwh3w5a-od.a.run.app
+outputs:
+  server:
+    description: Rancher cluster proxy URL
+    value: ${{ steps.login.outputs.server }}
+runs:
+  using: composite
+  steps:
+    - id: login
+      shell: bash
+      env:
+        SCOPE: ${{ inputs.scope }}
+        BAO_ADDR: ${{ inputs.bao-addr }}
+        BROKER_URL: ${{ inputs.broker-url }}
+      run: |
+        set -euo pipefail
+        fail() { echo "::error title=kube-login::$*"; exit 1; }
+        [[ "$SCOPE" =~ ^[a-z0-9-]{1,40}$ ]] || fail "invalid scope '$SCOPE'"
+        [ -n "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" ] || fail "no OIDC token available: add 'permissions: id-token: write' to the job"
+
+        gh_jwt=$(curl -fsS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+          "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://bao.hippius.network" | jq -r .value)
+        echo "::add-mask::$gh_jwt"
+
+        login=$(curl -sS -X POST "$BAO_ADDR/v1/auth/github/login" \
+          -d "$(jq -nc --arg r "kube-$SCOPE" --arg j "$gh_jwt" '{role: $r, jwt: $j}')")
+        bao_token=$(jq -r '.auth.client_token // empty' <<<"$login")
+        [ -n "$bao_token" ] || fail "OpenBao refused role kube-$SCOPE for this repo/ref/environment: $(jq -c '.errors // .' <<<"$login")"
+        echo "::add-mask::$bao_token"
+
+        id_token=$(curl -fsS -H "X-Vault-Token: $bao_token" "$BAO_ADDR/v1/identity/oidc/token/kube-$SCOPE" | jq -r .data.token)
+        echo "::add-mask::$id_token"
+        curl -fsS -o /dev/null -X POST -H "X-Vault-Token: $bao_token" "$BAO_ADDR/v1/auth/token/revoke-self" || true
+
+        resp=$(curl -sS -X POST -H "Authorization: Bearer $id_token" "$BROKER_URL/v1/token")
+        token=$(jq -r '.token // empty' <<<"$resp")
+        [ -n "$token" ] || fail "kube-broker refused: $(jq -c '.error // .' <<<"$resp" 2>/dev/null || echo "$resp")"
+        echo "::add-mask::$token"
+        server=$(jq -r .server <<<"$resp")
+
+        kc="$RUNNER_TEMP/kube-broker-$SCOPE.kubeconfig"
+        umask 077
+        cat > "$kc" <<KC
+        apiVersion: v1
+        kind: Config
+        clusters:
+        - name: rancher
+          cluster:
+            server: "$server"
+        users:
+        - name: kube-broker-$SCOPE
+          user:
+            token: "$token"
+        contexts:
+        - name: rancher
+          context:
+            cluster: rancher
+            user: kube-broker-$SCOPE
+        current-context: rancher
+        KC
+        echo "KUBECONFIG=$kc" >> "$GITHUB_ENV"
+        echo "server=$server" >> "$GITHUB_OUTPUT"
+        echo "kube-login: scope $SCOPE -> $server (token valid $(jq -r .expires_in <<<"$resp")s)"
