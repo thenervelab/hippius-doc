@@ -9,6 +9,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       contents: read
       packages: write
 
@@ -56,27 +57,27 @@ jobs:
     - name: Setup kubectl
       uses: azure/setup-kubectl@v3
 
+    - name: Kubernetes credentials (OpenBao kube-broker, 15 min)
+      uses: thenervelab/ci-actions/kube-login@4f368c284a7d95663d5808690edb9cd1aee6f762
+      with:
+        scope: hippius-doc-dev
+
     - name: Deploy to staging
       run: |
-        mkdir -p $HOME/.kube
-        echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
-        kubectl config set-cluster rancher --insecure-skip-tls-verify=true
-
-        kubectl create namespace docs-dev --insecure-skip-tls-verify=true || true
+        kubectl create namespace docs-dev || true
 
         kubectl create secret docker-registry registry \
           --namespace=docs-dev \
           --docker-server=registry.starkleytech.com \
           --docker-username=${{ secrets.REGISTRY_USERNAME }} \
           --docker-password=${{ secrets.REGISTRY_PASSWORD }} \
-          --insecure-skip-tls-verify=true \
-          --dry-run=client -o yaml | kubectl apply -f - --insecure-skip-tls-verify=true
+          --dry-run=client -o yaml | kubectl apply -f -
 
         sed -i "s|\${IMAGE}|registry.starkleytech.com/hippius/docs:dev-${{ steps.sha.outputs.SHORT_SHA }}|g" k8s/staging/manifests.yaml
 
-        kubectl apply -f k8s/staging/manifests.yaml --validate=false --insecure-skip-tls-verify=true
+        kubectl apply -f k8s/staging/manifests.yaml --validate=false
 
-        kubectl rollout status deployment/hippius-docs-dev -n docs-dev --timeout=180s --insecure-skip-tls-verify=true
+        kubectl rollout status deployment/hippius-docs-dev -n docs-dev --timeout=180s
 
     - name: Notify Mattermost (success)
       if: success()
