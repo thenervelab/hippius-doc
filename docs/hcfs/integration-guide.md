@@ -9,6 +9,10 @@ slug: /hcfs/integration-guide
 
 How to talk to HCFS from your own application — desktop, browser, or anything else. This is a guide for *integrators*: people building a client on top of HCFS, not people changing HCFS itself.
 
+:::tip Just want to use Drive from a script or an AI agent?
+You don't need to build a client. The `hippius-drive` Python SDK and command line tool, from [github.com/thenervelab/hippius-drive-sdk](https://github.com/thenervelab/hippius-drive-sdk), already do the encryption, signing and uploads for you. Start with [AI Agents and Scripts](/use/drive/agents).
+:::
+
 ---
 
 ## 1. Mental Model
@@ -35,7 +39,7 @@ Four paths exist. Pick by the language you're already writing your UI in — not
 |---|---|---|
 | Tauri (Rust backend) or any native Rust UI (egui, slint) | **`hcfs-client` crate** | Direct access to `Drive`, the sync engine, and progress callbacks. Same code path as the reference CLI. |
 | Electron, web-based Tauri frontend, or any browser/Node app | **`@hippius/hcfs-client-wasm`** *(crypto only)* + your own HTTP/sync layer | Real XChaCha20/Ed25519 in the renderer — no shipping a Rust binary alongside your JS. The WASM crate exposes primitives, **not** a full sync engine. |
-| Python tooling, scripts, automation | **`hcfs-client` with `python` feature** (`pyo3` bindings) | One-line install via `maturin`, same `Drive` semantics. |
+| Python tooling, scripts, automation, AI agents | **`hippius-drive` SDK and CLI** ([github.com/thenervelab/hippius-drive-sdk](https://github.com/thenervelab/hippius-drive-sdk)) | Pure Python, installed with `pip` from GitHub, no Rust toolchain. Upload, download, browse, search, rename, delete, share links and shared drives, plus a `hippius-drive` command line tool. See [AI Agents and Scripts](/use/drive/agents). |
 | Swift, Kotlin, Go, .NET, anything else | **Raw HTTP + crypto spec** (§6) | You re-implement the client side from the spec. Plan for it — this is real work, not a wrapper. |
 
 ### How to choose for a desktop app specifically
@@ -53,7 +57,7 @@ Every path requires you to implement the same four responsibilities locally:
 3. Manifest signing (Ed25519) and Bearer token construction.
 4. Three-tree state persistence between sync runs.
 
-The Rust crate and Python bindings do all four for you. The WASM crate covers (1) and (2). Raw HTTP gives you none of it.
+The Rust crate does all four for you. The Python SDK covers (1) to (3) and has a one way `sync` command, but keeps no three-tree state, so it is not a two way sync engine. The WASM crate covers (1) and (2). Raw HTTP gives you none of it.
 
 ---
 
