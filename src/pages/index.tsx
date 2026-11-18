@@ -47,7 +47,7 @@ export const CATEGORIES: (SmallCardInfo & {
   },
   {
     title: "Develop",
-    description: "Management API, HCFS API, SDKs, and docs written for agents.",
+    description: "The hipc command line, Management API, HCFS API, SDKs, and docs written for agents.",
     icon: <Icons.Code className="text-primary-50 relative size-6" />,
     cta: {
       label: "Develop",
@@ -119,6 +119,7 @@ export const PRODUCTS: (SmallCardInfo & {
 ];
 
 export const ALSO_USEFUL: { label: string; href: string }[] = [
+  { label: "hipc, the command line for agents and people", href: "/cli" },
   { label: "Hipstats, the network explorer", href: "https://hipstats.com" },
   { label: "Status", href: "https://status.hippius.com" },
   { label: "Help & Support", href: "/use/help-support" },

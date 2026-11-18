@@ -264,7 +264,7 @@ Prices can change. The console's CDN pages show the current ones, and the create
 
 ## Monthly spend cap
 
-Each zone has a monthly spend cap: $20 by default, from $1 to $100,000. It is a hard stop, not a warning. The month runs in UTC. Its spend (traffic, requests and custom domains) is checked every minute, and shown in the zone list and on the zone's **Settings** tab.
+Each zone has a monthly spend cap: $20 by default, from $1 to $100,000 (1 credit = $1). It is a hard stop, not a warning. The cap is per zone; there is no account-wide CDN cap. The month runs in UTC. Its spend (traffic, requests, custom domains and the [WAF add-on](/use/cdn/firewall#tiers-and-prices)) is checked every minute, and shown in the zone list and on the zone's **Settings** tab.
 
 <Unordered>
   <li><strong>At 80% of the cap</strong>, you get an email.</li>
@@ -276,6 +276,36 @@ Each zone has a monthly spend cap: $20 by default, from $1 to $100,000. It is a 
 Because the spend is checked every minute, a zone can end slightly above its cap.
 
 If your account's unpaid usage gets its virtual machines stopped, its zones are **suspended** too: they answer `403` until the balance is settled, then serve again.
+
+## From the command line
+
+Every step on this page is also in [hipc](/cli), the Hippius command line. Run each write with `--dry-run` in place of `--yes` first: it prints the request and sends nothing. From a bucket to a zone on your own domain, with a WAF and a cap:
+
+```bash
+hipc cdn prices                                              # needs no token
+hipc cdn estimate --traffic FR=500 --requests 2000000 --custom-hostnames 1 --waf standard=1
+
+# 1. The zone, with its cap in credits (1 credit = $1)
+hipc cdn zones create --name site --bucket my-site --prefix public/ --monthly-cap 50 --public --yes
+
+# 2. Your domain: the answer lists the three DNS records
+hipc cdn hostnames create ZONE_ID cdn.example.com --yes
+
+# 3. Publish the records yourself, or let hipc write them at Cloudflare or Route 53
+hipc cdn hostnames dns-setup ZONE_ID cdn.example.com --provider cloudflare --credentials-file ~/cloudflare.json --yes
+hipc cdn hostnames verify ZONE_ID cdn.example.com
+hipc cdn hostnames list ZONE_ID
+
+# 4. The WAF, in log mode first, then rate limits from a file
+hipc cdn waf update ZONE_ID --tier standard --mode log --yes
+hipc cdn waf rate-limits update ZONE_ID --rules-file rate-limits.json --yes
+hipc cdn waf update ZONE_ID --mode on --yes
+
+# 5. Raise or lower the cap later
+hipc cdn cap update ZONE_ID --monthly-cap 100 --yes
+```
+
+`ZONE_ID` comes from the create answer, or `hipc cdn zones list`. `--public` acknowledges that the zone publishes everything under the bucket and prefix (see the warning in [Create a zone](#create-a-zone)); it is checked by hipc and not sent. The Cloudflare credentials file is a mode-0600 JSON file such as `{"api_token": "...", "zone_id": "..."}`; `hipc cdn hostnames dns-setup --help` gives the Route 53 form. The rate-limit file is described on [WAF](/use/cdn/firewall#rate-limits-from-the-command-line).
 
 ## Emails
 
