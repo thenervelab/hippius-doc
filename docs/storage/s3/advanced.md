@@ -92,69 +92,121 @@ Do not append extra query parameters to a presigned URL — they invalidate the 
 
 ## Make a bucket or object public {#make-a-bucket-or-object-public}
 
-Buckets are private by default. Public objects are readable at:
+Public objects are readable at:
 
 ```
 https://s3.hippius.com/{bucket}/{key}
 ```
 
-**Whole bucket (ACL):**
+New buckets start locked down, with the same defaults as AWS:
+
+<Unordered>
+  <li><strong>Block Public Access</strong> is on: all four flags (<code>BlockPublicAcls</code>, <code>IgnorePublicAcls</code>, <code>BlockPublicPolicy</code>, <code>RestrictPublicBuckets</code>) are <code>true</code>.</li>
+  <li><strong>Object Ownership</strong> is <code>BucketOwnerEnforced</code>, so ACLs are disabled.</li>
+</Unordered>
+
+So on a new bucket:
+
+<Unordered>
+  <li>A public bucket policy returns <code>403 AccessDenied</code> while <code>BlockPublicPolicy</code> is on. The policy is checked first, so a malformed one returns <code>400 MalformedPolicy</code> instead. With <code>BlockPublicPolicy</code> off but <code>RestrictPublicBuckets</code> on, the policy is stored but anonymous reads still return <code>403</code>.</li>
+  <li>Any ACL other than <code>bucket-owner-full-control</code> (<code>put-bucket-acl</code>, <code>put-object-acl</code>, or <code>x-amz-acl</code> on an upload) returns <code>400 AccessControlListNotSupported</code>. Once ACLs are enabled, a public ACL returns <code>403 AccessDenied</code> while <code>BlockPublicAcls</code> is on, and is stored but ignored while <code>IgnorePublicAcls</code> is on.</li>
+</Unordered>
+
+A master key gets the same errors: these are settings on the bucket, not permissions on the key. Change them first, as below.
+
+Check a bucket's current settings:
 
 ```bash
+aws s3api get-public-access-block --bucket my-bucket --endpoint-url https://s3.hippius.com
+aws s3api get-bucket-ownership-controls --bucket my-bucket --endpoint-url https://s3.hippius.com
+```
+
+An error means the setting is not stored. `NoSuchPublicAccessBlockConfiguration` means nothing is blocked; `OwnershipControlsNotFoundError` means ACLs are enabled (`ObjectWriter`). Buckets created on older versions of the service can be in that state.
+
+**Whole bucket (policy, recommended):** turn off the two policy flags, then set the policy. The ACL flags stay on.
+
+```bash
+aws s3api put-public-access-block --bucket my-bucket \
+  --public-access-block-configuration \
+  BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=false,RestrictPublicBuckets=false \
+  --endpoint-url https://s3.hippius.com
+
+aws s3api put-bucket-policy --bucket my-bucket --endpoint-url https://s3.hippius.com \
+  --policy '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":"*","Action":"s3:GetObject","Resource":"arn:aws:s3:::my-bucket/*"}]}'
+```
+
+This policy publishes anonymous `GET` and `HEAD` of every object, but not the bucket listing. Add a statement allowing `s3:ListBucket` on `arn:aws:s3:::my-bucket` to publish the listing too.
+
+:::warning Bucket already public through an ACL
+If `get-public-access-block` reports no configuration, the bucket may be public through `public-read` ACLs, and `IgnorePublicAcls=true` hides them the moment you set it. Run `get-bucket-policy` first. Buckets made public on older versions of the service usually already hold the public-read policy, and lose only the anonymous listing. If there is no policy, set it first, with `BlockPublicPolicy=false,RestrictPublicBuckets=false` and the two ACL flags `false`, then turn the ACL flags on once the policy serves your objects. To keep the listing public, add the `s3:ListBucket` statement.
+:::
+
+**One folder (prefix) only:** use `arn:aws:s3:::my-bucket/public/*` as the `Resource`. Only objects under `public/` become readable; the rest of the bucket stays private.
+
+Policies follow the AWS bucket policy language: `Allow` and `Deny`, principals, S3 actions, and conditions. A policy is at most 20 KB; a larger one returns `400 EntityTooLarge`. An invalid one returns `400 MalformedPolicy`. `GetBucketPolicyStatus` reports whether the stored policy is public.
+
+**One object or the listing (ACL):** ACLs need two changes first: enable them with Object Ownership, and turn off the two ACL flags of Block Public Access. The policy flags stay on.
+
+As on AWS, a bucket ACL covers the bucket, not its objects: `public-read` on the bucket publishes the listing, and each object stays private until it has its own public ACL. To publish every object, use the policy above.
+
+```bash
+aws s3api put-bucket-ownership-controls --bucket my-bucket \
+  --ownership-controls 'Rules=[{ObjectOwnership=BucketOwnerPreferred}]' \
+  --endpoint-url https://s3.hippius.com
+
+aws s3api put-public-access-block --bucket my-bucket \
+  --public-access-block-configuration \
+  BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=true,RestrictPublicBuckets=true \
+  --endpoint-url https://s3.hippius.com
+
+# One existing object, the rest stays private
+aws s3api put-object-acl --bucket my-bucket --key document.pdf \
+  --acl public-read --endpoint-url https://s3.hippius.com
+
+# Upload an object as public
+aws s3 cp ./photo.jpg s3://my-bucket/photo.jpg --acl public-read \
+  --endpoint-url https://s3.hippius.com
+
+# The listing only: objects need their own ACL
 aws s3api put-bucket-acl --bucket my-bucket --acl public-read \
   --endpoint-url https://s3.hippius.com
 ```
 
-**Whole bucket (policy):**
+Canned ACLs: `private` (default), `public-read`, `public-read-write`, `authenticated-read`, `bucket-owner-full-control`. `public-read`, `public-read-write` and `authenticated-read` count as public, so Block Public Access applies to all three.
 
-```python
-import json
-
-policy = {
-    "Version": "2012-10-17",
-    "Statement": [{
-        "Effect": "Allow",
-        "Principal": "*",
-        "Action": ["s3:GetObject"],
-        "Resource": ["arn:aws:s3:::my-bucket/*"],
-    }],
-}
-s3.put_bucket_policy(Bucket="my-bucket", Policy=json.dumps(policy))
-```
-
-This policy publishes anonymous `GET` and `HEAD` of every object, but not the bucket listing. The `public-read` ACL above publishes the listing too.
-
-**One folder (prefix) only:** aim the same statement at `arn:aws:s3:::my-bucket/public/*`. Only objects under `public/` become readable; the rest of the bucket stays private. A policy can list up to 32 prefixes, but it can't mix a prefix with the whole bucket.
-
-```python
-policy["Statement"][0]["Resource"] = ["arn:aws:s3:::my-bucket/public/*"]
-s3.put_bucket_policy(Bucket="my-bucket", Policy=json.dumps(policy))
-```
-
-Only these `Allow`, `Principal: "*"`, `s3:GetObject` statements are accepted. Anything else (another action, a `Deny`, a condition, a specific principal) is rejected with `400 InvalidPolicyDocument`. A prefix policy on a bucket that is already public returns `409 PolicyAlreadyExists`.
-
-`DeleteBucketPolicy` removes the policy. On a bucket made public with the ACL it returns `409 InvalidBucketState`: set the ACL back to `private` instead.
-
-**One object, bucket stays private:**
+**Make it private again:** remove the policy (or set the ACL back to `private`), then turn every Block Public Access flag back on.
 
 ```bash
-aws s3api put-object-acl --bucket my-bucket --key document.pdf \
-  --acl public-read --endpoint-url https://s3.hippius.com
+aws s3api delete-bucket-policy --bucket my-bucket --endpoint-url https://s3.hippius.com
+
+aws s3api put-public-access-block --bucket my-bucket \
+  --public-access-block-configuration \
+  BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true \
+  --endpoint-url https://s3.hippius.com
 ```
+
+On a bucket with ACLs disabled, `put-bucket-acl --acl private` returns `400 AccessControlListNotSupported`: remove the policy instead.
 
 Public objects are still encrypted at rest with per-bucket keys. Use this for websites, images, and videos you intend anyone to fetch. Keep private data on a private bucket and share with a [presigned URL](#share-a-time-limited-download) instead.
 
-Canned ACLs: `private` (default), `public-read`, `public-read-write`, `authenticated-read`.
-
 ## Share with another Hippius account {#share-with-another-account}
 
-Grant by canonical user ID (every key on that account gets access):
+Grant by canonical user ID (every key on that account gets access). ACL grants need ACLs enabled on the bucket first (Object Ownership `BucketOwnerPreferred` or `ObjectWriter`, see [above](#make-a-bucket-or-object-public)); new buckets have them disabled and answer `400 AccessControlListNotSupported`.
+
+As on AWS, a grant on the bucket covers the bucket, not its objects: `--grant-read` on the bucket lets the other account list it, and each object it should read needs its own grant. To share every object, use a bucket policy with `"Principal": {"AWS": "their_canonical_id_here"}` instead. It is not public, so Block Public Access does not stop it and ACLs can stay disabled.
 
 ```bash
 aws s3api list-buckets --endpoint-url https://s3.hippius.com \
   --query 'Owner.ID' --output text
 
+# List the bucket
 aws s3api put-bucket-acl --bucket my-bucket \
+  --grant-read 'id="their_canonical_id_here"' \
+  --grant-full-control 'id="your_canonical_id_here"' \
+  --endpoint-url https://s3.hippius.com
+
+# Read one object
+aws s3api put-object-acl --bucket my-bucket --key report.pdf \
   --grant-read 'id="their_canonical_id_here"' \
   --grant-full-control 'id="your_canonical_id_here"' \
   --endpoint-url https://s3.hippius.com
@@ -175,16 +227,9 @@ aws s3api put-bucket-acl --bucket my-bucket --acl private \
 
 ## Grant one access key {#grant-one-access-key}
 
-`accessKey=` is a Hippius extension. Use it when you want one key, not a whole account.
+ACL grants name accounts (`id=`) or groups (`uri=`), as on AWS. The older `accessKey="hip_..."` grant is no longer accepted and returns `400 InvalidArgument`. To give one key access to one bucket, create a [sub-token](#give-an-app-scoped-credentials) scoped to that bucket: it needs no ACL grant.
 
-```bash
-aws s3api put-bucket-acl --bucket my-bucket \
-  --grant-read 'accessKey="YOUR_ACCESS_KEY"' \
-  --grant-full-control 'id="your_canonical_id"' \
-  --endpoint-url https://s3.hippius.com
-```
-
-Master keys bypass ACLs. Sub-tokens need an explicit grant unless you created them with access to that bucket in the console.
+Block Public Access and Object Ownership apply to master keys too: they are settings on the bucket, not permissions on a key.
 
 ## Give an app scoped credentials {#give-an-app-scoped-credentials}
 
@@ -248,8 +293,13 @@ s3.put_object_tagging(
 Make the bucket public, then upload. Files are served from the path-style URL, with no extra web server.
 
 ```bash
-aws s3api put-bucket-acl --bucket my-site --acl public-read \
+aws s3api put-public-access-block --bucket my-site \
+  --public-access-block-configuration \
+  BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=false,RestrictPublicBuckets=false \
   --endpoint-url https://s3.hippius.com
+
+aws s3api put-bucket-policy --bucket my-site --endpoint-url https://s3.hippius.com \
+  --policy '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":"*","Action":"s3:GetObject","Resource":"arn:aws:s3:::my-site/*"}]}'
 
 aws s3 sync ./dist s3://my-site/ --endpoint-url https://s3.hippius.com
 ```
