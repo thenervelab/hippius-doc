@@ -40,6 +40,7 @@ If you can connect but cannot read or write objects:
   <li><strong>Sub-token permissions:</strong> confirm the token is Object Read Only or Object Read &amp; Write, matching the operation you are trying.</li>
   <li><strong>Account read only or suspended:</strong> on pay as you go, an unpaid balance turns Object Storage read only after 7 days and suspends it after 14. Top up in <BgStyledText>Billing</BgStyledText>. See <a href="/use/console/billing#s3-plans-and-pay-as-you-go">Object Storage plans and pay as you go</a>.</li>
   <li><strong>Bucket scope:</strong> confirm the sub-token was granted access to this specific bucket. See <a href="/storage/s3/advanced#give-an-app-scoped-credentials">Give an app scoped credentials</a>.</li>
+  <li><strong>Making a bucket public:</strong> a public bucket policy returns <strong>AccessDenied</strong>, even with a master key, while the bucket's Block Public Access is on, and new buckets start with it on. See <a href="/storage/s3/advanced#make-a-bucket-or-object-public">Make a bucket or object public</a>.</li>
 </Unordered>
 
 ## Slow uploads

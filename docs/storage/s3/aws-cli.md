@@ -157,14 +157,21 @@ Default expiry is 1 hour (3600 seconds). Max is 7 days (604800 seconds).
 
 ## Access control
 
-Make a bucket publicly readable:
+Make a bucket publicly readable. New buckets block public access, so turn off the policy flags first, then set a public-read policy:
 
 ```bash
-aws s3api put-bucket-acl \
+aws s3api put-public-access-block \
   --bucket my-bucket \
-  --acl public-read \
+  --public-access-block-configuration \
+  BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=false,RestrictPublicBuckets=false \
+  --profile hippius \
+  --endpoint-url https://s3.hippius.com
+
+aws s3api put-bucket-policy \
+  --bucket my-bucket \
+  --policy '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":"*","Action":"s3:GetObject","Resource":"arn:aws:s3:::my-bucket/*"}]}' \
   --profile hippius \
   --endpoint-url https://s3.hippius.com
 ```
 
-See [Advanced Usage](/storage/s3/advanced#make-a-bucket-or-object-public) for full ACL options. Presigned URLs, sub-tokens, and public buckets are on that page too.
+See [Advanced Usage](/storage/s3/advanced#make-a-bucket-or-object-public) for ACLs and Object Ownership. Presigned URLs, sub-tokens, and public buckets are on that page too.

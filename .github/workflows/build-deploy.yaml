@@ -9,6 +9,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       contents: read
       packages: write
     
@@ -59,16 +60,16 @@ jobs:
       uses: azure/setup-kubectl@v3
       
     # Deploy to Kubernetes
+    - name: Kubernetes credentials (OpenBao kube-broker, 15 min)
+      uses: ./.github/actions/kube-login
+      with:
+        scope: hippius-doc
+
     - name: Deploy to Rancher K8s
       run: |
-        mkdir -p $HOME/.kube
-        echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
-        
-        # Create a kubectl config with insecure-skip-tls-verify
-        kubectl config set-cluster rancher --insecure-skip-tls-verify=true
         
         # Create namespace if it doesn't exist
-        kubectl create namespace hippius-documentation --insecure-skip-tls-verify=true || true
+        kubectl create namespace hippius-documentation || true
         
         # Create or update the registry secret in the namespace
         kubectl create secret docker-registry registry \
@@ -76,22 +77,21 @@ jobs:
           --docker-server=registry.starkleytech.com \
           --docker-username=${{ secrets.REGISTRY_USERNAME }} \
           --docker-password=${{ secrets.REGISTRY_PASSWORD }} \
-          --insecure-skip-tls-verify=true \
-          --dry-run=client -o yaml | kubectl apply -f - --insecure-skip-tls-verify=true
+          --dry-run=client -o yaml | kubectl apply -f -
         
         # Update deployment file with the current image tag
         sed -i "s|\${IMAGE}|registry.starkleytech.com/hippius/docs:${{ steps.sha.outputs.SHORT_SHA }}|g" k8s/deployment.yaml
         
         # Apply the deployment with validation disabled
-        kubectl apply -f k8s/deployment.yaml --validate=false --insecure-skip-tls-verify=true
+        kubectl apply -f k8s/deployment.yaml --validate=false
         
-        # Wait for rollout with increased timeout and insecure flag
-        kubectl rollout status deployment/hippius-docs -n hippius-documentation --timeout=180s --insecure-skip-tls-verify=true
+        # Wait for rollout with increased timeout
+        kubectl rollout status deployment/hippius-docs -n hippius-documentation --timeout=180s
         
         # Print deployment status for debugging
         echo "Deployment status:"
-        kubectl get deployments -n hippius-documentation --insecure-skip-tls-verify=true
+        kubectl get deployments -n hippius-documentation
         
         # Print pod status
         echo "Pod status:"
-        kubectl get pods -n hippius-documentation --insecure-skip-tls-verify=true 
+        kubectl get pods -n hippius-documentation 
