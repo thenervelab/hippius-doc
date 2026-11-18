@@ -29,7 +29,7 @@ With `--from-token-file`, `hipc s3 configure` reads the secret from the file the
 
 ## Secrets that go in, not out
 
-- A DNS provider credential (`--credentials-file` of `hipc cdn hostnames dns-setup`) and App Engine secret values (`--secrets-file` of `hipc compute app-engine apps create`) come only from a file that is the user's own, mode 0600, not a symlink, in a directory no one else can write. Ask the user to create it; don't write the values into it yourself. In this beta, Hippius operators can read App Engine secret values.
+- A DNS provider credential (`--credentials-file` of `hipc cdn hostnames dns-setup`) and App Engine secret values (`--secrets-file` of `hipc compute app-engine apps create` and `apps update`) come only from a file that is the user's own, mode 0600, not a symlink, in a directory no one else can write. Ask the user to create it; don't write the values into it yourself. In this beta, Hippius operators can read App Engine secret values.
 - A Bittensor hotkey's words go only in the file `--hotkey-file` names.
 - An S3 secret key (`--secret-key-file` of `hipc s3 configure`), an invite token (`--token-file` of `hipc account invites accept`), and a Kubernetes cluster key (`--cluster-key-file`) are read from files too. The API token goes only to `hipc auth login`, on the user's machine.
 

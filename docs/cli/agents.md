@@ -79,7 +79,7 @@ When a failed command still printed a document on stdout, keep it: it is what wa
   - `--public` may make a bucket or a namespace readable by anyone;
   - `--remove-others` lets a list replace drop entries that exist now;
   - `--replace` replaces a paid plan;
-  - `--change-isolation`, on `hipc api` only, changes which network peers can reach each other.
+  - `--change-isolation` changes which network peers can reach each other.
 
   Pass one only when the user asked for exactly that.
 - **Keep secrets out of the transcript.** Commands that issue a secret take `--secret-file` or `--credentials-dir`, which write it to new private files and print their paths instead. Prefer those over `--reveal`. A secret is shown once; the recovery is a rotate. See [secrets](/cli/agents/secrets).
