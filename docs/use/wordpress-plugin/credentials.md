@@ -97,7 +97,7 @@ aws s3api put-bucket-policy --bucket your-bucket-name --endpoint-url https://s3.
   --policy '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":"*","Action":"s3:GetObject","Resource":"arn:aws:s3:::your-bucket-name/*"}]}'
 ```
 
-See [Make a bucket or object public](/storage/s3/advanced#make-a-bucket-or-object-public) for the ACL version and how to make a bucket private again.
+See [Make a bucket or object public](/storage/s3/advanced#make-a-bucket-or-object-public) for how to make a bucket private again.
 
 :::info Public means readable, not unencrypted
 A public bucket lets anyone with a file's URL download it, which is exactly what a website needs. The files are still encrypted at rest on Hippius. Keep anything private out of this bucket.

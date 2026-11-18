@@ -33,9 +33,9 @@ Same values as the [Object Storage Quickstart](/use/quickstart#connection-detail
 | `HeadBucket` | ✅ Supported | |
 | `ListBuckets` | ✅ Supported | |
 | `GetBucketLocation` | ✅ Supported | Returns `us-east-1`. Clients still sign with region `decentralized` |
-| `PutBucketAcl` | ✅ Supported | `private`, `public-read`, `public-read-write`, `authenticated-read`. Needs ACLs enabled (Object Ownership not `BucketOwnerEnforced`); a public ACL also needs `BlockPublicAcls` off |
+| `PutBucketAcl` | ✅ Supported | `private`, `public-read`, `public-read-write`, `authenticated-read`. Needs ACLs enabled (Object Ownership not `BucketOwnerEnforced`). A public ACL needs `BlockPublicAcls` off (else `403`) and `IgnorePublicAcls` off (else ignored) |
 | `GetBucketAcl` | ✅ Supported | |
-| `PutBucketPolicy` | ✅ Supported | AWS policy language, up to 20 KB. A public policy needs `BlockPublicPolicy` off, else `403 AccessDenied` |
+| `PutBucketPolicy` | ✅ Supported | AWS policy language, up to 20 KB. A public policy needs `BlockPublicPolicy` off (else `403 AccessDenied`) and `RestrictPublicBuckets` off (else anonymous reads are refused) |
 | `GetBucketPolicy` | ✅ Supported | `404 NoSuchBucketPolicy` when none is stored |
 | `DeleteBucketPolicy` | ✅ Supported | |
 | `GetBucketPolicyStatus` | ✅ Supported | |
@@ -71,7 +71,7 @@ Same values as the [Object Storage Quickstart](/use/quickstart#connection-detail
 | `CopyObject` | ✅ Supported | |
 | `ListObjectsV2` | ✅ Supported | Pagination, prefix, delimiter |
 | `ListObjects` | ✅ Supported | V1 — prefer `ListObjectsV2` |
-| `PutObjectAcl` | ✅ Supported | Per-object ACLs |
+| `PutObjectAcl` | ✅ Supported | Per-object ACLs. Same prerequisites as `PutBucketAcl` |
 | `GetObjectAcl` | ✅ Supported | |
 | `PutObjectTagging` | ✅ Supported | |
 | `GetObjectTagging` | ✅ Supported | |

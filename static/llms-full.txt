@@ -300,7 +300,7 @@ Do not append extra query parameters to a presigned URL — they invalidate the 
 
 ### Public buckets
 
-New buckets have AWS's defaults: Block Public Access on (all four flags) and Object Ownership BucketOwnerEnforced (ACLs disabled). Until those change, a public policy returns 403 AccessDenied and any ACL (including x-amz-acl on an upload) returns 400 AccessControlListNotSupported, with a master key too; with ACLs enabled but the block on, a public ACL returns 403. Turn off the policy flags, then set a public-read policy:
+New buckets have AWS's defaults: Block Public Access on (all four flags) and Object Ownership BucketOwnerEnforced (ACLs disabled). Until those change, a public policy returns 403 AccessDenied and any ACL other than bucket-owner-full-control (including x-amz-acl on an upload) returns 400 AccessControlListNotSupported, with a master key too. A public policy needs both BlockPublicPolicy and RestrictPublicBuckets off; a public ACL needs both BlockPublicAcls and IgnorePublicAcls off. Turn off the policy flags, then set a public-read policy (on a bucket already public through an ACL, IgnorePublicAcls=true hides that ACL at once, so set the policy first):
 
     aws s3api put-public-access-block --bucket my-bucket \
       --public-access-block-configuration \
@@ -311,12 +311,17 @@ New buckets have AWS's defaults: Block Public Access on (all four flags) and Obj
 
 Public URL: https://s3.hippius.com/{bucket}/{key}
 
+Make it private again: aws s3api delete-bucket-policy, then put-public-access-block with all four flags true.
+
 ### ACLs
 
-ACLs need Object Ownership BucketOwnerPreferred or ObjectWriter (put-bucket-ownership-controls); on a BucketOwnerEnforced bucket an ACL returns 400 AccessControlListNotSupported. A public ACL also needs delete-public-access-block.
+ACLs need Object Ownership BucketOwnerPreferred or ObjectWriter; on a BucketOwnerEnforced bucket an ACL returns 400 AccessControlListNotSupported. A public ACL (public-read, public-read-write, authenticated-read) also needs BlockPublicAcls=false,IgnorePublicAcls=false in put-public-access-block.
 Permission types: READ, WRITE, READ_ACP, WRITE_ACP, FULL_CONTROL.
 Always include --grant-full-control for yourself when sharing.
 
+    aws s3api put-bucket-ownership-controls --bucket my-bucket \
+      --ownership-controls 'Rules=[{ObjectOwnership=BucketOwnerPreferred}]' \
+      --endpoint-url https://s3.hippius.com
     aws s3api put-bucket-acl --bucket my-bucket \
       --grant-read 'id="their_canonical_id"' \
       --grant-full-control 'id="your_canonical_id"' \
@@ -508,7 +513,7 @@ Supported operations:
 - Multipart: InitiateMultipartUpload, UploadPart, UploadPartCopy, CompleteMultipartUpload, AbortMultipartUpload, ListParts, ListMultipartUploads (parts up to 512 MiB, at most 10,000 parts, ~5 TiB)
 - Tags: PutObjectTagging, GetObjectTagging, DeleteObjectTagging, PutBucketTagging, GetBucketTagging
 - ACL: PutBucketAcl, GetBucketAcl, PutObjectAcl, GetObjectAcl
-- Policy: PutBucketPolicy, GetBucketPolicy, DeleteBucketPolicy, GetBucketPolicyStatus. AWS policy language, up to 20 KB; invalid is 400 MalformedPolicy. A public policy is 403 AccessDenied while BlockPublicPolicy is on
+- Policy: PutBucketPolicy, GetBucketPolicy, DeleteBucketPolicy, GetBucketPolicyStatus. AWS policy language, up to 20 KB; invalid is 400 MalformedPolicy. A public policy is 403 AccessDenied while BlockPublicPolicy is on, and is stored but ignored for anonymous reads while RestrictPublicBuckets is on
 - Public access and ownership: Put/Get/DeletePublicAccessBlock (all four flags on for new buckets), Put/Get/DeleteBucketOwnershipControls (new buckets are BucketOwnerEnforced, ACLs disabled)
 - Versioning: PutBucketVersioning (Enabled only; Suspended returns 501), GetBucketVersioning, ListObjectVersions
 - Object Lock: Put/Get ObjectLockConfiguration, Retention, LegalHold (GOVERNANCE and COMPLIANCE)
