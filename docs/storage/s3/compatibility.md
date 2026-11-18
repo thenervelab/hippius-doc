@@ -33,11 +33,18 @@ Same values as the [Object Storage Quickstart](/use/quickstart#connection-detail
 | `HeadBucket` | ✅ Supported | |
 | `ListBuckets` | ✅ Supported | |
 | `GetBucketLocation` | ✅ Supported | Returns `us-east-1`. Clients still sign with region `decentralized` |
-| `PutBucketAcl` | ✅ Supported | `private`, `public-read`, `public-read-write`, `authenticated-read` |
+| `PutBucketAcl` | ✅ Supported | `private`, `public-read`, `public-read-write`, `authenticated-read`. Needs ACLs enabled (Object Ownership not `BucketOwnerEnforced`); a public ACL also needs `BlockPublicAcls` off |
 | `GetBucketAcl` | ✅ Supported | |
-| `PutBucketPolicy` | ⚠️ Partial | Anonymous `s3:GetObject` only, on the whole bucket or on up to 32 prefixes (`arn:aws:s3:::bucket/prefix/*`). Other statements are rejected with `InvalidPolicyDocument` |
-| `GetBucketPolicy` | ✅ Supported | Returns the policy in force, including a public-read ACL; `404 NoSuchBucketPolicy` when nothing is public |
-| `DeleteBucketPolicy` | ✅ Supported | `409 InvalidBucketState` while the bucket ACL grants public read: set the ACL to `private` instead |
+| `PutBucketPolicy` | ✅ Supported | AWS policy language, up to 20 KB. A public policy needs `BlockPublicPolicy` off, else `403 AccessDenied` |
+| `GetBucketPolicy` | ✅ Supported | `404 NoSuchBucketPolicy` when none is stored |
+| `DeleteBucketPolicy` | ✅ Supported | |
+| `GetBucketPolicyStatus` | ✅ Supported | |
+| `PutPublicAccessBlock` | ✅ Supported | All four flags are on for new buckets |
+| `GetPublicAccessBlock` | ✅ Supported | |
+| `DeletePublicAccessBlock` | ✅ Supported | |
+| `PutBucketOwnershipControls` | ✅ Supported | New buckets are `BucketOwnerEnforced` (ACLs disabled) |
+| `GetBucketOwnershipControls` | ✅ Supported | |
+| `DeleteBucketOwnershipControls` | ✅ Supported | |
 | `PutBucketTagging` | ✅ Supported | |
 | `GetBucketTagging` | ✅ Supported | |
 | `DeleteBucketTagging` | ✅ Supported | |
@@ -128,7 +135,7 @@ Hippius Object Storage is S3-compatible but not a clone of any other provider. H
   <li><strong>No S3 Select.</strong> You can't query inside objects. Download the object and process it locally.</li>
   <li><strong>No event notifications.</strong> There's no equivalent of S3 Event Notifications.</li>
   <li><strong>Lifecycle rules do nothing yet.</strong> The configuration is accepted so that clients don't fail, but no object is expired or transitioned.</li>
-  <li><strong>Bucket policies only publish reads.</strong> A policy can make the whole bucket or some prefixes anonymously readable, nothing else. Use ACLs and sub-tokens for everything else.</li>
+  <li><strong>New buckets block public access.</strong> As on AWS, a new bucket has Block Public Access on and ACLs disabled, so a public policy returns <code>403 AccessDenied</code> and an ACL returns <code>400 AccessControlListNotSupported</code> until you change those settings. See <a href="/storage/s3/advanced#make-a-bucket-or-object-public">Make a bucket or object public</a>.</li>
   <li><strong>Replication is automatic.</strong> The Hippius network handles data replication across miners. You don't need to configure cross-region replication.</li>
 </Unordered>
 

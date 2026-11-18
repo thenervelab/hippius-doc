@@ -69,7 +69,7 @@ Bulk migration runs from your open browser tab, so closing the tab or losing you
 ### Migrated media doesn't show on the front-end
 
 <Unordered>
-  <li>Open one migrated file's Hippius URL in a private browser window. If it returns <strong>AccessDenied</strong>, the bucket isn't public. Click <BgStyledText>Make Bucket Public</BgStyledText> in the plugin, or run <code>aws s3api put-bucket-acl --bucket your-bucket-name --acl public-read --endpoint-url https://s3.hippius.com</code> (see <a href="/storage/s3/advanced#make-a-bucket-or-object-public">Make a bucket or object public</a>), then reload your page.</li>
+  <li>Open one migrated file's Hippius URL in a private browser window. If it returns <strong>AccessDenied</strong>, the bucket isn't public. Click <BgStyledText>Make Bucket Public</BgStyledText> in the plugin, or set a public-read bucket policy with any S3 client (see <a href="/use/wordpress-plugin/credentials#step-5-make-your-bucket-public">Make your bucket public</a>), then reload your page. If setting the policy returns <strong>AccessDenied</strong>, the bucket's Block Public Access is still on: turn off <code>BlockPublicPolicy</code> and <code>RestrictPublicBuckets</code> first.</li>
   <li>Cached pages can still hold the old local URLs. Clear your WordPress page cache, plus any CDN cache in front of your site.</li>
 </Unordered>
 

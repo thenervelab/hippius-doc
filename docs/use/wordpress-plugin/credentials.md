@@ -84,15 +84,20 @@ It's your choice, and there are two ways to do it:
 
 <Ordered>
   <li><strong>From the plugin (easiest).</strong> Once you've entered your keys and bucket, the plugin checks whether the bucket is public. If it isn't, click <BgStyledText>Make Bucket Public</BgStyledText> and the plugin applies the public-read policy for you. You'll do this on the next page.</li>
-  <li><strong>With any S3 client.</strong> Set a public-read ACL (PutBucketAcl) or the public-read bucket policy (PutBucketPolicy). For example, with the AWS CLI:</li>
+  <li><strong>With any S3 client.</strong> New buckets block public access, so turn that off for policies, then set the public-read bucket policy. For example, with the AWS CLI:</li>
 </Ordered>
 
 ```bash
-aws s3api put-bucket-acl --bucket your-bucket-name --acl public-read \
+aws s3api put-public-access-block --bucket your-bucket-name \
+  --public-access-block-configuration \
+  BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=false,RestrictPublicBuckets=false \
   --endpoint-url https://s3.hippius.com
+
+aws s3api put-bucket-policy --bucket your-bucket-name --endpoint-url https://s3.hippius.com \
+  --policy '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":"*","Action":"s3:GetObject","Resource":"arn:aws:s3:::your-bucket-name/*"}]}'
 ```
 
-See [Make a bucket or object public](/storage/s3/advanced#make-a-bucket-or-object-public) for the policy version and how to make a bucket private again.
+See [Make a bucket or object public](/storage/s3/advanced#make-a-bucket-or-object-public) for the ACL version and how to make a bucket private again.
 
 :::info Public means readable, not unencrypted
 A public bucket lets anyone with a file's URL download it, which is exactly what a website needs. The files are still encrypted at rest on Hippius. Keep anything private out of this bucket.
