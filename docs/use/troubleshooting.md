@@ -30,6 +30,7 @@ If an upload fails to start or gets interrupted:
   <li><strong>Empty balance:</strong> your account balance must cover what you store. Check <BgStyledText>Billing</BgStyledText> in the console.</li>
   <li><strong>Invalid bucket name:</strong> names must be 3–63 characters of lowercase letters, numbers, dots and hyphens, start and end with a letter or number, and must not look like an IP address.</li>
   <li><strong>File size:</strong> use multipart uploads for files larger than 5 GB. The console itself caps uploads at 100 MB — use a client for anything larger. See <a href="/storage/s3/advanced#upload-large-files">Upload large files</a>.</li>
+  <li><strong>AccessControlListNotSupported:</strong> new buckets have ACLs disabled, as on AWS, so an upload that sets an ACL (such as <code>--acl public-read</code> or <code>--acl private</code>) returns <strong>400</strong>, and so does <code>put-object-acl</code> or <code>put-bucket-acl</code>. Upload without the ACL, or see <a href="/storage/s3/advanced#make-a-bucket-or-object-public">Make a bucket or object public</a>.</li>
 </Unordered>
 
 ## Access denied

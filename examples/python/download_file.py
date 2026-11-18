@@ -20,7 +20,7 @@ s3 = boto3.client(
     ),
 )
 
-bucket_name = "my-bucket"
+bucket_name = os.environ.get("HIPPIUS_BUCKET", "my-bucket")
 
 # Download to disk
 s3.download_file(bucket_name, "remote-name.txt", "local-file.txt")

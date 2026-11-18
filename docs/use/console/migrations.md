@@ -66,7 +66,7 @@ Bucket names have to be unique across Hippius, so if the name you want is taken,
 :::
 
 :::warning
-Migrated buckets start **private**, and we copy object data rather than permissions. Access rules, ACLs and public settings do not come across, so anything that was public at your old provider needs setting up again here.
+Migrated buckets start **private**, and we copy object data rather than permissions. Access rules, ACLs and public settings do not come across, so anything that was public at your old provider needs setting up again here. See [Make a bucket or object public](/storage/s3/advanced#make-a-bucket-or-object-public).
 :::
 
 ## Watching it run

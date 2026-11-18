@@ -20,7 +20,7 @@ s3 = boto3.client(
     ),
 )
 
-bucket_name = "my-bucket"
+bucket_name = os.environ.get("HIPPIUS_BUCKET", "my-bucket")
 
 url = s3.generate_presigned_url(
     "get_object",

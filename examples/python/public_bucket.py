@@ -25,7 +25,7 @@ s3 = boto3.client(
     ),
 )
 
-bucket_name = "my-public-bucket"
+bucket_name = os.environ.get("HIPPIUS_PUBLIC_BUCKET", "my-public-bucket")
 
 # Create bucket
 s3.create_bucket(Bucket=bucket_name)

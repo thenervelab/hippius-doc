@@ -15,7 +15,7 @@ const s3 = new S3Client({
   forcePathStyle: true,
 });
 
-const bucketName = "my-bucket";
+const bucketName = process.env.HIPPIUS_BUCKET ?? "my-bucket";
 
 // Upload from disk
 await s3.send(new PutObjectCommand({
