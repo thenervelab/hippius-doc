@@ -18,7 +18,13 @@ Create the bucket before starting Nextcloud:
 
 ```bash
 aws s3 mb s3://nextcloud-data --endpoint-url https://s3.hippius.com
+
+aws s3api put-bucket-ownership-controls --bucket nextcloud-data \
+  --ownership-controls 'Rules=[{ObjectOwnership=ObjectWriter}]' \
+  --endpoint-url https://s3.hippius.com
 ```
+
+Nextcloud sends `x-amz-acl: private` on every upload and copy. New buckets have ACLs disabled (as on AWS) and refuse that with `400 AccessControlListNotSupported`, so the second command enables ACLs on this bucket. The bucket stays private: Block Public Access still refuses public ACLs. See [Make a bucket or object public](/storage/s3/advanced#make-a-bucket-or-object-public) for the defaults.
 
 ## Docker Compose
 

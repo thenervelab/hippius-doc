@@ -15,7 +15,7 @@ const s3 = new S3Client({
   forcePathStyle: true,
 });
 
-const bucketName = "my-bucket";
+const bucketName = process.env.HIPPIUS_BUCKET ?? "my-bucket";
 
 const url = await getSignedUrl(
   s3,

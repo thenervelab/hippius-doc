@@ -20,7 +20,7 @@ s3 = boto3.client(
     ),
 )
 
-bucket_name = "my-bucket"
+bucket_name = os.environ.get("HIPPIUS_BUCKET", "my-bucket")
 
 response = s3.list_objects_v2(Bucket=bucket_name)
 for obj in response.get("Contents", []):

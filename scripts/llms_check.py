@@ -39,6 +39,8 @@ ROOT_FACTS = (
     "Bitcoin",
     "USDC",
     "https://docs.hippius.com/use/drive",
+    "https://docs.hippius.com/storage/s3/advanced#make-a-bucket-or-object-public",
+    "put-public-access-block",
     "https://api.hippius.com/api/support/tickets/",
     "https://www.linkedin.com/company/hippius",
 )
