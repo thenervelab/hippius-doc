@@ -66,13 +66,6 @@ jobs:
       run: |
         kubectl create namespace docs-dev || true
 
-        kubectl create secret docker-registry registry \
-          --namespace=docs-dev \
-          --docker-server=registry.starkleytech.com \
-          --docker-username=${{ secrets.REGISTRY_USERNAME }} \
-          --docker-password=${{ secrets.REGISTRY_PASSWORD }} \
-          --dry-run=client -o yaml | kubectl apply -f -
-
         sed -i "s|\${IMAGE}|registry.starkleytech.com/hippius/docs:dev-${{ steps.sha.outputs.SHORT_SHA }}|g" k8s/staging/manifests.yaml
 
         kubectl apply -f k8s/staging/manifests.yaml --validate=false
