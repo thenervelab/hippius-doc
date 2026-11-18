@@ -73,7 +73,7 @@ Below the settings, **Bucket Policy Status** shows what the plugin last found fo
 
 <Unordered>
   <li><strong>Public (Gateway Accessible)</strong> means you're all set.</li>
-  <li><strong>Private</strong> means your media won't load for visitors yet. Click <BgStyledText>Make Bucket Public</BgStyledText> and the plugin applies a public-read policy, checks that it took effect, and reloads the page with the new status.</li>
+  <li><strong>Private</strong> means your media won't load for visitors yet. Click <BgStyledText>Make Bucket Public</BgStyledText> and the plugin applies a public-read policy, checks that it took effect, and reloads the page with the new status. On a new bucket this can fail, because new buckets block public policies and the plugin doesn't turn that off yet. If the status stays Private, follow <a href="/use/wordpress-plugin/credentials#step-5-make-your-bucket-public">Make your bucket public</a> with any S3 client.</li>
   <li><strong>Not checked</strong> means the plugin hasn't looked yet, or looked and couldn't tell. Save your settings, or click <BgStyledText>Test Bucket Policy Status</BgStyledText>. If it still says Not checked, use the private-window test in the tip below.</li>
 </Unordered>
 
