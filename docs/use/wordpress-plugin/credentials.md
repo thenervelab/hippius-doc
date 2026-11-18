@@ -83,7 +83,7 @@ Buckets created in the Hippius Console are always **private**, and the console d
 It's your choice, and there are two ways to do it:
 
 <Ordered>
-  <li><strong>From the plugin (easiest).</strong> Once you've entered your keys and bucket, the plugin checks whether the bucket is public. If it isn't, click <BgStyledText>Make Bucket Public</BgStyledText> and the plugin applies the public-read policy for you. You'll do this on the next page. On a new bucket the button can fail with <strong>AccessDenied</strong>: new buckets block public policies, and the plugin doesn't turn that off yet. If it fails, use an S3 client as below.</li>
+  <li><strong>From the plugin (easiest).</strong> Once you've entered your keys and bucket, the plugin checks whether the bucket is public. If it isn't, click <BgStyledText>Make Bucket Public</BgStyledText> and the plugin applies the public-read policy for you. You'll do this on the next page.</li>
   <li><strong>With any S3 client.</strong> New buckets block public access, so turn that off for policies, then set the public-read bucket policy. For example, with the AWS CLI:</li>
 </Ordered>
 
