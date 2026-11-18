@@ -70,14 +70,6 @@ jobs:
         # Create namespace if it doesn't exist
         kubectl create namespace hippius-documentation || true
         
-        # Create or update the registry secret in the namespace
-        kubectl create secret docker-registry registry \
-          --namespace=hippius-documentation \
-          --docker-server=registry.starkleytech.com \
-          --docker-username=${{ secrets.REGISTRY_USERNAME }} \
-          --docker-password=${{ secrets.REGISTRY_PASSWORD }} \
-          --dry-run=client -o yaml | kubectl apply -f -
-        
         # Update deployment file with the current image tag
         sed -i "s|\${IMAGE}|registry.starkleytech.com/hippius/docs:${{ steps.sha.outputs.SHORT_SHA }}|g" k8s/deployment.yaml
         
