@@ -191,6 +191,82 @@ The archive is packed by your browser, not on a server. Closing the tab or navig
 On a first visit, before the console's background worker has started, your browser may not be able to write the archive as it's packed. In that case the whole archive has to be held in memory, and folders over **500 MB** are refused with a "too large to download as a zip in this browser" message. Reload the page and try again, which lets the worker take over and removes the limit.
 :::
 
+## Moving Files and Folders {#moving-files-and-folders}
+
+Tidying up a project, or handing finished work over to your team's shared drive? You can move files and folders to another folder in the same drive, or to a different drive altogether.
+
+### Move with Move to…
+
+<Ordered>
+  <li>Open the menu (three dots) on a file or folder and choose <BgStyledText>Move to…</BgStyledText>. To move several items at once, tick them first and use <BgStyledText>Move to…</BgStyledText> in the selection bar.</li>
+  <li>The picker opens at the folder the items are in. Click into folders to find the destination, or use the breadcrumb to go back up. <BgStyledText>New folder</BgStyledText> makes a folder right there if you need one.</li>
+  <li>To move to another drive, pick it from the drive list at the top of the picker.</li>
+  <li>Click <BgStyledText>Move to</BgStyledText> followed by the folder's name.</li>
+</Ordered>
+
+The drive list shows your own drives and the [shared drives](/use/console/shared-drives) where you're an Editor or a Manager. A folder someone shared with you for editing opens at that folder. Drives you can only view aren't listed, because you can't add anything to them.
+
+### Drag and drop
+
+With a mouse or trackpad, you can also drag files and folders straight onto a folder. Drop onto any row inside an open folder and the items go into that folder, the way Finder works. The folder you'd drop into lights up, and the label reads **Move to** and its name. Hold over a closed folder for a moment and it opens, so you can go deeper.
+
+On **My Drives**, open a drive, then drag items onto another drive, or onto a folder inside it, to move them between drives. If a drop isn't allowed, the label says why, for example when you can only view a drive. Press Escape to cancel a drag.
+
+### Moving to another drive
+
+Every drive has its own encryption key, so moving to another drive isn't just a rename. Your browser opens each file, encrypts it again for the new drive and uploads it there. Only when every file has arrived does Hippius switch them all over in one step. Until then, nothing changes in either drive.
+
+That has a few consequences worth knowing:
+
+<Unordered>
+  <li><strong>It takes as long as an upload.</strong> A progress card in the bottom corner shows what is moving and where, and how many files are ready, for example <em>Preparing 1,240 of 8,300 files</em>. It keeps going if you close the picker or open another page, but keep the tab open.</li>
+  <li><strong>It's all or nothing.</strong> Click <BgStyledText>Cancel</BgStyledText> on the card at any point, and both drives stay exactly as they were. The same is true if anything fails.</li>
+  <li><strong>The console asks for your unlock password once</strong>, as the move starts, and won't stop to ask again even if it locks while you're away.</li>
+  <li><strong>There's no Undo.</strong> To put things back, move them again.</li>
+  <li><strong>Storage moves with the files.</strong> A file you move into someone else's drive counts toward the owner's storage, not yours. If their plan is full, the move says so.</li>
+</Unordered>
+
+When it finishes, a message tells you where things went, for example *Moved to Reports in Team*.
+
+### What happens to links and access
+
+<Unordered>
+  <li><strong>File links keep working</strong>, wherever the file goes. Each one is its own encrypted copy, so a move doesn't touch it.</li>
+  <li><strong>Within one drive</strong>, a folder keeps its folder links and the people it's shared with.</li>
+  <li><strong>To another drive</strong>, a folder can't take its sharing along, because its links and invites belong to the old drive's key and members. Before you move a shared folder, the console asks <strong>Move shared folder?</strong> and says what will be turned off, for example <em>Moving turns off 2 share links and access for 1 person.</em> After the move, make new links or share the folder again in its new drive if you need to.</li>
+  <li>Only the drive's owner or a Manager can move a folder that other people can open to another drive.</li>
+</Unordered>
+
+### When a name is already taken
+
+If something with the same name is already in the destination, the console asks what to do: **Keep both** (the moved item gets a new name such as *Report (1).pdf*), **Replace** (a file over a file), or **Skip**. With several clashes, **Do this for all** answers them in one go. Between drives only Keep both and Skip are offered, so nothing is deleted before the move is safely done.
+
+### If a move fails
+
+Nothing is lost when a move fails: both drives stay as they were, and the message says what stopped it. The most common ones:
+
+| Message says | What to do |
+|---|---|
+| A file **can't be opened with this drive's key** | That one file was saved with a different key, or is damaged. The message names it. Move it somewhere else in the same drive, then move the folder again. |
+| **An item with this name is already there** | Rename one of them, or pick another folder. |
+| **A shared folder or link already uses this name there** | The destination folder is shared on its own. Pick another folder. |
+| **An upload into this folder is still running** | Wait for the upload to finish, then try again. |
+| **Some files in this drive need to sync from the desktop app first** | Open the desktop app so it can finish syncing, then try again. |
+| **The recordings would go over the free plan's limit there** | The destination's owner is on the Free plan, which holds 25 recordings. |
+| **It changed while moving** | Someone edited a file while it moved. Try again. |
+
+### Limits
+
+| Limit | Value |
+|---|---|
+| **Files in one move between drives** | 2,000 |
+| **Folders in one move between drives** | 100 |
+| **Largest file you can move between drives in the browser** | 500 MB |
+| **Empty folders** | Can't be moved to another drive. Create the folder there instead. |
+| **Moves within a drive** | No file or size limit. Nothing is uploaded again, so even a big folder moves quickly. |
+
+For a bigger move, split it into several smaller ones.
+
 ## Selecting and Deleting Multiple Files
 
 Tick the checkbox at the start of any row to enter selection mode. The header checkbox selects everything on the current page.

@@ -22,7 +22,7 @@ If you signed in with a 12-word access key instead of Google, GitHub or Apple, y
 | **Length of a recording** | Up to 5 minutes | No limit |
 | **Number of recordings** | 25 in total | No limit |
 | **Hippius watermark** | A small one in the corner | None |
-| **Insights, comments and reactions** | See how many people opened a link | Full Insights, comments and reactions, on for captures |
+| **Insights, comments and reactions** | Not included | Full Insights, comments and reactions, on for captures |
 | **Storage** | Captures count toward your 10 GB | Captures count toward your plan's storage |
 
 The only limit on a paid plan is your storage.
@@ -57,7 +57,7 @@ The watermark is drawn into the picture on your computer, before the capture is 
 
 On a paid Drive plan, links to your screenshots and recordings come with full [Insights](/use/captures/insights): views, viewers, how much of a recording each person watched and where they stopped, plus comments and reactions, all switched on for you.
 
-On the Free plan, Insights show how many times a link was opened and by how many people; completion, the chart of where people stopped and the viewer list come with paid plans. New links on the Free plan start with Insights, comments and reactions off, in the desktop app and the console, and turning one on shows an upgrade prompt. Links that already had one on keep it until you turn it off. See [Where the switches start](/use/captures/insights#where-the-switches-start).
+Insights, comments and reactions only work on a paid plan. New links on the Free plan start with them off, in the desktop app and the console, and turning one on shows an upgrade prompt. If you move from a paid plan to Free, your links stop counting views and taking comments and reactions, and what they already collected stays in their Insights as totals: how many times a link was opened and by how many people. See [Where the switches start](/use/captures/insights#where-the-switches-start).
 
 ## Storage
 
