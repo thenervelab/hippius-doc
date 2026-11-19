@@ -15,7 +15,7 @@ You sent a recording to your team. Did anyone watch it? Did they get to the part
 
 The people you send a link to can also leave comments and react with an emoji, right under the screenshot or video. Their comments are end-to-end encrypted, so only people who have the link can read them. Not even Hippius can.
 
-Insights, comments and reactions work for any file you share by link. For [screenshots and recordings](/use/captures) on a paid plan, they're switched on for you.
+Insights, comments and reactions work for any file you share by link. For [screenshots and recordings](/use/captures) on a paid plan, they're switched on for you, and links to PDF, Word and PowerPoint files start with Insights on. For documents you also see how far people read, page by page, and folder links can count which files were opened. See [Shared Links](/use/console/shared-links#views-comments-and-reactions) for documents, folder links and exporting to a spreadsheet.
 
 ## Open a capture's Insights
 
@@ -82,7 +82,7 @@ When someone tags you as the owner, you see it in Insights, in the console and i
 
 ## Choose what each link collects
 
-Each link has three switches: **Insights** (counting views and watch time), **Comments** and **Reactions**. When Insights is on, people who open the link see a short note on the page: *The owner can see who viewed*. What you actually see is how many views and viewers the link had, and a name only for people who commented under their name.
+Each link has three switches: **Insights** (counting views and watch time), **Comments** and **Reactions**. A fourth, **Allow download**, decides whether people can download the file or only view it (see [Make a link view only](/use/console/shared-links#make-a-link-view-only)). When Insights is on, people who open the link see a short note on the page: *The owner can see how many people viewed*. What you actually see is how many views and viewers the link had, and a name only for people who commented under their name.
 
 You'll find them in the share dialog when you make a link, and later in the link's Insights, behind the gear at the top of the panel (**Link settings**). In the console, clicking any of the pills under the file name opens them too. Changes apply straight away. Turning one off stops new views, comments or reactions from being added, and what was already collected stays in your Insights.
 
@@ -94,15 +94,18 @@ You'll find them in the share dialog when you make a link, and later in the link
 |---|---|---|
 | Screenshots and recordings, paid plan | On | On |
 | Screenshots and recordings, Free plan | Off | Off |
-| Other files, any plan | Off | Off |
+| PDF, Word and PowerPoint files, paid plan | Insights on, the others off | Insights on, the others off |
+| Other files, and any file on the Free plan | Off | Off |
 
-On the Free plan, turning a switch on shows an upgrade prompt instead, *Insights, comments and reactions are available on paid Drive plans*, with an **Upgrade** button. Links that already have one on keep it, and you can always turn it off. Insights on the Free plan show how many views a link has had and by how many people; completion, the chart and the viewer list come with paid plans. In the console, a Free plan link that isn't counting views shows the upgrade card in its Insights instead of numbers.
+On the Free plan, turning a switch on shows an upgrade prompt instead, *Insights, comments and reactions are available on paid Drive plans*, with an **Upgrade** button. Insights, comments and reactions only work while you're on a paid plan: on the Free plan, links don't count new views or take new comments and reactions. If you move from a paid plan to Free, what your links already collected stays, and their Insights show the totals (how many views and how many people). Completion, the chart and the viewer list come with paid plans. You can always turn a switch off. In the console, a Free plan link that isn't counting views shows the upgrade card in its Insights instead of numbers.
 
 In the desktop app, **Track views, comments and reactions** in [Settings, Screenshots &amp; Recording](/use/desktop/settings#screenshots--recording) decides where the switches start for your captures.
 
 ## Emails about your links
 
 Hippius can email you when something happens to your links, so you don't have to keep checking. You can get an email when a link is opened for the first time, and another when people comment (comments are encrypted, so it says how many there are, not what they say). There's also a daily or weekly summary of views and comments across all your links, if you'd like one.
+
+An account that signs in with an access key has no email address, so there's nowhere to send these. To get them, sign in with Google or Apple.
 
 Choose them in the console under [Settings, Share link emails](/use/console/settings#share-link-emails), or in the desktop app under [Settings, Notifications](/use/desktop/settings#emails-about-your-links). Each email also has a link to stop that kind of email.
 

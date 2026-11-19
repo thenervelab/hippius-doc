@@ -3,7 +3,7 @@ id: shared-links
 title: Shared Links
 sidebar_label: Shared Links
 slug: /use/console/shared-links
-description: Share any Drive file as a public download link from the Drive page, then manage active links and history from the Shared Links page.
+description: Share a Drive file or folder as a link, make it view only or ask people to accept an NDA, see who opened it and how far they read, and manage your links from the Shared Links page.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -20,7 +20,9 @@ Screenshots and recordings get a link automatically, and those links show up her
 
 To share a file, go to **Drive**, open the menu on any file, and choose **Share via link**. Hippius creates a secure encrypted copy in your browser and generates a shareable URL. On a whole drive in **My Drives**, the same item is called **Share via public link**, to set it apart from **Share drive**, which invites people with an account (see [Shared Drives](/use/console/shared-drives)).
 
-After sharing, all your active links are tracked on the **Shared Links** page, reached from the <BgStyledText>Shared Links</BgStyledText> button in the Drive header (<BgStyledText>My Drives</BgStyledText>, under <BgStyledIconWithText text="Drive" icon="FolderOpen" /> in the sidebar). From there you can copy a link again, revoke access, and see a history of ended shares.
+You decide how long each link lasts, whether it needs a password, whether people can download the file or only view it, and whether they must accept an NDA first. With Insights on, you can see who opened it and how far they read.
+
+After sharing, all your active links are tracked on the **Shared Links** page, reached from the <BgStyledText>Shared Links</BgStyledText> button in the Drive header (<BgStyledText>My Drives</BgStyledText>, under <BgStyledIconWithText text="Drive" icon="FolderOpen" /> in the sidebar). From there you can copy a link again, change when it expires, revoke access, and see a history of ended shares.
 
 <Screenshot src="/img/console/drive/shared-links-overview.png" alt="Shared Links page overview" dark />
 
@@ -64,6 +66,7 @@ The download, decrypt, encrypt, and upload steps run each time you create a shar
   <li>Revoking a share deletes the encrypted copy, and its storage comes back within a few minutes.</li>
   <li>Each share is independent. Revoking one share of a file doesn't affect any other share of the same file.</li>
   <li>Deleting a file does not end the links made from it. Each link is its own encrypted copy, so it keeps working until you revoke it here or it expires. The delete confirmation reminds you of this.</li>
+  <li>Moving a file doesn't affect its links either, within a drive or to another drive. A folder link follows its folder when you move it within the same drive, but is turned off when the folder moves to another drive. See <a href="/use/console/drive#moving-files-and-folders">Moving Files and Folders</a>.</li>
 </Unordered>
 
 ## Before You Share
@@ -83,13 +86,17 @@ You create share links from within the Drive file browser, not from the Shared L
 <Ordered>
   <li>Go to <a href="/use/console/drive">Drive</a> and navigate to the file you want to share.</li>
   <li>Click the three dot action menu on the file row and choose <BgStyledText>Share via link</BgStyledText>.</li>
-  <li>Choose when the link should expire, and optionally require a password. Both are described below.</li>
-  <li>The share dialog runs the download, decrypt, encrypt, and upload steps automatically. A progress bar shows the current step.</li>
-  <li>When complete, the share URL is shown and copied to your clipboard automatically.</li>
-  <li>Click <BgStyledText>Copy link</BgStyledText> if you need to copy it again, then close the dialog.</li>
+  <li>Under <strong>Secure link</strong>, choose when the link should expire, and optionally require a password. Both are described below. You can also turn on <strong>Email me when it's opened</strong> to hear when someone first opens it.</li>
+  <li>Click <BgStyledText>Create share link</BgStyledText>. The share dialog runs the download, decrypt, encrypt, and upload steps automatically. A progress bar shows the current step.</li>
+  <li>When complete, the share URL is shown and copied to your clipboard automatically. This is also where you decide what people can do with the link: see <a href="#control-what-people-can-do">Control What People Can Do</a>.</li>
+  <li>Click <BgStyledText>Copy link</BgStyledText> if you need to copy it again, then click <BgStyledText>Done</BgStyledText>.</li>
 </Ordered>
 
 The link is live immediately. Anyone you send it to can open it right away.
+
+### When a file already has a link
+
+Choose **Share via link** on a file or folder that already has a live link, and the dialog shows that link first, so you don't end up with several links without meaning to. From there you can copy it, open **Manage in Shared Links**, or **View insights**. If you do want a second, separate link (say, one with a different expiry for a different person), click <BgStyledText>Create a new link</BgStyledText>. The first link keeps working.
 
 ### Choosing an expiry
 
@@ -102,7 +109,7 @@ A link you create yourself gets an expiry, chosen before you create it:
 | **30 days** | One month after you create it. |
 | **Until I revoke it** | Never on its own. It stays live until you revoke it. |
 
-The dialog starts on **24 hours**, so if the link should last longer, pick another option before you create it.
+The dialog starts on **24 hours**, so if the link should last longer, pick another option before you create it. You can change it later from Shared Links (see [Change the expiry](#change-the-expiry)).
 
 :::info Links made for screenshots and recordings
 A [screenshot or screen recording](/use/captures) gets its share link automatically, the moment it is saved. That link is public and keeps working until you turn it off, so it is ready to paste straight away. It is listed here with your other links, and you revoke it the same way. See [Share links for captures](/use/captures/share-links).
@@ -152,6 +159,67 @@ They do not need a Hippius account for any of this.
 
 <Screenshot src="/img/console/drive/folder-share-recipient.png" alt="Recipient view of a shared folder" dark />
 
+## Control What People Can Do {#control-what-people-can-do}
+
+A file link can do more than hand over a file. You can let people look without taking a copy, or ask them to agree to your terms before they see anything. Both are useful when you send something sensitive, such as a contract, a pitch deck or a draft that isn't final.
+
+You'll find these switches in two places:
+
+<Unordered>
+  <li>In the share dialog, right after the link is made.</li>
+  <li>Later, in the link's Insights: click <BgStyledText>Insights</BgStyledText> on its row in Shared Links, then the gear at the top of the panel (<strong>Link settings</strong>).</li>
+</Unordered>
+
+Changes apply straight away and the link stays the same, so there's nothing to send again. These switches are for file links. Folder links don't have them.
+
+### Make a link view only
+
+Turn off **Allow download** and the people you send the link to can still open the file in their browser, but the Download buttons are gone. A file that can't be previewed shows *Downloads are off for this link.* instead.
+
+A shared PDF also gets a faint watermark across every page: the viewer's email and the date when they're signed in to Hippius in that browser, or *Viewed* and the date when they aren't. It's drawn into the page itself, so a screenshot carries it too.
+
+:::info View only discourages copying, it can't prevent it
+To show the file, the viewer's browser has to hold all of it, and anyone can take a screenshot. Treat view only as a clear signal and a deterrent, not a lock. If someone must never have a copy, don't send them the file.
+:::
+
+### Ask people to accept an NDA
+
+Turn on **Ask to accept an NDA**, type or paste your terms, and click <BgStyledText>Save</BgStyledText>. From then on, anyone who opens the link sees your text first, with an <strong>Accept</strong> button. The file only opens once they accept.
+
+<Ordered>
+  <li>Make the link as usual, or open an existing one's Link settings.</li>
+  <li>Turn on <strong>Ask to accept an NDA</strong>.</li>
+  <li>Write your terms in the box. Plain text works best, and line breaks are kept.</li>
+  <li>Click <BgStyledText>Save</BgStyledText>.</li>
+</Ordered>
+
+To see who accepted, open the link's Insights and choose the **NDA** tab. It shows your text and everyone who accepted it, newest first, with the date and time. If you change the text later, an acceptance of the earlier version says so. Turn the switch off to remove the NDA. People can then open the file straight away.
+
+A few things worth knowing:
+
+<Unordered>
+  <li><strong>Your text is end-to-end encrypted</strong> with the link's key, like comments, so Hippius can't read it. To see or change it in the console, your Drive needs to be unlocked.</li>
+  <li><strong>Accepting doesn't need an account.</strong> An acceptance tells you that someone with the link accepted your text at that time. They show by the name they commented under in the same browser, or as an anonymous viewer, so it's not proof of who they are.</li>
+  <li><strong>Password links.</strong> The console can't add an NDA to a link that has a password, because it never keeps the password.</li>
+  <li>The text can be up to 64 KB, which is many pages.</li>
+</Unordered>
+
+### Which plans include what
+
+| | Free plan | Paid Drive plans (Starter, Plus, Max, Scale) |
+|---|---|---|
+| Make file and folder links, with expiry and password | Yes | Yes |
+| Change a link's expiry | Yes | Yes |
+| Make a link view only (turn off **Allow download**) | No | Yes |
+| Ask to accept an NDA | No | Yes |
+| Insights, comments and reactions | No | Yes |
+| Insights for folder links | No | Yes |
+| Emails about your links | Yes | Yes |
+
+On the Free plan these switches carry a **Paid** label, and turning one on shows an upgrade prompt instead. Turning things off always works on any plan, so a link never gets stuck. One thing to watch: on the Free plan, a switch you turn back to its free setting can't be changed again without upgrading. The console warns you under the switch before you do it.
+
+If you move from a paid plan to the Free plan, your links keep working, but they stop counting views, taking comments and reactions, and hiding the download button. What a link already collected stays in its Insights. An NDA you set stays in place, and you can still see who accepted it or remove it.
+
 ## Active Shares
 
 The Active Shares table shows every share currently live on your account. It refreshes automatically every 30 seconds.
@@ -168,6 +236,12 @@ Click the three dot menu on any row and choose <BgStyledText>Copy link</BgStyled
 **You can copy a link on any device, after you unlock.** The share URL includes the encryption key in the `#` fragment, and that key is kept in your account locked under your password. After a reload, or on another computer, the row shows <BgStyledText>Unlock to copy link</BgStyledText>: enter your [unlock password](/use/console/unlock-password) and the console rebuilds the same link. That works for links you made in the console, the desktop app or anywhere else.
 
 Some older links keep the old limit and can only be copied in the browser session that created them. Their row reads **Not available in this session**. To share one of those again, revoke it and create a new share.
+
+### Change the expiry {#change-the-expiry}
+
+Need a link to last longer, or to stop sooner? Open its row menu, choose <BgStyledText>Change expiry</BgStyledText>, pick **24 hours**, **7 days**, **30 days** or **Until I revoke it**, and click <BgStyledText>Update expiry</BgStyledText>. The new time counts from now, it applies to everyone holding the link straight away, and the link itself doesn't change. This works for file and folder links.
+
+A file link that has already expired can't be brought back, because its copy is gone. Its menu offers <BgStyledText>Reshare</BgStyledText> instead: the console finds the file in your Drive by its name and opens the share dialog on it, so you can make a fresh link. If the file was renamed or deleted, or more than one file has that name, it says so, and you can share it again from Drive.
 
 ### Revoke
 
@@ -236,7 +310,9 @@ When someone opens your share link, they land on a simple page in their browser 
     Add static/img/console/drive/shared-links-preview.png AND shared-links-preview-dark.png, then uncomment:
     <Screenshot src="/img/console/drive/shared-links-preview.png" alt="Recipient preview page with Download button" dark /> */}
 
-A **Download** option is always available. The file is streamed directly to the recipient's device, decrypted entirely in their browser. We never see the file in plaintext on the recipient's end either.
+A **Download** option is there too, unless you've [made the link view only](#make-a-link-view-only). The file is streamed directly to the recipient's device, decrypted entirely in their browser. We never see the file in plaintext on the recipient's end either.
+
+If you've [asked for an NDA](#ask-people-to-accept-an-nda), recipients see your text first and must click **Accept** before the file opens.
 
 When you've turned on comments or reactions for a link, recipients also see the comments in a panel beside the file (below it on a phone) and a row of reaction chips under it, where one tap adds a reaction and another takes it back. Commenters can tag you, or each other, by typing `@`. See [Views, Comments and Reactions](#views-comments-and-reactions).
 
@@ -244,11 +320,42 @@ If the link has been revoked or has expired, recipients see: _"This link has exp
 
 ## Views, Comments and Reactions
 
-Once a file link exists, the share dialog shows three more switches under **Views, comments and reactions**: **Insights** counts views and watch time, **Comments** lets people comment, and **Reactions** lets them react with an emoji. On a paid Drive plan they start on for screenshots and recordings, and off for other files. On the Free plan they all start off, and turning one on shows an upgrade prompt instead. Recipients see a short note when views are counted, can read comments without an account, and need a Hippius account to post a comment or react. Folder links don't have these switches, so they never count views or take comments.
+You sent a proposal. Did they open it? Did they read past page two? Insights answer that. Once a file link exists, the share dialog shows its switches under **Views, comments and reactions**: **Insights** counts views and watch time, **Comments** lets people comment, and **Reactions** lets them react with an emoji (**Allow download** sits with them, see [Make a link view only](#make-a-link-view-only)).
+
+Where they start depends on the file and your plan:
+
+| | Paid Drive plan | Free plan |
+|---|---|---|
+| Screenshots and recordings | Insights, Comments and Reactions on | All off |
+| PDF, Word (DOCX) and PowerPoint (PPTX) files | Insights on, Comments and Reactions off | All off |
+| Any other file | All off | All off |
+
+Recipients see a short note when views are counted, can read comments without an account, and need a Hippius account to post a comment or react.
 
 <Screenshot src="/img/console/captures/share-dialog-switches.png" alt="The console share dialog after the link is made, with Show a preview in chats and the Insights, Comments and Reactions switches" dark raw />
 
-To see what happened to a link, click <BgStyledText>Insights</BgStyledText> on its row in Shared Links or in [Captures](/use/captures), or choose **View insights** from the row menu. Shared Links also shows each link's **Views** and **Comments**, and you can sort by either. Insights open in a panel on the right with the views, a chart of where people stopped watching a video, and Comments, Viewers and Reactions tabs. The link's switches are behind the gear at the top of the panel. A comment that tags you says **Mentioned you**, and the **Mentions you** filter shows only those. Comments, viewer names and who was tagged are end-to-end encrypted with the link's key. Everything about it, including what the Free plan shows, is in [Insights, comments and reactions](/use/captures/insights).
+To see what happened to a link, click <BgStyledText>Insights</BgStyledText> on its row in Shared Links or in [Captures](/use/captures), or choose **View insights** from the row menu (in Drive, every file's menu has it too). Shared Links also shows each link's **Views** and **Comments**, and you can sort by either. Insights open in a panel on the right with the headline numbers first, then **Comments**, **Viewers** and **Reactions** tabs, and an **NDA** tab when the link asks for one. The link's switches are behind the gear at the top of the panel. A comment that tags you says **Mentioned you**, and the **Mentions you** filter shows only those. Comments, viewer names and who was tagged are end-to-end encrypted with the link's key. Everything about comments, reactions and privacy is in [Insights, comments and reactions](/use/captures/insights).
+
+### See how far people read a document
+
+For a PDF, Word document or PowerPoint presentation that people read in the browser, Insights follow them page by page. You see where people stopped (how many viewers reached each page) and the time spent on each page, so you can tell whether they reached the pricing on page 9 or gave up after the summary. Each viewer's row shows how many pages they saw, for example **9 of 12 pages**. Pages are counted while people read in the share page's viewer, not in a copy they download.
+
+### Insights for folder links
+
+A folder link can count views too. It tells you which files in the folder were opened, how often and by how many people, and for documents, how far people read and how long they spent. The **People** tab turns that around and shows who opened what.
+
+Folder links start with Insights off. To turn them on:
+
+<Ordered>
+  <li>In Shared Links, click <BgStyledText>Insights</BgStyledText> on the folder link's row, or choose <strong>View insights</strong> from its menu.</li>
+  <li>Click the gear at the top of the panel and turn on <strong>Insights</strong>.</li>
+</Ordered>
+
+From then on, the people who open the folder see a short note: *The owner can see how many people viewed*. Folder links don't take comments or reactions, and have no NDA or Allow download switch.
+
+### Export to a spreadsheet
+
+Want the numbers in your own report? Once a link has viewers listed, click <BgStyledText>Export CSV</BgStyledText> at the top of its Insights. You get one row per viewer for a file link, or one row per viewer and file for a folder link, with their visits, when they last viewed, how much of a video they watched, and the pages they saw. The file is built in your browser, so viewer names never pass through our servers, and it opens in Excel, Numbers or Google Sheets.
 
 <Screenshot src="/img/console/captures/insights-comments.png" alt="The Comments tab of the console's Insights panel, with comments from Sam, Robin and Jordan at moments in the recording, a reply from the owner, and the reaction totals in the summary" dark raw />
 
@@ -285,7 +392,7 @@ The desktop app also has a Shared Links page with a few extra capabilities:
 | **Share from Finder** | ❌ Not available | ✅ macOS only |
 | **Choose an expiry** | ✅ 24h, 7d, 30d, or until revoked | ✅ Same options |
 | **Password-protected link** | ✅ Yes | ✅ Yes, in the app and from Finder |
-| **Change the expiry later** | ✅ Folder links, from any device | ✅ File and folder links, from the row's menu |
+| **Change the expiry later** | ✅ File and folder links, from the row's menu | ✅ File and folder links, from the row's menu |
 | **How it reads the file** | Downloads and decrypts the Drive copy | Reads the local plaintext file directly from disk |
 | **Copy link (same session)** | ✅ Yes | ✅ Yes |
 | **Copy link after reload** | ✅ Yes, after you unlock (older links: no) | ✅ Yes, key is saved to a local database |
@@ -294,9 +401,7 @@ The desktop app also has a Shared Links page with a few extra capabilities:
 
 **How each app copies links after a reload:** The desktop app remembers each share's key on your computer. The console rebuilds the link once you unlock with your password.
 
-**Changing an expiry.** For a **folder** link, open its action menu on the Shared Links page and choose <BgStyledText>Change expiry</BgStyledText>. The link keeps its address, so nothing needs to be sent again.
-
-In the console a **file** link's expiry can't be changed. The desktop app can: its Shared Links page offers **Expire in 24 hours**, **Expire in 7 days**, **Expire in 30 days** and **Never expire** in each link's menu, and the link stays the same.
+**Changing an expiry.** Both apps change a live link's expiry without changing the link. The console asks in a small dialog (see [Change the expiry](#change-the-expiry)). The desktop app offers **Expire in 24 hours**, **Expire in 7 days**, **Expire in 30 days** and **Never expire** right in each link's menu.
 
 ## Limits
 
@@ -305,6 +410,7 @@ In the console a **file** link's expiry can't be changed. The desktop app can: i
 | **Max shareable file size** | 5 GB |
 | **Link expiry** | Your choice of 24 hours, 7 days, 30 days, or until you revoke it. Links made automatically for screenshots and recordings never expire by default. |
 | **Share password** | Optional, at least 8 characters |
+| **NDA text** | Up to 64 KB, file links only |
 
 ## Where to next
 
