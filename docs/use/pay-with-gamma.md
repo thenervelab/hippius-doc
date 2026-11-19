@@ -3,16 +3,12 @@ id: pay-with-gamma
 title: Pay with Gamma (Subnet 75)
 sidebar_label: Pay with Gamma
 slug: /use/pay-with-gamma
-description: Coming soon. How Bittensor subnet 75 gamma will turn into Hippius balance through the API. Link a hotkey, convert gamma into credits, check the status, and the limits and risks.
+description: How Bittensor subnet 75 gamma turns into Hippius balance through the API. Link a hotkey, convert gamma into credits, check the status, and the limits and risks.
 ---
 
 # Pay with Gamma (Subnet 75)
 
-:::caution Not live yet
-Paying with gamma is **not available today**. It becomes available once gamma is enabled on subnet 75 and Hippius announces the launch. Until then, subnet 75 gamma cannot be minted on Bittensor, and every route below answers `404`. Do not mint gamma for Hippius before the announcement.
-:::
-
-[Gamma](https://www.bittensor.com/docs/guides/gamma) is a subnet's prepaid credit on Bittensor. It is minted by burning that subnet's alpha, and **one gamma is worth one US dollar**. Once live, Hippius will accept the gamma of subnet 75: we burn gamma from a deposit you hold and add the same number of dollars to your Hippius balance.
+[Gamma](https://www.bittensor.com/docs/guides/gamma) is a subnet's prepaid credit on Bittensor. It is minted by burning that subnet's alpha, and **one gamma is worth one US dollar**. Hippius accepts the gamma of subnet 75: we burn gamma from a deposit you hold and add the same number of dollars to your Hippius balance.
 
 There is no console page for gamma. You use the [Hippius API](/use/api) with `curl` or any HTTP client. A conversion counts as a payment like a card or USDC top-up: it is added to your balance as credits and appears on your invoices.
 
@@ -39,7 +35,9 @@ The answer's `spender` is the account a deposit must name, and `service_hotkey` 
 btcli gamma mint --netuid 75 --hotkey <YOUR_GAMMA_HOTKEY> --amount-tao 10 --service-hotkey <service_hotkey from the answer>
 ```
 
-`service_hotkey` is `null` until our service is published at launch: do not mint before then. A script can call `mint_gamma` directly and pass `spender` from the answer as its `spender`. If you already hold a deposit, set its spender with `set_gamma_deposit_spender` instead. A daily spend cap on the deposit is respected: we can only spend what the cap allows at that moment.
+A script can call `mint_gamma` directly and pass `spender` from the answer as its `spender`. If you already hold a deposit, set its spender with `set_gamma_deposit_spender` instead. A daily spend cap on the deposit is respected: we can only spend what the cap allows at that moment.
+
+A program can find us on chain too: Hippius publishes its service on subnet 75, and the service's URL is a machine-readable document, `https://api.hippius.com/api/billing/gamma/service.json`, with our name, the API's OpenAPI description, the payment type and the largest single conversion.
 
 ## 2. Link the hotkey to your account (once)
 
@@ -156,7 +154,7 @@ The gamma routes answer their errors as `{"code": "…", "detail": "…"}`. A mi
 | 429 | `daily_cap`, `global_daily_cap` | Convert less, or wait for older conversions to leave the 24-hour window |
 | 503 | `oracle_deviation`, `oracle_unavailable`, `price_unavailable`, `chain_unavailable`, `unavailable` | Try again later |
 | 400 | `gamma_personal_only` | Gamma pays for your own account only: drop the `X-Hippius-Account` (unless it names your own account), `X-Hippius-Project` and `X-Hippius-Billing` headers. To fund a shared account, its owner converts with their own token |
-| 404 | `gamma_unavailable` | Gamma payments are not enabled yet |
+| 404 | `gamma_unavailable` | Gamma payments are switched off: try again later |
 | 404 | `gamma_hotkey_not_found` | The hotkey is not linked to your account (`GET /api/billing/gamma/` lists yours) |
 | 404 | `gamma_conversion_not_found` | No such conversion on your account |
 | 404 | `gamma_page_not_found` | The page is past the end of the list |
