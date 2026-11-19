@@ -133,6 +133,20 @@ Recipients can browse subfolders, search by name, preview files, download any si
 
 To share a file that isn't in a synced folder, use [Share from Finder](/use/desktop/share-from-finder) on macOS.
 
+## Control What People Can Do {#control-what-people-can-do}
+
+A file link can do more than hand over a file. You can let people look without taking a copy, or ask them to agree to your terms before they see anything. Both help when you send something sensitive, such as a contract, a pitch deck or a draft.
+
+The switches are in the **Share via link** dialog once the link is made, and later in the link's Insights, behind the gear at the top of the panel (**Link settings**). Changes apply straight away and the link stays the same. They're for file links only. Both need a paid Drive plan, and you can always undo them on any plan.
+
+### Make a link view only
+
+Turn off **Allow download** and people can still open the file in their browser, but the Download buttons are gone. A shared PDF also gets a faint watermark on every page, with the viewer's email and the date when they're signed in to Hippius in that browser, or *Viewed* and the date when they aren't. View only discourages copying but can't prevent it: the viewer's browser holds the whole file to show it, and anyone can take a screenshot. See [Make a link view only](/use/console/shared-links#make-a-link-view-only) for what recipients see.
+
+### Ask people to accept an NDA
+
+Turn on **Ask to accept an NDA**, write your terms in the box and click <BgStyledText>Save</BgStyledText>. Anyone who opens the link then sees your text first and must click **Accept** before the file opens. The link's Insights get an **NDA** tab listing who accepted and when. The text is end-to-end encrypted with the link's key, so Hippius can't read it. Accepting needs no account, so an acceptance shows that someone with the link agreed, not who they are. You can't add an NDA to a link with a password. More in [Ask people to accept an NDA](/use/console/shared-links#ask-people-to-accept-an-nda).
+
 ## Active Shares
 
 The Active Shares table shows every share currently live on your account, refreshed from the server every few seconds. It includes shares created from any device or the console, not just this desktop install.
@@ -220,17 +234,23 @@ When someone opens your share link, they land on a simple page in their browser.
     Add static/img/desktop/shared-links-preview.png AND shared-links-preview-dark.png, then uncomment:
     <Screenshot src="/img/desktop/shared-links-preview.png" alt="Recipient preview page with Download button" dark /> */}
 
-A **Download** option is always available. The file is decrypted directly in the recipient's browser: on modern browsers (Chrome, Edge, Firefox) the download streams straight to disk with no size limit; on older browsers it's buffered in memory up to 500 MB. The decryption key never reaches our servers.
+A **Download** option is there too, unless you've [made the link view only](#make-a-link-view-only). If you've [asked for an NDA](#ask-people-to-accept-an-nda), people accept it before the file opens. The file is decrypted directly in the recipient's browser: on modern browsers (Chrome, Edge, Firefox) the download streams straight to disk with no size limit; on older browsers it's buffered in memory up to 500 MB. The decryption key never reaches our servers.
 
 If the link has expired or been revoked, recipients see: _"This link has expired or been revoked."_ We don't say which, so no one can guess whether a token was ever valid.
 
 ## Views, Comments and Reactions
 
-You can see how many people opened a link, and let people comment and react under it. The **Share via link** dialog has **Insights**, **Comments** and **Reactions** switches for each file you share, next to **Show a preview in chats** for pictures and videos. On a paid Drive plan they start on for screenshots and recordings and off for other files; on the Free plan they start off and turning one on shows an upgrade prompt.
+You can see how many people opened a link, and let people comment and react under it. The **Share via link** dialog has **Insights**, **Comments** and **Reactions** switches for each file you share, next to **Show a preview in chats** for pictures and videos. On a paid Drive plan they start on for screenshots and recordings, PDF, Word and PowerPoint files start with Insights on, and other files start with all three off. On the Free plan they start off and turning one on shows an upgrade prompt.
 
 <Screenshot src="/img/desktop/captures/share-dialog.png" alt="The desktop Share via link dialog with Show a preview in chats, Insights, Comments and Reactions switches" dark raw />
 
 Open a link's **Insights** from its row in Shared Links, or from Captures, to see how many people watched and read what they said. They open in a panel on the right, with Comments, Viewers and Reactions tabs, and the link's switches behind the gear at the top. In Captures every screenshot and recording offers Insights, and one without a link yet can get one there with **Create link**. A comment that tags you with `@` says **Mentioned you**, and the **Mentions you** filter shows only those. See [Insights, comments and reactions](/use/captures/insights).
+
+**Documents.** For a PDF, Word document or PowerPoint presentation read in the browser, the **Pages** tab shows where people stopped reading and how long they spent on each page, and each viewer's row shows how many pages they saw.
+
+**Folder links.** Click <BgStyledText>Insights</BgStyledText> on a folder link's row to see which files in the folder were opened, how often and by how many people, how far people read each document and how long they spent on it. Folder links start with Insights off: turn them on behind the gear in the panel. This needs a paid Drive plan.
+
+**Export CSV.** Once a link has viewers listed, the <BgStyledText>Export CSV</BgStyledText> button at the top of its Insights saves who viewed, how often, when they last looked and how many pages they read. The app asks where to save the file, and it opens in Excel, Numbers or Google Sheets.
 
 ## Storage Usage
 
@@ -274,5 +294,5 @@ Every live file link uses storage. Revoke temporary links when you're done with 
   <li><a href="/use/desktop/drive">Drive</a>: manage your sync folders and uploads.</li>
   <li><a href="/use/desktop/shared-drives">Shared Drives</a>: invite people with a Hippius account into a drive or a folder, with a role.</li>
   <li><a href="/use/console/shared-links">Console Shared Links</a>: the console version, where you can create shares from the web interface.</li>
-  <li><a href="/use/desktop/billing">Billing</a>: manage credits before sharing large files.</li>
+  <li><a href="/use/desktop/billing">Billing</a>: check your Drive plan has room before sharing large files.</li>
 </Unordered>
