@@ -236,6 +236,7 @@ Press and hold any file or folder for its options:
   <li><strong>Open</strong> for a file, or <strong>Browse Files</strong> for a folder.</li>
   <li><strong>Get info</strong>. See <a href="#file-details">File details</a>.</li>
   <li><strong>Rename</strong>. See <a href="#renaming">Renaming</a>.</li>
+  <li><strong>Move to…</strong>. See <a href="#moving">Moving files and folders</a>.</li>
   <li><strong>Download</strong>, for files. See <a href="#saving-a-file-to-your-phone">Saving a file to your phone</a>.</li>
   <li><strong>Share via Link</strong>. See <a href="/use/mobile/shared-links">Sharing Files</a>.</li>
   <li><strong>Delete File</strong> or <strong>Delete Folder</strong>. See <a href="#deleting">Deleting</a>.</li>
@@ -243,7 +244,6 @@ Press and hold any file or folder for its options:
 
 Files that are still uploading have no options until they finish. Items you have shared from this phone show a small **link** badge. Tap it to see or revoke that link.
 
-There is no Move or Copy on mobile. To put a file somewhere else, download it and upload it again into the folder you want.
 
 <Screenshot src="/img/mobile/drive/item-menu.png" alt="The press-and-hold menu on a file" dark raw phone />
 
@@ -269,6 +269,18 @@ A name can't:
 
 **Top-level folders can't be renamed** on mobile. Folders inside them, and files, can. If the app says **Renaming isn't available for this login**, unlock your account with your [unlock password](/use/mobile/settings#unlocking) first.
 
+### Moving files and folders {#moving}
+
+<Ordered>
+  <li>Press and hold the item and choose <strong>Move to…</strong>, or select several items and tap the <strong>move</strong> button in the bar at the bottom.</li>
+  <li>The picker opens at the folder the items are in. Tap a folder to go into it, or use the path at the top to go back up. <strong>New folder</strong> makes one right there.</li>
+  <li>Tap <BgStyledText>Move here</BgStyledText>.</li>
+</Ordered>
+
+If something with the same name is already there, the app asks whether to <strong>Keep both</strong>, <strong>Replace</strong> (a file over a file) or <strong>Skip</strong>. When the move is done, <strong>Undo</strong> appears for a few seconds in case you picked the wrong folder. Moving doesn't affect links you've made to files, and a folder keeps its links when it moves within its drive.
+
+On your phone, items move within the same drive. To move them to another drive, use [Move to… in the console](/use/console/drive#moving-files-and-folders).
+
 ### Selecting several items {#selecting-several-items}
 
 <Ordered>
@@ -277,7 +289,7 @@ A name can't:
   <li>Tap the red <strong>trash</strong> button to delete them, or the <strong>X</strong> to stop selecting.</li>
 </Ordered>
 
-Delete is the only thing you can do with several items at once.
+With several items selected, the bar at the bottom can move, share, download or delete them.
 
 ### Deleting {#deleting}
 
