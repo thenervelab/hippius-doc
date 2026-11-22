@@ -31,7 +31,7 @@ Each hotkey that spends gamma at Hippius has one Hippius account, named by the h
 
 Use a hotkey of its own for this: anyone who holds its words can spend its gamma and act as its account. Never use a staking hotkey, and never give anyone your **coldkey** words: Hippius never needs them.
 
-If you linked a hotkey to an existing Hippius account in the earlier version of gamma payments, its spends are credited to that linked account.
+If you linked a hotkey to an existing Hippius account in the earlier version of gamma payments, its spends are credited to that linked account. Such a hotkey cannot sign API requests for that account: sign in to it with its token or its usual login.
 
 ## 1. Mint gamma into a deposit at your hotkey
 
@@ -71,7 +71,9 @@ curl -s "https://api.hippius.com/api/billing/gamma/balance?hotkey=<YOUR_HOTKEY>"
 | `remaining_usd` | The account's available balance, however it was funded (gamma, card, USDC, …) |
 | `used_usd` | `credited_usd` minus `remaining_usd`, never below 0 |
 
-The amounts are US dollars, as decimal strings. A spend shows here as soon as its block is finalized: the balance request credits it first. A hotkey that has never spent at Hippius answers zeros. An address that is not an SS58 address is a `400 invalid_hotkey`. The route allows 30 requests a minute per client address.
+The amounts are US dollars, as decimal strings. A spend shows here as soon as its block is finalized: the balance request credits it first. A hotkey that has never spent at Hippius answers zeros; a total below 0.1 gamma is credited once it reaches 0.1. An address that is not an SS58 address is a `400 invalid_hotkey`. The route allows 30 requests a minute per client address, and a few reads a minute per hotkey (`429 gamma_balance_rate_limited`, with `Retry-After`).
+
+Unsigned, `remaining_usd` is the full balance only for an account that only the hotkey signs in to. For an account that also has an e-mail, social or password sign-in, or that the hotkey was linked to, the unsigned answer shows the gamma alone. Sign the balance request with the hotkey (step 4) to see the full figures of its own account.
 
 ## 4. Sign requests with your hotkey (btauth/1) {#sign-requests}
 
@@ -116,6 +118,8 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 In order: `btauth/1`; the scheme (`sr25519` or `ed25519`); the HTTP method in capitals; the path and query exactly as sent, percent-encoded; the SHA-256 of the exact body bytes, as lowercase hex (the hash of an empty body above); the nonce; your hotkey; the receiver. An sr25519 signature uses the substrate signing context, as chain transactions do.
 
 Sign a fresh nonce for every request, retries included. A nonce more than 10 seconds old or 2 seconds ahead is refused, and each nonce works once.
+
+The `Host` header is not part of the signed message, as in Bittensor's scheme: the receiver hotkey is what binds a signature to Hippius. Send requests to `https://api.hippius.com` only, so that they are not readable by anyone in between.
 
 ### With the Bittensor SDK
 
@@ -213,7 +217,8 @@ A signed request that is refused answers `{"error": "<code>", "detail": "<what t
 | 401 | `btauth_replayed_nonce` | Sign every request, retries included, with a new nonce |
 | 401 | `btauth_protected_sender` | This hotkey is a hashed account on chain; its sr25519/ed25519 signatures are not accepted |
 | 401 | `btauth_chain_unavailable` | The chain could not be read to check the sender; retry shortly |
-| 401 | `btauth_account_unavailable` | This key cannot be a Hippius account (for example, it is already a Hippius-generated address or a provider's key); use another hotkey |
+| 401 | `btauth_account_unavailable` | This hotkey pays an existing Hippius account (sign in to that account another way), or it cannot be a Hippius account (for example, a Hippius-generated address or a provider's key); use another hotkey |
+| 429 | `btauth_rate_limited` | Too many new signers from your address or for this hotkey; wait for `Retry-After` |
 | 401 | `btauth_not_accepted_here` | This route does not take signed requests (staff and session routes); use an API token |
 | 402 | `insufficient_balance` | Spend gamma at Hippius, then retry |
 | 413 | `btauth_body_too_large` | The body is too large to be signed; send a smaller one |
