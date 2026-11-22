@@ -68,12 +68,12 @@ curl -s "https://api.hippius.com/api/billing/gamma/balance?hotkey=<YOUR_HOTKEY>"
 | Field | Meaning |
 |---|---|
 | `credited_usd` | Every gamma payment the hotkey's account has received |
-| `remaining_usd` | The account's available balance, however it was funded (gamma, card, USDC, …) |
+| `remaining_usd` | Signed by the hotkey: the account's available balance, however it was funded (gamma, card, USDC, …). Unsigned: the gamma credited less what signed requests used |
 | `used_usd` | `credited_usd` minus `remaining_usd`, never below 0 |
 
 The amounts are US dollars, as decimal strings. A spend shows here as soon as its block is finalized: the balance request credits it first. A hotkey that has never spent at Hippius answers zeros; a total below 0.1 gamma is credited once it reaches 0.1. An address that is not an SS58 address is a `400 invalid_hotkey`. The route allows 30 requests a minute per client address, and a few reads a minute per hotkey (`429 gamma_balance_rate_limited`, with `Retry-After`).
 
-Unsigned, `remaining_usd` is the full balance only for an account that only the hotkey signs in to. For an account that also has an e-mail, social or password sign-in, or that the hotkey was linked to, the unsigned answer shows the gamma alone. Sign the balance request with the hotkey (step 4) to see the full figures of its own account.
+Unsigned, the answer shows the gamma alone, for every account: `remaining_usd` is the gamma credited less what the account's signed requests were charged, and `used_usd` is that charge. It never shows what the account holds from other payments. Sign the balance request with the hotkey (step 4) to see the full figures of its own account.
 
 ## 4. Sign requests with your hotkey (btauth/1) {#sign-requests}
 
