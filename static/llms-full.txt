@@ -720,6 +720,19 @@ Docs: https://docs.hippius.com/use/wallet-login
     POST https://api.hippius.com/api/auth/verify/    {"address", "substrate_address", "challenge", "signature", "substrate_signature"} -> token
 Sign `message` verbatim: signature = EIP-191 personal_sign by the Ethereum key (m/44'/60'/0'/0/0); substrate_signature = sr25519 by the Substrate key (no derivation path) over the raw message bytes. A signature over the polkadot.js <Bytes> wrapping (browser extension signRaw) is refused: 401 code substrate_signature_invalid. Missing proof on a new or never-proven account: 401 code substrate_signature_required. The first verify for a new Substrate address creates the account. An agent that holds the phrase uses this. Never ask a user to paste their 12 words into chat.
 
+
+### Hotkey-signed requests (btauth/1) and paying with gamma
+
+Docs: https://docs.hippius.com/use/pay-with-gamma#sign-requests
+An agent holding only a Bittensor hotkey can pay with subnet 75 gamma and call every REST API route with btauth/1 signed requests, instead of `Authorization: Token`.
+    btcli gamma spend --netuid 75 --service-hotkey 5G1Qj93Fy22grpiGKq6BEvqqmS2HVRs3jaEdMhq9absQzs6g --amount-gamma 5 -H <hotkey>
+                                                             1 gamma = $1, credited to the hotkey's account within ~10 finalized blocks
+    GET  /api/billing/gamma/balance?hotkey=<ss58>            no auth -> hotkey, credited_usd, used_usd, remaining_usd
+    GET  https://api.hippius.com/api/billing/gamma/service.json   publishers, API base, balance URL, signature, pricing
+Headers: X-Bittensor-Version: 1, X-Bittensor-Hotkey, X-Bittensor-Receiver (the service hotkey above), X-Bittensor-Nonce (unix ns), X-Bittensor-Crypto (absent for sr25519, `ed25519`), X-Bittensor-Signature (0x + hex). No Authorization header with them.
+Signed message: "btauth/1", scheme, METHOD, path?query as sent, sha256(raw body) hex, nonce, hotkey, receiver, joined by \n, no trailing newline; sr25519 with the substrate context. Python SDK: bt.http_auth.sign(wallet, method=, path=, body=, receiver_ss58=).
+Each signed request costs $0.001 from the balance (balance, transactions, profile reads free); an empty balance is 402 {"error": "insufficient_balance"}. Refusals are {"error": "btauth_...", "detail": ...}.
+REST API only: S3 keeps S3 access keys (create one with a signed POST /api/objectstore/master-tokens/), Drive, OAuth and API tokens are unchanged.
 ---
 
 ## Links
