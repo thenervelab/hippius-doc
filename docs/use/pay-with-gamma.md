@@ -8,14 +8,14 @@ description: Pay Hippius with Bittensor subnet 75 gamma from a hotkey, read the 
 
 # Pay with Gamma (Subnet 75)
 
-[Gamma](https://www.bittensor.com/docs/guides/gamma) is a subnet's prepaid credit on Bittensor. It is minted by burning that subnet's alpha, and **one gamma is worth one US dollar**. Hippius accepts the gamma of subnet 75, following Bittensor's Gamma Integration Standard V1.2:
+[Gamma](https://www.bittensor.com/docs/guides/gamma) is a subnet's prepaid credit on Bittensor. It is minted by burning that subnet's alpha, and **one gamma is worth one US dollar**. Hippius accepts the gamma of subnet 75, following Bittensor's Gamma Integration Standard V1.3:
 
 1. Your coldkey mints subnet 75 gamma into a deposit at one of your hotkeys.
 2. That hotkey spends the gamma at the Hippius service hotkey. The spend is free of fees.
 3. Hippius reads the chain and adds one US dollar per gamma to the hotkey's Hippius account, within about 10 finalized blocks (about two minutes).
 4. The hotkey signs its requests to the [Hippius API](/use/api) (btauth/1) and acts as that account. Each signed request costs a small fee from the balance.
 
-An agent that holds only a hotkey can do all of this: no browser, no email, no API token.
+An agent that holds only a hotkey can do all of this: no browser, no sign-up, no email, no API token, no account linking. The hotkey is the account: its first credited spend opens it, and its signatures are the only credential. A hotkey we have never seen that signs a paid request with no balance gets `402 insufficient_balance`, not a sign-in error.
 
 The Hippius service hotkey on subnet 75 is:
 
@@ -23,7 +23,7 @@ The Hippius service hotkey on subnet 75 is:
 5G1Qj93Fy22grpiGKq6BEvqqmS2HVRs3jaEdMhq9absQzs6g
 ```
 
-The machine-readable description of the service, the one the chain points to, is [`https://api.hippius.com/api/billing/gamma/service.json`](https://api.hippius.com/api/billing/gamma/service.json). It lists the service hotkey (`publishers`), the API base URL (`services`), the balance URL and the signature scheme (`payments`), and the price of a signed request (`pricing`).
+The machine-readable description of the service, the one the chain points to, is [`https://api.hippius.com/api/billing/gamma/service.json`](https://api.hippius.com/api/billing/gamma/service.json). It lists the service hotkey (`publishers`); the API's OpenAPI spec, covering every route (`services`, type `openapi`: `https://api.hippius.com/swagger.json`, OpenAPI 2.0, with the `btauth` security scheme) and its base URL; the balance URL, the signature scheme and how the balance is read (`payments`); and the machine-readable price list (`pricing`: [`https://api.hippius.com/api/billing/gamma/pricing`](https://api.hippius.com/api/billing/gamma/pricing), which links each product's price and catalog routes). An agent that knows only netuid 75 finds everything from there.
 
 ## The hotkey is the account
 
@@ -35,7 +35,7 @@ If you linked a hotkey to an existing Hippius account in the earlier version of 
 
 ## 1. Mint gamma into a deposit at your hotkey
 
-Mint with `btcli`, from the coldkey that owns the hotkey. The chain's own guide explains minting and deposits: [Gamma](https://www.bittensor.com/docs/guides/gamma).
+Mint with `btcli`, from the coldkey that owns the hotkey (`pip install "bittensor>=11.3.5"`). The chain's own guide explains minting and deposits: [Gamma](https://www.bittensor.com/docs/guides/gamma).
 
 ```bash
 btcli gamma mint --netuid 75 --hotkey <YOUR_HOTKEY> --amount-tao 0.02 -w <YOUR_COLDKEY>
@@ -55,7 +55,7 @@ A spend is at least 0.1 gamma, unless it empties the deposit. The chain burns th
 
 ## 3. Read the balance
 
-Anyone can read a hotkey's balance. No token or signature is needed:
+Anyone can read a hotkey's balance. No token or signature is needed; the total spendable balance needs a request signed by the hotkey (the document's `balance_auth` says so):
 
 ```bash
 curl -s "https://api.hippius.com/api/billing/gamma/balance?hotkey=<YOUR_HOTKEY>"
@@ -186,9 +186,9 @@ print(requests.get(API + target, headers=signed("GET", target)).json())
 
 ## 5. What a signed request costs
 
-Each signed request costs **0.001 US dollar**, taken from the account's balance before the request runs. Hippius may change this price; the current one is `pricing.btauth_request_usd` in the [service document](https://api.hippius.com/api/billing/gamma/service.json). What the request does is billed as usual on top (a VM's hours, storage, …).
+Each signed request costs **0.001 US dollar**, taken from the account's balance before the request runs. Hippius may change this price; the current one is `signed_request.price_usd` in the [price list](https://api.hippius.com/api/billing/gamma/pricing), which also lists the free reads and links each product's prices. What the request does is billed as usual on top (a VM's hours, storage, …).
 
-These are free, and never refused for the balance: reading the balance, the service document, the account's credit balance (`GET /api/billing/credits/balance/`), its transactions (`GET /api/billing/transactions/`), its profile (`GET /api/user-profile/`), the gamma overview, and `OPTIONS`.
+These are free, and never refused for the balance: reading the balance, the service document, the price list, the account's credit balance (`GET /api/billing/credits/balance/`), its transactions (`GET /api/billing/transactions/`), its profile (`GET /api/user-profile/`), the gamma overview, and `OPTIONS`.
 
 When the balance cannot cover a request, Hippius first credits any gamma your hotkey has just spent, then answers:
 

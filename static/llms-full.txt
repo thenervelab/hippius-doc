@@ -724,11 +724,12 @@ Sign `message` verbatim: signature = EIP-191 personal_sign by the Ethereum key (
 ### Hotkey-signed requests (btauth/1) and paying with gamma
 
 Docs: https://docs.hippius.com/use/pay-with-gamma#sign-requests
-An agent holding only a Bittensor hotkey can pay with subnet 75 gamma and call every REST API route with btauth/1 signed requests, instead of `Authorization: Token`.
+An agent holding only a Bittensor hotkey can pay with subnet 75 gamma and call every REST API route with btauth/1 signed requests, instead of `Authorization: Token`: no sign-up, no API key, no linking. SDK and btcli: pip install "bittensor>=11.3.5".
     btcli gamma spend --netuid 75 --service-hotkey 5G1Qj93Fy22grpiGKq6BEvqqmS2HVRs3jaEdMhq9absQzs6g --amount-gamma 5 -H <hotkey>
                                                              1 gamma = $1, credited to the hotkey's account within ~10 finalized blocks
     GET  /api/billing/gamma/balance?hotkey=<ss58>            no auth -> hotkey, credited_usd, used_usd, remaining_usd
-    GET  https://api.hippius.com/api/billing/gamma/service.json   publishers, API base, balance URL, signature, pricing
+    GET  https://api.hippius.com/api/billing/gamma/service.json   publishers, OpenAPI spec (services, type openapi), API base, balance URL + balance_auth, signature, pricing URL
+    GET  /api/billing/gamma/pricing                          no auth -> signed_request.price_usd, free reads, 402 body, product price and catalog links
 Headers: X-Bittensor-Version: 1, X-Bittensor-Hotkey, X-Bittensor-Receiver (the service hotkey above), X-Bittensor-Nonce (unix ns), X-Bittensor-Crypto (absent for sr25519, `ed25519`), X-Bittensor-Signature (0x + hex). No Authorization header with them.
 Signed message: "btauth/1", scheme, METHOD, path?query as sent, sha256(raw body) hex, nonce, hotkey, receiver, joined by \n, no trailing newline; sr25519 with the substrate context. Python SDK: bt.http_auth.sign(wallet, method=, path=, body=, receiver_ss58=).
 Each signed request costs $0.001 from the balance (balance, transactions, profile reads free); an empty balance is 402 {"error": "insufficient_balance"}. Refusals are {"error": "btauth_...", "detail": ...}.
