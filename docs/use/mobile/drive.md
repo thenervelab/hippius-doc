@@ -271,15 +271,41 @@ A name can't:
 
 ### Moving files and folders {#moving}
 
+Tidying up, or putting finished work into another of your drives? You can move files and folders to another folder, or to another drive you own.
+
 <Ordered>
-  <li>Press and hold the item and choose <strong>Move to…</strong>, or select several items and tap the <strong>move</strong> button in the bar at the bottom.</li>
-  <li>The picker opens at the folder the items are in. Tap a folder to go into it, or use the path at the top to go back up. <strong>New folder</strong> makes one right there.</li>
-  <li>Tap <BgStyledText>Move here</BgStyledText>.</li>
+  <li>Press and hold the item and choose <strong>Move to…</strong>, or select several items and tap <strong>Move selected</strong> in the bar at the bottom.</li>
+  <li>The picker opens at the folder the items are in. Tap a folder to go into it, or use <strong>Back</strong> and the path at the top to go back up. <strong>New folder</strong> makes one right there.</li>
+  <li>To move to another drive, tap it in the row of drives at the top.</li>
+  <li>Tap the button that names where they're going, such as <BgStyledText>Move to Reports</BgStyledText>.</li>
 </Ordered>
 
-If something with the same name is already there, the app asks whether to <strong>Keep both</strong>, <strong>Replace</strong> (a file over a file) or <strong>Skip</strong>. When the move is done, <strong>Undo</strong> appears for a few seconds in case you picked the wrong folder. Moving doesn't affect links you've made to files, and a folder keeps its links when it moves within its drive.
+If something with the same name is already there, the app asks whether to <strong>Keep both</strong> (the moved item gets a name such as <em>Report (1).pdf</em>), <strong>Replace</strong> (a file over a file) or <strong>Skip</strong>, and <strong>Do this for all</strong> answers every clash at once. Within a drive, <strong>Undo move</strong> appears for a few seconds in case you picked the wrong folder.
 
-On your phone, items move within the same drive. To move them to another drive, use [Move to… in the console](/use/console/drive#moving-files-and-folders).
+Moving isn't offered in a drive someone else owns, or in your captures drive.
+
+#### Moving to another drive
+
+Every drive has its own encryption key, so a move to another drive isn't just a rename. Your phone opens each file, encrypts it again for the new drive and uploads it. Only when every file has arrived are they all switched over in one step.
+
+<Unordered>
+  <li><strong>It takes as long as an upload</strong>, and the app shows how far it has got. Keep the app open until it's done.</li>
+  <li><strong>It's all or nothing.</strong> Tap <BgStyledText>Cancel</BgStyledText> at any point, and both drives stay as they were. The same is true if anything fails, or if the app closes first. A move left open that way holds some room in the destination until the app next starts, when it's let go.</li>
+  <li><strong>There's no Undo.</strong> To put things back, move them again.</li>
+  <li><strong>Replace isn't offered</strong>, so nothing is deleted before the move is safely done. Keep both and Skip work as usual.</li>
+  <li><strong>The other drives listed are your own.</strong> To move into or out of a shared drive someone else owns, use <a href="/use/console/drive#moving-files-and-folders">Move to… in the console</a>.</li>
+</Unordered>
+
+Links to files keep working wherever the file goes, because each one is its own encrypted copy. A folder keeps its links when it moves within its drive. Moved to another drive, a folder can't take its links or the people it's shared with along, because they belong to the old drive. Before you move a shared folder, the app asks <strong>Move shared folder?</strong> and says what will be turned off, for example <em>Moving turns off 2 share links and access for 1 person.</em>
+
+| Limit for one move between drives | Value |
+|---|---|
+| Files | 2,000 |
+| Folders | 100 |
+| Largest file | 500 MB |
+| Empty files | Can't be moved to another drive from your phone |
+
+Empty folders move like any other folder.
 
 ### Selecting several items {#selecting-several-items}
 
