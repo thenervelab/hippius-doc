@@ -21,7 +21,7 @@ If you signed in with a 12-word access key instead of Google, GitHub or Apple, y
 | **Sharing** | Unlimited | Unlimited |
 | **Length of a recording** | Up to 5 minutes | No limit |
 | **Number of recordings** | 25 in total | No limit |
-| **Hippius watermark** | A small one in the corner | None |
+| **Hippius watermark** | A small "Recorded with Hippius" label in the corner | None |
 | **Insights, comments and reactions** | Not included | Full Insights, comments and reactions, on for captures |
 | **Storage** | Captures count toward your 10 GB | Captures count toward your plan's storage |
 
@@ -49,7 +49,9 @@ When you've used all 25, Hippius tells you as soon as you press Record, before a
 
 ## The watermark
 
-Screenshots and recordings made on the Free plan carry a small Hippius watermark (the Hippius logo and the word "Hippius") in the bottom-right corner. It's white and slightly see-through, so it reads on light and dark backgrounds without getting in the way. Your camera bubble sits in the opposite corner.
+Screenshots and recordings made on the Free plan carry a small Hippius watermark in the bottom-right corner: a dark, rounded label with the Hippius logo and the words "Recorded with Hippius" in white. The dark background keeps it readable on a white page as well as a dark one, and it's sized to the picture, so it stays small on a big screen. On a recording it sits a little higher, clear of a video player's controls. Your camera bubble sits in the opposite corner.
+
+The desktop app and the console draw the same label.
 
 The watermark is drawn into the picture on your computer, before the capture is encrypted. It isn't something the server adds or could remove, so it stays on the file when you share it or download it. Captures made on a paid plan have no watermark. Upgrading doesn't remove it from captures you've already taken.
 

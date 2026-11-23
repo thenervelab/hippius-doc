@@ -51,7 +51,8 @@ The panel shows the headline numbers first (views, people and how much they watc
   <li><strong>Completion</strong>: for each view of a recording, how much of the video was played, averaged over all views. Skipped parts don't count, and parts watched twice count once.</li>
   <li><strong>Average watch time</strong>: how long people watched, on average.</li>
   <li><strong>Where people stopped</strong>: a chart that shows, for each moment of the recording, how many views reached it. A sharp drop tells you where people lost interest or found what they needed. Each commenter appears on the chart at the moment their comment is about.</li>
-  <li><strong>Viewers</strong>: everyone who watched, with how much they watched and when. You don't see who they are: each one shows as <em>Anonymous viewer</em>, unless they also left a comment under their name in the same browser, which puts that name on their views.</li>
+  <li><strong>Viewers</strong>: everyone who watched, with how much they watched, how many visits they made, how long they spent and when they last came. Click or tap a viewer to see each of their visits. You don't see who they are: each one shows as <em>Anonymous viewer</em>, unless they also left a comment under their name in the same browser, which puts that name on their views.</li>
+  <li><strong>Engaged</strong>: in the console and the mobile app, a viewer who saw at least 80% of the video or document, or came back for a second visit, is marked Engaged.</li>
 </Unordered>
 
 Screenshots and other pictures get views and viewers, but no completion or chart, since there is nothing to play.
@@ -110,6 +111,8 @@ An account that signs in with an access key has no email address, so there's now
 Choose them in the console under [Settings, Share link emails](/use/console/settings#share-link-emails), or in the desktop app under [Settings, Notifications](/use/desktop/settings#emails-about-your-links). Each email also has a link to stop that kind of email.
 
 <Screenshot src="/img/desktop/captures/settings-link-emails.png" alt="Emails about your links in the desktop app's notification settings, with First views, New comments and a weekly Summary" dark raw />
+
+The apps can tell you too. The console has a [bell for link activity](/use/console/shared-links#link-activity) at the top of the page, the [desktop app](/use/desktop/shared-links) shows a notification when your links get new views, and so does the [mobile app](/use/mobile/shared-links) on a paid plan.
 
 ## Privacy
 

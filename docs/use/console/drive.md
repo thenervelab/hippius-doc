@@ -220,7 +220,8 @@ That has a few consequences worth knowing:
 
 <Unordered>
   <li><strong>It takes as long as an upload.</strong> A progress card in the bottom corner shows what is moving and where, and how many files are ready, for example <em>Preparing 1,240 of 8,300 files</em>. It keeps going if you close the picker or open another page, but keep the tab open.</li>
-  <li><strong>It's all or nothing.</strong> Click <BgStyledText>Cancel</BgStyledText> on the card at any point, and both drives stay exactly as they were. The same is true if anything fails.</li>
+  <li><strong>It's all or nothing.</strong> Click <BgStyledText>Cancel</BgStyledText> on the card at any point, and both drives stay exactly as they were. The same is true if anything fails, or if you close the tab before it finishes.</li>
+  <li><strong>A move holds room in the destination</strong> while it runs, so the files are sure to fit. If the tab closed or crashed partway, the console lets go of that room the next time you open Drive in the same browser. A move started somewhere else is never touched, and anything left over is freed on its own within a day.</li>
   <li><strong>The console asks for your unlock password once</strong>, as the move starts, and won't stop to ask again even if it locks while you're away.</li>
   <li><strong>There's no Undo.</strong> To put things back, move them again.</li>
   <li><strong>Storage moves with the files.</strong> A file you move into someone else's drive counts toward the owner's storage, not yours. If their plan is full, the move says so.</li>
@@ -233,7 +234,7 @@ When it finishes, a message tells you where things went, for example *Moved to R
 <Unordered>
   <li><strong>File links keep working</strong>, wherever the file goes. Each one is its own encrypted copy, so a move doesn't touch it.</li>
   <li><strong>Within one drive</strong>, a folder keeps its folder links and the people it's shared with.</li>
-  <li><strong>To another drive</strong>, a folder can't take its sharing along, because its links and invites belong to the old drive's key and members. Before you move a shared folder, the console asks <strong>Move shared folder?</strong> and says what will be turned off, for example <em>Moving turns off 2 share links and access for 1 person.</em> After the move, make new links or share the folder again in its new drive if you need to.</li>
+  <li><strong>To another drive</strong>, a folder can't take its sharing along, because its links and invites belong to the old drive's key and members. Before you move a shared folder, the console asks <strong>Move shared folder?</strong> and says what will be turned off, for example <em>Moving turns off 2 share links and access for 1 person.</em> The count takes in every live link on the folder and the folders inside it, including links other Managers made, so nothing stops working without warning. After the move, make new links or share the folder again in its new drive if you need to.</li>
   <li>Only the drive's owner or a Manager can move a folder that other people can open to another drive.</li>
 </Unordered>
 
@@ -254,6 +255,7 @@ Nothing is lost when a move fails: both drives stay as they were, and the messag
 | **Some files in this drive need to sync from the desktop app first** | Open the desktop app so it can finish syncing, then try again. |
 | **The recordings would go over the free plan's limit there** | The destination's owner is on the Free plan, which holds 25 recordings. |
 | **It changed while moving** | Someone edited a file while it moved. Try again. |
+| **A folder changed or is no longer there** | Someone renamed, moved or deleted a folder in the move while it ran. Refresh the page and try again. |
 
 ### Limits
 
@@ -262,7 +264,7 @@ Nothing is lost when a move fails: both drives stay as they were, and the messag
 | **Files in one move between drives** | 2,000 |
 | **Folders in one move between drives** | 100 |
 | **Largest file you can move between drives in the browser** | 500 MB |
-| **Empty folders** | Can't be moved to another drive. Create the folder there instead. |
+| **Empty folders** | Move like any other folder, even a folder that holds only empty folders. |
 | **Moves within a drive** | No file or size limit. Nothing is uploaded again, so even a big folder moves quickly. |
 
 For a bigger move, split it into several smaller ones.

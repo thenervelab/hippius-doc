@@ -264,7 +264,7 @@ Every live file link uses storage. Revoke temporary links when you're done with 
 | **How it reads the file**    | The file on this computer, or downloads it if needed | Downloads and decrypts the Drive copy                        |
 | **Copy link (same session)** | ✅ Yes                                               | ✅ Yes                                                       |
 | **Copy link later**          | ✅ Yes, the app keeps or fetches the key             | ✅ Yes, after you unlock (some older links: no)              |
-| **Change expiry**            | ✅ File and folder links, link stays the same        | ✅ File and folder links, link stays the same                |
+| **Change expiry**            | ✅ File and folder links, link stays the same        | ✅ Folder links only                                         |
 | **Revoke**                   | ✅ Any device                                        | ✅ Any device                                                |
 | **History**                  | ✅ Yes                                               | ✅ Yes                                                       |
 
