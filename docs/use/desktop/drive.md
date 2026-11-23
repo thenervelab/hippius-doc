@@ -259,7 +259,8 @@ Every drive has its own encryption key, so moving to another drive isn't just a 
 
 <Unordered>
   <li><strong>It takes as long as an upload.</strong> A message shows what is moving and where, and you can keep working while it runs. One move between drives runs at a time.</li>
-  <li><strong>It's all or nothing.</strong> Click <BgStyledText>Cancel</BgStyledText> on the message at any point, and both drives stay as they were. The same is true if anything fails.</li>
+  <li><strong>It's all or nothing.</strong> Click <BgStyledText>Cancel</BgStyledText> on the message at any point, and both drives stay as they were. The same is true if anything fails, or if the app closes before the move finishes.</li>
+  <li><strong>A move holds room in the destination</strong> while it runs, so the files are sure to fit. If the app closed partway, it lets go of that room the next time it starts. A move running in the console or on your phone is never touched.</li>
   <li><strong>There's no Undo.</strong> To put things back, move them again.</li>
   <li><strong>Storage moves with the files.</strong> A file you move into someone else's drive counts toward the owner's storage, not yours.</li>
   <li><strong>Name clashes</strong> offer Keep both or Skip. Replace isn't offered between drives, so nothing is deleted before the move is safely done.</li>
@@ -267,7 +268,7 @@ Every drive has its own encryption key, so moving to another drive isn't just a 
 
 #### What happens to links and access
 
-File links keep working wherever the file goes, because each one is its own encrypted copy. Within one drive, a folder keeps its folder links and the people it's shared with. A folder moved to another drive can't take its sharing along, because its links and invites belong to the old drive. Before you move a shared folder, the app asks <strong>Move a shared folder?</strong> and says what will be turned off, for example *Moving it to another drive turns off its share link and removes access for 2 people.* Only the drive's owner or a Manager can move a folder other people can open.
+File links keep working wherever the file goes, because each one is its own encrypted copy. Within one drive, a folder keeps its folder links and the people it's shared with. A folder moved to another drive can't take its sharing along, because its links and invites belong to the old drive. Before you move a shared folder, the app asks <strong>Move a shared folder?</strong> and says what will be turned off, for example *Moving it to another drive turns off its share link and removes access for 2 people.* The count takes in every live link on the folder, including links other people made, so nothing stops working without warning. Only the drive's owner or a Manager can move a folder other people can open.
 
 #### If a move fails
 
@@ -277,7 +278,7 @@ Nothing is lost: both drives stay as they were, and the message says what stoppe
 |---|---|
 | Files in one move between drives | 2,000 |
 | Folders in one move between drives | 100 |
-| Empty folders | Can't move to another drive yet. Create the folder there instead. |
+| Empty folders | Move like any other folder, even a folder that holds only empty folders. |
 
 ### View Modes
 
