@@ -394,11 +394,7 @@ To see what happened to a link, click <BgStyledText>Insights</BgStyledText> on i
 
 The **Viewers** tab lists everyone who opened the link, with their last visit, how many visits they made, the time they spent, and how much they saw: pages for a document, a percentage for a video. You can sort the list by any of these, or put engaged viewers first.
 
-<Unordered>
-  <li><strong>Time</strong> is a viewer's time over all their visits: time watching a video, or time on a document's pages.</li>
-  <li><strong>Engaged</strong> marks a viewer who saw at least 80% of the pages (or of the video), or came back for a second visit. Time alone doesn't change it.</li>
-  <li><strong>NDA</strong> marks a viewer who accepted the link's NDA.</li>
-</Unordered>
+Time counts every visit: time spent watching a video, or reading a document's pages. A viewer who saw at least 80% of the pages (or of the video), or came back for a second visit, is marked **Engaged**. Time alone doesn't change that. A viewer who accepted the link's NDA is marked **NDA**.
 
 Click a viewer to open their visits, newest first: when each one started, how long it lasted and the pages it covered. For a document you also see their own time on each page, with pages they never opened greyed out. **How we count views**, at the bottom of Link settings, explains each of these numbers.
 
