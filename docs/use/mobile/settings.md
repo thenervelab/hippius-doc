@@ -312,7 +312,7 @@ From Overview, tap the **Storage** card, or the same card at the top of Settings
 
 ## Your account
 
-Open **Account** from the **Account** card at the top of Settings, or on Android from the **Plan** card on Overview. It shows:
+Open **Account** from the **Account** card at the top of Settings. It shows:
 
 <Unordered>
   <li><strong>Who you are signed in as.</strong> If you signed in with Google, GitHub or Apple, you see your name and email. Your <strong>wallet address</strong> is shown too, with a button to copy it.</li>
