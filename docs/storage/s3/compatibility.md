@@ -54,7 +54,7 @@ Same values as the [Object Storage Quickstart](/use/quickstart#connection-detail
 | `GetBucketVersioning` | ✅ Supported | Omits `Status` when versioning was never enabled |
 | `PutObjectLockConfiguration` | ✅ Supported | Bucket default retention, `Days` or `Years`. Requires versioning — see [Object Lock](/storage/s3/object-lock) |
 | `GetObjectLockConfiguration` | ✅ Supported | `404 ObjectLockConfigurationNotFoundError` when unset |
-| `PutBucketCors` | ❌ Not supported | Returns 200 and ignores the configuration. CORS is handled at the gateway level |
+| `PutBucketCors` | ✅ Supported | Per bucket. Enforced on CORS preflight requests. A preflight gets 403 until the bucket has CORS rules |
 | `PutBucketNotificationConfiguration` | ❌ Not supported | |
 | `PutBucketReplication` | ❌ Not supported | Data is replicated by the network automatically |
 | `PutBucketLogging` | ❌ Not supported | |
