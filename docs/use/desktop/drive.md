@@ -3,7 +3,7 @@ id: drive
 title: Drive
 sidebar_label: Drive
 slug: /use/desktop/drive
-description: Manage your Drive in Hippius Desktop — sync folders across your devices, upload and browse files, search your whole account, and keep everything end-to-end encrypted.
+description: Manage your Drive in Hippius Desktop — sync folders across your devices, upload and browse files, star what you use most, search your whole account, and keep everything end-to-end encrypted.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -185,16 +185,30 @@ Right click any file or folder (or click the <BgStyledIconWithText icon="More" p
 | --------------------------------- | ----------------- | ---------------------------------------------------------------------- |
 | **Open**                          | Folders           | Navigate into the folder                                               |
 | **Download**                      | Files & Folders   | Download the item to your local device                                 |
+| **Star / Unstar**                 | Files, Folders & Drives | Add the item to [Starred](#starred), or take it off               |
 | **View**                          | Previewable files | Open in the built-in viewer, see [Previewing Files](#previewing-files) |
 | **Retry sync**                    | Failed files      | Re-attempt syncing a file that failed to sync                          |
 | **Reveal in Finder**              | Files & Folders   | Show the item in your operating system's file manager                  |
-| **File Details / Folder Details** | Files & Folders   | View detailed metadata (size, type, modified date, sync status)        |
+| **File Details / Folder Details** | Files & Folders   | View detailed metadata, see [File Details](#file-details)              |
 | **View on Explorer**              | Uploaded files    | Open the file's Arion Hash tracker on hipstats.com                     |
 | **Share via link**                | Synced files      | Create a shareable link to the file                                    |
 | **Rename**                        | Files & Folders   | Rename the item on this device; the change syncs to the network        |
 | **Delete**                        | Files & Folders   | Remove the item (disabled while syncing)                               |
 
 <Screenshot src="/img/desktop/file-context-menu.png" alt="File context menu" dark />
+
+### File Details {#file-details}
+
+<BgStyledText>File Details</BgStyledText> opens a panel with the file's name, type, size, dates, sync status and Arion hash. Where the app that uploaded the file recorded them, it also shows:
+
+<Unordered>
+  <li><strong>Date Taken</strong>: when a photo or video was taken.</li>
+  <li><strong>Date Modified</strong>: when the original was last changed, before it was uploaded.</li>
+  <li><strong>Camera</strong>: the camera or phone that took a photo.</li>
+  <li><strong>Uploaded from</strong>: the phone or computer it was uploaded from, by the name it has under <a href="/use/desktop/settings#devices">Settings → Devices</a>. It is shown only for files you uploaded yourself.</li>
+</Unordered>
+
+A row with nothing to show is left out.
 
 ### Previewing Files
 
@@ -260,6 +274,31 @@ To add a folder to a sync folder, you can:
   <li>Upload an existing folder with <BgStyledText>+ New Folder</BgStyledText> (see <a href="#uploading-folders">Uploading Folders</a> above).</li>
   <li>Create the folder inside your synced folder using your operating system's file manager, then add files to it — they sync to the Hippius network automatically on the next sync cycle.</li>
 </Unordered>
+
+## Starred {#starred}
+
+Star the files, folders and drives you come back to, and find them all in one place.
+
+<Unordered>
+  <li>To star something, right click it (or open the <BgStyledIconWithText icon="More" paddingClassName="px-1 py-1" /> menu) and choose <BgStyledText>Star</BgStyledText>. This works for a file, a folder, and a whole drive in your folder list.</li>
+  <li>In the viewer, click the <strong>star</strong> button.</li>
+  <li>To star several at once, select them and choose <BgStyledText>Star</BgStyledText> in the selection bar.</li>
+</Unordered>
+
+A starred item shows a small star beside its name. Choose <BgStyledText>Unstar</BgStyledText> to take it off again. Your stars belong to your account, so they are the same in the desktop app, the [mobile app](/use/mobile/drive#starred) and the [Hippius Console](/use/console/drive#starred). In a drive someone shared with you, your stars are your own: the other members don't see them.
+
+Click <BgStyledText>Starred</BgStyledText> in the sidebar, under Drive, to see everything you starred, from your own drives and the drives shared with you. The star in the sidebar fills in while you are on the page.
+
+<Unordered>
+  <li>Starred looks and works like your Drive, in <strong>List View</strong> or <strong>Card View</strong>. Each item says where it is, such as <strong>Documents / Work</strong>.</li>
+  <li>Click the arrow beside a starred folder or drive to expand it in place, or open it to browse it right on the Starred page. The path at the top starts at <strong>Starred</strong>, so you can always step back to the list.</li>
+  <li>Files preview in the built-in viewer, and every item has the same actions as in your Drive. A starred drive offers only <BgStyledText>Open</BgStyledText> and <BgStyledText>Unstar</BgStyledText>, since its other actions would act on the whole drive folder.</li>
+  <li>The search box finds items by name, and the column headers sort the list.</li>
+</Unordered>
+
+<Screenshot src="/img/desktop/drive/starred.png" alt="The Starred page with starred drives, folders and files" dark raw />
+
+You can star up to 1,000 items. Deleting a starred item takes it off the list.
 
 ## Sharing With Other People
 
