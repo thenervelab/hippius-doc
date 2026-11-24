@@ -63,14 +63,19 @@ jobs:
         scope: hippius-doc-dev
 
     - name: Deploy to staging
+      env:
+        # Through the environment and quoted: Harbor robot account names hold a
+        # `$`, which bash would expand if the value were pasted into the script.
+        REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+        REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
       run: |
         kubectl create namespace docs-dev || true
 
         kubectl create secret docker-registry registry \
           --namespace=docs-dev \
           --docker-server=registry.starkleytech.com \
-          --docker-username=${{ secrets.REGISTRY_USERNAME }} \
-          --docker-password=${{ secrets.REGISTRY_PASSWORD }} \
+          --docker-username="$REGISTRY_USERNAME" \
+          --docker-password="$REGISTRY_PASSWORD" \
           --dry-run=client -o yaml | kubectl apply -f -
 
         sed -i "s|\${IMAGE}|registry.starkleytech.com/hippius/docs:dev-${{ steps.sha.outputs.SHORT_SHA }}|g" k8s/staging/manifests.yaml
