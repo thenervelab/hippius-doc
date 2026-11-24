@@ -112,6 +112,7 @@ Overview shows, from top to bottom:
   <li>The <strong>Storage</strong> and <strong>Plan</strong> cards: how full your Drive is, and which plan you are on. On iPhone there is only the <strong>Storage</strong> card. See <a href="/use/mobile/plans#what-the-app-shows">Plans and Storage</a>.</li>
   <li><strong>Save your recovery phrase</strong>, only for a new Google, GitHub or Apple account after its first upload. Tap <BgStyledText>View phrase</BgStyledText> to back the phrase up. <BgStyledText>Later</BgStyledText> hides the card for good, so only tap it once the phrase is safe.</li>
   <li>A card to set up <a href="/use/mobile/camera-uploads">Camera Uploads</a>. Once you have set it up, it is replaced by <strong>Storage Distribution</strong>, a breakdown of what is using your storage.</li>
+  <li><strong>Starred</strong>: the files, folders and drives you starred. Tap the arrow to open them all. See <a href="/use/mobile/drive#starred">Starred</a>.</li>
 </Unordered>
 
 ## Notifications {#notifications}
