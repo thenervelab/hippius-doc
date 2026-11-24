@@ -3,7 +3,7 @@ id: settings
 title: App Settings
 sidebar_label: App Settings
 slug: /use/desktop/settings
-description: Manage sync folders, screenshot and recording shortcuts, security, notifications, appearance, your API token, and the blockchain RPC endpoint from the Hippius desktop Settings page.
+description: Manage sync folders, screenshot and recording shortcuts, the devices linked to your account, security, notifications, appearance, your API token, and the blockchain RPC endpoint from the Hippius desktop Settings page.
 ---
 
 import DocAccordion, { DocAccordionItem } from '@site/src/components/DocAccordion';
@@ -13,7 +13,7 @@ import BgStyledIconWithText from '@site/src/components/BgStyledIconWithText';
 import BgStyledText from '@site/src/components/BgStyledText';
 import Screenshot from '@site/src/components/Screenshot';
 
-The **Settings** page is organized into sections you can open from the left sidebar: **Sync & Storage**, **Screenshots & Recording**, **Security**, **Notifications**, **Billing**, **Appearance**, **Updates**, and **Customize RPC**. Screenshots &amp; Recording only shows on a computer that can take captures. Billing has [its own page](/use/desktop/billing). Each section has a short description and an info (ⓘ) tooltip next to its title.
+The **Settings** page is organized into sections you can open from the left sidebar: **Sync & Storage**, **Screenshots & Recording**, **Devices**, **Security**, **Notifications**, **Billing**, **Appearance**, **Updates**, and **Customize RPC**. Screenshots &amp; Recording only shows on a computer that can take captures. Billing has [its own page](/use/desktop/billing). Each section has a short description and an info (ⓘ) tooltip next to its title.
 
 <DocAccordion defaultValue="sync-storage">
 
@@ -195,6 +195,43 @@ Sync & Storage
 
   ───────────────────────────────────────────────────────────────────────
 */}
+
+## Devices {#devices}
+
+<DocAccordionItem value="devices">
+  <>
+  Devices
+  </>
+  <>
+    <p>The <strong>Devices</strong> section lists the phones and computers linked to your account: "Phones and computers linked to your account." Every phone with the <a href="/use/mobile/getting-started">mobile app</a> and every computer with the desktop app that has signed in is here, with its name, what it is, and when it was last active.</p>
+
+    <Ordered>
+      <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />, then open <strong>Devices</strong>.</li>
+    </Ordered>
+
+    <p>This computer comes first, marked <strong>This device</strong>. It is added the first time you sign in, and it has no Unlink: signing out of the app is how you remove it.</p>
+
+    <Screenshot src="/img/desktop/settings/devices.png" alt="The Devices section with this computer and a phone" dark raw />
+
+    ### Unlinking a device
+
+    <p>To remove a phone or computer you no longer use, click <BgStyledText>Unlink</BgStyledText> on its row, read what will happen, then click <BgStyledText>Unlink</BgStyledText> to confirm.</p>
+
+    <Unordered>
+      <li><strong>A phone</strong> is signed out the next time it opens the app with a connection. The files it kept offline are deleted from it, and Camera Uploads stops on it.</li>
+      <li><strong>A computer</strong> is signed out the next time the desktop app is open and online, and stops syncing.</li>
+    </Unordered>
+
+    <p>Everything the device uploaded stays in your Drive. Sign in on it again anytime to link it back, and a phone's Camera Uploads backup carries on where it left off.</p>
+
+    ### When this computer is unlinked
+
+    <p>If you unlink this computer from your phone or another computer, the app signs out the next time it is open and online. The sign in screen then says <strong>This computer was unlinked</strong>. Sign in again to link it back. The files in your sync folders on this computer are not touched, and everything it uploaded stays in your Drive.</p>
+
+    <p>The <strong>Uploaded from</strong> row in a file's <a href="/use/desktop/drive#file-details">details</a> uses the same device names.</p>
+
+</>
+</DocAccordionItem>
 
 ## Security
 
