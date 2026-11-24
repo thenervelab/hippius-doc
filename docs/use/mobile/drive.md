@@ -256,6 +256,61 @@ A starred item shows a small star beside its name. Choose **Unstar** to take it 
 
 You can star up to 1,000 items. Deleting a starred item takes it off the list.
 
+## Offline files {#offline-files}
+
+Keep files and folders on this phone so they open without a connection, such as on a plane or wherever the signal drops.
+
+<Ordered>
+  <li>Press and hold a file or folder.</li>
+  <li>Switch on <strong>Available offline</strong>.</li>
+</Ordered>
+
+<Screenshot src="/img/mobile/drive/offline-menu.png" alt="The press-and-hold menu with Available offline switched on" dark raw phone />
+
+The switch is also in the preview's menu. For several items at once, choose **Select** in the **…** menu, tap the items, then choose **Available offline** under **⋯** in the bar at the bottom.
+
+The download starts straight away, on Wi-Fi or mobile data. While it downloads, the item shows its progress. Once it is on this phone, it shows a small green arrow.
+
+<Unordered>
+  <li><strong>A folder</strong> brings everything in it, and files added to it later are downloaded too. An item inside a kept folder shows its switch on but greyed out, with <strong>Kept with</strong> and the folder's name. Switch the folder off to remove it.</li>
+  <li><strong>Only your own drives</strong> can be kept offline. Items in a drive someone shared with you don't offer the switch.</li>
+  <li><strong>Copies stay encrypted</strong> on this phone, as they are in your Drive, and are only unlocked when you open them in the app. They aren't included in your phone's backups.</li>
+</Unordered>
+
+### Keeping them up to date {#offline-updates}
+
+When a kept file changes in your Drive, the copy on this phone is updated by itself, on Wi-Fi. To update on mobile data too, turn on [Use cellular data](/use/mobile/settings#offline-files).
+
+A yellow **!** on an item means its copy is out of date, or didn't finish downloading. Tap the **!**, or choose **Update offline copy** in the item's menu.
+
+If a kept file is renamed or deleted somewhere else, it is taken off this phone. To keep a renamed file, switch it on again under its new name.
+
+### The Offline screen {#the-offline-screen}
+
+**Offline** is the last section on [Overview](/use/mobile/getting-started#overview). Tap its arrow to see everything kept on this phone, with the space it takes and whether it is **Up to date**:
+
+<Unordered>
+  <li>Tap a folder to browse it, or a file to open it.</li>
+  <li>The <strong>…</strong> menu switches between grid and list view and changes the sort.</li>
+  <li>Press and hold an item for its options, such as switching <strong>Available offline</strong> off.</li>
+</Unordered>
+
+<Screenshot src="/img/mobile/drive/offline.png" alt="The Offline screen with the space used and the files kept on this phone" dark raw phone />
+
+Before you keep anything, the section offers **Show me how**, a short animation of the steps.
+
+### With no connection {#no-connection}
+
+A **No internet connection** banner shows under the header. Tap it to go to your offline files. Drive and search show the files you kept, and they open as usual.
+
+A file that isn't kept on this phone, and that you haven't opened recently, can't open until you are back online. Next time, make it available offline before you go.
+
+### Removing offline files {#removing-offline-files}
+
+Switch **Available offline** off on an item to remove its copy from this phone. To remove them all at once, use [Remove all offline files](/use/mobile/settings#offline-files) in Settings. Either way, your files stay in your Drive.
+
+When you log out, your offline files stay on this phone but are locked. They open again when you sign back in with the same account. If this phone is [unlinked](/use/mobile/settings#devices), they are deleted from it.
+
 ## Organising
 
 Press and hold any file or folder for its options:
@@ -266,6 +321,7 @@ Press and hold any file or folder for its options:
   <li><strong>Rename</strong>. See <a href="#renaming">Renaming</a>.</li>
   <li><strong>Download</strong>, for files. See <a href="#saving-a-file-to-your-phone">Saving a file to your phone</a>.</li>
   <li><strong>Star</strong> or <strong>Unstar</strong>. See <a href="#starred">Starred</a>.</li>
+  <li><strong>Available offline</strong>, and <strong>Update offline copy</strong> when a kept copy is out of date. See <a href="#offline-files">Offline files</a>.</li>
   <li><strong>Share via Link</strong>. See <a href="/use/mobile/shared-links">Sharing Files</a>.</li>
   <li><strong>Delete File</strong> or <strong>Delete Folder</strong>. See <a href="#deleting">Deleting</a>.</li>
 </Unordered>
