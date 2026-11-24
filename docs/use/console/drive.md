@@ -3,7 +3,7 @@ id: drive
 title: Drive
 sidebar_label: Drive
 slug: /use/console/drive
-description: Browse, upload, preview, and download your end-to-end encrypted Drive files and folders from the Hippius Console, and manage them in bulk.
+description: Browse, upload, preview, star and download your end-to-end encrypted Drive files and folders from the Hippius Console, and manage them in bulk.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -134,6 +134,17 @@ The preview toolbar has buttons to **Download** or **Close** the preview, plus *
 
 Click the action menu (three dots) on any file row and choose <BgStyledText>Details</BgStyledText> to see the file's metadata without opening a preview. The details panel shows the file name, file type, date uploaded, file size and Arion hash. The hash has a copy button and a link to the file tracker on hipstats.com.
 
+Where the app that uploaded the file recorded them, the panel also shows:
+
+<Unordered>
+  <li><strong>Date Taken</strong>: when a photo or video was taken.</li>
+  <li><strong>Date Modified</strong>: when the original was last changed, before it was uploaded.</li>
+  <li><strong>Camera</strong>: the camera or phone that took a photo.</li>
+  <li><strong>Uploaded From</strong>: the phone or computer it was uploaded from, by the name it has under <a href="/use/console/settings#devices">Devices</a>. It is shown only for files you uploaded yourself.</li>
+</Unordered>
+
+A row with nothing to show is left out.
+
 <Screenshot src="/img/console/drive/details-panel.png" alt="File details panel" dark />
 
 ## Downloading Files
@@ -226,6 +237,31 @@ How much you can upload depends on your **Drive plan**, not on your balance.
 See [Billing → Drive plans](/use/console/billing#drive-plans) for the plans and what happens without one.
 
 
+## Starred {#starred}
+
+Star the files, folders and drives you come back to, and find them all in one place.
+
+<Unordered>
+  <li>To star something, open its action menu (three dots) and choose <BgStyledText>Star</BgStyledText>. This works for a file, a folder inside a drive, and a whole drive in <strong>My Drives</strong> or <strong>Shared Drives</strong>.</li>
+  <li>In the preview, click the <strong>star</strong> button in the header.</li>
+  <li>To star several at once, select them and choose <BgStyledText>Star</BgStyledText> in the selection menu.</li>
+</Unordered>
+
+A starred item shows a small star beside its name. Choose <BgStyledText>Unstar</BgStyledText> to take it off again. Your stars belong to your account, so they are the same in the console, the [desktop app](/use/desktop/drive#starred) and the [mobile app](/use/mobile/drive#starred). In a drive someone shared with you, your stars are your own: the other members don't see them.
+
+Everything you starred is under <BgStyledIconWithText text="Drive" icon="FolderOpen" /> → <BgStyledText>Starred</BgStyledText> in the sidebar: drives first, then folders, then files, from your own drives and the drives shared with you.
+
+<Unordered>
+  <li><strong>Search Starred</strong> finds items by name.</li>
+  <li>Click a column header to sort.</li>
+  <li>Every row has the same actions as in Drive: preview, download, details, share and, in your own drives, rename and delete.</li>
+  <li>Opening a starred folder or drive takes you to it in <strong>My Drives</strong>, or in <strong>Shared Drives</strong> for a drive someone shared with you.</li>
+</Unordered>
+
+<Screenshot src="/img/console/drive/starred.png" alt="The Starred page with a starred drive, a folder and files" dark raw />
+
+You can star up to 1,000 items. Deleting a starred item takes it off the list.
+
 ## Screenshots and Recordings
 
 Want to show someone what's on your screen? Click <BgStyledText>Screenshot</BgStyledText> or <BgStyledText>Record</BgStyledText> at the top of the Drive page, and Hippius saves the capture to your captures drive and copies a link to it, ready to paste. Everything you capture, here or in the desktop app, is listed in **Captures**, under Drive in the sidebar. See [Screenshots and Recording](/use/captures).
@@ -258,6 +294,7 @@ The two folder download limits come from the zip format itself, not from Hippius
 ## Where to next
 
 <Unordered>
+  <li><a href="/use/console/settings#devices">Devices</a>: the phones and computers linked to your account, and unlinking one you no longer use.</li>
   <li><a href="/use/console/shared-links">Shared Links</a>: share any Drive file as a public link, with no account needed to open it.</li>
   <li><a href="/use/console/shared-drives">Shared Drives</a>: share a drive or a folder with people who have a Hippius account, and work in drives shared with you.</li>
   <li><a href="/use/captures">Screenshots and Recording</a>: capture your screen and share it with a link.</li>
