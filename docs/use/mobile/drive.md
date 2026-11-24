@@ -319,6 +319,7 @@ Press and hold any file or folder for its options:
   <li><strong>Open</strong> for a file, or <strong>Browse Files</strong> for a folder.</li>
   <li><strong>Get info</strong>. See <a href="#file-details">File details</a>.</li>
   <li><strong>Rename</strong>. See <a href="#renaming">Renaming</a>.</li>
+  <li><strong>Move to…</strong>, to put it in another folder.</li>
   <li><strong>Download</strong>, for files. See <a href="#saving-a-file-to-your-phone">Saving a file to your phone</a>.</li>
   <li><strong>Star</strong> or <strong>Unstar</strong>. See <a href="#starred">Starred</a>.</li>
   <li><strong>Available offline</strong>, and <strong>Update offline copy</strong> when a kept copy is out of date. See <a href="#offline-files">Offline files</a>.</li>
@@ -327,8 +328,6 @@ Press and hold any file or folder for its options:
 </Unordered>
 
 Files that are still uploading have no options until they finish. Items you have shared from this phone show a small **link** badge. Tap it to see or revoke that link.
-
-There is no Move or Copy on mobile. To put a file somewhere else, download it and upload it again into the folder you want.
 
 <Screenshot src="/img/mobile/drive/item-menu.png" alt="The press-and-hold menu on a file" dark raw phone />
 
@@ -359,10 +358,9 @@ A name can't:
 <Ordered>
   <li>Open the <strong>···</strong> menu and choose <strong>Select</strong>.</li>
   <li>Tap the items you want. The bar at the bottom counts them, such as <strong>3 Items</strong>.</li>
-  <li>Tap the red <strong>trash</strong> button to delete them, or the <strong>X</strong> to stop selecting.</li>
+  <li>Use the bar at the bottom: <strong>Move</strong>, <strong>Share</strong>, or the red <strong>trash</strong> button to delete them. Under <strong>⋯</strong> are <strong>Download</strong>, <strong>Star</strong> and <strong>Available offline</strong>.</li>
+  <li>Tap the <strong>X</strong> to stop selecting.</li>
 </Ordered>
-
-Delete is the only thing you can do with several items at once.
 
 ### Deleting {#deleting}
 
