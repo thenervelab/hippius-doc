@@ -143,6 +143,53 @@ Besides `hf_hub_download` and `snapshot_download`: `upload_file`, `upload_folder
 
 ---
 
+## Use Hugging Face tools
+
+Hippius Hub works with the standard Hugging Face tools for reading models. Point them at Hippius Hub with one variable:
+
+```bash
+export HF_ENDPOINT=https://hub.hippius.com
+```
+
+Public models live under the `archive/` namespace and need no login.
+
+```bash
+pip install huggingface_hub transformers
+
+hf download archive/bge-small-en-v1.5 config.json
+```
+
+```python
+from huggingface_hub import snapshot_download
+
+snapshot_download("archive/all-minilm-l6-v2", allow_patterns=["*.json"])
+```
+
+```python
+from transformers import AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained("archive/qwen3-0.6b")
+```
+
+```python
+from huggingface_hub import HfApi
+
+for model in HfApi().list_models(search="qwen", limit=5):
+    print(model.id)
+```
+
+Clone a model with git. Install [git-lfs](https://git-lfs.com) first, or the large files come back as small pointer files:
+
+```bash
+git clone https://hub.hippius.com/archive/all-minilm-l6-v2
+```
+
+:::info Uploads
+Uploads are not available through the Hugging Face tools yet. Keep using the `hippius-hub` CLI to push (see [Push](/registry/push)).
+:::
+
+---
+
 ## Where to next
 
 - [**Push**](/registry/push): upload your own models or container images.
