@@ -3,7 +3,7 @@ id: drive
 title: Your Files
 sidebar_label: Your Files
 slug: /use/mobile/drive
-description: Browse, search, upload, preview, download, rename and delete your encrypted Hippius files from your phone.
+description: Browse, search, upload, preview, download, star, rename and delete your encrypted Hippius files from your phone.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -222,11 +222,39 @@ Press and hold a file or folder and choose **Get info**. The **Info** sheet show
   <li><strong>File type</strong> and <strong>Size</strong>.</li>
   <li><strong>Date Uploaded</strong> for a file, or <strong>Date Created</strong> for a folder.</li>
   <li><strong>Date Taken</strong>, for photos and videos you uploaded from this phone, and <strong>Modified</strong> when the phone recorded a change.</li>
+  <li><strong>Camera</strong>: the camera or phone that took a photo, when the photo recorded it.</li>
   <li><strong>Saved in</strong>: the folder it is in, such as <strong>Drive / Camera Uploads</strong>.</li>
   <li><strong>On this phone</strong>: where the original is on this phone, such as <strong>DCIM / Camera / IMG_0001.jpg</strong>, for photos and videos uploaded from here that are still in your gallery. Tap it to open the original in your gallery.</li>
 </Unordered>
 
 <Screenshot src="/img/mobile/drive/info.png" alt="The Info sheet for a photo" dark raw phone />
+
+## Starred {#starred}
+
+Star the files, folders and drives you come back to, and find them all in one place.
+
+<Unordered>
+  <li>Press and hold a file or folder and choose <strong>Star</strong>.</li>
+  <li>For the folder you are in, choose <strong>Star</strong> in the <strong>…</strong> menu.</li>
+  <li>For a whole drive, choose <strong>Star</strong> in its menu on the Drive screen. A drive someone shared with you is starred from inside it, with the <strong>…</strong> menu.</li>
+  <li>In the preview, it is in the same menu as Download.</li>
+</Unordered>
+
+A starred item shows a small star beside its name. Choose **Unstar** to take it off again. Your stars belong to your account, so they are the same in the mobile app, the [desktop app](/use/desktop/drive#starred) and the [Hippius Console](/use/console/drive#starred). In a drive someone shared with you, your stars are your own: the other members don't see them.
+
+**Starred** on [Overview](/use/mobile/getting-started#overview) shows the items you starred. Tap its arrow to open the **Starred** screen, which lists them all:
+
+<Unordered>
+  <li><strong>Search</strong> finds items by name.</li>
+  <li>The <strong>…</strong> menu switches between grid and list view and changes the sort, the same way as in Drive.</li>
+  <li>Pull down to refresh.</li>
+  <li>Tap a folder or drive to open it, or a file to preview it. Press and hold for the same options as in Drive, or choose <strong>Select</strong> in the <strong>…</strong> menu to act on several at once.</li>
+  <li>An item in a drive someone shared with you offers <strong>Open</strong>, <strong>Get info</strong> and <strong>Unstar</strong>.</li>
+</Unordered>
+
+<Screenshot src="/img/mobile/drive/starred.png" alt="The Starred screen with starred folders and files" dark raw phone />
+
+You can star up to 1,000 items. Deleting a starred item takes it off the list.
 
 ## Organising
 
@@ -237,6 +265,7 @@ Press and hold any file or folder for its options:
   <li><strong>Get info</strong>. See <a href="#file-details">File details</a>.</li>
   <li><strong>Rename</strong>. See <a href="#renaming">Renaming</a>.</li>
   <li><strong>Download</strong>, for files. See <a href="#saving-a-file-to-your-phone">Saving a file to your phone</a>.</li>
+  <li><strong>Star</strong> or <strong>Unstar</strong>. See <a href="#starred">Starred</a>.</li>
   <li><strong>Share via Link</strong>. See <a href="/use/mobile/shared-links">Sharing Files</a>.</li>
   <li><strong>Delete File</strong> or <strong>Delete Folder</strong>. See <a href="#deleting">Deleting</a>.</li>
 </Unordered>

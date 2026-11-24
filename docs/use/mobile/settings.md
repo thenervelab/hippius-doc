@@ -3,7 +3,7 @@ id: settings
 title: Settings
 sidebar_label: Settings
 slug: /use/mobile/settings
-description: Every setting in the Hippius mobile app. Camera Uploads, biometric lock, your mnemonic seed and unlock password, Wi-Fi only uploads, delete confirmation, backup notifications, appearance, updates, cache, your account, and deleting it.
+description: Every setting in the Hippius mobile app. Camera Uploads, biometric lock, your mnemonic seed and unlock password, your devices, Wi-Fi only uploads, delete confirmation, backup notifications, appearance, updates, cache, your account, and deleting it.
 ---
 
 import Unordered from '@site/src/components/Unordered';
@@ -28,6 +28,7 @@ The screen opens with two cards, followed by your preferences, then help and app
 | **Camera Uploads**          | Opens the Camera Uploads settings. The row shows **On** or **Off**.     | Off     |
 | **Biometric lock**          | Asks for your fingerprint or face before the app opens.                 | Off     |
 | **Security**                | Back up your mnemonic seed, and set or change your unlock password.     |         |
+| **Devices**                 | The phones and computers linked to your account. See [Devices](#devices). |       |
 | **Upload on Wi-Fi only**    | Pauses all uploads, including Camera Uploads, on mobile data.           | Off     |
 | **Confirm before deleting** | Asks every time before something is deleted.                            | On      |
 | **Backup notifications**    | Tells you when a Camera Uploads backup finishes.                        | On      |
@@ -208,6 +209,28 @@ The app checks that the seed belongs to the account you are signed in to before 
 :::warning Lost both?
 Hippius never sees the password or the seed, so neither can be recovered for you. If you lose both, your encrypted files cannot be decrypted. Back up your seed while you still have it.
 :::
+
+## Devices {#devices}
+
+**Devices** lists the phones and computers linked to your account: every phone with the Hippius app and every computer with the [desktop app](/use/desktop/getting-started) that has signed in. Each one shows its name, what it is, and when it was last active. This phone comes first.
+
+<Screenshot src="/img/mobile/settings/devices.png" alt="The Devices screen with this phone and a computer" dark raw phone />
+
+To remove a phone or computer you no longer use, such as a phone you sold:
+
+<Ordered>
+  <li>Tap <strong>Unlink</strong> on its row.</li>
+  <li>Read what will happen, then tap <BgStyledText>Unlink</BgStyledText> to confirm.</li>
+</Ordered>
+
+<Unordered>
+  <li><strong>A phone</strong> is signed out the next time it opens the app with a connection. The files it kept offline are deleted from it, and Camera Uploads stops on it.</li>
+  <li><strong>A computer</strong> is signed out the next time the desktop app is open and online, and stops syncing.</li>
+</Unordered>
+
+Everything the device uploaded stays in your Drive. Sign in on it again anytime to link it back, and a phone's Camera Uploads backup carries on where it left off.
+
+This phone has no **Unlink**. To remove it, [log out](#logging-out).
 
 ## Uploads
 
