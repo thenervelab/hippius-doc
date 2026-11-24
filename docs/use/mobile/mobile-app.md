@@ -113,6 +113,7 @@ Overview shows, from top to bottom:
   <li><strong>Save your recovery phrase</strong>, only for a new Google, GitHub or Apple account after its first upload. Tap <BgStyledText>View phrase</BgStyledText> to back the phrase up. <BgStyledText>Later</BgStyledText> hides the card for good, so only tap it once the phrase is safe.</li>
   <li>A card to set up <a href="/use/mobile/camera-uploads">Camera Uploads</a>. Once you have set it up, it is replaced by <strong>Storage Distribution</strong>, a breakdown of what is using your storage.</li>
   <li><strong>Starred</strong>: the files, folders and drives you starred. Tap the arrow to open them all. See <a href="/use/mobile/drive#starred">Starred</a>.</li>
+  <li><strong>Offline</strong>: the files and folders you keep on this phone to open without a connection. Tap the arrow to open them all. See <a href="/use/mobile/drive#offline-files">Offline files</a>.</li>
 </Unordered>
 
 ## Notifications {#notifications}

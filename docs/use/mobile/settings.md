@@ -26,6 +26,7 @@ The screen opens with two cards, followed by your preferences, then help and app
 | **Account** card            | Opens your [Account](#your-account) screen.                             |         |
 | **Storage** card            | Opens the [Storage](#storage) breakdown.                                |         |
 | **Camera Uploads**          | Opens the Camera Uploads settings. The row shows **On** or **Off**.     | Off     |
+| **Offline files**           | The files kept on this phone, with their settings. See [Offline files](#offline-files). |   |
 | **Biometric lock**          | Asks for your fingerprint or face before the app opens.                 | Off     |
 | **Security**                | Back up your mnemonic seed, and set or change your unlock password.     |         |
 | **Devices**                 | The phones and computers linked to your account. See [Devices](#devices). |       |
@@ -48,6 +49,19 @@ Settings apply to this phone only. Your files, your plan and your unlock passwor
 The **Camera Uploads** row opens the screen where you choose which photos are backed up, the Drive folder they go to, whether videos are included, and where you turn backup on or off. The row reads **On** or **Off** so you can see at a glance whether backup is running.
 
 Everything on that screen is covered in [Camera Uploads](/use/mobile/camera-uploads#changing-settings-later).
+
+## Offline files {#offline-files}
+
+**Offline files** opens the files and folders you keep on this phone, with two settings above them:
+
+<Unordered>
+  <li><strong>Use cellular data</strong>: also updates offline files on mobile data. Off by default, so changed files update on Wi-Fi only. Files you switch on yourself download straight away either way.</li>
+  <li><strong>Remove all offline files</strong>: deletes every offline copy from this phone and tells you how much space that frees. Your files stay in your Drive, but you need a connection to open them. Shown only when something is kept.</li>
+</Unordered>
+
+<Screenshot src="/img/mobile/settings/offline-files.png" alt="Offline files with Use cellular data and Remove all offline files above the kept files" dark raw phone />
+
+To choose what is kept, see [Offline files](/use/mobile/drive#offline-files).
 
 ## Biometric lock
 
@@ -283,7 +297,7 @@ The change applies straight away, and the Appearance row shows which one you pic
 
 When you open a photo, video or PDF, the app keeps a decrypted copy on your phone so it opens instantly next time. The <BgStyledText>Clear cache data</BgStyledText> button at the bottom of Settings shows how much space those copies use.
 
-Tap it, then <BgStyledText>Clear</BgStyledText> to confirm. This frees the space on your phone. Your files in Drive are not touched, and anything you open again is simply downloaded again. Uploads in progress are not affected.
+Tap it, then <BgStyledText>Clear</BgStyledText> to confirm. This frees the space on your phone. Your files in Drive are not touched, and anything you open again is simply downloaded again. Uploads in progress and [offline files](#offline-files) are not affected.
 
 ## Storage
 
@@ -313,7 +327,7 @@ You can't subscribe or change a plan in the Hippius mobile app. See [How do I su
 
 ### Logging out {#logging-out}
 
-Tap <BgStyledText>Logout</BgStyledText> on the Account screen or at the bottom of Settings, then confirm. Logging out removes your session and your seed from this phone. Your files are untouched, and signing back in brings everything back.
+Tap <BgStyledText>Logout</BgStyledText> on the Account screen or at the bottom of Settings, then confirm. Logging out removes your session and your seed from this phone. Your files are untouched, and signing back in brings everything back. [Offline files](/use/mobile/drive#offline-files) stay on this phone but are locked until you sign back in with the same account.
 
 Before you log out, make sure you can sign back in: with the same Google, GitHub or Apple account, or with your access key. If this phone was the only place your seed lived, [back it up](#backing-up-your-mnemonic-seed) first.
 
