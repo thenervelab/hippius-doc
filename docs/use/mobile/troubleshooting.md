@@ -130,7 +130,15 @@ If the reason says your phone needs more free space, free some up and retry. Fil
 
 ### I see the same photos twice {#duplicates}
 
-After you reinstall the app, or set up Camera Uploads on a new phone, it starts from scratch and backs up every photo again as new copies, next to the old ones in the same folder. Their names end in a different code. Delete the copies you don't need. See [Good to know](/use/mobile/camera-uploads#good-to-know).
+Camera Uploads backs every photo up again, as new copies next to the old ones in the same folder, when it starts from scratch:
+
+<Unordered>
+  <li>on a new phone, or one that was erased or reset to factory settings;</li>
+  <li>on iPhone, after you tap <BgStyledText>Set up as a new iPhone</BgStyledText>;</li>
+  <li>after you reinstall the app, for photos that an app version older than 1.5.0 backed up.</li>
+</Unordered>
+
+The new copies' names end in a different code. Delete the copies you don't need. Reinstalling version 1.5.0 or later on the same phone continues its backup instead; see [Reinstalling the app](/use/mobile/camera-uploads#reinstalling-the-app).
 
 ### I edited a photo but Hippius still has the old one {#edited-photo}
 

@@ -66,6 +66,11 @@ jobs:
         scope: hippius-doc
 
     - name: Deploy to Rancher K8s
+      env:
+        # Through the environment and quoted: Harbor robot account names hold a
+        # `$`, which bash would expand if the value were pasted into the script.
+        REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+        REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
       run: |
         
         # Create namespace if it doesn't exist
@@ -75,8 +80,8 @@ jobs:
         kubectl create secret docker-registry registry \
           --namespace=hippius-documentation \
           --docker-server=registry.starkleytech.com \
-          --docker-username=${{ secrets.REGISTRY_USERNAME }} \
-          --docker-password=${{ secrets.REGISTRY_PASSWORD }} \
+          --docker-username="$REGISTRY_USERNAME" \
+          --docker-password="$REGISTRY_PASSWORD" \
           --dry-run=client -o yaml | kubectl apply -f -
         
         # Update deployment file with the current image tag
