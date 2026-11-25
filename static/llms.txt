@@ -9,6 +9,7 @@ Open only the file for the product you need. The long reference for the whole pr
 | Want to | Open |
 |---|---|
 | Store or fetch files from code, rclone, or a backup tool | [hippius-s3 llms.txt](https://raw.githubusercontent.com/thenervelab/hippius-s3/staging/llms.txt) |
+| Make a bucket or file public, or host a static site. New buckets block public access and disable ACLs: run put-public-access-block with BlockPublicPolicy=false,RestrictPublicBuckets=false, then put-bucket-policy. An ACL (--acl, even private) returns 400 AccessControlListNotSupported | [Make a bucket or object public](https://docs.hippius.com/storage/s3/advanced#make-a-bucket-or-object-public) |
 | Store encrypted files in the browser (Drive) | [Drive guide](https://docs.hippius.com/use/drive) |
 | Publish or pull a model or a container image | [hippius-hub llms.txt](https://raw.githubusercontent.com/thenervelab/hippius-hub/main/llms.txt) |
 | Sync folders on a computer | [hippius-desktop llms.txt](https://raw.githubusercontent.com/thenervelab/hippius-desktop/staging/llms.txt) |

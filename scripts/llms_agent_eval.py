@@ -40,6 +40,13 @@ TASKS = [
         "must_not": ["eu-central-1", "us-east-1.hippius.com", "brew install hipc"],
     },
     {
+        "id": "s3-public",
+        "prompt": "I just created a new Hippius bucket. Make every file in it publicly readable with the AWS CLI. Start at the URL I give you. Only open links you have seen.",
+        "must_fetch": [],
+        "must_say": ["put-public-access-block", "put-bucket-policy", "s3.hippius.com"],
+        "must_not": ["eu-central-1", "put-bucket-acl --bucket my-bucket --acl public-read"],
+    },
+    {
         "id": "hub",
         "prompt": "I have a brand new Hippius account with no credits. Help me create a Hub namespace and push a model. Start at the URL I give you. Only open links you have seen.",
         "must_fetch": ["hippius-hub"],

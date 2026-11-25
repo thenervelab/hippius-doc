@@ -20,7 +20,7 @@ s3 = boto3.client(
     ),
 )
 
-bucket_name = "my-bucket"
+bucket_name = os.environ.get("HIPPIUS_BUCKET", "my-bucket")
 
 # Upload from disk
 s3.upload_file("local-file.txt", bucket_name, "remote-name.txt")
