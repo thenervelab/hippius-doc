@@ -147,6 +147,8 @@ An agent that holds its own 12-word access key opens the account at https://docs
 
 `hippius-hub` publishes models and container images. Full cheat sheet: https://raw.githubusercontent.com/thenervelab/hippius-hub/main/llms.txt
 
+Hub models also load with the Hugging Face tools. Set `HF_ENDPOINT=https://hub.hippius.com`, then use `hf download`, `snapshot_download`, `from_pretrained` or `git clone` on `archive/...` repos. Uploads also work with the Hugging Face tools after `hf auth login` with a console token (`hf upload` or `git push`); `hippius-hub` still works too. https://docs.hippius.com/registry/pull#use-hugging-face-tools
+
 ```bash
 pip install hippius_hub
 hippius-hub login --hippius-token "$HIPPIUS_TOKEN"
