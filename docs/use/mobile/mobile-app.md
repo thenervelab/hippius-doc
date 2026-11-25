@@ -13,7 +13,7 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-Your Hippius Drive, on your phone. Browse everything you have stored, upload from your camera roll, share a file or folder with a link, and let your photos back themselves up while you get on with your day.
+Your Hippius Drive, on your phone. Browse everything you have stored, upload from your camera roll, share a file or folder with a link, work in drives you share with other people, and let your photos back themselves up while you get on with your day.
 
 It is the same account and the same files you see in the console and the desktop app. Anything you add on one shows up on the others.
 
@@ -99,7 +99,7 @@ The app has two main screens, **Overview** and **Drive**. Switch between them wi
 
 <Unordered>
   <li><strong>Overview</strong> is your home screen. See below.</li>
-  <li><strong>Drive</strong> is your files. Browse, search, upload, preview, download, and organise them into folders. See <a href="/use/mobile/drive">Your Files</a>.</li>
+  <li><strong>Drive</strong> is your files, in three tabs: <strong>My drives</strong>, <strong>Shared</strong> and <strong>Captures</strong>. Browse, search, upload, preview, download, and organise them into folders. See <a href="/use/mobile/drive">Your Files</a>.</li>
   <li>The <BgStyledText>+</BgStyledText> button adds something: <strong>Upload Photos</strong>, <strong>Upload files</strong>, <strong>Create Folder</strong>, or <strong>Take photo or video</strong>. See <a href="/use/mobile/drive#adding-files">Adding files</a>.</li>
 </Unordered>
 
@@ -202,6 +202,8 @@ Bigger updates come from the App Store. Tap <BgStyledText>Open App Store</BgStyl
   <li><strong>Your files.</strong> Upload, preview, download, rename and delete. See <a href="/use/mobile/drive">Your Files</a>.</li>
   <li><strong>Camera Uploads.</strong> Back up your photos and videos on their own. See <a href="/use/mobile/camera-uploads">Camera Uploads</a>.</li>
   <li><strong>Shared links.</strong> Send a file or folder to someone who does not have Hippius. See <a href="/use/mobile/shared-links">Sharing Files</a>.</li>
+  <li><strong>Shared drives.</strong> Let people into a drive or a folder with their own Hippius account, and open drives other people share with you. See <a href="/use/mobile/shared-drives">Shared Drives</a>.</li>
+  <li><strong>Starred and offline files.</strong> Keep what you use most close at hand, and open it without a connection. See <a href="/use/mobile/drive#starred">Starred</a> and <a href="/use/mobile/drive#offline-files">Offline files</a>.</li>
   <li><strong>Your plan and storage.</strong> See how much space you have and what is using it. See <a href="/use/mobile/plans">Plans and Storage</a>.</li>
 </Unordered>
 

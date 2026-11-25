@@ -33,6 +33,8 @@ The screen opens with two cards, followed by your preferences, then help and app
 | **Upload on Wi-Fi only**    | Pauses all uploads, including Camera Uploads, on mobile data.           | Off     |
 | **Confirm before deleting** | Asks every time before something is deleted.                            | On      |
 | **Backup notifications**    | Tells you when a Camera Uploads backup finishes.                        | On      |
+| **Link activity**           | Tells you when your share links get new views. Paid plans only.        | On      |
+| **Link emails**             | Choose which emails we send about your share links.                     |         |
 | **Appearance**              | Light, dark, or following your phone. The row shows your choice.        | System  |
 | **Contact support**         | Opens an email to support@hippius.com.                                  |         |
 | **App version**             | The version installed on this phone.                                    |         |
@@ -271,6 +273,14 @@ On by default. When a Camera Uploads backup finishes, the app tells you, both in
 This switch doesn't affect the quiet notification Android shows while a backup is running in the background. That one is required by Android and goes away when the backup is done.
 
 Your phone also has to allow Hippius to send notifications. On Android, the app asks after you first sign in, and again when you turn on Camera Uploads if you haven't allowed it yet. On iPhone, it asks when you turn on Camera Uploads or **Backup notifications**. See [Permissions](/use/mobile/permissions#notifications).
+
+### Link activity {#link-activity}
+
+On a paid Drive plan, the app tells you when your share links get new views, for example *Deck.pdf, 3 new views*. It checks while the app is running, and tells you about views from while it was closed the next time you open it. Turn it off if you'd rather check [Insights](/use/mobile/shared-links#insights) yourself. Your phone has to allow Hippius to send notifications too. The row only appears on a paid plan.
+
+### Link emails {#link-emails}
+
+Choose the emails we send about your share links. **First views** tells you when someone first opens a link. **New comments** sends at most one email an hour per link. The **Summary email** rounds up views and comments across all your links, **Daily**, **Weekly** or **Off**. These are the same settings as in the console and the desktop app, so a change here applies there too. An account that signs in with an access key has no email address, so instead of the screen the row tells you to sign in with Google or Apple to get them.
 
 ## Appearance
 
