@@ -11,7 +11,7 @@ Open only the file for the product you need. The long reference for the whole pr
 | Store or fetch files from code, rclone, or a backup tool | [hippius-s3 llms.txt](https://raw.githubusercontent.com/thenervelab/hippius-s3/staging/llms.txt) |
 | Store encrypted files in the browser (Drive) | [Drive guide](https://docs.hippius.com/use/drive) |
 | Publish or pull a model or a container image | [hippius-hub llms.txt](https://raw.githubusercontent.com/thenervelab/hippius-hub/main/llms.txt) |
-| Load or clone a Hub model with Hugging Face tools (read only, set `HF_ENDPOINT`) | [Use Hugging Face tools](https://docs.hippius.com/registry/pull#use-hugging-face-tools) |
+| Load or clone a Hub model with Hugging Face tools (set `HF_ENDPOINT`) | [Use Hugging Face tools](https://docs.hippius.com/registry/pull#use-hugging-face-tools) |
 | Sync folders on a computer | [hippius-desktop llms.txt](https://raw.githubusercontent.com/thenervelab/hippius-desktop/staging/llms.txt) |
 | Work in a shared drive | A Drive someone else owns and invited you into. They pay for the storage. It shows in the console under Storage after the invite. |
 | Give a coding agent shared memory | [hippius-mem llms.txt](https://raw.githubusercontent.com/thenervelab/hippius-mem/main/llms.txt) |
