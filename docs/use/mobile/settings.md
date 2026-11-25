@@ -3,7 +3,7 @@ id: settings
 title: Settings
 sidebar_label: Settings
 slug: /use/mobile/settings
-description: Every setting in the Hippius mobile app. Camera Uploads, biometric lock, your mnemonic seed and unlock password, your devices, Wi-Fi only uploads, delete confirmation, backup notifications, appearance, updates, cache, your account, and deleting it.
+description: Every setting in the Hippius mobile app. Camera Uploads, biometric lock, your recovery seed and unlock password, your devices, Wi-Fi only uploads, delete confirmation, backup notifications, appearance, updates, cache, your account, and deleting it.
 ---
 
 import Unordered from '@site/src/components/Unordered';
@@ -28,7 +28,7 @@ The screen opens with two cards, followed by your preferences, then help and app
 | **Camera Uploads**          | Opens the Camera Uploads settings. The row shows **On** or **Off**.     | Off     |
 | **Offline files**           | The files kept on this phone, with their settings. See [Offline files](#offline-files). |   |
 | **Biometric lock**          | Asks for your fingerprint or face before the app opens.                 | Off     |
-| **Security**                | Back up your mnemonic seed, and set or change your unlock password.     |         |
+| **Security**                | Back up your recovery seed, and set or change your unlock password.     |         |
 | **Devices**                 | The phones and computers linked to your account. See [Devices](#devices). |       |
 | **Upload on Wi-Fi only**    | Pauses all uploads, including Camera Uploads, on mobile data.           | Off     |
 | **Confirm before deleting** | Asks every time before something is deleted.                            | On      |
@@ -95,7 +95,7 @@ If turning it on doesn't work, the app tells you why:
 
 The line under the switch reads **Use Face ID to open Hippius app**, or **Use Touch ID to open Hippius app** on an iPhone with Touch ID.
 
-With Face ID, the first time you turn it on, iOS asks whether Hippius may use it. Tap **OK**. If you chose **Don't Allow**, the app says **Face ID unavailable** and offers <BgStyledText>Open Settings</BgStyledText>. Turn on **Face ID** under **Settings → Hippius**, then try again.
+With Face ID, the first time you turn it on, iOS asks whether Hippius may use it. Tap **OK**. If you chose **Don't Allow**, the app says **Face ID unavailable** and offers <BgStyledText>Open Settings</BgStyledText>. Turn on **Face ID** under **Settings → Hippius Drive**, then try again.
 
 After too many failed attempts, iOS locks Face ID for a while. Choose <BgStyledText>Use passcode</BgStyledText> and enter your iPhone passcode to unlock it.
 
@@ -104,30 +104,30 @@ After too many failed attempts, iOS locks Face ID for a while. Choose <BgStyledT
 Open <BgStyledText>Settings</BgStyledText> → <BgStyledText>Security</BgStyledText> to manage the two things that keep your files yours:
 
 <Unordered>
-  <li>Your <strong>mnemonic seed</strong>, the 12-word key that encrypts your files.</li>
+  <li>Your <strong>recovery seed</strong>, the 12-word key that encrypts your files.</li>
   <li>Your <strong>unlock password</strong>, which lets you open your files on a new phone without typing the seed.</li>
 </Unordered>
 
 <Screenshot src="/img/mobile/settings/security.png" alt="The Security screen" dark raw phone />
 
-### Mnemonic Seed {#mnemonic-seed}
+### Recovery Seed {#mnemonic-seed}
 
-Every file you upload is encrypted on your phone before it leaves it. The key that does the encrypting is a 12-word **mnemonic seed** that belongs to your account. Hippius never has this seed in a readable form, which is why nobody but you can open your files, and also why nobody at Hippius can get them back for you if the seed is lost.
+Every file you upload is encrypted on your phone before it leaves it. The key that does the encrypting is a 12-word **recovery seed** that belongs to your account. Hippius never has this seed in a readable form, which is why nobody but you can open your files, and also why nobody at Hippius can get them back for you if the seed is lost.
 
-**If you signed in with Google, GitHub, or Apple**, the seed was created for you and lives in your phone's secure storage. You should back it up once, so that you can still reach your files if you lose this phone. The <strong>Mnemonic Seed</strong> row on the Security screen is where you do that.
+**If you signed in with Google, GitHub, or Apple**, the seed was created for you and lives in your phone's secure storage. You should back it up once, so that you can still reach your files if you lose this phone. The <strong>Recovery Seed</strong> card on the Security screen is where you do that.
 
-**If you signed in with an access key**, that key is your mnemonic seed. You already have it, so the Security screen does not show the backup row. Keep your access key with the same care described below.
+**If you signed in with an access key**, that key is your recovery seed. You already have it, so the Security screen does not show the backup card. Keep your access key with the same care described below.
 
-#### Backing up your mnemonic seed
+#### Backing up your recovery seed {#backing-up-your-mnemonic-seed}
 
 <Ordered>
-  <li>Tap <BgStyledText>Backup Mnemonic Seed</BgStyledText>.</li>
-  <li>Read the handling tips. Make sure nobody can see your screen, then tap <BgStyledText>I Understand, Show My Mnemonic Seed</BgStyledText>.</li>
+  <li>Tap <BgStyledText>Back Up Recovery Seed</BgStyledText>.</li>
+  <li>Read the handling tips under <strong>Secure Your Recovery Seed</strong>. Make sure nobody can see your screen, then tap <BgStyledText>I Understand, Show My Recovery Seed</BgStyledText>.</li>
   <li>The 12 words are blurred. Tap <BgStyledText>Show</BgStyledText> to reveal them and write them down in order, on paper.</li>
   <li>When you are done, tap <BgStyledText>I Have Written It Down</BgStyledText>.</li>
 </Ordered>
 
-<Screenshot src="/img/mobile/settings/mnemonic-backup-tips.png" alt="Secure Your Mnemonic Seed step with handling tips" dark raw phone />
+<Screenshot src="/img/mobile/settings/mnemonic-backup-tips.png" alt="Secure Your Recovery Seed step with handling tips" dark raw phone />
 
 Two more options on the same screen:
 
@@ -142,14 +142,14 @@ Never share your seed with anyone, including support staff. Never store it in em
 
 ### Unlock Password {#unlock-password}
 
-Your files are encrypted with your mnemonic seed, not with a password. The **unlock password** does not replace the seed. It protects an encrypted copy of your seed that Hippius stores for your account, so that you can open your files on another phone by typing a password instead of the 12 words.
+Your files are encrypted with your recovery seed, not with a password. The **unlock password** does not replace the seed. It protects an encrypted copy of your seed that Hippius stores for your account, so that you can open your files on another phone by typing a password instead of the 12 words.
 
 When you enter your unlock password, the app downloads that encrypted copy, unlocks it on your phone, and keeps the seed in the phone's secure storage. Files are encrypted and decrypted on the phone. The seed and the password are never sent to Hippius.
 
 The same unlock password works everywhere you use Hippius. If you also use the Hippius desktop app or the web console, you are asked for it there too, and a password set or changed in one place applies to all of them.
 
 :::danger Your unlock password cannot be recovered
-Hippius never sees your unlock password, so it cannot be reset for you. If you forget it, the only way back in is your mnemonic seed. Keep both somewhere safe. See [Forgot Your Password? Restore Access](#restore-access).
+Hippius never sees your unlock password, so it cannot be reset for you. If you forget it, the only way back in is your recovery seed. Keep both somewhere safe. See [Forgot Your Password? Restore Access](#restore-access).
 :::
 
 When you are asked for it:
@@ -161,20 +161,20 @@ When you are asked for it:
 | Web console | Asked whenever you preview, download, or upload a file. |
 | Desktop app | Asked when you sign in on a new computer. |
 
-:::tip Camera Uploads doesn't wait for it
-Camera Uploads backs up your photos without asking for an unlock password. Set one anyway, so you can open those photos in the web console and the desktop app too.
-:::
+Turning on [Camera Uploads](/use/mobile/camera-uploads#turning-it-on) on a new account asks for it too, because your photos are encrypted before they upload.
 
 #### Setting Your Unlock Password {#setting-your-unlock-password}
 
-If your account has no unlock password yet, the app asks you to create one the first time you upload a file. You can also do it any time from Security, where the row reads <BgStyledText>Set Unlock Password</BgStyledText>.
+If your account has no unlock password yet, the app asks you to create one the first time you upload a file or turn on Camera Uploads. You can also do it any time from Security, where the row reads <BgStyledText>Set Unlock Password</BgStyledText>.
 
 <Ordered>
   <li>Tap <BgStyledText>Set Unlock Password</BgStyledText>. The <strong>Protect Your Account</strong> sheet opens.</li>
-  <li>Under <strong>Create Unlock Password</strong>, enter a password of at least 8 characters. The strength meter must read <strong>OK</strong> or <strong>Strong</strong>. A phrase of several unrelated words works well. The console and the desktop app ask for at least 10 characters and Strong when you set it there, so a longer password saves you trouble later.</li>
+  <li>Under <strong>Create Unlock Password</strong>, enter a password of at least 10 characters. The strength meter must read <strong>Strong</strong>. Four or more unrelated words are easier to remember, and stronger, than a short complicated password.</li>
   <li>Repeat it under <strong>Confirm Password</strong>.</li>
-  <li>Tap <BgStyledText>Create Password</BgStyledText>.</li>
+  <li>Tap <BgStyledText>Set Unlock Password</BgStyledText>.</li>
 </Ordered>
+
+The console and the desktop app have the same rule. A password you set before this rule still works.
 
 Before saving, the app checks whether your account already has an unlock password, for example one you set in the desktop app or the console. If it does, nothing is replaced and the row switches to <BgStyledText>Change Unlock Password</BgStyledText>.
 
@@ -189,7 +189,7 @@ After you sign in on a phone that has not seen your account before, the app show
 <Ordered>
   <li>Open <BgStyledText>Settings</BgStyledText> → <BgStyledText>Security</BgStyledText> and tap <BgStyledText>Change Unlock Password</BgStyledText>.</li>
   <li>Enter your <strong>Current Password</strong>.</li>
-  <li>Enter a <strong>New Password</strong> that meets the strength requirement and differs from the current one, then repeat it under <strong>Confirm New Password</strong>.</li>
+  <li>Enter a <strong>New Password</strong> of at least 10 characters that reads <strong>Strong</strong> and differs from the current one, then repeat it under <strong>Confirm New Password</strong>.</li>
   <li>Tap <BgStyledText>Change Password</BgStyledText>.</li>
 </Ordered>
 
@@ -197,22 +197,17 @@ After you sign in on a phone that has not seen your account before, the app show
 
 The app opens your encrypted seed copy with the current password, re-encrypts the same seed with the new password, and replaces the copy. Your seed does not change and your files are not re-encrypted, so nothing is re-uploaded. Use the new password from now on, on every device.
 
-If the current password is wrong, the sheet shows **Incorrect current password.** If you no longer know it, tap **Forgot current password?** to open [Restore Access](#restore-access).
+If the current password is wrong, the sheet shows **Wrong password. Try again.** If you no longer know it, tap **Forgot current password?**. The same sheet then asks for your recovery seed instead, or only for the new password if this phone already holds your seed, as in [Restore Access](#restore-access).
 
 #### Forgot Your Password? Restore Access {#restore-access}
 
-If you forget your unlock password, you can set a new one with your mnemonic seed. Open the flow from either place:
-
-<Unordered>
-  <li>On the <strong>Unlock Your Account</strong> sheet, tap <strong>Forgot your password?</strong>, then <strong>Use your mnemonic seed</strong>.</li>
-  <li>On the <strong>Change Unlock Password</strong> sheet, tap <strong>Forgot current password?</strong>.</li>
-</Unordered>
+If you forget your unlock password, you can set a new one with your recovery seed. On the **Unlock Your Account** sheet, tap **Forgot your password?**, then **Use your recovery seed** (or **Use your access key** if you sign in with one). From the Change Unlock Password sheet, see above.
 
 The <strong>Restore Access</strong> sheet asks for your seed and a new password:
 
 <Ordered>
-  <li>Under <strong>Mnemonic Seed</strong>, enter or paste your 12-word seed phrase.</li>
-  <li>Enter a <strong>New Unlock Password</strong> and repeat it under <strong>Confirm Password</strong>.</li>
+  <li>Under <strong>Recovery Seed</strong>, enter or paste your 12 words.</li>
+  <li>Enter a <strong>New Unlock Password</strong> and repeat it under <strong>Confirm Password</strong>. The same 10 character, Strong rule applies.</li>
   <li>Tap <BgStyledText>Restore and Set Password</BgStyledText>.</li>
 </Ordered>
 
@@ -220,7 +215,7 @@ The <strong>Restore Access</strong> sheet asks for your seed and a new password:
 
 The app checks that the seed belongs to the account you are signed in to before anything is replaced. A seed for a different account is rejected and your existing backup is not touched. If it matches, the app creates a new encrypted copy of the same seed, protected by your new password. Your files are not re-encrypted, and the seed never leaves your phone.
 
-**If this phone already holds your seed**, for example because you signed in with an access key, the sheet skips the seed field and only asks for the new password. The message reads "Choose a new unlock password. This device already has your mnemonic seed, so the current password is not required."
+**If this phone already holds your seed**, for example because you signed in with an access key, the action reads **Set a new password**, and the sheet skips the seed field and only asks for the new password, with <BgStyledText>Set New Password</BgStyledText>.
 
 :::warning Lost both?
 Hippius never sees the password or the seed, so neither can be recovered for you. If you lose both, your encrypted files cannot be decrypted. Back up your seed while you still have it.
@@ -228,7 +223,7 @@ Hippius never sees the password or the seed, so neither can be recovered for you
 
 ## Devices {#devices}
 
-**Devices** lists the phones and computers linked to your account: every phone with the Hippius app and every computer with the [desktop app](/use/desktop/getting-started) that has signed in. Each one shows its name, what it is, and when it was last active. This phone comes first.
+**Devices** lists the phones and computers that upload to your account: phones with the Hippius app and computers with the [desktop app](/use/desktop/getting-started). A device appears once it has uploaded something. Each one shows its name, what it is, and when it was last active. This phone comes first, marked **This device**.
 
 <Screenshot src="/img/mobile/settings/devices.png" alt="The Devices screen with this phone and a computer" dark raw phone />
 
@@ -240,13 +235,15 @@ To remove a phone or computer you no longer use, such as a phone you sold:
 </Ordered>
 
 <Unordered>
-  <li><strong>A phone</strong> is signed out the next time it opens the app with a connection. The files it kept offline are deleted from it, and Camera Uploads stops on it.</li>
+  <li><strong>A phone</strong> is signed out within moments if the app is open, or the next time it opens. The files it kept offline are deleted from it, and Camera Uploads stops on it. It then shows <strong>This phone was removed</strong>, explaining what happened.</li>
   <li><strong>A computer</strong> is signed out the next time the desktop app is open and online, and stops syncing.</li>
 </Unordered>
 
 Everything the device uploaded stays in your Drive. Sign in on it again anytime to link it back, and a phone's Camera Uploads backup carries on where it left off.
 
 This phone has no **Unlink**, and [logging out](#logging-out) doesn't remove it: it stays in the list, and signing in again is the same phone. To remove it, unlink it from **Devices** on another phone, in the [desktop app](/use/desktop/settings) or in the [web console](/use/console/settings#devices). If it is still signed in, it is then signed out as described above.
+
+After you reinstall the app on an iPhone, Devices may ask **Is this your iPhone?** with the model's name. Answering tells Camera Uploads whether to carry on this phone's old backup. See [Reinstalling the app](/use/mobile/camera-uploads#reinstalling-the-app-iphone).
 
 ## Uploads
 
@@ -326,10 +323,10 @@ Open **Account** from the **Account** card at the top of Settings. It shows:
 
 <Unordered>
   <li><strong>Who you are signed in as.</strong> If you signed in with Google, GitHub or Apple, you see your name and email. Your <strong>wallet address</strong> is shown too, with a button to copy it.</li>
-  <li><strong>Your current plan</strong> and how much storage it gives you. This is read only. On iPhone, the <strong>Storage</strong> card takes its place.</li>
+  <li>The <strong>Storage</strong> card: how much of your storage you have used. The app doesn't show your plan.</li>
 </Unordered>
 
-Your mnemonic seed is not shown here. It lives in your phone's secure storage, and the only place the app reveals it is the deliberate backup flow under [Security](#mnemonic-seed).
+Your recovery seed is not shown here. It lives in your phone's secure storage, and the only place the app reveals it is the deliberate backup flow under [Security](#mnemonic-seed).
 
 :::info
 You can't subscribe or change a plan in the Hippius mobile app. See [How do I subscribe or get more storage?](/use/mobile/troubleshooting#get-more-storage)
@@ -337,7 +334,7 @@ You can't subscribe or change a plan in the Hippius mobile app. See [How do I su
 
 ### Logging out {#logging-out}
 
-Tap <BgStyledText>Logout</BgStyledText> on the Account screen or at the bottom of Settings, then confirm. Logging out removes your session and your seed from this phone. Your files are untouched, and signing back in brings everything back. [Offline files](/use/mobile/drive#offline-files) stay on this phone but are locked until you sign back in with the same account.
+Tap <BgStyledText>Logout</BgStyledText> on the Account screen or at the bottom of Settings, then <BgStyledText>Logout</BgStyledText> again to confirm. Logging out removes your session and your seed from this phone. Your files are untouched, and signing back in brings everything back. [Offline files](/use/mobile/drive#offline-files) stay on this phone but are locked until you sign back in with the same account.
 
 This phone stays in [Devices](#devices) after you log out. Signing back in is the same phone, so Camera Uploads carries on where it left off.
 
@@ -345,7 +342,7 @@ Before you log out, make sure you can sign back in: with the same Google, GitHub
 
 ## Delete account
 
-At the bottom of the **Account** screen, below **Logout**, is **Delete my account**. It deletes your whole Hippius account — not just the app on this phone — and everything in it.
+At the bottom of the **Account** screen, below **Logout**, is **Delete my account**. It deletes your whole Hippius account, not just the app on this phone, and everything in it.
 
 Deleting is not instant. Your account is **locked the moment you confirm**, and permanently deleted **7 days later**. Those 7 days are a grace period: until the deletion runs you can still stop it and get everything back.
 
@@ -355,11 +352,9 @@ Your files, buckets, container images, subscriptions and remaining balance all g
 
 ### What gets deleted
 
-The first step is not a warning, it is an **inventory**. The app reads your account live and lists what is actually there, in six groups: **Storage**, **Compute**, **Registry and network**, **Subscriptions**, **Credits**, and **Access and account**.
+The first step is not a warning, it is an **inventory**. The app reads your account live and lists what is actually there, in up to five groups: **Storage**, **Compute**, **Registry and network**, **Storage allowance** and **Access and account**.
 
-Only groups that hold something get a checkbox to tick. A group that is empty collapses to a single grey line, so you are only asked to confirm what you actually have. The app has no virtual machines or databases of its own, so unless you run them from the console, **Compute** will simply read "No VMs or databases".
-
-On iPhone, **Compute** and **Registry and network** only appear if they hold something, **Storage allowance** takes the place of **Subscriptions**, and there is no **Credits** group. The **Access and account** checkbox covers any remaining balance.
+Only groups that hold something get a checkbox to tick, so you are only asked to confirm what you actually have. **Compute** and **Registry and network** only appear if you run virtual machines, databases or images from the console, and **Storage allowance** only if your account has a plan. The **Access and account** checkbox covers any remaining balance.
 
 If you do have a **running** VM or managed database, that blocks the request until it is decommissioned from the console.
 
@@ -369,8 +364,8 @@ Tap <BgStyledText>Delete my account</BgStyledText> to open the sheet. Everyone f
 
 | How you sign in                                   | Steps                                   |
 | ------------------------------------------------- | --------------------------------------- |
-| **Social login** (Google, GitHub, Apple) | **3** — inventory, emailed code, phrase |
-| **Recovery seed or access key**                   | **2** — inventory, phrase               |
+| **Social login** (Google, GitHub, Apple) | **3**: inventory, emailed code, phrase |
+| **Recovery seed or access key**                   | **2**: inventory, phrase               |
 
 A wallet-only account is deleted in exactly the same way, on exactly the same 7 day schedule. It simply has no mailbox to send a code to, so that one step does not exist and the counter reads "OF 2" instead of "OF 3".
 
@@ -385,6 +380,8 @@ A wallet-only account is deleted in exactly the same way, on exactly the same 7 
 The app does not throw you out. The sheet turns into a final step headed **Your account is locked**, which gives the exact date your account will be deleted and says how to keep it before then.
 
 That step has no close button. The only way out is <BgStyledText>Sign out</BgStyledText>, and that is deliberate: confirming revokes every session token, including this phone's, so the session behind the screen is already dead. Read the date, then sign out.
+
+Files you kept [offline](/use/mobile/drive#offline-files) on this phone stay locked until the deletion date, and are then deleted from it. If you cancel the deletion, they open again.
 
 ### Changing your mind
 

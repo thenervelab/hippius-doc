@@ -21,12 +21,12 @@ Everything is encrypted on your phone before it leaves it, so what travels to th
 
 ## Installing the app
 
-Hippius is on **Google Play** for Android phones and the **App Store** for iPhones.
+The app is called **Hippius Drive**. It is on **Google Play** for Android phones and the **App Store** for iPhones.
 
 ### On Android {#install-android}
 
 <Ordered>
-  <li>On your Android phone, open <a href="https://play.google.com/store/apps/details?id=com.hippius.mobile">Hippius on Google Play</a>, or search for <strong>Hippius</strong> in the Play Store.</li>
+  <li>On your Android phone, open <a href="https://play.google.com/store/apps/details?id=com.hippius.mobile">Hippius Drive on Google Play</a>, or search for <strong>Hippius Drive</strong> in the Play Store.</li>
   <li>Tap <BgStyledText>Install</BgStyledText>.</li>
   <li>Open the app when it has finished installing.</li>
 </Ordered>
@@ -36,7 +36,7 @@ The app needs Android 7.0 or later.
 ### On iPhone {#install-iphone}
 
 <Ordered>
-  <li>On your iPhone, open <a href="https://apps.apple.com/app/hippius/id6794237382">Hippius on the App Store</a>, or search for <strong>Hippius</strong> in the App Store.</li>
+  <li>On your iPhone, open <a href="https://apps.apple.com/app/hippius/id6794237382">Hippius Drive on the App Store</a>, or search for <strong>Hippius Drive</strong> in the App Store.</li>
   <li>Tap <BgStyledText>Get</BgStyledText>, and confirm if your iPhone asks.</li>
   <li>Open the app when it has finished installing.</li>
 </Ordered>
@@ -51,9 +51,9 @@ If you have used Hippius before, sign in with the same details you use everywher
 
 <Ordered>
   <li>Open the app and go through the short introduction. Tap <BgStyledText>Continue</BgStyledText>, then <BgStyledText>Proceed to log in</BgStyledText>.</li>
-  <li>On <strong>Log In to Hippius</strong>, choose how you want to continue: <BgStyledText>Continue with Google</BgStyledText>, <BgStyledText>Continue with Github</BgStyledText>, <BgStyledText>Continue with Apple</BgStyledText>, or <BgStyledText>Continue with Access Key</BgStyledText>. All four work on iPhone and Android.</li>
+  <li>On <strong>Log In to Hippius</strong>, choose how you want to continue: <BgStyledText>Continue with Google</BgStyledText>, <BgStyledText>Continue with GitHub</BgStyledText>, <BgStyledText>Continue with Apple</BgStyledText>, or <BgStyledText>Continue with Access Key</BgStyledText>. All four work on iPhone and Android.</li>
   <li>Google, GitHub, and Apple open a browser sheet where you approve the sign-in and come straight back to the app.</li>
-  <li>For an access key, type or paste your recovery phrase from an existing Hippius account under <strong>Access Key</strong> and tap <BgStyledText>Log In</BgStyledText>. Use this if you already have one.</li>
+  <li>For an access key, type or paste the 12-word access key of an existing Hippius account under <strong>Access Key</strong> and tap <BgStyledText>Log In</BgStyledText>. Use this if you already have one.</li>
 </Ordered>
 
 <Screenshot src="/img/mobile/sign-in.png" alt="Choosing how to sign in to the Hippius mobile app" dark raw phone />
@@ -66,18 +66,18 @@ How you sign in also decides whether your account includes free storage. Google,
 
 ## Your unlock password
 
-An **unlock password** protects an encrypted copy of your mnemonic seed that we store for your account. It is the same password used in the console and the desktop app. It is not your Google, Apple, or GitHub password.
+An **unlock password** protects an encrypted copy of your recovery seed that we store for your account. It is the same password used in the console and the desktop app. It is not your Google, Apple, or GitHub password.
 
 When you are asked for it depends on the situation:
 
 <Unordered>
-  <li><strong>New account, first upload.</strong> The app asks you to create an unlock password before that first upload is encrypted. For a Google, GitHub or Apple account, this is also when your recovery phrase is created. Afterwards, a <strong>Save your recovery phrase</strong> card appears on Overview. Tap <BgStyledText>View phrase</BgStyledText> and <a href="/use/mobile/settings#backing-up-your-mnemonic-seed">write it down</a>.</li>
+  <li><strong>New account, first upload or Camera Uploads.</strong> The app asks you to create an unlock password before anything is encrypted. It needs at least 10 characters and a <strong>Strong</strong> rating. For a Google, GitHub or Apple account, this is also when your recovery seed is created. Afterwards, a <strong>Save your recovery seed</strong> card appears on Overview. Tap <BgStyledText>View seed</BgStyledText> and <a href="/use/mobile/settings#backing-up-your-mnemonic-seed">write it down</a>.</li>
   <li><strong>Existing unlock password, new phone.</strong> After you sign in, the app asks you to enter the password once so it can open your seed on this device.</li>
   <li><strong>Any time from Settings.</strong> You can set, change, or restore the password under <a href="/use/mobile/settings#unlock-password">Settings → Security</a>.</li>
 </Unordered>
 
 :::warning
-We cannot reset your unlock password or recover it for you. If you forget it, your mnemonic seed can restore access and set a new one. See [Restore Access](/use/mobile/settings#restore-access).
+We cannot reset your unlock password or recover it for you. If you forget it, your recovery seed can restore access and set a new one. See [Restore Access](/use/mobile/settings#restore-access).
 :::
 
 ## Finding your way around {#finding-your-way-around}
@@ -110,7 +110,8 @@ Overview shows, from top to bottom:
 <Unordered>
   <li><strong>Recents</strong>: the files you added most recently. Tap the arrow to go to Drive.</li>
   <li>The <strong>Storage</strong> card: how full your Drive is. See <a href="/use/mobile/plans#what-the-app-shows">Plans and Storage</a>.</li>
-  <li><strong>Save your recovery phrase</strong>, only for a new Google, GitHub or Apple account after its first upload. Tap <BgStyledText>View phrase</BgStyledText> to back the phrase up. <BgStyledText>Later</BgStyledText> hides the card for good, so only tap it once the phrase is safe.</li>
+  <li><strong>Save your recovery seed</strong>, only for a new Google, GitHub or Apple account after its first upload. Tap <BgStyledText>View seed</BgStyledText> to back the seed up. <BgStyledText>Later</BgStyledText> hides the card for good, so only tap it once the seed is safe.</li>
+  <li>Cards that ask for something only when it's needed, such as <a href="/use/mobile/camera-uploads#waiting-for-encryption">Protect your account to back up photos</a> or, on iPhone, <a href="/use/mobile/camera-uploads#keeping-it-running-iphone">Keep backing up in the background</a>.</li>
   <li>A card to set up <a href="/use/mobile/camera-uploads">Camera Uploads</a>. Once you have set it up, it is replaced by <strong>Storage Distribution</strong>, a breakdown of what is using your storage.</li>
   <li><strong>Starred</strong>: the files, folders and drives you starred. Tap the arrow to open them all. See <a href="/use/mobile/drive#starred">Starred</a>.</li>
   <li><strong>Offline</strong>: the files and folders you keep on this phone to open without a connection. Tap the arrow to open them all. See <a href="/use/mobile/drive#offline-files">Offline files</a>.</li>
@@ -118,17 +119,19 @@ Overview shows, from top to bottom:
 
 ## Notifications {#notifications}
 
-Tap the **bell** to see your notifications. The app sends three kinds:
+Tap the **bell** to see your notifications. The app sends these:
 
 <Unordered>
   <li><strong>Welcome</strong>, once, when you first sign in.</li>
-  <li><strong>App updated</strong>, after the app updates to a new version.</li>
+  <li><strong>App updated</strong>, after you install a new version from the App Store or Google Play.</li>
   <li><strong>Backup finished</strong>, when Camera Uploads has backed up your photos, for example <strong>Backed up 12 new photos</strong>. If some could not be backed up, it says how many need attention. Its <strong>Open</strong> button, such as <BgStyledText>Open Camera Uploads</BgStyledText>, takes you to your backup folder. You can turn these off with <a href="/use/mobile/settings#backup-notifications">Backup notifications</a>.</li>
+  <li><strong>Backup paused</strong>, on iPhone, when iOS stops a backup that was running in the background. Open the app to carry on.</li>
+  <li><strong>New views</strong> on your share links, on a paid plan, for example <strong>Deck.pdf, 3 new views</strong>. See <a href="/use/mobile/shared-links">Sharing Files</a>.</li>
 </Unordered>
 
-Backup notifications also appear on your phone, so you know without opening the app. Tapping one opens the app on that notification.
+All but Welcome also appear on your phone, so you know without opening the app. Tapping one opens the app on that notification.
 
-In the list, tap a notification to read it, or press and hold it to mark it as read or unread, or delete it. **Mark all as read** clears the unread badge.
+In the list, tap a notification to read it, press and hold it to mark it as read or unread or delete it, or swipe it left to delete it. **Mark all as read** clears the unread badge.
 
 ## Home screen widgets {#home-screen-widgets}
 
@@ -136,7 +139,7 @@ Widgets put Hippius on your home screen, so you can start an upload or check on 
 
 ### On Android {#android-widgets}
 
-To add one, press and hold an empty spot on your home screen, tap **Widgets**, find **Hippius**, and drag the widget you want into place. You can resize them.
+To add one, press and hold an empty spot on your home screen, tap **Widgets**, find **Hippius Drive**, and drag the widget you want into place. You can resize them.
 
 There are four:
 
@@ -166,7 +169,7 @@ It keeps updating while Camera Uploads runs in the background. Tap it to open **
 
 ### On iPhone {#iphone-widgets}
 
-To add one, press and hold an empty spot on your Home Screen until the apps jiggle, tap **Edit**, then **Add Widget**. Search for **Hippius**, pick a widget and tap **Add Widget**.
+To add one, press and hold an empty spot on your Home Screen until the apps jiggle, tap **Edit**, then **Add Widget**. Search for **Hippius Drive**, pick a widget and tap **Add Widget**.
 
 iPhone widgets are shortcuts. Each one opens the app straight into an action:
 
@@ -190,11 +193,11 @@ Small updates install inside the app. Tap <BgStyledText>Update now</BgStyledText
 
 ### On Android {#updates-android}
 
-Bigger updates come from Google Play. Tap <BgStyledText>Update now</BgStyledText> and Google Play installs the new version for you without leaving the app. If it can't, the button reads <BgStyledText>Open Play Store</BgStyledText> instead. It takes you to Hippius on Google Play, where you tap **Update**.
+Bigger updates come from Google Play. Tap <BgStyledText>Update now</BgStyledText> and Google Play installs the new version for you without leaving the app. If it can't, the button reads <BgStyledText>Open Play Store</BgStyledText> instead. It takes you to Hippius Drive on Google Play, where you tap **Update**.
 
 ### On iPhone {#updates-iphone}
 
-Bigger updates come from the App Store. Tap <BgStyledText>Open App Store</BgStyledText>, then tap **Update** on the Hippius page.
+Bigger updates come from the App Store. Tap <BgStyledText>Open App Store</BgStyledText>, then tap **Update** on the Hippius Drive page.
 
 ## What you can do
 
@@ -215,7 +218,7 @@ If you turn on **Biometric lock** in Settings, the app asks for your fingerprint
 
 ## Your plan
 
-On Android, the app shows which Drive plan you are on and how much storage it gives you, on the Overview **Plan** card and on your **Account** screen. On iPhone, it shows your storage rather than your plan, on the **Storage** card. **Managing subscriptions is not available in the mobile app.** You subscribe, change or cancel a plan in the [Hippius Console](https://console.hippius.com) in a browser, signed in with the same account.
+The app shows your storage, not your plan: how much you have and how much you have used, on the **Storage** card. **Managing subscriptions is not available in the mobile app.** You subscribe, change or cancel a plan in the [Hippius Console](https://console.hippius.com) in a browser, signed in with the same account.
 
 Once you subscribe in the console, the app picks the plan up on its own. There is nothing to enter twice. [Plans and Storage](/use/mobile/plans) walks through it step by step, and shows what the app looks like before and after.
 
