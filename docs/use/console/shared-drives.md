@@ -188,6 +188,8 @@ The **Added by** column tells you who put each file there, by name. Files added 
 
 Anything you upload to a shared drive is stored in the owner's drive and counts towards their storage, not yours.
 
+As an Editor or a Manager you can also move files and folders into a shared drive from your own drives, out of it, or between two shared drives, with <BgStyledText>Move to…</BgStyledText> or by dragging. A folder's links and members belong to the drive it's in, so moving a shared folder to another drive turns them off, and only the owner or a Manager can do that. See [Moving Files and Folders](/use/console/drive#moving-files-and-folders).
+
 :::info When the owner's billing pauses a drive
 If the owner's account runs into a billing limit, the drive becomes read only for everyone, the owner included. You can still open and download files, but nobody can upload until the owner sorts out their billing.
 :::
