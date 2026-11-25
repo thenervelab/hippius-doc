@@ -185,7 +185,7 @@ git clone https://hub.hippius.com/archive/all-minilm-l6-v2
 ```
 
 :::info Uploads
-Uploads are not available through the Hugging Face tools yet. Keep using the `hippius-hub` CLI to push (see [Push](/registry/push)).
+Uploads also work with the Hugging Face tools: run `hf auth login` with a token from the console, then `hf upload` or `git push` (install [git-lfs](https://git-lfs.com) first). The `hippius-hub` CLI still works too, see [Push](/registry/push).
 :::
 
 ---
