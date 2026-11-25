@@ -18,6 +18,10 @@ Drive is your private, end-to-end encrypted file storage. This guide gets your f
 Drive is for your own files. To connect apps, scripts or backup tools over the S3 API, follow the [Object Storage Quickstart](/use/quickstart) instead.
 :::
 
+:::tip Using Drive from code or an AI agent?
+The `hippius-drive` Python SDK and command line upload, download, list and share Drive files from a script or an agent, with the same encryption as the apps. See [AI Agents and Scripts](/use/drive/agents).
+:::
+
 ## 1. Sign in
 
 <Ordered>
@@ -109,4 +113,5 @@ Sign in to the apps with the **same** Google, GitHub or Apple account, or the sa
   <li><a href="/use/drive/apps">Choose Your App</a>: what the console, desktop app and mobile app are each best at, with links to their guides.</li>
   <li><a href="/use/console/drive">Drive in the Console</a>: everything you can do with your files in the browser.</li>
   <li><a href="/use/console/billing#drive-plans">Drive plans</a>: when you need more than 10 GB.</li>
+  <li><a href="/use/drive/agents">AI Agents and Scripts</a>: use Drive from Python, the command line or an AI agent.</li>
 </Unordered>

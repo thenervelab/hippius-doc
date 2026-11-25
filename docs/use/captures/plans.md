@@ -21,8 +21,8 @@ If you signed in with a 12-word access key instead of Google, GitHub or Apple, y
 | **Sharing** | Unlimited | Unlimited |
 | **Length of a recording** | Up to 5 minutes | No limit |
 | **Number of recordings** | 25 in total | No limit |
-| **Hippius watermark** | A small one in the corner | None |
-| **Insights, comments and reactions** | See how many people opened a link | Full Insights, comments and reactions, on for captures |
+| **Hippius watermark** | A small "Recorded with Hippius" label in the corner | None |
+| **Insights, comments and reactions** | Not included | Full Insights, comments and reactions, on for captures |
 | **Storage** | Captures count toward your 10 GB | Captures count toward your plan's storage |
 
 The only limit on a paid plan is your storage.
@@ -49,7 +49,9 @@ When you've used all 25, Hippius tells you as soon as you press Record, before a
 
 ## The watermark
 
-Screenshots and recordings made on the Free plan carry a small Hippius watermark (the Hippius logo and the word "Hippius") in the bottom-right corner. It's white and slightly see-through, so it reads on light and dark backgrounds without getting in the way. Your camera bubble sits in the opposite corner.
+Screenshots and recordings made on the Free plan carry a small Hippius watermark in the bottom-right corner: a dark, rounded label with the Hippius logo and the words "Recorded with Hippius" in white. The dark background keeps it readable on a white page as well as a dark one, and it's sized to the picture, so it stays small on a big screen. On a recording it sits a little higher, clear of a video player's controls. Your camera bubble sits in the opposite corner.
+
+The desktop app and the console draw the same label.
 
 The watermark is drawn into the picture on your computer, before the capture is encrypted. It isn't something the server adds or could remove, so it stays on the file when you share it or download it. Captures made on a paid plan have no watermark. Upgrading doesn't remove it from captures you've already taken.
 
@@ -57,7 +59,7 @@ The watermark is drawn into the picture on your computer, before the capture is 
 
 On a paid Drive plan, links to your screenshots and recordings come with full [Insights](/use/captures/insights): views, viewers, how much of a recording each person watched and where they stopped, plus comments and reactions, all switched on for you.
 
-On the Free plan, Insights show how many times a link was opened and by how many people; completion, the chart of where people stopped and the viewer list come with paid plans. New links on the Free plan start with Insights, comments and reactions off, in the desktop app and the console, and turning one on shows an upgrade prompt. Links that already had one on keep it until you turn it off. See [Where the switches start](/use/captures/insights#where-the-switches-start).
+Insights, comments and reactions only work on a paid plan. New links on the Free plan start with them off, in the desktop app and the console, and turning one on shows an upgrade prompt. If you move from a paid plan to Free, your links stop counting views and taking comments and reactions, and what they already collected stays in their Insights as totals: how many times a link was opened and by how many people. See [Where the switches start](/use/captures/insights#where-the-switches-start).
 
 ## Storage
 

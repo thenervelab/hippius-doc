@@ -104,6 +104,26 @@ def repo_of(url: str) -> str | None:
     return rest.split("/", 1)[0]
 
 
+DOCS = Path(__file__).resolve().parents[1] / "docs"
+
+
+def page_in_checkout(url: str) -> bool:
+    """A docs.hippius.com page whose source is in this checkout.
+
+    A pull request that adds a page and links it from llms.txt cannot pass
+    otherwise: the page is not on the live site until the pull request merges.
+    """
+    if host_of(url) != "docs.hippius.com":
+        return False
+    path = url.split("docs.hippius.com", 1)[1].split("#", 1)[0].strip("/")
+    if not path:
+        return False
+    return any(
+        (DOCS / f"{path}{suffix}").is_file()
+        for suffix in (".md", ".mdx", "/index.md", "/index.mdx")
+    )
+
+
 def main() -> None:
     mode = "lenient"
     if len(sys.argv) == 3 and sys.argv[1] == "--mode" and sys.argv[2] in ("lenient", "strict"):
@@ -143,6 +163,8 @@ def main() -> None:
             message = f"{code} {url}"
             if leaf and mode == "lenient":
                 warnings.append(message + " (leaf not merged yet)")
+            elif mode == "lenient" and page_in_checkout(url):
+                warnings.append(message + " (page added here, not deployed yet)")
             else:
                 failures.append(message)
             continue
