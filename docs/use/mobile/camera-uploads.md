@@ -297,12 +297,44 @@ They land in the Drive folder you chose, like anything else you upload. Browse t
   <li><strong>Deleting a backed-up photo from Drive</strong> doesn't bring it back. It isn't backed up again.</li>
   <li><strong>Edits aren't backed up again.</strong> If you edit a photo after it was backed up, Hippius keeps the version it already has. If your editing app saves the edit as a new photo, that new photo is backed up.</li>
   <li><strong>Logging out and back in</strong> on the same phone picks up where it left off, with the same settings. Photos already backed up are skipped.</li>
-  <li><strong>Reinstalling the app, or moving to a new phone,</strong> starts Camera Uploads from scratch. It backs up every photo on the phone again, as new copies next to the old ones in the same folder. Delete the copies you don't need, or pick only the folders you want before you turn it on.</li>
+  <li><strong>Reinstalling the app</strong> on the same phone continues its backup. Photos already backed up are skipped. See <a href="#reinstalling-the-app">Reinstalling the app</a>.</li>
+  <li><strong>Moving to a new phone</strong> starts Camera Uploads from scratch. It backs up every photo on the new phone, as new copies next to the old ones in the same folder. Delete the copies you don't need, or pick only the folders you want before you turn it on.</li>
 </Unordered>
 
 :::tip Set an unlock password
 Camera Uploads doesn't ask for an unlock password. Set one under [Settings → Security](/use/mobile/settings#setting-your-unlock-password) anyway, so you can open your backed-up photos in the web console and the desktop app too.
 :::
+
+## Reinstalling the app {#reinstalling-the-app}
+
+If you delete the app and install it again on the same phone, Camera Uploads continues this phone's backup instead of starting over.
+
+<Ordered>
+  <li>Sign in with the same account.</li>
+  <li>Set up Camera Uploads again. <a href="#back-up-to">Where backups go</a> and <a href="#include-videos">Videos</a> are filled in as they were. Choose what to back up under <a href="#upload-from">Upload from</a> again, then turn it on.</li>
+</Ordered>
+
+The backup starts straight away. While it runs, the app checks each photo against what this phone backed up before. A photo the backup already holds is counted as backed up and isn't uploaded again, even if you moved it to another folder since.
+
+<Unordered>
+  <li><strong>Photos backed up by an app version older than 1.5.0</strong> aren't recognised. Camera Uploads backs them up again, as new copies next to the old ones.</li>
+  <li><strong>A phone that was erased or reset to factory settings</strong> counts as a new phone, and starts from scratch.</li>
+</Unordered>
+
+### On Android {#reinstalling-the-app-android}
+
+<Unordered>
+  <li>The app recognises the phone by itself: Android tells it that this is the same phone.</li>
+  <li>The count picks up where it left off. The app reads your photo library quickly, so shortly after you turn Camera Uploads on, a backup that had reached 260 of 1,000 photos shows <strong>260 of 1,000</strong> again and carries on from there.</li>
+</Unordered>
+
+### On iPhone {#reinstalling-the-app-iphone}
+
+<Unordered>
+  <li>The app recognises the iPhone by itself: its device ID is kept in the iPhone's keychain, which stays when you delete the app.</li>
+  <li>If it can't tell, and your account already backs up an iPhone of the same model, it asks once: <strong>Is this your iPhone?</strong> (with the model's name), on Overview and in the Camera Uploads settings. Tap <BgStyledText>Continue its backup</BgStyledText> if it is that phone, or <BgStyledText>Set up as a new iPhone</BgStyledText> if it isn't. Camera Uploads waits until you answer.</li>
+  <li>The count climbs in steps instead of starting where it left off. The app reads your photo library 100 photos at a time, which takes a few minutes on a large library, and checks each batch against your backup as it finds it. So a backup that had reached 260 of 1,000 photos climbs back to 260 while the app works through the library, rather than showing it at once. Nothing is uploaded twice.</li>
+</Unordered>
 
 ## Keeping it running
 
