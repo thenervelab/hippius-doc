@@ -19,34 +19,41 @@ Files are encrypted on your phone before they are uploaded, and decrypted on you
 
 ## The Drive screen {#the-drive-screen}
 
-Tap **Drive** in the bar at the bottom. From top to bottom you'll find:
+Tap **Drive** in the bar at the bottom. Three tabs at the top split it up:
 
 <Unordered>
-  <li><strong>Storage</strong>: a bar showing how your space is split between <strong>Images</strong>, <strong>Videos</strong>, <strong>Docs</strong> and <strong>Others</strong>. Tap a colour for its size and number of files.</li>
-  <li>A card to set up <a href="/use/mobile/camera-uploads">Camera Uploads</a>, until you turn it on.</li>
-  <li><strong>Recents</strong>: your most recently added files. Swipe sideways to see more.</li>
-  <li><strong>Search Files</strong>: search your whole Drive. See <a href="#finding-a-file">Finding a file</a>.</li>
-  <li><strong>All</strong>: your folders. The <strong>link</strong> icon opens your <a href="/use/mobile/shared-links#seeing-and-revoking-your-links">Shared Links</a>, and the <strong>···</strong> button has options to select, create a folder, switch view and sort.</li>
+  <li><strong>My drives</strong>: your own files. Each top-level folder is a drive of its own, which you can share with people as a whole.</li>
+  <li><strong>Shared</strong>: the drives other people share with you, and the drives you share. It shows how many there are, such as <strong>Shared · 3</strong>. See <a href="/use/mobile/shared-drives">Shared Drives</a>.</li>
+  <li><strong>Captures</strong>: the screenshots and recordings you made with Hippius on the desktop app or in your browser. See <a href="#captures">Captures</a>.</li>
 </Unordered>
 
+On **My drives** you'll find **Search Files**, which searches all your drives (see [Finding a file](#finding-a-file)), and **All**, the list of your drives. The **Links** button above the list opens your [Shared Links](/use/mobile/shared-links#seeing-and-revoking-your-links), and the **···** button has options to select, create a folder, switch view and sort. Pull down to refresh.
+
+{/* Outdated: drive.png shows the Drive tab from before My drives, Shared and Captures. Retake it. */}
 <Screenshot src="/img/mobile/drive.png" alt="The Drive screen listing files and folders" dark raw phone />
 
-If your Drive is empty, it says **Your drive is empty**. Tap <BgStyledText>+ Add content</BgStyledText> to upload something.
+If you have nothing stored yet, it says **Your drive is empty**. Tap <BgStyledText>+ Add content</BgStyledText> to upload something.
+
+How full your storage is, and the files you added most recently, are on [Overview](/use/mobile/getting-started#overview).
 
 ### Inside a folder {#inside-a-folder}
 
-Tap a folder to open it. The header shows the folder's name, when it was created and how big it is. While files are uploading into it, that line shows progress instead, for example **Uploading • 3 remaining...**.
+Tap a drive or folder to open it. The header shows its name, when it was created and how big it is. While files are uploading into it, that line shows progress instead, for example **Uploading • 3 remaining...**.
 
 On the right of the header, the upload button opens **Your Uploads**, and the **…** button has the folder's options:
 
 <Unordered>
-  <li><strong>Rename</strong>, for folders inside another folder.</li>
+  <li><strong>Rename</strong>, for folders inside a drive.</li>
   <li><strong>Select</strong>, to select several items at once.</li>
   <li><strong>New Folder</strong>, to create a folder inside this one.</li>
+  <li><strong>Star</strong> or <strong>Unstar</strong>. See <a href="#starred">Starred</a>.</li>
+  <li><strong>People</strong> at the top of a drive, or <strong>Share with people</strong> in a folder inside it, to choose who else can open it. See <a href="/use/mobile/shared-drives">Shared Drives</a>.</li>
   <li><strong>Shared Links</strong>, to see the links you have shared.</li>
   <li><strong>Grid view</strong> or <strong>List view</strong>.</li>
   <li>Sorting and filtering. See <a href="#sorting-and-views">Sorting and views</a>.</li>
 </Unordered>
+
+In a drive someone else shares with you, you see fewer options, depending on your role there.
 
 An empty folder says **This folder is empty**. <BgStyledText>+ Add content</BgStyledText> uploads straight into it.
 
@@ -57,11 +64,11 @@ An empty folder says **This folder is empty**. <BgStyledText>+ Add content</BgSt
 Tap **Search Files** and type.
 
 <Unordered>
-  <li>On the <strong>Drive</strong> screen, the search covers your whole Drive, not just one folder, so you don't have to remember where you put something.</li>
-  <li>Inside a folder, the search box covers the top-level folder you are in, including every folder inside it.</li>
+  <li>On <strong>My drives</strong>, the search covers all your drives, so you don't have to remember where you put something.</li>
+  <li>Inside a folder, the search covers the whole drive you are in, including every folder inside it.</li>
 </Unordered>
 
-Search finds files by name. If nothing matches, it says **We couldn't find anything**.
+Search finds files by name, and needs at least 3 characters. If nothing matches, it says **We couldn't find anything**.
 
 ### Sorting and views {#sorting-and-views}
 
@@ -94,6 +101,16 @@ Tap <BgStyledText>+</BgStyledText> in the bottom bar and choose what to add:
 **On iPhone**, the camera opens straight away. Switch between photo and video in the camera itself.
 
 <Screenshot src="/img/mobile/drive/add-menu.png" alt="The + menu with the ways to add files" dark raw phone />
+
+### From other apps {#from-other-apps}
+
+You can also send files to Hippius from another app, such as Photos, Files or your email. Tap the app's **Share** button and choose **Hippius Drive**. The app opens on the **Choose a folder** sheet, and from there it is a normal upload.
+
+<Unordered>
+  <li>On iPhone you can send up to 50 files at a time.</li>
+  <li>Besides your own drives, the sheet lists the drives under <strong>Shared with me</strong> where your role lets you add files.</li>
+  <li>Files can't go into Captures.</li>
+</Unordered>
 
 ### Choosing where files go {#choosing-a-folder}
 
@@ -172,7 +189,7 @@ Tap any file to open it full screen. The app downloads and decrypts it on your p
   <li><strong>Swipe</strong> left or right to move between the files in the list you opened it from. A counter shows where you are, such as <strong>3 of 10</strong>.</li>
   <li><strong>Pinch</strong> to zoom into a photo. Tap once to hide or show the buttons.</li>
   <li>Presentations have buttons for the previous and next slide.</li>
-  <li>The <strong>…</strong> menu at the top has <strong>Get info</strong>, <strong>Rename</strong>, <strong>Download</strong>, <strong>Share via Link</strong> and <strong>Delete File</strong>. The three buttons at the bottom delete, download and share the file.</li>
+  <li>The <strong>…</strong> menu at the top has <strong>Get info</strong>, <strong>Rename</strong>, <strong>Download</strong>, <strong>Star</strong>, <strong>Available offline</strong>, <strong>Share via Link</strong> and <strong>Delete File</strong>, plus <strong>Copy link</strong> and <strong>View insights</strong> when the file already has a link. The three buttons at the bottom delete, download and share the file.</li>
 </Unordered>
 
 These file types open in the app:
@@ -196,7 +213,7 @@ Older Office files (DOC, XLS and PPT), audio and code files don't preview, and n
 
 Open a file and tap the **download** button at the bottom, or press and hold it in a list and choose **Download**. The app downloads the file, decrypts it on your phone and saves it. A progress window shows **Downloading…**, **Decrypting…** and **Saving…**, and you can cancel at any time. When it is done, the app says **Saved**.
 
-Files are downloaded one at a time, and folders can't be downloaded in the app. Very large files can't be downloaded on mobile yet. The app tells you if a file is too large, and you can download it from the [console](/use/console/drive) or the desktop app instead.
+To save several files, [select them](#selecting-several-items) and choose **Download** under **⋯** in the bar at the bottom. They download one after another. Folders can't be downloaded in the app. Very large files can't be downloaded on mobile yet. The app tells you if a file is too large, and you can download it from the [console](/use/console/drive) or the desktop app instead.
 
 Where the file goes depends on your phone and the kind of file.
 
@@ -221,7 +238,7 @@ Press and hold a file or folder and choose **Get info**. The **Info** sheet show
 <Unordered>
   <li><strong>File type</strong> and <strong>Size</strong>.</li>
   <li><strong>Date Uploaded</strong> for a file, or <strong>Date Created</strong> for a folder.</li>
-  <li><strong>Date Taken</strong>, for photos and videos you uploaded from this phone, and <strong>Modified</strong> when the phone recorded a change.</li>
+  <li><strong>Date Taken</strong> for photos and videos, and <strong>Modified</strong> when the file was last changed, when the device that uploaded it recorded them.</li>
   <li><strong>Camera</strong>: the camera or phone that took a photo, when the photo recorded it.</li>
   <li><strong>Saved in</strong>: the folder it is in, such as <strong>Drive / Camera Uploads</strong>.</li>
   <li><strong>On this phone</strong>: where the original is on this phone, such as <strong>DCIM / Camera / IMG_0001.jpg</strong>, for photos and videos uploaded from here that are still in your gallery. Tap it to open the original in your gallery.</li>
@@ -281,7 +298,7 @@ The download starts straight away, on Wi-Fi or mobile data. While it downloads, 
 
 When a kept file changes in your Drive, the copy on this phone is updated by itself, on Wi-Fi. To update on mobile data too, turn on [Use cellular data](/use/mobile/settings#offline-files).
 
-A yellow **!** on an item means its copy is out of date, or didn't finish downloading. Tap the **!**, or choose **Update offline copy** in the item's menu.
+A yellow **!** on an item means a newer version is in your Drive, and a red **!** means its download didn't finish. Tap the **!**, or choose **Update offline copy** in the item's menu.
 
 If a kept file is renamed or deleted somewhere else, it is taken off this phone. To keep a renamed file, switch it on again under its new name.
 
@@ -301,7 +318,7 @@ Before you keep anything, the section offers **Show me how**, a short animation 
 
 ### With no connection {#no-connection}
 
-A **No internet connection** banner shows under the header. Tap it to go to your offline files. Drive and search show the files you kept, and they open as usual.
+A **No internet connection** banner shows under the header. **View offline files** takes you to the files you kept, and the **X** hides the banner until the connection drops again. Drive and search show the files you kept, and they open as usual.
 
 A file that isn't kept on this phone, and that you haven't opened recently, can't open until you are back online. Next time, make it available offline before you go.
 
@@ -327,7 +344,9 @@ Press and hold any file or folder for its options:
   <li><strong>Delete File</strong> or <strong>Delete Folder</strong>. See <a href="#deleting">Deleting</a>.</li>
 </Unordered>
 
-Files that are still uploading have no options until they finish. Items you have shared from this phone show a small **link** badge. Tap it to see or revoke that link.
+On a drive itself there is no Rename, Move or Download, and **Share drive** lets people into the whole drive. A folder inside a drive offers **Share with people** for just that folder. See [Shared Drives](/use/mobile/shared-drives). Once an item has a link, the menu also has **Copy link** and, on a paid plan, **View insights**. In a drive someone else shares with you, you see fewer options, depending on your role there.
+
+Files that are still uploading have no options until they finish. Items with a share link show a small **link** badge, wherever you made the link. In list view, tap it to see or revoke that link.
 
 <Screenshot src="/img/mobile/drive/item-menu.png" alt="The press-and-hold menu on a file" dark raw phone />
 
@@ -358,7 +377,7 @@ A name can't:
 Tidying up, or putting finished work into another of your drives? You can move files and folders to another folder, or to another drive you own.
 
 <Ordered>
-  <li>Press and hold the item and choose <strong>Move to…</strong>, or select several items and tap <strong>Move selected</strong> in the bar at the bottom.</li>
+  <li>Press and hold the item and choose <strong>Move to…</strong>, or select several items and tap <strong>Move</strong> in the bar at the bottom.</li>
   <li>The picker opens at the folder the items are in. Tap a folder to go into it, or use <strong>Back</strong> and the path at the top to go back up. <strong>New folder</strong> makes one right there.</li>
   <li>To move to another drive, tap it in the row of drives at the top.</li>
   <li>Tap the button that names where they're going, such as <BgStyledText>Move to Reports</BgStyledText>.</li>
@@ -395,7 +414,7 @@ Empty folders move like any other folder.
 
 <Ordered>
   <li>Open the <strong>···</strong> menu and choose <strong>Select</strong>.</li>
-  <li>Tap the items you want. The bar at the bottom counts them, such as <strong>3 Items</strong>.</li>
+  <li>Tap the items you want. The bar at the bottom counts them, such as <strong>3 Items</strong>. <strong>Select all</strong> picks everything in the list that has loaded so far, and <strong>Deselect all</strong> clears it again.</li>
   <li>Use the bar at the bottom: <strong>Move</strong>, <strong>Share</strong>, or the red <strong>trash</strong> button to delete them. Under <strong>⋯</strong> are <strong>Download</strong>, <strong>Star</strong> and <strong>Available offline</strong>.</li>
   <li>Tap the <strong>X</strong> to stop selecting.</li>
 </Ordered>
@@ -404,13 +423,24 @@ Empty folders move like any other folder.
 
 Press and hold an item and choose **Delete File** or **Delete Folder**, or select several and tap the trash button. The app asks you to confirm, for example **Are you sure you want to delete "Holiday.jpg"?**, then shows its progress, such as **Deleting 2/5…**.
 
+If what you're deleting has share links, the confirmation offers **Also turn off its links**. Tick it to turn them off too. Otherwise the links keep working, because each file link is its own copy. You can turn them off later in [Shared Links](/use/mobile/shared-links#seeing-and-revoking-your-links).
+
 :::warning Deletes are permanent
 There is no bin. A deleted file can't be recovered, and deleting a folder deletes everything in it. You can turn the confirmation off with [Confirm before deleting](/use/mobile/settings#confirm-before-deleting), but deleting stays permanent either way.
 :::
 
+## Captures {#captures}
+
+Screenshots and recordings you make with Hippius on the desktop app or in your browser are kept in a drive of their own. The **Captures** tab on the Drive screen lists them by day, newest first. **Show older captures** loads more, and **Open folder** opens the whole drive.
+
+Tap a capture to preview it. Press and hold it to share it, copy its link, see its insights, download it or delete it. Captures keep the name and place they were made with, so they can't be renamed or moved, and you can't upload into Captures from your phone.
+
+To make captures, see [Screenshots and Recording](/use/captures).
+
 ## Where to next
 
 <Unordered>
+  <li><a href="/use/mobile/shared-drives">Shared Drives</a>: share a drive or a folder with people, and open drives shared with you.</li>
   <li><a href="/use/mobile/shared-links">Sharing Files</a>: send a file or folder to someone without a Hippius account.</li>
   <li><a href="/use/mobile/camera-uploads">Camera Uploads</a>: back up your photos automatically.</li>
   <li><a href="/use/mobile/plans">Plans and Storage</a>: how much space you have, and how to get more.</li>

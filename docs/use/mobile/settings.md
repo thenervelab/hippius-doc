@@ -276,11 +276,11 @@ Your phone also has to allow Hippius to send notifications. On Android, the app 
 
 ### Link activity {#link-activity}
 
-On a paid Drive plan, the app tells you when your share links get new views, for example *Deck.pdf, 3 new views*. Turn it off if you'd rather check [Insights](/use/mobile/shared-links#insights) yourself. Your phone has to allow Hippius to send notifications too.
+On a paid Drive plan, the app tells you when your share links get new views, for example *Deck.pdf, 3 new views*. It checks while the app is running, and tells you about views from while it was closed the next time you open it. Turn it off if you'd rather check [Insights](/use/mobile/shared-links#insights) yourself. Your phone has to allow Hippius to send notifications too. The row only appears on a paid plan.
 
 ### Link emails {#link-emails}
 
-Choose the emails we send about your share links. **First views** tells you when someone first opens a link. **New comments** sends at most one email an hour per link. The **Summary email** rounds up views and comments across all your links. These are the same settings as in the console and the desktop app. An account that signs in with an access key has no email address, so the app tells you to sign in with Google or Apple to get them.
+Choose the emails we send about your share links. **First views** tells you when someone first opens a link. **New comments** sends at most one email an hour per link. The **Summary email** rounds up views and comments across all your links, **Daily**, **Weekly** or **Off**. These are the same settings as in the console and the desktop app, so a change here applies there too. An account that signs in with an access key has no email address, so instead of the screen the row tells you to sign in with Google or Apple to get them.
 
 ## Appearance
 

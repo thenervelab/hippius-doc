@@ -207,6 +207,7 @@ const sidebars: SidebarsConfig = {
             "use/mobile/mobile-app",
             "use/mobile/drive",
             "use/mobile/shared-links",
+            "use/mobile/shared-drives",
             "use/mobile/camera-uploads",
             "use/mobile/permissions",
             "use/mobile/plans",
