@@ -25,7 +25,7 @@ The app asks for each permission when it first needs it, rather than all at once
 | --------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------- |
 | **Photos and videos** | When you set up Camera Uploads                                      | Finding the photos and videos to back up                        | Camera Uploads can't run. Picking photos to upload by hand still works. |
 | **Camera**            | When you choose **Take photo or video**                             | Taking a photo or video to upload straight away                 | Upload photos you have already taken instead.                           |
-| **Notifications**     | After you first sign in, and again when you turn on Camera Uploads | Showing backup progress, and telling you when a backup finishes | Backups still run. You just don't see them in your notifications.       |
+| **Notifications**     | After you first sign in, and again when you turn on Camera Uploads | Showing backup progress, telling you when a backup finishes, and new views on your share links | Backups still run. You just don't see them in your notifications.       |
 
 **Biometric lock** uses the fingerprint or face unlock already set up on your phone, so Android doesn't ask a separate question for it.
 
@@ -35,7 +35,7 @@ When you set up Camera Uploads, Android asks whether Hippius may access your pho
 
 <Unordered>
   <li><strong>Allow all</strong> lets Hippius see your whole library. Choose this for Camera Uploads.</li>
-  <li><strong>Select photos and videos</strong> lets Hippius see only the items you pick. Camera Uploads then backs up only those, and never sees new photos you take. The <strong>Upload from</strong> sheet says so and offers <strong>Change selection</strong>. When you turn backup on, the app warns you again with <strong>Limited photo access</strong>, and offers <strong>Select Photos…</strong> or <strong>Allow Full Access</strong>.</li>
+  <li><strong>Select photos and videos</strong> lets Hippius see only the items you pick. Camera Uploads then backs up only those, and never sees new photos you take. The <strong>Upload from</strong> sheet says so and offers <strong>Change selection</strong>. When you turn backup on, the app reminds you with <strong>Limited photo access</strong>, and offers <strong>Continue</strong>, <strong>Select Photos…</strong> or <strong>Open Settings</strong>.</li>
   <li><strong>Don't allow</strong> gives no access. Camera Uploads can't be turned on.</li>
 </Unordered>
 
@@ -44,7 +44,7 @@ On Android 13 and earlier, the choice is simply **Allow** or **Don't allow**.
 To change it later:
 
 <Ordered>
-  <li>Open your phone's <strong>Settings</strong> → <strong>Apps</strong> → <strong>Hippius</strong>.</li>
+  <li>Open your phone's <strong>Settings</strong> → <strong>Apps</strong> → <strong>Hippius Drive</strong>.</li>
   <li>Tap <strong>Permissions</strong>, then <strong>Photos and videos</strong>.</li>
   <li>Choose <strong>Allow all</strong>.</li>
 </Ordered>
@@ -55,7 +55,7 @@ The app can take you there: on the **Upload from** sheet, tap **Manage in settin
 
 On Android 13 and later, apps need your permission to show notifications. Hippius asks after you first sign in, and again when you turn on Camera Uploads if you haven't allowed it yet.
 
-Allow it. While a backup runs in the background, Android requires a visible notification for it, and without the permission you can't see it. Backups still run if you say no, and you can turn notifications on later under **Settings → Apps → Hippius → Notifications**.
+Allow it. While a backup runs in the background, Android requires a visible notification for it, and without the permission you can't see it. Backups still run if you say no, and you can turn notifications on later under **Settings → Apps → Hippius Drive → Notifications**.
 
 The **Backup notifications** switch in the app's own Settings decides whether you are told when a backup finishes. See [Settings](/use/mobile/settings#backup-notifications).
 
@@ -97,7 +97,7 @@ While this setting is on for Hippius, the app reminds you every time you open th
 | 11                  | **Remove permissions if app isn't used**   | App info → Permissions                   |
 | 10 and earlier      | **Remove permissions if app isn't used**   | Play Protect → Permissions for Unused Apps |
 
-To find **App info**, open your phone's **Settings → Apps → Hippius**.
+To find **App info**, open your phone's **Settings → Apps → Hippius Drive**.
 
 <Screenshot src="/img/mobile/permissions/unused-app.png" alt="The dialog asking to turn off Manage app if unused" dark raw phone />
 
@@ -115,7 +115,7 @@ If both battery optimization and the unused app setting still need changing, the
   <li><strong>Closing the app</strong> by swiping it away from your recent apps usually doesn't stop a backup that is already running. Some phones stop it anyway. See <a href="#phone-battery-managers">When your phone stops backups anyway</a>.</li>
   <li><strong>Restarting your phone</strong> ends a running backup. The background checks start again after the restart and carry on a batch at a time. Open the app to get the backup going at full speed again.</li>
   <li><strong>Android 15 and later</strong> limit how long an app may upload in the background. On a long backup, Android may stop it after a while. It carries on at the next background check, or as soon as you open the app.</li>
-  <li><strong>Force stop</strong> (Settings → Apps → Hippius → Force stop) stops everything, including background checks, until you open the app again.</li>
+  <li><strong>Force stop</strong> (Settings → Apps → Hippius Drive → Force stop) stops everything, including background checks, until you open the app again.</li>
 </Unordered>
 
 A backup that is running in the background can only be started from the open app. That is why opening Hippius is always the quickest way to get a stalled backup moving again.
@@ -132,7 +132,7 @@ When that happens:
   <li>Nothing is lost. The next time you open Hippius, the backup carries on from where it stopped, and photos that were already backed up are not uploaded again.</li>
 </Unordered>
 
-To make it happen less often, look through your phone's own battery settings for Hippius. They are usually under **Settings → Apps → Hippius → Battery**, or in the phone's **Battery** settings. The names change from one phone maker and software version to the next, but look for settings like these:
+To make it happen less often, look through your phone's own battery settings for Hippius. They are usually under **Settings → Apps → Hippius Drive → Battery**, or in the phone's **Battery** settings. The names change from one phone maker and software version to the next, but look for settings like these:
 
 | Phone                     | What to look for                                                                                              |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------- |
@@ -156,10 +156,10 @@ Even so, some phones still close apps in the background. For a big backup, keep 
 | **Add to Photos** | The first time you save a downloaded photo or video                   | Saving downloads to the Photos app                                    | Photos and videos can't be saved to the Photos app.                             |
 | **Camera**        | When you choose **Take photo or video**                               | Taking a photo or video to upload straight away                       | Upload photos you have already taken instead.                                   |
 | **Microphone**    | The first time you record a video                                     | Recording sound with your video                                       | Videos may be recorded without sound.                                           |
-| **Notifications** | When you turn on Camera Uploads or **Backup notifications**           | Telling you when a backup finishes                                    | Backups still run. You just aren't told when they finish.                       |
+| **Notifications** | When you turn on Camera Uploads, **Backup notifications** or **Link activity** | Telling you when a backup finishes or pauses, and about new views on your share links | Backups still run. You just aren't told about them.                       |
 | **Face ID**       | When you turn on **Biometric lock**                                   | Unlocking the app                                                     | The lock can't be turned on.                                                    |
 
-You can change any of these later under **Settings → Hippius** on your iPhone.
+You can change any of these later under **Settings → Hippius Drive** on your iPhone.
 
 ### Photos {#iphone-photos}
 
@@ -167,11 +167,11 @@ When you set up Camera Uploads, iOS asks whether Hippius may access your photos:
 
 <Unordered>
   <li><strong>Allow Full Access</strong> lets Hippius see your whole library. Choose this for Camera Uploads.</li>
-  <li><strong>Limit Access</strong> lets Hippius see only the photos you pick, so only those are backed up. The <strong>Upload from</strong> sheet says so, and <strong>Change selection</strong> lets you pick different photos.</li>
+  <li><strong>Limit Access</strong> lets Hippius see only the photos you pick, so only those are backed up. iOS also hides your albums from the app, so smart albums can't be picked. The <strong>Upload from</strong> sheet says so, and <strong>Change selection</strong> lets you pick different photos. See <a href="/use/mobile/camera-uploads#photo-access-on-iphone">Photo access on iPhone</a>.</li>
   <li><strong>Don't Allow</strong> gives no access. Camera Uploads can't be turned on.</li>
 </Unordered>
 
-To change it later, open the iPhone **Settings → Hippius → Photos** and choose **Full Access**.
+To change it later, open the iPhone **Settings → Hippius Drive → Photos** and choose **Full Access**.
 
 **Upload Photos** doesn't ask for photo access. Full access is what lets a Live Photo keep its motion, so without it, Live Photos upload as stills.
 
@@ -181,11 +181,11 @@ When you save a downloaded photo or video, iOS separately asks whether Hippius m
 
 ### Background App Refresh {#background-app-refresh}
 
-iOS only lets Hippius back up in the background when **Background App Refresh** is on. Without it, Camera Uploads only runs while the app is open. To check:
+iOS only lets Hippius pick up new photos in the background when **Background App Refresh** is on. Without it, Camera Uploads only runs while the app is open, and the app tells you once with **Background App Refresh is off**. To check:
 
 <Ordered>
   <li>Open the iPhone <strong>Settings → General → Background App Refresh</strong>.</li>
-  <li>Make sure Background App Refresh is on at the top, then turn it on for <strong>Hippius</strong>.</li>
+  <li>Make sure Background App Refresh is on at the top, then turn it on for <strong>Hippius Drive</strong>.</li>
 </Ordered>
 
 **Low Power Mode** turns Background App Refresh off for every app while it is on.
@@ -195,12 +195,20 @@ iOS only lets Hippius back up in the background when **Background App Refresh** 
 iOS gives apps very little time in the background, and it decides when:
 
 <Unordered>
-  <li><strong>Leaving the app.</strong> When a backup starts, the app shows <strong>Keep Hippius open while your photos back up. Backup may pause shortly after you leave the app.</strong> A few files that are already on their way keep uploading after you leave, although large videos usually wait. Then the backup pauses until iOS gives Hippius time again.</li>
-  <li><strong>Background runs are delayed.</strong> iOS decides when Hippius may run in the background, often when your iPhone is idle and connected to power, such as overnight. It can be hours between runs, and each one only lasts a few minutes, so it backs up a little at a time.</li>
+  <li><strong>A backup you start, on iOS 26 and later.</strong> When you turn Camera Uploads on, tap <strong>Retry all</strong>, resume, or tap <strong>Continue in background</strong>, iOS lets that backup keep going after you leave the app or lock your iPhone, and shows its progress in a card of its own. It covers the photos waiting at that moment. If iOS ends it early, the backup reads <strong>Paused</strong> and you get a <strong>Backup paused</strong> notification. Open Hippius to carry on.</li>
+  <li><strong>Leaving the app, on earlier versions.</strong> The app shows <strong>Keep Hippius open while your photos back up. Backup may pause shortly after you leave the app.</strong> Files already on their way keep uploading after you leave, even with your iPhone locked. Then the backup pauses until iOS gives Hippius time again.</li>
+  <li><strong>New photos wait for background runs.</strong> iOS decides when Hippius may run in the background to pick them up, often when your iPhone is idle and connected to power, such as overnight. It can be hours between runs, and each one only lasts a few minutes, so it backs up a little at a time.</li>
   <li><strong>Force-quitting stops it.</strong> If you swipe Hippius away in the app switcher, iOS doesn't run it in the background again until you open it yourself. Leave it in the app switcher instead.</li>
 </Unordered>
 
-The fastest way through a big backup on iPhone is to keep Hippius open on screen, on Wi-Fi and plugged in.
+The fastest way through a big backup on iPhone is [Fast backup](/use/mobile/camera-uploads#fast-backup): Hippius open on screen, on Wi-Fi and plugged in.
+
+## Things that need no permission {#no-permission-needed}
+
+<Unordered>
+  <li><strong>Sending files from other apps.</strong> Hippius Drive appears in your phone's share sheet. See <a href="/use/mobile/drive">Your Files</a>.</li>
+  <li><strong>Opening Hippius links.</strong> Share links and drive invites from console.hippius.com open in the app by themselves.</li>
+</Unordered>
 
 ## Where to next
 

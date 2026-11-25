@@ -15,11 +15,7 @@ import Screenshot from '@site/src/components/Screenshot';
 
 Your Drive plan sets how much encrypted storage your account has. One plan covers your whole account, on every device. Files you upload by hand, photos backed up by Camera Uploads, and anything you add from the console or the desktop app all count toward it.
 
-On Android, the app shows which plan you are on and how much of it you have used. To subscribe to a plan, change it or cancel it, use the [Hippius Console](https://console.hippius.com) in a web browser. The app picks up the change by itself.
-
-:::info On iPhone
-The iPhone app talks about storage, not plans. It shows how much storage your account has and how much of it is used, but no plan name, and it doesn't mention plans or subscriptions anywhere. Your account still has a plan, and you choose and pay for it in the console, as this page describes.
-:::
+The app talks about storage, not plans, on iPhone and Android alike. It shows how much storage your account has and how much of it is used, but no plan name, and it doesn't mention plans or subscriptions anywhere. Your account still has a plan. To subscribe to one, change it or cancel it, use the [Hippius Console](https://console.hippius.com) in a web browser. The app picks up the change by itself.
 
 ## Which plan you start with
 
@@ -36,23 +32,9 @@ When you need more space, paid plans go up to many terabytes and are billed mont
 
 ## What the app shows {#what-the-app-shows}
 
-Two cards on **Overview** sum up your plan and your storage. Tap either one for more detail. On iPhone there is only the **Storage** card.
-
-<Screenshot src="/img/mobile/plan-card.png" alt="The Storage and Plan cards on the Overview screen" dark raw phone />
-
-### Your plan {#your-plan-in-the-app}
-
-The **Plan** card shows your plan's name, for example **Free** or **Plus**, and how much storage it gives you, such as **≈ 2 TB Storage**.
-
-Tap it to open the **Account** screen. You can also get there from the **Account** card in Settings. Its **Current Plan** card shows your plan's full name, for example **Free Drive Plan**, and its storage.
-
-<Screenshot src="/img/mobile/plans/account.png" alt="The Account screen with the Current Plan card" dark raw phone />
-
-On iPhone there is no **Plan** card, and the **Account** screen shows the **Storage** card in place of **Current Plan**.
-
 ### Your storage {#your-storage-in-the-app}
 
-The **Storage** card is on Overview, and again at the top of Settings. It shows:
+The **Storage** card is on Overview, at the top of Settings, and on your Account screen. It shows:
 
 <Unordered>
   <li>How full your Drive is, as a percentage.</li>
@@ -60,7 +42,7 @@ The **Storage** card is on Overview, and again at the top of Settings. It shows:
   <li>A bar that turns <strong>amber</strong> when you have used 80% of your storage and <strong>red</strong> at 95%.</li>
 </Unordered>
 
-While the numbers load, the card reads **Calculating storage..**. If they can't be read, for example while you are offline, it reads **Usage unavailable** rather than guessing. An account with no storage reads **0 GB left**, and one past its limit shows how far over it is, for example **2.5GB over limit**.
+While the numbers load, the card reads **Calculating storage..**. If they can't be read, for example while you are offline, it reads **Usage unavailable** rather than guessing. An account with no storage reads **0 GB left** or **No storage available**, and one past its limit shows how far over it is, for example **2.5GB over limit**.
 
 Tap the card to open the **Storage** screen, which shows what is using your space:
 
@@ -86,12 +68,12 @@ You can't subscribe in the app, on iPhone or Android, and the app doesn't point 
   <li>Pick the plan you want and click <BgStyledText>Subscribe</BgStyledText> on its card.</li>
   <li>Choose how to pay: <strong>Card</strong>, through Stripe, or <strong>Account balance</strong>, if you have already topped up your balance.</li>
   <li>Click <BgStyledText>Make Payment</BgStyledText> and finish paying. After a card payment the console shows the plan activating, which usually takes under a minute.</li>
-  <li>Go back to the Hippius app. It checks your plan again whenever it comes back to the screen, so the <strong>Storage</strong> card, and the <strong>Plan</strong> card on Android, update within a few seconds.</li>
+  <li>Go back to the Hippius app. It checks your plan again whenever it comes back to the screen, so the <strong>Storage</strong> card updates within a few seconds.</li>
 </Ordered>
 
 <Screenshot src="/img/console/billing/drive-plans.png" alt="The Storage Plans page in the Hippius Console" dark raw />
 
-Your files stay where they are, and nothing is uploaded again. The new plan only changes how much you can store: the **Storage** card measures your usage against the new total, and on Android the **Plan** card shows its name.
+Your files stay where they are, and nothing is uploaded again. The new plan only changes how much you can store: the **Storage** card measures your usage against the new total.
 
 ## Changing or cancelling your plan {#changing-or-cancelling-your-plan}
 
