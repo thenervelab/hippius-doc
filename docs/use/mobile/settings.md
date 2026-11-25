@@ -244,7 +244,7 @@ To remove a phone or computer you no longer use, such as a phone you sold:
 
 Everything the device uploaded stays in your Drive. Sign in on it again anytime to link it back, and a phone's Camera Uploads backup carries on where it left off.
 
-This phone has no **Unlink**. To remove it, [log out](#logging-out).
+This phone has no **Unlink**, and [logging out](#logging-out) doesn't remove it: it stays in the list, and signing in again is the same phone. To remove it, unlink it from **Devices** on another phone, in the [desktop app](/use/desktop/settings) or in the [web console](/use/console/settings#devices). If it is still signed in, it is then signed out as described above.
 
 ## Uploads
 
@@ -328,6 +328,8 @@ You can't subscribe or change a plan in the Hippius mobile app. See [How do I su
 ### Logging out {#logging-out}
 
 Tap <BgStyledText>Logout</BgStyledText> on the Account screen or at the bottom of Settings, then confirm. Logging out removes your session and your seed from this phone. Your files are untouched, and signing back in brings everything back. [Offline files](/use/mobile/drive#offline-files) stay on this phone but are locked until you sign back in with the same account.
+
+This phone stays in [Devices](#devices) after you log out. Signing back in is the same phone, so Camera Uploads carries on where it left off.
 
 Before you log out, make sure you can sign back in: with the same Google, GitHub or Apple account, or with your access key. If this phone was the only place your seed lived, [back it up](#backing-up-your-mnemonic-seed) first.
 

@@ -209,7 +209,7 @@ Sync & Storage
       <li>Click on <BgStyledIconWithText text="Settings" icon="Settings" />, then open <strong>Devices</strong>.</li>
     </Ordered>
 
-    <p>This computer comes first, marked <strong>This device</strong>. It is added the first time you sign in, and it has no Unlink: signing out of the app is how you remove it.</p>
+    <p>This computer comes first, marked <strong>This device</strong>. It is added the first time you sign in. It has no Unlink here, and signing out of the app doesn't remove it: it stays in the list, and signing in again is the same computer. To remove it, unlink it from <strong>Devices</strong> on your phone, on another computer or in the <a href="/use/console/settings#devices">web console</a>. If the app is still signed in, it then signs out by itself (see below).</p>
 
     <Screenshot src="/img/desktop/settings/devices.png" alt="The Devices section with this computer and a phone" dark raw />
 
