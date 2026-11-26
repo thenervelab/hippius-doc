@@ -23,7 +23,7 @@ The Hippius service hotkey on subnet 75 is:
 5G1Qj93Fy22grpiGKq6BEvqqmS2HVRs3jaEdMhq9absQzs6g
 ```
 
-The machine-readable description of the service, the one the chain points to, is [`https://api.hippius.com/api/billing/gamma/service.json`](https://api.hippius.com/api/billing/gamma/service.json). It lists the service hotkey (`publishers`); the API's OpenAPI spec, covering every route (`services`, type `openapi`: `https://api.hippius.com/swagger.json`, OpenAPI 2.0, with the `btauth` security scheme) and its base URL; the balance URL, the signature scheme and how the balance is read (`payments`); and the machine-readable price list (`pricing`: [`https://api.hippius.com/api/billing/gamma/pricing`](https://api.hippius.com/api/billing/gamma/pricing), which links each product's price and catalog routes). An agent that knows only netuid 75 finds everything from there.
+The machine-readable description of the service, the one the chain points to, is [`https://api.hippius.com/api/billing/gamma/service.json`](https://api.hippius.com/api/billing/gamma/service.json). It lists the service hotkey (`publishers`); the API's OpenAPI spec, covering every route (`services`, type `openapi`: `https://api.hippius.com/openapi.json`, OpenAPI 3.0, with the `btauth` security scheme) and its base URL; the balance URL, the signature scheme and how the balance is read (`payments`); and the machine-readable price list (`pricing`: [`https://api.hippius.com/api/billing/gamma/pricing`](https://api.hippius.com/api/billing/gamma/pricing), which links each product's price and catalog routes). An agent that knows only netuid 75 finds everything from there.
 
 ## The hotkey is the account
 
