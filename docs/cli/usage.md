@@ -18,7 +18,7 @@ hipc version
 hipc auth login
 ```
 
-With Homebrew, run `brew trust thenervelab/tap` and then `brew install thenervelab/tap/hipc`. `hipc auth login` asks for the API token from console [Settings](https://console.hippius.com/dashboard/settings). [hipc, the Hippius command line](/cli) covers install, login and the first commands, and [hipc for agents](/cli/agents) is the page a coding agent reads first.
+With Homebrew, run `brew trust thenervelab/tap` and then `brew install thenervelab/tap/hipc`. Homebrew 7.0.0 and later need the `brew trust` line; an older one does not, and one older than 5.1.15 answers it with `Unknown command: trust`, which is harmless. `hipc auth login` asks for the API token from console [Settings](https://console.hippius.com/dashboard/settings). [hipc, the Hippius command line](/cli) covers install, login and the first commands, and [hipc for agents](/cli/agents) is the page a coding agent reads first.
 
 ## For Drive
 

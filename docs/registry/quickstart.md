@@ -55,7 +55,8 @@ The Free plan can create a namespace only when the account holds a balance of at
 ```bash
 # 1. Install the unified CLI (also the Python library)
 pip install hippius_hub
-brew trust thenervelab/tap && brew install thenervelab/tap/hipc
+brew trust thenervelab/tap          # Homebrew 7.0.0 and later need this; older ones may say Unknown command
+brew install thenervelab/tap/hipc
 
 # 2. Store your API token from https://console.hippius.com/dashboard/settings in hipc
 #    (https://docs.hippius.com/cli); the prompt does not show it
@@ -94,7 +95,8 @@ model = AutoModel.from_pretrained(
 ```bash
 # 1. Install the CLI for namespace provisioning + credential helpers
 pip install hippius_hub
-brew trust thenervelab/tap && brew install thenervelab/tap/hipc
+brew trust thenervelab/tap          # Homebrew 7.0.0 and later need this; older ones may say Unknown command
+brew install thenervelab/tap/hipc
 
 # 2. Store your API token from https://console.hippius.com/dashboard/settings in hipc
 #    (https://docs.hippius.com/cli); the prompt does not show it

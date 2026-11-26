@@ -22,7 +22,7 @@ Hippius is a **transparent, distributed, anonymous cloud storage platform** buil
 `hipc` is one command for everything the console manages: accounts, billing, S3, Hub, compute and App Engine, Kubernetes, CDN, the private network, and support. On a pipe it speaks JSON, an error is one JSON object, and nothing prompts, so a coding agent drives it as easily as a person does.
 
 ```bash
-brew trust thenervelab/tap
+brew trust thenervelab/tap          # needed on Homebrew 7.0.0 and later
 brew install thenervelab/tap/hipc   # or the install script on the hipc page
 hipc auth login --token-file -      # paste the API token from console Settings, Enter, Ctrl-D
 hipc account get
