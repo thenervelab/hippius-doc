@@ -15,11 +15,20 @@ macOS and Linux, x86_64 and arm64.
 The install script puts `hipc` in `~/.local/bin` (or `$HIPC_INSTALL_DIR`), needs no root, and checks the release checksum, and the signature too when `cosign` is installed:
 
 ```bash
-curl -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh
+curl -q --proto '=https' --tlsv1.2 -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh
 ```
 
-:::warning Homebrew and PyPI
-Each is published by a release once its switch is on. Until then, `brew install thenervelab/tap/hipc` installs the IPFS-era `hipc` 0.0.7, and `pip install hippius` (or `uv tool install hippius`, or `pipx install hippius`) installs the old Hippius Python SDK, not this command. Use the install script above, or a tarball from the [releases page](https://github.com/thenervelab/hippius-cli/releases). If the IPFS-era `hipc` from Homebrew is installed, remove it first with `brew uninstall hipc`, so it does not come first on your `PATH`.
+Or with Homebrew:
+
+```bash
+brew trust thenervelab/tap
+brew install thenervelab/tap/hipc
+```
+
+Recent Homebrew loads a formula from a third-party tap only once the tap is trusted, and refuses `brew install hipc` by its short name until then. `brew trust` exists from Homebrew 7.0.0 on; on an older Homebrew, skip that line. Each release updates the formula, and `brew upgrade hipc` installs it.
+
+:::warning The IPFS-era hipc
+The tap's `hipc` was the IPFS-era tool of that name, version 0.0.x. On a machine that has it, `brew trust thenervelab/tap` and then `brew upgrade hipc` move it onto this one. If you install with the script instead, run `brew uninstall hipc` first, so the old one does not come first on your `PATH`. A PyPI package comes later: today `pip install hippius` installs the old Hippius Python SDK, not this command.
 :::
 
 Check it with `hipc version`.

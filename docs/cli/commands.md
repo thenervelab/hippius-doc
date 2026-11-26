@@ -25,7 +25,7 @@ A wrong name is cheap: it exits 2 `usage`, sends nothing, and the message lists 
 
 ## Ask the schema
 
-`hipc schema` is the same tree as JSON, with no network call. The whole document is about 190 KB, so pass a path to keep it small:
+`hipc schema` is the same tree as JSON, with no network call. The whole document is about 240 KB, so pass a path to keep it small:
 
 ```bash
 hipc schema s3 buckets | jq -r '.commands[] | .path | join(" ")'
