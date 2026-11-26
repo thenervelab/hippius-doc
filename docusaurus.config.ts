@@ -280,6 +280,10 @@ const config: Config = {
               label: "API",
               to: "/blockchain/api",
             },
+            {
+              label: "Drive SDK and AI Agents",
+              to: "/use/drive/agents",
+            },
           ],
         },
         {

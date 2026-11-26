@@ -82,6 +82,8 @@ hippius-hub upload my-models/qwen-7b ./qwen-7b
 
 Folder uploads **merge** into the existing manifest: re-running adds or replaces individual files without wiping the rest. The indexer picks up format / architecture / parameter count / quantization within a few seconds of the push completing.
 
+Use lowercase repository names. An uppercase name fails with `401 Unauthorized`.
+
 </TabItem>
 <TabItem value="docker" label="Docker">
 

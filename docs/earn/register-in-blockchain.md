@@ -35,7 +35,7 @@ hippius-env\Scripts\activate
 ### 2: Install and log in to the registration tool
 
 ```bash
-# the chain registration tool is version 0.2.77; the unpinned name installs hipc instead
+# pin the chain registration tool to version 0.2.77
 pip install "hippius==0.2.77"
 
 # Give your account a name, have your seed phrase handy, encrypt it and don't forget the password

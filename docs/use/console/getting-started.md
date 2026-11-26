@@ -34,6 +34,10 @@ Go to [console.hippius.com](https://console.hippius.com) and choose how you want
 
 If this is your first time signing in, your account is created automatically. There is no separate sign up step.
 
+:::note Signed in and see $0 or no files?
+You're probably signed in with a different email than the one you used before. Each email is its own account: sign out and sign in again with your original email.
+:::
+
 :::info Already using the Hippius Desktop App?
 Your console account and desktop app account are the same. Sign in with the same credentials and your Drive files will be there waiting for you.
 :::

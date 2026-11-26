@@ -35,7 +35,7 @@ Even with all of this done, **some Android phones still close Hippius in the bac
 
 #### On iPhone {#backup-stops-iphone}
 
-iOS pauses backups shortly after you leave the app, and runs them in the background only when it chooses, often hours later. Check these:
+On iOS 26 and later, a backup you start yourself keeps going after you leave the app, with iOS's own progress card. If iOS ends it early, it reads **Paused**, not failed, and a **Backup paused** notification asks you to open Hippius. Tap <BgStyledText>Continue in background</BgStyledText> on the card in the app to start it again. On earlier versions, iOS pauses backups shortly after you leave the app. Either way, iOS picks up new photos in the background only when it chooses, often hours later. Check these:
 
 <Unordered>
   <li><strong>Background App Refresh</strong> is on for Hippius, under <strong>Settings → General → Background App Refresh</strong>.</li>
@@ -43,7 +43,7 @@ iOS pauses backups shortly after you leave the app, and runs them in the backgro
   <li>You haven't swiped Hippius away in the app switcher. iOS doesn't run it in the background again until you open it yourself.</li>
 </Unordered>
 
-For a big backup, keep the app open on screen, on Wi-Fi and plugged in. See [How iOS runs backups in the background](/use/mobile/permissions#ios-background).
+For a big backup, use [Fast backup](/use/mobile/camera-uploads#fast-backup): the app open on screen, on Wi-Fi and plugged in. If the app says **Background backup isn't available right now**, keep it open to finish, or turn on Background App Refresh. See [How iOS runs backups in the background](/use/mobile/permissions#ios-background).
 
 ### Camera Uploads stopped after a long time without opening the app (Android) {#backup-stopped-after-months}
 
@@ -80,14 +80,14 @@ Check each of these:
 #### On Android {#only-some-photos-android}
 
 <Unordered>
-  <li><strong>Photo access.</strong> If you chose <strong>Select photos and videos</strong> when Android asked, Hippius only sees those photos. The <strong>Upload from</strong> row reads <strong>Limited access</strong>. Switch to <strong>Allow all</strong>. See <a href="/use/mobile/camera-uploads#photo-access">Photo access</a>.</li>
+  <li><strong>Photo access.</strong> If you chose <strong>Select photos and videos</strong> when Android asked, Hippius only sees those photos. The <strong>Upload from</strong> row reads <strong>Selected photos</strong>. Switch to <strong>Allow all</strong>. See <a href="/use/mobile/camera-uploads#photo-access">Photo access</a>.</li>
   <li><strong>Upload from.</strong> If you picked folders rather than <strong>All Photos</strong>, only those folders are backed up. Photos in other folders, such as Screenshots or WhatsApp Images, are left out.</li>
 </Unordered>
 
 #### On iPhone {#only-some-photos-iphone}
 
 <Unordered>
-  <li><strong>Photo access.</strong> If you chose <strong>Limit Access</strong> when iOS asked, Hippius only sees the photos you picked. The <strong>Upload from</strong> row reads <strong>Limited access</strong>. Switch to <strong>Full Access</strong> under <strong>Settings → Hippius → Photos</strong>. See <a href="/use/mobile/camera-uploads#photo-access-on-iphone">Photo access on iPhone</a>.</li>
+  <li><strong>Photo access.</strong> If you chose <strong>Limit Access</strong> when iOS asked, Hippius only sees the photos you picked. The <strong>Upload from</strong> row reads <strong>Selected photos</strong>, and smart albums can't be picked. Switch to <strong>Full Access</strong> under <strong>Settings → Hippius Drive → Photos</strong>. See <a href="/use/mobile/camera-uploads#photo-access-on-iphone">Photo access on iPhone</a>.</li>
   <li><strong>Upload from.</strong> If you picked smart albums rather than <strong>Camera Roll</strong>, only what is in those albums is backed up. Albums you made yourself can't be picked, so choose <strong>Camera Roll</strong> to include everything.</li>
 </Unordered>
 
@@ -96,14 +96,16 @@ Check each of these:
 The Camera Uploads screen shows the reason under its options:
 
 <Unordered>
-  <li><strong>Allow photo access to turn on Camera Uploads.</strong> Photo access is off. Allow it in your phone's settings.</li>
+  <li><strong>Photo access is off, so Camera Uploads can't back up your photos.</strong> Allow photo access in your phone's settings.</li>
   <li><strong>Select at least one photo or video to turn on Camera Uploads.</strong> You gave access to selected photos only, and none are selected. Give Hippius access to all your photos instead.</li>
-  <li><strong>Camera Backup needs Wi-Fi.</strong> <strong>Upload on Wi-Fi only</strong> is on and you are on mobile data.</li>
+  <li><strong>Camera Uploads needs your account protected first.</strong> You closed the unlock password step. Turn Camera Uploads on again and create or enter your unlock password. See <a href="/use/mobile/camera-uploads#turning-it-on">Setting it up for the first time</a>.</li>
 </Unordered>
 
-**On Android**, photo access is under **Settings → Apps → Hippius → Permissions → Photos and videos**. Choose **Allow all**.
+If **Upload on Wi-Fi only** is on and you are on mobile data, the app says **Camera Backup needs Wi-Fi** instead.
 
-**On iPhone**, photo access is under **Settings → Hippius → Photos**. Choose **Full Access**.
+**On Android**, photo access is under **Settings → Apps → Hippius Drive → Permissions → Photos and videos**. Choose **Allow all**.
+
+**On iPhone**, photo access is under **Settings → Hippius Drive → Photos**. Choose **Full Access**.
 
 ### Some items failed {#failed-items}
 
@@ -114,7 +116,9 @@ The header says how many, for example **3 backup items failed**. Open **Your Upl
   <li>Tap <BgStyledText>Skip</BgStyledText> to leave that item out, so the rest of the backup can finish. You can upload it by hand later.</li>
 </Unordered>
 
-The app has already retried each of these a few times by itself. If many items fail at once, check your connection, and check whether your storage is full.
+With several failed, <BgStyledText>Retry all</BgStyledText> tries them all at once. Items that read **Retrying shortly** haven't failed yet: the app tries them again by itself. A photo marked **Backup is waiting** needs your encryption set up first. Tap <BgStyledText>Set up</BgStyledText>, as in <a href="/use/mobile/camera-uploads#waiting-for-encryption">If it waits for encryption</a>.
+
+The app has already retried each failed item a few times by itself. If many items fail at once, check your connection, and check whether your storage is full.
 
 If the reason says your phone needs more free space, free some up and retry. Files are encrypted on your phone before they are uploaded, and a large video needs room for its encrypted copy.
 
@@ -122,15 +126,23 @@ If the reason says your phone needs more free space, free some up and retry. Fil
 
 <Unordered>
   <li>Check that <BgStyledText>Settings</BgStyledText> → <BgStyledText>Backup notifications</BgStyledText> is on.</li>
-  <li>Check that your phone allows notifications from Hippius. On Android, that is under <strong>Settings → Apps → Hippius → Notifications</strong>.</li>
+  <li>Check that your phone allows notifications from Hippius. On Android, that is under <strong>Settings → Apps → Hippius Drive → Notifications</strong>.</li>
   <li>Open <strong>Your Uploads</strong>. A backup with failed items that are waiting for you doesn't count as finished. Retry or skip them, and the notification follows.</li>
 </Unordered>
 
-**On iPhone**, notifications for Hippius are under **Settings → Notifications → Hippius**.
+**On iPhone**, notifications for Hippius are under **Settings → Notifications → Hippius Drive**.
 
 ### I see the same photos twice {#duplicates}
 
-After you reinstall the app, or set up Camera Uploads on a new phone, it starts from scratch and backs up every photo again as new copies, next to the old ones in the same folder. Their names end in a different code. Delete the copies you don't need. See [Good to know](/use/mobile/camera-uploads#good-to-know).
+Camera Uploads backs every photo up again, as new copies next to the old ones in the same folder, when it starts from scratch:
+
+<Unordered>
+  <li>on a new phone, or one that was erased or reset to factory settings;</li>
+  <li>on iPhone, after you tap <BgStyledText>Set up as a new iPhone</BgStyledText>;</li>
+  <li>after you reinstall the app, for photos that an app version older than 1.5.0 backed up.</li>
+</Unordered>
+
+The new copies' names end in a different code. Delete the copies you don't need. Reinstalling version 1.5.0 or later on the same phone continues its backup instead; see [Reinstalling the app](/use/mobile/camera-uploads#reinstalling-the-app).
 
 ### I edited a photo but Hippius still has the old one {#edited-photo}
 
@@ -170,7 +182,7 @@ The app tells you what is wrong with your storage, but not how to get more. Here
 
 <Unordered>
   <li>Switch away from the app and back again. It checks your plan whenever it comes back to the screen.</li>
-  <li>On iPhone, check the total on the <strong>Storage</strong> card, because the app doesn't show a plan name.</li>
+  <li>Check the total on the <strong>Storage</strong> card, because the app doesn't show a plan name.</li>
   <li>Make sure you subscribed on the <strong>same account</strong> you use in the app: the same Google, GitHub or Apple account, or the same access key. A different one is a different Hippius account.</li>
   <li>After a card payment the plan can take up to a minute to activate. Check that it shows as active on <strong>Billing</strong> in the console.</li>
 </Unordered>
@@ -183,7 +195,7 @@ Accounts that sign in with an access key don't include the free 10 GB, so their 
 
 ### I forgot my unlock password {#forgot-unlock-password}
 
-Your mnemonic seed can set a new one. See [Restore Access](/use/mobile/settings#restore-access). Hippius can't reset the password for you, because we never see it.
+Your recovery seed can set a new one. See [Restore Access](/use/mobile/settings#restore-access). Hippius can't reset the password for you, because we never see it.
 
 ### My files are gone after signing in {#files-gone}
 

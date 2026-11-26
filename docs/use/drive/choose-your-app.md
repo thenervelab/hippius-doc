@@ -52,6 +52,10 @@ Use the mobile app for your files on the go, and to back up your phone's photos 
   <li><a href="/use/mobile/troubleshooting">Troubleshooting</a>: when a backup stops or doesn't start.</li>
 </Unordered>
 
+## Scripts and AI Agents
+
+To use Drive from your own code, or to let an AI agent such as Claude Code, Cursor or Codex work with your files, use the `hippius-drive` Python SDK and its command line tool. They encrypt files on the machine they run on, just like the apps. [AI Agents and Scripts](/use/drive/agents) covers installing them, signing in without pasting keys into a chat, and giving an agent access to one folder instead of your whole account.
+
 ## One unlock password in every app {#unlock-password}
 
 You set your unlock password once, and the same one then opens your files in every app. Each app asks for it at a different moment:

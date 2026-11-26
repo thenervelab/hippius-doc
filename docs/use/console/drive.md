@@ -3,7 +3,7 @@ id: drive
 title: Drive
 sidebar_label: Drive
 slug: /use/console/drive
-description: Browse, upload, preview, and download your end-to-end encrypted Drive files and folders from the Hippius Console, and manage them in bulk.
+description: Browse, upload, preview, star and download your end-to-end encrypted Drive files and folders from the Hippius Console, and manage them in bulk.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -134,6 +134,17 @@ The preview toolbar has buttons to **Download** or **Close** the preview, plus *
 
 Click the action menu (three dots) on any file row and choose <BgStyledText>Details</BgStyledText> to see the file's metadata without opening a preview. The details panel shows the file name, file type, date uploaded, file size and Arion hash. The hash has a copy button and a link to the file tracker on hipstats.com.
 
+Where the app that uploaded the file recorded them, the panel also shows:
+
+<Unordered>
+  <li><strong>Date Taken</strong>: when a photo or video was taken.</li>
+  <li><strong>Date Modified</strong>: when the original was last changed, before it was uploaded.</li>
+  <li><strong>Camera</strong>: the camera or phone that took a photo.</li>
+  <li><strong>Uploaded From</strong>: the phone or computer it was uploaded from, by the name it has under <a href="/use/console/settings#devices">Devices</a>. It is shown only for files you uploaded yourself.</li>
+</Unordered>
+
+A row with nothing to show is left out.
+
 <Screenshot src="/img/console/drive/details-panel.png" alt="File details panel" dark />
 
 ## Downloading Files
@@ -191,6 +202,84 @@ The archive is packed by your browser, not on a server. Closing the tab or navig
 On a first visit, before the console's background worker has started, your browser may not be able to write the archive as it's packed. In that case the whole archive has to be held in memory, and folders over **500 MB** are refused with a "too large to download as a zip in this browser" message. Reload the page and try again, which lets the worker take over and removes the limit.
 :::
 
+## Moving Files and Folders {#moving-files-and-folders}
+
+Tidying up a project, or handing finished work over to your team's shared drive? You can move files and folders to another folder in the same drive, or to a different drive altogether.
+
+### Move with Move to…
+
+<Ordered>
+  <li>Open the menu (three dots) on a file or folder and choose <BgStyledText>Move to…</BgStyledText>. To move several items at once, tick them first and use <BgStyledText>Move to…</BgStyledText> in the selection bar.</li>
+  <li>The picker opens at the folder the items are in. Click into folders to find the destination, or use the breadcrumb to go back up. <BgStyledText>New folder</BgStyledText> makes a folder right there if you need one.</li>
+  <li>To move to another drive, pick it from the drive list at the top of the picker.</li>
+  <li>Click <BgStyledText>Move to</BgStyledText> followed by the folder's name.</li>
+</Ordered>
+
+The drive list shows your own drives and the [shared drives](/use/console/shared-drives) where you're an Editor or a Manager. A folder someone shared with you for editing opens at that folder. Drives you can only view aren't listed, because you can't add anything to them.
+
+### Drag and drop
+
+With a mouse or trackpad, you can also drag files and folders straight onto a folder. Drop onto any row inside an open folder and the items go into that folder, the way Finder works. The folder you'd drop into lights up, and the label reads **Move to** and its name. Hold over a closed folder for a moment and it opens, so you can go deeper.
+
+On **My Drives**, open a drive, then drag items onto another drive, or onto a folder inside it, to move them between drives. If a drop isn't allowed, the label says why, for example when you can only view a drive. Press Escape to cancel a drag.
+
+### Moving to another drive
+
+Every drive has its own encryption key, so moving to another drive isn't just a rename. Your browser opens each file, encrypts it again for the new drive and uploads it there. Only when every file has arrived does Hippius switch them all over in one step. Until then, nothing changes in either drive.
+
+That has a few consequences worth knowing:
+
+<Unordered>
+  <li><strong>It takes as long as an upload.</strong> A progress card in the bottom corner shows what is moving and where, and how many files are ready, for example <em>Preparing 1,240 of 8,300 files</em>. It keeps going if you close the picker or open another page, but keep the tab open.</li>
+  <li><strong>It's all or nothing.</strong> Click <BgStyledText>Cancel</BgStyledText> on the card at any point, and both drives stay exactly as they were. The same is true if anything fails, or if you close the tab before it finishes.</li>
+  <li><strong>A move holds room in the destination</strong> while it runs, so the files are sure to fit. If the tab closed or crashed partway, the console lets go of that room the next time you open Drive in the same browser. A move started somewhere else is never touched, and anything left over is freed on its own within a day.</li>
+  <li><strong>The console asks for your unlock password once</strong>, as the move starts, and won't stop to ask again even if it locks while you're away.</li>
+  <li><strong>There's no Undo.</strong> To put things back, move them again.</li>
+  <li><strong>Storage moves with the files.</strong> A file you move into someone else's drive counts toward the owner's storage, not yours. If their plan is full, the move says so.</li>
+</Unordered>
+
+When it finishes, a message tells you where things went, for example *Moved to Reports in Team*.
+
+### What happens to links and access
+
+<Unordered>
+  <li><strong>File links keep working</strong>, wherever the file goes. Each one is its own encrypted copy, so a move doesn't touch it.</li>
+  <li><strong>Within one drive</strong>, a folder keeps its folder links and the people it's shared with.</li>
+  <li><strong>To another drive</strong>, a folder can't take its sharing along, because its links and invites belong to the old drive's key and members. Before you move a shared folder, the console asks <strong>Move shared folder?</strong> and says what will be turned off, for example <em>Moving turns off 2 share links and access for 1 person.</em> The count takes in every live link on the folder and the folders inside it, including links other Managers made, so nothing stops working without warning. After the move, make new links or share the folder again in its new drive if you need to.</li>
+  <li>Only the drive's owner or a Manager can move a folder that other people can open to another drive.</li>
+</Unordered>
+
+### When a name is already taken
+
+If something with the same name is already in the destination, the console asks what to do: **Keep both** (the moved item gets a new name such as *Report (1).pdf*), **Replace** (a file over a file), or **Skip**. With several clashes, **Do this for all** answers them in one go. Between drives only Keep both and Skip are offered, so nothing is deleted before the move is safely done.
+
+### If a move fails
+
+Nothing is lost when a move fails: both drives stay as they were, and the message says what stopped it. The most common ones:
+
+| Message says | What to do |
+|---|---|
+| A file **can't be opened with this drive's key** | That one file was saved with a different key, or is damaged. The message names it. Move it somewhere else in the same drive, then move the folder again. |
+| **An item with this name is already there** | Rename one of them, or pick another folder. |
+| **A shared folder or link already uses this name there** | The destination folder is shared on its own. Pick another folder. |
+| **An upload into this folder is still running** | Wait for the upload to finish, then try again. |
+| **Some files in this drive need to sync from the desktop app first** | Open the desktop app so it can finish syncing, then try again. |
+| **The recordings would go over the free plan's limit there** | The destination's owner is on the Free plan, which holds 25 recordings. |
+| **It changed while moving** | Someone edited a file while it moved. Try again. |
+| **A folder changed or is no longer there** | Someone renamed, moved or deleted a folder in the move while it ran. Refresh the page and try again. |
+
+### Limits
+
+| Limit | Value |
+|---|---|
+| **Files in one move between drives** | 2,000 |
+| **Folders in one move between drives** | 100 |
+| **Largest file you can move between drives in the browser** | 500 MB |
+| **Empty folders** | Move like any other folder, even a folder that holds only empty folders. |
+| **Moves within a drive** | No file or size limit. Nothing is uploaded again, so even a big folder moves quickly. |
+
+For a bigger move, split it into several smaller ones.
+
 ## Selecting and Deleting Multiple Files
 
 Tick the checkbox at the start of any row to enter selection mode. The header checkbox selects everything on the current page.
@@ -226,6 +315,31 @@ How much you can upload depends on your **Drive plan**, not on your balance.
 See [Billing → Drive plans](/use/console/billing#drive-plans) for the plans and what happens without one.
 
 
+## Starred {#starred}
+
+Star the files, folders and drives you come back to, and find them all in one place.
+
+<Unordered>
+  <li>To star something, open its action menu (three dots) and choose <BgStyledText>Star</BgStyledText>. This works for a file, a folder inside a drive, and a whole drive in <strong>My Drives</strong> or <strong>Shared Drives</strong>.</li>
+  <li>In the preview, click the <strong>star</strong> button in the header.</li>
+  <li>To star several at once, select them and choose <BgStyledText>Star</BgStyledText> in the selection menu.</li>
+</Unordered>
+
+A starred item shows a small star beside its name. Choose <BgStyledText>Unstar</BgStyledText> to take it off again. Your stars belong to your account, so they are the same in the console, the [desktop app](/use/desktop/drive#starred) and the [mobile app](/use/mobile/drive#starred). In a drive someone shared with you, your stars are your own: the other members don't see them.
+
+Everything you starred is under <BgStyledIconWithText text="Drive" icon="FolderOpen" /> → <BgStyledText>Starred</BgStyledText> in the sidebar: drives first, then folders, then files, from your own drives and the drives shared with you.
+
+<Unordered>
+  <li><strong>Search Starred</strong> finds items by name.</li>
+  <li>Click a column header to sort.</li>
+  <li>Every row has the same actions as in Drive: preview, download, details, share and, in your own drives, rename and delete.</li>
+  <li>Opening a starred folder or drive takes you to it in <strong>My Drives</strong>, or in <strong>Shared Drives</strong> for a drive someone shared with you.</li>
+</Unordered>
+
+<Screenshot src="/img/console/drive/starred.png" alt="The Starred page with a starred drive, a folder and files" dark raw />
+
+You can star up to 1,000 items. Deleting a starred item takes it off the list.
+
 ## Screenshots and Recordings
 
 Want to show someone what's on your screen? Click <BgStyledText>Screenshot</BgStyledText> or <BgStyledText>Record</BgStyledText> at the top of the Drive page, and Hippius saves the capture to your captures drive and copies a link to it, ready to paste. Everything you capture, here or in the desktop app, is listed in **Captures**, under Drive in the sidebar. See [Screenshots and Recording](/use/captures).
@@ -258,6 +372,7 @@ The two folder download limits come from the zip format itself, not from Hippius
 ## Where to next
 
 <Unordered>
+  <li><a href="/use/console/settings#devices">Devices</a>: the phones and computers linked to your account, and unlinking one you no longer use.</li>
   <li><a href="/use/console/shared-links">Shared Links</a>: share any Drive file as a public link, with no account needed to open it.</li>
   <li><a href="/use/console/shared-drives">Shared Drives</a>: share a drive or a folder with people who have a Hippius account, and work in drives shared with you.</li>
   <li><a href="/use/captures">Screenshots and Recording</a>: capture your screen and share it with a link.</li>

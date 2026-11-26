@@ -62,7 +62,7 @@ Virtual machines, managed databases and Kubernetes clusters are driven through t
 <Unordered>
   <li><strong>Base URL</strong>: <code>https://api.hippius.com/api</code>. VMs are under <code>/compute/</code>, databases under <code>/databases/</code>, Kubernetes under <code>/kubernetes/</code>.</li>
   <li><strong>Authentication</strong>: <code>Authorization: Token YOUR_TOKEN</code>, as above. Add <code>X-Hippius-Account: acct_...</code> to act in a shared account.</li>
-  <li><strong>Specification</strong>: the OpenAPI (Swagger 2.0) document is at <a href="https://api.hippius.com/swagger.json">api.hippius.com/swagger.json</a>, with the endpoints and their fields.</li>
+  <li><strong>Specification</strong>: the OpenAPI 3.0 document is at <a href="https://api.hippius.com/openapi.json">api.hippius.com/openapi.json</a> (Swagger 2.0 remains at <a href="https://api.hippius.com/swagger.json">api.hippius.com/swagger.json</a>), with the endpoints and their fields.</li>
 </Unordered>
 
 To create a VM and connect to it:

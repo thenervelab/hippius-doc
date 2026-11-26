@@ -103,46 +103,32 @@ def host_of(url: str) -> str:
     return url.split("://", 1)[1].split("/", 1)[0].split(":", 1)[0]
 
 
-DOCS = ROOT.parents[1] / "docs"
-SITE = "https://docs.hippius.com"
-
-# The CLI repository (thenervelab/hippius-cli) exists, but its hipc content, releases, and
-# docs land with the public flip; until then those URLs answer 404. Lenient mode warns on
-# them while the flip is pending, which it reads from the latest release's install.sh
-# answering 404 (the releases page itself answers 200 with no release), so the leniency
-# expires by itself with the first public release. Strict mode fails until then. Remove
-# this block after the flip.
-HIP_REPO_URLS = (
-    "https://github.com/thenervelab/hippius-cli",
-    "https://raw.githubusercontent.com/thenervelab/hippius-cli/",
-)
-HIPC_INSTALL_URL = "https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh"
-
-
-def hip_flip_pending() -> bool:
-    code, _, _ = curl(HIPC_INSTALL_URL)
-    return code == 404
-
-
-def page_in_tree(url: str) -> bool:
-    """Whether a docs.hippius.com URL is a page of this checkout, by its slug front matter.
-
-    A page added in the same pull request as its llms.txt link answers 404 until the site
-    deploys; lenient mode warns on it instead of failing.
-    """
-    if not url.startswith(SITE + "/"):
-        return False
-    slug = url[len(SITE):].split("#", 1)[0].rstrip("/")
-    needle = f"\nslug: {slug}\n"
-    return any(needle in page.read_text()[:1000] for page in DOCS.rglob("*.md"))
-
-
 def repo_of(url: str) -> str | None:
     marker = "https://raw.githubusercontent.com/thenervelab/"
     if not url.startswith(marker) or not url.endswith("/llms.txt"):
         return None
     rest = url[len(marker):]
     return rest.split("/", 1)[0]
+
+
+DOCS = Path(__file__).resolve().parents[1] / "docs"
+
+
+def page_in_checkout(url: str) -> bool:
+    """A docs.hippius.com page whose source is in this checkout.
+
+    A pull request that adds a page and links it from llms.txt cannot pass
+    otherwise: the page is not on the live site until the pull request merges.
+    """
+    if host_of(url) != "docs.hippius.com":
+        return False
+    path = url.split("docs.hippius.com", 1)[1].split("#", 1)[0].strip("/")
+    if not path:
+        return False
+    return any(
+        (DOCS / f"{path}{suffix}").is_file()
+        for suffix in (".md", ".mdx", "/index.md", "/index.mdx")
+    )
 
 
 def main() -> None:
@@ -155,7 +141,6 @@ def main() -> None:
     text = ROOT.read_text()
     failures = []
     warnings = []
-    flip_pending = mode == "lenient" and hip_flip_pending()
 
     for fact in ROOT_FACTS:
         if fact not in text:
@@ -185,10 +170,8 @@ def main() -> None:
             message = f"{code} {url}"
             if leaf and mode == "lenient":
                 warnings.append(message + " (leaf not merged yet)")
-            elif code == 404 and mode == "lenient" and page_in_tree(url):
-                warnings.append(message + " (page in this checkout, not deployed yet)")
-            elif code == 404 and flip_pending and url.startswith(HIP_REPO_URLS):
-                warnings.append(message + " (hipc content lands with the public flip)")
+            elif mode == "lenient" and page_in_checkout(url):
+                warnings.append(message + " (page added here, not deployed yet)")
             else:
                 failures.append(message)
             continue

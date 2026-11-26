@@ -3,7 +3,7 @@ id: settings
 title: Settings
 sidebar_label: Settings
 slug: /use/console/settings
-description: API token, sign-in methods, email notifications and emails about your share links, theme, Normal or Pro mode, table text size, your unlock password, your Drive plan and account deletion in the Hippius Console.
+description: API token, sign-in methods, the devices linked to your account, email notifications and emails about your share links, theme, Normal or Pro mode, table text size, your unlock password, your Drive plan and account deletion in the Hippius Console.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -14,7 +14,7 @@ import Screenshot from '@site/src/components/Screenshot';
 
 ## Introduction
 
-The **Settings** page is where you personalise the console and manage your account preferences. You can grab your API token, add or remove ways to sign in, control which emails Hippius sends you (including emails about your share links), pick a theme, change your dashboard layout, set or change your unlock password, adjust table text size, and see your Drive plan.
+The **Settings** page is where you personalise the console and manage your account preferences. You can grab your API token, add or remove ways to sign in, see and unlink the phones and computers linked to your account, control which emails Hippius sends you (including emails about your share links), pick a theme, change your dashboard layout, set or change your unlock password, adjust table text size, and see your Drive plan.
 
 To reach Settings, click your identity card in the top right corner to open the account menu, then click **Settings**.
 
@@ -51,6 +51,28 @@ Anyone with this token has full access to your account. Never paste it into publ
 </Unordered>
 
 Every change first asks you to **Confirm it's you**: sign with your wallet, or enter a code we email to an address already on the account. Linking an email address or a social login also lifts the Drive suspension of an account that only had an access key.
+
+## Devices {#devices}
+
+**Devices**, beside Sign-in methods, lists the phones and computers linked to your account: every phone with the [mobile app](/use/mobile/getting-started) and every computer with the [desktop app](/use/desktop/getting-started) that has signed in. Each row shows the device's name, what it is (such as **Android**, **iPhone**, **Mac** or **Windows**) and when it was last active. The console in your browser is not a device, so it isn't listed.
+
+<Screenshot src="/img/console/settings/devices.png" alt="The Devices list with a phone and a computer" dark raw />
+
+To remove a device you no longer use, such as a phone you sold or a computer you replaced:
+
+<Ordered>
+  <li>Click <BgStyledText>Unlink</BgStyledText> on its row.</li>
+  <li>Read what will happen, then click <BgStyledText>Unlink</BgStyledText> to confirm.</li>
+</Ordered>
+
+<Unordered>
+  <li><strong>A phone</strong> is signed out the next time it opens the app with a connection. The files it kept offline are deleted from it, and Camera Uploads stops on it.</li>
+  <li><strong>A computer</strong> is signed out the next time the desktop app is open and online, and stops syncing.</li>
+</Unordered>
+
+Everything the device uploaded stays in your Drive. Unlinking is not a ban: sign in on that device again and it is linked once more, and a phone's Camera Uploads backup carries on where it left off.
+
+The <strong>Uploaded From</strong> row in a file's [details](/use/console/drive#file-details) uses these same names.
 
 ## Email Notifications
 

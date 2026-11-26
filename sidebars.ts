@@ -73,7 +73,7 @@ const sidebars: SidebarsConfig = {
           type: "category",
           label: "Drive",
           collapsed: true,
-          items: ["use/drive/quickstart", "use/drive/choose-your-app"],
+          items: ["use/drive/quickstart", "use/drive/choose-your-app", "use/drive/agents"],
         },
         {
           type: "category",
@@ -232,6 +232,7 @@ const sidebars: SidebarsConfig = {
             "use/mobile/mobile-app",
             "use/mobile/drive",
             "use/mobile/shared-links",
+            "use/mobile/shared-drives",
             "use/mobile/camera-uploads",
             "use/mobile/permissions",
             "use/mobile/plans",
