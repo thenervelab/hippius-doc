@@ -193,6 +193,7 @@ Right click any file or folder (or click the <BgStyledIconWithText icon="More" p
 | **View on Explorer**              | Uploaded files    | Open the file's Arion Hash tracker on hipstats.com                     |
 | **Share via link**                | Synced files      | Create a shareable link to the file                                    |
 | **Rename**                        | Files & Folders   | Rename the item on this device; the change syncs to the network        |
+| **Move to…**                      | Files & Folders   | Move the item to another folder or drive, see [Moving Files and Folders](#moving-files-and-folders) |
 | **Delete**                        | Files & Folders   | Remove the item (disabled while syncing)                               |
 
 <Screenshot src="/img/desktop/file-context-menu.png" alt="File context menu" dark />
@@ -253,6 +254,46 @@ The name is validated as you type. A name cannot be empty, contain `/`, `\`, or 
 The <strong>Rename</strong> action is only available for items that are synced and present on this device. It is disabled while a file is uploading, downloading, or failed, and for cloud-only items that exist on another device but are not synced here. Wait for sync to finish and try again.
 :::
 
+### Moving Files and Folders {#moving-files-and-folders}
+
+Tidying up a project, or handing finished work over to your team's shared drive? You can move files and folders to another folder in the same drive, or to a different drive.
+
+<Ordered>
+  <li>Right click a file or folder (or open its <BgStyledIconWithText icon="More" paddingClassName="px-1 py-1" /> menu) and choose <BgStyledText>Move to…</BgStyledText>. To move several items, select them and click <BgStyledText>Move</BgStyledText> in the selection bar.</li>
+  <li>The picker opens at the folder the items are in. Click into folders to find the destination, or use the breadcrumb to go back up. <BgStyledText>New folder</BgStyledText> makes one right there if you need it.</li>
+  <li>To move to another drive, pick it from the drive list at the top of the picker. It lists your own drives and the shared drives where you're an Editor or a Manager.</li>
+  <li>Click <BgStyledText>Move to</BgStyledText> followed by the folder's name.</li>
+</Ordered>
+
+Within a drive you can also drag items onto a folder, the way Finder works. The folder you'd drop into lights up, and holding over a closed folder for a moment opens it. A move within a drive is quick, and the message afterwards has an <BgStyledText>Undo</BgStyledText> button. Move is available for the same items as Rename, so if it's greyed out, wait for the item to finish syncing.
+
+#### Moving to another drive
+
+Every drive has its own encryption key, so moving to another drive isn't just a rename. Hippius Drive reads each file (straight from this computer when the drive is synced here), encrypts it again for the new drive and uploads it. Only when every file has arrived are they all switched over in one step, and folders synced on this computer are updated to match.
+
+<Unordered>
+  <li><strong>It takes as long as an upload.</strong> A message shows what is moving and where, and you can keep working while it runs. One move between drives runs at a time.</li>
+  <li><strong>It's all or nothing.</strong> Click <BgStyledText>Cancel</BgStyledText> on the message at any point, and both drives stay as they were. The same is true if anything fails, or if the app closes before the move finishes.</li>
+  <li><strong>A move holds room in the destination</strong> while it runs, so the files are sure to fit. If the app closed partway, it lets go of that room the next time it starts. A move running in the console or on your phone is never touched.</li>
+  <li><strong>There's no Undo.</strong> To put things back, move them again.</li>
+  <li><strong>Storage moves with the files.</strong> A file you move into someone else's drive counts toward the owner's storage, not yours.</li>
+  <li><strong>Name clashes</strong> offer Keep both or Skip. Replace isn't offered between drives, so nothing is deleted before the move is safely done.</li>
+</Unordered>
+
+#### What happens to links and access
+
+File links keep working wherever the file goes, because each one is its own encrypted copy. Within one drive, a folder keeps its folder links and the people it's shared with. A folder moved to another drive can't take its sharing along, because its links and invites belong to the old drive. Before you move a shared folder, the app asks <strong>Move a shared folder?</strong> and says what will be turned off, for example *Moving it to another drive turns off its share link and removes access for 2 people.* The count takes in every live link on the folder, including links other people made, so nothing stops working without warning. Only the drive's owner or a Manager can move a folder other people can open.
+
+#### If a move fails
+
+Nothing is lost: both drives stay as they were, and the message says what stopped it. If a file can't be read, Hippius names it, so you can move that file out of the way and try again. Other common reasons are a name that's already taken in the destination, files that are still uploading, or a destination drive without enough storage left.
+
+| Limit | Value |
+|---|---|
+| Files in one move between drives | 2,000 |
+| Folders in one move between drives | 100 |
+| Empty folders | Move like any other folder, even a folder that holds only empty folders. |
+
 ### View Modes
 
 The Drive page supports two display layouts:
@@ -272,7 +313,7 @@ To add a folder to a sync folder, you can:
 
 <Unordered>
   <li>Upload an existing folder with <BgStyledText>+ New Folder</BgStyledText> (see <a href="#uploading-folders">Uploading Folders</a> above).</li>
-  <li>Create the folder inside your synced folder using your operating system's file manager, then add files to it — they sync to the Hippius network automatically on the next sync cycle.</li>
+  <li>Create the folder inside your synced folder using your operating system's file manager, then add files to it. They sync to the Hippius network automatically on the next sync cycle.</li>
 </Unordered>
 
 ## Starred {#starred}

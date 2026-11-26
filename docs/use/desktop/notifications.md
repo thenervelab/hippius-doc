@@ -22,6 +22,8 @@ Notifications are grouped into two categories:
   <li><strong>Credits</strong> — changes to your balance.</li>
 </Unordered>
 
+There's also <strong>Link activity</strong>, a notification when your shared links get new views. It's on unless you turn it off, and it's covered in <a href="/use/desktop/shared-links#link-activity">Get notified about new views</a>.
+
 You decide which of these categories you want to receive — see [Notification Settings](#notification-settings).
 
 

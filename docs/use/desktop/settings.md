@@ -310,6 +310,7 @@ Sync & Storage
     <Unordered>
       <li><strong>Credits</strong>: "Notifications for account credits, including low balance warnings and credit additions."</li>
       <li><strong>Drive</strong>: "Notifications for file operations including sync completion and failures."</li>
+      <li><strong>Link activity</strong>: "Desktop notifications when your shared links get new views." On unless you turn it off. See <a href="/use/desktop/shared-links#link-activity">Get notified about new views</a>.</li>
     </Unordered>
 
     <Screenshot src="/img/desktop/settings/settings-notifications.png" alt="Notifications screen" dark />

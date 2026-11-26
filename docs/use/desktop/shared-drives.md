@@ -179,6 +179,8 @@ A drive of yours has <BgStyledText>Open</BgStyledText>, <BgStyledText>Share driv
 
 What you can change depends on your role. A Viewer who tries to add files is told they have Viewer access and can ask for Editor access. Anything you upload counts towards the owner's storage, not yours.
 
+As an Editor or a Manager you can also move files and folders into a shared drive from your own drives, or out of it, with <BgStyledText>Move to…</BgStyledText>. A folder's links and members belong to its drive, so moving a shared folder to another drive turns them off, and only the owner or a Manager can do that. See [Moving Files and Folders](/use/desktop/drive#moving-files-and-folders).
+
 When you browse a shared drive, the **Added by** column tells you who put each file there, by name. Files added before we started recording this show as **Owner**. To see only one person's files, use the **Added by** filter: it lists the owner, the members by name, and **Not recorded (shown as Owner)** for those older files.
 
 If the owner's account runs into a billing limit, the drive is marked **Frozen**. You can still open and download files, but nobody can change anything until the owner sorts out their billing.

@@ -3,7 +3,7 @@ id: shared-links
 title: Shared Links
 sidebar_label: Shared Links
 slug: /use/desktop/shared-links
-description: Share any file as a public or password-protected link from the Hippius desktop app, including straight from macOS Finder, then manage your active links and history from the Shared Links page.
+description: Share any file as a public or password-protected link from the Hippius desktop app, including straight from macOS Finder, set its rules (end date, view only, PDF watermark, NDA), see who opened it, get notified of new views, and manage your links from the Shared Links page.
 ---
 
 import Ordered from '@site/src/components/Ordered';
@@ -18,7 +18,7 @@ With Hippius you can share a file as a link that anyone can open in a browser, w
 
 To share a file, right click it in the desktop app and choose **Share via link**. We create a secure encrypted copy and generate a shareable URL, then copy it to your clipboard for you. On macOS you can also share straight from Finder: just right click any file or folder and choose **Share with Hippius**.
 
-After sharing, all your active links are tracked on the **Shared Links** page. Open it with the <BgStyledText>Shared Links</BgStyledText> button in the top right of the <BgStyledIconWithText text="Drive" icon="Category" /> view header. From there you can copy a link again, change when it expires, revoke it, and see a history of ended shares.
+After sharing, all your active links are tracked on the **Shared Links** page. Open it with the <BgStyledText>Shared Links</BgStyledText> button in the top right of the <BgStyledIconWithText text="Drive" icon="Category" /> view header. From there you can copy a link again, change when it expires, see who opened it, revoke it, and see a history of ended shares.
 
 Screenshots and recordings get a link automatically, and those links show up here too. See [Share links for captures](/use/captures/share-links).
 
@@ -86,11 +86,13 @@ The desktop reads your local file directly with no download required. For most f
   <li>Right click the file (or click the <BgStyledText>⋮</BgStyledText> menu on its row) and choose <BgStyledText>Share via link</BgStyledText>.</li>
   <li>Choose who can open it (<strong>Anyone with the link</strong> or <strong>Password protected</strong>) and when the link should expire. Both are described below.</li>
   <li>The share dialog runs the encrypt and upload steps automatically, showing <em>Encrypting and uploading…</em> while it works. You can press <BgStyledText>Cancel</BgStyledText> to stop before it finishes.</li>
-  <li>When complete, the share URL is shown in the modal and copied to your clipboard automatically, along with when the link expires.</li>
+  <li>When complete, the share URL is shown in the modal and copied to your clipboard automatically. Below it are the link's rules, where you decide what people can do with it (see <a href="#control-what-people-can-do">Control What People Can Do</a>).</li>
   <li>Use the copy icon next to the URL to copy it again, <BgStyledText>Open in browser</BgStyledText> to preview the recipient page, or <BgStyledText>Revoke share</BgStyledText> to cancel the link right away. Click <BgStyledText>Done</BgStyledText> to close the dialog.</li>
 </Ordered>
 
 The link is live immediately. Anyone you send it to can download the file right away.
+
+When the link will count views, the dialog also offers **Email me when a link is first opened** under **Secure link**. It's one setting for your account, the same as First views in [emails about your links](/use/captures/insights#emails-about-your-links).
 
 ### Choosing an expiry
 
@@ -102,6 +104,8 @@ A link you create yourself gets an expiry, chosen before you create it:
 | **7 days** | One week after you create it. |
 | **30 days** | One month after you create it. |
 | **Until I revoke it** | Never on its own. It stays live until you revoke it. |
+
+Once a file link exists, you can also end it on a day you choose (see [Choose the day a link ends](#choose-the-day-a-link-ends)).
 
 :::info Links made for screenshots and recordings
 A [screenshot or screen recording](/use/captures) gets its share link automatically, the moment it is saved. That link is public and keeps working until you turn it off, so it is ready to paste straight away. It is listed in Shared Links with your other links, and you revoke it the same way. You can stop these links being made by turning off **Copy a share link after capture** in [Settings](/use/desktop/settings#screenshots--recording). See [Share links for captures](/use/captures/share-links).
@@ -133,6 +137,49 @@ Recipients can browse subfolders, search by name, preview files, download any si
 
 To share a file that isn't in a synced folder, use [Share from Finder](/use/desktop/share-from-finder) on macOS.
 
+## Control What People Can Do {#control-what-people-can-do}
+
+Sending a contract, a pitch deck or a draft that isn't final? A file link can do more than hand over the file. You can let people look without taking a copy, put their email on every page of a PDF, ask them to agree to your terms first, and pick the day the link stops working. These are the link's rules.
+
+You'll find them in the **Share via link** dialog once the link is made, and later in the link's Insights, behind the gear at the top of the panel (**Link settings**). Each rule says whether it's on and what it does for this link. Click one to change it, and the back arrow takes you to the list again. Changes apply straight away and the link stays the same, so there's nothing to send again.
+
+Rules are for file links. A folder link has an expiry you can change from its menu (see [Change the expiry](#change-the-expiry)), and a password if you set one when you made it. The rules work the same way as in the console, which has [more about each one](/use/console/shared-links).
+
+### Choose the day a link ends {#choose-the-day-a-link-ends}
+
+A file link's **Expiry** rule offers **24 hours**, **7 days**, **30 days** and **Until I revoke it**, and also **On a date**. Pick a day and the link works until the end of that day, on this computer's clock. The day can be from 2 hours to a year away. For anything longer, choose **Until I revoke it**.
+
+A new link starts with one of the four choices, so to end it on a set date, make the link, then open its **Expiry** rule in the same dialog and choose **On a date**.
+
+### Make a link view only
+
+Open the **Download** rule and turn off **Allow download**. People can still open the file in their browser, but the Download buttons are gone. View only discourages copying but can't prevent it: the viewer's browser holds the whole file to show it, and anyone can take a screenshot. Unless you've set the watermark yourself, a PDF on a view only link also gets the watermark.
+
+### Put a watermark on a PDF
+
+The **Watermark** rule writes each viewer's email and the date across every page of a shared PDF, on the share page, so a screenshot carries it too. When the viewer isn't signed in to Hippius in that browser, it reads *Viewed* and the date. It has its own switch, so a PDF can carry a watermark and still be downloadable, or be view only without one. Watermarks are for PDFs only. The [console's Shared Links page](/use/console/shared-links) has more about what viewers see.
+
+### Ask people to accept an NDA
+
+Open the **NDA** rule, turn on **Ask to accept an NDA**, write or paste your terms and click <BgStyledText>Save</BgStyledText>. Anyone who opens the link then reads your text first, ticks that they agree, and can type their name as a signature before the file opens. You can change the text or turn the NDA off at any time.
+
+The NDA templates and the NDAs you've saved to your account are in the console for now. To use one, set the NDA up there, or copy its text from the console and paste it here.
+
+To see who accepted, open the link's Insights and choose the **NDA** tab. It lists each acceptance with the name the person typed (or the name they commented under) and when they accepted. An acceptance of text you've since changed says **Earlier text**.
+
+<Unordered>
+  <li><BgStyledText>Export</BgStyledText> saves every acceptance as a CSV file.</li>
+  <li><BgStyledText>Record</BgStyledText> on a row saves that acceptance as a text file: the file name, the signer's name, when they accepted (in UTC), and the full text they agreed to with its SHA-256 fingerprint.</li>
+</Unordered>
+
+The app asks where to save both, and makes them on this computer, so names and your text never reach our servers in the clear. Export before the link expires: after that, acceptances can't be listed.
+
+Your text is end-to-end encrypted with the link's key, so Hippius can't read it. Agreeing needs no account, and a typed name isn't checked, so an acceptance shows that someone with the link agreed, not who they are. A link with a password can't have an NDA. The [console's Shared Links page](/use/console/shared-links) has more, including the templates and what viewers see.
+
+### Plans
+
+Making links, setting a password and changing the expiry work on every plan. View only, the watermark and the NDA need a paid Drive plan. On the Free plan the rule shows an upgrade prompt instead, and you can always turn a rule off on any plan.
+
 ## Active Shares
 
 The Active Shares table shows every share currently live on your account, refreshed from the server every few seconds. It includes shares created from any device or the console, not just this desktop install.
@@ -145,9 +192,9 @@ Click <BgStyledText>Copy link</BgStyledText> from the row's action menu to copy 
 
 The share URL includes the encryption key. The app keeps the keys of links made on this computer, and fetches the keys of file links you made elsewhere (another computer or the console) from your account, so you can usually copy any file link from here. A link it can't rebuild, such as some older links, or a folder link made on another device, has Copy link greyed out with a note saying so. For a password link, the copied link still needs the password you set when you made it.
 
-### Change the expiry
+### Change the expiry {#change-the-expiry}
 
-A live link's menu offers <BgStyledText>Expire in 24 hours</BgStyledText>, <BgStyledText>Expire in 7 days</BgStyledText>, <BgStyledText>Expire in 30 days</BgStyledText> and <BgStyledText>Never expire</BgStyledText>. Pick one and the new expiry applies straight away. The link itself stays the same, so there's nothing to send again. A password can't be changed: to use a different one, revoke the link and create a new one.
+A live link's menu offers <BgStyledText>Expire in 24 hours</BgStyledText>, <BgStyledText>Expire in 7 days</BgStyledText>, <BgStyledText>Expire in 30 days</BgStyledText> and <BgStyledText>Never expire</BgStyledText>. Pick one and the new expiry applies straight away. The link itself stays the same, so there's nothing to send again. To end a file link on a particular day instead, use its **Expiry** rule (see [Choose the day a link ends](#choose-the-day-a-link-ends)). A password can't be changed: to use a different one, revoke the link and create a new one.
 
 ### Revoke
 
@@ -220,17 +267,33 @@ When someone opens your share link, they land on a simple page in their browser.
     Add static/img/desktop/shared-links-preview.png AND shared-links-preview-dark.png, then uncomment:
     <Screenshot src="/img/desktop/shared-links-preview.png" alt="Recipient preview page with Download button" dark /> */}
 
-A **Download** option is always available. The file is decrypted directly in the recipient's browser: on modern browsers (Chrome, Edge, Firefox) the download streams straight to disk with no size limit; on older browsers it's buffered in memory up to 500 MB. The decryption key never reaches our servers.
+A **Download** option is there too, unless you've [made the link view only](#make-a-link-view-only). If you've [asked for an NDA](#ask-people-to-accept-an-nda), people accept it before the file opens. The file is decrypted directly in the recipient's browser: on modern browsers (Chrome, Edge, Firefox) the download streams straight to disk with no size limit; on older browsers it's buffered in memory up to 500 MB. The decryption key never reaches our servers.
 
 If the link has expired or been revoked, recipients see: _"This link has expired or been revoked."_ We don't say which, so no one can guess whether a token was ever valid.
 
 ## Views, Comments and Reactions
 
-You can see how many people opened a link, and let people comment and react under it. The **Share via link** dialog has **Insights**, **Comments** and **Reactions** switches for each file you share, next to **Show a preview in chats** for pictures and videos. On a paid Drive plan they start on for screenshots and recordings and off for other files; on the Free plan they start off and turning one on shows an upgrade prompt.
+You can see how many people opened a link, and let people comment and react under it. The **Share via link** dialog has **Insights**, **Comments** and **Reactions** switches for each file you share, next to **Show a preview in chats** for pictures and videos. On a paid Drive plan they start on for screenshots and recordings, PDF, Word and PowerPoint files start with Insights on, and other files start with all three off. On the Free plan they start off and turning one on shows an upgrade prompt.
 
 <Screenshot src="/img/desktop/captures/share-dialog.png" alt="The desktop Share via link dialog with Show a preview in chats, Insights, Comments and Reactions switches" dark raw />
 
-Open a link's **Insights** from its row in Shared Links, or from Captures, to see how many people watched and read what they said. They open in a panel on the right, with Comments, Viewers and Reactions tabs, and the link's switches behind the gear at the top. In Captures every screenshot and recording offers Insights, and one without a link yet can get one there with **Create link**. A comment that tags you with `@` says **Mentioned you**, and the **Mentions you** filter shows only those. See [Insights, comments and reactions](/use/captures/insights).
+Open a link's **Insights** from its row in Shared Links, or from Captures, to see how many people watched and read what they said. They open in a panel on the right, with Comments, Viewers and Reactions tabs, and the link's rules and switches behind the gear at the top. In Captures every screenshot and recording offers Insights, and one without a link yet can get one there with **Create link**. A comment that tags you with `@` says **Mentioned you**, and the **Mentions you** filter shows only those. See [Insights, comments and reactions](/use/captures/insights).
+
+**Viewers.** The **Viewers** tab lists everyone who opened the link, with how many visits they made, when they last came and how much they saw. On a paid plan, click a viewer to open their visits: their total time, a bar for each page of a document showing how long they spent there (pages they skipped are greyed out), and each visit, newest first, with its time and pages.
+
+**Documents.** For a PDF, Word document or PowerPoint presentation read in the browser, the **Pages** tab shows where people stopped reading and how long they spent on each page, and each viewer's row shows how many pages they saw.
+
+**Folder links.** Click <BgStyledText>Insights</BgStyledText> on a folder link's row to see which files in the folder were opened, how often and by how many people, how far people read each document and how long they spent on it. Folder links start with Insights off: turn them on behind the gear in the panel. This needs a paid Drive plan.
+
+**Export CSV.** Once a link has viewers listed, the <BgStyledText>Export CSV</BgStyledText> button at the top of its Insights saves who viewed, how often, when they last looked and how many pages they read. The app asks where to save the file, and it opens in Excel, Numbers or Google Sheets.
+
+### Get notified about new views {#link-activity}
+
+You don't have to keep checking. While the app is running, it looks at your file links every couple of minutes, and when one has new views you get a notification such as *3 new views on Series A deck.pdf*. It's one notification per link, never one per view, and when several links have news at once they're grouped, for example *7 new views on 5 links*. Click the notification to open that link's Insights.
+
+New views also appear under **Link activity** in the menu bar (tray) panel, the latest three of them, with **See all** to open Shared Links, and in the app's notifications.
+
+Link notifications are on unless you turn them off: untick **Link activity** in [Settings, Notifications](/use/desktop/settings#notifications). When the app starts, it only notes where your counts stand, so you're not told again about views you've already had.
 
 ## Storage Usage
 
@@ -259,12 +322,12 @@ Every live file link uses storage. Revoke temporary links when you're done with 
 | **Create a share**           | ✅ Yes                                               | ✅ Yes                                                       |
 | **Share a folder**           | ✅ Yes                                               | ✅ Yes                                                       |
 | **Share from Finder**        | ✅ macOS only                                        | ❌ Not available                                            |
-| **Choose an expiry**         | ✅ 24h, 7d, 30d, or until revoked                    | ✅ Same options                                              |
+| **Choose an expiry**         | ✅ 24h, 7d, 30d, until revoked, or a date for a file link | ✅ Same options                                         |
 | **Password-protected link**  | ✅ In the app and from Finder                        | ✅ Yes                                                       |
 | **How it reads the file**    | The file on this computer, or downloads it if needed | Downloads and decrypts the Drive copy                        |
 | **Copy link (same session)** | ✅ Yes                                               | ✅ Yes                                                       |
 | **Copy link later**          | ✅ Yes, the app keeps or fetches the key             | ✅ Yes, after you unlock (some older links: no)              |
-| **Change expiry**            | ✅ File and folder links, link stays the same        | ✅ Folder links only                                         |
+| **Change expiry**            | ✅ File and folder links, link stays the same        | ✅ File and folder links, link stays the same                |
 | **Revoke**                   | ✅ Any device                                        | ✅ Any device                                                |
 | **History**                  | ✅ Yes                                               | ✅ Yes                                                       |
 
@@ -274,5 +337,5 @@ Every live file link uses storage. Revoke temporary links when you're done with 
   <li><a href="/use/desktop/drive">Drive</a>: manage your sync folders and uploads.</li>
   <li><a href="/use/desktop/shared-drives">Shared Drives</a>: invite people with a Hippius account into a drive or a folder, with a role.</li>
   <li><a href="/use/console/shared-links">Console Shared Links</a>: the console version, where you can create shares from the web interface.</li>
-  <li><a href="/use/desktop/billing">Billing</a>: manage credits before sharing large files.</li>
+  <li><a href="/use/desktop/billing">Billing</a>: check your Drive plan has room before sharing large files.</li>
 </Unordered>
