@@ -139,7 +139,7 @@ Open a support ticket with the account API token: POST https://api.hippius.com/a
 
 ## Tools an agent can run
 
-`hipc` and the storage commands in `pip install hippius` are deprecated. Do not use them. Chain registration still uses `hippius`. Object Storage uses any S3 client, and that manual starts at Object Storage — Quickstart. The tools below are the other products.
+The IPFS-era `hipc` (0.0.x and 0.1.x, with `hipc storage pin`) and the storage commands in `pip install hippius` are deprecated. Do not use them. The current `hipc` (0.17 and later) manages the account, billing, S3 buckets and keys, Hub, compute and CDN, and does not upload or download files: https://raw.githubusercontent.com/thenervelab/hippius-cli/main/docs/agents.md Chain registration still uses `hippius`. Object Storage uses any S3 client, and that manual starts at Object Storage — Quickstart. The tools below are the other products.
 
 An agent that holds its own 12-word access key opens the account at https://docs.hippius.com/use/wallet-login and calls the API with the returned token. Google, GitHub, and Apple sign-in stays in the browser at https://console.hippius.com. The API token for an account opened in the browser is on https://console.hippius.com/dashboard/settings
 
