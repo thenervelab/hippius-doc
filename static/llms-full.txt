@@ -159,7 +159,7 @@ Instructions for agents:
 - Find a command with `hipc --help`, one level at a time, or `hipc schema <path>`, such as `hipc schema s3 buckets` (the whole schema is about 240 KB; pass a path). Don't recall flags from memory or from a web page: the installed binary is the reference for its own version.
 - Run every write with `--dry-run` first, and ask the user before adding `--yes`.
 
-Install: `curl -q --proto '=https' --tlsv1.2 -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh` (macOS and Linux, into ~/.local/bin), or with Homebrew `brew trust thenervelab/tap` then `brew install thenervelab/tap/hipc` (Homebrew 7.0.0 and later need the trust line; before 5.1.15 it prints `Unknown command: trust`, which is harmless). A PyPI package comes later: `pip install hippius` is the old Python SDK, not `hipc`. Check `hipc version` after installing; if `hipc --help` lists `storage` or `miner`, it is the IPFS-era `hipc`.
+Install: `curl -q --proto '=https' --tlsv1.2 -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh` (macOS and Linux, into ~/.local/bin), or with Homebrew `brew trust thenervelab/tap` then `brew install thenervelab/tap/hipc` (on Homebrew 6.0.0 and later the trust line lets short-name commands such as `brew upgrade hipc` work; before 5.1.15 it prints `Unknown command: brew trust`, which is harmless). A PyPI package comes later: `pip install hippius` is the old Python SDK, not `hipc`. Check `hipc version` after installing; if `hipc --help` lists `storage` or `miner`, it is the IPFS-era `hipc`.
 
 ### Hub
 

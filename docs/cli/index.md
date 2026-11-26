@@ -27,7 +27,7 @@ brew trust thenervelab/tap
 brew install thenervelab/tap/hipc
 ```
 
-Homebrew 7.0.0 and later load a formula from a third-party tap only once the tap is trusted, and refuse `brew install hipc` by its short name until then. An older Homebrew does not need the `brew trust` line, and one older than 5.1.15 answers it with `Unknown command: trust`, which is harmless: the install line still runs. Each release updates the formula, and `brew upgrade hipc` installs it. On a machine that has the IPFS-era `hipc`, `brew trust thenervelab/tap` and then `brew upgrade hipc` move it onto this one.
+Homebrew 6.0.0 and later load a formula from a third-party tap only once it is trusted. Installing by the full name, as above, trusts that one formula by itself; `brew trust thenervelab/tap` trusts the whole tap, so commands by the short name, such as `brew upgrade hipc`, work too. A Homebrew before 6.0.0 does not need the `brew trust` line, and one before 5.1.15 answers it with `Unknown command: brew trust`, which is harmless: the install line still runs. Each release updates the formula, and `brew upgrade hipc` installs it. On a machine that has the IPFS-era `hipc`, `brew trust thenervelab/tap` and then `brew upgrade hipc` move it onto this one.
 
 A PyPI package comes later: today `pip install hippius` installs the old Hippius Python SDK, not this command.
 
