@@ -1,0 +1,66 @@
+---
+id: index
+title: hipc, the Hippius command line
+sidebar_label: Get started
+slug: /cli
+description: Install hipc, the Hippius command line for coding agents and people, log in once, and drive accounts, billing, S3, Hub, compute, Kubernetes, CDN and support from a terminal.
+---
+
+`hipc` is the Hippius command line, for people and coding agents. It drives everything the console manages: accounts, projects and teams, billing and plans, Object Storage buckets and tokens, Hub, VMs and App Engine apps, Kubernetes, PostgreSQL, GitHub Actions runners, CDN and WAF, the private network, and support. It does not move data: use an S3 client for objects and `hippius-hub` for Hub blobs. Source: [github.com/thenervelab/hippius-cli](https://github.com/thenervelab/hippius-cli).
+
+## Install
+
+macOS and Linux, x86_64 and arm64.
+
+If Homebrew has the IPFS-era `hipc` 0.0.x (`brew list --versions hipc` shows it), run `brew uninstall hipc` first, so the old one does not come first on your `PATH`, or move it onto this one with Homebrew as below.
+
+The install script puts `hipc` in `~/.local/bin` (or `$HIPC_INSTALL_DIR`), needs no root, and checks the release checksum, and the signature too when `cosign` is installed:
+
+```bash
+curl -q --proto '=https' --tlsv1.2 -fsSL https://github.com/thenervelab/hippius-cli/releases/latest/download/install.sh | sh
+```
+
+Or with Homebrew:
+
+```bash
+brew trust thenervelab/tap
+brew install thenervelab/tap/hipc
+```
+
+Homebrew 6.0.0 and later load a formula from a third-party tap only once it is trusted. Installing by the full name, as above, trusts that one formula by itself; `brew trust thenervelab/tap` trusts the whole tap, so commands by the short name, such as `brew upgrade hipc`, work too. A Homebrew before 6.0.0 does not need the `brew trust` line, and one before 5.1.15 answers it with `Unknown command: brew trust`, which is harmless: the install line still runs. Each release updates the formula, and `brew upgrade hipc` installs it. On a machine that has the IPFS-era `hipc`, `brew trust thenervelab/tap` and then `brew upgrade hipc` move it onto this one.
+
+A PyPI package comes later: today `pip install hippius` installs the old Hippius Python SDK, not this command.
+
+Check it with `hipc version`.
+
+## Log in
+
+Sign in at [console.hippius.com](https://console.hippius.com) with Google, GitHub, or Apple and copy your API token from [Settings](https://console.hippius.com/dashboard/settings). If you sign in with a 12-word access key, Settings shows no token: the person runs the [access-key sign-in](/use/wallet-login) on their own device and keeps only the token; an agent never runs it. `hipc` never takes the 12 words. Then:
+
+```bash
+hipc auth login                   # at a terminal: paste the token at the prompt; it is not shown
+hipc auth login --token-file -    # in a script: the token on stdin
+hipc auth status
+```
+
+Or pass a file path instead of `-`. The token never goes on the command line. `HIPPIUS_TOKEN` sets a token for a single run. For CI, sign in once on a machine you trust and store only the token as the runner's `HIPPIUS_TOKEN` secret; never put the 12 words on a runner, since they control the whole account.
+
+## First commands
+
+```bash
+hipc account get
+hipc billing balance
+hipc s3 buckets list
+hipc s3 buckets create photos --dry-run
+```
+
+- `--dry-run` shows the requests and sends nothing.
+- A command that spends, deletes, revokes, rotates or cancels asks first, and needs `--yes` outside a terminal.
+- A command that issues a secret needs `--reveal`, or `--secret-file` (or `--credentials-dir` for a database), which writes it to a new private file instead. `--secret-file` and `--credentials-dir` count as the reveal; `--reveal` alone prints the secret on stdout.
+- Every `--help` ends with examples.
+
+## Next
+
+- [For agents](/cli/agents): the one page a coding agent reads first: how to find a command, the dry-run and `--yes` loop, the JSON and error contract, and the safety rules.
+- [Examples](/cli/examples): twelve journeys as copyable snippets.
+- [Finding a command](/cli/commands): `--help` at every level, and `hipc schema` for a path.

@@ -90,6 +90,38 @@ x-hippius:
 
 The container sees `PLAN_PRICE` as `$5 a month`. Replace the example digests with your images' real digests.
 
+A web service with Redis, which keeps its data on a volume:
+
+```yaml title="docker-compose.yaml"
+services:
+  web:
+    image: "ghcr.io/acme/web@sha256:4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c"
+    ports:
+      - "8080:80"
+    environment:
+      REDIS_URL: "redis://cache:6379"
+    depends_on:
+      - "cache"
+    restart: "unless-stopped"
+  cache:
+    image: "docker.io/library/redis@sha256:9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d9d"
+    command:
+      - "redis-server"
+      - "--appendonly"
+      - "yes"
+    volumes:
+      - type: "volume"
+        source: "redisdata"
+        target: "/data"
+    restart: "unless-stopped"
+volumes:
+  redisdata:
+x-hippius:
+  version: 1
+```
+
+Redis is reached by its service name, `cache`, and publishes no port, so only the web service can talk to it.
+
 ## Deploy an app in the console
 
 <Ordered>
@@ -104,6 +136,28 @@ The container sees `PLAN_PRICE` as `$5 a month`. Replace the example digests wit
 <Screenshot src="/img/console/app-engine/deploy.png" alt="The Deploy an app form: the compose passes grammar v1 and shows its SHA-256, services, published port and secret, with a summary of size, public IPv4 and price" dark raw />
 
 The app then appears in the list as **Launching** while the VM boots. The containers start once the runner has pulled the images: watch the [app runtime](#deployment-status-and-runtime-status) for that.
+
+## Deploy from the command line
+
+[hipc](/cli) checks and launches the same compose file:
+
+```bash
+hipc compute app-engine get                                   # whether you can use it, and the smallest size
+hipc compute app-engine validate --compose-file docker-compose.yaml
+hipc compute app-engine fix --compose-file docker-compose.yaml --output-file docker-compose.fixed.yaml
+hipc compute app-engine apps create --flavor small --name web --compose-file docker-compose.yaml \
+  --secrets-file secrets.json --dry-run
+hipc compute app-engine apps create --flavor small --name web --compose-file docker-compose.yaml \
+  --secrets-file secrets.json --yes
+hipc compute app-engine apps runtime VM_ID                    # the containers, once the images are pulled
+```
+
+<Unordered>
+  <li><code>validate</code> checks the file against grammar v1 and names each rule it breaks. <code>fix</code> rewrites it into the grammar where it can, writes the result to a new file, and lists each change, the image digests it looked up, and what it could not fix. Review a change that alters what runs before you use the copy.</li>
+  <li><code>secrets.json</code> is a JSON object of each name in <code>x-hippius.secrets</code> to its value, such as <code>{"{"}"DB_PASSWORD": "..."{"}"}</code>. It must be yours, mode 0600 (<code>chmod 600 secrets.json</code>), in a directory no one else can write. The dry run shows a placeholder, never the value.</li>
+  <li>An app launched with hipc always gets a public IPv4. The file is sent as it is. hipc reads up to 1 MiB, but the app engine takes a smaller file: at most `max_compose_bytes` from `hipc compute app-engine get`.</li>
+  <li>An app is a VM: <code>hipc compute app-engine apps list</code> lists them, and <code>hipc compute vms delete VM_ID --yes</code> deletes one.</li>
+</Unordered>
 
 ## Secrets
 
